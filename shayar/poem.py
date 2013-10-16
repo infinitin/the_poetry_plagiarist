@@ -3,8 +3,9 @@ __author__ = 'Nitin'
 
 #There are many more, such as half line, caesurae, alliterative verse etc etc.
 class Poem:
-    def __init__(self):
-        self.poem = []                      # A list of poem lines
+
+    def __init__(self, poem):
+        self.poem = poem.split('\n')        # A list of poem lines
 
         self.stanzas = 0                    # Number of stanzas
         self.lines = []                     # List of numbers indicating lines per stanza
