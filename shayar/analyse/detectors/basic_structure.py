@@ -2,6 +2,7 @@ __author__ = 'Nitin'
 
 import collections
 
+
 def count_stanzas(poem):
     if not poem:
         return 0
@@ -39,5 +40,3 @@ def count_repeated_lines(poem):
         repeated_lines[line] = [i for i, x in enumerate(poem) if x == line]
 
     return repeated_lines
-
-
