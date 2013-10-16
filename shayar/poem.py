@@ -5,14 +5,14 @@ __author__ = 'Nitin'
 class Poem:
 
     def __init__(self, poem):
-        self.poem = poem.split('\n')        # A list of poem lines
+        self.poem = self.__format_poem(poem)     # A list of poem lines
 
         self.stanzas = 0                    # Number of stanzas
         self.lines = []                     # List of numbers indicating lines per stanza
-        self.repeatedLines = {}             # A map of the repeated line to the locations in the poem
+        self.repeated_lines = {}            # A map of the repeated line to the locations in the poem
 
         self.tense = []                     # Tense of each line (use an enum for tense)
-        self.unusualWords = []              # List of words that are unusual (perhaps indicative of the era)
+        self.unusual_words = []             # List of words that are unusual (perhaps indicative of the era)
         self.verbs = []                     # A list of the set of verbs used in each line
         self.nouns = []                     # A list of the set of nouns used in each line
         self.adjectives = []                # A list of the set of adjectives used in each line
@@ -22,13 +22,13 @@ class Poem:
                                                                       # to the locations they are mentioned
 
         self.rhymeScheme = []               # A list of characters representing the rhyme for each line: [A,A,B,B,A]
-        self.internalRhymeScheme = []       # A list of locations in the poem with internal rhyme
+        self.internal_rhyme_scheme = []       # A list of locations in the poem with internal rhyme
 
         self.foot = []                      # Poetic foot for each line in the poem
         self.metre = []                     # List of foot repetitions for each line
-        self.syllableCount = []             # List of number of syllables per line
-        self.irregularRhythm = []           # A list true/false as to whether or not the rhythm is irregular
-        self.parallelStructure = []         # List consistent verb-noun order for each line, if any
+        self.syllable_count = []             # List of number of syllables per line
+        self.irregular_rhythm = []           # A list true/false as to whether or not the rhythm is irregular
+        self.parallel_structure = []         # List consistent verb-noun order for each line, if any
 
         self.consonance = []                # List of lengths of the longest consonance for each line
         self.assonance = []                 # List of lengths of the longest assonance for each line
@@ -41,8 +41,12 @@ class Poem:
     def __str__(self):
         return "This is an empty poem"
 
-
-
+    def __format_poem(self, poem):
+        poem = poem.split('\n')
+        formatted_poem = []
+        for line in poem:
+            formatted_poem.append(line.strip())
+        return formatted_poem
 
 
 

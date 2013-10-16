@@ -1,5 +1,6 @@
 __author__ = 'Nitin'
 
+import collections
 
 def count_stanzas(poem):
     if not poem:
@@ -26,3 +27,17 @@ def count_lines_per_stanza(poem):
     lines_per_stanza.append(lines)
 
     return lines_per_stanza
+
+
+def count_repeated_lines(poem):
+    non_unique_lines = [x for x, y in collections.Counter(poem).items() if y > 1]
+    if not non_unique_lines:
+        return {}
+
+    repeated_lines = {}
+    for line in non_unique_lines:
+        repeated_lines[line] = [i for i, x in enumerate(poem) if x == line]
+
+    return repeated_lines
+
+
