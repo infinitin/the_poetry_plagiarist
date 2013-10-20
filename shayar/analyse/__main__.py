@@ -2,13 +2,13 @@ __author__ = 'Nitin'
 
 from shayar.poem import Poem
 
-from detectors import basic_structure, tense, rhythm, line_pattern
+from detectors import basic_structure, tense, rhythm, line_pattern, rhyme
 
-#poetry_input = " The limerick packs laughs anatomical\nInto space that is quite economical.\n" \
-#               "But the good ones I've seen\nSo seldom are clean\n" \
-#               "And the clean ones so seldom are comical"
+poetry_input = " The limerick packs laughs anatomical\nInto space that is quite economical.\n" \
+               "But the good ones I've seen\nSo seldom are clean\n" \
+               "And the clean ones so seldom are comical"
 
-poetry_input = "Glass boss\nMammals named Sam are clammy\nSlither Slather\nOn scrolls of silver snowy sentences"
+#poetry_input = "Glass boss\nMammals named Sam are clammy\nSlither Slather\nOn scrolls of silver snowy sentences"
 
 limerick = Poem(poetry_input)
 limerick.stanzas = basic_structure.count_stanzas(limerick.poem)
@@ -19,6 +19,7 @@ limerick.syllable_count = rhythm.count_syllables(limerick.poem)
 limerick.consonance = line_pattern.detect_consonance(limerick.poem)
 limerick.assonance = line_pattern.detect_assonance(limerick.poem)
 limerick.alliteration = line_pattern.detect_alliteration(limerick.poem)
+limerick.rhyme_scheme = rhyme.determine_rhyme_scheme(limerick.poem)
 
 print str(limerick.poem) + "\n"
 
@@ -33,3 +34,4 @@ print "The syllable lengths of each line are as follows: " + str(limerick.syllab
 print "The poem has consonance scores of: " + str(limerick.consonance) + ","
 print "an assonance scores of: " + str(limerick.assonance)
 print "and an alliteration score of " + str(limerick.alliteration)
+print "The rhyme scheme is " + str(limerick.rhyme_scheme)
