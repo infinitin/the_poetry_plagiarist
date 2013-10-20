@@ -4,11 +4,11 @@ from shayar.poem import Poem
 
 from detectors import basic_structure, tense, rhythm, line_pattern
 
-poetry_input = " The limerick packs laughs anatomical\nInto space that is quite economical.\n" \
-               "But the good ones I've seen\nSo seldom are clean\n" \
-               "And the clean ones so seldom are comical"
+#poetry_input = " The limerick packs laughs anatomical\nInto space that is quite economical.\n" \
+#               "But the good ones I've seen\nSo seldom are clean\n" \
+#               "And the clean ones so seldom are comical"
 
-#poetry_input = "Glass boss\nMammals named Sam are clammy\nSlither Slather"
+poetry_input = "Glass boss\nMammals named Sam are clammy\nSlither Slather\nOn scrolls of silver snowy sentences"
 
 limerick = Poem(poetry_input)
 limerick.stanzas = basic_structure.count_stanzas(limerick.poem)
@@ -18,6 +18,7 @@ limerick.tense = tense.detect_line_tense(limerick.poem)
 limerick.syllable_count = rhythm.count_syllables(limerick.poem)
 limerick.consonance = line_pattern.detect_consonance(limerick.poem)
 limerick.assonance = line_pattern.detect_assonance(limerick.poem)
+limerick.alliteration = line_pattern.detect_alliteration(limerick.poem)
 
 print str(limerick.poem) + "\n"
 
@@ -29,5 +30,6 @@ print "at positions " + str(limerick.repeated_lines.values()) + "."
 print "The tenses of the lines in the given limerick are " + str(limerick.tense)
 print "Giving it a " + str(tense.detect_overall_tense(limerick.tense)) + " tense overall."
 print "The syllable lengths of each line are as follows: " + str(limerick.syllable_count) + "."
-print "The poem has consonance scores of: " + str(limerick.consonance)
-print "and assonance scores of: " + str(limerick.assonance)
+print "The poem has consonance scores of: " + str(limerick.consonance) + ","
+print "an assonance scores of: " + str(limerick.assonance)
+print "and an alliteration score of " + str(limerick.alliteration)
