@@ -7,6 +7,7 @@ from nltk.corpus import cmudict
 
 def count_syllables(poem):
     syllabic_line_lengths = []
+    dictionary = cmudict.dict()
     for line in poem:
         exclude = set(string.punctuation)
         no_punct_line = ''.join(char for char in line if char not in exclude)
@@ -14,14 +15,13 @@ def count_syllables(poem):
         words = [w.lower() for w in tokenized_line]
         syllabic_line_length = 0
         for word in words:
-            syllabic_line_length += __count_syllables_in_word(word)
+            syllabic_line_length += __count_syllables_in_word(word, dictionary)
         syllabic_line_lengths.append(syllabic_line_length)
 
     return syllabic_line_lengths
 
 
-def __count_syllables_in_word(word):
-    dictionary = cmudict.dict()
+def __count_syllables_in_word(word, dictionary):
     syllables = 0
     try:
         arpabet_word = dictionary[word][0]
