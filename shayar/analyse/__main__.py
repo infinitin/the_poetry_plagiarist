@@ -20,6 +20,7 @@ limerick.consonance = line_pattern.detect_consonance(limerick.poem)
 limerick.assonance = line_pattern.detect_assonance(limerick.poem)
 limerick.alliteration = line_pattern.detect_alliteration(limerick.poem)
 limerick.rhyme_scheme = rhyme.determine_rhyme_scheme(limerick.poem)
+limerick.internal_rhyme_scheme = rhyme.detect_internal_rhyme(limerick.poem)
 
 print str(limerick.poem) + "\n"
 
@@ -28,10 +29,11 @@ print "with a total of " + str(sum(limerick.lines)) + " lines "
 print "in the format of " + str(limerick.lines) + "."
 print str(len(limerick.repeated_lines)) + " line(s) are repeated in this poem"
 print "at positions " + str(limerick.repeated_lines.values()) + "."
-print "The tenses of the lines in the given limerick are " + str(limerick.tense)
-print "Giving it a " + str(tense.detect_overall_tense(limerick.tense)) + " tense overall."
+print "The tenses of the lines in the given limerick are " + str(limerick.tense) + ","
+print "giving it a " + str(tense.detect_overall_tense(limerick.tense)) + " tense overall."
 print "The syllable lengths of each line are as follows: " + str(limerick.syllable_count) + "."
 print "The poem has consonance scores of: " + str(limerick.consonance) + ","
-print "an assonance scores of: " + str(limerick.assonance)
-print "and an alliteration score of " + str(limerick.alliteration)
-print "The rhyme scheme is " + str(limerick.rhyme_scheme)
+print "assonance scores of: " + str(limerick.assonance)
+print "and alliteration scores of " + str(limerick.alliteration)
+print "The rhyme scheme is " + str(limerick.rhyme_scheme) + "."
+print "There is also internal rhyme: " + str(limerick.internal_rhyme_scheme) + "."
