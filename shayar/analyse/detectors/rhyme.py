@@ -36,6 +36,7 @@ def detect_internal_rhyme(poem):
                     arpabet_word = dictionary[word]
                     words.append(arpabet_word)
                 except KeyError:
+                    words.append('')
                     continue
         rhyme_scheme.append(__get_rhyme_scheme(words))
 
@@ -56,6 +57,10 @@ def __get_rhyme_scheme(words):
                     if not rhyme_phonemes in rhyme_scheme_map:
                         rhyme_scheme_map[rhyme_phonemes] = line_rhyme_token
                         line_rhyme_token = chr(ord(line_rhyme_token)+1)
+                    else:
+                        if phoneme == '':
+                            rhyme_tokens.append(line_rhyme_token)
+                            line_rhyme_token = chr(ord(line_rhyme_token)+1)
                     rhyme_tokens.append(rhyme_scheme_map[rhyme_phonemes])
                 index += 1
 
