@@ -14,7 +14,10 @@ def determine_rhyme_scheme(poem):
             no_punct_line = ''.join(char for char in line if char not in exclude)
             tokenized_line = nltk.Text(nltk.word_tokenize(no_punct_line))
             last_word = tokenized_line[-1].lower()
-            last_words.append(dictionary[last_word])
+            try:
+                last_words.append(dictionary[last_word])
+            except KeyError:
+                continue
 
     return __get_rhyme_scheme(last_words)
 
