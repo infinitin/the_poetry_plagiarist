@@ -52,10 +52,11 @@ def __get_rhyme_scheme(words):
             index = 0
             for phoneme in pronunciation:
                 if str(phoneme[-1]).isdigit() and str(phoneme[-1]) == "1":
-                    if not str(pronunciation[index:]) in rhyme_scheme_map:
-                        rhyme_scheme_map[str(pronunciation[index:])] = line_rhyme_token
+                    rhyme_phonemes = __get_rhyme_phonemes(pronunciation[index:])
+                    if not rhyme_phonemes in rhyme_scheme_map:
+                        rhyme_scheme_map[rhyme_phonemes] = line_rhyme_token
                         line_rhyme_token = chr(ord(line_rhyme_token)+1)
-                    rhyme_tokens.append(rhyme_scheme_map[str(pronunciation[index:])])
+                    rhyme_tokens.append(rhyme_scheme_map[rhyme_phonemes])
                 index += 1
 
         rhyme_tokens = list(set(rhyme_tokens))
@@ -65,6 +66,15 @@ def __get_rhyme_scheme(words):
             rhyme_scheme.append(rhyme_tokens)
 
     return rhyme_scheme
+
+
+def __get_rhyme_phonemes(phonemes):
+    rhyme_phonemes = []
+    for phoneme in phonemes:
+        if str(phoneme[-1]).isdigit():
+            rhyme_phonemes.append(phoneme)
+
+    return str(rhyme_phonemes)
 
 
 def __get_stanzas(poem):

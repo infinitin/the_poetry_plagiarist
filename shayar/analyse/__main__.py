@@ -4,7 +4,7 @@ from shayar.poem import Poem
 
 from detectors import basic_structure, tense, rhythm, line_pattern, rhyme
 
-poetry_input = " The limerick packs laughs anatomical\nInto space that is quite economical.\n\n" \
+poetry_input = " The limerick packs laughs anatomical\nInto space that is quite economical.\n" \
                "But the good ones I've seen\nSo seldom are clean\n" \
                "And the clean ones so seldom are comical"
 
