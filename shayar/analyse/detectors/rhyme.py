@@ -9,29 +9,28 @@ def determine_rhyme_scheme(poem):
     last_words = []
     dictionary = cmudict.dict()
     for line in poem:
-        exclude = set(string.punctuation)
-        no_punct_line = ''.join(char for char in line if char not in exclude)
-        tokenized_line = nltk.Text(nltk.word_tokenize(no_punct_line))
-        last_word = tokenized_line[-1].lower()
-        last_words.append(dictionary[last_word])
+        if line.strip():
+            exclude = set(string.punctuation)
+            no_punct_line = ''.join(char for char in line if char not in exclude)
+            tokenized_line = nltk.Text(nltk.word_tokenize(no_punct_line))
+            last_word = tokenized_line[-1].lower()
+            last_words.append(dictionary[last_word])
 
     return __get_rhyme_scheme(last_words)
 
 
 def detect_internal_rhyme(poem):
+    stanzas = __get_stanzas(poem)
     rhyme_scheme = []
-    words = []
     dictionary = cmudict.dict()
-    poem_end = False
-    while not poem_end:
-        for line in poem:
-            if line.isspace:
-                poem_end = line == poem[-1]
-                break
+    for stanza in stanzas:
+        words = []
+        for line in stanza:
             exclude = set(string.punctuation)
             no_punct_line = ''.join(char for char in line if char not in exclude)
             tokenized_line = nltk.Text(nltk.word_tokenize(no_punct_line))
             line_words = [w.lower() for w in tokenized_line]
+
             for word in line_words:
                 try:
                     arpabet_word = dictionary[word]
@@ -66,3 +65,16 @@ def __get_rhyme_scheme(words):
             rhyme_scheme.append(rhyme_tokens)
 
     return rhyme_scheme
+
+
+def __get_stanzas(poem):
+    stanzas = []
+    stanza = []
+    for line in poem:
+        if not line.strip():
+            stanzas.append(stanza)
+            stanza = []
+        else:
+            stanza.append(line)
+    stanzas.append(stanza)
+    return stanzas

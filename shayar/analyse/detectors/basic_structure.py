@@ -9,7 +9,7 @@ def count_stanzas(poem):
 
     stanzas = 1
     for line in poem:
-        if line.isspace():
+        if not line.strip():
             stanzas += 1
     return stanzas
 
@@ -19,7 +19,7 @@ def count_lines_per_stanza(poem):
 
     lines = 0
     for line in poem:
-        if line.isspace():
+        if not line.strip():
             lines_per_stanza.append(lines)
             lines = 0
         else:
