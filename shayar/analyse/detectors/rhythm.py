@@ -49,7 +49,6 @@ def get_stress_pattern(poem):
         for word in words:
             try:
                 phonemes = dictionary[word][0]
-                print phonemes
                 for phoneme in phonemes:
                     if str(phoneme[-1]).isdigit():
                         stress_pattern += str(phoneme[-1])
