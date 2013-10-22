@@ -6,20 +6,25 @@ from nltk.corpus import cmudict
 
 
 def determine_rhyme_scheme(poem):
-    last_words = []
+    stanzas = __get_stanzas(poem)
     dictionary = cmudict.dict()
-    for line in poem:
-        if line.strip():
-            exclude = set(string.punctuation)
-            no_punct_line = ''.join(char for char in line if char not in exclude)
-            tokenized_line = nltk.Text(nltk.word_tokenize(no_punct_line))
-            last_word = tokenized_line[-1].lower()
-            try:
-                last_words.append(dictionary[last_word])
-            except KeyError:
-                continue
+    stanza_rhyme_scheme = []
+    for stanza in stanzas:
+        last_words = []
+        for line in stanza:
+            if line.strip():
+                exclude = set(string.punctuation)
+                no_punct_line = ''.join(char for char in line if char not in exclude)
+                tokenized_line = nltk.Text(nltk.word_tokenize(no_punct_line))
+                last_word = tokenized_line[-1].lower()
+                try:
+                    last_words.append(dictionary[last_word])
+                except KeyError:
+                    continue
 
-    return __get_rhyme_scheme(last_words)
+        stanza_rhyme_scheme.append(__get_rhyme_scheme(last_words))
+
+    return stanza_rhyme_scheme
 
 
 def detect_internal_rhyme(poem):
