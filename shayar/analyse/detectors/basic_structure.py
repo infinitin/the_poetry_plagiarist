@@ -4,14 +4,7 @@ import collections
 
 
 def count_stanzas(poem):
-    if not poem:
-        return 0
-
-    stanzas = 1
-    for line in poem:
-        if not line.strip():
-            stanzas += 1
-    return stanzas
+    return poem.count('') + 1
 
 
 def count_lines_per_stanza(poem):
@@ -19,7 +12,7 @@ def count_lines_per_stanza(poem):
 
     lines = 0
     for line in poem:
-        if not line.strip():
+        if not line:
             lines_per_stanza.append(lines)
             lines = 0
         else:

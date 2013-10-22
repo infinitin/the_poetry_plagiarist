@@ -18,6 +18,8 @@ def detect_line_tense(poem):
 
     line_tenses = []
     for line_verb in poem_verb_set:
+        if not line_verb:
+            continue
         possible_tenses = []
         for tense in tenses(line_verb):
             possible_tenses.append(tense[0])

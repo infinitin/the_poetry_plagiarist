@@ -5,7 +5,7 @@ __author__ = 'Nitin'
 class Poem:
 
     def __init__(self, poem):
-        self.poem = self.__format_poem(poem)     # A list of poem lines
+        self.poem = poem     # A list of poem lines
 
         self.stanzas = 0                    # Number of stanzas
         self.lines = []                     # List of numbers indicating lines per stanza
@@ -39,13 +39,6 @@ class Poem:
 
     def __str__(self):
         return "This is an empty poem"
-
-    def __format_poem(self, poem):
-        poem = poem.split('\n')
-        formatted_poem = []
-        for line in poem:
-            formatted_poem.append(line.strip())
-        return formatted_poem
 
 
 
