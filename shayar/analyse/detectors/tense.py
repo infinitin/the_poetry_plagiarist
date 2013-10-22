@@ -23,7 +23,10 @@ def detect_line_tense(poem):
         possible_tenses = []
         for tense in tenses(line_verb):
             possible_tenses.append(tense[0])
-        line_tenses.append([x for x, y in Counter(possible_tenses).most_common()][0])
+        try:
+            line_tenses.append([x for x, y in Counter(possible_tenses).most_common()][0])
+        except IndexError:
+            line_tenses.append('')
 
     return line_tenses
 

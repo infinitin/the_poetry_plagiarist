@@ -79,7 +79,7 @@ def __get_rhyme_scheme(words):
 def __get_rhyme_phonemes(phonemes):
     rhyme_phonemes = []
     for phoneme in phonemes:
-        if str(phoneme[-1]).isdigit():
+        if str(phoneme[-1]).isdigit() or phonemes[-1] == phoneme:
             rhyme_phonemes.append(phoneme)
 
     return str(rhyme_phonemes)
