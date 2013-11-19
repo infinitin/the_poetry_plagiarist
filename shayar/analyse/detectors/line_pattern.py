@@ -7,7 +7,7 @@ import string
 from nltk.corpus import cmudict
 
 
-def __get_phonemes(line, vowel):
+def __get_phonemes(line, is_vowel):
     dictionary = cmudict.dict()
     exclude = set(string.punctuation)
     no_punct_line = ''.join(char for char in line if char not in exclude)
@@ -21,7 +21,7 @@ def __get_phonemes(line, vowel):
         except KeyError:
             continue
 
-        if vowel:
+        if is_vowel:
             for phoneme in arpabet_word:
                 if str(phoneme[-1]).isdigit():
                     phonemes.append(phoneme)
