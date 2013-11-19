@@ -41,13 +41,9 @@ def __get_phonemes(line, is_consonant):
             continue
 
         if is_consonant:
-            for phoneme in arpabet_word:
-                if not str(phoneme[-1]).isdigit():
-                    phonemes.append(phoneme)
+            phonemes.extend([phoneme for phoneme in arpabet_word if not str(phoneme[-1]).isdigit()])
         else:
-            for phoneme in arpabet_word:
-                if str(phoneme[-1]).isdigit():
-                    phonemes.append(phoneme)
+            phonemes.extend([phoneme for phoneme in arpabet_word if str(phoneme[-1]).isdigit()])
 
     return phonemes
 
