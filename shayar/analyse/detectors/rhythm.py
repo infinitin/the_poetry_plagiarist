@@ -3,10 +3,11 @@ __author__ = 'Nitin'
 import nltk
 import string
 from nltk.corpus import cmudict
+from utils import get_stanzas
 
 
 def count_syllables(poem):
-    stanzas = __get_stanzas(poem)
+    stanzas = get_stanzas(poem)
     syllabic_stanza_lengths = []
     dictionary = cmudict.dict()
 
@@ -86,16 +87,3 @@ def __count_syllables_in_word(word, dictionary):
             syllables += 1
 
     return syllables
-
-
-def __get_stanzas(poem):
-    stanzas = []
-    stanza = []
-    for line in poem:
-        if not line.strip():
-            stanzas.append(stanza)
-            stanza = []
-        else:
-            stanza.append(line)
-    stanzas.append(stanza)
-    return stanzas

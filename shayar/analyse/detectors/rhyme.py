@@ -3,10 +3,11 @@ __author__ = 'Nitin'
 import nltk
 import string
 from nltk.corpus import cmudict
+from utils import get_stanzas
 
 
 def determine_rhyme_scheme(poem):
-    stanzas = __get_stanzas(poem)
+    stanzas = get_stanzas(poem)
     dictionary = cmudict.dict()
     stanza_rhyme_scheme = []
 
@@ -31,7 +32,7 @@ def determine_rhyme_scheme(poem):
 
 
 def detect_internal_rhyme(poem):
-    stanzas = __get_stanzas(poem)
+    stanzas = get_stanzas(poem)
     rhyme_scheme = []
     dictionary = cmudict.dict()
 
@@ -100,16 +101,3 @@ def __get_rhyme_phonemes(phonemes):
             rhyme_phonemes.append(phoneme)
 
     return str(rhyme_phonemes)
-
-
-def __get_stanzas(poem):
-    stanzas = []
-    stanza = []
-    for line in poem:
-        if not line.strip():
-            stanzas.append(stanza)
-            stanza = []
-        else:
-            stanza.append(line)
-    stanzas.append(stanza)
-    return stanzas
