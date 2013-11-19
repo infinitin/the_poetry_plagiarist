@@ -1,7 +1,7 @@
 __author__ = 'Nitin'
 
-import string
 import nltk
+import string
 from nltk.corpus import cmudict
 
 
@@ -9,14 +9,17 @@ def determine_rhyme_scheme(poem):
     stanzas = __get_stanzas(poem)
     dictionary = cmudict.dict()
     stanza_rhyme_scheme = []
+
     for stanza in stanzas:
         last_words = []
+
         for line in stanza:
             if line.strip():
                 exclude = set(string.punctuation)
                 no_punct_line = ''.join(char for char in line if char not in exclude)
                 tokenized_line = nltk.Text(nltk.word_tokenize(no_punct_line))
                 last_word = tokenized_line[-1].lower()
+
                 try:
                     last_words.append(dictionary[last_word])
                 except KeyError:
@@ -31,8 +34,10 @@ def detect_internal_rhyme(poem):
     stanzas = __get_stanzas(poem)
     rhyme_scheme = []
     dictionary = cmudict.dict()
+
     for stanza in stanzas:
         words = []
+
         for line in stanza:
             exclude = set(string.punctuation)
             no_punct_line = ''.join(char for char in line if char not in exclude)
@@ -46,6 +51,7 @@ def detect_internal_rhyme(poem):
                 except KeyError:
                     words.append('')
                     continue
+
         rhyme_scheme.append(__get_rhyme_scheme(words))
 
     return rhyme_scheme
@@ -55,13 +61,17 @@ def __get_rhyme_scheme(words):
     rhyme_scheme_map = {}
     rhyme_scheme = []
     line_rhyme_token = 'A'
+
     for pronunciations in words:
         rhyme_tokens = []
+
         for pronunciation in pronunciations:
             index = 0
+
             for phoneme in pronunciation:
                 if str(phoneme[-1]).isdigit() and str(phoneme[-1]) == "1":
                     rhyme_phonemes = __get_rhyme_phonemes(pronunciation[index:])
+
                     if not rhyme_phonemes in rhyme_scheme_map:
                         rhyme_scheme_map[rhyme_phonemes] = line_rhyme_token
                         line_rhyme_token = chr(ord(line_rhyme_token)+1)
@@ -69,6 +79,7 @@ def __get_rhyme_scheme(words):
                         if phoneme == '':
                             rhyme_tokens.append(line_rhyme_token)
                             line_rhyme_token = chr(ord(line_rhyme_token)+1)
+
                     rhyme_tokens.append(rhyme_scheme_map[rhyme_phonemes])
                 index += 1
 
@@ -83,6 +94,7 @@ def __get_rhyme_scheme(words):
 
 def __get_rhyme_phonemes(phonemes):
     rhyme_phonemes = []
+
     for phoneme in phonemes:
         if str(phoneme[-1]).isdigit() or phonemes[-1] == phoneme:
             rhyme_phonemes.append(phoneme)
