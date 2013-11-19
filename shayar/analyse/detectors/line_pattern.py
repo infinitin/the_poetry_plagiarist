@@ -1,4 +1,6 @@
+from __future__ import division
 __author__ = 'Nitin'
+
 
 import nltk
 import string
@@ -36,7 +38,8 @@ def detect_assonance(poem):
 
     for line in poem:
         vowel_phonemes = __get_phonemes(line, True)
-        assonance_lengths.append(len(vowel_phonemes) - len(set(vowel_phonemes)))
+        normalized_count = (len(vowel_phonemes) - len(set(vowel_phonemes)) + 1)/len(line.split(' '))
+        assonance_lengths.append(normalized_count)
 
     return assonance_lengths
 
@@ -46,7 +49,8 @@ def detect_consonance(poem):
 
     for line in poem:
         consonant_phonemes = __get_phonemes(line, False)
-        consonance_lengths.append(len(consonant_phonemes) - len(set(consonant_phonemes)))
+        normalized_count = (len(consonant_phonemes) - len(set(consonant_phonemes)) + 1)/len(set(consonant_phonemes))
+        consonance_lengths.append(normalized_count)
 
     return consonance_lengths
 
@@ -56,7 +60,8 @@ def detect_alliteration(poem):
 
     for line in poem:
         alliteration_phonemes = __get_start_or_stressed_phonemes(line)
-        alliteration_lengths.append(len(alliteration_phonemes) - len(set(alliteration_phonemes)))
+        normalized_count = (len(alliteration_phonemes) - len(set(alliteration_phonemes)) + 1)/len(line.split(' '))
+        alliteration_lengths.append(normalized_count)
 
     return alliteration_lengths
 
