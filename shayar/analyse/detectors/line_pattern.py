@@ -7,7 +7,31 @@ import string
 from nltk.corpus import cmudict
 
 
-def __get_phonemes(line, is_vowel):
+def detect_assonance(poem):
+    return __detect_pattern(poem, False, False)
+
+
+def detect_consonance(poem):
+    return __detect_pattern(poem, True, False)
+
+
+def detect_alliteration(poem):
+    return __detect_pattern(poem, False, True)
+
+
+def __detect_pattern(poem, consonance, alliteration):
+    pattern_lengths = []
+
+    for line in poem:
+        phonemes = __get_start_or_stressed_phonemes(line) if alliteration else __get_phonemes(line, consonance)
+        normalizer = len(set(phonemes)) if consonance else len(line.split(' '))
+        normalized_count = (len(phonemes) - len(set(phonemes)) + 1)/normalizer
+        pattern_lengths.append(normalized_count)
+
+    return pattern_lengths
+
+
+def __get_phonemes(line, is_consonant):
     dictionary = cmudict.dict()
     exclude = set(string.punctuation)
     no_punct_line = ''.join(char for char in line if char not in exclude)
@@ -21,49 +45,16 @@ def __get_phonemes(line, is_vowel):
         except KeyError:
             continue
 
-        if is_vowel:
-            for phoneme in arpabet_word:
-                if str(phoneme[-1]).isdigit():
-                    phonemes.append(phoneme)
-        else:
+        if is_consonant:
             for phoneme in arpabet_word:
                 if not str(phoneme[-1]).isdigit():
                     phonemes.append(phoneme)
+        else:
+            for phoneme in arpabet_word:
+                if str(phoneme[-1]).isdigit():
+                    phonemes.append(phoneme)
 
     return phonemes
-
-
-def detect_assonance(poem):
-    assonance_lengths = []
-
-    for line in poem:
-        vowel_phonemes = __get_phonemes(line, True)
-        normalized_count = (len(vowel_phonemes) - len(set(vowel_phonemes)) + 1)/len(line.split(' '))
-        assonance_lengths.append(normalized_count)
-
-    return assonance_lengths
-
-
-def detect_consonance(poem):
-    consonance_lengths = []
-
-    for line in poem:
-        consonant_phonemes = __get_phonemes(line, False)
-        normalized_count = (len(consonant_phonemes) - len(set(consonant_phonemes)) + 1)/len(set(consonant_phonemes))
-        consonance_lengths.append(normalized_count)
-
-    return consonance_lengths
-
-
-def detect_alliteration(poem):
-    alliteration_lengths = []
-
-    for line in poem:
-        alliteration_phonemes = __get_start_or_stressed_phonemes(line)
-        normalized_count = (len(alliteration_phonemes) - len(set(alliteration_phonemes)) + 1)/len(line.split(' '))
-        alliteration_lengths.append(normalized_count)
-
-    return alliteration_lengths
 
 
 def __get_start_or_stressed_phonemes(line):
@@ -82,7 +73,7 @@ def __get_start_or_stressed_phonemes(line):
 
         previous_phoneme = ""
         first_found = False
-        for phoneme in word:
+        for phoneme in arpabet_word:
             if not str(phoneme[-1]).isdigit():
                 if not first_found:
                     phonemes.append(phoneme)
