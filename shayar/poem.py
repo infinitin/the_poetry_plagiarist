@@ -40,19 +40,19 @@ class Poem:
 
     def __str__(self):
         return \
-            "This poem has " + str(self.stanzas) + " stanza(s)\n " +\
-            "with a total of " + str(sum(self.lines)) + " lines\n " +\
-            "in the format of " + str(self.lines) + ".\n" +\
+            "This poem has " + str(self.stanzas) + " stanza(s)\n" +\
+            " with a total of " + str(sum(self.lines)) + " lines\n" +\
+            " in the format of " + str(self.lines) + ".\n\n" +\
             str(len(self.repeated_lines)) + " line(s) are repeated in this poem\n" +\
-            "at positions " + str(self.repeated_lines.values()) + ".\n" +\
+            " at positions " + str(self.repeated_lines.values()) + ".\n\n" +\
             "The tenses of the lines in the given limerick are " + str(self.tenses) + ",\n" +\
-            "giving it a " + str(self.overall_tense) + " tense overall.\n" +\
-            "The syllable lengths of each line are as follows: " + str(self.syllable_count) + ".\n" +\
+            " giving it a " + str(self.overall_tense) + " tense overall.\n\n" +\
+            "The syllable lengths of each line are as follows: " + str(self.syllable_count) + ".\n\n" +\
             "The poem has consonance scores of: " + str(self.consonance) + ",\n" +\
-            "assonance scores of: " + str(self.assonance) + "\n" +\
-            "and alliteration scores of " + str(self.alliteration) + "\n" +\
+            " assonance scores of: " + str(self.assonance) + "\n" +\
+            " and alliteration scores of " + str(self.alliteration) + "\n\n" +\
             "The rhyme scheme is " + str(self.rhyme_scheme) + ".\n" +\
-            "There is also internal rhyme: " + str(self.internal_rhyme_scheme) + ".\n" +\
+            "There is also internal rhyme: " + str(self.internal_rhyme_scheme) + ".\n\n" +\
             "The stress patterns of each of the lines is: " + str(self.stress_pattern) + "."
 
 
