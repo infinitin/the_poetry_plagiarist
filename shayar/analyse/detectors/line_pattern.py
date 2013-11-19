@@ -2,9 +2,8 @@ from __future__ import division
 __author__ = 'Nitin'
 
 
-import nltk
-import string
 import utils
+from utils import get_tokenized_words
 
 
 def detect_assonance(poem):
@@ -32,10 +31,7 @@ def __detect_pattern(poem, consonance, alliteration):
 
 
 def __get_phonemes(line, is_consonant):
-    exclude = set(string.punctuation)
-    no_punct_line = ''.join(char for char in line if char not in exclude)
-    tokenized_line = nltk.Text(nltk.word_tokenize(no_punct_line))
-    words = [w.lower() for w in tokenized_line]
+    words = get_tokenized_words(line)
 
     phonemes = []
     for word in words:
@@ -57,10 +53,7 @@ def __get_phonemes(line, is_consonant):
 
 
 def __get_start_or_stressed_phonemes(line):
-    exclude = set(string.punctuation)
-    no_punct_line = ''.join(char for char in line if char not in exclude)
-    tokenized_line = nltk.Text(nltk.word_tokenize(no_punct_line))
-    words = [w.lower() for w in tokenized_line]
+    words = get_tokenized_words(line)
 
     phonemes = []
     for word in words:

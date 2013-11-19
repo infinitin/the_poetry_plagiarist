@@ -1,9 +1,8 @@
 __author__ = 'Nitin'
 
-import nltk
-import string
 from utils import get_stanzas
 import utils
+from utils import get_tokenized_words
 
 
 def determine_rhyme_scheme(poem):
@@ -15,10 +14,8 @@ def determine_rhyme_scheme(poem):
 
         for line in stanza:
             if line.strip():
-                exclude = set(string.punctuation)
-                no_punct_line = ''.join(char for char in line if char not in exclude)
-                tokenized_line = nltk.Text(nltk.word_tokenize(no_punct_line))
-                last_word = tokenized_line[-1].lower()
+                words = get_tokenized_words(line)
+                last_word = words[-1]
 
                 try:
                     last_words.append(utils.dictionary[last_word])
@@ -38,10 +35,7 @@ def detect_internal_rhyme(poem):
         words = []
 
         for line in stanza:
-            exclude = set(string.punctuation)
-            no_punct_line = ''.join(char for char in line if char not in exclude)
-            tokenized_line = nltk.Text(nltk.word_tokenize(no_punct_line))
-            line_words = [w.lower() for w in tokenized_line]
+            line_words = get_tokenized_words(line)
 
             for word in line_words:
                 try:

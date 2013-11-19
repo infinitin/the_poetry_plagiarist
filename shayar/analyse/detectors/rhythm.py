@@ -1,9 +1,8 @@
 __author__ = 'Nitin'
 
-import nltk
-import string
 from utils import get_stanzas
 import utils
+from utils import get_tokenized_words
 
 
 def count_syllables(poem):
@@ -14,16 +13,7 @@ def count_syllables(poem):
         syllabic_line_lengths = []
 
         for line in stanza:
-            exclude = set(string.punctuation)
-            exclude.remove("'")
-            exclude.remove("-")
-
-            no_punct_line = ''.join(char for char in line if char not in exclude)
-            no_punct_line = no_punct_line.replace(" '", " ")
-            no_punct_line = no_punct_line.replace("-", " ")
-
-            tokenized_line = nltk.Text(nltk.word_tokenize(no_punct_line))
-            words = [w.lower() for w in tokenized_line]
+            words = get_tokenized_words(line)
 
             syllabic_line_length = 0
             for word in words:
@@ -40,16 +30,7 @@ def get_stress_pattern(poem):
     stress_patterns = []
 
     for line in poem:
-        exclude = set(string.punctuation)
-        exclude.remove("'")
-        exclude.remove("-")
-
-        no_punct_line = ''.join(char for char in line if char not in exclude)
-        no_punct_line = no_punct_line.replace(" '", " ")
-        no_punct_line = no_punct_line.replace("-", " ")
-
-        tokenized_line = nltk.Text(nltk.word_tokenize(no_punct_line))
-        words = [w.lower() for w in tokenized_line]
+        words = get_tokenized_words(line)
 
         stress_pattern = ""
         for word in words:
