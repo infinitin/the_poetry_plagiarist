@@ -13,7 +13,11 @@ def count_syllables(poem):
         syllabic_line_lengths = []
         for line in stanza:
             exclude = set(string.punctuation)
+            exclude.remove("'")
+            exclude.remove("-")
             no_punct_line = ''.join(char for char in line if char not in exclude)
+            no_punct_line = no_punct_line.replace(" '", " ")
+            no_punct_line = no_punct_line.replace("-", " ")
             tokenized_line = nltk.Text(nltk.word_tokenize(no_punct_line))
             words = [w.lower() for w in tokenized_line]
             syllabic_line_length = 0
@@ -27,6 +31,8 @@ def count_syllables(poem):
 
 def __count_syllables_in_word(word, dictionary):
     syllables = 0
+    if word.startswith("'"):
+        return syllables
     try:
         arpabet_word = dictionary[word][0]
         for phoneme in arpabet_word:
@@ -46,6 +52,7 @@ def get_stress_pattern(poem):
     dictionary = cmudict.dict()
     for line in poem:
         exclude = set(string.punctuation)
+        exclude.remove("'")
         no_punct_line = ''.join(char for char in line if char not in exclude)
         tokenized_line = nltk.Text(nltk.word_tokenize(no_punct_line))
         words = [w.lower() for w in tokenized_line]
