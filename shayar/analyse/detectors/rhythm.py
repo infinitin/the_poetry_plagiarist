@@ -2,14 +2,13 @@ __author__ = 'Nitin'
 
 import nltk
 import string
-from nltk.corpus import cmudict
 from utils import get_stanzas
+import utils
 
 
 def count_syllables(poem):
     stanzas = get_stanzas(poem)
     syllabic_stanza_lengths = []
-    dictionary = cmudict.dict()
 
     for stanza in stanzas:
         syllabic_line_lengths = []
@@ -28,7 +27,7 @@ def count_syllables(poem):
 
             syllabic_line_length = 0
             for word in words:
-                syllabic_line_length += __count_syllables_in_word(word, dictionary)
+                syllabic_line_length += __count_syllables_in_word(word, utils.dictionary)
 
             syllabic_line_lengths.append(syllabic_line_length)
 
@@ -39,7 +38,6 @@ def count_syllables(poem):
 
 def get_stress_pattern(poem):
     stress_patterns = []
-    dictionary = cmudict.dict()
 
     for line in poem:
         exclude = set(string.punctuation)
@@ -56,15 +54,15 @@ def get_stress_pattern(poem):
         stress_pattern = ""
         for word in words:
             try:
-                phonemes = dictionary[word][0]
+                phonemes = utils.dictionary[word][0]
                 for phoneme in phonemes:
                     if str(phoneme[-1]).isdigit():
                         stress_pattern += str(phoneme[-1])
             except KeyError:
                 if word.endswith("n't") and not (word.equals("can't") or word.startswith("won't") or word.startswith("ain't")):
-                    stress_pattern += "10"
+                    stress_pattern += utils.stressed + utils.unstressed
                 else:
-                    stress_pattern += "1"
+                    stress_pattern += utils.stressed
 
         stress_patterns.append(stress_pattern)
 

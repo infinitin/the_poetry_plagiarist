@@ -4,7 +4,7 @@ __author__ = 'Nitin'
 
 import nltk
 import string
-from nltk.corpus import cmudict
+import utils
 
 
 def detect_assonance(poem):
@@ -32,7 +32,6 @@ def __detect_pattern(poem, consonance, alliteration):
 
 
 def __get_phonemes(line, is_consonant):
-    dictionary = cmudict.dict()
     exclude = set(string.punctuation)
     no_punct_line = ''.join(char for char in line if char not in exclude)
     tokenized_line = nltk.Text(nltk.word_tokenize(no_punct_line))
@@ -41,7 +40,7 @@ def __get_phonemes(line, is_consonant):
     phonemes = []
     for word in words:
         try:
-            arpabet_word = dictionary[word][0]
+            arpabet_word = utils.dictionary[word][0]
         except KeyError:
             continue
 
@@ -58,7 +57,6 @@ def __get_phonemes(line, is_consonant):
 
 
 def __get_start_or_stressed_phonemes(line):
-    dictionary = cmudict.dict()
     exclude = set(string.punctuation)
     no_punct_line = ''.join(char for char in line if char not in exclude)
     tokenized_line = nltk.Text(nltk.word_tokenize(no_punct_line))
@@ -67,7 +65,7 @@ def __get_start_or_stressed_phonemes(line):
     phonemes = []
     for word in words:
         try:
-            arpabet_word = dictionary[word][0]
+            arpabet_word = utils.dictionary[word][0]
         except KeyError:
             continue
 
@@ -81,7 +79,7 @@ def __get_start_or_stressed_phonemes(line):
                 else:
                     previous_phoneme = phoneme
             else:
-                if str(phoneme[-1]) == "1":
+                if str(phoneme[-1]) == utils.stressed:
                     phonemes.append(previous_phoneme)
 
     return phonemes

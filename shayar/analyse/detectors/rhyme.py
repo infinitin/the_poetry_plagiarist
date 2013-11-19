@@ -2,13 +2,12 @@ __author__ = 'Nitin'
 
 import nltk
 import string
-from nltk.corpus import cmudict
 from utils import get_stanzas
+import utils
 
 
 def determine_rhyme_scheme(poem):
     stanzas = get_stanzas(poem)
-    dictionary = cmudict.dict()
     stanza_rhyme_scheme = []
 
     for stanza in stanzas:
@@ -22,7 +21,7 @@ def determine_rhyme_scheme(poem):
                 last_word = tokenized_line[-1].lower()
 
                 try:
-                    last_words.append(dictionary[last_word])
+                    last_words.append(utils.dictionary[last_word])
                 except KeyError:
                     continue
 
@@ -34,7 +33,6 @@ def determine_rhyme_scheme(poem):
 def detect_internal_rhyme(poem):
     stanzas = get_stanzas(poem)
     rhyme_scheme = []
-    dictionary = cmudict.dict()
 
     for stanza in stanzas:
         words = []
@@ -47,7 +45,7 @@ def detect_internal_rhyme(poem):
 
             for word in line_words:
                 try:
-                    arpabet_word = dictionary[word]
+                    arpabet_word = utils.dictionary[word]
                     words.append(arpabet_word)
                 except KeyError:
                     words.append('')
@@ -70,7 +68,7 @@ def __get_rhyme_scheme(words):
             index = 0
 
             for phoneme in pronunciation:
-                if str(phoneme[-1]).isdigit() and str(phoneme[-1]) == "1":
+                if str(phoneme[-1]).isdigit() and str(phoneme[-1]) == utils.stressed:
                     rhyme_phonemes = __get_rhyme_phonemes(pronunciation[index:])
 
                     if not rhyme_phonemes in rhyme_scheme_map:
