@@ -18,6 +18,9 @@ def detect_alliteration(poem):
     return __detect_pattern(poem, False, True)
 
 
+# Grab the phonemes that we care about
+# Find the number of repeated chosen phonemes
+# Normalise it (more investigation needed perhaps)
 def __detect_pattern(poem, consonance, alliteration):
     pattern_lengths = []
 
@@ -30,6 +33,8 @@ def __detect_pattern(poem, consonance, alliteration):
     return pattern_lengths
 
 
+# Get the phonemes in the line
+# If is_consonant is true then we only grab the consonant phonemes, otherwise we grab the vowels phonemes
 def __get_phonemes(line, is_consonant):
     words = get_tokenized_words(line)
 
@@ -48,6 +53,8 @@ def __get_phonemes(line, is_consonant):
     return phonemes
 
 
+# Alliteration occurs when consonants are repeated at the beginning or on the stressed syllable of consecutive words.
+# So this grabs the stressed consonant or otherwise the first consonant of each word in the line.
 def __get_start_or_stressed_phonemes(line):
     words = get_tokenized_words(line)
 

@@ -1,7 +1,7 @@
 __author__ = 'Nitin'
 
 from shayar.poem import Poem
-from detectors.utils import analysis_init
+from detectors.utils import set_up_globals
 
 from detectors import basic_structure, tense, rhythm, line_pattern, rhyme
 
@@ -16,7 +16,7 @@ haiku = Poem(map(str.strip, f.readlines()))
 f.close()
 
 test = line_patterns
-analysis_init()
+set_up_globals()
 
 test.stanzas = basic_structure.count_stanzas(test.poem)
 test.lines = basic_structure.count_lines_per_stanza(test.poem)

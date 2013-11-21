@@ -5,7 +5,7 @@ import string
 import nltk
 
 
-def analysis_init():
+def set_up_globals():
     global dictionary
     dictionary = cmudict.dict()
     global stressed
@@ -27,6 +27,8 @@ def get_stanzas(poem):
     return stanzas
 
 
+# Remove the apostrophe and hyphen because they are legal letters in words for the the cmudict.
+# Add them back in as spaces to separate the parts of the word in prep for cmudict.
 def get_tokenized_words(line):
     exclude = set(string.punctuation)
     exclude.remove("'")

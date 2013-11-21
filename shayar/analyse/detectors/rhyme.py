@@ -14,8 +14,7 @@ def determine_rhyme_scheme(poem):
 
         for line in stanza:
             if line.strip():
-                words = get_tokenized_words(line)
-                last_word = words[-1]
+                last_word = get_tokenized_words(line)[-1]
 
                 try:
                     last_words.append(utils.dictionary[last_word])
@@ -50,6 +49,11 @@ def detect_internal_rhyme(poem):
     return rhyme_scheme
 
 
+# Create a map of a rhyme token to the rhyme phoneme
+# When determining the rhyme token to assign, check if it has been to the map first, or otherwise add it
+# Some words have more than one pronunciation so we need to take both into account and give all permutations in the
+#  generalisation stage
+# If there is only one permutation, we show it as a single list. May want to remove this.
 def __get_rhyme_scheme(words):
     rhyme_scheme_map = {}
     rhyme_scheme = []
@@ -85,6 +89,9 @@ def __get_rhyme_scheme(words):
     return rhyme_scheme
 
 
+# The phonemes that determine rhyme are the vowels and the last consonant.
+# E.g. Tragedy and strategy rhyme (well... near rhyme, but we want to spot that.)
+# Can have separate rules for strict and near rhyme, but we prefer to assume rhyme in the generalisation stage
 def __get_rhyme_phonemes(phonemes):
     rhyme_phonemes = []
 

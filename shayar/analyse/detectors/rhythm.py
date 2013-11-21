@@ -5,27 +5,10 @@ import utils
 from utils import get_tokenized_words
 
 
-def count_syllables(poem):
-    stanzas = get_stanzas(poem)
-    syllabic_stanza_lengths = []
-
-    for stanza in stanzas:
-        syllabic_line_lengths = []
-
-        for line in stanza:
-            words = get_tokenized_words(line)
-
-            syllabic_line_length = 0
-            for word in words:
-                syllabic_line_length += __count_syllables_in_word(word, utils.dictionary)
-
-            syllabic_line_lengths.append(syllabic_line_length)
-
-        syllabic_stanza_lengths.append(syllabic_line_lengths)
-
-    return syllabic_stanza_lengths
-
-
+# Stress pattern is done by stripping out the digit of each vowel
+# We append to a string so that we can use fuzzy string comparison algorithms like Jaro-Winkler
+# Words with apostrophes cause problems.
+# Words that are not in cmudict also cause problems. Need to expand cmudict as much as possible through learning.
 def get_stress_pattern(poem):
     stress_patterns = []
 
@@ -48,6 +31,29 @@ def get_stress_pattern(poem):
         stress_patterns.append(stress_pattern)
 
     return stress_patterns
+
+
+# We want a list of of the syllable counts of each line as well as a pattern for each stanza
+# This is because we may have an alternating pattern of syllabic rhythm
+def count_syllables(poem):
+    stanzas = get_stanzas(poem)
+    syllabic_stanza_lengths = []
+
+    for stanza in stanzas:
+        syllabic_line_lengths = []
+
+        for line in stanza:
+            words = get_tokenized_words(line)
+
+            syllabic_line_length = 0
+            for word in words:
+                syllabic_line_length += __count_syllables_in_word(word, utils.dictionary)
+
+            syllabic_line_lengths.append(syllabic_line_length)
+
+        syllabic_stanza_lengths.append(syllabic_line_lengths)
+
+    return syllabic_stanza_lengths
 
 
 def __count_syllables_in_word(word, dictionary):

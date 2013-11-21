@@ -12,7 +12,7 @@ def count_lines_per_stanza(poem):
 
     lines = 0
     for line in poem:
-        if not line:
+        if not line.strip():
             lines_per_stanza.append(lines)
             lines = 0
         else:
