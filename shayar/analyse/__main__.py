@@ -15,7 +15,7 @@ f = open("haiku.txt")
 haiku = Poem(map(str.strip, f.readlines()))
 f.close()
 
-test = line_patterns
+test = sonnet
 set_up_globals()
 
 test.stanzas = basic_structure.count_stanzas(test.poem)

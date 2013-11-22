@@ -3,6 +3,7 @@ __author__ = 'Nitin'
 from utils import get_stanzas
 import utils
 from utils import get_tokenized_words
+from utils import get_pronunciations
 
 
 def determine_rhyme_scheme(poem):
@@ -15,11 +16,7 @@ def determine_rhyme_scheme(poem):
         for line in stanza:
             if line.strip():
                 last_word = get_tokenized_words(line)[-1]
-
-                try:
-                    last_words.append(utils.dictionary[last_word])
-                except KeyError:
-                    continue
+                last_words.append(get_pronunciations(last_word))
 
         stanza_rhyme_scheme.append(__get_rhyme_scheme(last_words))
 
@@ -37,12 +34,7 @@ def detect_internal_rhyme(poem):
             line_words = get_tokenized_words(line)
 
             for word in line_words:
-                try:
-                    arpabet_word = utils.dictionary[word]
-                    words.append(arpabet_word)
-                except KeyError:
-                    words.append('')
-                    continue
+                words.append(get_pronunciations(word))
 
         rhyme_scheme.append(__get_rhyme_scheme(words))
 

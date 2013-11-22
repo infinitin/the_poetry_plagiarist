@@ -3,6 +3,7 @@ __author__ = 'Nitin'
 from nltk.corpus import cmudict
 import string
 import nltk
+from difflib import get_close_matches
 
 
 def set_up_globals():
@@ -40,3 +41,19 @@ def get_tokenized_words(line):
 
     tokenized_line = nltk.Text(nltk.word_tokenize(no_punct_line))
     return [w.lower() for w in tokenized_line]
+
+
+def get_pronunciations(word):
+    try:
+        pronunciations = dictionary[word]
+    except KeyError:
+        #Fuzzy matching on words to find closest
+        pronunciations = dictionary[get_close_matches(word, cmudict.words(), 1)[0]]
+        #Other options to make this more accurate:
+            #Break many syllable words into likely part-words
+            #Try all combos (stress/syllables only)
+            #Add from shakespeare sonnets
+            #Add from limericks
+            #Add manually
+
+    return pronunciations

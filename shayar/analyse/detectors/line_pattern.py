@@ -4,6 +4,7 @@ __author__ = 'Nitin'
 
 import utils
 from utils import get_tokenized_words
+from utils import get_pronunciations
 
 
 def detect_assonance(poem):
@@ -40,15 +41,12 @@ def __get_phonemes(line, is_consonant):
 
     phonemes = []
     for word in words:
-        try:
-            arpabet_word = utils.dictionary[word][0]
-        except KeyError:
-            continue
+        pronunciation = get_pronunciations(word)[0]
 
         if is_consonant:
-            phonemes.extend([phoneme for phoneme in arpabet_word if not str(phoneme[-1]).isdigit()])
+            phonemes.extend([phoneme for phoneme in pronunciation if not str(phoneme[-1]).isdigit()])
         else:
-            phonemes.extend([phoneme for phoneme in arpabet_word if str(phoneme[-1]).isdigit()])
+            phonemes.extend([phoneme for phoneme in pronunciation if str(phoneme[-1]).isdigit()])
 
     return phonemes
 
@@ -60,14 +58,11 @@ def __get_start_or_stressed_phonemes(line):
 
     phonemes = []
     for word in words:
-        try:
-            arpabet_word = utils.dictionary[word][0]
-        except KeyError:
-            continue
+        pronunciation = get_pronunciations(word)[0]
 
         previous_phoneme = ""
         first_found = False
-        for phoneme in arpabet_word:
+        for phoneme in pronunciation:
             if not str(phoneme[-1]).isdigit():
                 if not first_found:
                     phonemes.append(phoneme)

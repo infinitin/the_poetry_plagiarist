@@ -3,6 +3,7 @@ __author__ = 'Nitin'
 from utils import get_stanzas
 import utils
 from utils import get_tokenized_words
+from utils import get_pronunciations
 
 
 # Stress pattern is done by stripping out the digit of each vowel
@@ -17,16 +18,10 @@ def get_stress_pattern(poem):
 
         stress_pattern = ""
         for word in words:
-            try:
-                phonemes = utils.dictionary[word][0]
-                for phoneme in phonemes:
-                    if str(phoneme[-1]).isdigit():
-                        stress_pattern += str(phoneme[-1])
-            except KeyError:
-                if word.endswith("n't") and not (word.equals("can't") or word.startswith("won't") or word.startswith("ain't")):
-                    stress_pattern += utils.stressed + utils.unstressed
-                else:
-                    stress_pattern += utils.stressed
+            pronunciation = get_pronunciations(word)[0]
+            for phoneme in pronunciation:
+                if str(phoneme[-1]).isdigit():
+                    stress_pattern += str(phoneme[-1])
 
         stress_patterns.append(stress_pattern)
 
@@ -47,7 +42,7 @@ def count_syllables(poem):
 
             syllabic_line_length = 0
             for word in words:
-                syllabic_line_length += __count_syllables_in_word(word, utils.dictionary)
+                syllabic_line_length += __count_syllables_in_word(word)
 
             syllabic_line_lengths.append(syllabic_line_length)
 
@@ -56,19 +51,13 @@ def count_syllables(poem):
     return syllabic_stanza_lengths
 
 
-def __count_syllables_in_word(word, dictionary):
+def __count_syllables_in_word(word):
     syllables = 0
     if word.startswith("'"):
         return syllables
-    try:
-        arpabet_word = dictionary[word][0]
-        for phoneme in arpabet_word:
-            if str(phoneme[-1]).isdigit():
-                syllables += 1
-    except KeyError:
-        if word.endswith("n't") and not (word.equals("can't") or word.startswith("won't") or word.startswith("ain't")):
-            syllables += 2
-        else:
+    pronunciation = get_pronunciations(word)[0]
+    for phoneme in pronunciation:
+        if str(phoneme[-1]).isdigit():
             syllables += 1
 
     return syllables
