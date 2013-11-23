@@ -55,5 +55,6 @@ def get_pronunciations(word):
             #Add from shakespeare sonnets
             #Add from limericks
             #Add manually
+        #Could also bias this for fewer changes near the end of the word for the sake of rhyme only.
 
     return pronunciations
