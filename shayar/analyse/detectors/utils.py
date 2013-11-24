@@ -4,6 +4,7 @@ from nltk.corpus import cmudict
 import string
 import nltk
 from difflib import get_close_matches
+from itertools import product
 
 
 def set_up_globals():
@@ -58,3 +59,9 @@ def get_pronunciations(word):
         #Could also bias this for fewer changes near the end of the word for the sake of rhyme only.
 
     return pronunciations
+
+
+def get_line_permutations(line):
+    words = get_tokenized_words(line)
+    pronunciations = [get_pronunciations(word) for word in words]
+    return list(product(*pronunciations))
