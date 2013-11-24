@@ -3,7 +3,7 @@ __author__ = 'Nitin'
 from utils import get_stanzas
 from utils import get_tokenized_words
 from utils import get_pronunciations
-from utils import get_line_permutations
+from utils import get_extended_line_permutations
 
 
 # Stress pattern is done by stripping out the digit of each vowel
@@ -14,7 +14,7 @@ def get_stress_pattern(poem):
     stress_patterns = []
 
     for line in poem:
-        line_permutations = get_line_permutations(line)
+        line_permutations = get_extended_line_permutations(line)
         line_stress_patterns = set()
         for line_permutation in line_permutations:
             stress_pattern = ""

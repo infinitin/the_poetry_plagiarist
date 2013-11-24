@@ -65,3 +65,22 @@ def get_line_permutations(line):
     words = get_tokenized_words(line)
     pronunciations = [get_pronunciations(word) for word in words]
     return list(product(*pronunciations))
+
+
+def get_extended_line_permutations(line):
+    words = get_tokenized_words(line)
+    line_pronunciations = [get_pronunciations(word) for word in words]
+    extended_pronunciations = []
+    for word_pronunciations in line_pronunciations:
+        extended_word_pronunciations = word_pronunciations
+        for pronunciation in word_pronunciations:
+            vowels = [phoneme for phoneme in pronunciation if str(phoneme[-1]).isdigit()]
+            if len(vowels) == 1:
+                alternate_stress_phoneme = vowels[0][:-1] + str(1 - int(vowels[0][-1]))
+                new_pronunciation = [alternate_stress_phoneme if phoneme == vowels[0] else phoneme
+                                     for phoneme in pronunciation]
+                if not new_pronunciation in word_pronunciations:
+                    extended_word_pronunciations.append(new_pronunciation)
+
+        extended_pronunciations.append(extended_word_pronunciations)
+    return list(product(*extended_pronunciations))
