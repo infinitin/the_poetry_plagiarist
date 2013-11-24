@@ -77,7 +77,8 @@ def __get_rhyme_scheme(words):
         rhyme_scheme.append(rhyme_tokens)
 
     all_possibilities = list(product(*rhyme_scheme))
-    return [__normalize_rhyme_scheme(possibility)for possibility in all_possibilities]
+    normalized_rhyme_schemes = [__normalize_rhyme_scheme(possibility)for possibility in all_possibilities]
+    return [list(x) for x in set(tuple(x) for x in normalized_rhyme_schemes)]
 
 
 # The phonemes that determine rhyme are the vowels and the last consonant.
@@ -98,6 +99,10 @@ def __normalize_rhyme_scheme(rhyme_scheme):
     diff = ord(min(rhyme_scheme)) - ord('A')
     for letter in rhyme_scheme:
         normalized_rhyme_scheme.append(chr(ord(letter) - diff))
+
+    for token in range(ord('A'), ord(max(normalized_rhyme_scheme))):
+        if not chr(token) in normalized_rhyme_scheme:
+            normalized_rhyme_scheme = [chr(ord(x)-1) if x > chr(token) else x for x in normalized_rhyme_scheme]
 
     return normalized_rhyme_scheme
 
