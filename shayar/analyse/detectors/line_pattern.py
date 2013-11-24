@@ -33,7 +33,6 @@ def __detect_pattern(poem, consonance, alliteration):
         for phonemes in phoneme_set:
             normalizer = len(set(phonemes)) if consonance else len(line.split(' '))
             normalized_counts.append((len(phonemes) - len(set(phonemes)) + 1)/normalizer)
-        print normalized_counts
         pattern_lengths.append(max(normalized_counts))
 
     return pattern_lengths
