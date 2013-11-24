@@ -4,6 +4,7 @@ from utils import get_stanzas
 import utils
 from utils import get_tokenized_words
 from utils import get_pronunciations
+from itertools import product
 
 
 def determine_rhyme_scheme(poem):
@@ -73,12 +74,9 @@ def __get_rhyme_scheme(words):
                 index += 1
 
         rhyme_tokens = list(set(rhyme_tokens))
-        if len(rhyme_tokens) == 1:
-            rhyme_scheme.append(rhyme_tokens[0])
-        else:
-            rhyme_scheme.append(rhyme_tokens)
+        rhyme_scheme.append(rhyme_tokens)
 
-    return rhyme_scheme
+    return list(product(*rhyme_scheme))
 
 
 # The phonemes that determine rhyme are the vowels and the last consonant.
