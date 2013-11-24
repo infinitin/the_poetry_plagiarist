@@ -1,9 +1,9 @@
 __author__ = 'Nitin'
 
 from utils import get_stanzas
-import utils
 from utils import get_tokenized_words
 from utils import get_pronunciations
+from utils import get_line_permutations
 
 
 # Stress pattern is done by stripping out the digit of each vowel
@@ -14,16 +14,17 @@ def get_stress_pattern(poem):
     stress_patterns = []
 
     for line in poem:
-        words = get_tokenized_words(line)
+        line_permutations = get_line_permutations(line)
+        line_stress_patterns = set()
+        for line_permutation in line_permutations:
+            stress_pattern = ""
+            for pronunciation in line_permutation:
+                for phoneme in pronunciation:
+                    if str(phoneme[-1]).isdigit():
+                        stress_pattern += str(phoneme[-1])
+            line_stress_patterns.add(stress_pattern)
 
-        stress_pattern = ""
-        for word in words:
-            pronunciation = get_pronunciations(word)[0]
-            for phoneme in pronunciation:
-                if str(phoneme[-1]).isdigit():
-                    stress_pattern += str(phoneme[-1])
-
-        stress_patterns.append(stress_pattern)
+        stress_patterns.append(list(line_stress_patterns))
 
     return stress_patterns
 
