@@ -67,20 +67,41 @@ def get_line_permutations(line):
     return list(product(*pronunciations))
 
 
+# Extends the likely pronunciations so that single syllable words can be either stressed or unstressed
+# or if the word has a "light stress" (2) we treat it as either
 def get_extended_line_permutations(line):
     words = get_tokenized_words(line)
     line_pronunciations = [get_pronunciations(word) for word in words]
+
     extended_pronunciations = []
     for word_pronunciations in line_pronunciations:
         extended_word_pronunciations = word_pronunciations
+
         for pronunciation in word_pronunciations:
             vowels = [phoneme for phoneme in pronunciation if str(phoneme[-1]).isdigit()]
+
             if len(vowels) == 1:
                 alternate_stress_phoneme = vowels[0][:-1] + str(1 - int(vowels[0][-1]))
                 new_pronunciation = [alternate_stress_phoneme if phoneme == vowels[0] else phoneme
                                      for phoneme in pronunciation]
                 if not new_pronunciation in word_pronunciations:
                     extended_word_pronunciations.append(new_pronunciation)
+            else:
+                light_stresses = [vowel for vowel in vowels if str(vowel[-1]) == "2"]
+
+                for light_stress in light_stresses:
+                    full_stress_phoneme = light_stress[0][:-1] + "1"
+                    no_stress_phoneme = light_stress[0][:-1] + "0"
+
+                    new_full_stress_pronunciation = [full_stress_phoneme if phoneme == light_stress[0] else phoneme for
+                                                     phoneme in pronunciation]
+                    new_no_stress_pronunciation = [no_stress_phoneme if phoneme == light_stress[0] else phoneme for
+                                                   phoneme in pronunciation]
+
+                    if not new_full_stress_pronunciation in word_pronunciations:
+                        extended_word_pronunciations.append(new_pronunciation)
+                    if not new_no_stress_pronunciation in word_pronunciations:
+                        extended_word_pronunciations.append(new_pronunciation)
 
         extended_pronunciations.append(extended_word_pronunciations)
     return list(product(*extended_pronunciations))
