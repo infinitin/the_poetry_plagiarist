@@ -86,22 +86,23 @@ def get_extended_line_permutations(line):
                                      for phoneme in pronunciation]
                 if not new_pronunciation in word_pronunciations:
                     extended_word_pronunciations.append(new_pronunciation)
-            else:
-                light_stresses = [vowel for vowel in vowels if str(vowel[-1]) == "2"]
 
-                for light_stress in light_stresses:
-                    full_stress_phoneme = light_stress[0][:-1] + "1"
-                    no_stress_phoneme = light_stress[0][:-1] + "0"
+            light_stresses = [vowel for vowel in vowels if str(vowel[-1]) == "2"]
+            for light_stress in light_stresses:
+                full_stress_phoneme = light_stress[:-1] + "1"
+                no_stress_phoneme = light_stress[:-1] + "0"
 
-                    new_full_stress_pronunciation = [full_stress_phoneme if phoneme == light_stress[0] else phoneme for
-                                                     phoneme in pronunciation]
-                    new_no_stress_pronunciation = [no_stress_phoneme if phoneme == light_stress[0] else phoneme for
-                                                   phoneme in pronunciation]
+                new_full_stress_pronunciation = [full_stress_phoneme if phoneme == light_stress else phoneme for
+                                                 phoneme in pronunciation]
+                new_no_stress_pronunciation = [no_stress_phoneme if phoneme == light_stress else phoneme for
+                                               phoneme in pronunciation]
 
-                    if not new_full_stress_pronunciation in word_pronunciations:
-                        extended_word_pronunciations.append(new_pronunciation)
-                    if not new_no_stress_pronunciation in word_pronunciations:
-                        extended_word_pronunciations.append(new_pronunciation)
+                if not new_full_stress_pronunciation in word_pronunciations:
+                    extended_word_pronunciations.append(new_full_stress_pronunciation)
+                if not new_no_stress_pronunciation in word_pronunciations:
+                    extended_word_pronunciations.append(new_no_stress_pronunciation)
+
+                extended_word_pronunciations = [x for x in extended_word_pronunciations if x != pronunciation]
 
         extended_pronunciations.append(extended_word_pronunciations)
     return list(product(*extended_pronunciations))
