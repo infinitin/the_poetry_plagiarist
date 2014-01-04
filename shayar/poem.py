@@ -19,8 +19,7 @@ class Poem:
         self.adjectives = []                # A list of the set of adjectives used in each line
         self.pronouns = []                  # A list of the set of pronouns used in each line
         self.adverbs = []                   # A list of the set of adverbs used in each line
-        self.characters = {}                # A map of the characters (nouns and pronouns after anaphora resolution)
-                                                                      # to the locations they are mentioned
+        self.characters = []                # A list of characters (subjects and objects) in the poem
 
         self.rhyme_scheme = []              # A list of characters representing the rhyme for each line: [A,A,B,B,A]
         self.internal_rhyme_scheme = []     # A list of locations in the poem with internal rhyme
@@ -57,7 +56,8 @@ class Poem:
             "The rhyme scheme is " + str(self.rhyme_scheme) + ".\n" +\
             "There is also internal rhyme: " + str(self.internal_rhyme_scheme) + ".\n\n" +\
             "The stress patterns of each of the lines is: " + str(self.stress_pattern) + ".\n\n" +\
-            "The poem is written in " + str(self.point_of_view) + " person."
+            "The poem is written in " + str(self.point_of_view) + " person.\n" +\
+            "The characters in the poem are: " + str(self.characters)
 
 
 

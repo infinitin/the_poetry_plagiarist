@@ -1,6 +1,7 @@
 __author__ = 'Nitin'
 
 from pattern.text.en import parsetree
+from nltk.sem import drt
 
 
 def determine_perspective(poem):
@@ -9,7 +10,6 @@ def determine_perspective(poem):
     for line in poem:
         s = parsetree(line, relations=True)
         point_of_views += [chunk.head.string.lower() for chunk in s.sentences[0].subjects]
-        print point_of_views
 
     first_person_words = set(['i', 'me', 'my', 'myself', 'mine'])
     second_person_words = set(['you', 'your', 'yourself', 'yours', 'thy', 'thine', 'thou'])
@@ -25,4 +25,15 @@ def determine_perspective(poem):
             return "second"
     else:
         return "third"
+
+
+def identifiy_characters(poem):
+    characters = []
+
+    for line in poem:
+        s = parsetree(line, relations=True)
+        characters += [chunk.string.lower() for chunk in s.sentences[0].chunks if chunk.type.startswith("N")]
+
+    return characters
+
 

@@ -20,7 +20,7 @@ haiku = Poem(map(str.strip, f.readlines()))
 f.close()
 
 logging.info('Begin analysis')
-test = sonnet
+test = limerick
 
 logging.info('Setting up cmudict and other tools')
 set_up_globals()
@@ -60,9 +60,13 @@ test.internal_rhyme_scheme = rhyme.detect_internal_rhyme(test.poem)
 
 logging.info('Listening to stress pattern')
 test.stress_pattern = rhythm.get_stress_pattern(test.poem)
-'''
+
 
 logging.info("Determining speaker's point of view")
 test.point_of_view = point_of_view.determine_perspective(test.poem)
+'''
+
+logging.info("Identifying the characters in the poem")
+test.characters = point_of_view.identifiy_characters(test.poem)
 
 print str(test)
