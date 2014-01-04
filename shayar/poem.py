@@ -38,6 +38,8 @@ class Poem:
         self.similes = []                   # List of set of similes used per line
         self.metaphors = []                 # List of set of metaphors used per line
 
+        self.point_of_view = ""             # first/second/third person
+
     def __str__(self):
         return \
             "This poem has " + str(self.stanzas) + " stanza(s)\n" +\
@@ -54,7 +56,8 @@ class Poem:
             "Scores >0.5 indicate presence, <0.5 indicate abscence and 0.5 indicate uncertainty.\n\n" +\
             "The rhyme scheme is " + str(self.rhyme_scheme) + ".\n" +\
             "There is also internal rhyme: " + str(self.internal_rhyme_scheme) + ".\n\n" +\
-            "The stress patterns of each of the lines is: " + str(self.stress_pattern) + "."
+            "The stress patterns of each of the lines is: " + str(self.stress_pattern) + ".\n\n" +\
+            "The poem is written in " + str(self.point_of_view) + " person."
 
 
 
