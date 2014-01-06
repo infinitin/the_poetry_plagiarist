@@ -56,7 +56,8 @@ class Poem:
             "The rhyme scheme is " + str(self.rhyme_scheme) + ".\n" +\
             "There is also internal rhyme: " + str(self.internal_rhyme_scheme) + ".\n\n" +\
             "The stress patterns of each of the lines is: " + str(self.stress_pattern) + ".\n\n" +\
-            "The use of similes probably has an affect: " + str(self.similes) + ".\n\n" +\
+            "The use of similes probably has an affect: " + str(self.similes) + ",\n" +\
+            "As does the use of onomatopoeia: " + str(self.onomatopoeia) + ".\n\n" +\
             "The poem is written in " + str(self.point_of_view) + " person.\n" +\
             "The characters in the poem are: " + str(self.characters)
 

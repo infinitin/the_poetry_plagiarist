@@ -26,7 +26,7 @@ test = similes
 
 logging.info('Setting up cmudict and other tools')
 set_up_globals()
-
+'''
 logging.info('Counting number of stanzas')
 test.stanzas = basic_structure.count_stanzas(test.poem)
 
@@ -65,12 +65,17 @@ test.stress_pattern = rhythm.get_stress_pattern(test.poem)
 
 logging.info('Looking out for similes')
 test.similes = rhetoric.detect_simile(test.poem)
+'''
 
+logging.info('Listening for onomatopoeia')
+test.onomatopoeia = rhetoric.identify_onomatopoeia(test.poem)
+
+'''
 logging.info("Determining speaker's point of view")
 test.point_of_view = point_of_view.determine_perspective(test.poem)
 
-
 logging.info("Identifying the characters in the poem")
 test.characters = point_of_view.identify_characters(test.poem)
+'''
 
 print str(test)
