@@ -34,8 +34,8 @@ class Poem:
         self.alliteration = []              # List of lengths of the longest alliteration for each line
 
         self.onomatopoeia = []              # List of set of onomatopoeia used per line
-        self.similes = []                   # List of set of similes used per line
-        self.metaphors = []                 # List of set of metaphors used per line
+        self.similes = []                   # List of set of similes used
+        self.metaphors = []                 # List of set of metaphors used
 
         self.point_of_view = ""             # first/second/third person
 
@@ -56,6 +56,7 @@ class Poem:
             "The rhyme scheme is " + str(self.rhyme_scheme) + ".\n" +\
             "There is also internal rhyme: " + str(self.internal_rhyme_scheme) + ".\n\n" +\
             "The stress patterns of each of the lines is: " + str(self.stress_pattern) + ".\n\n" +\
+            "The use of similes probably has an affect: " + str(self.similes) + ".\n\n" +\
             "The poem is written in " + str(self.point_of_view) + " person.\n" +\
             "The characters in the poem are: " + str(self.characters)
 

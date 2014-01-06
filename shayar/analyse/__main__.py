@@ -6,7 +6,7 @@ import logging
 logging.basicConfig(level=logging.INFO)
 logging.getLogger(__name__)
 
-from detectors import basic_structure, tense, rhythm, line_pattern, rhyme, point_of_view
+from detectors import basic_structure, tense, rhythm, line_pattern, rhyme, point_of_view, rhetoric
 
 logging.info('Grabbing poems')
 f = open("limerick.txt")
@@ -17,14 +17,16 @@ f = open("line patterns.txt")
 line_patterns = Poem(map(str.strip, f.readlines()))
 f = open("haiku.txt")
 haiku = Poem(map(str.strip, f.readlines()))
+f = open("similes.txt")
+similes = Poem(map(str.strip, f.readlines()))
 f.close()
 
 logging.info('Begin analysis')
-test = limerick
+test = similes
 
 logging.info('Setting up cmudict and other tools')
 set_up_globals()
-'''
+
 logging.info('Counting number of stanzas')
 test.stanzas = basic_structure.count_stanzas(test.poem)
 
@@ -61,10 +63,13 @@ test.internal_rhyme_scheme = rhyme.detect_internal_rhyme(test.poem)
 logging.info('Listening to stress pattern')
 test.stress_pattern = rhythm.get_stress_pattern(test.poem)
 
+logging.info('Looking out for similes')
+test.similes = rhetoric.detect_simile(test.poem)
+
 
 logging.info("Determining speaker's point of view")
 test.point_of_view = point_of_view.determine_perspective(test.poem)
-'''
+
 
 logging.info("Identifying the characters in the poem")
 test.characters = point_of_view.identifiy_characters(test.poem)

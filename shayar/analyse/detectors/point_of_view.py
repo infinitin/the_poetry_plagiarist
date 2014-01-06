@@ -29,11 +29,23 @@ def determine_perspective(poem):
 
 def identifiy_characters(poem):
     characters = []
+    subjects = []
+    objects = []
 
     for line in poem:
         s = parsetree(line, relations=True)
         characters += [chunk.string.lower() for chunk in s.sentences[0].chunks if chunk.type.startswith("N")]
+        subjects += [chunk.string.lower() for chunk in s.sentences[0].subjects]
+        objects += [chunk.string.lower() for chunk in s.sentences[0].objects]
+
+    print subjects
+    print objects
 
     return characters
 
+
+def resolve_anaphora(poem):
+    line = "Joey is fat. He eats too much cake."
+    resolved = drt.resolve_anaphora(line)
+    print resolved
 
