@@ -66,12 +66,11 @@ test.stress_pattern = rhythm.get_stress_pattern(test.poem)
 logging.info('Looking out for similes')
 test.similes = rhetoric.detect_simile(test.poem)
 
-
 logging.info("Determining speaker's point of view")
 test.point_of_view = point_of_view.determine_perspective(test.poem)
 
 
 logging.info("Identifying the characters in the poem")
-test.characters = point_of_view.identifiy_characters(test.poem)
+test.characters = point_of_view.identify_characters(test.poem)
 
 print str(test)

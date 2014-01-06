@@ -27,7 +27,7 @@ def determine_perspective(poem):
         return "third"
 
 
-def identifiy_characters(poem):
+def identify_characters(poem):
     characters = []
     subjects = []
     objects = []
@@ -41,11 +41,5 @@ def identifiy_characters(poem):
     print subjects
     print objects
 
-    return characters
-
-
-def resolve_anaphora(poem):
-    line = "Joey is fat. He eats too much cake."
-    resolved = drt.resolve_anaphora(line)
-    print resolved
+    return set(characters)
 
