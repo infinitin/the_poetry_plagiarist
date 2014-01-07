@@ -12,7 +12,7 @@ def determine_perspective(poem):
         point_of_views += [chunk.head.string.lower() for chunk in s.sentences[0].subjects]
 
     first_person_words = set(['i', 'me', 'my', 'myself', 'mine'])
-    second_person_words = set(['you', 'your', 'yourself', 'yours', 'thy', 'thine', 'thou'])
+    second_person_words = set(['you', 'your', 'yourself', 'yours', 'thy', 'thine', 'thou', 'thee'])
     pov_set = set(point_of_views)
 
     first_person = list(first_person_words & pov_set)
