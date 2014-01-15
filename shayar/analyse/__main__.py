@@ -6,7 +6,7 @@ import logging
 logging.basicConfig(level=logging.INFO)
 logging.getLogger(__name__)
 
-from detectors import basic_structure, tense, rhythm, line_pattern, rhyme, point_of_view, rhetoric
+from detectors import basic_structure, tense, rhythm, line_pattern, rhyme, point_of_view, rhetoric, context
 
 logging.info('Grabbing poems')
 f = open("limerick.txt")
@@ -65,17 +65,18 @@ test.stress_pattern = rhythm.get_stress_pattern(test.poem)
 
 logging.info('Looking out for similes')
 test.similes = rhetoric.detect_simile(test.poem)
-'''
 
 logging.info('Listening for onomatopoeia')
 test.onomatopoeia = rhetoric.identify_onomatopoeia(test.poem)
 
-'''
 logging.info("Determining speaker's point of view")
 test.point_of_view = point_of_view.determine_perspective(test.poem)
 
 logging.info("Identifying the characters in the poem")
 test.characters = point_of_view.identify_characters(test.poem)
 '''
+
+logging.info("Reading in-between the lines")
+context.build_drs(test.poem)
 
 print str(test)
