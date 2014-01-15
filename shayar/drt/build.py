@@ -85,13 +85,11 @@ def write_noun_rules(grammar_file):
             if len(lemma.name) == 1:
                 continue
 
+            grammar_file.write(NOUN_RULE % ('sg', lemma.name.replace('-', '_').replace('.', ''), lemma.name.replace('_', ' ')))
+
             plurals = set([pluralize(lemma.name, classical=False), pluralize(lemma.name, classical=False)])
-            if not plurals:
-                grammar_file.write(NOUN_RULE % ('ms', lemma.name.replace('-', '_').replace('.', ''), lemma.name.replace('_', ' ')))
-            else:
-                grammar_file.write(NOUN_RULE % ('sg', lemma.name.replace('-', '_').replace('.', ''), lemma.name.replace('_', ' ')))
-                for plural in plurals:
-                    grammar_file.write(NOUN_RULE % ('pl', lemma.name.replace('-', '_').replace('.', ''), plural.replace('_', ' ')))
+            for plural in plurals:
+                grammar_file.write(NOUN_RULE % ('pl', lemma.name.replace('-', '_').replace('.', ''), plural.replace('_', ' ')))
 
 
 PRONOUN_RULE = "PropN[%sLOC,NUM=%s,SEM=<\P.(DRS([x],[%s(x)])+P(x))>] -> \"%s\"\n"
@@ -117,9 +115,78 @@ def write_verb_rules(grammar_file):
         if len(lemma) == 1 or lemma == 'exist':
                 continue
 
+        if lemma == 'be':
+            write_be_rules(grammar_file)
+            continue
+
         #for lex in lexeme(lemma): when we start introducing tenses and 1/2/3 person
         all_forms = lexeme(lemma)
-        grammar_file.write(BINARY_VERB_RULE % ('pl', lemma.replace('-', '_').replace('.', ''), 'pres', all_forms[0].replace('_', ' ')))
-        grammar_file.write(BINARY_VERB_RULE % ('sg', lemma.replace('-', '_').replace('.', ''), 'pres', all_forms[1].replace('_', ' ')))
-        grammar_file.write(UNARY_VERB_RULE % ('pl', lemma.replace('-', '_').replace('.', ''), 'pres', all_forms[0].replace('_', ' ')))
-        grammar_file.write(UNARY_VERB_RULE % ('sg', lemma.replace('-', '_').replace('.', ''), 'pres', all_forms[1].replace('_', ' ')))
+        fixed_lemma = lemma.replace('-', '_').replace('.', '')
+        grammar_file.write(BINARY_VERB_RULE % ('pl', fixed_lemma, 'pres', all_forms[0].replace('_', ' ')))
+        grammar_file.write(UNARY_VERB_RULE % ('pl', fixed_lemma, 'pres', all_forms[0].replace('_', ' ')))
+
+        grammar_file.write(BINARY_VERB_RULE % ('sg', fixed_lemma, 'pres', all_forms[1].replace('_', ' ')))
+        grammar_file.write(UNARY_VERB_RULE % ('sg', fixed_lemma, 'pres', all_forms[1].replace('_', ' ')))
+
+        if all_forms[2].endswith('ed'):
+            grammar_file.write(BINARY_VERB_RULE % ('sg', fixed_lemma, 'past', all_forms[2].replace('_', ' ')))
+            grammar_file.write(UNARY_VERB_RULE % ('sg', fixed_lemma, 'past', all_forms[2].replace('_', ' ')))
+            grammar_file.write(BINARY_VERB_RULE % ('pl', fixed_lemma, 'past', all_forms[2].replace('_', ' ')))
+            grammar_file.write(UNARY_VERB_RULE % ('pl', fixed_lemma, 'past', all_forms[2].replace('_', ' ')))
+            continue
+
+        grammar_file.write(BINARY_VERB_RULE % ('sg', fixed_lemma, 'part', all_forms[2].replace('_', ' ')))
+        grammar_file.write(UNARY_VERB_RULE % ('sg', fixed_lemma, 'part', all_forms[2].replace('_', ' ')))
+        grammar_file.write(BINARY_VERB_RULE % ('pl', fixed_lemma, 'part', all_forms[2].replace('_', ' ')))
+        grammar_file.write(UNARY_VERB_RULE % ('pl', fixed_lemma, 'part', all_forms[2].replace('_', ' ')))
+
+        if len(all_forms) > 3:
+            grammar_file.write(BINARY_VERB_RULE % ('sg', fixed_lemma, 'past', all_forms[3].replace('_', ' ')))
+            grammar_file.write(UNARY_VERB_RULE % ('sg', fixed_lemma, 'past', all_forms[3].replace('_', ' ')))
+            grammar_file.write(BINARY_VERB_RULE % ('pl', fixed_lemma, 'past', all_forms[3].replace('_', ' ')))
+            grammar_file.write(UNARY_VERB_RULE % ('pl', fixed_lemma, 'past', all_forms[3].replace('_', ' ')))
+
+
+def write_be_rules(grammar_file):
+    lemma = 'be'
+    all_forms = lexeme(lemma)
+
+    #be
+    grammar_file.write(BINARY_VERB_RULE % ('sg', lemma, 'futr', all_forms[0].replace('_', ' ')))
+    grammar_file.write(UNARY_VERB_RULE % ('sg', lemma, 'futr', all_forms[0].replace('_', ' ')))
+    grammar_file.write(BINARY_VERB_RULE % ('pl', lemma, 'futr', all_forms[0].replace('_', ' ')))
+    grammar_file.write(UNARY_VERB_RULE % ('pl', lemma, 'futr', all_forms[0].replace('_', ' ')))
+
+    #am
+    grammar_file.write(BINARY_VERB_RULE % ('sg', lemma, 'pres', all_forms[1].replace('_', ' ')))
+    grammar_file.write(UNARY_VERB_RULE % ('sg', lemma, 'pres', all_forms[1].replace('_', ' ')))
+
+    #are
+    grammar_file.write(BINARY_VERB_RULE % ('pl', lemma, 'pres', all_forms[2].replace('_', ' ')))
+    grammar_file.write(UNARY_VERB_RULE % ('pl', lemma, 'pres', all_forms[2].replace('_', ' ')))
+
+    #is
+    grammar_file.write(BINARY_VERB_RULE % ('sg', lemma, 'pres', all_forms[3].replace('_', ' ')))
+    grammar_file.write(UNARY_VERB_RULE % ('sg', lemma, 'pres', all_forms[3].replace('_', ' ')))
+
+    #being
+    grammar_file.write(BINARY_VERB_RULE % ('sg', lemma, 'part', all_forms[4].replace('_', ' ')))
+    grammar_file.write(UNARY_VERB_RULE % ('sg', lemma, 'part', all_forms[4].replace('_', ' ')))
+    grammar_file.write(BINARY_VERB_RULE % ('pl', lemma, 'part', all_forms[4].replace('_', ' ')))
+    grammar_file.write(UNARY_VERB_RULE % ('pl', lemma, 'part', all_forms[4].replace('_', ' ')))
+
+    #was
+    grammar_file.write(BINARY_VERB_RULE % ('sg', lemma, 'past', all_forms[5].replace('_', ' ')))
+    grammar_file.write(UNARY_VERB_RULE % ('sg', lemma, 'past', all_forms[5].replace('_', ' ')))
+
+    #were
+    grammar_file.write(BINARY_VERB_RULE % ('pl', lemma, 'past', all_forms[6].replace('_', ' ')))
+    grammar_file.write(UNARY_VERB_RULE % ('pl', lemma, 'past', all_forms[6].replace('_', ' ')))
+
+    #been
+    grammar_file.write(BINARY_VERB_RULE % ('sg', lemma, 'ppart', all_forms[7].replace('_', ' ')))
+    grammar_file.write(UNARY_VERB_RULE % ('sg', lemma, 'ppart', all_forms[7].replace('_', ' ')))
+    grammar_file.write(BINARY_VERB_RULE % ('pl', lemma, 'ppart', all_forms[7].replace('_', ' ')))
+    grammar_file.write(UNARY_VERB_RULE % ('pl', lemma, 'ppart', all_forms[7].replace('_', ' ')))
+
+    #need to add negations!
