@@ -17,7 +17,7 @@ def build_drs(poem):
         words.extend(get_tokenized_words(line))
 
     #trees = parser.nbest_parse(line)
-    trees = parser.nbest_parse('Angus knew John'.split())
+    trees = parser.nbest_parse('the bartender said'.split())
     if not trees: print 'no way to parse this!'
     for tree in trees:
         print(tree.node['SEM'].simplify())

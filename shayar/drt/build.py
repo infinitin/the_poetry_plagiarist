@@ -62,6 +62,8 @@ def write_all_rules(grammar_file):
     grammar_file.write("Det[NUM=pl,SEM=<\P Q.DRS([],[((DRS([x],[])+P(x)) implies Q(x))])>] -> 'all' | 'All'\n")
     grammar_file.write("Det[SEM=<\P Q.((DRS([x],[])+P(x))+Q(x))>] -> 'some' | 'Some'\n")
     grammar_file.write("Det[NUM=sg,SEM=<\P Q.((DRS([x],[])+P(x))+Q(x))>] -> 'a' | 'A'\n")
+    grammar_file.write("Det[NUM=sg,SEM=<\P Q.((DRS([x],[])+P(x))+Q(x))>] -> 'the' | 'The'\n")
+    grammar_file.write("Det[NUM=pl,SEM=<\P Q.((DRS([x],[])+P(x))+Q(x))>] -> 'the' | 'The'\n")
     grammar_file.write("Det[NUM=sg,SEM=<\P Q.(not ((DRS([x],[])+P(x))+Q(x)))>] -> 'no' | 'No'\n")
 
     grammar_file.write("\n")
