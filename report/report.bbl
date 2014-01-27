@@ -1,0 +1,19 @@
+\begin{thebibliography}{4}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+
+\bibitem[{Chobotov(2002)}]{vladbook}
+{\sc Chobotov, V.} (2002). {\em Orbital Mechanics, Third Edition\/}. AIAA
+  Education.
+
+\bibitem[{Koci(2010)}]{matrixdiagref}
+{\sc Koci, R.} (2010). World, view and projection matrix unveiled.
+  \url{http://robertokoci.com/world-view-projection-matrix-unveiled/}.
+
+\bibitem[{Meeus(1997)}]{meeusbook}
+{\sc Meeus, J.} (1997). {\em Mathematical Astronomy Morsels\/}. Willmann-Bell.
+
+\bibitem[{Yu(2005)}]{viewfrusdiagref}
+{\sc Yu, D.T.} (2005). Computer graphics.
+  \url{http://cse.csusb.edu/tong/courses/cs420/notes/}.
+
+\end{thebibliography}

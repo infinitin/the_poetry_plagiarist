@@ -1,0 +1,37 @@
+\select@language {english}
+\contentsline {chapter}{Contents}{i}{chapter*.1}
+\contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}
+\contentsline {chapter}{\numberline {2}Background}{6}{chapter.2}
+\contentsline {section}{\numberline {2.1}Poetry Theory}{6}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}The Purpose of Poetry}{6}{subsection.2.1.1}
+\contentsline {subsection}{\numberline {2.1.2}Features of Poetry}{7}{subsection.2.1.2}
+\contentsline {subsubsection}{\numberline {2.1.2.1}Rhyme}{7}{subsubsection.2.1.2.1}
+\contentsline {subsubsection}{\numberline {2.1.2.2}Rhythm}{8}{subsubsection.2.1.2.2}
+\contentsline {subsubsection}{\numberline {2.1.2.3}Sound Devices}{10}{subsubsection.2.1.2.3}
+\contentsline {subsubsection}{\numberline {2.1.2.4}Structure}{11}{subsubsection.2.1.2.4}
+\contentsline {subsubsection}{\numberline {2.1.2.5}Symbolism and Imagery}{12}{subsubsection.2.1.2.5}
+\contentsline {subsubsection}{\numberline {2.1.2.6}Context and Personification}{13}{subsubsection.2.1.2.6}
+\contentsline {subsubsection}{\numberline {2.1.2.7}Theme}{14}{subsubsection.2.1.2.7}
+\contentsline {subsection}{\numberline {2.1.3}Types of Poetry}{14}{subsection.2.1.3}
+\contentsline {subsubsection}{\numberline {2.1.3.1}Categories}{15}{subsubsection.2.1.3.1}
+\contentsline {subsubsection}{\numberline {2.1.3.2}Popular Types}{15}{subsubsection.2.1.3.2}
+\contentsline {section}{\numberline {2.2}Brief Overview of Computational Creativity}{17}{section.2.2}
+\contentsline {section}{\numberline {2.3}Brief Overview of Computational Linguistics}{17}{section.2.3}
+\contentsline {subsection}{\numberline {2.3.1}Syntax}{17}{subsection.2.3.1}
+\contentsline {subsection}{\numberline {2.3.2}Semantics}{17}{subsection.2.3.2}
+\contentsline {subsection}{\numberline {2.3.3}Summarisation}{17}{subsection.2.3.3}
+\contentsline {subsection}{\numberline {2.3.4}Natural Language Generation}{17}{subsection.2.3.4}
+\contentsline {subsection}{\numberline {2.3.5}Grammaticality and Interpretation}{17}{subsection.2.3.5}
+\contentsline {subsection}{\numberline {2.3.6}Discourse Representation Theory}{17}{subsection.2.3.6}
+\contentsline {section}{\numberline {2.4}State of the Art}{17}{section.2.4}
+\contentsline {chapter}{\numberline {3}Project Plan}{18}{chapter.3}
+\contentsline {section}{\numberline {3.1}Analysis}{18}{section.3.1}
+\contentsline {section}{\numberline {3.2}Abstraction}{19}{section.3.2}
+\contentsline {section}{\numberline {3.3}Generation}{21}{section.3.3}
+\contentsline {chapter}{\numberline {4}Evaluation Plan}{24}{chapter.4}
+\contentsline {section}{\numberline {4.1}Comparison of Analysis Results to Theory}{24}{section.4.1}
+\contentsline {section}{\numberline {4.2}Turing-style Tests}{25}{section.4.2}
+\contentsline {section}{\numberline {4.3}FACE Descriptive Model}{26}{section.4.3}
+\contentsline {section}{\numberline {4.4}IDEA Descriptive Model}{26}{section.4.4}
+\contentsline {chapter}{Appendix A}{28}{appendix*.5}
+\contentsline {chapter}{References}{29}{appendix*.6}

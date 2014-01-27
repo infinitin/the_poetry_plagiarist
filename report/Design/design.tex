@@ -1,0 +1,295 @@
+% \pagebreak[4]
+% \hspace*{1cm}
+% \pagebreak[4]
+% \hspace*{1cm}
+% \pagebreak[4]
+
+\chapter{Background}
+\ifpdf
+    \graphicspath{{Design/DesignFigs/PNG/}{Design/DesignFigs/PDF/}{Design/DesignFigs/}}
+\else
+    \graphicspath{{Design/DesignFigs/EPS/}{Design/DesignFigs/}}
+\fi
+
+This chapter gives a brief overview of the features and types of poetry that exist, as well as why people are interested in writing them. This gives context for the brief overview into the fields of computational linguistics and computational creativity, both of which are involved in the task of automatic poetry generation. Finally, we will explain and critique the state of the art of poetry generation that most relate to the approach taken in this paper.
+
+\section{Poetry Theory}
+
+To fully appreciate the task that we are about to undertake, we need to have an understanding of poetry as an art form. Poetry is believed to predate even literacy and as such it has been documented ever since. Over the ages, different styles of poetry have evolved. Here we discuss those styles and the underlying reason for why poetry is written.
+
+\subsection{The Purpose of Poetry}
+
+Merriam-Webster dictionary defines poetry as:\\
+\emph{writing that formulates a concentrated imaginative awareness of experience in language chosen and arranged to create a specific emotional response through meaning, sound, and rhythm.}\\
+
+Let us break this down:
+\begin{itemize}
+\item{\textit{Formulates} implies a method and system in the process of writing a poem.}
+\item{\textit{Concentrated} accentuates the fact that poems are generally short, as they are indeed counted in stanzas in lines rather than paragraphs and pages.}
+\item{\textit{Imaginative} confirms the fact that this is a creative act, that has a level of non-determinism and is not necessarily realistic.}
+\item{\textit{Awareness of Experience} embodies the need for general background knowledge based on a particular set of experiences.}
+\item{\textit{Language Chosen and Arranged} reiterates that this is a methodical and systematic art - decisions are made carefully with precise intention.}
+\item{\textit{Create a specific emotional response} finally gives the purpose of the poem - too express a feeling or an idea and elicit an emotional response.}
+\item{\textit{Through meaning, sound, and rhythm} describes that this purpose is not reached purely by the words, but other language features.}
+\end{itemize}
+
+To summarise the purpose of poetry from this, we would say that it is using one's imagination and experience to trigger empathy about a particular topic from the reader. This means that poetry is a vehicle through which poets can share a very personal message that they want the reader to experience and remember. 
+\\\\
+We must keep this in mind throughout the project, as it is important to realise that the features of poetry discussed in the next section might be seen as arbitrary rules on form rather than purposeful techniques used to make the language more concise and effective.
+
+\subsection{Features of Poetry}
+
+The definition above mentions the use of \textit{meaning, sound and rhythm} in poetry. These add an extra layer of subtext to poems to help the author remain concise while still eliciting a full emotional response from the reader. We call these techniques \textit{features} of poetry throughout this paper. There are many features of poetry to address, but we have scoped this project down to concentrate on the following popular ones.
+
+\subsubsection{Rhyme}
+\begin{figure}[h!]
+\centering
+\textit{
+There once was a big brown \textbf{cat}\\
+That liked to eat a lot of \textbf{mice}\\
+He got all round and \textbf{fat}\\
+Because they tasted so \textbf{nice}
+}
+\caption{A rhyming quatrain often used in teaching poetry}
+\end{figure}
+Two words rhyme when they sound similar when spoken out loud. \textit{Cat} and \textit{fat} in the poem above rhyme, as do \textit{mice} and \textit{nice}. Rhyming words need not spell the same way, for example, \textit{kite} and \textit{height}. 
+\\\\
+Strict rhyme enforces the exact same sound while weak rhyme only requires that the vowel sounds are the same. Examples of weak rhyme are \textit{turtle} with \textit{purple} and \textit{tragedy} with \textit{strategy}. 
+\\\
+A piece of text has a rhyme scheme if there is a pattern of rhyme between its lines. For example, the poem in Figure blah has an \textit{ABAB} rhyme scheme.
+\\\\
+Rhyme can also occur within a line (internal rhyme) or between words in the middle of different lines.\\
+
+\textbf{Major Purposes} 
+\begin{itemize}
+\item{Pleasant to hear, making the listener feel more comfortable and listen carefully} 
+\item{As a mnemonic device}
+\item{Used at the end of lines of poetry and songs making the rhythmic structure more distinct}
+\end{itemize}
+
+In this project, we will detect and reproduce end-line rhyme and internal rhyme where applicable. It will also be prioritised when producing poetry for which a rhyme scheme is not mandatory but fits the purposes.
+
+\subsubsection{Rhythm}
+Rhythm is the pattern of emphasis of syllables that occurs in a line of poetry. There are three major ways of measuring rhythm, often used in tandem - syllabic, quantitative and accentual.
+
+\begin{figure}[h!]
+\centering
+\textit{
+The bartender said\\
+to the neutron, 'For you, sir,\\
+there will be no charge.'\\
+}
+\caption{A funny Haiku}
+\end{figure}
+
+Syllabic rhythm enforces a certain number of syllables to be used in a particular line of poetry. Haikus are the most famous type of poem with this feature - they are three lines long with the first and last lines restricted to 5 syllables and the second to 7. An example is given in Figure blah.
+\\\\
+Quantitative measures uses the fact that some syllables sound longer than others when spoken out loud. Long sounding syllables are \textit{stressed} while short ones are \textit{unstressed}. Accentual measures are similar to Quantitative, but they work on the tendency to stress a particular syllable when spoken out loud, rather than its length. It is important to note that a word's meaning can change depending on stress. For example, '\textbf{ob}ject' is a noun whereas 'ob\textbf{ject}' is a verb.
+\\\\
+Lines of pre-defined patterns of stressed and unstressed syllables are called \textit{meters}. Lines with meter are made up of individual units called \textit{feet}. The five major foot types in poetry are given in Table blah.
+
+\begin{table}[h!]
+\centering
+    \begin{tabular}{|l|l|l|}
+    \hline
+    Foot Type & Pattern                            & Example  \\ \hline
+    iamb      & unstressed - stressed              & des\textbf{cribe} \\ \hline
+    trochee   & stressed - unstressed              & \textbf{po}em     \\ \hline
+    spondee   & stressed - stressed                & \textbf{popcorn}  \\ \hline
+    anapest   & unstressed - unstressed - stressed & meta\textbf{phor} \\ \hline
+    dactyl    & stressed - unstressed - unstressed & \textbf{po}etry   \\ \hline
+    \end{tabular}
+\caption{The major poetic foot types with their corresponding pattern and an example to illustrate}
+\end{table}
+
+
+The metre is formed by repeating feet, typically with up to six feet:
+\begin{itemize}
+\setlength{\itemsep}{0pt}
+\item{Monometer: 1 foot}
+\item{Dimeter: 2 feet}
+\item{Trimeter: 3 feet}
+\item{Tetrameter: 4 feet}
+\item{Pentameter: 5 feet}
+\item{Hexameter: 6 feet}
+\end{itemize}
+
+All Shakepeare's sonnets are written in iambic pentameter, i.e. five repetitions of unstressed-stressed syllables. His Sonnet II is given as an example:\\
+\textit{When \textbf{for}ty \textbf{win}ters \textbf{shall} be\textbf{siege} thy \textbf{brow}}
+\\\\
+\textbf{Major Purposes}
+\begin{itemize}
+\item{Introduces a melody based on the natural intonations of speech} 
+\item{Add a level of predictability and subconscious structure}
+\item{Emphasizes the message by putting stress on the words that matter}
+\end{itemize}
+
+Rhythm is a fundamentally important feature of poetry, so this project aims to be able to detect and reproduce it consistently and to a high level of accuracy.
+
+\subsubsection{Sound Devices}
+This project considers four types of sound devices.
+\\\\
+The first is \textbf{onomatopoeia} - words that imitate or suggest sounds of particular sources. For example, the word 'Pow' is used to describe the sound of a punch or 'tick-tock' for clocks. This technique has mostly been used in comic books to help the reader experience the sound of the scene to go with the image.
+\\\\
+The next three devices are repetitions of a pattern of similar sounds, like rhyme. \textbf{Consonance} is the repetition of similar consonant sounds (e.g. 'pitter patter' repeats the 'p', 't', and 'r' sounds), while \textbf{assonance} is that of vowels (e.g. 'doom and gloom' repeats the 'oo' sound). \textbf{Alliteration} is a special case where the repeated sound occurs at the beginning of consecutive words. 'Zany zebras zigzagged through the zoo' has alliteration on the letter 'z'.
+\\
+\textbf{Major Purposes}
+\begin{itemize}
+\item{Poets use onomatopoeia to help describe actions or atmosphere richly. A famous example is the nursery rhyme 'Old MacDonald', which uses onomatopoeia of the sounds that animals make to describe the farm, figuratively placing the reader in the farm itself.} 
+\item{Alliteration, consonance and assonance are pleasant to listen to when spoken out loud.}
+\item{Can be used to add drama to an action.}
+\item{Sometimes used to suggest danger.}
+\end{itemize}
+
+We aim to detect and reproduce all forms of sound devices explained here. However, there will be a limit to the onomatopoeic vocabulary and it will be unable to create brand new onomatopoeia.
+
+\subsubsection{Structure}
+The structure of the poem is the organisation of lines in a poem. The main unit is the stanza, which is a fixed amount of lines grouped by rhythmical pattern.\\
+
+There are four major types of stanza:
+\begin{itemize}
+\item{Couplet: 2 lines}
+\item{Tercet: 3 lines}
+\item{Quatrain: 4 lines}
+\item{Cinquain: 5 lines}
+\end{itemize}
+
+Stanzas can also be called verses, which have the added property that they tend to rhyme. A chorus is a special type of verse that is repeated every other verse. Similarly, envoys are the short final verse of a poem.
+\\\\
+Features of the structure of a poem include:
+\begin{itemize}
+\item{The number of stanzas}
+\item{The number of lines per stanza}
+\item{The number and positions of repeated lines}
+\item{The number and positions of repeated stanzas}
+\end{itemize} 
+
+The Haiku in Figure blah has a single tercet structure with no repetitions. Songs are generally several stanzas long, with a chorus interleaving longer non-repeating verses.
+\\\\
+\textbf{Major Purposes}
+\begin{itemize}
+\item{Helps to guide the reader through the story.}
+\item{Forces the poet to be more succinct and purposeful.}
+\item{Manages the storyline - changes in stanza often suggest a change in perspective or message.}
+\item{Repetition helps drive home the main message.}
+\item{Ties several thoughts together into one continuous flow.}
+\end{itemize} 
+
+We concentrate on detecting and reproducing accurate structures of common poetry in this project.
+
+\subsubsection{Symbolism and Imagery}
+Symbolism and imagery are general terms for creating an overall image in the reader's mind by describing a subject or object as something else.
+
+Techniques include:
+\begin{itemize}
+\item{\textit{Metaphor}: an object is described as another object with a set of desirable characteristics. For example, saying someone is 'drowning in debt' describes the debt as an ocean in which the subject is drowning, suggesting that there is too much to handle, and may even insinuate the subject's downfall.}
+\item{\textit{Simile}: an object or action is specifically described using an adjective or adverb, but compared to another object that is a stereotypical example of that description. The phrases 'like a' and 'as a' are often used, e.g. 'Runs like a cheetah', 'Slippery as an eel'}
+\item{\textit{'Hyperbole'}: unrealistic exaggeration, often used in tandem with metaphor e.g. 'Cried a river of tears'.}
+\item{\textit{'Powerful Verb'}: a more exciting way to describe an action using unusual verbs, e.g. 'Wormed through the crowd'.}
+\end{itemize}
+
+\textbf{Major Purposes}
+\begin{itemize}
+\item{Explain complex concepts concisely.}
+\item{Induce empathy from the reader by relating it to something they understand.}
+\end{itemize} 
+
+This paper attempts to detect use of metaphor and simile as well as reproduce it. However, the context around the use of the metaphor and simile is not considered, so they may not be generated at the most appropriate time. We do not consider Hyperbole and Powerful Verb as they are similar to Metaphor, but it is worth noting that they exist because including them should be an accessible extension for future work.
+
+\subsubsection{Context and Personification}
+Poetry is similar to storytelling in that it has characters around which the poem is written. Understanding who or what they are, their descriptions and their actions are all part of the underlying message that the poet wants to get across. This is the context of the poem.
+\\\\
+Personification is a technique used by poets to give inanimate objects life, expressing actions and descriptions as if it were human. This is a powerful technique that relates to imagery, helping poets make more abstract messages clearer. For example, 'the moon smiled' gives the moon life by describing it as having performed a human-like action with full intention of doing so. Noting the use of personification can make the context of the poem clearer, as often inanimate objects are the subject of the poem.
+\\\\
+\textbf{Major Purposes}\\
+Context is the underlying message in its bare form. It is the story that the poet wishes to tell and guides the use of all other features.
+\\\\
+In this paper, we aim to extract characters and differentiate them by their descriptions and actions. This is vital in understanding the poem and can help us generalise the uses of features when attempting to produce a coherent story as the backbone to the generated poem. Furthermore, it will help determine the type of poem (narrative, lyrical, descriptive etc.) and will help guide generation of poems of a particular type. 
+
+\subsubsection{Theme}
+Theme is a very abstract term that is difficult to define. It can be thought of as the worldly context of the poem, often requiring better understanding and background knowledge of the poet. For example, Maya Angelou's \textit{I Know Why The Caged Bird Sings} is about oppression of African Americans during the time that she was alive. It was were way of helping readers empathise with her situation, by personifying a caged bird and the similarities she shares with it. The theme is therefore \textit{oppression}. However, without knowing Angelou's life situation, it would have been impossible to determine.
+
+Theme is beyond the scope of this project, both in interpretation of poetry and generation. However, we will attempt themes that can be summarised into a single word, often called topics. For example, we will try to emulate the styles of 'Love' poems or 'War' poems from the past. This will help give more meaning to the features described here and help in using them in the right context during the generation phase.
+
+\subsection{Types of Poetry}
+
+We define a type of poetry as a particular form of poem with a set of unique features, including those described in the previous section. Some types are very popular and have had their styles, features and purposes documented and taught. Out of these grew categories of different types that tend to be used for similar purposes.
+
+This project attempts to derive these categories and some popular types of poetry. They are discussed here.
+
+\subsubsection{Categories}
+
+There are many types of poem all with different form. However, there are only three main categories of purpose for a poem:
+
+\begin{enumerate}
+\item{\textit{Lyrical} poems have an identifiable speaker whose thoughts and emotions are being expressed in the poem. This means that poems of this category have very few characters, a song-like structure and tends to be in a reflective tone, generally using a lot of symbolism. Maya Angelou's \textit{I Know Why The Caged Bird Sings} is an example of this, along with many songs.}
+\item{\textit{Descriptive} poems describe the surroundings of the speaker. This is identifiable by the use of adjectives and complex imagery. Many objects may appear in this type of poem to be able to give an in-depth description of the environment and atmosphere. There will be very few action verbs used.}
+\item{\textit{Narrative} poems concentrate on telling a story. It therefore has a coherent plot line, several characters with explicit relationships between them, action and climax. Ballads and Epics are types of narrative poems.}
+\item{Some popular poem types do not fall under any one bracket as they can be used in any of the above categories. Examples include Haikus and Limericks.}
+\end{enumerate}
+
+This project aims to be able to place any poem accurately into one of these categories.
+
+\subsubsection{Popular Types}
+As well as determining the category of poems, we aim to be able to detect and reproduce some popular types of poetry. For this project, we will concentrate on:
+\begin{itemize}
+\item{\textit{Haiku:} single tercet structure with 5-7-5 syllabic rhythm.}
+\item{\textit{Limerick:} single cinquain structure with AABBA rhyme scheme. Lines 1, 2 and 5 have 7-10 syllables, while lines 3 and 4 have 5-7 syllables. The first line tends to begin with "There was a..." and ending with a person or location. Limericks are usually used for humour as the last line is generally a punchline.}
+\item{\textit{Sonnet:} 14 lines, each in iambic pentameter with an ABABCDCDEFEFGG rhyme scheme, i.e. three quatrains followed by a rhyming couplet.}
+\item{\textit{Elegy:} usually used to mourn the dead, its lines alternates between dactylic hexameter and pentameter in rhythm. It has no particular rhyme scheme, although does still use rhyme. }
+\item{\textit{Ode:} Description of a particular person or thing, using plenty of similes, metaphors and hyperbole.}
+\item{\textit{Ballad:} Tells a story and has a number of quatrains, each with an AABB rhyme scheme. Lines alternate between iambic tetrameter and iambic trimeter.}
+\item{\textit{Cinquain:} as the name suggests, this has 5 lines. They are not rhymed, but have a 2-4-6-8-2 syllabic pattern. }
+\item{\textit{Riddle:} Riddles describe things without telling what it is, using anaphora to refer to it. Ususally told in a number of rhyming couplets.}
+\item{\textit{Free Verse:} No particular features attached to this type.}
+\end{itemize} 
+
+Some of these poems are harder to read and generate than others, particularly in terms of context. However, this selection covers the main features of poetry that we would like to address so it a good way to evaluate this project.
+
+
+\section{Brief Overview of Computational Creativity}
+%http://link.springer.com/article/10.1007/BF03037332#page-1
+%http://computationalcreativity.net/iccc2014/wp-content/uploads/2013/09/ComputationalCreativity.pdf
+
+\section{Brief Overview of Computational Linguistics}
+%http://www.cse.iitk.ac.in/users/mohit/Speech-and-Language-Processing.pdf
+
+\subsection{Syntax}
+%http://delivery.acm.org/10.1145/980000/972475/p313-marcus.pdf?ip=82.31.135.169&id=972475&acc=OPEN&key=BF13D071DEA4D3F3B0AA4BA89B4BCA5B&CFID=397642531&CFTOKEN=69509660&__acm__=1390858444_560bb7766479576772371b53b664bc15
+
+\subsection{Semantics}
+%http://www.let.rug.nl/bos/pubs/BasileBosEvangVenhuizen2012LREC.pdf
+%http://delivery.acm.org/10.1145/180000/176324/p409-pustejovsky.pdf?ip=82.31.135.169&id=176324&acc=OPEN&key=BF13D071DEA4D3F3B0AA4BA89B4BCA5B&CFID=397642531&CFTOKEN=69509660&__acm__=1390863422_5f1c79f13ae2bdd57d3950804e3835ec
+
+\subsection{Summarisation}
+%http://acl.ldc.upenn.edu/eacl2006/main/papers/22_2_careniningpauls_201.pdf
+%http://delivery.acm.org/10.1145/1620000/1610199/p25-marsi.pdf?ip=82.31.135.169&id=1610199&acc=OPEN&key=BF13D071DEA4D3F3B0AA4BA89B4BCA5B&CFID=397642531&CFTOKEN=69509660&__acm__=1390863805_45be3d0b76b231e221c184d5df6cdb59
+
+\subsection{Natural Language Generation}
+%http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.111.9651&rep=rep1&type=pdf
+%http://acl.ldc.upenn.edu/P/P07/P07-1042.pdf
+
+\subsection{Grammaticality and Interpretation}
+%http://www.postgradolinguistica.ucv.cl/dev/documentos/49,578,Noam%20Chomsky%20-%20Syntactic%20Structure.pdf
+
+\subsection{Discourse Representation Theory}
+%http://aclweb.org/anthology/W/W11/W11-2819.pdf
+%http://www.let.rug.nl/bos/pubs/BasileBosEvangVenhuizen2012LREC.pdf
+
+
+\section{State of the Art}
+%https://www.era.lib.ed.ac.uk/bitstream/1842/314/1/IP040022.pdf
+%All in docs
+%the policeman's beard is half constructed pdf
+%http://link.springer.com/chapter/10.1007/3-540-46119-1_7#page-1
+%http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.126.1464&rep=rep1&type=pdf
+%http://delivery.acm.org/10.1145/1880000/1870709/p524-greene.pdf?ip=82.31.135.169&id=1870709&acc=OPEN&key=BF13D071DEA4D3F3B0AA4BA89B4BCA5B&CFID=397642531&CFTOKEN=69509660&__acm__=1390863256_1cb8f68563ec050ead2a0b910996fc19
+
+
+% ------------------------------------------------------------------------
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "../thesis"
+%%% End: 

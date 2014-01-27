@@ -1,0 +1,272 @@
+\section{Celestial Mechanics}
+
+Various mathematical models have been developed that can be used to emulate the mechanics of the objects in the Solar System and their interactions. They vary in their implementation complexity, accuracy, performance complexity and other aspects, so it is important we discuss how our model implementation evolved over time and what effect our changes had on the aforementioned aspects.
+
+\subsection{$1^{st}$ Iteration: Universal Gravitation}
+\label{universalgravitation}
+Our first attempt was a na\"{i}ve implementation of Newton's law of universal gravitation, which allows the calculation of the opposing forces (and thus respective accelerations) caused by the gravitational attraction between two point masses.
+
+This law states that \emph{"every point mass in the universe attracts every other point mass with a force that is directly proportional to the product of their masses and inversely proportional to the square of the distance between them"}.  This can be expressed formulaically as:
+
+\begin{center}
+$F = G \dfrac{m_1 m_2}{r^2}$,
+\end{center}
+
+where $F$ is a force in Newtons, $G \approx 6.674 \times 10^{-11}$ is the gravitational constant in newton square metres per kilogram squared, $m_1$ and $m_2$ are the masses of two objects in Kilograms and $r$ is the distance between the objects in metres.
+
+We already know from Newton's third law that the forces experienced by both point masses are opposite and equal, and we know from his second law that the acceleration of a body is proportional to its net force and inversely proportional to its mass (i.e., $F=ma$).  Using these two principles, we can calculate the respective accelerations of objects so long as we know their masses, the distance between them and our universe's gravitational constant.
+
+Naturally this model can be extended to 3D space through the use of three-dimensional vectors, and two objects can be sufficiently emulated by point masses located at their respective centres of mass.  This works well for simulating an orbiting body around a central body, such as the Earth around the Sun, although difficulties arise from the fact that the Earth is not solely influenced by the gravitational pull of the Sun, as the Sun and Earth do not exist in isolation.
+
+However, acceleration vectors are additive and due to the inverse square distance relationship we can attain a reliable estimation despite excluding bodies outside of the solar system from our model as these forces will tend to zero the farther away the body.  If we can calulate the acceleration vectors between each pair of objects in our model, we can then calculate the resultant acceleration -- i.e., the sum -- and from this value deduce a body's new position after a time interval has elapsed.
+
+Consider two arbitrary bodies $i$ and $j$:
+
+\begin{center}
+$F_i = m_i a_i$
+
+$\Rightarrow F_i = G \dfrac{m_i m_j}{r^2}$
+
+$\Rightarrow m_i a_i = G \dfrac{m_i m_j}{r^2}$
+
+$\Rightarrow a_i = G \dfrac{m_j}{r^2}$
+\end{center}
+
+Extending this to use three-dimensional acceleration vector $\overrightarrow{a_i}$ and direction vector $\overrightarrow{r_{ij}}$ gives us:
+
+\begin{center}
+$\Rightarrow \overrightarrow{a_i} = G \dfrac{m_j}{r^2} \dfrac{\overrightarrow{r_{ij}}}{|\overrightarrow{r_{ij}}|}$
+
+$\Rightarrow \overrightarrow{a_i} = G \dfrac{m_j}{|\overrightarrow{r_{ij}}|^3} \overrightarrow{r_{ij}}$
+\end{center}
+
+Redefining this acceleration vector as the resultant sum of forces from all $N$ objects in the model is thus:
+
+\begin{center}
+$\Rightarrow \overrightarrow{a_i} = \sum\limits_{j\not=i}^{N}(G \dfrac{m_j}{|\overrightarrow{r_{ij}}|^3} \overrightarrow{r_{ij}})$
+\end{center}
+
+We now need to solve the problem of calculating the displacement of an object after a fixed time interval has elapsed given that we now know the current resultant acceleration vector acting upon it.  Notice that our calculation of the resultant acceleration is based upon a fixed point in time but in reality all objects will be in constant motion and thus the acceleration vector will not be constant over the duration of any size time interval, so solving this problem is non-trivial.
+
+A solution can be estimated by means of numerical integration, which would effectively approximate the the curve representing the motion of an orbital element by a sequence of small straight line movements.  Due to the huge scale of the solar system it is likely that having a small enough time interval and an approximated curve leads to a tolerable level of error.
+
+To calculate the new position vector from the current position and the acceleration, we can use two of the standard equations of motion and the Euler method.  First we must calculate the new velocity vector $\overrightarrow{v}$ from the current velocity vector $\overrightarrow{u}$ and the acceleration vector multiplied by our fixed time interval $\Delta t$.
+
+\begin{center}
+$\overrightarrow{v} = \overrightarrow{u} + \overrightarrow{a}\Delta t$,
+\end{center}
+
+where $\overrightarrow{v},\overrightarrow{u}$ are in metres per seconds, $\overrightarrow{a}$ is in metres per second$^2$ and $\Delta t$ is in seconds.  From this new value we can calculate the new position $\overrightarrow{r_{i+1}}$ as the old position $\overrightarrow{r_{i}}$ offset by the average of the velocity vectors multiplied by our time interval $\Delta t$:
+
+\begin{center}
+$\overrightarrow{r_{i+1}} = \overrightarrow{r_{i}} + (\dfrac{\overrightarrow{v}+\overrightarrow{u}}{2})\Delta t$.
+\end{center}
+
+One of the drawbacks of using the Euler method is that rounding errors accumulate so if you iterate $n$ time steps forward and then $n$ steps backwards you are unlikely to arrive at your starting position.  This suggests that Euler's method is not well suited to our application, as being prevented from accurately travelling backwards in time is a significant limitation to our model.
+
+An alternative to Euler's method is Leapfrog, where calculations for velocities and positions are offset by $0.5\Delta t$ and their calculations interleaved i.e., a repeating sequence of velocity calculation, time shift by $0.5\Delta t$, position calculation, time shift by $0.5\Delta t$.  This method of numerical integration is time-symmetric so it does not suffer from the asymmetry of Euler's approach.  Modified formulae for Leapfrog are as follows:
+
+\begin{center}
+$\overrightarrow{r_i} = \overrightarrow{r_{i-1}} + \overrightarrow{v_{i-0.5}}\Delta t$
+
+$\overrightarrow{v_{i+0.5}} = \overrightarrow{v_{i-0.5}} + \overrightarrow{a_i} \Delta t$
+\end{center}
+
+These formulae can be modified further\footnote{\url{http://www.artcompsci.org/vol_1/v1_web/node34.html}} to produce their integer-based counterparts, which makes calculation significantly easier as we can rely directly on cached values from the previous iteration:
+
+\begin{center}
+$\overrightarrow{r_{i+1}} = \overrightarrow{r_i} + \overrightarrow{v_i} \Delta t + \dfrac{\overrightarrow{a_i} \Delta t^2}{2}$
+
+$\overrightarrow{v_{i+1}} = \overrightarrow{v_i} + \dfrac{(\overrightarrow{a_i} + \overrightarrow{a_{i+1}})\Delta t}{2}$.
+\end{center}
+
+So to evaluate the gravitation model overall, we have $O(n^2)$ complexity for calculating the acceleration vectors for every iteration of time as we need to calculate every possible pairing, which means that the model does not lend itself to scaling gracefully as we add more bodies to the system.  Given that we are targeting Android devices that have rather limited processing power, this is a big concern.
+
+Additionally, the model introduces rounding errors that do not diminish because every iteration is based on the value of a previous iteration, even if we opt for Leapfrog over Euler's method.  In practice this means that simulating a body in perfect orbit around another is not possible as the errors will accumulate until the body eventually escapes from its orbit.  We attempted to reduce the impact of this by using double precision arithmetic but this just added further performance overhead to a solution that was already computationally inefficient.  We therefore decided to perform further research and investigate better models that were not beset by these limitations. 
+
+Although the calculation of gravity is relatively simple and the reasoning behind each stage of the model is intuitive, in retrospect we made the mistake of trying to implement a model that was far too broad.  Had we continued with this approach, we would have produced a solution that could simulate the motion of \emph{any} celestial system given only masses, and initial position and velocity vectors, but this was never the objective of our project and we lose little by switching to a model that is narrower in scope.
+
+
+\subsection{$2^{nd}$ Iteration: Kepler via "Equation of the Centre"}
+Kepler's model is significantly narrower in scope than our previous model as it is concerned only with the trajectory of orbital bodies and completely abstracts away the idea of opposing forces.
+
+The basis of the implementation behind any Kepler model is as follows:
+
+\begin{enumerate}
+\item All orbital bodies are instantiated with their keplerian parameter values at a given epoch, and the current time is a global variable.
+\item At each tick, increment time and for every body in the system:
+\begin{enumerate}
+\item Calculate the new true anomaly $\nu$, i.e., the angle between the celestial body and the argument of periapsis.
+\item Through geometry define each dimension of the position vector in terms of the keplerian parameters and the true anomaly.
+\end{enumerate}
+\end{enumerate}
+
+The beauty of this model is that bodies can be treated independently; the dependencies between bodies' orbits due to gravity only determine their keplerian parameter values and these data are easily obtained from NASA and the European Space Agency.  We therefore achieve a linear performance complexity and the ability to parallelise calculations, a huge improvement over our previous model.
+
+Fresh with disappointment at the poor performance complexity of our previous approach we attempted to go further and research an efficient method of calculating the true anomaly.  We discovered the equation of the centre\footnote{\url{https://en.wikipedia.org/wiki/Equation_of_the_center}}, which approximates the true anomaly as a series expansion and is also a function of the mean anomaly.  Being a series expansion we are able to vary the number of terms to suit the performance characteristics of the device at run time, which is ideal for Android where device processing power is hugely varied.
+
+Represented formulaically the equation of the centre to three terms is:
+
+\begin{center}
+$\nu = M + (2 e - \frac{1}{4} e^3) \sin M + \frac{5}{4} e^2 \sin 2 M + \frac{13}{12} e^3 \sin 3 M + ...$
+\end{center}
+
+The mean anomaly $M$ is easily calculable from the mean anomaly at the given epoch, the current time $t$ in days and the orbital period $P$ in days as follows:
+
+\begin{center}
+$M = M_{Epoch} + \dfrac{2\pi}{P}t$
+\end{center}
+
+To calculate coordinates we assume, for simplicity, that the Sun is at the origin.  We can calculate the distance $r$ from a body to the centre of the Sun (i.e., the Heliocentric distance) simply through the properties of an ellipse:
+
+\begin{center}
+$r = \dfrac{a(1-e^2)}{1+e \cos{\nu}}$
+\end{center}
+
+We now know that the body is on the surface of a sphere with radius $r$ and can combine this distance, the true anomaly $\nu$, longitude of the ascending node $\Omega$ and argument of periapsis $\omega$ to form spherical coordinates\footnote{\url{http://planetoweb.net/en/how-it-works}}, and hence deduce the each of the values of the three dimensions of the position vector:
+
+\begin{center}
+$x = r \left( \cos (\Omega) \cos (\nu+\omega) - \sin (\Omega) \sin (\nu+\omega) \cos (i) \right)$
+
+$y = r \left( \sin (\Omega) \cos (\nu+\omega) + \cos (\Omega) \sin (\nu+\omega) \cos (i) \right)$
+
+$z = r \sin (\nu+\omega) \sin (i)$
+\end{center}
+
+After testing this approach we realised that our calculations were not accurate enough for eclipses to occur reliably, regardless of the number of terms we used in our series expansion, so we sought a more accurate implementation of the Kepler model.  Furthermore, we later discovered that using the equation of the centre was a short sighted approach since it is only valid for orbital bodies with small eccentricity values.
+
+\subsection{$3^{rd}$ Iteration: Iterative Kepler}
+
+At this point we concluded that the Kepler model was still the best model to implement and that only our algorithm for obtaining a value for the true anomaly needed altering.  We therefore decided to use multiple iterative algorithms to find the anomaly with the choice of algorithm determined by the eccentricity of an orbit at run time.
+
+Similar to the previous "equation of the centre" method, this approach allows us to trade off performance against accuracy, an ideal characteristic for the Android device ecosystem.  We can both dynamically change the maximum number of iterations for each algorithm and decide to set a tolerance level $\epsilon$ that assures that computation ends when returns diminish for marginal iterations.
+
+Figure~\ref{KeplerAlgo1} is a table representing the relationships between the algorithms we used to obtain the true anomaly and their corresponding valid orbit eccentricity ranges:
+
+
+\begin{figure}[!htbp]
+  \begin{center}
+	\begin{tabular}{|c|p{3.15cm}|c|p{4.5cm}|}
+	\hline
+	\textbf{Eccentricity} & \centering \textbf{Algorithm} & \textbf{Iterations} & \centering \textbf{Comment} \tabularnewline
+	\hline
+	$e = 0$ & None & 0 & In this case the orbit is perfectly circular, so the mean anomaly is returned.\\
+	\hline
+	$0.0 < e \le 0.2$ & Direct & 5 & Very simple, fast, and a direct interpretation of Kepler's equation of elliptical motion.\\
+	\hline
+	$0.2 < e \le 0.9$ & Newton-Raphson & 6 & More complex than the linear algorithm, but faster converging. \\
+	\hline
+	$0.9 < e \le 1.0$ & Laguerre-Conway & 8 & A more advanced algorithm that requires a greater number of iterations.\\
+	\hline
+	$e > 1.0$ & Laguerre-Conway (Hyperbolic) & 30 & A modified version of the previous algorithm, and vastly more iterations as the ranges of positions in escape orbits are huge.\\
+	\hline
+	\end{tabular}
+    \caption{Kepler iterative algorithm overview}
+    \label{KeplerAlgo1}
+  \end{center}
+\end{figure}
+
+Linear iteration is a technique used to find the root of a non-linear equation $f(x)$ that can be rearranged to form a recursion formula of form $x_{i+1} = g(x_i)$.  We define a starting approximation $x_0$  which we input to $g(x)$ to get the resultant approximation $x_1$ which is used as the next input, and so on.  The process is stopped after a fixed number of iterations or until $| x_i - x_{i+1}| < \epsilon$.
+
+From Kepler's equation of elliptical motion\footnote{\url{http://www.akiti.ca/KeplerEquation.html}} we have $f(\nu) = M - \nu + e \sin(\nu) = 0$, where $\nu$ is the true anomaly we are trying to find, $M$ is the mean anomaly and $e$ is the eccentricity.  This can be rearranged to the following form:
+
+\begin{center}
+$\nu_{i+1} = M + e \sin(\nu_i)$,
+\end{center}
+
+and we can trivially calculate the mean anomaly to use as our starting approximation $\nu_0$.  This is the approach we use in our 'direct' algorithm for bodies with eccentricities $0 < e \le 0.2$ so that the true anomalies (and hence position vectors) for the majority of orbital bodies in our simulation are calculated very quickly.
+
+Newton-Raphson is a faster converging but more complex iterative approach, where you differentiate $f(x)$ to get $f'(x)$ and then use the recurrence relation $x_{i+1} = x_i - f(x_i) / f'(x_i)$ to obtain successive approximations.  As before, we take $f(\nu) = M - \nu + e \sin(\nu)$ but now differentiate to get $f'(\nu) = e \cos(\nu) -1$.  Our recurrence relation is thus:
+
+\begin{center}
+$\nu_{i+1} = \nu_i - (M - \nu + e \sin(\nu_i)) / (e \cos(\nu_i) -1)$
+\end{center}
+
+In the context of elliptical orbits, this algorithm is known to sometimes fail to converge for large eccentricity values when the mean anomaly is taken as a first approximation.  One solution to this is to take $\pi$ as a first approximation as this has been proven to always converge\footnote{\url{http://link.springer.com/content/pdf/10.1023\%2FA\%3A1008200607490}} but this increases the number of iterations required to achieve a satisfactory result.
+
+Instead we use the Laguerre-Conway method for $e > 0.9$ which should take, on average, two fewer iterations to achieve the same result and does not suffer from the rare divergence of the Newton-Raphson algorithm \cite{vladbook}.  This method involves using a 19th Century polynomial root-finding method that requires the calculation of both $f'(\nu)$ and $f''(\nu) = -e \sin(\nu)$.  As a recurrence relation for a polynomial of degree $n$ it is expressed formulaically as:
+
+\begin{center}
+$x_{i+1} = x_i - \dfrac{nf(x_i)}{f'(x_i) \pm \sqrt{|(n-1)\{(n-1)[f'(x_i)]^2 - nf(x_i)f''(x_i)\}|}}$
+\end{center}
+
+For the purposes of calculating the true anomaly $\nu$ it is safe to take $n=5$, which gives us:
+
+\begin{center}
+$\nu_{i+1} = \nu_i - \dfrac{5f(\nu_i)}{f'(\nu_i) \pm 2\sqrt{|4[f'(\nu_i)]^2 - 5f(\nu_i)f''(\nu_i)|}}$
+\end{center}
+
+For completeness, it should be said that we have used a modified version of Laguerre-Conway for hyperbolic escape orbits which uses the hyperbolic versions of the sine and cosine functions.  This version also requires considerably more iterations as it could take much longer for true anomaly approximations to converge for hyperbolic escape orbits.
+
+
+After testing we discovered that ultimately this revised model was \emph{still} not accurate enough for Earth and Moon interactions to occur to a satisfactory standard, which was surprising to us since we know our data are correct and these algorithms are used widely in other applications like Celestia.  This inaccuracy became more noticeable as the time since our chosen epoch J2000 increased.
+
+As has been discussed previously in the theory section, the Kepler model does not actually represent the true orbits of bodies because it does not take into account perturbations that can alter the values of the keplerian elements over time; the Kepler model is a model of purely elliptical orbits.  One approach is to store data for the keplerian elements for multiple epochs and then switch the values used in the calculations to those of the nearest epoch.
+
+However, this approach could cause the positions of planets to 'jump' if there are large enough changes in the magnitudes of values.  Furthermore values at future epochs can only be estimated on the basis of more complex models rather than being measured, unlike the data we have for J2000, so it makes sense to instead investigate more realistic models and use their results directly.
+
+\subsection{$4^{th}$ Iteration: VSOP87}
+The Variations Séculaires des Orbites Planétaires theory (known as VSOP) is a significantly more accurate model that can be used to describe the positions of the planets in the Solar System as a function of time.  It includes peturbations, so unlike Kepler's model the orbit is not just assumed to be affected solely by the gravitational pull of the Sun, and is general relativity-safe so the orbit of Mercury is correct.
+
+The first version of this theory, VSOP82, was published in 1982 and did not provide means to calculate location vectors directly but instead provided a model for calculating values of the keplerian elements as a function of time.  It follows that this version still requires the use of Kepler's model and therefore needs additional processing to achieve position vectors of orbital elements.
+
+VSOP82 was superseded five years later by a version with greater accuracy and means to generate position vectors directly without reliance on further calculations using another model.  We have implemented this updated version, VSOP87, as it claims to guarantee accuracy to one arcsecond over a period of 8000 years bisected by the J2000 epoch for Mercury, Venus, the Earth-Moon barycentre and Mars.  The same accuracy is claimed for Jupiter and Saturn over 4000 years, and over 12000 years for Uranus and Neptune.
+
+This level of accuracy does not come without significant cost in terms of additional data processing; VSOP theory is simply a set of parametric equations with an associated data set of constants rather than a intuitive physical model.  To complicate things further, data sets for VSOP87 are available in the following different versions:
+
+\begin{figure}[!htbp]
+  \begin{center}
+	\begin{tabular}{|c|c|c|c|}
+	\hline
+	\textbf{Version} & \textbf{Origin} & \textbf{Coordinates} & \textbf{Epoch} \tabularnewline
+	\hline
+	VSOP87A & heliocentric & rectangular & J2000 \\
+	\hline
+	VSOP87B & heliocentric & spherical & J2000 \\
+	\hline
+	VSOP87C & heliocentric & rectangular & equinox of date \\
+	\hline
+	VSOP87D & heliocentric & spherical & equinox of date \\
+	\hline
+	VSOP87E & barycentric & rectangular & J2000 \\
+	\hline
+	\end{tabular}
+    \caption{VSOP87 data set comparison}
+    \label{VSOP1}
+  \end{center}
+\end{figure}
+
+Since our graphics engine uses rectangular coordinates in 3D space and we are most comfortable using the J2000 epoch, we utilise the full VSOP87A data set in our implementation.  All data sets are available on the FTP server of the Institut de Mécanique Céleste et de Calcul des Éphémérides\footnote{\url{ftp://ftp.imcce.fr/pub/ephem/planets/vsop87}} and the seminal resource for calculating position vectors from these data is Jean Meeus' book \emph{Astronomical Algorithms}, which also includes simplified data sets for a reduced-accuracy implementation.
+
+A VSOP87 data set is composed of individual files for each of the planets in the Solar System and each file contains data of a similar structure.  Headers group data rows into terms, state the number of data rows to follow and the associated variable number which corresponds to the dimension of a position vector (where $1$ is $x$, $2$ is $y$ and $3$ is $z$ for rectangular coordinate systems).  Each data row contains many values, with the most relevant being the last three, known as the coefficients $A$, $B$ and $C$.
+
+The general process to calculate a heliocentric position vector in AU for a planet from the VSOP87A data set is as follows:
+
+\begin{enumerate}
+\item Calculate the number of Julian millennia $M$ since J2000.  If you have time $t$ in Julian days, $M = (t - 24515.45.0) / 356250.0$
+\item For each dimension $d$ in $p = (x,y,z)$:
+\begin{enumerate}
+\item Determine the number of terms $N$ in the data set, i.e., the number of sections between headers for the variable number corresponding for $d$.
+\item For each term $T_i$, where $i\in\{0..N\}$:
+\begin{enumerate}
+\item Until there are no more data rows for the current term:
+\begin{enumerate}
+\item Read the three coefficients $A$, $B$ and $C$ from the next data row.
+\item Add the value of $A \cos(B + C M)$ to the current value of $T_i$.
+\end{enumerate}
+\end{enumerate}
+\item $d = \sum\limits_{i=0}^{N}(T_i M^i)$.
+\end{enumerate}
+\end{enumerate}
+
+
+We had reservations as to the performance properties of this model on mobile devices, but it thoroughly surpassed our expectations.  Memory usage is increased substantially as we must keep almost all VSOP87A data cached in memory at once, which unavoidably increases our memory usage by several megabytes.  Having tested this model we have found that it is accurate enough for eclipses to occur reliably for hundreds of years, and additionally there is no need to switch to Jean Meeus' simplified data sets for a reduced-accuracy implementation on the grounds of performance.
+
+The main drawback of using VSOP theory is the lack of availability of data; as this model is only concerned with the orbits of the planets in our Solar System, we must integrate one or more additional models to satisfy all of our goals.
+
+
+\subsection{$5^{th}$ Iteration: Hybrid Model}
+Naturally, our final iteration was a combination of the two previous approaches.  We used VSOP87A data for all planets where data was available and for all other celestial bodies we relied on the full Kepler model with a combination of data from the European Space Agency's planetary database\footnote{\url{http://pdb.estec.esa.int}} and the NASA Jet Propolusion Laboratory's HORIZONS system\footnote{\url{http://ssd.jpl.nasa.gov}}.  Taking this approach allows us to have very accurate simulation where it is needed most, but it also allows for a large number of lower priority bodies to be simulated with acceptable accuracy.
+
+Our final iteration includes optimised algorithms from our orbital model ported to run directly on the GPU and, due their massively parallel nature, this enables our simulation to support thousands of distinct orbital bodies concurrently. (See section !!!! for more information.)  Consequently, we now simulate the asteroid belt after having obtained data from NASA's Small-Body database\footnote{\url{http://ssd.jpl.nasa.gov/sbdb.cgi}}.  Our Android version is capable of simulating $20 000$ asteroids while maintaining an acceptable frame-rate and for comparison our PC version is able to support NASA's entire $600 000$ asteroid data set at 90 frames per second on a high-end Nvidia GeForce GTX 680 GPU.
+

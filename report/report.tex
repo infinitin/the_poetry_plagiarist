@@ -1,0 +1,124 @@
+%input macros (i.e. write your own macros file called MacroFile1.tex)
+%\include{Macros/MacroFile1}
+
+\documentclass[oneside,12pt]{Classes/CUEDthesisPSnPDF}
+
+\ifpdf
+    \pdfinfo { /Title  (The Poetry Pioneer)
+               /Creator (TeX)
+               /Producer (pdfTeX)
+               /Subject (The Poetry Pioneer)
+               /Keywords (PhD, Thesis)}
+    \pdfcatalog { /PageMode (/UseOutlines)
+                  /OpenAction (fitbh)  }
+\fi
+
+\title{The Poetry Pioneer}
+
+\ifpdf
+  \author{\href{mailto:nbn10@doc.ic.ac.uk}{Nitin Nihalani}}
+  \collegeordept{\href{http://www.doc.ic.ac.uk}{Department of Computing}}
+  \university{\href{http://www.ic.ac.uk}{Imperial College London}}
+% insert below the file name that contains the crest in-place of 'UnivShield'
+  \crest{\includegraphics[width=30mm]{UnivShield}}
+  \crest{\includegraphics[width=70mm]{logo}}
+\else
+  \author{Nitin Nihalani}
+  \collegeordept{Department of Engineering}
+  \university{Imperial College London}
+% insert below the file name that contains the crest in-place of 'UnivShield'
+  \crest{\includegraphics[bb = 0 0 292 336, width=30mm]{UnivShield}}
+  \crest{\includegraphics[bb = 0 0 292 336, width=70mm]{logo}}
+\fi
+%
+% insert below the file name that contains the crest in-place of 'UnivShield'
+% \crest{\IncludeGraphicsW{UnivShield}{40mm}{14 14 73 81}}
+%
+\renewcommand{\submittedtext}{A report for}
+\degree{MEng Computing (AI)}
+\degreedate{Individual Project}
+
+% turn of those nasty overfull and underfull hboxes
+\hbadness=10000
+\hfuzz=50pt
+
+% Put all the style files you want in the directory StyleFiles and usepackage like this:
+\usepackage{StyleFiles/watermark}
+\usepackage{cleveref}
+
+% Comment out the next line to get single spacing
+\onehalfspacing
+
+\usepackage{titlesec}
+\titlespacing*{\chapter}{0pt}{-60pt}{20pt}
+\titleformat{\chapter}[display]{\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge}
+\usepackage{multicol}
+\usepackage{listings}
+\lstset{tabsize=2}
+
+\begin{document}
+
+%\language{english}
+
+% A page with the abstract on including title and author etc may be
+% required to be handed in separately. If this is not so, then comment
+% the below 3 lines (between '\begin{abstractseparte}' and 
+% 'end{abstractseparate}'), normally like a declaration ... needs some more
+% work, mind as environment abstracts creates a new page!
+% \begin{abstractseparate}
+%   \input{Abstract/abstract}
+% \end{abstractseparate}
+
+
+
+
+% Using the watermark package which is in StyleFiles/
+% and to remove DRAFT COPY ONLY appearing on the top of all pages comment out below line
+%\watermark{DRAFT COPY ONLY}
+
+
+\maketitle
+\parindent 0pt
+
+
+%set the number of sectioning levels that get number and appear in the contents
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
+
+\frontmatter % book mode only
+\pagenumbering{roman}
+%\include{Dedication/dedication}
+%\include{Acknowledgement/acknowledgement}
+
+\tableofcontents
+%\listoffigures
+%\addcontentsline{toc}{chapter}{nomenclature}
+
+\mainmatter % book mode only
+%\include{Abstract/abstract}
+
+\parskip 6pt
+
+\include{Introduction/introduction}
+\include{Design/design}
+\include{Theory/theory}
+%\include{Implementation/implementation}
+%\include{Management/management}
+\include{Evaluation/evaluation}
+%\include{Conclusions/conclusions}
+
+\backmatter % book mode only
+\appendix
+\renewcommand{\thesection}{A.\arabic{section}}
+\include{Appendix1/appendix1}
+%\renewcommand{\thesection}{B.\arabic{section}}
+%\include{Appendix2/appendix2}
+
+%\bibliographystyle{plainnat}
+%\bibliographystyle{Classes/CUEDbiblio}
+\bibliographystyle{Classes/jmb}
+%\bibliographystyle{Classes/jmb} % bibliography style
+\renewcommand{\bibname}{References} % changes default name Bibliography to References
+\bibliography{References/references} % References file
+
+\end{document}

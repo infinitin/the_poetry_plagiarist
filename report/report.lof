@@ -1,0 +1,69 @@
+\select@language {english}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Orbital elements visualisation\relax }}{10}{figure.caption.3}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Kepler iterative algorithm overview\relax }}{20}{figure.caption.4}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces VSOP87 data set comparison\relax }}{23}{figure.caption.5}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces 4x4 matrix layout\relax }}{26}{figure.caption.6}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces 4x4 identity matrix\relax }}{27}{figure.caption.7}
+\contentsline {figure}{\numberline {5.5}{\ignorespaces 4x4 world matrix\relax }}{27}{figure.caption.8}
+\contentsline {figure}{\numberline {5.6}{\ignorespaces 4x4 view matrix\relax }}{28}{figure.caption.9}
+\contentsline {figure}{\numberline {5.7}{\ignorespaces 4x4 projection matrix\relax }}{28}{figure.caption.10}
+\contentsline {figure}{\numberline {5.8}{\ignorespaces Camera frustum}}{30}{figure.caption.11}
+\contentsline {figure}{\numberline {5.9}{\ignorespaces Example of partial scene graph for the app\relax }}{31}{figure.caption.12}
+\contentsline {figure}{\numberline {5.10}{\ignorespaces Camera frustum\relax }}{33}{figure.caption.13}
+\contentsline {figure}{\numberline {5.11}{\ignorespaces Performance from 20,000 to 600,000 asteroids before and after implementing VBO/IBOs on an integrated Intel HD Graphics 3000 GPU\relax }}{36}{figure.caption.14}
+\contentsline {figure}{\numberline {5.12}{\ignorespaces Star sphere shown from different views (star sizes greatly increased for clarity).\relax }}{39}{figure.caption.15}
+\contentsline {figure}{\numberline {5.13}{\ignorespaces Star sphere textured shown from different views (star sizes greatly increased for clarity).\relax }}{40}{figure.caption.16}
+\contentsline {figure}{\numberline {5.14}{\ignorespaces Star sphere final render quality with texturing, colouring and correct scaling.\relax }}{40}{figure.caption.17}
+\contentsline {figure}{\numberline {5.15}{\ignorespaces Star sphere final render quality with texturing, colouring and correct scaling.\relax }}{41}{figure.caption.18}
+\contentsline {figure}{\numberline {5.16}{\ignorespaces Geometry underlying the rendering of text\relax }}{42}{figure.caption.19}
+\contentsline {figure}{\numberline {5.17}{\ignorespaces Texture overlayed over the geometry with texture coordinates pointing to particular characters to produce the desired text output.\relax }}{42}{figure.caption.20}
+\contentsline {figure}{\numberline {5.18}{\ignorespaces Shader applied per-pixel\relax }}{44}{figure.caption.21}
+\contentsline {figure}{\numberline {5.19}{\ignorespaces Shader applied per-vertex\relax }}{44}{figure.caption.21}
+\contentsline {figure}{\numberline {5.20}{\ignorespaces Atmosphere sphere drawn over the planet sphere\relax }}{44}{figure.caption.22}
+\contentsline {figure}{\numberline {5.21}{\ignorespaces Atmosphere shader\relax }}{45}{figure.caption.23}
+\contentsline {figure}{\numberline {5.22}{\ignorespaces Corona shader\relax }}{45}{figure.caption.23}
+\contentsline {figure}{\numberline {5.23}{\ignorespaces The noise amount can be customised which allows for interesting effects.\relax }}{45}{figure.caption.24}
+\contentsline {figure}{\numberline {5.24}{\ignorespaces 20,000 asteroids\relax }}{46}{figure.caption.25}
+\contentsline {figure}{\numberline {5.25}{\ignorespaces Full 600,000 asteroids\relax }}{46}{figure.caption.25}
+\contentsline {figure}{\numberline {5.26}{\ignorespaces 20,000 asteroids rendered with a realistic texture\relax }}{46}{figure.caption.26}
+\contentsline {figure}{\numberline {5.27}{\ignorespaces Diffuse lighting on a flat surface\relax }}{47}{figure.caption.27}
+\contentsline {figure}{\numberline {5.28}{\ignorespaces Textured sphere\relax }}{48}{figure.caption.28}
+\contentsline {figure}{\numberline {5.29}{\ignorespaces Diffuse lighting added\relax }}{48}{figure.caption.28}
+\contentsline {figure}{\numberline {5.30}{\ignorespaces Day/night texture added\relax }}{49}{figure.caption.29}
+\contentsline {figure}{\numberline {5.31}{\ignorespaces Dark side of the Earth\relax }}{49}{figure.caption.29}
+\contentsline {figure}{\numberline {5.32}{\ignorespaces Earth normal map\relax }}{50}{figure.caption.30}
+\contentsline {figure}{\numberline {5.33}{\ignorespaces Dot3 bump mapping applied\relax }}{50}{figure.caption.30}
+\contentsline {figure}{\numberline {5.34}{\ignorespaces Earth specular map\relax }}{51}{figure.caption.31}
+\contentsline {figure}{\numberline {5.35}{\ignorespaces Specular highlights applied\relax }}{51}{figure.caption.31}
+\contentsline {figure}{\numberline {5.36}{\ignorespaces Heightmapping on Earth (scale has been greatly increased for clarity).\relax }}{52}{figure.caption.32}
+\contentsline {figure}{\numberline {5.37}{\ignorespaces Cloud layer added\relax }}{52}{figure.caption.33}
+\contentsline {figure}{\numberline {5.38}{\ignorespaces Atmosphere enabled\relax }}{52}{figure.caption.33}
+\contentsline {figure}{\numberline {5.39}{\ignorespaces Source texture for Saturn's Rings with transparency shown as black.\relax }}{53}{figure.caption.34}
+\contentsline {figure}{\numberline {5.40}{\ignorespaces Rings of Saturn\relax }}{54}{figure.caption.35}
+\contentsline {figure}{\numberline {5.41}{\ignorespaces Rings of Neptune\relax }}{54}{figure.caption.35}
+\contentsline {figure}{\numberline {5.42}{\ignorespaces Diagram shows the three rays cast (six here as it is done on both sides)\relax }}{55}{figure.caption.36}
+\contentsline {figure}{\numberline {5.43}{\ignorespaces Radii used in calculations\relax }}{56}{figure.caption.37}
+\contentsline {figure}{\numberline {5.44}{\ignorespaces Resulting effect\relax }}{56}{figure.caption.37}
+\contentsline {figure}{\numberline {5.45}{\ignorespaces Hyperbolic escape orbit 1\relax }}{61}{figure.caption.38}
+\contentsline {figure}{\numberline {5.46}{\ignorespaces Hyperbolic escape orbit 2\relax }}{61}{figure.caption.39}
+\contentsline {figure}{\numberline {5.47}{\ignorespaces Hyperbolic escape orbit 3\relax }}{62}{figure.caption.40}
+\contentsline {figure}{\numberline {5.48}{\ignorespaces Ship successfully enters a large elliptical orbit with high eccentricity\relax }}{62}{figure.caption.41}
+\contentsline {figure}{\numberline {5.49}{\ignorespaces Complex orbit which eventually leads to a collision with Earth\relax }}{63}{figure.caption.42}
+\contentsline {figure}{\numberline {5.50}{\ignorespaces UI elements on main screen\relax }}{64}{figure.caption.43}
+\contentsline {figure}{\numberline {5.51}{\ignorespaces Accelerator at different levels\relax }}{65}{figure.caption.44}
+\contentsline {figure}{\numberline {5.52}{\ignorespaces Hyperjump planets selector\relax }}{66}{figure.caption.45}
+\contentsline {figure}{\numberline {5.53}{\ignorespaces Hyperjump button\relax }}{66}{figure.caption.46}
+\contentsline {figure}{\numberline {5.54}{\ignorespaces Gamepad\relax }}{67}{figure.caption.47}
+\contentsline {figure}{\numberline {5.55}{\ignorespaces Calendar\relax }}{67}{figure.caption.48}
+\contentsline {figure}{\numberline {5.56}{\ignorespaces Different states for selecting modes\relax }}{68}{figure.caption.49}
+\contentsline {figure}{\numberline {5.57}{\ignorespaces Regular Android SeekBar vs modified SeekBar\relax }}{70}{figure.caption.50}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {7.1}{\ignorespaces VSOP implementation performance comparison plot\relax }}{75}{figure.caption.51}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
