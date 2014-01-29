@@ -5,119 +5,70 @@
 \else
     \graphicspath{{Introduction/IntroductionFigs/EPS/}{Introduction/IntroductionFigs/}}
 \fi
-%\section{Motivation}
-%\\
-%\emph{"The true sign of intelligence is not knowledge but imagination." \\ \hfill{- Albert Einstein}}
-%\\
+\emph{"Dream in a pragmatic way." - Aldous Huxley}
 
-%http://www.thepaintingfool.com/papers/colton_dagstuhl09.pdf
+\section{Motivation}
 
-Contribution:
-recent areas of concern in this area as a whole is the evaluation process. Turing-style tests were used for a long time but more quantitative measures were needed to assess the level of \textit{responsibility} of the system while reducing the reliance on \textit{unbiased observers}. Recent proposals include the FACE and IDEA descriptive models. This project will be evaluated against these measures in order to get more feedback on the effectiveness of these models. More details on the evaluation methodologies used for this project can be found in Chapter 4.
-
-Major new directions that Computational Creativity research is taking as described by Colton and Wiggins is the
-\textit{usage of web resources as a source of material and conceptual inspiration for creative acts by computer}. This project takes a step in this direction.
-End Contribution bit.
-
-Poetry is a linguistic art form designed to help convey a particular, well-defined message in a memorable and powerful way. Poets write poems that are succinct in length but dense in meaning by employing a number of techniques, such as rhyme and rhythm (Chapter num). However, they must take the occasional liberty with grammar rules in order to meet the constraints imposed by these techniques as they are more important in ultimately conveying the message. Therefore, poems can be understood as natural language messages with added prioritised constraints and features. Different types of poetry each have their own sets of constraints, features and priorities that define their best usage (Chapter num). For example, limericks are best suited to humour while elegies are best suited to remembrance. 
+Computational Semantics is a relatively young and fashionable topic in Computational Linguistics. It involves finding representations and algorithms that are able to cope with the \textit{meaning} of linguistic utterances.
 \\\\
-The origins of these constraints is not sufficiently documented given that poetry predates literacy. This means that our understanding of the techniques used in poetry comes from human analysis. There are few better tools for pattern and feature detection than computers, so the aim of this paper is to investigate the effectiveness of computer systems to learn constraints and features in natural language. Analysing poetry is particularly effective because of the wider array of constraints and patterns to be found, allowing us to test the hypothesis that computers are adept to pattern and feature recognition in natural language.
+Pragmatics is an even younger discipline, concentrating on the context of those utterances. When we as humans read or listen to any linguistic output, we build a representation of the objects, people, actions, descriptions, relationships and anything else to provide context to the experience. For example, the phrase \textit{"I have a green light"} may mean that I have been granted permission for something, or that I literally have a lamp with a green tint. 
 \\\\
-A natural extension to this process is to use the learned techniques to produce novel, creative poetry. Previous attempts at poetry generation involved manually hard-coding rules in various ways to enforce these techniques. While this may be effective at producing poetry that has stricter structure, such as haikus and limericks, they are lacking in the more modern free verse because the mapping of techniques is only to types of poems, not the effects they have on the reader. By learning the techniques from first principles, the system can find the best opportunities for the use of each technique and decide what liberties can be taken in favour of other constraints. This approach should lead to poetry that is adept not only at producing poems of a certain type, but choosing the right tools for the right message as a human poet would. 
-
-%\section{Significance of Automatic Poetry Generation}
-
-%\subsection{Computational Creativity}
-%\subsubsection{Creativity}
-%\subsubsection{Emotional Connection}
-%\subsubsection{General Knowledge}
-%\subsubsection{Abstraction}
-
-%\subsection{Computational Linguistics}
-%\subsubsection{Drafting and Iteration}
-%\subsubsection{Rephrasing and Paraphrasing}
-%\subsubsection{Summarisation}
-
-%NEED EXAMPLES
-%\section{Objectives}
-The primary objective of this project is to build a poetry generation system that learns constraints and features by analysing a large number of poems and uses what it learned to generate new poetry. 
+Indeed a similar approach is taken when writing or speaking - one has a purpose and a message that would like to be passed and the language used helps to build such context. For example, if I aim to tell you that I have a lot of work, I could simply say that or say I am 'drowning' in work. The latter helps you, the reader, realise that not only do I have a lot of work but that I also cannot handle it.
 \\\\
-We wish to create a system that:
+For a computer to truly converse in a manner indistinguishable to humans, as is the aim of the elusive Turing Test, it must be able to handle pragmatics along with syntax and semantics. This requires a deep understanding of words not as a linguistic unit, but as the objects, actions and descriptions they represent. They should then be used with a purpose when generating text, as human writers and speakers do.
+\\\\
+Poetry is a linguistic art form designed to help convey a particular, well-defined message in a memorable and powerful way. Poets write poems that are succinct in length but dense in meaning by employing a number of techniques, such as rhyme and rhythm. 
+\\\\
+Different types of poetry each have their own sets of constraints, features and priorities that define their best usage. For example, narrative poems convey characters, relationships and actions while descriptive ones are used to give a comprehensive linguistic illustration. Furthermore, rhythm and rhyme can be used to provide melody making it pleasant to hear and applicable to songs, but alliteration can be used to create suspense and a sense of danger.
+\\\\
+In this paper, we use poetry as the catalyst with which to develop computational semantics and pragmatics. We aim to create a system that can analyse poetry and build a contextual representation of it, as well as generate poetry with an underlying purpose and message.
+\\\\
+Outside of linguistics, pragmatic also means to deal with something in a practical way rather than using theories. We will deal with this problem pragmatically:
+\begin{enumerate}
+\item{First we will write the analysis module, which detects a wide range of poetic features in a single poem. It also aims to represent the context of the poem with Discourse Representation Structures (DRSs), outlined in section BLAH.}
+
+\item{Then we run many poems of the same type through the analysis module and then abstract away the common features between the given poems. This includes a general structure for the DRSs of that class of poem.}
+
+\item{Finally we generate poems with a purpose as guided by the structure of the DRS. We will also utilise third-party libraries to build semantically and syntactically valid lines of poetry that also use poetic features. Poeticness and creativity is prioritised in the selection of words and phrases during the generation process.}
+\end{enumerate}
+
+%-----------------------------------
+
+\section{Objectives}
+The overarching primary objective of this system is \textit{pragmatic competence}. We aim to generate poetry that demonstrates some understanding of context with regards to descriptions, actions and relationships of people and objects, and with careful text and sentence planning for that context.
+
+Thereafter, we wish to create a system that:
 \begin{itemize}
-\item{identifies a broad list of features in a single poem (Appendix num)} 
-\item{generalises features of a given class of poems or texts}
-\item{learns the features of a wide variety of different classes of poems (Appendix num)}
+\item{identifies a broad list of features in a single poem.} 
+\item{abstracts features of a given class of poems or texts that have been analysed.}
+\item{learns the features of a wide variety of different classes of poems.}
 \item{produces poems, given natural language 'seeds' of inspiration, that are:}
 	\begin{itemize}
 	\setlength{\itemsep}{0pt}
-	\item{novel}
-	\item{syntactically valid}
-	\item{semantically interpretable}
-	\item{evident of a set of defined constraints and desired features}
+	\item{novel,}
+	\item{syntactically valid,}
+	\item{semantically interpretable,}
+	\item{pragmatically comprehensible,}
+	\item{evident of a set of desired features.}
 	\end{itemize} 
-\item{detects relevant opportunities for usage of known poetic techniques}
+\item{is able to digress slightly from learned features in its use of poetic techniques in search of creativity.}
 \end{itemize}
 
-%\section{Contributions}
-This project makes contributions towards both computational creativity and computational linguistics, in particular:
+%---------------------------------------------------
+
+\section{Contributions}
+This project makes contributions towards both Computational Creativity and Computational Linguistics.
 \begin{itemize}
-\item{We demonstrate the ability for computer systems to assess written natural language works in terms of its structure, common words and phrases, rhetoric and poetic features such as rhyme, rhythm and alliteration. Notably, we will investigate the appropriateness of Discourse Representation Theory as a semantic representation of characters, objects and locations, descriptions of them, relationships between them and the actions that they executed.}
-\item {We demonstrate the ability to make generalisations of written features when given a large number of similar texts to compare.}
-\item{We investigate the appropriateness of turning those generalisations into predicates and rules in a constraint programming  environment.}
-\item{We demonstrate constraint programming as an effective tool for guiding the macro- and micro- planning stages of natural language generation}
-\item{We demonstrate the use of third party libraries as sufficient for the surface realisation stage of natural language processing}
-\item{We provide a tool for poetry creation from natural language seeds of inspiration}
-\end{itemize}
-%What does this approach contribute? Why is it worth trying? What is the hypothesis?
-
-
-
-
-Poetry is a mysterious art. Poems are often written to make a point in a powerful and dramatic way that helps the people connect with the author and the emotions that are succinctly put into rhythmic combinations of words and to make it more memorable. Even those who unaware of the subtle techniques employed by poets in order to resonate better with their reader or listener are still able to enjoy high quality poetry because of the way it sounds. Yet, even most humans struggle to understand poems, let alone have the creative ability to generate them.
-\\\\
-Furthermore, people reading the same poem can have different interpretations of its underlying goal and meaning. The best of poets take advantage of this by weaving different layers of meaning into very few words, but humans are also apt at finding layers of meaning that were not intended by the poet.
-\\\\
-Many previous attempts at poetry generation have abused this admirable human trait by slewing grammatically correct strings of words (a task that has become relatively easy in the field of Natural Language Processing over the past decade) and rely on the reader to find its meaning. However, Chomsky retorted that a valid grammatical syntax can be completely non-sensical, giving the famous example "Colorless green ideas sleep furiously". If this were a line in a poem, a determined reader might read into this as old, locked-away, thoughts of monetary greed threatening to return or something to that effect. However, Veale argues that this 'poetic licence' is not a licence but a contract that allows a speaker to take liberties in language in exchange for real insight.
-\\\\
-The approach taken in this project aims to generate meaningful insight in poetic form in a fully autonomous way. This follows from the unfortunate realisation brought forward by Colton et al. that a fully autonomous computer poet cannot induce the emotional connection with the reader that a human can. This is a constraint that prevents the system from producing syntactically correct yet non-sensical strings of words. This constraint is not a bad thing. In fact, composer Igor Stravinsky argues that constraints assist the creative process rather than hinders it:\\
-\textit{"The more constraints one imposes, the more one frees one's self of the chains that shackle the spirit"\\ \hfill{- Igor Stravinsky 1947}}
-\\\\
-Poetry comes with more constraints than just meaningful insight. 
-Toivanen et al. 2013 put forward a promising proposal for generating poetry flexibly and effectively using constraint programming.
-
-\begin{itemize}
-\item{Rhyme}
-\item{Rhythm, including meter and syllable count}
-\item{Alliteration, assonance, consonance, onomatopoeia and other sound devices}
-\item{Rhetoric, such as metaphors and similes}
-\item{Theme}
-\item{Repetition}
-\item{Structure}
-\item{Unusual words}
-\item{Exaggeration and superlatives}
-\item{Symbolism}
-\item{Tense}
+\item{We demonstrate the ability for computer systems to assess written natural language works in terms of its structure, common words and phrases, rhetoric and poetic features such as rhyme, rhythm and alliteration.}
+\item{We will investigate the appropriateness of Discourse Representation Theory (DRT) as a semantic representation of poetry from which we can derive pragmatics in terms of characters, objects and locations, descriptions of them, relationships between them and the actions that they executed.}
+\item {We demonstrate the ability to abstract common written features out of a large number of comparable texts.}
+\item{We take in a step in the direction of using the web as a source of material and conceptual inspiration for creative acts.}
+\item{We demonstrate Discourse Representation Theory as an effective tool for guiding the macro- and micro- planning stages of natural language generation.}
+\item{We demonstrate the effectiveness of third-party libraries for the surface realisation stage of Natural Language Generation.}
+\item{We provide a tool for poetry creation from natural language seeds of inspiration.}
+\item{We investigate the applicability of the new FACE and IDEA descriptive models for evaluation.}
 \end{itemize}
 
-
-
-These constraints are not a bad thing. In fact, composer Igor Stravinsky argues that constraints assist the creative process rather than hinders it:\\
-\textit{"The more constraints one imposes, the more one frees one's self of the chains that shackle the spirit"\\ \hfill{- Igor Stravinsky 1947}}\\
-Similarly, more constraints make poetry generation easier for a logic-based entity as a computer. The more constraints, the smaller the search space and possible permutations. These constraints can be hard-coded, but the number of sets of constraints can be very large, constantly changing and sometimes too subtle to notice or define logically.
-\\\\
-%Why generate poetry automatically?
-It could be argued that a computer writing poetry is an oxymoron, and a pointless endeavour. However, several attempts have been made in the past at generating poems automatically with several different methods being employed (Chapter num). For motivation, we need look no further than the desire to pass the Turing Test. For a computer to be truly exhibit intelligent behaviour indistinguishable to that of a human, it needs to be able to make an emotional connection with another human. Other reasons for attempting to generate poetry automatically include other transferable skills that a computer could develop, including:
-\begin{itemize}
-%Just take a list of the stuff from previous papers and reference all
-\item{Semantic understanding of text}
-\item{Fluent natural language generation}
-\item{Problem abstraction and specification}
-\item{Pattern recognition and projection}
-\item{Drafting and iterating}
-\end{itemize}
-
-%What are the challenges?
-Poems are summaries of an author's emotional thoughts and opinions coupled with both common sense and stereotypical knowledge. Therein lie the challenges of poetry generation. It is difficult enough for humans to express their own emotions in words, let alone succinctly. Furthermore, common sense and stereotypical knowledge is derived from the human instinct to abstract conclusions from experiences. 
 
 %%% ----------------------------------------------------------------------
 
