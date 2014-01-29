@@ -11,7 +11,7 @@
     \graphicspath{{Design/DesignFigs/EPS/}{Design/DesignFigs/}}
 \fi
 
-This chapter gives a brief overview of the features and types of poetry that exist, as well as why people are interested in writing them. This gives context for the brief overview into the fields of computational linguistics and computational creativity, both of which are involved in the task of automatic poetry generation. Finally, we will explain and critique the state of the art of poetry generation that most relate to the approach taken in this paper.
+This chapter gives a brief overview of the features and types of poetry that exist, as well as why people are interested in writing them. We will discuss, critique and gather inspiration from the related work in the area of poetry generation that most relate to the approach taken in this paper. We then give brief overviews into the fields of computational linguistics and computational creativity, both of which are involved in the task of automatic poetry generation. 
 
 \section{Poetry Theory}
 
@@ -196,7 +196,7 @@ Techniques include:
 
 This paper attempts to detect use of metaphor and simile as well as reproduce it. However, the context around the use of the metaphor and simile is not considered, so they may not be generated at the most appropriate time. We do not consider Hyperbole and Powerful Verb as they are similar to Metaphor, but it is worth noting that they exist because including them should be an accessible extension for future work.
 
-\subsubsection{Context and Personification}
+\subsubsection{Pragmatics and Personification}
 Poetry is similar to storytelling in that it has characters around which the poem is written. Understanding who or what they are, their descriptions and their actions are all part of the underlying message that the poet wants to get across. This is the context of the poem.
 \\\\
 Personification is a technique used by poets to give inanimate objects life, expressing actions and descriptions as if it were human. This is a powerful technique that relates to imagery, helping poets make more abstract messages clearer. For example, 'the moon smiled' gives the moon life by describing it as having performed a human-like action with full intention of doing so. Noting the use of personification can make the context of the poem clearer, as often inanimate objects are the subject of the poem.
@@ -247,44 +247,191 @@ As well as determining the category of poems, we aim to be able to detect and re
 Some of these poems are harder to read and generate than others, particularly in terms of context. However, this selection covers the main features of poetry that we would like to address so it a good way to evaluate this project.
 
 
-\section{Brief Overview of Computational Creativity}
-%http://link.springer.com/article/10.1007/BF03037332#page-1
-%http://computationalcreativity.net/iccc2014/wp-content/uploads/2013/09/ComputationalCreativity.pdf
+\section{Lessons from Related Work}
+Here we discuss and critique six important previous attempts that have all influenced this project.
 
-\section{Brief Overview of Computational Linguistics}
-%http://www.cse.iitk.ac.in/users/mohit/Speech-and-Language-Processing.pdf
+\subsection{Actively Gather Inspiration}
 
-\subsection{Syntax}
-%http://delivery.acm.org/10.1145/980000/972475/p313-marcus.pdf?ip=82.31.135.169&id=972475&acc=OPEN&key=BF13D071DEA4D3F3B0AA4BA89B4BCA5B&CFID=397642531&CFTOKEN=69509660&__acm__=1390858444_560bb7766479576772371b53b664bc15
+Colton et al. published a paper in the International Conference of Computational Creativity 2012[ref], whose main objective was to describe the first poetry generation system that satisfied the FACE Descriptive model[ref]. It is a \textit{Form Aware}[ref] implementation that uses constructs templates of poems based on constraints of poetic features.
+\\\\
+The most interesting point of this paper was its admission that inspiration cannot come from the technology and must come from the user. By taking this into account, it now takes inspiration from news articles. However, since its objective was focused on passing a particular evaluation model, the poems created by this system are relatively simple and the processes rudimentary - using randomness rather than semantic applicability and coherent pragmatics.
 
-\subsection{Semantics}
-%http://www.let.rug.nl/bos/pubs/BasileBosEvangVenhuizen2012LREC.pdf
-%http://delivery.acm.org/10.1145/180000/176324/p409-pustejovsky.pdf?ip=82.31.135.169&id=176324&acc=OPEN&key=BF13D071DEA4D3F3B0AA4BA89B4BCA5B&CFID=397642531&CFTOKEN=69509660&__acm__=1390863422_5f1c79f13ae2bdd57d3950804e3835ec
+\subsection{Constrain to Improve Creativity}
 
-\subsection{Summarisation}
-%http://acl.ldc.upenn.edu/eacl2006/main/papers/22_2_careniningpauls_201.pdf
-%http://delivery.acm.org/10.1145/1620000/1610199/p25-marsi.pdf?ip=82.31.135.169&id=1610199&acc=OPEN&key=BF13D071DEA4D3F3B0AA4BA89B4BCA5B&CFID=397642531&CFTOKEN=69509660&__acm__=1390863805_45be3d0b76b231e221c184d5df6cdb59
+Recently, Toivanen et al. attempted a solution that used off-the-shelf constraint solvers[ref] to produce poetry. Their solution, illustrated in figure blah, also received inspiration from another source. This was then combined with other sources to build the set of candidate words, form requirements and content requirements. These were passed into a constraint solver with a manually encoded static constraint library powered by Answer Set Programming.
+\\\\
+The idea that constraints do not hinder but rather help the creative process is an attractive one for computational creativity research. Constraining words and other requirements for each particular word position is a natural technique for constraint programming, but extremely restrictive. First, the size of each line must be defined by number of words \textit{and then} by rhythm and other poetic features. Secondly, once the candidate words are chosen there is no scope for further filtering. Finally, the structure of the poem in terms of its POS must be defined beforehand and is taken from previous poems of the same type. Even though this is an efficient method that has produced impressive results, it is too restricted to produce truly creative work.
 
-\subsection{Natural Language Generation}
-%http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.111.9651&rep=rep1&type=pdf
-%http://acl.ldc.upenn.edu/P/P07/P07-1042.pdf
+\subsection{Learn from Experience}
 
-\subsection{Grammaticality and Interpretation}
-%http://www.postgradolinguistica.ucv.cl/dev/documentos/49,578,Noam%20Chomsky%20-%20Syntactic%20Structure.pdf
-
-\subsection{Discourse Representation Theory}
-%http://aclweb.org/anthology/W/W11/W11-2819.pdf
-%http://www.let.rug.nl/bos/pubs/BasileBosEvangVenhuizen2012LREC.pdf
+Ray Kurtzweil Cybernetic Poet (RKCP), created by Kurtzweil himself[ref], addresses the issue of having a predefined template. He uses a stochastic approach that takes advantage on n-grams to build lines from words. The system was trained on a selection of poems and created a template and n-gram corpus from those poems. RKCP would then be able to create similar types of poems. Algorithms were employed to ensure that poems were not exact copies of other poems and to maintain a coherent theme.
+\\\\
+This method is more flexible and has granular word selection. However, the vocabulary would still be limited and the form of the poem is not well defined due to being probabilistic. A specific purpose or storyline is not definable and the use of imagery is only probabilistic.
 
 
-\section{State of the Art}
+\subsection{Choose Words Carefully}
+MCGONAGALL[ref] takes a flat semantic representation of what he calls semantic expressions as input into an NLG system. For example, the semantic expression of \textit{"John loves Mary"} would be\\ \textit{\{john(j), mary(m), love(l, j, m)\}}
+\\
+These are used as starting points for initialisation of his evolutionary system that uses stochastic methods to determine the best values to be carried forward to further iterations.
+\\\\
+Of particular note is the structure of a lexical entry into the system. It is enriched with much semantic information that backs up the fitness score and helps MCGONAGALL form syntactically and semantically correct sentences. We will use much of his work in this area. However, pragmatism is still lacking because of the restrictions on evolution. It does not take particular types of poetry into account and there is little scope for creativity due to the strictness of grammar generated. 
+
+
+\subsection{Derive Insight from Worldly Knowledge}
+Tony Veale's daring approach to knowledge-based poetry generation[ref] concentrates on symbolism and imagery - arguably the hardest tasks in automatic poetry generation. He uses the theory of Mutual Knowledge through norms and stereotypes to build a structure that uses various words to describe objects and derive stereotypical characteristics. Out of this have grown two very useful third-part tools: Metaphor Magnet[ref] and Thesaurus Rex[ref]. We will not go into his methods of building this knowledge base here but I recommend the reader the article in the Fourth International Conference on Computational Creativity 2013[ref].
+
+His methods have obvious limitations in that they do not consider rhyme, rhythm or any other poetic feature other than symbolism. However, we will take advantage of the tools that have been born out of his project to give this system more symbolic choices of words and phrases.
+
+Knowledge Based: Less Rhyme, More Reason, \textit{Tony Veale} (Symbolic representations)
+
+
+\subsection{Dare to be Different}
+WASP is one of the first attempts at an automatic poetry generator. It is a rule based system that takes a set of words, a set of verse patterns and returns a set of verses[ref]. It uses heuristics to guide the construction to fit structure, but no semantic limitations are enforced.
+
+This has obvious limitations but Gervas does make a good point that poetry's creativeness is somewhat down to daringness of transgression. We keep this in mind to allow some level of randomness and mutation from expected norms in this project. 
+
 %https://www.era.lib.ed.ac.uk/bitstream/1842/314/1/IP040022.pdf
 %All in docs
-%the policeman's beard is half constructed pdf
 %http://link.springer.com/chapter/10.1007/3-540-46119-1_7#page-1
 %http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.126.1464&rep=rep1&type=pdf
 %http://delivery.acm.org/10.1145/1880000/1870709/p524-greene.pdf?ip=82.31.135.169&id=1870709&acc=OPEN&key=BF13D071DEA4D3F3B0AA4BA89B4BCA5B&CFID=397642531&CFTOKEN=69509660&__acm__=1390863256_1cb8f68563ec050ead2a0b910996fc19
 
+\section{Brief Overview of Computational Creativity}
+Simon Colton and Geraint Wiggins, pioneers of Computational Creativity, define research in this area as: \\
+\textit{The philosophy, science and engineering of computational systems which, by taking on particular responsibilities, exhibit behaviours that unbiased observers would deem to be creative.}[ref]\\
+
+In the context of Automatic Poetry Generation, we are creating a system that is \textit{responsible} for generating aesthetically pleasing, meaningful and novel poems. The poems still need to be sufficiently similar to existing works created by humans such that it \textit{exhibits behaviour} to which \textit{unbiased observers} can relate and recognise.
+
+This definition has evolved from one where behaviour was \textit{deemed creative if exhibited by humans}[ref]. However, recent developments in the area have lead to the requirement of more quantitative measures for evaluation than Turing-style tests, such as the FACE and IDEA descriptive models[ref].
+
+This area of research has come under scrutiny for philosophical reasons, but has had support from Alan Turing and other pioneers of Artificial Intelligence[ref]. It has since been accepted as a valid area of research, with the annual International Conference on Computational Creativity heading into its fifth round.
+
+Other experiments in the area of Computational Creativity include:
+\begin{itemize}
+\item{Simon Colton's \textit{Painting Fool}[ref] produced paintings that managed to trick art lovers into believing that it was the work of a talented human artist. An example is given in Figure blah.}
+\item{\textit{JAPE}[ref], created by Ritchie and Binsted in 1994 was given a general, non-humorous lexicon and generated puns as answers to questions. For example:\\\textit{Q:What do you call a strange market?\\ A: A bizarre bazaar}}
+\item{\textit{Iamus} by Gustavo Diaz-Jerez[ref], which composed music entirely on its own that was then recorded by London Symphony Orchestra[ref]}
+%the policeman's beard is half constructed pdf
+\end{itemize} 
+music
+
+Automatic poetry generation is a popular research problem in this area, as we will discuss in section blah.
+%https://www.cs.helsinki.fi/webfm_send/571
+%http://computationalcreativity.net/iccc2014/wp-content/uploads/2013/09/ComputationalCreativity.pdf
+
+\section{Brief Overview of Computational Linguistics}
+Computational Linguistics is a wide area of research, covering Speech Recognition, Natural Language Processing and Generation and with overlaps in several other areas such as Machine Learning and Knowledge Representation. In fact, Daniel Jurafsky and James H. Martin needed almost a thousand pages to cover the foundations of this area[ref].
+
+Automatic Poetry Generation uses many lessons from Computational Linguistics. Here we will briefly discuss the major ones in general and in the context of machine poetry analysis and generation. For an in depth general study of Computational Linguistics, the refer the interested reader to [ref]
+%http://www.cse.iitk.ac.in/users/mohit/Speech-and-Language-Processing.pdf
+
+\subsection{Words}
+Words are the fundamental building blocks of language. They have been studied for creation of spell-checkers, text-to-speech synthesis and automatic speech recognition. Two major subsets that we are concerned with in poetry is the study of pronunciation and morphology. 
+
+The CMU Pronunciation Dictionary[ref] has taken the first steps towards computationally modeling the phonetics of words. It uses the ARPAbet phoneme set (see table blah) is highly important for poetry generation as it helps machines reason about rhyme and sound devices by simply comparing phonemes. It has over 133,000 words mapped to its corresponding pronunciation.
+
+To illustrate how this works, let us take two words that are spelled differently but pronounced the same - \textit{kite} and \textit{height}. The Jaro-Winkler distance, a normalised score of similarity between strings, for the tail of these words (in search of rhyme) gives 51.11\%, indicating that it would be difficult for a machine to realise that they rhyme if it only looked at spelling. Their corresponding phoneme sets are \textit{'K AY T'} and \textit{'HH AY T} respectively. Now it is trivial to compare them and see that the tails are exactly the same and therefore rhyme.
+
+Morphology of words is the study of putting words together with morphemes, the smallest unit of grammar. To use Jarufsky and Martin's example[ref page 59], the word \textit{fox} consists of a single morpheme that is itself, but \textit{cats} has two morphemes, \textit{cat} and \textit{-s}. This is of vital importance in our project as we need to understand the difference between different forms of the same word and how they relate to context. Furthermore, when generating text we wish to produce coherent grammar with consistent tense and perspective.
+
+The CLiPS Pattern library has a number of tools for morphology of words. It provides a method of changing a word into its first, second or third person version, pluralisation and finding superlatives.[ref]
+%http://delivery.acm.org/10.1145/980000/972475/p313-marcus.pdf?ip=82.31.135.169&id=972475&acc=OPEN&key=BF13D071DEA4D3F3B0AA4BA89B4BCA5B&CFID=397642531&CFTOKEN=69509660&__acm__=1390858444_560bb7766479576772371b53b664bc15
+
+\subsection{Syntax}
+Syntax is the glue that binds words together. It gives us an understanding of the grammatical relationship between words and guides the building of phrases and sentences.
+
+Core to this area of research is part-of-speech (POS) analysis, which provides a model for grouping words together correctly, taking into account how words depend on each other. The big success story in this is The Penn Treebank, an enormous corpus of annotated POS information [ref]. Indeed this accelerated progress of research in the area, as the paper had planned. The tagset is given in table blah.
+
+From these POS tags, we are able to create Grammars (most commonly Context-Free), the structural rules of phrases and sentences, and parsers for those grammars to be able to extract grammatical structure from unstructured text.
+
+Python's Natural Language Toolkit (NLTK)[ref] is a suite of text processing libraries, corpora and lexical resources that is heavily used in this project, particularly for syntactical purposes. It will allow us to use The Penn Treebank tags as well as produce our own grammar and parser that can be used to parse most poetry. This is a challenge because poetry does not follow grammatical rules as strictly as discourse. However, the gains will be that we can model the context of the poem, leading to better analysis of semantics and pragmatics of poetry.
+%http://www.postgradolinguistica.ucv.cl/dev/documentos/49,578,Noam%20Chomsky%20-%20Syntactic%20Structure.pdf
+
+\subsection{Semantics and Pragmatics}
+Chomsky used the famous example 'Colorless green ideas sleep furiously' as an illustration that a valid grammatical syntax can be completely nonsensical[ref]. This illustrates the importance of the study of semantics, the meaning of words and phrases, as well as pragmatics, the way context affects semantics.
+
+This is yet another major challenge for poetry generation. Poems are concise but have many layers of meaning that are subtle even to human readers and that only the best of poets can fully control. The different categories of poems each have their own pragmatics and there is always a fundamental message and purpose supporting these layers meaning.
+
+If Chomsky's example were a line in a poem, a determined reader might read into this as old, locked-away, thoughts of monetary greed threatening to return. Or perhaps a completely different interpretation may arise depending on the reader.  Veale argues that this 'poetic licence' is not a licence but a contract that allows a speaker to take liberties in language in exchange for real insight. We must be careful not to abuse this by slewing unrelated words together and expecting the reader to do the work.
+
+Various methods of understanding semantics in natural language have been proposed. A very popular one is First Order Predicate Calculus. In particular, Hans Kamp proposes Discourse Representation Theory (DRT) as a way of modelling language in such a way. We use this theory in this project and will go into more depth in the next section.
+
+Johan Bos proposes that semantic analysis of text is where syntax analysis was 20 years ago, before The Penn Treebank [ref]. He and his team have begun the Groningen Meaning Bank (GMB) project[ref], a large semantically annotated corpus in lieu of The Penn Treebank, in the attempt to bring the same success and acceleration to this research field. They use DRTas the backbone to an assembly of third-party tools to annotate semantics.
+
+However, the GMB project is still in early stages and has only annotated open license news articles[ref] up until now, which is not a suitable corpus for poetry generation. However, we will support the coordination of third-party tools and will consider using the following to boost the semantic and pragmatic skill of our poetry generator, particularly with regards to the problem of producing vivid imagery and pragmatic parsing:
+\begin{itemize}
+\item{\textit{WordNet}: a lexical database that provides hierarchical, conceptual-semantic and lexical relations of 155,287 English words.}
+\item{\textit{VerbNet}: a lexical database that groups verbs by semantic and syntactic linking behaviour.}
+\item{\textit{FrameNet}: a lexicon with framing semantics to define and constrain the building of phrases around individual words.}
+\item{\textit{ACE}: a classification of Named Entity Recognition.}
+\item{\textit{PropBank}: an annotated corpus a million words defining and providing argument role labels for verbs}
+\item{\textit{NomBank}: similar to PropBank, but for nouns instead of verbs.}
+\item{\textit{Wordnik}: a multi-faceted dictionary and semantic language database collected from a variety of sources}
+\item{\textit{Metaphor Magnet}: a web application that maps commonplace metaphors in everyday texts}
+\item{\textit{Oxford Collocations Dictionary}: a source of word pairings and phrases that occur with greater than chance probability}
+\item{\textit{LinguaTools DISCO}: a tool to derive semantic similarity between words based on statistical analysis of large text collections}
+\item{\textit{ConceptNet 5}: a semantic general knowledge network}
+\item{\textit{Thesaurus Rex}: a monster thesaurus generated from web texts}
+\item{\textit{Written Sound}: a dictionary of onomatopoeia to their meanings and associated objects}
+\item{\textit{Feature Structure Grammars}: instead of CFG}
+\end{itemize}
+
+Not all of these tools will be used in this project due to the limited scope. The selected few will be justified in the implementation section with regards to meeting the objectives of this paper. Others will be suggested for future extensions to this project.
+
+%http://www.let.rug.nl/bos/pubs/BasileBosEvangVenhuizen2012LREC.pdf
+
+\subsection{Discourse Representation Theory}
+Discourse Representation Theory (DRT)[ref] is a framework for investigating semantics of natural language. DRT is becoming the accepted theory of meaning representation[ref] and is fundamental to the task of semantic modelling of natural language.
+
+Abstract mental representations of DRT are Discourse Representation Structures, or DRS. It is designed to be language neutral and combine meaning across sentences and coping with anaphora (e.g. pronouns in place of nouns). 
+
+Using Kamp's example, if we take the sentence \textit{A farmer owns a donkey} and convert it into a DRS, we get the following notation:\\
+\textit\{[x,y: farmer(x), donkey(y), own(x,y)]\}\\
+
+If we then say \textit{He beats it.}, it will produce:\\
+\textit\{[x,y,z,w: farmer(x), donkey(y), own(x,y), PRO(z), PRO(w), beat(z,w)]\}.\\
+
+We can then use anaphora resolution on this DRS to produce:\\
+\textit\{[x,y: farmer(x), donkey(y), own(x,y), beat(x,y)]\}\\
+
+We can see that this is similar to the notation used by Manurung in MCGONNAGAL, described in section blah.
+
+This method has evolved over the years to take tense and aspect into account, providing temporal reasoning in natural language sentences. Accuracy of anaphora and presupposition (e.g. saying 'animal' instead of 'cat') resolution has improved with the use of the third party tools mentioned earlier in combination with the ideas of Blackburn and Bos[ref].
+
+Extending this example, we may wish to model the sentence \textit{Every farmer who owns a donkey beats it.}. This sort of semantic problem is now known as \textit{Donkey Anaphora} thanks to this paper[ref]. DRT provides an elegant solution for this using first order logic style 'for all':\\
+\textit\{[x][y][farmer(x), donkey(y), own(x,y) -\textgreater beat(x,y)]\}\\
+
+This allows us to provide background knowledge to the system and make inferences on it. As a result of its usefulness in many applications, NLTK has included DRS manipulation and anaphora resolution into its core Semantics package[ref]. 
+
+In poetry, like any text, we can use this to analyse the semantics and pragmatics of the storyline. Furthermore, we hypothesis that it can be used to model each poetry type since they each have their own forms and purposes, and provide coherency to the story when generating text.
+%http://aclweb.org/anthology/W/W11/W11-2819.pdf
+%http://www.let.rug.nl/bos/pubs/BasileBosEvangVenhuizen2012LREC.pdf
+
+\subsection{Natural Language Generation}
+Natural Language Generation is the term for putting some non-linguistic form of content into understandable text in a human language. Reiter and Dale give the framework[ref] illustrated in figure blah for the process of generating natural language:
+
+%INSERT FIG 3 HERE
+
+A similar model was propsed by Bateman and Zock[ref], which includes four stages:
+\begin{enumerate}
+\item{\textit{Macro Planning:} Overall content of the text is structured.}
+\item{\textit{Micro Planning:} Specific words and expressions are decided.}
+\item{\textit{Surface Realisation:} Grammatical constructs and order are selected.}
+\item{\textit{Physical Presentation:} Final articulated text is presented.}
+\end{enumerate}
+
+These are theories upon which natural language generation tools, such as simpleNLG[ref] have been designed. There are others, such as grammar generation implemented by NLTK (similar to the one used in MCGONNAGAL) or the constraint programming technique used by Toivanen et al. explained in section blah, but we find that this process is not granular enough, jumping from the goal to the surface text without enough consideration for the individual words used.
+
+The inputs into this system can vary. One popular problem is raw numerical data into a textual summary. In our case, however, we look at symbolic representations of content in the form of a DRS. Basile and Bos[ref] argue that DRSs are appropriate for all stages of the Bateman and Zock example[ref]. Gardent and Kow have also proposed a symbolic approach to the Surface Realisation phase, working from first-order logic as the input form.
+
+In this paper, we will look at using DRSs to guide the content, i.e. the Macro Planning stage. However, we feel it is restrictive to use it for Micro Planning, since it gives no scope the use of symbolic imagery, or Surface Realisation, as it forces grammatical perfection.
+
+%http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.111.9651&rep=rep1&type=pdf
+%http://acl.ldc.upenn.edu/P/P07/P07-1042.pdf
+
+%\subsection{Summarisation}
+%http://acl.ldc.upenn.edu/eacl2006/main/papers/22_2_careniningpauls_201.pdf
+%http://delivery.acm.org/10.1145/1620000/1610199/p25-marsi.pdf?ip=82.31.135.169&id=1610199&acc=OPEN&key=BF13D071DEA4D3F3B0AA4BA89B4BCA5B&CFID=397642531&CFTOKEN=69509660&__acm__=1390863805_45be3d0b76b231e221c184d5df6cdb59
 
 % ------------------------------------------------------------------------
 
