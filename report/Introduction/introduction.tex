@@ -6,31 +6,32 @@
     \graphicspath{{Introduction/IntroductionFigs/EPS/}{Introduction/IntroductionFigs/}}
 \fi
 \emph{"Dream in a pragmatic way." - Aldous Huxley}
-
 \section{Motivation}
 
 Computational Semantics is a relatively young and fashionable topic in Computational Linguistics. It involves finding representations and algorithms that are able to cope with the \textit{meaning} of linguistic utterances.
-\\\\
+
 Pragmatics is an even younger discipline, concentrating on the context of those utterances. When we as humans read or listen to any linguistic output, we build a representation of the objects, people, actions, descriptions, relationships and anything else to provide context to the experience. For example, the phrase \textit{"I have a green light"} may mean that I have been granted permission for something, or that I literally have a lamp with a green tint. 
-\\\\
+
 Indeed a similar approach is taken when writing or speaking - one has a purpose and a message that would like to be passed and the language used helps to build such context. For example, if I aim to tell you that I have a lot of work, I could simply say that or say I am 'drowning' in work. The latter helps you, the reader, realise that not only do I have a lot of work but that I also cannot handle it.
-\\\\
+
 For a computer to truly converse in a manner indistinguishable to humans, as is the aim of the elusive Turing Test, it must be able to handle pragmatics along with syntax and semantics. This requires a deep understanding of words not as a linguistic unit, but as the objects, actions and descriptions they represent. They should then be used with a purpose when generating text, as human writers and speakers do.
-\\\\
+
 Poetry is a linguistic art form designed to help convey a particular, well-defined message in a memorable and powerful way. Poets write poems that are succinct in length but dense in meaning by employing a number of techniques, such as rhyme and rhythm. 
-\\\\
+
 Different types of poetry each have their own sets of constraints, features and priorities that define their best usage. For example, narrative poems convey characters, relationships and actions while descriptive ones are used to give a comprehensive linguistic illustration. Furthermore, rhythm and rhyme can be used to provide melody making it pleasant to hear and applicable to songs, but alliteration can be used to create suspense and a sense of danger.
-\\\\
+
 In this paper, we use poetry as the catalyst with which to develop computational semantics and pragmatics. We aim to create a system that can analyse poetry and build a contextual representation of it, as well as generate poetry with an underlying purpose and message.
-\\\\
-Outside of linguistics, pragmatic also means to deal with something in a practical way rather than using theories. We will deal with this problem pragmatically:
+
+The proposed implementation comes in three phases:
 \begin{enumerate}
-\item{First we will write the analysis module, which detects a wide range of poetic features in a single poem. It also aims to represent the context of the poem with Discourse Representation Structures (DRSs), outlined in section BLAH.}
+\item{First we will write the analysis module, which detects a wide range of poetic features in a single poem. It also aims to represent the context of the poem with Discourse Representation Structures (DRSs), outlined in section \ref{sec:drt}.}
 
 \item{Then we run many poems of the same type through the analysis module and then abstract away the common features between the given poems. This includes a general structure for the DRSs of that class of poem.}
 
-\item{Finally we generate poems with a purpose as guided by the structure of the DRS. We will also utilise third-party libraries to build semantically and syntactically valid lines of poetry that also use poetic features. Poeticness and creativity is prioritised in the selection of words and phrases during the generation process.}
+\item{Finally we generate poems with a purpose as guided by the structure of the DRS. We will also utilise third-party libraries to build semantically and syntactically valid lines of poetry that also use poetic features. Poeticness and creativity is prioritised in the selection of words and phrases during the generation process. A dry run of this phase is given in the appendix.}
 \end{enumerate}
+
+
 
 %-----------------------------------
 

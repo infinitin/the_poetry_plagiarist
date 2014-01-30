@@ -1,76 +1,153 @@
 \chapter{Appendix A}
 
-The features of peoms we wish to be able to detect:
-\begin{itemize}
-\item{Structure}
-	\begin{itemize}
-	\setlength{\itemsep}{0pt}
-	\begin{multicols}{2}
-	\item{Number of stanzas}
-	\item{Number of lines per stanza}
-	\item{Number of repeated lines}
-	\columnbreak
-	\item{Repeated phrases}
-	\item{Repeated words}
-	\item{Unusual words}
-	\end{multicols}
-	\end{itemize} 
-\item{Rhyme}
-	\begin{itemize}
-	\setlength{\itemsep}{0pt}
-	\begin{multicols}{2}
-	\item{Rhyme scheme between lines}
-	\item{Rhyme scheme within a line}
-	\columnbreak
-	\item{Presence of regular rhyme scheme}
-	\end{multicols}
-	\end{itemize}
-\item{Rhythm}
-	\begin{itemize}
-	\setlength{\itemsep}{0pt}
-	\begin{multicols}{2}
-	\item{Number of syllables}
-	\columnbreak
-	\item{Stress pattern for each line}
-	\end{multicols}
-	\end{itemize}
-\item{Line patterns}
-	\begin{itemize}
-	\setlength{\itemsep}{0pt}
-	\begin{multicols}{2}
-	\item{Alliteration}
-	\item{Assonance}
-	\columnbreak
-	\item{Consonance}
-	\end{multicols}
-	\end{itemize}
-\item{Rhetoric}
-	\begin{itemize}
-	\setlength{\itemsep}{0pt}
-	\begin{multicols}{2}
-	\item{Similes}
-	\item{Metaphors}
-	\columnbreak
-	\item{Onomatopoeia}
-	\end{multicols}
-	\end{itemize}
-\item{Contextual}
-	\begin{itemize}
-	\setlength{\itemsep}{0pt}
-	\begin{multicols}{2}
-	\item{Tense}
-	\item{Point of view}
-	\item{Characters}
-	\item{Objects}
-	\columnbreak
-	\item{Locations}
-	\item{Descriptions}
-	\item{Actions}
-	\item{Relationships}
-	\end{multicols}
-	\end{itemize}
-\end{itemize}
+\textbf{Dry run of generation phase with commentary}
 
+Input seed: Limerick about a computer that is bored with data and finds poetry fun
+
+1. 
+\textit{There once was (a/an) \_\_\_\_\_ named \_\_\_\_[A]\\
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_[A]\\
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_[B]\\
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_[B]\\
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_[A]}
+
+This is a limerick template straight out of the generation phase.
+
+2.
+\textit{There once was a computer named \_\_\_\_ [data]\\
+That was bored with data [data]\\
+It finds poetry fun [fun]\\
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_[fun]\\
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ [data]}
+
+This step introduced the computer, the fact that it is bored with data and finds poetry fun. It does not take any structure into account when adding these.
+
+3.
+\textit{There once was a computer named Zeta\\
+That was bored to death with data\\
+It finds poetry fun\\
+\_\_\_\_\_\_\_\_\_\_\_ sun\\
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ beta}
+
+This step filled in the name Zeta since it needed to rhyme with data. 
+It rephrased ‘bored’ with ‘bored to death’ to fit the rhythm without losing meaning. 
+Found third line to be complete.
+Added sun to end of next line since it is an association with fun and follows rhyme scheme.
+Added beta to end of last line since it rhymes with data (and Zeta)
+
+4.
+\textit{There once was a computer named Zeta\\
+That was bored to death with data\\
+It finds poetry fun\\
+Like the summer sun\\
+The revolutionary new system goes into beta}
+
+This step added a simile to compare the fun of poetry to the sun since it fit the rhythm structure (alternatively, “like the scorching/setting/sinking sun”, but summer sun has alliteration on 'su' rather than just 's'). A phrase was found that ends with beta and was arbitrarily added.
+
+5.
+\textit{There once was a computer named Zeta\\
+That was bored to death with data\\
+It finds poetry fun\\
+Like the summer sun\\
+The new system goes into beta}
+
+Redundant adjective removed to fit structure in last line. Poem finished.
+
+Note too that we added the input data to the first three lines. Separating them out will make it more coherent, especially in longer poems. Then the associations could be found with surrounding sentences, not just the previous one.
+
+Further rephrasing of lifted sentences, such as the last one, could be beneficial to adding randomness and creativity.
+
+\begin{table}
+    \begin{tabular}{|l|l|l|}
+    \hline
+    Phoneme & Example & Tranlsation \\ \hline
+    AA      & odd     & AA D        \\
+    AE      & at      & AE T        \\
+    AH      & hut     & HH AH T     \\
+    AO      & ought   & AO T        \\
+    AW      & cow     & K AW        \\
+    AY      & hide    & HH AY D     \\
+    B       & be      & B IY        \\
+    CH      & cheese  & CH IY Z     \\
+    D       & dee     & D IY        \\
+    DH      & thee    & DH IY       \\
+    EH      & Ed      & EH D        \\
+    ER      & hurt    & HH ER T     \\
+    EY      & ate     & EY T        \\
+    F       & fee     & F IY        \\
+    G       & green   & G R IY N    \\
+    HH      & he      & HH IY       \\
+    IH      & it      & IH T        \\
+    IY      & eat     & IY T        \\
+    JH      & gee     & JH IY       \\
+    K       & key     & K IY        \\
+    L       & lee     & L IY        \\
+    M       & me      & M IY        \\
+    N       & knee    & N IY        \\
+    NG      & ping    & P IH NG     \\
+    OW      & oat     & OW T        \\
+    OY      & toy     & T OY        \\
+    P       & pee     & P IY        \\
+    R       & read    & R IY D      \\
+    S       & sea     & S IY        \\
+    SH      & she     & SH IY       \\
+    T       & tea     & T IY        \\
+    TH      & theta   & TH EY T AH  \\
+    UH      & hood    & HH UH D     \\
+    UW      & two     & T UW        \\
+    V       & vee     & V IY        \\
+    W       & we      & W IY        \\
+    Y       & yield   & Y IY LD     \\
+    Z       & zee     & Z IY        \\
+    ZH      & seizure & S IY ZH ER  \\ \hline
+    \end{tabular}
+    \caption{ARPAbet phoneme set with corresponding examples}
+    \label{tab:arpa}
+\end{table}
+\begin{table}
+    \begin{tabular}{|l|l|}
+    \hline
+    Tag  & ~                                        \\ \hline
+    CC   & Coordinating conjunction                 \\
+    CD   & Cardinal number                          \\
+    DT   & Determiner                               \\
+    EX   & Existential there                        \\
+    FW   & Foreign word                             \\
+    IN   & Preposition or subordinating conjunction \\
+    JJ   & Adjective                                \\
+    JJR  & Adjective, comparative                   \\
+    JJS  & Adjective, superlative                   \\
+    LS   & List item marker                         \\
+    MD   & Modal                                    \\
+    NN   & Noun, singular or mass                   \\
+    NNS  & Noun, plural                             \\
+    NNP  & Proper noun, singular                    \\
+    NNPS & Proper noun, plural                      \\
+    PDT  & Predeterminer                            \\
+    POS  & Possessive ending                        \\
+    PRP  & Personal pronoun                         \\
+    PRP\$ & Possessive pronoun                       \\
+    RB   & Adverb                                   \\
+    RBR  & Adverb, comparative                      \\
+    RBS  & Adverb, superlative                      \\
+    RP   & Particle                                 \\
+    SYM  & Symbol                                   \\
+    TO   & to                                       \\
+    UH   & Interjection                             \\
+    VB   & Verb, base form                          \\
+    VBD  & Verb, past tense                         \\
+    VBG  & Verb, gerund or present participle       \\
+    VBN  & Verb, past participle                    \\
+    VBP  & Verb, non-3rd person singular present    \\
+    VBZ  & Verb, 3rd person singular present        \\
+    WDT  & Wh-determiner                            \\
+    WP   & Wh-pronoun                               \\
+    WP\$ & Possessive wh-pronoun                    \\
+    WRB  & Wh-adverb                                \\ \hline
+    \end{tabular}
+    \caption{Penn Treebank Tagset in alphabetical order}
+    \label{tab:penn}
+\end{table}
 % ------------------------------------------------------------------------
 
 %%% Local Variables: 

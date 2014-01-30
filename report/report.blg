@@ -1,13 +1,10 @@
 This is BibTeX, Version 0.99dThe top-level auxiliary file: report.aux
-A level-1 auxiliary file: Acknowledgement/acknowledgement.aux
-A level-1 auxiliary file: Abstract/abstract.aux
 A level-1 auxiliary file: Introduction/introduction.aux
 A level-1 auxiliary file: Design/design.aux
 A level-1 auxiliary file: Theory/theory.aux
-A level-1 auxiliary file: Implementation/implementation.aux
-A level-1 auxiliary file: Management/management.aux
 A level-1 auxiliary file: Evaluation/evaluation.aux
-A level-1 auxiliary file: Conclusions/conclusions.aux
 A level-1 auxiliary file: Appendix1/appendix1.aux
 The style file: Classes/jmb.bst
+I found no \citation commands---while reading file report.aux
 Database file #1: References/references.bib
+(There was 1 error message)

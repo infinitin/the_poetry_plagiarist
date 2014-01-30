@@ -20,14 +20,14 @@
   \collegeordept{\href{http://www.doc.ic.ac.uk}{Department of Computing}}
   \university{\href{http://www.ic.ac.uk}{Imperial College London}}
 % insert below the file name that contains the crest in-place of 'UnivShield'
-  \crest{\includegraphics[width=30mm]{UnivShield}}
+  \crest{\includegraphics[width=70mm]{UnivShield}}
   \crest{\includegraphics[width=70mm]{logo}}
 \else
   \author{Nitin Nihalani}
   \collegeordept{Department of Engineering}
   \university{Imperial College London}
 % insert below the file name that contains the crest in-place of 'UnivShield'
-  \crest{\includegraphics[bb = 0 0 292 336, width=30mm]{UnivShield}}
+  \crest{\includegraphics{UnivShield}}
   \crest{\includegraphics[bb = 0 0 292 336, width=70mm]{logo}}
 \fi
 %
@@ -53,8 +53,21 @@
 \titlespacing*{\chapter}{0pt}{-60pt}{20pt}
 \titleformat{\chapter}[display]{\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge}
 \usepackage{multicol}
+\usepackage{cite}
 \usepackage{listings}
-\lstset{tabsize=2}
+\usepackage{color}
+\lstset{frame=tb,
+  language=Python,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  breaklines=true,
+  breakatwhitespace=true
+  tabsize=2
+}
 
 \begin{document}
 
@@ -110,7 +123,7 @@
 \backmatter % book mode only
 \appendix
 \renewcommand{\thesection}{A.\arabic{section}}
-%\include{Appendix1/appendix1}
+\include{Appendix1/appendix1}
 %\renewcommand{\thesection}{B.\arabic{section}}
 %\include{Appendix2/appendix2}
 

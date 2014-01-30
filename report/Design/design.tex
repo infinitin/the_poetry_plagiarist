@@ -11,30 +11,30 @@
     \graphicspath{{Design/DesignFigs/EPS/}{Design/DesignFigs/}}
 \fi
 
-This chapter gives a brief overview of the features and types of poetry that exist, as well as why people are interested in writing them. We will discuss, critique and gather inspiration from the related work in the area of poetry generation that most relate to the approach taken in this paper. We then give brief overviews into the fields of computational linguistics and computational creativity, both of which are involved in the task of automatic poetry generation. 
+This chapter gives a brief overview of the features and classes of poetry that exist, along with why people are interested in writing them. We will discuss, critique and gather inspiration from the related work in the area of poetry generation that most relate to the approach taken in this paper. We then give brief overviews into the fields of Computational Linguistics and Computational Creativity, both of which are involved in the task of automatic poetry generation. These overviews are by no means complete or comprehensive, but should provide enough information for those not familiar with those areas to understand and appreciate this paper.
 
 \section{Poetry Theory}
 
-To fully appreciate the task that we are about to undertake, we need to have an understanding of poetry as an art form. Poetry is believed to predate even literacy and as such it has been documented ever since. Over the ages, different styles of poetry have evolved. Here we discuss those styles and the underlying reason for why poetry is written.
+To fully appreciate the task that we are about to undertake, we need to have an understanding of poetry as an art form. Poetry is believed to predate even literacy and has been documented ever since. Over the ages, different styles of poetry have evolved. Here we discuss those styles and the underlying reason for why poetry is written.
 
 \subsection{The Purpose of Poetry}
 
 Merriam-Webster dictionary defines poetry as:\\
-\emph{writing that formulates a concentrated imaginative awareness of experience in language chosen and arranged to create a specific emotional response through meaning, sound, and rhythm.}\\
+\emph{writing that formulates a concentrated imaginative awareness of experience in language chosen and arranged to create a specific emotional response through meaning, sound, and rhythm.}
 
 Let us break this down:
 \begin{itemize}
-\item{\textit{Formulates} implies a method and system in the process of writing a poem.}
-\item{\textit{Concentrated} accentuates the fact that poems are generally short, as they are indeed counted in stanzas in lines rather than paragraphs and pages.}
-\item{\textit{Imaginative} confirms the fact that this is a creative act, that has a level of non-determinism and is not necessarily realistic.}
-\item{\textit{Awareness of Experience} embodies the need for general background knowledge based on a particular set of experiences.}
+\item{\textit{Formulates} implies that there is method to the process of writing a poem.}
+\item{\textit{Concentrated} accentuates the fact that poems are generally short, as they are counted in stanzas in lines rather than paragraphs and pages.}
+\item{\textit{Imaginative} confirms the fact that this is a creative act, that has a level of non-determinism and need not be entirely realistic.}
+\item{\textit{Awareness of Experience} embodies the need for general background knowledge based on a particular set of experiences that surface when writing a poem.}
 \item{\textit{Language Chosen and Arranged} reiterates that this is a methodical and systematic art - decisions are made carefully with precise intention.}
-\item{\textit{Create a specific emotional response} finally gives the purpose of the poem - too express a feeling or an idea and elicit an emotional response.}
-\item{\textit{Through meaning, sound, and rhythm} describes that this purpose is not reached purely by the words, but other language features.}
+\item{\textit{Create a specific emotional response} gives the main purpose of the poem - to express a feeling or an idea and elicit an emotional response.}
+\item{\textit{Through meaning, sound, and rhythm} describes that this purpose is not reached purely by words, but other language features.}
 \end{itemize}
 
 To summarise the purpose of poetry from this, we would say that it is using one's imagination and experience to trigger empathy about a particular topic from the reader. This means that poetry is a vehicle through which poets can share a very personal message that they want the reader to experience and remember. 
-\\\\
+
 We must keep this in mind throughout the project, as it is important to realise that the features of poetry discussed in the next section might be seen as arbitrary rules on form rather than purposeful techniques used to make the language more concise and effective.
 
 \subsection{Features of Poetry}
@@ -51,20 +51,21 @@ He got all round and \textbf{fat}\\
 Because they tasted so \textbf{nice}
 }
 \caption{A rhyming quatrain often used in teaching poetry}
+\label{fig:rhyme}
 \end{figure}
-Two words rhyme when they sound similar when spoken out loud. \textit{Cat} and \textit{fat} in the poem above rhyme, as do \textit{mice} and \textit{nice}. Rhyming words need not spell the same way, for example, \textit{kite} and \textit{height}. 
-\\\\
+Two words rhyme when they sound similar when spoken out loud. \textit{Cat} and \textit{fat} in figure \ref{fig:rhyme} rhyme, as do \textit{mice} and \textit{nice}. Rhyming words need not spell the same way, for example, \textit{kite} and \textit{height}. 
+
 Strict rhyme enforces the exact same sound while weak rhyme only requires that the vowel sounds are the same. Examples of weak rhyme are \textit{turtle} with \textit{purple} and \textit{tragedy} with \textit{strategy}. 
-\\\
-A piece of text has a rhyme scheme if there is a pattern of rhyme between its lines. For example, the poem in Figure blah has an \textit{ABAB} rhyme scheme.
-\\\\
-Rhyme can also occur within a line (internal rhyme) or between words in the middle of different lines.\\
+
+A piece of text has a rhyme scheme if there is a pattern of rhyme between its lines. For example, the poem in Figure \ref{fig:rhyme} has an \textit{ABAB} rhyme scheme.
+
+Rhyme can also occur within a line (internal rhyme) or between words in the middle of different lines.
 
 \textbf{Major Purposes} 
 \begin{itemize}
-\item{Pleasant to hear, making the listener feel more comfortable and listen carefully} 
-\item{As a mnemonic device}
-\item{Used at the end of lines of poetry and songs making the rhythmic structure more distinct}
+\item{Pleasant to hear, making the listener feel more comfortable and listen carefully.} 
+\item{As a mnemonic device.}
+\item{Used at the end of lines of poetry and songs making the rhythmic structure more distinct.}
 \end{itemize}
 
 In this project, we will detect and reproduce end-line rhyme and internal rhyme where applicable. It will also be prioritised when producing poetry for which a rhyme scheme is not mandatory but fits the purposes.
@@ -79,14 +80,15 @@ The bartender said\\
 to the neutron, 'For you, sir,\\
 there will be no charge.'\\
 }
-\caption{A funny Haiku}
+\caption{A humourous Haiku}
+\label{fig:haiku}
 \end{figure}
 
-Syllabic rhythm enforces a certain number of syllables to be used in a particular line of poetry. Haikus are the most famous type of poem with this feature - they are three lines long with the first and last lines restricted to 5 syllables and the second to 7. An example is given in Figure blah.
-\\\\
-Quantitative measures uses the fact that some syllables sound longer than others when spoken out loud. Long sounding syllables are \textit{stressed} while short ones are \textit{unstressed}. Accentual measures are similar to Quantitative, but they work on the tendency to stress a particular syllable when spoken out loud, rather than its length. It is important to note that a word's meaning can change depending on stress. For example, '\textbf{ob}ject' is a noun whereas 'ob\textbf{ject}' is a verb.
-\\\\
-Lines of pre-defined patterns of stressed and unstressed syllables are called \textit{meters}. Lines with meter are made up of individual units called \textit{feet}. The five major foot types in poetry are given in Table blah.
+Syllabic rhythm enforces a certain number of syllables to be used in a particular line of poetry. Haikus are the most famous type of poem with this feature - they are three lines long with the first and last lines restricted to 5 syllables and the second to 7. An example is given in Figure \ref{fig:haiku}.
+
+Quantitative measures use the fact that some syllables \textit{sound} longer than others when spoken out loud. Long sounding syllables are \textit{stressed} while short ones are \textit{unstressed}. Accentual measures are similar to Quantitative, but they work on the \textit{tendency to emphasize a particular syllable} when spoken out loud, rather than its length. It is important to note that a word's meaning can change depending on stress. For example, '\textbf{ob}ject' is a noun whereas 'ob\textbf{ject}' is a verb.
+
+Lines of pre-defined patterns of stressed and unstressed syllables are called \textit{meters}. Lines with meter are made up of individual units called \textit{feet}. The five major foot types in poetry are given in Table \ref{tab:rhythm}.
 
 \begin{table}[h!]
 \centering
@@ -99,7 +101,8 @@ Lines of pre-defined patterns of stressed and unstressed syllables are called \t
     anapest   & unstressed - unstressed - stressed & meta\textbf{phor} \\ \hline
     dactyl    & stressed - unstressed - unstressed & \textbf{po}etry   \\ \hline
     \end{tabular}
-\caption{The major poetic foot types with their corresponding pattern and an example to illustrate}
+\caption{The major poetic foot types with their corresponding pattern and an illustrative example.}
+\label{tab:rhythm}
 \end{table}
 
 
@@ -114,28 +117,28 @@ The metre is formed by repeating feet, typically with up to six feet:
 \item{Hexameter: 6 feet}
 \end{itemize}
 
-All Shakepeare's sonnets are written in iambic pentameter, i.e. five repetitions of unstressed-stressed syllables. His Sonnet II is given as an example:\\
+All Shakepeare's sonnets are written in iambic pentameter, i.e. five repetitions of unstressed-stressed syllables. The first line of his Sonnet II as an example:\\
 \textit{When \textbf{for}ty \textbf{win}ters \textbf{shall} be\textbf{siege} thy \textbf{brow}}
-\\\\
+
 \textbf{Major Purposes}
 \begin{itemize}
-\item{Introduces a melody based on the natural intonations of speech} 
-\item{Add a level of predictability and subconscious structure}
-\item{Emphasizes the message by putting stress on the words that matter}
+\item{Introduces a melody based on the natural intonations of speech.} 
+\item{Adds a level of predictability and structure that resonates with readers and listeners.}
+\item{Emphasizes the message by putting stress on the words that matter.}
 \end{itemize}
 
 Rhythm is a fundamentally important feature of poetry, so this project aims to be able to detect and reproduce it consistently and to a high level of accuracy.
 
 \subsubsection{Sound Devices}
 This project considers four types of sound devices.
-\\\\
-The first is \textbf{onomatopoeia} - words that imitate or suggest sounds of particular sources. For example, the word 'Pow' is used to describe the sound of a punch or 'tick-tock' for clocks. This technique has mostly been used in comic books to help the reader experience the sound of the scene to go with the image.
-\\\\
-The next three devices are repetitions of a pattern of similar sounds, like rhyme. \textbf{Consonance} is the repetition of similar consonant sounds (e.g. 'pitter patter' repeats the 'p', 't', and 'r' sounds), while \textbf{assonance} is that of vowels (e.g. 'doom and gloom' repeats the 'oo' sound). \textbf{Alliteration} is a special case where the repeated sound occurs at the beginning of consecutive words. 'Zany zebras zigzagged through the zoo' has alliteration on the letter 'z'.
-\\
+
+The first is \textbf{onomatopoeia} - words that imitate or suggest sounds of particular sources. For example, the \textit{pow} of a punch or the \textit{tick-tock} of a clock. This technique has mostly been used in comic books to help the reader experience the sound of the scene to go with the image.
+
+The next three devices are repetitions of a pattern of similar sounds, like rhyme. \textbf{Consonance} is the repetition of similar consonant sounds (e.g. \textit{pitter patter} repeats the 'p', 't', and 'r' sounds), while \textbf{assonance} is that of vowels (e.g. \textit{doom and gloom} repeats the 'oo' sound). \textbf{Alliteration} is a special case where the repeated sound occurs at the beginning of consecutive words. \textit{Zany zebras zigzagged through the zoo} has alliteration on the letter 'z'.
+
 \textbf{Major Purposes}
 \begin{itemize}
-\item{Poets use onomatopoeia to help describe actions or atmosphere richly. A famous example is the nursery rhyme 'Old MacDonald', which uses onomatopoeia of the sounds that animals make to describe the farm, figuratively placing the reader in the farm itself.} 
+\item{Poets use onomatopoeia to help describe actions or atmosphere richly. A famous example is the nursery rhyme 'Old MacDonald', which uses onomatopoeia of the sounds that animals make to describe the farm, figuratively placing the reader or listener in the farm itself.} 
 \item{Alliteration, consonance and assonance are pleasant to listen to when spoken out loud.}
 \item{Can be used to add drama to an action.}
 \item{Sometimes used to suggest danger.}
@@ -144,7 +147,7 @@ The next three devices are repetitions of a pattern of similar sounds, like rhym
 We aim to detect and reproduce all forms of sound devices explained here. However, there will be a limit to the onomatopoeic vocabulary and it will be unable to create brand new onomatopoeia.
 
 \subsubsection{Structure}
-The structure of the poem is the organisation of lines in a poem. The main unit is the stanza, which is a fixed amount of lines grouped by rhythmical pattern.\\
+The structure of the poem is the organisation of lines in a poem. The main unit is the stanza, which is a fixed amount of lines grouped by rhythmical pattern.
 
 There are four major types of stanza:
 \begin{itemize}
@@ -154,8 +157,8 @@ There are four major types of stanza:
 \item{Cinquain: 5 lines}
 \end{itemize}
 
-Stanzas can also be called verses, which have the added property that they tend to rhyme. A chorus is a special type of verse that is repeated every other verse. Similarly, envoys are the short final verse of a poem.
-\\\\
+Stanzas can also be called \textit{verses}, which have the added property of a rhyme scheme. A \textit{chorus} is a special type of verse that is repeated throughout a poem.
+
 Features of the structure of a poem include:
 \begin{itemize}
 \item{The number of stanzas}
@@ -164,8 +167,8 @@ Features of the structure of a poem include:
 \item{The number and positions of repeated stanzas}
 \end{itemize} 
 
-The Haiku in Figure blah has a single tercet structure with no repetitions. Songs are generally several stanzas long, with a chorus interleaving longer non-repeating verses.
-\\\\
+The Haiku in Figure \ref{fig:haiku} has a single tercet structure with no repetitions. Songs are generally several stanzas long, with a chorus interleaving longer non-repeating verses.
+
 \textbf{Major Purposes}
 \begin{itemize}
 \item{Helps to guide the reader through the story.}
@@ -178,14 +181,14 @@ The Haiku in Figure blah has a single tercet structure with no repetitions. Song
 We concentrate on detecting and reproducing accurate structures of common poetry in this project.
 
 \subsubsection{Symbolism and Imagery}
-Symbolism and imagery are general terms for creating an overall image in the reader's mind by describing a subject or object as something else.
+Symbolism and imagery are general terms for creating an overall image in the reader's mind by describing a subject or object as something else with desired qualities.
 
 Techniques include:
 \begin{itemize}
-\item{\textit{Metaphor}: an object is described as another object with a set of desirable characteristics. For example, saying someone is 'drowning in debt' describes the debt as an ocean in which the subject is drowning, suggesting that there is too much to handle, and may even insinuate the subject's downfall.}
-\item{\textit{Simile}: an object or action is specifically described using an adjective or adverb, but compared to another object that is a stereotypical example of that description. The phrases 'like a' and 'as a' are often used, e.g. 'Runs like a cheetah', 'Slippery as an eel'}
-\item{\textit{'Hyperbole'}: unrealistic exaggeration, often used in tandem with metaphor e.g. 'Cried a river of tears'.}
-\item{\textit{'Powerful Verb'}: a more exciting way to describe an action using unusual verbs, e.g. 'Wormed through the crowd'.}
+\item{\textbf{Metaphor}: an object is described as another object with a set of desirable characteristics. For example, saying someone is a lion immediately creates the image of bravery, intimidation and power.}
+\item{\textbf{Simile}: an object or action is specifically described using an adjective or adverb, but compared to another object that is a stereotypical example of that description. The phrases 'like a' and 'as a' are often used, e.g. \textit{Runs like a cheetah}, \textit{Slippery as an eel}.}
+\item{\textbf{Hyperbole}: unrealistic exaggeration, often used in tandem with metaphor e.g. \textit{Cried a river of tears}.}
+\item{\textbf{Powerful Verb}: a more exciting way to describe an action using unusual verbs, e.g. \textit{Wormed through the crowd}.}
 \end{itemize}
 
 \textbf{Major Purposes}
@@ -194,48 +197,47 @@ Techniques include:
 \item{Induce empathy from the reader by relating it to something they understand.}
 \end{itemize} 
 
-This paper attempts to detect use of metaphor and simile as well as reproduce it. However, the context around the use of the metaphor and simile is not considered, so they may not be generated at the most appropriate time. We do not consider Hyperbole and Powerful Verb as they are similar to Metaphor, but it is worth noting that they exist because including them should be an accessible extension for future work.
+This paper attempts to detect use of metaphor and simile as well as reproduce it. The pragmatics around the use of metaphor and simile will be considered, for example using the ocean to show power rather than the sun if the poem generally speaks of water. We do not consider Hyperbole and Powerful Verb as they are similar to Metaphor, but it is worth noting that they exist because including them should be an accessible extension for future work.
 
 \subsubsection{Pragmatics and Personification}
-Poetry is similar to storytelling in that it has characters around which the poem is written. Understanding who or what they are, their descriptions and their actions are all part of the underlying message that the poet wants to get across. This is the context of the poem.
-\\\\
-Personification is a technique used by poets to give inanimate objects life, expressing actions and descriptions as if it were human. This is a powerful technique that relates to imagery, helping poets make more abstract messages clearer. For example, 'the moon smiled' gives the moon life by describing it as having performed a human-like action with full intention of doing so. Noting the use of personification can make the context of the poem clearer, as often inanimate objects are the subject of the poem.
-\\\\
+Poetry is similar to storytelling in that it has characters around which the poem is written. Understanding who or what they are, their descriptions and their actions are all part of the underlying message that the poet wants to get across. This is the context of the poem and defining it is a pragmatics problem.
+
+Personification is a technique used by poets to give inanimate objects life, expressing actions and descriptions as if it were human. This is a powerful technique that relates to imagery, helping poets make more abstract messages clearer. For example, \textit{the moon smiled} gives the moon life by describing it as having performed a human-like action with full intention of doing so. Noting the use of personification can make the context of the poem clearer, as often inanimate objects are the subject of the poem.
+
 \textbf{Major Purposes}\\
 Context is the underlying message in its bare form. It is the story that the poet wishes to tell and guides the use of all other features.
-\\\\
+
 In this paper, we aim to extract characters and differentiate them by their descriptions and actions. This is vital in understanding the poem and can help us generalise the uses of features when attempting to produce a coherent story as the backbone to the generated poem. Furthermore, it will help determine the type of poem (narrative, lyrical, descriptive etc.) and will help guide generation of poems of a particular type. 
 
 \subsubsection{Theme}
 Theme is a very abstract term that is difficult to define. It can be thought of as the worldly context of the poem, often requiring better understanding and background knowledge of the poet. For example, Maya Angelou's \textit{I Know Why The Caged Bird Sings} is about oppression of African Americans during the time that she was alive. It was were way of helping readers empathise with her situation, by personifying a caged bird and the similarities she shares with it. The theme is therefore \textit{oppression}. However, without knowing Angelou's life situation, it would have been impossible to determine.
 
-Theme is beyond the scope of this project, both in interpretation of poetry and generation. However, we will attempt themes that can be summarised into a single word, often called topics. For example, we will try to emulate the styles of 'Love' poems or 'War' poems from the past. This will help give more meaning to the features described here and help in using them in the right context during the generation phase.
+Theme is beyond the scope of this project, both in interpretation of poetry and generation. However, we will attempt themes that can be summarised into a single word, which we will refer to as \textit{topics}. For example, we will try to emulate the styles of \textit{Love} poems or \textit{War} poems from given examples. This will help give more meaning to the features described here and help in using them in the right context during the generation phase.
 
 \subsection{Classification of Poetry}
 
 We define a type of poetry as a particular form of poem with a set of unique features, including those described in the previous section. Some types are very popular and have had their styles, features and purposes documented and taught. Out of these grew categories of different types that tend to be used for similar purposes.
 
-This project attempts to derive these categories and some popular types of poetry. They are discussed here.
+This project attempts to derive these categories and some popular types of poetry by analysing many comparable poems.
 
 \subsubsection{Categories}
 
 There are many types of poem all with different form. However, there are only three main categories of purpose for a poem:
 
 \begin{enumerate}
-\item{\textit{Lyrical} poems have an identifiable speaker whose thoughts and emotions are being expressed in the poem. This means that poems of this category have very few characters, a song-like structure and tends to be in a reflective tone, generally using a lot of symbolism. Maya Angelou's \textit{I Know Why The Caged Bird Sings} is an example of this, along with many songs.}
+\item{\textit{Lyrical} poems have an identifiable speaker whose thoughts and emotions are being expressed in the poem. This means that poems of this category have very few characters, a song-like structure and tend to be in a reflective tone, generally using a lot of symbolism. Maya Angelou's \textit{I Know Why The Caged Bird Sings} is an example of this, along with many songs.}
 \item{\textit{Descriptive} poems describe the surroundings of the speaker. This is identifiable by the use of adjectives and complex imagery. Many objects may appear in this type of poem to be able to give an in-depth description of the environment and atmosphere. There will be very few action verbs used.}
 \item{\textit{Narrative} poems concentrate on telling a story. It therefore has a coherent plot line, several characters with explicit relationships between them, action and climax. Ballads and Epics are types of narrative poems.}
-\item{Some popular poem types do not fall under any one bracket as they can be used in any of the above categories. Examples include Haikus and Limericks.}
 \end{enumerate}
 
-This project aims to be able to place any poem accurately into one of these categories.
+Some popular poem types do not fall under any one bracket as they can be used in any of the above categories. Examples include Haikus and Limericks. This project aims to be able to place any poem accurately into one of these categories.
 
 \subsubsection{Popular Types}
 As well as determining the category of poems, we aim to be able to detect and reproduce some popular types of poetry. For this project, we will concentrate on:
 \begin{itemize}
 \item{\textit{Haiku:} single tercet structure with 5-7-5 syllabic rhythm.}
 \item{\textit{Limerick:} single cinquain structure with AABBA rhyme scheme. Lines 1, 2 and 5 have 7-10 syllables, while lines 3 and 4 have 5-7 syllables. The first line tends to begin with "There was a..." and ending with a person or location. Limericks are usually used for humour as the last line is generally a punchline.}
-\item{\textit{Sonnet:} 14 lines, each in iambic pentameter with an ABABCDCDEFEFGG rhyme scheme, i.e. three quatrains followed by a rhyming couplet.}
+\item{\textit{Sonnet:} 14 lines, each in iambic pentameter with an ABAB CDCD EFEF GG rhyme scheme, i.e. three quatrains followed by a rhyming couplet.}
 \item{\textit{Elegy:} usually used to mourn the dead, its lines alternates between dactylic hexameter and pentameter in rhythm. It has no particular rhyme scheme, although does still use rhyme. }
 \item{\textit{Ode:} Description of a particular person or thing, using plenty of similes, metaphors and hyperbole.}
 \item{\textit{Ballad:} Tells a story and has a number of quatrains, each with an AABB rhyme scheme. Lines alternate between iambic tetrameter and iambic trimeter.}
@@ -244,46 +246,142 @@ As well as determining the category of poems, we aim to be able to detect and re
 \item{\textit{Free Verse:} No particular features attached to this type.}
 \end{itemize} 
 
-Some of these poems are harder to read and generate than others, particularly in terms of context. However, this selection covers the main features of poetry that we would like to address so it a good way to evaluate this project.
+Some of these poems are harder to read and generate than others, particularly in terms of pragmatics. However, this selection covers the main features of poetry that we would like to address so it a good way to evaluate this project.
 
 
 \section{Lessons from Related Work}
-Here we discuss and critique six important previous attempts that have all influenced this project.
+This section looks at six important previous attempts at automatic poetry generation. They each have some aspect of investigation or experimentation that we have learned from and have influenced this project. However, each of these attempts has its limitations that we look to overcome in this project.
 
 \subsection{Actively Gather Inspiration}
 
-Colton et al. published a paper in the International Conference of Computational Creativity 2012[ref], whose main objective was to describe the first poetry generation system that satisfied the FACE Descriptive model[ref]. It is a \textit{Form Aware}[ref] implementation that uses constructs templates of poems based on constraints of poetic features.
-\\\\
-The most interesting point of this paper was its admission that inspiration cannot come from the technology and must come from the user. By taking this into account, it now takes inspiration from news articles. However, since its objective was focused on passing a particular evaluation model, the poems created by this system are relatively simple and the processes rudimentary - using randomness rather than semantic applicability and coherent pragmatics.
+Colton et al. published a paper in the International Conference of Computational Creativity 2012[ref], whose main objective was to describe the first poetry generation system that satisfied the FACE Descriptive model[ref]. It is a \textit{Form Aware}[ref] implementation that constructs templates of poems based on constraints of poetic features. 
+
+\begin{figure}[h!]
+\begin{multicols}{2}
+It was generally a bad news day. I read an article in
+the Guardian entitled: “Police investigate alleged race
+hate crime in Rochdale”. Apparently, “Stringer-Prince,
+17, has undergone surgery following the attack on
+Saturday in which his skull, eye sockets and
+cheekbone were fractured” and “This was a
+completely unprovoked and relentless attack that has
+left both victims shocked by their ordeal”. I decided to
+focus on mood and lyricism, with an emphasis on
+syllables and matching line lengths, with very
+occasional rhyming. I like how words like attack and
+snake sound together. \columnbreak
+I wrote this poem.\\
+\textit{Relentless attack\\
+a glacier-relentless attack\\
+the wild unprovoked attack of a snake\\
+the wild relentless attack of a snake\\
+a relentless attack, like a glacier\\
+the high-level function of eye sockets\\
+a relentless attack, like a machine\\
+the low-level role of eye sockets\\
+a relentless attack, like the tick of a machine\\
+the high-level role of eye sockets\\
+a relentless attack, like a bloodhound
+}
+\end{multicols}
+\caption{The Guardian article used for inspiration(left) and the resulting poem(right).}
+\label{fig:face}
+\end{figure}
+
+The most interesting point of this paper was its admission that inspiration cannot come from the technology and must come from the user. By taking this into account, it now takes inspiration from news articles as seen in Figure \ref{fig:face}. However, since its objective was focused on passing a particular evaluation model, the poems created by this system are relatively simple and the processes rudimentary - using randomness rather than semantic applicability and coherent pragmatics.
 
 \subsection{Constrain to Improve Creativity}
+\label{sec:con}
+Recently, Toivanen et al. attempted a solution that used off-the-shelf constraint solvers[ref] to produce poetry. Their solution, illustrated in figure \ref{fig:con1}, also received inspiration from another source. This was then combined with other sources to build the set of candidate words, form requirements and content requirements. These were passed into a constraint solver with a manually encoded static constraint library powered by Answer Set Programming.
 
-Recently, Toivanen et al. attempted a solution that used off-the-shelf constraint solvers[ref] to produce poetry. Their solution, illustrated in figure blah, also received inspiration from another source. This was then combined with other sources to build the set of candidate words, form requirements and content requirements. These were passed into a constraint solver with a manually encoded static constraint library powered by Answer Set Programming.
-\\\\
-The idea that constraints do not hinder but rather help the creative process is an attractive one for computational creativity research. Constraining words and other requirements for each particular word position is a natural technique for constraint programming, but extremely restrictive. First, the size of each line must be defined by number of words \textit{and then} by rhythm and other poetic features. Secondly, once the candidate words are chosen there is no scope for further filtering. Finally, the structure of the poem in terms of its POS must be defined beforehand and is taken from previous poems of the same type. Even though this is an efficient method that has produced impressive results, it is too restricted to produce truly creative work.
+\begin{figure}[h!]
+\centering
+\includegraphics[width=140mm]{Constraint}
+\caption{Complete poetry composition workflow.}
+\label{fig:con1}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{multicols}{2}
+N SG VB, N SG VB, N SG VB!\\
+PR PS ADJ N PL ADJ PRE PR PS N SG:\\
+– C ADV, ADV ADV DT N SG PR VB!\\
+\columnbreak DT N SG PRE DT N PL PRE N SG!\\
+\textit{Music swells, accent practises, theatre hears!\\
+Her delighted epiphanies bent in her universe:\\
+– And then, singing directly a universe she disappears!\\
+An anthem in the judgements after verse!
+}
+\end{multicols}
+\caption{The POS template used for constraint input(left) and the resulting poem(right).}
+\label{fig:con2}
+\end{figure}
+
+The idea that constraints do not hinder but rather help the creative process is an attractive one for computational creativity research. Constraining words and other requirements for each particular word position is a natural technique for constraint programming, but extremely restrictive. First, the size of each line must be defined by number of words \textit{and then} by rhythm and other poetic features. Secondly, once the candidate words are chosen there is no scope for further filtering. Finally, the structure of the poem in terms of its POS must be defined beforehand and is taken from previous poems of the same type, as seen in Figure \ref{fig:con2}. Even though this is an efficient method that has produced impressive results, it is too restricted to produce truly creative work.
 
 \subsection{Learn from Experience}
 
 Ray Kurtzweil Cybernetic Poet (RKCP), created by Kurtzweil himself[ref], addresses the issue of having a predefined template. He uses a stochastic approach that takes advantage on n-grams to build lines from words. The system was trained on a selection of poems and created a template and n-gram corpus from those poems. RKCP would then be able to create similar types of poems. Algorithms were employed to ensure that poems were not exact copies of other poems and to maintain a coherent theme.
-\\\\
-This method is more flexible and has granular word selection. However, the vocabulary would still be limited and the form of the poem is not well defined due to being probabilistic. A specific purpose or storyline is not definable and the use of imagery is only probabilistic.
+
+\begin{figure}[h!]
+\centering
+\textit{
+Scattered sandals\\
+a call back to myself,\\
+so hollow I would echo.
+}
+\caption{A haiku written by Ray Kurzweil's Cybernetic Poet after reading poems by Kimberly McLauchlin and Ray Kurzweil}
+\label{fig:rkcp}
+\end{figure}
+
+This method is more flexible and has granular word selection. However, the vocabulary would still be limited and the form of the poem is not well defined due to being probabilistic. We can see that in Figure \ref{fig:rkcp}, the attempted Haiku has a syllabic rhythm is 4-6-7 as opposed to 5-7-5. A specific purpose or storyline is not definable and the use of imagery is only probabilistic. A lot also depends on the poems given as examples, limiting the pragmatic and semantic capabilities.
 
 
 \subsection{Choose Words Carefully}
+\label{sec:mcg}
 MCGONAGALL[ref] takes a flat semantic representation of what he calls semantic expressions as input into an NLG system. For example, the semantic expression of \textit{"John loves Mary"} would be\\ \textit{\{john(j), mary(m), love(l, j, m)\}}
-\\
+
 These are used as starting points for initialisation of his evolutionary system that uses stochastic methods to determine the best values to be carried forward to further iterations.
-\\\\
+
+\begin{figure}[h!]
+\centering
+\textit{
+They play. An expense is a waist.\\
+A lion, he dwells in a dish.\\
+He dwells in a skin.\\
+A sensitive child,\\
+he dwells in a child with a fish.\\
+}
+\caption{Resulting MCGONNAGAL poem when seeded with a couple of lines of Hilaire Belloc.}
+\label{fig:mcg}
+\end{figure}
+
 Of particular note is the structure of a lexical entry into the system. It is enriched with much semantic information that backs up the fitness score and helps MCGONAGALL form syntactically and semantically correct sentences. We will use much of his work in this area. However, pragmatism is still lacking because of the restrictions on evolution. It does not take particular types of poetry into account and there is little scope for creativity due to the strictness of grammar generated. 
 
 
 \subsection{Derive Insight from Worldly Knowledge}
-Tony Veale's daring approach to knowledge-based poetry generation[ref] concentrates on symbolism and imagery - arguably the hardest tasks in automatic poetry generation. He uses the theory of Mutual Knowledge through norms and stereotypes to build a structure that uses various words to describe objects and derive stereotypical characteristics. Out of this have grown two very useful third-part tools: Metaphor Magnet[ref] and Thesaurus Rex[ref]. We will not go into his methods of building this knowledge base here but I recommend the reader the article in the Fourth International Conference on Computational Creativity 2013[ref].
+Tony Veale's daring approach to knowledge-based poetry generation[ref] concentrates on symbolism and imagery - arguably the hardest tasks in automatic poetry generation. He uses the theory of Mutual Knowledge through norms and stereotypes to build a structure that uses various words to describe objects and derive stereotypical characteristics. Out of this grew a very useful tool: Metaphor Magnet[ref]. We will not go into his methods of building this knowledge base here but I recommend the reader the article in the Fourth International Conference on Computational Creativity 2013[ref].
 
-His methods have obvious limitations in that they do not consider rhyme, rhythm or any other poetic feature other than symbolism. However, we will take advantage of the tools that have been born out of his project to give this system more symbolic choices of words and phrases.
+\begin{figure}[h!]
+\centering
+\textit{
+My marriage is an emotional prison\\
+Barred visitors do marriages allow\\
+The most unitary collective scarcely organizes so much\\
+Intimidate me with the official regulation of your prison\\
+Let your sexual degradation charm me\\
+Did ever an offender go to a more oppressive prison?\\
+You confine me as securely as any locked prison cell\\
+Does any prison punish more harshly than this marriage?\\
+You punish me with your harsh security\\
+The most isolated prisons inflict the most difficult hardships\\
+O Marriage, you disgust me with your undesirable security\\
+}
+\caption{'The legalized regime of this marriage', a poetic view of marriage as a prison}
+\label{fig:veale}
+\end{figure}
 
-Knowledge Based: Less Rhyme, More Reason, \textit{Tony Veale} (Symbolic representations)
-
+His methods have obvious limitations in that they do not consider rhyme, rhythm or any other poetic feature other than symbolism. However, we will take advantage of the tools that have been born out of his project to give this system more symbolic choices of words and phrases as Figure \ref{fig:veale} shows that they are quite impressive.
 
 \subsection{Dare to be Different}
 WASP is one of the first attempts at an automatic poetry generator. It is a rule based system that takes a set of words, a set of verse patterns and returns a set of verses[ref]. It uses heuristics to guide the construction to fit structure, but no semantic limitations are enforced.
@@ -298,7 +396,7 @@ This has obvious limitations but Gervas does make a good point that poetry's cre
 
 \section{Brief Overview of Computational Creativity}
 Simon Colton and Geraint Wiggins, pioneers of Computational Creativity, define research in this area as: \\
-\textit{The philosophy, science and engineering of computational systems which, by taking on particular responsibilities, exhibit behaviours that unbiased observers would deem to be creative.}[ref]\\
+\textit{The philosophy, science and engineering of computational systems which, by taking on particular responsibilities, exhibit behaviours that unbiased observers would deem to be creative.}[ref]
 
 In the context of Automatic Poetry Generation, we are creating a system that is \textit{responsible} for generating aesthetically pleasing, meaningful and novel poems. The poems still need to be sufficiently similar to existing works created by humans such that it \textit{exhibits behaviour} to which \textit{unbiased observers} can relate and recognise.
 
@@ -306,74 +404,93 @@ This definition has evolved from one where behaviour was \textit{deemed creative
 
 This area of research has come under scrutiny for philosophical reasons, but has had support from Alan Turing and other pioneers of Artificial Intelligence[ref]. It has since been accepted as a valid area of research, with the annual International Conference on Computational Creativity heading into its fifth round.
 
-Other experiments in the area of Computational Creativity include:
+Successes of Computational Creativity:
 \begin{itemize}
-\item{Simon Colton's \textit{Painting Fool}[ref] produced paintings that managed to trick art lovers into believing that it was the work of a talented human artist. An example is given in Figure blah.}
+\item{Simon Colton's \textit{Painting Fool}[ref] produced paintings that managed to trick art lovers into believing that it was the work of a talented human artist. An example is given in Figure \ref{fig:chair}.}
 \item{\textit{JAPE}[ref], created by Ritchie and Binsted in 1994 was given a general, non-humorous lexicon and generated puns as answers to questions. For example:\\\textit{Q:What do you call a strange market?\\ A: A bizarre bazaar}}
-\item{\textit{Iamus} by Gustavo Diaz-Jerez[ref], which composed music entirely on its own that was then recorded by London Symphony Orchestra[ref]}
-%the policeman's beard is half constructed pdf
+\item{\textit{Iamus} by Gustavo Diaz-Jerez[ref], which composed music entirely on its own that was then recorded by London Symphony Orchestra}
+\item{\textit{The Policeman's Beard is Half Constructed}[ref] is recognised for being the first book, which included some poetry, to have been written entirely by a computer program, RACTER.}
 \end{itemize} 
-music
 
-Automatic poetry generation is a popular research problem in this area, as we will discuss in section blah.
+\begin{figure}[h!]
+\centering
+\includegraphics[width=100mm]{Chair}
+\caption{Chair \#17 at the Performing Sciences Exhibition, La Maison Rouge, Paris, Sept 2011}
+\label{fig:chair}
+\end{figure}
 %https://www.cs.helsinki.fi/webfm_send/571
 %http://computationalcreativity.net/iccc2014/wp-content/uploads/2013/09/ComputationalCreativity.pdf
 
 \section{Brief Overview of Computational Linguistics}
 Computational Linguistics is a wide area of research, covering Speech Recognition, Natural Language Processing and Generation and with overlaps in several other areas such as Machine Learning and Knowledge Representation. In fact, Daniel Jurafsky and James H. Martin needed almost a thousand pages to cover the foundations of this area[ref].
 
-Automatic Poetry Generation uses many lessons from Computational Linguistics. Here we will briefly discuss the major ones in general and in the context of machine poetry analysis and generation. For an in depth general study of Computational Linguistics, the refer the interested reader to [ref]
+Automatic Poetry Generation uses many lessons from Computational Linguistics. Here we will briefly discuss the major ones in general and in the context of machine poetry analysis and generation. For an in depth general study of Computational Linguistics, we refer the interested reader to [ref]
 %http://www.cse.iitk.ac.in/users/mohit/Speech-and-Language-Processing.pdf
 
 \subsection{Words}
 Words are the fundamental building blocks of language. They have been studied for creation of spell-checkers, text-to-speech synthesis and automatic speech recognition. Two major subsets that we are concerned with in poetry is the study of pronunciation and morphology. 
 
-The CMU Pronunciation Dictionary[ref] has taken the first steps towards computationally modeling the phonetics of words. It uses the ARPAbet phoneme set (see table blah) is highly important for poetry generation as it helps machines reason about rhyme and sound devices by simply comparing phonemes. It has over 133,000 words mapped to its corresponding pronunciation.
+The CMU Pronunciation Dictionary[ref] has taken the first steps towards computationally modeling the phonetics of words. It uses the ARPAbet phoneme set (see Table \ref{tab:arpa} in the appendix) is highly important for poetry generation as it helps machines reason about rhyme and sound devices by simply comparing phonemes. It has over 133,000 words mapped to its corresponding pronunciation.
 
 To illustrate how this works, let us take two words that are spelled differently but pronounced the same - \textit{kite} and \textit{height}. The Jaro-Winkler distance, a normalised score of similarity between strings, for the tail of these words (in search of rhyme) gives 51.11\%, indicating that it would be difficult for a machine to realise that they rhyme if it only looked at spelling. Their corresponding phoneme sets are \textit{'K AY T'} and \textit{'HH AY T} respectively. Now it is trivial to compare them and see that the tails are exactly the same and therefore rhyme.
 
 Morphology of words is the study of putting words together with morphemes, the smallest unit of grammar. To use Jarufsky and Martin's example[ref page 59], the word \textit{fox} consists of a single morpheme that is itself, but \textit{cats} has two morphemes, \textit{cat} and \textit{-s}. This is of vital importance in our project as we need to understand the difference between different forms of the same word and how they relate to context. Furthermore, when generating text we wish to produce coherent grammar with consistent tense and perspective.
 
 The CLiPS Pattern library has a number of tools for morphology of words. It provides a method of changing a word into its first, second or third person version, pluralisation and finding superlatives.[ref]
+
 %http://delivery.acm.org/10.1145/980000/972475/p313-marcus.pdf?ip=82.31.135.169&id=972475&acc=OPEN&key=BF13D071DEA4D3F3B0AA4BA89B4BCA5B&CFID=397642531&CFTOKEN=69509660&__acm__=1390858444_560bb7766479576772371b53b664bc15
 
 \subsection{Syntax}
 Syntax is the glue that binds words together. It gives us an understanding of the grammatical relationship between words and guides the building of phrases and sentences.
 
-Core to this area of research is part-of-speech (POS) analysis, which provides a model for grouping words together correctly, taking into account how words depend on each other. The big success story in this is The Penn Treebank, an enormous corpus of annotated POS information [ref]. Indeed this accelerated progress of research in the area, as the paper had planned. The tagset is given in table blah.
+Core to this area of research is \textit{part-of-speech (POS)} analysis, which provides a model for grouping words together correctly, taking into account how words depend on each other. The big success story in this is The Penn Treebank, an enormous corpus of annotated POS information [ref]. The full tagset is given in Table \ref{tab:penn} in the APPENDIX. Indeed this accelerated progress of research in the area, as the paper had planned. 
 
-From these POS tags, we are able to create Grammars (most commonly Context-Free), the structural rules of phrases and sentences, and parsers for those grammars to be able to extract grammatical structure from unstructured text.
+From these POS tags, we are able to create \textit{grammars}, the structural rules of phrases and sentences, and \textit{parsers} for those grammars to be able to extract grammatical structure from unstructured text.
+
+For example, the phrase \textit{John loves Mary} would be represented as in Figure \ref{fig:parse} if parsed with a grammar based on The Penn Treebank tagset.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=100mm]{Treebank}
+\caption{Parse tree of \textit{'John loves Mary'}}
+\label{fig:parse}
+\end{figure}
 
 Python's Natural Language Toolkit (NLTK)[ref] is a suite of text processing libraries, corpora and lexical resources that is heavily used in this project, particularly for syntactical purposes. It will allow us to use The Penn Treebank tags as well as produce our own grammar and parser that can be used to parse most poetry. This is a challenge because poetry does not follow grammatical rules as strictly as discourse. However, the gains will be that we can model the context of the poem, leading to better analysis of semantics and pragmatics of poetry.
 %http://www.postgradolinguistica.ucv.cl/dev/documentos/49,578,Noam%20Chomsky%20-%20Syntactic%20Structure.pdf
 
 \subsection{Semantics and Pragmatics}
-Chomsky used the famous example 'Colorless green ideas sleep furiously' as an illustration that a valid grammatical syntax can be completely nonsensical[ref]. This illustrates the importance of the study of semantics, the meaning of words and phrases, as well as pragmatics, the way context affects semantics.
+Chomsky used the famous example 'Colorless green ideas sleep furiously' to show that a valid grammatical syntax can be completely nonsensical[ref]. This illustrates the importance of the study of semantics, the meaning of words and phrases, as well as pragmatics, the way context affects semantics.
 
 This is yet another major challenge for poetry generation. Poems are concise but have many layers of meaning that are subtle even to human readers and that only the best of poets can fully control. The different categories of poems each have their own pragmatics and there is always a fundamental message and purpose supporting these layers meaning.
 
-If Chomsky's example were a line in a poem, a determined reader might read into this as old, locked-away, thoughts of monetary greed threatening to return. Or perhaps a completely different interpretation may arise depending on the reader.  Veale argues that this 'poetic licence' is not a licence but a contract that allows a speaker to take liberties in language in exchange for real insight. We must be careful not to abuse this by slewing unrelated words together and expecting the reader to do the work.
+If Chomsky's example were a line in a poem, a determined reader might read into this as old, locked-away, thoughts of monetary greed threatening to return. Or perhaps a completely different interpretation may arise depending on the reader.  Veale argues that this 'poetic licence' is not a licence but a contract that allows a speaker to take liberties in language in exchange for real insight[ref]. We must be careful not to abuse this by slewing unrelated words together and expecting the reader to do the work.
 
 Various methods of understanding semantics in natural language have been proposed. A very popular one is First Order Predicate Calculus. In particular, Hans Kamp proposes Discourse Representation Theory (DRT) as a way of modelling language in such a way. We use this theory in this project and will go into more depth in the next section.
 
-Johan Bos proposes that semantic analysis of text is where syntax analysis was 20 years ago, before The Penn Treebank [ref]. He and his team have begun the Groningen Meaning Bank (GMB) project[ref], a large semantically annotated corpus in lieu of The Penn Treebank, in the attempt to bring the same success and acceleration to this research field. They use DRTas the backbone to an assembly of third-party tools to annotate semantics.
+Johan Bos proposes that semantic analysis of text is where syntax analysis was 20 years ago, before The Penn Treebank [ref]. He and his team have begun the Groningen Meaning Bank (GMB) project[ref], a large semantically annotated corpus in lieu of The Penn Treebank, in the attempt to bring the same success and acceleration to this research field. They use DRTas the backbone to an assembly of third-party tools to annotate semantics, as can be seen in Figure \ref{fig:gmb}.
 
-However, the GMB project is still in early stages and has only annotated open license news articles[ref] up until now, which is not a suitable corpus for poetry generation. However, we will support the coordination of third-party tools and will consider using the following to boost the semantic and pragmatic skill of our poetry generator, particularly with regards to the problem of producing vivid imagery and pragmatic parsing:
+\begin{figure}[h!]
+\centering
+\includegraphics[width=100mm]{Groningen}
+\caption{Semantic structure of the sentence \textit{Smoking causes diseases.}}
+\label{fig:gmb}
+\end{figure}
+
+However, the GMB project is still in early stages and has only annotated open license news articles up until now, which is not a suitable corpus for poetry generation. However, we will support the coordination of third-party tools and will consider using the following to boost the semantic and pragmatic skill of our poetry generator, particularly with regards to the problem of producing vivid imagery and pragmatic parsing:
 \begin{itemize}
-\item{\textit{WordNet}: a lexical database that provides hierarchical, conceptual-semantic and lexical relations of 155,287 English words.}
-\item{\textit{VerbNet}: a lexical database that groups verbs by semantic and syntactic linking behaviour.}
-\item{\textit{FrameNet}: a lexicon with framing semantics to define and constrain the building of phrases around individual words.}
-\item{\textit{ACE}: a classification of Named Entity Recognition.}
-\item{\textit{PropBank}: an annotated corpus a million words defining and providing argument role labels for verbs}
-\item{\textit{NomBank}: similar to PropBank, but for nouns instead of verbs.}
-\item{\textit{Wordnik}: a multi-faceted dictionary and semantic language database collected from a variety of sources}
-\item{\textit{Metaphor Magnet}: a web application that maps commonplace metaphors in everyday texts}
-\item{\textit{Oxford Collocations Dictionary}: a source of word pairings and phrases that occur with greater than chance probability}
-\item{\textit{LinguaTools DISCO}: a tool to derive semantic similarity between words based on statistical analysis of large text collections}
-\item{\textit{ConceptNet 5}: a semantic general knowledge network}
-\item{\textit{Thesaurus Rex}: a monster thesaurus generated from web texts}
-\item{\textit{Written Sound}: a dictionary of onomatopoeia to their meanings and associated objects}
-\item{\textit{Feature Structure Grammars}: instead of CFG}
+\item{\textit{WordNet}: a lexical database that provides hierarchical, conceptual-semantic and lexical relations of 155,287 English words.[ref]}
+\item{\textit{VerbNet}: a lexical database that groups verbs by semantic and syntactic linking behaviour.[ref]}
+\item{\textit{FrameNet}: a lexicon with framing semantics to define and constrain the building of phrases around individual words.[ref]}
+\item{\textit{ACE}: a classification of Named Entity Recognition.[ref]}
+\item{\textit{PropBank}: an annotated corpus a million words defining and providing argument role labels for verbs[ref]}
+\item{\textit{NomBank}: similar to PropBank, but for nouns instead of verbs.[ref]}
+\item{\textit{Wordnik}: a multi-faceted dictionary and semantic language database collected from a variety of sources[ref]}
+\item{\textit{Metaphor Magnet}: a web application that maps commonplace metaphors in everyday texts[ref]}
+\item{\textit{Oxford Collocations Dictionary}: a source of word pairings and phrases that occur with greater than chance probability[ref]}
+\item{\textit{LinguaTools DISCO}: a tool to derive semantic similarity between words based on statistical analysis of large text collections[ref]}
+\item{\textit{ConceptNet 5}: a semantic general knowledge network[ref]}
+\item{\textit{Written Sound}: a dictionary of onomatopoeia to their meanings and associated objects[ref]}
 \end{itemize}
 
 Not all of these tools will be used in this project due to the limited scope. The selected few will be justified in the implementation section with regards to meeting the objectives of this paper. Others will be suggested for future extensions to this project.
@@ -381,36 +498,42 @@ Not all of these tools will be used in this project due to the limited scope. Th
 %http://www.let.rug.nl/bos/pubs/BasileBosEvangVenhuizen2012LREC.pdf
 
 \subsection{Discourse Representation Theory}
+\label{sec:drt}
 Discourse Representation Theory (DRT)[ref] is a framework for investigating semantics of natural language. DRT is becoming the accepted theory of meaning representation[ref] and is fundamental to the task of semantic modelling of natural language.
 
 Abstract mental representations of DRT are Discourse Representation Structures, or DRS. It is designed to be language neutral and combine meaning across sentences and coping with anaphora (e.g. pronouns in place of nouns). 
 
 Using Kamp's example, if we take the sentence \textit{A farmer owns a donkey} and convert it into a DRS, we get the following notation:\\
-\textit\{[x,y: farmer(x), donkey(y), own(x,y)]\}\\
+\textit\{[x,y: farmer(x), donkey(y), own(x,y)]\}
 
 If we then say \textit{He beats it.}, it will produce:\\
-\textit\{[x,y,z,w: farmer(x), donkey(y), own(x,y), PRO(z), PRO(w), beat(z,w)]\}.\\
+\textit\{[x,y,z,w: farmer(x), donkey(y), own(x,y), PRO(z), PRO(w), beat(z,w)]\}.
 
 We can then use anaphora resolution on this DRS to produce:\\
-\textit\{[x,y: farmer(x), donkey(y), own(x,y), beat(x,y)]\}\\
+\textit\{[x,y: farmer(x), donkey(y), own(x,y), beat(x,y)]\}
 
-We can see that this is similar to the notation used by Manurung in MCGONNAGAL, described in section blah.
+We can see that this is similar to the notation used by Manurung in MCGONNAGAL, described in section \ref{sec:mcg}.
 
 This method has evolved over the years to take tense and aspect into account, providing temporal reasoning in natural language sentences. Accuracy of anaphora and presupposition (e.g. saying 'animal' instead of 'cat') resolution has improved with the use of the third party tools mentioned earlier in combination with the ideas of Blackburn and Bos[ref].
 
-Extending this example, we may wish to model the sentence \textit{Every farmer who owns a donkey beats it.}. This sort of semantic problem is now known as \textit{Donkey Anaphora} thanks to this paper[ref]. DRT provides an elegant solution for this using first order logic style 'for all':\\
-\textit\{[x][y][farmer(x), donkey(y), own(x,y) -\textgreater beat(x,y)]\}\\
+Extending this example, we may wish to model the sentence \textit{Every farmer who owns a donkey beats it.}. DRT provides an elegant solution for this using first order logic style 'for all':\\
+\textit\{[x][y][farmer(x), donkey(y), own(x,y) -\textgreater beat(x,y)]\}
 
-This allows us to provide background knowledge to the system and make inferences on it. As a result of its usefulness in many applications, NLTK has included DRS manipulation and anaphora resolution into its core Semantics package[ref]. 
+This allows us to provide background knowledge to the system and make inferences on it. As a result of its usefulness in many applications, NLTK has included DRS manipulation and anaphora resolution into its core 'Sem' package. 
 
 In poetry, like any text, we can use this to analyse the semantics and pragmatics of the storyline. Furthermore, we hypothesis that it can be used to model each poetry type since they each have their own forms and purposes, and provide coherency to the story when generating text.
 %http://aclweb.org/anthology/W/W11/W11-2819.pdf
 %http://www.let.rug.nl/bos/pubs/BasileBosEvangVenhuizen2012LREC.pdf
 
 \subsection{Natural Language Generation}
-Natural Language Generation is the term for putting some non-linguistic form of content into understandable text in a human language. Reiter and Dale give the framework[ref] illustrated in figure blah for the process of generating natural language:
+Natural Language Generation is the term for putting some non-linguistic form of content into understandable text in a human language. Reiter and Dale give the framework[ref] illustrated in figure \ref{fig:nlg} for the process of generating natural language.
 
-%INSERT FIG 3 HERE
+\begin{figure}[h!]
+\centering
+\includegraphics[width=30mm]{NLG}
+\caption{Reiter and Dale Natural Language Generation process}
+\label{fig:nlg}
+\end{figure}
 
 A similar model was propsed by Bateman and Zock[ref], which includes four stages:
 \begin{enumerate}
@@ -420,9 +543,9 @@ A similar model was propsed by Bateman and Zock[ref], which includes four stages
 \item{\textit{Physical Presentation:} Final articulated text is presented.}
 \end{enumerate}
 
-These are theories upon which natural language generation tools, such as simpleNLG[ref] have been designed. There are others, such as grammar generation implemented by NLTK (similar to the one used in MCGONNAGAL) or the constraint programming technique used by Toivanen et al. explained in section blah, but we find that this process is not granular enough, jumping from the goal to the surface text without enough consideration for the individual words used.
+These are theories upon which natural language generation tools, such as simpleNLG[ref] have been designed. There are others, such as grammar generation implemented by NLTK (similar to the one used in MCGONNAGAL) or the constraint programming technique used by Toivanen et al. explained in section \ref{sec:con}, but we find that this process is not granular enough, jumping from the goal to the surface text without enough consideration for the individual words used.
 
-The inputs into this system can vary. One popular problem is raw numerical data into a textual summary. In our case, however, we look at symbolic representations of content in the form of a DRS. Basile and Bos[ref] argue that DRSs are appropriate for all stages of the Bateman and Zock example[ref]. Gardent and Kow have also proposed a symbolic approach to the Surface Realisation phase, working from first-order logic as the input form.
+The inputs into this system can vary. One popular problem is raw numerical data into a textual summary. In our case, however, we look at symbolic representations of content in the form of a DRS. Basile and Bos argue that DRSs are appropriate for all stages of the Bateman and Zock example[ref]. Gardent and Kow have also proposed a symbolic approach to the Surface Realisation phase, working from first-order logic as the input form.
 
 In this paper, we will look at using DRSs to guide the content, i.e. the Macro Planning stage. However, we feel it is restrictive to use it for Micro Planning, since it gives no scope the use of symbolic imagery, or Surface Realisation, as it forces grammatical perfection.
 
