@@ -1,4 +1,750 @@
-\begin{thebibliography}{0}
-\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 2.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
 
-\end{thebibliography}
+
+\refsection{0}
+  \sortlist{entry}{nty}
+    \entry{baker1998berkeley}{inproceedings}{}
+      \name{labelname}{3}{}{%
+        {{hash=a05f6dccc2782fe82991bad69864b53e}{Baker}{B\bibinitperiod}{Collin\bibnamedelima F}{C\bibinitperiod\bibinitdelim F\bibinitperiod}{}{}{}{}}%
+        {{hash=f252cc90e6a108aaca9a90b1d9cfad46}{Fillmore}{F\bibinitperiod}{Charles\bibnamedelima J}{C\bibinitperiod\bibinitdelim J\bibinitperiod}{}{}{}{}}%
+        {{hash=823115392a590131d017cf19ddef4312}{Lowe}{L\bibinitperiod}{John\bibnamedelima B}{J\bibinitperiod\bibinitdelim B\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{3}{}{%
+        {{hash=a05f6dccc2782fe82991bad69864b53e}{Baker}{B\bibinitperiod}{Collin\bibnamedelima F}{C\bibinitperiod\bibinitdelim F\bibinitperiod}{}{}{}{}}%
+        {{hash=f252cc90e6a108aaca9a90b1d9cfad46}{Fillmore}{F\bibinitperiod}{Charles\bibnamedelima J}{C\bibinitperiod\bibinitdelim J\bibinitperiod}{}{}{}{}}%
+        {{hash=823115392a590131d017cf19ddef4312}{Lowe}{L\bibinitperiod}{John\bibnamedelima B}{J\bibinitperiod\bibinitdelim B\bibinitperiod}{}{}{}{}}%
+      }
+      \list{organization}{1}{%
+        {Association for Computational Linguistics}%
+      }
+      \strng{namehash}{7f11ed7dc03e8b9e0bebbc2db423bc67}
+      \strng{fullhash}{7f11ed7dc03e8b9e0bebbc2db423bc67}
+      \field{sortinit}{B}
+      \field{labeltitle}{The berkeley framenet project}
+      \field{booktitle}{Proceedings of the 17th international conference on Computational linguistics-Volume 1}
+      \field{title}{The berkeley framenet project}
+      \field{year}{1998}
+      \field{pages}{86\bibrangedash 90}
+    \endentry
+    \entry{basile2011towards}{inproceedings}{}
+      \name{labelname}{2}{}{%
+        {{hash=1ed7a3568fca65839ab7d3e2f0b1b9d0}{Basile}{B\bibinitperiod}{Valerio}{V\bibinitperiod}{}{}{}{}}%
+        {{hash=f14668cfa2a37aeebf3deffcfed09acd}{Bos}{B\bibinitperiod}{Johan}{J\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{2}{}{%
+        {{hash=1ed7a3568fca65839ab7d3e2f0b1b9d0}{Basile}{B\bibinitperiod}{Valerio}{V\bibinitperiod}{}{}{}{}}%
+        {{hash=f14668cfa2a37aeebf3deffcfed09acd}{Bos}{B\bibinitperiod}{Johan}{J\bibinitperiod}{}{}{}{}}%
+      }
+      \list{organization}{1}{%
+        {Association for Computational Linguistics}%
+      }
+      \strng{namehash}{5c06158256f213c0443dd64277e2699a}
+      \strng{fullhash}{5c06158256f213c0443dd64277e2699a}
+      \field{sortinit}{B}
+      \field{labeltitle}{Towards generating text from discourse representation structures}
+      \field{booktitle}{Proceedings of the 13th European Workshop on Natural Language Generation}
+      \field{title}{Towards generating text from discourse representation structures}
+      \field{year}{2011}
+      \field{pages}{145\bibrangedash 150}
+    \endentry
+    \entry{BasileBosEvangVenhuizen2012LREC}{inproceedings}{}
+      \name{labelname}{4}{}{%
+        {{hash=1ed7a3568fca65839ab7d3e2f0b1b9d0}{Basile}{B\bibinitperiod}{Valerio}{V\bibinitperiod}{}{}{}{}}%
+        {{hash=f14668cfa2a37aeebf3deffcfed09acd}{Bos}{B\bibinitperiod}{Johan}{J\bibinitperiod}{}{}{}{}}%
+        {{hash=a45b4d1927bb0ea3a040dfe5d1f0d310}{Evang}{E\bibinitperiod}{Kilian}{K\bibinitperiod}{}{}{}{}}%
+        {{hash=8ea2e9ff6a70e9095ab8eb7fcf37bebe}{Venhuizen}{V\bibinitperiod}{Noortje}{N\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{4}{}{%
+        {{hash=1ed7a3568fca65839ab7d3e2f0b1b9d0}{Basile}{B\bibinitperiod}{Valerio}{V\bibinitperiod}{}{}{}{}}%
+        {{hash=f14668cfa2a37aeebf3deffcfed09acd}{Bos}{B\bibinitperiod}{Johan}{J\bibinitperiod}{}{}{}{}}%
+        {{hash=a45b4d1927bb0ea3a040dfe5d1f0d310}{Evang}{E\bibinitperiod}{Kilian}{K\bibinitperiod}{}{}{}{}}%
+        {{hash=8ea2e9ff6a70e9095ab8eb7fcf37bebe}{Venhuizen}{V\bibinitperiod}{Noortje}{N\bibinitperiod}{}{}{}{}}%
+      }
+      \list{location}{1}{%
+        {Istanbul, Turkey}%
+      }
+      \strng{namehash}{814979146aef37f23c0eb045a854b030}
+      \strng{fullhash}{7dacc59cce6e91feace59946ec41cbc5}
+      \field{sortinit}{B}
+      \field{labeltitle}{Developing a large semantically annotated corpus}
+      \field{booktitle}{Proceedings of the Eighth International Conference on Language Resources and Evaluation (LREC 2012)}
+      \field{title}{Developing a large semantically annotated corpus}
+      \field{year}{2012}
+      \field{pages}{3196\bibrangedash 3200}
+    \endentry
+    \entry{mitkov2003oxford}{book}{}
+      \name{labelname}{2}{}{%
+        {{hash=b1ec06c667c5c36b5a575172c1849e1a}{Bateman}{B\bibinitperiod}{John}{J\bibinitperiod}{}{}{}{}}%
+        {{hash=d6e0904de841cbacc7f553669b619344}{Zock}{Z\bibinitperiod}{Michael}{M\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{2}{}{%
+        {{hash=b1ec06c667c5c36b5a575172c1849e1a}{Bateman}{B\bibinitperiod}{John}{J\bibinitperiod}{}{}{}{}}%
+        {{hash=d6e0904de841cbacc7f553669b619344}{Zock}{Z\bibinitperiod}{Michael}{M\bibinitperiod}{}{}{}{}}%
+      }
+      \list{publisher}{1}{%
+        {Oxford University Press}%
+      }
+      \strng{namehash}{cc940d15b792ef67b1fd3cd84a93afaf}
+      \strng{fullhash}{cc940d15b792ef67b1fd3cd84a93afaf}
+      \field{sortinit}{B}
+      \field{labeltitle}{Oxford Handbook of Computational Linguistics}
+      \field{chapter}{15 Natural Language Generation}
+      \field{title}{Oxford Handbook of Computational Linguistics}
+      \field{year}{2003}
+    \endentry
+    \entry{binsted1997computational}{article}{}
+      \name{labelname}{2}{}{%
+        {{hash=1c09fe5b51670c056f20977502512da8}{Binsted}{B\bibinitperiod}{Kim}{K\bibinitperiod}{}{}{}{}}%
+        {{hash=0504ccf340a1c8204debb5ff8a1d3d56}{Ritchie}{R\bibinitperiod}{Graeme}{G\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{2}{}{%
+        {{hash=1c09fe5b51670c056f20977502512da8}{Binsted}{B\bibinitperiod}{Kim}{K\bibinitperiod}{}{}{}{}}%
+        {{hash=0504ccf340a1c8204debb5ff8a1d3d56}{Ritchie}{R\bibinitperiod}{Graeme}{G\bibinitperiod}{}{}{}{}}%
+      }
+      \list{publisher}{1}{%
+        {WALTER DE GRUYTER \& CO}%
+      }
+      \strng{namehash}{6c478705e5313b8f41b664953e2feef7}
+      \strng{fullhash}{6c478705e5313b8f41b664953e2feef7}
+      \field{sortinit}{B}
+      \field{labeltitle}{Computational rules for generating punning riddles}
+      \field{journaltitle}{Humor}
+      \field{number}{1}
+      \field{title}{Computational rules for generating punning riddles}
+      \field{volume}{10}
+      \field{year}{1997}
+      \field{pages}{25\bibrangedash 76}
+    \endentry
+    \entry{bird2009natural}{book}{}
+      \name{labelname}{3}{}{%
+        {{hash=a6ad72a87713a430f7335c5656da28f1}{Bird}{B\bibinitperiod}{Steven}{S\bibinitperiod}{}{}{}{}}%
+        {{hash=95e002ca584c2d8d701c96f08c6d589f}{Klein}{K\bibinitperiod}{Ewan}{E\bibinitperiod}{}{}{}{}}%
+        {{hash=2814798d9a65d66800fc6e2ec5ad7483}{Loper}{L\bibinitperiod}{Edward}{E\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{3}{}{%
+        {{hash=a6ad72a87713a430f7335c5656da28f1}{Bird}{B\bibinitperiod}{Steven}{S\bibinitperiod}{}{}{}{}}%
+        {{hash=95e002ca584c2d8d701c96f08c6d589f}{Klein}{K\bibinitperiod}{Ewan}{E\bibinitperiod}{}{}{}{}}%
+        {{hash=2814798d9a65d66800fc6e2ec5ad7483}{Loper}{L\bibinitperiod}{Edward}{E\bibinitperiod}{}{}{}{}}%
+      }
+      \list{publisher}{1}{%
+        {O'reilly}%
+      }
+      \strng{namehash}{f0999d1f539a44b08b01482038a721f8}
+      \strng{fullhash}{f0999d1f539a44b08b01482038a721f8}
+      \field{sortinit}{B}
+      \field{labeltitle}{Natural language processing with Python}
+      \field{title}{Natural language processing with Python}
+      \field{year}{2009}
+    \endentry
+    \entry{blackburn2008computational}{article}{}
+      \name{labelname}{2}{}{%
+        {{hash=14473cad2b160935933179834d7b5a2f}{Blackburn}{B\bibinitperiod}{Patrick}{P\bibinitperiod}{}{}{}{}}%
+        {{hash=f14668cfa2a37aeebf3deffcfed09acd}{Bos}{B\bibinitperiod}{Johan}{J\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{2}{}{%
+        {{hash=14473cad2b160935933179834d7b5a2f}{Blackburn}{B\bibinitperiod}{Patrick}{P\bibinitperiod}{}{}{}{}}%
+        {{hash=f14668cfa2a37aeebf3deffcfed09acd}{Bos}{B\bibinitperiod}{Johan}{J\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{b6138b2d97be0d46a85e22123573de22}
+      \strng{fullhash}{b6138b2d97be0d46a85e22123573de22}
+      \field{sortinit}{B}
+      \field{labeltitle}{Computational semantics}
+      \field{journaltitle}{THEORIA. An International Journal for Theory, History and Foundations of Science}
+      \field{number}{1}
+      \field{title}{Computational semantics}
+      \field{volume}{18}
+      \field{year}{2008}
+    \endentry
+    \entry{chamberlain1984policeman}{article}{}
+      \name{labelname}{2}{}{%
+        {{hash=43344480a874cac18cabab4ed5569b5a}{Chamberlain}{C\bibinitperiod}{William}{W\bibinitperiod}{}{}{}{}}%
+        {{hash=7cd170ab7d977afb70eaf0e9f6972313}{Etter}{E\bibinitperiod}{Thomas}{T\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{2}{}{%
+        {{hash=43344480a874cac18cabab4ed5569b5a}{Chamberlain}{C\bibinitperiod}{William}{W\bibinitperiod}{}{}{}{}}%
+        {{hash=7cd170ab7d977afb70eaf0e9f6972313}{Etter}{E\bibinitperiod}{Thomas}{T\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{dccde525737e57d6ece9e7a6b6b87ce2}
+      \strng{fullhash}{dccde525737e57d6ece9e7a6b6b87ce2}
+      \field{sortinit}{C}
+      \field{labeltitle}{The Policeman’s Beard is Half-Constructed: Computer Prose and Poetry}
+      \field{journaltitle}{Warner Software/Books, New York}
+      \field{title}{The Policeman’s Beard is Half-Constructed: Computer Prose and Poetry}
+      \field{year}{1984}
+    \endentry
+    \entry{chomsky2002syntactic}{book}{}
+      \name{labelname}{1}{}{%
+        {{hash=28167c0b3800bc5cfb686676277005b0}{Chomsky}{C\bibinitperiod}{Noam}{N\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{1}{}{%
+        {{hash=28167c0b3800bc5cfb686676277005b0}{Chomsky}{C\bibinitperiod}{Noam}{N\bibinitperiod}{}{}{}{}}%
+      }
+      \list{publisher}{1}{%
+        {Walter de Gruyter}%
+      }
+      \strng{namehash}{28167c0b3800bc5cfb686676277005b0}
+      \strng{fullhash}{28167c0b3800bc5cfb686676277005b0}
+      \field{sortinit}{C}
+      \field{labeltitle}{Syntactic structures}
+      \field{title}{Syntactic structures}
+      \field{year}{2002}
+    \endentry
+    \entry{colton2012painting}{incollection}{}
+      \name{labelname}{1}{}{%
+        {{hash=3cc72753508ea031bbab98dfcaf1d385}{Colton}{C\bibinitperiod}{Simon}{S\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{1}{}{%
+        {{hash=3cc72753508ea031bbab98dfcaf1d385}{Colton}{C\bibinitperiod}{Simon}{S\bibinitperiod}{}{}{}{}}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{3cc72753508ea031bbab98dfcaf1d385}
+      \strng{fullhash}{3cc72753508ea031bbab98dfcaf1d385}
+      \field{sortinit}{C}
+      \field{labeltitle}{The painting fool: Stories from building an automated painter}
+      \field{booktitle}{Computers and creativity}
+      \field{title}{The painting fool: Stories from building an automated painter}
+      \field{year}{2012}
+      \field{pages}{3\bibrangedash 38}
+    \endentry
+    \entry{colton2012full}{inproceedings}{}
+      \name{labelname}{3}{}{%
+        {{hash=3cc72753508ea031bbab98dfcaf1d385}{Colton}{C\bibinitperiod}{Simon}{S\bibinitperiod}{}{}{}{}}%
+        {{hash=60372d1144fb6d4f605cbb8804ce21a4}{Goodwin}{G\bibinitperiod}{Jacob}{J\bibinitperiod}{}{}{}{}}%
+        {{hash=d12d899d07d282dcfaee990e9149e241}{Veale}{V\bibinitperiod}{Tony}{T\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{3}{}{%
+        {{hash=3cc72753508ea031bbab98dfcaf1d385}{Colton}{C\bibinitperiod}{Simon}{S\bibinitperiod}{}{}{}{}}%
+        {{hash=60372d1144fb6d4f605cbb8804ce21a4}{Goodwin}{G\bibinitperiod}{Jacob}{J\bibinitperiod}{}{}{}{}}%
+        {{hash=d12d899d07d282dcfaee990e9149e241}{Veale}{V\bibinitperiod}{Tony}{T\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{dae700694e56edeb78274c49b7ca2c01}
+      \strng{fullhash}{dae700694e56edeb78274c49b7ca2c01}
+      \field{sortinit}{C}
+      \field{labeltitle}{Full face poetry generation}
+      \field{booktitle}{Proceedings of the Third International Conference on Computational Creativity}
+      \field{title}{Full face poetry generation}
+      \field{year}{2012}
+      \field{pages}{95\bibrangedash 102}
+    \endentry
+    \entry{colton2011computational}{inproceedings}{}
+      \name{labelname}{3}{}{%
+        {{hash=3cc72753508ea031bbab98dfcaf1d385}{Colton}{C\bibinitperiod}{Simon}{S\bibinitperiod}{}{}{}{}}%
+        {{hash=1eeab1e671509187ea3a212e48991efc}{Pease}{P\bibinitperiod}{A}{A\bibinitperiod}{}{}{}{}}%
+        {{hash=63e9c78c40c3ede362f0ac60a33559fc}{Charnley}{C\bibinitperiod}{J}{J\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{3}{}{%
+        {{hash=3cc72753508ea031bbab98dfcaf1d385}{Colton}{C\bibinitperiod}{Simon}{S\bibinitperiod}{}{}{}{}}%
+        {{hash=1eeab1e671509187ea3a212e48991efc}{Pease}{P\bibinitperiod}{A}{A\bibinitperiod}{}{}{}{}}%
+        {{hash=63e9c78c40c3ede362f0ac60a33559fc}{Charnley}{C\bibinitperiod}{J}{J\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{aa470e3fc2420122cb70dfb16312ba41}
+      \strng{fullhash}{aa470e3fc2420122cb70dfb16312ba41}
+      \field{sortinit}{C}
+      \field{labeltitle}{Computational creativity theory: The FACE and IDEA descriptive models}
+      \field{booktitle}{Proceedings of the Second International Conference on Computational Creativity}
+      \field{title}{Computational creativity theory: The FACE and IDEA descriptive models}
+      \field{year}{2011}
+    \endentry
+    \entry{colton2012computational}{inproceedings}{}
+      \name{labelname}{2}{}{%
+        {{hash=3cc72753508ea031bbab98dfcaf1d385}{Colton}{C\bibinitperiod}{Simon}{S\bibinitperiod}{}{}{}{}}%
+        {{hash=d565adbbd0075d5589e9afa4bbbf18b5}{Wiggins}{W\bibinitperiod}{Geraint\bibnamedelima A}{G\bibinitperiod\bibinitdelim A\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{2}{}{%
+        {{hash=3cc72753508ea031bbab98dfcaf1d385}{Colton}{C\bibinitperiod}{Simon}{S\bibinitperiod}{}{}{}{}}%
+        {{hash=d565adbbd0075d5589e9afa4bbbf18b5}{Wiggins}{W\bibinitperiod}{Geraint\bibnamedelima A}{G\bibinitperiod\bibinitdelim A\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{bc0a9d7925439a73145f3fbe0c920005}
+      \strng{fullhash}{bc0a9d7925439a73145f3fbe0c920005}
+      \field{sortinit}{C}
+      \field{labeltitle}{Computational Creativity: The Final Frontier?}
+      \field{booktitle}{ECAI}
+      \field{title}{Computational Creativity: The Final Frontier?}
+      \field{year}{2012}
+      \field{pages}{21\bibrangedash 26}
+    \endentry
+    \entry{crowther2003oxford}{book}{}
+      \name{labelname}{3}{}{%
+        {{hash=0d70b7f5bd38649843db2479da4d8bfb}{Crowther}{C\bibinitperiod}{Jonathan}{J\bibinitperiod}{}{}{}{}}%
+        {{hash=683139e7a812ebed9d6b97963222bc43}{Dignen}{D\bibinitperiod}{Sheila}{S\bibinitperiod}{}{}{}{}}%
+        {{hash=30aca6795e9ed6650bb56d387abb6bb3}{Lea}{L\bibinitperiod}{Diana}{D\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{3}{}{%
+        {{hash=0d70b7f5bd38649843db2479da4d8bfb}{Crowther}{C\bibinitperiod}{Jonathan}{J\bibinitperiod}{}{}{}{}}%
+        {{hash=683139e7a812ebed9d6b97963222bc43}{Dignen}{D\bibinitperiod}{Sheila}{S\bibinitperiod}{}{}{}{}}%
+        {{hash=30aca6795e9ed6650bb56d387abb6bb3}{Lea}{L\bibinitperiod}{Diana}{D\bibinitperiod}{}{}{}{}}%
+      }
+      \list{publisher}{2}{%
+        {Foreign Language Teaching}%
+        {Research Press}%
+      }
+      \strng{namehash}{fa7fc1813b86ff7b5732e164bd52073d}
+      \strng{fullhash}{fa7fc1813b86ff7b5732e164bd52073d}
+      \field{sortinit}{C}
+      \field{labeltitle}{Oxford Collocations Dictionary: For Students of English}
+      \field{title}{Oxford Collocations Dictionary: For Students of English}
+      \field{year}{2003}
+    \endentry
+    \entry{de2012pattern}{article}{}
+      \name{labelname}{2}{}{%
+        {{hash=228232ebcc92016d11200def64fb561b}{De\bibnamedelima Smedt}{D\bibinitperiod\bibinitdelim S\bibinitperiod}{Tom}{T\bibinitperiod}{}{}{}{}}%
+        {{hash=de80d83604a86dc9aff51ca1ce3069e6}{Daelemans}{D\bibinitperiod}{Walter}{W\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{2}{}{%
+        {{hash=228232ebcc92016d11200def64fb561b}{De\bibnamedelima Smedt}{D\bibinitperiod\bibinitdelim S\bibinitperiod}{Tom}{T\bibinitperiod}{}{}{}{}}%
+        {{hash=de80d83604a86dc9aff51ca1ce3069e6}{Daelemans}{D\bibinitperiod}{Walter}{W\bibinitperiod}{}{}{}{}}%
+      }
+      \list{publisher}{1}{%
+        {JMLR. org}%
+      }
+      \strng{namehash}{d7cc0613ff354246bb6239513e63a270}
+      \strng{fullhash}{d7cc0613ff354246bb6239513e63a270}
+      \field{sortinit}{D}
+      \field{labeltitle}{Pattern for python}
+      \field{journaltitle}{The Journal of Machine Learning Research}
+      \field{title}{Pattern for python}
+      \field{volume}{98888}
+      \field{year}{2012}
+      \field{pages}{2063\bibrangedash 2067}
+    \endentry
+    \entry{diaz2011composing}{article}{}
+      \name{labelname}{1}{}{%
+        {{hash=60f0007f8a11046c9aff834afd00b342}{Diaz-Jerez}{D\bibinithyphendelim J\bibinitperiod}{Gustavo}{G\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{1}{}{%
+        {{hash=60f0007f8a11046c9aff834afd00b342}{Diaz-Jerez}{D\bibinithyphendelim J\bibinitperiod}{Gustavo}{G\bibinitperiod}{}{}{}{}}%
+      }
+      \list{publisher}{1}{%
+        {MIT Press}%
+      }
+      \strng{namehash}{60f0007f8a11046c9aff834afd00b342}
+      \strng{fullhash}{60f0007f8a11046c9aff834afd00b342}
+      \field{sortinit}{D}
+      \field{labeltitle}{Composing with Melomics: Delving into the Computational World for Musical Inspiration}
+      \field{journaltitle}{Leonardo Music Journal}
+      \field{title}{Composing with Melomics: Delving into the Computational World for Musical Inspiration}
+      \field{volume}{21}
+      \field{year}{2011}
+      \field{pages}{13\bibrangedash 14}
+    \endentry
+    \entry{doddington2004automatic}{inproceedings}{}
+      \name{labelname}{6}{}{%
+        {{hash=8d09925b9e30e95137f3809f89ea14a3}{Doddington}{D\bibinitperiod}{George\bibnamedelima R}{G\bibinitperiod\bibinitdelim R\bibinitperiod}{}{}{}{}}%
+        {{hash=6f5c0663bc608f4a495c4b22bfc4a17f}{Mitchell}{M\bibinitperiod}{Alexis}{A\bibinitperiod}{}{}{}{}}%
+        {{hash=5340175291c7740f32aa93a5a65adb91}{Przybocki}{P\bibinitperiod}{Mark\bibnamedelima A}{M\bibinitperiod\bibinitdelim A\bibinitperiod}{}{}{}{}}%
+        {{hash=feecec5a1a7e8f2c4e69be99f9f2b45e}{Ramshaw}{R\bibinitperiod}{Lance\bibnamedelima A}{L\bibinitperiod\bibinitdelim A\bibinitperiod}{}{}{}{}}%
+        {{hash=4fc4ca7530db074565e25cfc7216d976}{Strassel}{S\bibinitperiod}{Stephanie}{S\bibinitperiod}{}{}{}{}}%
+        {{hash=e4a4ad35f605b566166c45dba567fb50}{Weischedel}{W\bibinitperiod}{Ralph\bibnamedelima M}{R\bibinitperiod\bibinitdelim M\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{6}{}{%
+        {{hash=8d09925b9e30e95137f3809f89ea14a3}{Doddington}{D\bibinitperiod}{George\bibnamedelima R}{G\bibinitperiod\bibinitdelim R\bibinitperiod}{}{}{}{}}%
+        {{hash=6f5c0663bc608f4a495c4b22bfc4a17f}{Mitchell}{M\bibinitperiod}{Alexis}{A\bibinitperiod}{}{}{}{}}%
+        {{hash=5340175291c7740f32aa93a5a65adb91}{Przybocki}{P\bibinitperiod}{Mark\bibnamedelima A}{M\bibinitperiod\bibinitdelim A\bibinitperiod}{}{}{}{}}%
+        {{hash=feecec5a1a7e8f2c4e69be99f9f2b45e}{Ramshaw}{R\bibinitperiod}{Lance\bibnamedelima A}{L\bibinitperiod\bibinitdelim A\bibinitperiod}{}{}{}{}}%
+        {{hash=4fc4ca7530db074565e25cfc7216d976}{Strassel}{S\bibinitperiod}{Stephanie}{S\bibinitperiod}{}{}{}{}}%
+        {{hash=e4a4ad35f605b566166c45dba567fb50}{Weischedel}{W\bibinitperiod}{Ralph\bibnamedelima M}{R\bibinitperiod\bibinitdelim M\bibinitperiod}{}{}{}{}}%
+      }
+      \list{organization}{1}{%
+        {Citeseer}%
+      }
+      \strng{namehash}{320476f924657862191646003beff0e5}
+      \strng{fullhash}{a9a1cbcc90cfc21056e52c004c8615ff}
+      \field{sortinit}{D}
+      \field{labeltitle}{The Automatic Content Extraction (ACE) Program-Tasks, Data, and Evaluation.}
+      \field{booktitle}{LREC}
+      \field{title}{The Automatic Content Extraction (ACE) Program-Tasks, Data, and Evaluation.}
+      \field{year}{2004}
+    \endentry
+    \entry{gatt2009simplenlg}{inproceedings}{}
+      \name{labelname}{2}{}{%
+        {{hash=cdf0f2d0f15f2dbac724c6ea5270b1b6}{Gatt}{G\bibinitperiod}{Albert}{A\bibinitperiod}{}{}{}{}}%
+        {{hash=37e7a1df94820369e2a868ad20514036}{Reiter}{R\bibinitperiod}{Ehud}{E\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{2}{}{%
+        {{hash=cdf0f2d0f15f2dbac724c6ea5270b1b6}{Gatt}{G\bibinitperiod}{Albert}{A\bibinitperiod}{}{}{}{}}%
+        {{hash=37e7a1df94820369e2a868ad20514036}{Reiter}{R\bibinitperiod}{Ehud}{E\bibinitperiod}{}{}{}{}}%
+      }
+      \list{organization}{1}{%
+        {Association for Computational Linguistics}%
+      }
+      \strng{namehash}{2b284d28f0766a5e67e712bee6f74585}
+      \strng{fullhash}{2b284d28f0766a5e67e712bee6f74585}
+      \field{sortinit}{G}
+      \field{labeltitle}{SimpleNLG: A realisation engine for practical applications}
+      \field{booktitle}{Proceedings of the 12th European Workshop on Natural Language Generation}
+      \field{title}{SimpleNLG: A realisation engine for practical applications}
+      \field{year}{2009}
+      \field{pages}{90\bibrangedash 93}
+    \endentry
+    \entry{gervas2000wasp}{inproceedings}{}
+      \name{labelname}{1}{}{%
+        {{hash=288ca42b0165841357fc00fcfa89c383}{Gervás}{G\bibinitperiod}{Pablo}{P\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{1}{}{%
+        {{hash=288ca42b0165841357fc00fcfa89c383}{Gervás}{G\bibinitperiod}{Pablo}{P\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{288ca42b0165841357fc00fcfa89c383}
+      \strng{fullhash}{288ca42b0165841357fc00fcfa89c383}
+      \field{sortinit}{G}
+      \field{labeltitle}{Wasp: Evaluation of different strategies for the automatic generation of spanish verse}
+      \field{booktitle}{Proceedings of the AISB-00 Symposium on Creative \& Cultural Aspects of AI}
+      \field{title}{Wasp: Evaluation of different strategies for the automatic generation of spanish verse}
+      \field{year}{2000}
+      \field{pages}{93\bibrangedash 100}
+    \endentry
+    \entry{jurafsky2000speech}{book}{}
+      \name{labelname}{5}{}{%
+        {{hash=3147296c99a3f829087becd1a4eaec08}{Jurafsky}{J\bibinitperiod}{Dan}{D\bibinitperiod}{}{}{}{}}%
+        {{hash=7d1c7262a31a89cbc5dbdeb95fd7b4fb}{Martin}{M\bibinitperiod}{James\bibnamedelima H}{J\bibinitperiod\bibinitdelim H\bibinitperiod}{}{}{}{}}%
+        {{hash=bd005b3ff0004f57635070da97c61a65}{Kehler}{K\bibinitperiod}{Andrew}{A\bibinitperiod}{}{}{}{}}%
+        {{hash=f27652a94a2694ef9e7da2b5e326e56b}{Vander\bibnamedelima Linden}{V\bibinitperiod\bibinitdelim L\bibinitperiod}{Keith}{K\bibinitperiod}{}{}{}{}}%
+        {{hash=1ce9aa4700f34378cb7678ada974ac83}{Ward}{W\bibinitperiod}{Nigel}{N\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{5}{}{%
+        {{hash=3147296c99a3f829087becd1a4eaec08}{Jurafsky}{J\bibinitperiod}{Dan}{D\bibinitperiod}{}{}{}{}}%
+        {{hash=7d1c7262a31a89cbc5dbdeb95fd7b4fb}{Martin}{M\bibinitperiod}{James\bibnamedelima H}{J\bibinitperiod\bibinitdelim H\bibinitperiod}{}{}{}{}}%
+        {{hash=bd005b3ff0004f57635070da97c61a65}{Kehler}{K\bibinitperiod}{Andrew}{A\bibinitperiod}{}{}{}{}}%
+        {{hash=f27652a94a2694ef9e7da2b5e326e56b}{Vander\bibnamedelima Linden}{V\bibinitperiod\bibinitdelim L\bibinitperiod}{Keith}{K\bibinitperiod}{}{}{}{}}%
+        {{hash=1ce9aa4700f34378cb7678ada974ac83}{Ward}{W\bibinitperiod}{Nigel}{N\bibinitperiod}{}{}{}{}}%
+      }
+      \list{publisher}{1}{%
+        {MIT Press}%
+      }
+      \strng{namehash}{b54aeb64c9e09184a85a84910f037e3c}
+      \strng{fullhash}{720648526f49e946f2c3eecf6c6ed83e}
+      \field{sortinit}{J}
+      \field{labeltitle}{Speech and language processing: An introduction to natural language processing, computational linguistics, and speech recognition}
+      \field{title}{Speech and language processing: An introduction to natural language processing, computational linguistics, and speech recognition}
+      \field{volume}{2}
+      \field{year}{2000}
+    \endentry
+    \entry{kamp1993discourse}{book}{}
+      \name{labelname}{2}{}{%
+        {{hash=179ad664ff3be57a74d5f809b819a1d8}{Kamp}{K\bibinitperiod}{Hans}{H\bibinitperiod}{}{}{}{}}%
+        {{hash=0cd59552e2fd004f3333ed0b02f3f9b9}{Reyle}{R\bibinitperiod}{Uwe}{U\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{2}{}{%
+        {{hash=179ad664ff3be57a74d5f809b819a1d8}{Kamp}{K\bibinitperiod}{Hans}{H\bibinitperiod}{}{}{}{}}%
+        {{hash=0cd59552e2fd004f3333ed0b02f3f9b9}{Reyle}{R\bibinitperiod}{Uwe}{U\bibinitperiod}{}{}{}{}}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{ad57875819b2dfea1c3a03468b30342c}
+      \strng{fullhash}{ad57875819b2dfea1c3a03468b30342c}
+      \field{sortinit}{K}
+      \field{labeltitle}{From discourse to logic: Introduction to modeltheoretic semantics of natural language, formal logic and discourse representation theory}
+      \field{number}{42}
+      \field{title}{From discourse to logic: Introduction to modeltheoretic semantics of natural language, formal logic and discourse representation theory}
+      \field{year}{1993}
+    \endentry
+    \entry{kingsbury2002treebank}{inproceedings}{}
+      \name{labelname}{2}{}{%
+        {{hash=12ceffa2eafb411af62437e14885eafa}{Kingsbury}{K\bibinitperiod}{Paul}{P\bibinitperiod}{}{}{}{}}%
+        {{hash=8c92d21f9aded31210d396bfc368310b}{Palmer}{P\bibinitperiod}{Martha}{M\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{2}{}{%
+        {{hash=12ceffa2eafb411af62437e14885eafa}{Kingsbury}{K\bibinitperiod}{Paul}{P\bibinitperiod}{}{}{}{}}%
+        {{hash=8c92d21f9aded31210d396bfc368310b}{Palmer}{P\bibinitperiod}{Martha}{M\bibinitperiod}{}{}{}{}}%
+      }
+      \list{organization}{1}{%
+        {Citeseer}%
+      }
+      \strng{namehash}{59260134bfa68f0e3a95924f3bc76841}
+      \strng{fullhash}{59260134bfa68f0e3a95924f3bc76841}
+      \field{sortinit}{K}
+      \field{labeltitle}{From TreeBank to PropBank.}
+      \field{booktitle}{LREC}
+      \field{title}{From TreeBank to PropBank.}
+      \field{year}{2002}
+    \endentry
+    \entry{kolb2008disco}{article}{}
+      \name{labelname}{1}{}{%
+        {{hash=8aba42171522a6c2221a8d59797cbaed}{Kolb}{K\bibinitperiod}{Peter}{P\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{1}{}{%
+        {{hash=8aba42171522a6c2221a8d59797cbaed}{Kolb}{K\bibinitperiod}{Peter}{P\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{8aba42171522a6c2221a8d59797cbaed}
+      \strng{fullhash}{8aba42171522a6c2221a8d59797cbaed}
+      \field{sortinit}{K}
+      \field{labeltitle}{Disco: A multilingual database of distributionally similar words}
+      \field{journaltitle}{Proceedings of KONVENS-2008, Berlin}
+      \field{title}{Disco: A multilingual database of distributionally similar words}
+      \field{year}{2008}
+    \endentry
+    \entry{kurzweil1999ray}{article}{}
+      \name{labelname}{1}{}{%
+        {{hash=0adc9b7df5d54aca253a97676a4f9ee3}{Kurzweil}{K\bibinitperiod}{Ray}{R\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{1}{}{%
+        {{hash=0adc9b7df5d54aca253a97676a4f9ee3}{Kurzweil}{K\bibinitperiod}{Ray}{R\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{0adc9b7df5d54aca253a97676a4f9ee3}
+      \strng{fullhash}{0adc9b7df5d54aca253a97676a4f9ee3}
+      \field{sortinit}{K}
+      \field{labeltitle}{Ray kurzweil’s cybernetic poet}
+      \field{journaltitle}{CyberArt Technologies}
+      \field{title}{Ray kurzweil’s cybernetic poet}
+      \field{year}{1999}
+    \endentry
+    \entry{liu2004conceptnet}{article}{}
+      \name{labelname}{2}{}{%
+        {{hash=d5780dd92459a9f90b55eb3ae726a4f9}{Liu}{L\bibinitperiod}{Hugo}{H\bibinitperiod}{}{}{}{}}%
+        {{hash=c08ca73548ff4fb2841dbc2b8255f421}{Singh}{S\bibinitperiod}{Push}{P\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{2}{}{%
+        {{hash=d5780dd92459a9f90b55eb3ae726a4f9}{Liu}{L\bibinitperiod}{Hugo}{H\bibinitperiod}{}{}{}{}}%
+        {{hash=c08ca73548ff4fb2841dbc2b8255f421}{Singh}{S\bibinitperiod}{Push}{P\bibinitperiod}{}{}{}{}}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{ec3ebb686d207125ae3e84563e0c4231}
+      \strng{fullhash}{ec3ebb686d207125ae3e84563e0c4231}
+      \field{sortinit}{L}
+      \field{labeltitle}{ConceptNet—a practical commonsense reasoning tool-kit}
+      \field{journaltitle}{BT technology journal}
+      \field{number}{4}
+      \field{title}{ConceptNet—a practical commonsense reasoning tool-kit}
+      \field{volume}{22}
+      \field{year}{2004}
+      \field{pages}{211\bibrangedash 226}
+    \endentry
+    \entry{manurung2004evolutionary}{article}{}
+      \name{labelname}{1}{}{%
+        {{hash=b0749b078b0f2c9389a85ab9ca0b56a3}{Manurung}{M\bibinitperiod}{Hisar}{H\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{1}{}{%
+        {{hash=b0749b078b0f2c9389a85ab9ca0b56a3}{Manurung}{M\bibinitperiod}{Hisar}{H\bibinitperiod}{}{}{}{}}%
+      }
+      \list{publisher}{2}{%
+        {University of Edinburgh. College of Science}%
+        {Engineering. School of Informatics.}%
+      }
+      \strng{namehash}{b0749b078b0f2c9389a85ab9ca0b56a3}
+      \strng{fullhash}{b0749b078b0f2c9389a85ab9ca0b56a3}
+      \field{sortinit}{M}
+      \field{labeltitle}{An evolutionary algorithm approach to poetry generation}
+      \field{title}{An evolutionary algorithm approach to poetry generation}
+      \field{year}{2004}
+    \endentry
+    \entry{marcus1993building}{article}{}
+      \name{labelname}{3}{}{%
+        {{hash=a84230895aa53cc0ddcebd83c1386ec1}{Marcus}{M\bibinitperiod}{Mitchell\bibnamedelima P}{M\bibinitperiod\bibinitdelim P\bibinitperiod}{}{}{}{}}%
+        {{hash=70c3bd2fb69d1b113d0d84c8f65670d5}{Marcinkiewicz}{M\bibinitperiod}{Mary\bibnamedelima Ann}{M\bibinitperiod\bibinitdelim A\bibinitperiod}{}{}{}{}}%
+        {{hash=1a6b1a60e440837f7e64b04d28996d76}{Santorini}{S\bibinitperiod}{Beatrice}{B\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{3}{}{%
+        {{hash=a84230895aa53cc0ddcebd83c1386ec1}{Marcus}{M\bibinitperiod}{Mitchell\bibnamedelima P}{M\bibinitperiod\bibinitdelim P\bibinitperiod}{}{}{}{}}%
+        {{hash=70c3bd2fb69d1b113d0d84c8f65670d5}{Marcinkiewicz}{M\bibinitperiod}{Mary\bibnamedelima Ann}{M\bibinitperiod\bibinitdelim A\bibinitperiod}{}{}{}{}}%
+        {{hash=1a6b1a60e440837f7e64b04d28996d76}{Santorini}{S\bibinitperiod}{Beatrice}{B\bibinitperiod}{}{}{}{}}%
+      }
+      \list{publisher}{1}{%
+        {MIT Press}%
+      }
+      \strng{namehash}{470c508d9ea954e77d766b921b4c4bb7}
+      \strng{fullhash}{470c508d9ea954e77d766b921b4c4bb7}
+      \field{sortinit}{M}
+      \field{labeltitle}{Building a large annotated corpus of English: The Penn Treebank}
+      \field{journaltitle}{Computational linguistics}
+      \field{number}{2}
+      \field{title}{Building a large annotated corpus of English: The Penn Treebank}
+      \field{volume}{19}
+      \field{year}{1993}
+      \field{pages}{313\bibrangedash 330}
+    \endentry
+    \entry{meyers2004nombank}{inproceedings}{}
+      \name{labelname}{7}{}{%
+        {{hash=8db53bf15e056087d6a4c09bdcc39786}{Meyers}{M\bibinitperiod}{Adam}{A\bibinitperiod}{}{}{}{}}%
+        {{hash=2931aa230bad241015c0cb145ec513f1}{Reeves}{R\bibinitperiod}{Ruth}{R\bibinitperiod}{}{}{}{}}%
+        {{hash=27e9b5e6bf56a38712f0cb22a15a70cc}{Macleod}{M\bibinitperiod}{Catherine}{C\bibinitperiod}{}{}{}{}}%
+        {{hash=1b56bf9ba42482e49856d497d2a9f051}{Szekely}{S\bibinitperiod}{Rachel}{R\bibinitperiod}{}{}{}{}}%
+        {{hash=e68de0440ea9673c92d1ec8e13604114}{Zielinska}{Z\bibinitperiod}{Veronika}{V\bibinitperiod}{}{}{}{}}%
+        {{hash=1ef5f7fab58cc5750f741e9fb5f16cdb}{Young}{Y\bibinitperiod}{Brian}{B\bibinitperiod}{}{}{}{}}%
+        {{hash=3d96e426faa039bfa33eb6e4c54e8a77}{Grishman}{G\bibinitperiod}{Ralph}{R\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{7}{}{%
+        {{hash=8db53bf15e056087d6a4c09bdcc39786}{Meyers}{M\bibinitperiod}{Adam}{A\bibinitperiod}{}{}{}{}}%
+        {{hash=2931aa230bad241015c0cb145ec513f1}{Reeves}{R\bibinitperiod}{Ruth}{R\bibinitperiod}{}{}{}{}}%
+        {{hash=27e9b5e6bf56a38712f0cb22a15a70cc}{Macleod}{M\bibinitperiod}{Catherine}{C\bibinitperiod}{}{}{}{}}%
+        {{hash=1b56bf9ba42482e49856d497d2a9f051}{Szekely}{S\bibinitperiod}{Rachel}{R\bibinitperiod}{}{}{}{}}%
+        {{hash=e68de0440ea9673c92d1ec8e13604114}{Zielinska}{Z\bibinitperiod}{Veronika}{V\bibinitperiod}{}{}{}{}}%
+        {{hash=1ef5f7fab58cc5750f741e9fb5f16cdb}{Young}{Y\bibinitperiod}{Brian}{B\bibinitperiod}{}{}{}{}}%
+        {{hash=3d96e426faa039bfa33eb6e4c54e8a77}{Grishman}{G\bibinitperiod}{Ralph}{R\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{29c8c453d9db06b2d79551816c7ab835}
+      \strng{fullhash}{3ded99544279a1495b3db83b11aa282a}
+      \field{sortinit}{M}
+      \field{labeltitle}{The NomBank project: An interim report}
+      \field{booktitle}{HLT-NAACL 2004 workshop: Frontiers in corpus annotation}
+      \field{title}{The NomBank project: An interim report}
+      \field{year}{2004}
+      \field{pages}{24\bibrangedash 31}
+    \endentry
+    \entry{miller1995wordnet}{article}{}
+      \name{labelname}{1}{}{%
+        {{hash=707b823abf497389dc012bbdc891b57b}{Miller}{M\bibinitperiod}{George\bibnamedelima A}{G\bibinitperiod\bibinitdelim A\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{1}{}{%
+        {{hash=707b823abf497389dc012bbdc891b57b}{Miller}{M\bibinitperiod}{George\bibnamedelima A}{G\bibinitperiod\bibinitdelim A\bibinitperiod}{}{}{}{}}%
+      }
+      \list{publisher}{1}{%
+        {ACM}%
+      }
+      \strng{namehash}{707b823abf497389dc012bbdc891b57b}
+      \strng{fullhash}{707b823abf497389dc012bbdc891b57b}
+      \field{sortinit}{M}
+      \field{labeltitle}{WordNet: a lexical database for English}
+      \field{journaltitle}{Communications of the ACM}
+      \field{number}{11}
+      \field{title}{WordNet: a lexical database for English}
+      \field{volume}{38}
+      \field{year}{1995}
+      \field{pages}{39\bibrangedash 41}
+    \endentry
+    \entry{reiter2000building}{book}{}
+      \name{labelname}{2}{}{%
+        {{hash=37e7a1df94820369e2a868ad20514036}{Reiter}{R\bibinitperiod}{Ehud}{E\bibinitperiod}{}{}{}{}}%
+        {{hash=18b9bad1514d667a06f7114e513d26d3}{Dale}{D\bibinitperiod}{Robert}{R\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{2}{}{%
+        {{hash=37e7a1df94820369e2a868ad20514036}{Reiter}{R\bibinitperiod}{Ehud}{E\bibinitperiod}{}{}{}{}}%
+        {{hash=18b9bad1514d667a06f7114e513d26d3}{Dale}{D\bibinitperiod}{Robert}{R\bibinitperiod}{}{}{}{}}%
+      }
+      \list{publisher}{1}{%
+        {MIT Press}%
+      }
+      \strng{namehash}{d2a82f6cc20d2fc8df24cc75515e4b2c}
+      \strng{fullhash}{d2a82f6cc20d2fc8df24cc75515e4b2c}
+      \field{sortinit}{R}
+      \field{labeltitle}{Building natural language generation systems}
+      \field{title}{Building natural language generation systems}
+      \field{volume}{152}
+      \field{year}{2000}
+    \endentry
+    \entry{schuler2005verbnet}{article}{}
+      \name{labelname}{1}{}{%
+        {{hash=42e5f69e2a89434b570590b855eefbde}{Schuler}{S\bibinitperiod}{Karin\bibnamedelima Kipper}{K\bibinitperiod\bibinitdelim K\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{1}{}{%
+        {{hash=42e5f69e2a89434b570590b855eefbde}{Schuler}{S\bibinitperiod}{Karin\bibnamedelima Kipper}{K\bibinitperiod\bibinitdelim K\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{42e5f69e2a89434b570590b855eefbde}
+      \strng{fullhash}{42e5f69e2a89434b570590b855eefbde}
+      \field{sortinit}{S}
+      \field{labeltitle}{VerbNet: A broad-coverage, comprehensive verb lexicon}
+      \field{title}{VerbNet: A broad-coverage, comprehensive verb lexicon}
+      \field{year}{2005}
+    \endentry
+    \entry{toivanen2013harnessing}{inproceedings}{}
+      \name{labelname}{3}{}{%
+        {{hash=90d66b9726dd20a3aab2cc85883e3526}{Toivanen}{T\bibinitperiod}{Jukka\bibnamedelima M}{J\bibinitperiod\bibinitdelim M\bibinitperiod}{}{}{}{}}%
+        {{hash=69144522e80cc3f0d70e7014afbfc072}{Järvisalo}{J\bibinitperiod}{Matti}{M\bibinitperiod}{}{}{}{}}%
+        {{hash=6f6200005b70c14db424245927d50f09}{Toivonen}{T\bibinitperiod}{Hannu}{H\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{3}{}{%
+        {{hash=90d66b9726dd20a3aab2cc85883e3526}{Toivanen}{T\bibinitperiod}{Jukka\bibnamedelima M}{J\bibinitperiod\bibinitdelim M\bibinitperiod}{}{}{}{}}%
+        {{hash=69144522e80cc3f0d70e7014afbfc072}{Järvisalo}{J\bibinitperiod}{Matti}{M\bibinitperiod}{}{}{}{}}%
+        {{hash=6f6200005b70c14db424245927d50f09}{Toivonen}{T\bibinitperiod}{Hannu}{H\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{487ef06aa200d2b37505479fda921dca}
+      \strng{fullhash}{487ef06aa200d2b37505479fda921dca}
+      \field{sortinit}{T}
+      \field{labeltitle}{Harnessing Constraint Programming for Poetry Composition}
+      \field{booktitle}{Proceedings of the Fourth International Conference on Computational Creativity}
+      \field{title}{Harnessing Constraint Programming for Poetry Composition}
+      \field{year}{2013}
+      \field{pages}{160}
+    \endentry
+    \entry{veale2013less}{inproceedings}{}
+      \name{labelname}{1}{}{%
+        {{hash=d12d899d07d282dcfaee990e9149e241}{Veale}{V\bibinitperiod}{Tony}{T\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{1}{}{%
+        {{hash=d12d899d07d282dcfaee990e9149e241}{Veale}{V\bibinitperiod}{Tony}{T\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{d12d899d07d282dcfaee990e9149e241}
+      \strng{fullhash}{d12d899d07d282dcfaee990e9149e241}
+      \field{sortinit}{V}
+      \field{labeltitle}{Less Rhyme, More Reason: Knowledge-based Poetry Generation with Feeling, Insight and Wit}
+      \field{booktitle}{Proceedings of the Fourth International Conference on Computational Creativity}
+      \field{title}{Less Rhyme, More Reason: Knowledge-based Poetry Generation with Feeling, Insight and Wit}
+      \field{year}{2013}
+      \field{pages}{152}
+    \endentry
+    \entry{vealespecifying}{article}{}
+      \name{labelname}{2}{}{%
+        {{hash=d12d899d07d282dcfaee990e9149e241}{Veale}{V\bibinitperiod}{Tony}{T\bibinitperiod}{}{}{}{}}%
+        {{hash=21f97dd8338200783a5920fbe63f31d2}{Li}{L\bibinitperiod}{Guofu}{G\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{2}{}{%
+        {{hash=d12d899d07d282dcfaee990e9149e241}{Veale}{V\bibinitperiod}{Tony}{T\bibinitperiod}{}{}{}{}}%
+        {{hash=21f97dd8338200783a5920fbe63f31d2}{Li}{L\bibinitperiod}{Guofu}{G\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{06ddc8efe2461537c9970f27c90ba381}
+      \strng{fullhash}{06ddc8efe2461537c9970f27c90ba381}
+      \field{sortinit}{V}
+      \field{labeltitle}{Specifying Viewpoint and Information Need with Affective Metaphors}
+      \field{title}{Specifying Viewpoint and Information Need with Affective Metaphors}
+    \endentry
+    \entry{weide1998cmu}{misc}{}
+      \name{labelname}{1}{}{%
+        {{hash=00dccd6b63900478b884f654da208cf4}{Weide}{W\bibinitperiod}{R}{R\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{1}{}{%
+        {{hash=00dccd6b63900478b884f654da208cf4}{Weide}{W\bibinitperiod}{R}{R\bibinitperiod}{}{}{}{}}%
+      }
+      \list{publisher}{1}{%
+        {Carnegie Mellon University}%
+      }
+      \strng{namehash}{00dccd6b63900478b884f654da208cf4}
+      \strng{fullhash}{00dccd6b63900478b884f654da208cf4}
+      \field{sortinit}{W}
+      \field{labeltitle}{The CMU pronunciation dictionary, release 0.6}
+      \field{title}{The CMU pronunciation dictionary, release 0.6}
+      \field{year}{1998}
+    \endentry
+    \entry{wiggins2006searching}{article}{}
+      \name{labelname}{1}{}{%
+        {{hash=d565adbbd0075d5589e9afa4bbbf18b5}{Wiggins}{W\bibinitperiod}{Geraint\bibnamedelima A}{G\bibinitperiod\bibinitdelim A\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{1}{}{%
+        {{hash=d565adbbd0075d5589e9afa4bbbf18b5}{Wiggins}{W\bibinitperiod}{Geraint\bibnamedelima A}{G\bibinitperiod\bibinitdelim A\bibinitperiod}{}{}{}{}}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{d565adbbd0075d5589e9afa4bbbf18b5}
+      \strng{fullhash}{d565adbbd0075d5589e9afa4bbbf18b5}
+      \field{sortinit}{W}
+      \field{labeltitle}{Searching for computational creativity}
+      \field{journaltitle}{New Generation Computing}
+      \field{number}{3}
+      \field{title}{Searching for computational creativity}
+      \field{volume}{24}
+      \field{year}{2006}
+      \field{pages}{209\bibrangedash 222}
+    \endentry
+  \endsortlist
+\endrefsection
+\endinput
+

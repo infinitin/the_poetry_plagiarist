@@ -53,7 +53,8 @@
 \titlespacing*{\chapter}{0pt}{-60pt}{20pt}
 \titleformat{\chapter}[display]{\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge}
 \usepackage{multicol}
-\usepackage{cite}
+%\usepackage{cite}
+\usepackage[utf8]{inputenc}
 \usepackage{listings}
 \usepackage{color}
 \lstset{frame=tb,
@@ -68,6 +69,9 @@
   breakatwhitespace=true
   tabsize=2
 }
+
+\addbibresource{References/poetry_references.bib}
+\nocite{*}
 
 \begin{document}
 
@@ -129,9 +133,10 @@
 
 %\bibliographystyle{plainnat}
 %\bibliographystyle{Classes/CUEDbiblio}
-\bibliographystyle{Classes/jmb}
-%\bibliographystyle{Classes/jmb} % bibliography style
-\renewcommand{\bibname}{References} % changes default name Bibliography to References
-\bibliography{References/references} % References file
+%\bibliographystyle{Classes/jmb}
+%\bibliographystyle{Classes/jmb} %
+\printbibliography[title={References}]
+%\renewcommand{\bibname}{References} % changes default name Bibliography to References
+%\bibliography{References/references} % References file
 
 \end{document}

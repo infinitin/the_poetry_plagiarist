@@ -46,7 +46,7 @@
 \usepackage[english]{babel}
 \usepackage[usenames, dvipsnames]{color}
 \usepackage[perpage]{footmisc}
-\usepackage[square, sort, numbers, authoryear]{natbib}
+\usepackage[style=numeric,backend=biber]{biblatex}
 \usepackage{ifthen}
 \usepackage{ifpdf}
 \usepackage{pgfplots}
@@ -95,7 +95,7 @@
                  bookmarksnumbered = true,
                  breaklinks = true,
                  linktocpage,
-                 pagebackref,
+                 %pagebackref,
                  colorlinks = true,
                  linkcolor = blue,
                  urlcolor  = blue,
@@ -105,7 +105,7 @@
                  hyperfigures
                  ]{hyperref} 
     %\usepackage[pdftex]{graphicx}
-    \DeclareGraphicsExtensions{.png, .jpg, .pdf}
+    \DeclareGraphicsExtensions{.png, .jpg, .pdf, .jpeg}
 
     \pdfcompresslevel=9
     \graphicspath{{ThesisFigs/PNG/}{ThesisFigs/PDF/}{ThesisFigs/}}
@@ -116,7 +116,7 @@
                  bookmarksnumbered = true,
                  breaklinks = true,
                  linktocpage,
-                 pagebackref,
+                 %pagebackref,
                  colorlinks = true,
                  linkcolor = blue,
                  urlcolor  = blue,
