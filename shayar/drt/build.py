@@ -114,7 +114,7 @@ UNARY_VERB_RULE = "IV[NUM=%s,SEM=<\\x.DRS([],[%s(x)])>,tns=%s] -> \"%s\"\n"
 
 def write_verb_rules(grammar_file):
     for lemma in verbnet.lemmas():
-        if len(lemma) == 1 or lemma == 'exist':
+        if len(lemma) == 1:
                 continue
 
         if lemma == 'be':
@@ -124,6 +124,8 @@ def write_verb_rules(grammar_file):
         #for lex in lexeme(lemma): when we start introducing tenses and 1/2/3 person
         all_forms = lexeme(lemma)
         fixed_lemma = lemma.replace('-', '_').replace('.', '')
+        if lemma == 'exist':
+            fixed_lemma = '_exist'
         grammar_file.write(BINARY_VERB_RULE % ('pl', fixed_lemma, 'pres', all_forms[0].replace('_', ' ')))
         grammar_file.write(UNARY_VERB_RULE % ('pl', fixed_lemma, 'pres', all_forms[0].replace('_', ' ')))
 

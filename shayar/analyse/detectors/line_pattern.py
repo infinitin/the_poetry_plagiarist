@@ -3,8 +3,6 @@ __author__ = 'Nitin'
 
 
 import utils
-from utils import get_tokenized_words
-from utils import get_pronunciations
 from utils import get_line_permutations
 
 

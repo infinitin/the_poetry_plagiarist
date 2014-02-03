@@ -19,10 +19,12 @@ f = open("haiku.txt")
 haiku = Poem(map(str.strip, f.readlines()))
 f = open("similes.txt")
 similes = Poem(map(str.strip, f.readlines()))
+f = open("simple.txt")
+simple = Poem(map(str.strip, f.readlines()))
 f.close()
 
 logging.info('Begin analysis')
-test = similes
+test = simple
 
 logging.info('Setting up cmudict and other tools')
 set_up_globals()
@@ -77,6 +79,6 @@ test.characters = point_of_view.identify_characters(test.poem)
 '''
 
 logging.info("Reading in-between the lines")
-context.build_drs(test.poem)
+context.build_story(test.poem)
 
 print str(test)
