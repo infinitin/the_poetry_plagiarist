@@ -31,6 +31,10 @@ def analyse_sentence(sentence):
     for relation in is_a_relations:
         print relation
 
+    at_location_relations = find_at_location_relations(sentence)
+    for relation in at_location_relations:
+        print relation
+
 
 # Return a 2D array, one with the subject and one with the object
 #def find_capable_of_relations(sentence):
@@ -60,7 +64,7 @@ def find_is_a_relations(sentence):
                 if sentence[sentence.index(verb) + n] == 'no' or sentence[sentence.index(verb) + n] == 'neither':
                     positive = not positive
 
-                if adverbs & negative_adverbs:
+                if len(adverbs & negative_adverbs) % 2 == 1:
                     positive = not positive
 
                 return positive, before_is, after_dt
@@ -70,15 +74,12 @@ def find_is_a_relations(sentence):
 #def find_has_a_relations(sentence):
 
 
-
 #def determine_if_has_a_is_part_of_relation(hasA_relations):
 
 
-def find_near_location_relations(sentence):
+def find_at_location_relations(sentence):
     #Assume this is an AtLocation not NotAtLocation
     positive = True
-
-    preps = set([word for word in sentence if word.type.startswith('I')])
 
     single_at_location_preps = set(['abaft', 'aboard', 'about', 'above', 'across', 'after', 'against', 'along', 'alongside',
                              'amid', 'amidst', 'among', 'amongst', 'anenst', 'around', 'aside', 'astride', 'at',
@@ -99,22 +100,70 @@ def find_near_location_relations(sentence):
 
     double_not_at_location_preps = set(['far from', 'out from', 'out of', 'away from'])
 
-    # Check that it is a possible location preposition
-    for prep in preps:
-        #Check if there is a verb like 'is'
-        if prep.lemma in location_preps:
-            n = 1
-            #Check that the next noun is not a time
-            while not sentence[sentence.index(prep) + n].type.startswith('N'):
-                n += 1
-            if not timex.tag(sentence[sentence.index(prep) + n].string):
-                m = 1
-                while not sentence[sentence.index(prep) - m].type.startswith('N'):
-                    m += 1
-                #The object that can be found, the preposition, the location (need to take into account len(prep)
-                return sentence[sentence.index(prep) - m], prep, sentence[sentence.index(prep)+1:]
+    unparsed = ''
+    for word in sentence:
+        unparsed += ' ' + word.string
+    unparsed = unparsed.lstrip().split(' ')
 
+    prep = ''
 
+    for triple_prep in triple_at_location_preps:
+        if triple_prep in unparsed:
+            prep = triple_prep
+            break
+
+    if not prep:
+        for double_prep in double_at_location_preps:
+            if double_prep in unparsed:
+                prep = double_prep
+                break
+
+    if not prep:
+        for double_not_prep in double_not_at_location_preps:
+            if double_not_prep in unparsed:
+                prep = double_not_prep
+                positive = False
+                break
+
+    if not prep:
+        for single_prep in single_at_location_preps:
+            if single_prep in unparsed:
+                prep = single_prep
+                break
+
+    if not prep:
+        for single_not_prep in single_not_at_location_preps:
+            if single_not_prep in unparsed:
+                prep = single_not_prep
+                positive = False
+                break
+
+    if not prep:
+        return ()
+
+    print prep.split(' ')
+    prep_first_word_index = unparsed.index(prep.split(' ')[0])
+    prep_last_word_index = prep_first_word_index + prep.count(' ')
+
+    n = 1
+    #Check that the next noun is not a time
+    while not sentence[prep_last_word_index + n].type.startswith('N'):
+        n += 1
+    if not timex.tag(sentence[prep_last_word_index + n].string):
+        m = 1
+        while not sentence[prep_first_word_index - m].type.startswith('N'):
+            m += 1
+
+        before_prep = sentence[:prep_first_word_index]
+        after_prep = sentence[prep_last_word_index+1:]
+        adverbs = set([word for word in sentence if word not in before_prep and word not in after_prep])
+        if len(adverbs & negative_adverbs) % 2 == 1:
+            positive = not positive
+        #The object that can be found, the preposition, the location (need to take into account len(prep)
+        return positive, sentence[prep_first_word_index - m], prep, \
+               sentence[prep_last_word_index:prep_last_word_index + n + 1]
+
+    return ()
 
 #def find_receives_action_relations(sentence):
 

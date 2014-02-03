@@ -11,7 +11,7 @@ class Character:
         self.has_a = []              # array of HasA relations
         self.part_of = []            # array of PartOf relations
         self.capable_of = []         # array of CapableOf relations
-        self.near_location = []      # array of NearLocation relations
+        self.at_location = []      # array of NearLocation relations
         self.receives_action = []    # array of ReceivesAction relations
         self.created_by = []         # array of CreatedBy relations
         self.used_for = []           # array of UsedFor relations
