@@ -33,7 +33,7 @@ Then we try to understand the context of the poem to extract:
 \item{Symbolism, such as metaphors and similes}
 \end{itemize}
 
-The implementations of these detectors use:
+The implementations of these detectors, as of this report, use:
 \begin{itemize}
 \setlength{\itemsep}{0pt}
 \item{Basic string parsing algorithms}
@@ -49,15 +49,15 @@ The implementations of these detectors use:
 
 This stage is currently on schedule and expected to be completed within two weeks of the submission of this paper. The tasks that remain are an improved grammar and lexicon for parsing to a Discourse Representation Structure (DRS) and metaphor detection using Metaphor Magnet.
 
-Note that the Theme of the poem is not be addressed at this stage. The algorithm for detecting Theme uses a very similar process to Abstraction as explained below, so has been moved to that phase.
+Note that the theme of the poem is not be addressed at this stage. The algorithm for detecting theme uses a very similar process to Abstraction as explained below, so has been moved to that phase.
 
 \section{Abstraction}
 
-A prerequisite to this stage is that all of the output from the detectors is as general as possible, leaving all options open for consideration during this phase. They should also be in an easily comparable format such as numerical scores and strings. The first task of this stage is to make sure that this is the case and make any adjustments if necessary.
+A prerequisite to this stage is that all of the output from the detectors is as general as possible, leaving all options open for consideration during this phase. They should also be in an easily comparable format such as numerical scores and simple strings. The first task of this stage is to make sure that this is the case and make any adjustments if necessary.
 
 The major algorithm to be written in this stage will analyse a large set of poems, compare each aspect of the results individually and find significant overlaps. The overlapping features will be saved as a template for poems of that type. Any single type of poem may have several templates. For example, overlapping features of all limerick include its rhythm and \textit{AABBA} rhyme scheme, but only some start with \textit{"There once was a"}, so one template will be created with that start string and one without.
 
-We then take a large list of poems of the same Theme, as determined by classifications on poets.org [https://www.poets.org/search.php/prmResetList/1] and run it through this algorithm. We will then be able to analyse and generate poetry with Theme-associated constraints. For example, love poems may talk about roses and flowers, so we associate these objects as having a theme of love. It may also, for example, reveal that limericks are mostly humourous.
+We then take a large list of poems of the same theme, as determined by classifications on poets.org and run it through this algorithm. We will then be able to analyse and generate poetry with theme-associated constraints. For example, love poems may talk about roses and flowers, so we associate these objects as having a theme of love. It may also, for example, reveal that limericks are mostly humourous.
 
 Thereafter, we will find abstractions of the following types of poems:
 \begin{itemize}
@@ -106,6 +106,8 @@ If not all constraints are met,
 	Restart loop with error codes to help rephrasing process.
 \end{lstlisting}		
 Words selected during the algorithm are weighted to include more alliteration and other features. A dry run example is given in the appendix. Rephrasing entails replacing a word or phrase in a sentence with a substitute that fixes the broken constraint without breaking anything further. 
+
+A dry run for this algorithm can be found in the Appendix.
 
 This algorithm will be implemented using all the tools listed in the Analysis section, as well as from the following sources and libraries:
 \begin{itemize}

@@ -9,6 +9,7 @@ from shayar.drt import grammar_dir
 from pattern.text.en import parsetree
 from shayar.character import Character
 from nltk.corpus import verbnet
+from shayar.analyse import timex
 
 characters = []
 negative_adverbs = set(['not', 'seldom', 'hardly', 'barely', 'scarcely', 'rarely'])
@@ -22,16 +23,13 @@ def build_story(poem):
     parse_sentences = parsetree(lines, tags=True, chunks=True, relations=True, lemmata=True, tagset=True)
 
     for sentence in parse_sentences:
-        analyse_sentence(sentence)
+        analyse_sentence(sentence.words)
 
 
 def analyse_sentence(sentence):
     is_a_relations = find_is_a_relations(sentence)
     for relation in is_a_relations:
         print relation
-
-
-#def analyse_words(words):
 
 
 # Return a 2D array, one with the subject and one with the object
@@ -45,21 +43,21 @@ def find_is_a_relations(sentence):
     #Get the list of words that are like 'is'
     is_a_verbs = set(verbnet.lemmas(verbnet.classids('be')[0]))
     #Find all the verbs
-    verbs = set([word for word in sentence.words if word.type.startswith('V')])
+    verbs = set([word for word in sentence if word.type.startswith('V')])
 
     for verb in verbs:
         #Check if there is a verb like 'is'
         if verb.lemma in is_a_verbs:
             n = 1
             #Check that it is followed by a determiner, possibly after a number of adverbs
-            while sentence.words[sentence.words.index(verb)+n].type.startswith('R'):
+            while sentence[sentence.index(verb) + n].type.startswith('R'):
                 n += 1
-            if sentence.words[sentence.words.index(verb)+n].type.startswith('D'):
+            if sentence[sentence.index(verb) + n].type.startswith('D'):
                 #We have an IsA for sure, now split the sentence
-                before_is = sentence.words[:sentence.words.index(verb)]
-                after_dt = sentence.words[sentence.words.index(verb)+n+1:]
-                adverbs = set([word for word in sentence.words if word not in before_is and word not in after_dt])
-                if sentence.words[sentence.words.index(verb)+n] == 'no' or sentence.words[sentence.words.index(verb)+n] == 'neither':
+                before_is = sentence[:sentence.index(verb)]
+                after_dt = sentence[sentence.index(verb) + n + 1:]
+                adverbs = set([word for word in sentence if word not in before_is and word not in after_dt])
+                if sentence[sentence.index(verb) + n] == 'no' or sentence[sentence.index(verb) + n] == 'neither':
                     positive = not positive
 
                 if adverbs & negative_adverbs:
@@ -76,8 +74,45 @@ def find_is_a_relations(sentence):
 #def determine_if_has_a_is_part_of_relation(hasA_relations):
 
 
+def find_near_location_relations(sentence):
+    #Assume this is an AtLocation not NotAtLocation
+    positive = True
 
-#def find_at_location_relations(sentence):
+    preps = set([word for word in sentence if word.type.startswith('I')])
+
+    single_at_location_preps = set(['abaft', 'aboard', 'about', 'above', 'across', 'after', 'against', 'along', 'alongside',
+                             'amid', 'amidst', 'among', 'amongst', 'anenst', 'around', 'aside', 'astride', 'at',
+                             'athwart', 'atop', 'before', 'behind', 'below', 'beneath', 'beside', 'besides', 'between',
+                             'betwixt', 'by', 'down', 'forenenst', 'in', 'inside', 'into', 'mid', 'midst', 'near',
+                             'next', 'nigh', 'on', 'onto', 'opposite', 'outside', 'over', 'round', 'through', 'thru',
+                             'to', 'toward', 'towards', 'under', 'underneath', 'up', 'upon', 'with', 'within',
+                             'behither', 'betwixen', 'betwixt', 'biforn', 'ere', 'fornent', 'gainst', "'gainst", 'neath',
+                             "'neath", 'overthwart', 'twixt', "'twixt"])
+
+    double_at_location_preps = set(['ahead of', 'back to', 'close to', 'in to', 'inside of', 'left of', 'near to',
+                                    'next to', 'on to', 'outside of', 'right of'])
+
+    triple_at_location_preps = set(['in front of', 'on top of'])
+
+    single_not_at_location_preps = set(['beyond', 'from', 'off', 'out', 'past', 'via', 'ayond', 'ayont', 'froward',
+                                        'frowards', 'fromward', 'outwith'])
+
+    double_not_at_location_preps = set(['far from', 'out from', 'out of', 'away from'])
+
+    # Check that it is a possible location preposition
+    for prep in preps:
+        #Check if there is a verb like 'is'
+        if prep.lemma in location_preps:
+            n = 1
+            #Check that the next noun is not a time
+            while not sentence[sentence.index(prep) + n].type.startswith('N'):
+                n += 1
+            if not timex.tag(sentence[sentence.index(prep) + n].string):
+                m = 1
+                while not sentence[sentence.index(prep) - m].type.startswith('N'):
+                    m += 1
+                #The object that can be found, the preposition, the location (need to take into account len(prep)
+                return sentence[sentence.index(prep) - m], prep, sentence[sentence.index(prep)+1:]
 
 
 
@@ -102,7 +137,6 @@ def find_is_a_relations(sentence):
 
 
 #def resolve_characters():
-
 
 
 """

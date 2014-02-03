@@ -19,6 +19,18 @@
 
 \refsection{0}
   \sortlist{entry}{nty}
+    \entry{wordnik}{online}{}
+      \field{sortinit}{0}
+      \verb{url}
+      \verb http://www.wordnik.com/about
+      \endverb
+    \endentry
+    \entry{onomat}{online}{}
+      \field{sortinit}{0}
+      \verb{url}
+      \verb http://www.writtensound.com/about.php
+      \endverb
+    \endentry
     \entry{baker1998berkeley}{inproceedings}{}
       \name{labelname}{3}{}{%
         {{hash=a05f6dccc2782fe82991bad69864b53e}{Baker}{B\bibinitperiod}{Collin\bibnamedelima F}{C\bibinitperiod\bibinitdelim F\bibinitperiod}{}{}{}{}}%
@@ -373,6 +385,27 @@
       \field{title}{The Automatic Content Extraction (ACE) Program-Tasks, Data, and Evaluation.}
       \field{year}{2004}
     \endentry
+    \entry{gardent2007symbolic}{inproceedings}{}
+      \true{morelabelname}
+      \name{labelname}{2}{}{%
+        {{hash=db8e678b1d356ee221a041bf4b530213}{Gardent}{G\bibinitperiod}{Claire}{C\bibinitperiod}{}{}{}{}}%
+        {{hash=47cfc61d0d7b8534f8d380f7374d4fa0}{Kow}{K\bibinitperiod}{Eric}{E\bibinitperiod}{}{}{}{}}%
+      }
+      \true{moreauthor}
+      \name{author}{2}{}{%
+        {{hash=db8e678b1d356ee221a041bf4b530213}{Gardent}{G\bibinitperiod}{Claire}{C\bibinitperiod}{}{}{}{}}%
+        {{hash=47cfc61d0d7b8534f8d380f7374d4fa0}{Kow}{K\bibinitperiod}{Eric}{E\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{4aa88e9145bf28532de42a3cc6221dad}
+      \strng{fullhash}{8a0acd1ad6a3e58d57e1f6b2b879a64b}
+      \field{sortinit}{G}
+      \field{labeltitle}{A symbolic approach to near-deterministic surface realisation using tree adjoining grammar}
+      \field{booktitle}{ACL}
+      \field{title}{A symbolic approach to near-deterministic surface realisation using tree adjoining grammar}
+      \field{volume}{7}
+      \field{year}{2007}
+      \field{pages}{328\bibrangedash 335}
+    \endentry
     \entry{gatt2009simplenlg}{inproceedings}{}
       \name{labelname}{2}{}{%
         {{hash=cdf0f2d0f15f2dbac724c6ea5270b1b6}{Gatt}{G\bibinitperiod}{Albert}{A\bibinitperiod}{}{}{}{}}%
@@ -620,6 +653,50 @@
       \field{volume}{38}
       \field{year}{1995}
       \field{pages}{39\bibrangedash 41}
+    \endentry
+    \entry{nelson2004university}{article}{}
+      \name{labelname}{3}{}{%
+        {{hash=cad4d23d272fec34c6aa4975f4a47764}{Nelson}{N\bibinitperiod}{Douglas\bibnamedelima L}{D\bibinitperiod\bibinitdelim L\bibinitperiod}{}{}{}{}}%
+        {{hash=451e0e7ed2529acce636526de6d01f0f}{McEvoy}{M\bibinitperiod}{Cathy\bibnamedelima L}{C\bibinitperiod\bibinitdelim L\bibinitperiod}{}{}{}{}}%
+        {{hash=ffc3665608ea457e48c25950a86efe36}{Schreiber}{S\bibinitperiod}{Thomas\bibnamedelima A}{T\bibinitperiod\bibinitdelim A\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{3}{}{%
+        {{hash=cad4d23d272fec34c6aa4975f4a47764}{Nelson}{N\bibinitperiod}{Douglas\bibnamedelima L}{D\bibinitperiod\bibinitdelim L\bibinitperiod}{}{}{}{}}%
+        {{hash=451e0e7ed2529acce636526de6d01f0f}{McEvoy}{M\bibinitperiod}{Cathy\bibnamedelima L}{C\bibinitperiod\bibinitdelim L\bibinitperiod}{}{}{}{}}%
+        {{hash=ffc3665608ea457e48c25950a86efe36}{Schreiber}{S\bibinitperiod}{Thomas\bibnamedelima A}{T\bibinitperiod\bibinitdelim A\bibinitperiod}{}{}{}{}}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{b2a9c5969d9b6028bc4c616fd97e496b}
+      \strng{fullhash}{b2a9c5969d9b6028bc4c616fd97e496b}
+      \field{sortinit}{N}
+      \field{labeltitle}{The University of South Florida free association, rhyme, and word fragment norms}
+      \field{journaltitle}{Behavior Research Methods, Instruments, \& Computers}
+      \field{number}{3}
+      \field{title}{The University of South Florida free association, rhyme, and word fragment norms}
+      \field{volume}{36}
+      \field{year}{2004}
+      \field{pages}{402\bibrangedash 407}
+    \endentry
+    \entry{pease2011impact}{inproceedings}{}
+      \name{labelname}{2}{}{%
+        {{hash=d98a1f39fa7df83e0aa3ed6461066a3d}{Pease}{P\bibinitperiod}{Alison}{A\bibinitperiod}{}{}{}{}}%
+        {{hash=3cc72753508ea031bbab98dfcaf1d385}{Colton}{C\bibinitperiod}{Simon}{S\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{2}{}{%
+        {{hash=d98a1f39fa7df83e0aa3ed6461066a3d}{Pease}{P\bibinitperiod}{Alison}{A\bibinitperiod}{}{}{}{}}%
+        {{hash=3cc72753508ea031bbab98dfcaf1d385}{Colton}{C\bibinitperiod}{Simon}{S\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{bd7ae3b9bccaeed86dfbe2e40ae16a15}
+      \strng{fullhash}{bd7ae3b9bccaeed86dfbe2e40ae16a15}
+      \field{sortinit}{P}
+      \field{labeltitle}{On impact and evaluation in computational creativity: A discussion of the Turing test and an alternative proposal}
+      \field{booktitle}{Proceedings of the AISB}
+      \field{title}{On impact and evaluation in computational creativity: A discussion of the Turing test and an alternative proposal}
+      \field{volume}{11}
+      \field{year}{2011}
+      \field{pages}{1\bibrangedash 8}
     \endentry
     \entry{reiter2000building}{book}{}
       \name{labelname}{2}{}{%
