@@ -54,7 +54,7 @@ def find_is_a_relations(sentence):
         if verb.lemma in is_a_verbs:
             n = 1
             #Check that it is followed by a determiner, possibly after a number of adverbs
-            while sentence[sentence.index(verb) + n].type.startswith('R'):
+            while sentence[sentence.index(verb) + n].type.startswith('R') and sentence.index(verb) + n < len(sentence):
                 n += 1
             if sentence[sentence.index(verb) + n].type.startswith('D'):
                 #We have an IsA for sure, now split the sentence
@@ -81,29 +81,30 @@ def find_at_location_relations(sentence):
     #Assume this is an AtLocation not NotAtLocation
     positive = True
 
-    single_at_location_preps = set(['abaft', 'aboard', 'about', 'above', 'across', 'after', 'against', 'along', 'alongside',
-                             'amid', 'amidst', 'among', 'amongst', 'anenst', 'around', 'aside', 'astride', 'at',
-                             'athwart', 'atop', 'before', 'behind', 'below', 'beneath', 'beside', 'besides', 'between',
-                             'betwixt', 'by', 'down', 'forenenst', 'in', 'inside', 'into', 'mid', 'midst', 'near',
-                             'next', 'nigh', 'on', 'onto', 'opposite', 'outside', 'over', 'round', 'through', 'thru',
-                             'to', 'toward', 'towards', 'under', 'underneath', 'up', 'upon', 'with', 'within',
-                             'behither', 'betwixen', 'betwixt', 'biforn', 'ere', 'fornent', 'gainst', "'gainst", 'neath',
-                             "'neath", 'overthwart', 'twixt', "'twixt"])
+    single_at_location_preps = set(['abaft', 'aboard', 'about', 'above', 'across', 'after', 'against', 'along',
+                                    'alongside', 'amid', 'amidst', 'among', 'amongst', 'anenst', 'around', 'aside',
+                                    'astride', 'at', 'athwart', 'atop', 'before', 'behind', 'below', 'beneath',
+                                    'beside', 'besides', 'between', 'betwixt', 'by', 'down', 'forenenst', 'in',
+                                    'inside', 'into', 'mid', 'midst', 'near', 'next', 'nigh', 'on', 'onto', 'opposite',
+                                    'outside', 'over', 'through', 'thru', 'toward', 'towards', 'under',
+                                    'underneath', 'up', 'upon', 'with', 'within', 'behither', 'betwixen', 'betwixt',
+                                    'biforn', 'ere', 'fornent', 'gainst', "'gainst", 'neath', "'neath", 'overthwart',
+                                    'twixt', "'twixt"])
 
     double_at_location_preps = set(['ahead of', 'back to', 'close to', 'in to', 'inside of', 'left of', 'near to',
                                     'next to', 'on to', 'outside of', 'right of'])
 
     triple_at_location_preps = set(['in front of', 'on top of'])
 
-    single_not_at_location_preps = set(['beyond', 'from', 'off', 'out', 'past', 'via', 'ayond', 'ayont', 'froward',
-                                        'frowards', 'fromward', 'outwith'])
+    single_not_at_location_preps = set(['beyond', 'from', 'off', 'out', 'via', 'ayond', 'ayont', 'froward', 'frowards',
+                                        'fromward', 'outwith'])
 
     double_not_at_location_preps = set(['far from', 'out from', 'out of', 'away from'])
 
     unparsed = ''
     for word in sentence:
         unparsed += ' ' + word.string
-    unparsed = unparsed.lstrip().split(' ')
+    unparsed_words = unparsed.lstrip().split(' ')
 
     prep = ''
 
@@ -127,13 +128,13 @@ def find_at_location_relations(sentence):
 
     if not prep:
         for single_prep in single_at_location_preps:
-            if single_prep in unparsed:
+            if single_prep in unparsed_words:
                 prep = single_prep
                 break
 
     if not prep:
         for single_not_prep in single_not_at_location_preps:
-            if single_not_prep in unparsed:
+            if single_not_prep in unparsed_words:
                 prep = single_not_prep
                 positive = False
                 break
@@ -141,17 +142,24 @@ def find_at_location_relations(sentence):
     if not prep:
         return ()
 
-    print prep.split(' ')
-    prep_first_word_index = unparsed.index(prep.split(' ')[0])
+    prep_first_word_index = unparsed_words.index(prep.split(' ')[0])
     prep_last_word_index = prep_first_word_index + prep.count(' ')
 
     n = 1
     #Check that the next noun is not a time
-    while not sentence[prep_last_word_index + n].type.startswith('N'):
-        n += 1
+    for i in range(1, len(sentence) - prep_last_word_index):
+        if sentence[prep_last_word_index + i].type.startswith('N'):
+            if sentence[prep_last_word_index + i + 1].string == 'and':
+                continue
+            else:
+                n = i
+                break
+
+    #while not sentence[prep_last_word_index + n].type.startswith('N') and prep_last_word_index + n < len(sentence):
+        #n += 1
     if not timex.tag(sentence[prep_last_word_index + n].string):
         m = 1
-        while not sentence[prep_first_word_index - m].type.startswith('N'):
+        while not sentence[prep_first_word_index - m].type.startswith('N') and m <= prep_first_word_index:
             m += 1
 
         before_prep = sentence[:prep_first_word_index]
@@ -161,7 +169,7 @@ def find_at_location_relations(sentence):
             positive = not positive
         #The object that can be found, the preposition, the location (need to take into account len(prep)
         return positive, sentence[prep_first_word_index - m], prep, \
-               sentence[prep_last_word_index:prep_last_word_index + n + 1]
+               sentence[prep_last_word_index + 1:prep_last_word_index + n + 1]
 
     return ()
 
