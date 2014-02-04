@@ -9,6 +9,7 @@ class Poem:
         self.stanzas = 0                    # Number of stanzas
         self.lines = []                     # List of numbers indicating lines per stanza
         self.repeated_lines = {}            # A map of the repeated line to the locations in the poem
+        self.distinct_sentences = 0         # Number of sentences (compare with lines to get relative complexity)
 
         self.tenses = []                     # Tense of each line (use an enum for tense)
         self.overall_tense = ""
@@ -42,7 +43,8 @@ class Poem:
         return \
             "This poem has " + str(self.stanzas) + " stanza(s)\n" +\
             " with a total of " + str(sum(self.lines)) + " lines\n" +\
-            " in the format of " + str(self.lines) + ".\n\n" +\
+            " in the format of " + str(self.lines) + "\n" +\
+            " with " + str(self.distinct_sentences) + " distinct sentences.\n\n" +\
             str(len(self.repeated_lines)) + " line(s) are repeated in this poem\n" +\
             " at positions " + str(self.repeated_lines.values()) + ".\n\n" +\
             "The tenses of the lines in the given poem are " + str(self.tenses) + ",\n" +\

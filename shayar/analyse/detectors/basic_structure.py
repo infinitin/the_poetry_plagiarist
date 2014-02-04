@@ -1,6 +1,7 @@
 __author__ = 'Nitin'
 
 import collections
+from pattern.text.en import parsetree
 
 
 def count_stanzas(poem):
@@ -33,3 +34,11 @@ def count_repeated_lines(poem):
         repeated_lines[line] = [i for i, x in enumerate(poem) if x == line]
 
     return repeated_lines
+
+
+def count_distinct_sentences(poem):
+    lines = ""
+    for line in poem:
+        lines += line.lower() + " "
+
+    return len(parsetree(lines))
