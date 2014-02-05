@@ -8,6 +8,7 @@ from shayar.character import Character
 from at_location import find_at_location_relations
 from has_a import find_has_a_relations
 from json import loads as json_load
+from semantic_dependency_node import SemanticDependencyNode
 
 characters = []
 relation_extractor = {}
@@ -24,7 +25,21 @@ def build_story(poem):
 
     for sentence in sentences:
         dependencies = get_dependencies(sentence)
-        print dependencies
+        #Find the root.
+        root = [dep for dep in dependencies if dep['HEAD'] == '0'][0]
+        root_node = build_semantic_dependency_tree(dependencies, root)
+        print str(root_node)
+
+
+def build_semantic_dependency_tree(dependencies, root):
+    root_node = SemanticDependencyNode(root['ID'], root['FORM'], root['CPOSTAG'], root['POSTAG'])
+    children = [dep for dep in dependencies if dep['HEAD'] == root['ID']]
+
+    for child in children:
+        child_node = build_semantic_dependency_tree(dependencies, child)
+        root_node.add_child(child['DEPREL'], child_node)
+
+    return root_node
 
 
 def get_dependencies(sentence):
@@ -47,8 +62,8 @@ def get_dependencies(sentence):
         #dependency['FEATS'] = entry[5] nor do we get this
         dependency['HEAD'] = entry[6]
         dependency['DEPREL'] = entry[7]
-        dependency['PHEAD'] = entry[8]
-        dependency['PDEPREL'] = entry[9]
+        #dependency['PHEAD'] = entry[8] nor these
+        #dependency['PDEPREL'] = entry[9]
         dependencies.append(dependency)
 
     return dependencies
