@@ -6,7 +6,8 @@ import logging
 logging.basicConfig(level=logging.INFO)
 logging.getLogger(__name__)
 
-from detectors import basic_structure, tense, rhythm, line_pattern, rhyme, point_of_view, rhetoric, context
+from detectors import basic_structure, tense, rhythm, line_pattern, rhyme, point_of_view, rhetoric
+from detectors.context import context
 
 logging.info('Grabbing poems')
 f = open("limerick.txt")
