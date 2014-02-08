@@ -24,12 +24,12 @@ def build_story(poem):
     for sentence in sentences:
         json_parse_data = make_request(sentence)
         dependencies = get_dependencies(json_parse_data)
-        characters = create_characters([d for d in dependencies if d['CHARACTER']])
+        characters = create_characters([d for d in dependencies if d['CHARACTER_ID']])
         candidate_relations = build_candidate_relations_from_frames(json_parse_data, dependencies)
+        print candidate_relations
         #Find the root.
         root = [dep for dep in dependencies if dep['HEAD'] == '0'][0]
         root_node = build_semantic_dependency_tree(dependencies, root, characters)
-        print str(root_node)
 
 
 def build_semantic_dependency_tree(dependencies, root, characters):
@@ -38,10 +38,10 @@ def build_semantic_dependency_tree(dependencies, root, characters):
     if root['CHARACTER_ID']:
         root_node.add_character(characters[root['CHARACTER_ID']])
 
-    children = [dep for dep in dependencies if dep['HEAD'] == root['ID']]
-    for child in children:
-        child_node = build_semantic_dependency_tree(dependencies, child)
-        root_node.add_child(child['DEPREL'], child_node)
+    #children = [dep for dep in dependencies if dep['HEAD'] == root['ID']]
+    #for child in children:
+    #    child_node = build_semantic_dependency_tree(dependencies, child)
+    #    root_node.add_child(child['DEPREL'], child_node)
 
     return root_node
 
@@ -66,10 +66,10 @@ def get_dependencies(json):
         cpostag = dependency['CPOSTAG']
         if cpostag.startswith('N') or cpostag.startswith('PR'):
             global NEXT_CHARACTER_ID
-            dependency['CHARACTER'] = str(NEXT_CHARACTER_ID)
+            dependency['CHARACTER_ID'] = str(NEXT_CHARACTER_ID)
             NEXT_CHARACTER_ID += 1
         else:
-            dependency['CHARACTER'] = ''
+            dependency['CHARACTER_ID'] = ''
 
         dependencies.append(dependency)
 

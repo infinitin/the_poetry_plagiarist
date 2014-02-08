@@ -67,11 +67,12 @@ def check_desirability_polarity(target):
 
 def check_special_params(param, frame):
     original = param
+    frame_elements = frame["annotationSets"][0]["frameElements"]
     if '"' in param:
         param.replace('"', '')
         words = param.split(' ')
         try:
-            words[-1] = frame["annotationSets"]["frameElements"][words[-1]]
+            words[-1] = get_element_text(words[-1], frame_elements)
             param = ' '.join(words)
         except KeyError:
             param = ''
@@ -80,7 +81,7 @@ def check_special_params(param, frame):
         first_params = param.split('/')
         for param in first_params:
             try:
-                param = frame["annotationSets"]["frameElements"][param]
+                param = get_element_text(param, frame_elements)
                 break
             except KeyError:
                 continue
@@ -90,7 +91,21 @@ def check_special_params(param, frame):
     elif param == "OpWord":
         param = frame["target"]["text"]
 
+    else:
+        try:
+            param = get_element_text(param, frame_elements)
+        except KeyError:
+            param = ''
+
     return param
+
+
+def get_element_text(element_name, frame_elements):
+    for element in frame_elements:
+        if element["name"] == element_name:
+            return element["text"]
+
+    return ''
 
 
 def validate_relation_syntax(candidate_relation, word, dependencies):

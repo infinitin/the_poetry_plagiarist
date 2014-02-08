@@ -2,17 +2,31 @@ __author__ = 'Nitin'
 
 from pattern.text.en import wordnet
 from shayar.character import Character
+from pattern.text.en import lemma as lemmatise
+from pattern.text.en import singularize
 
-MALE_SYNSETS = set(wordnet.synsets('male') + wordnet.synsets('actor') + wordnet.synsets('husband') +
-                   wordnet.synsets('father') + wordnet.synsets('brother') + wordnet.synsets('son') +
-                   wordnet.synsets('king') + wordnet.synsets('prince'))
-FEMALE_SYNSETS = set(wordnet.synsets('female') + wordnet.synsets('woman') + wordnet.synsets('wife') +
-                     wordnet.synsets('actress') + wordnet.synsets('female_aristocrat') + wordnet.synsets('mother') +
-                     wordnet.synsets('sister') + wordnet.synsets('daughter') + wordnet.synsets('queen') +
-                     wordnet.synsets('princess'))
+MALE_SYNSETS = set([s.gloss for s in wordnet.synsets('male')] +
+                   [s.gloss for s in wordnet.synsets('actor')] +
+                   [s.gloss for s in wordnet.synsets('husband')] +
+                   [s.gloss for s in wordnet.synsets('father')] +
+                   [s.gloss for s in wordnet.synsets('brother')] +
+                   [s.gloss for s in wordnet.synsets('son')] +
+                   [s.gloss for s in wordnet.synsets('king')] +
+                   [s.gloss for s in wordnet.synsets('prince')])
 
-ANIMATE_SYNSETS = set(wordnet.synsets('animate thing'))
-PHYSICAL_SYNSETS = set(wordnet.synsets('physical object'))
+FEMALE_SYNSETS = set([s.gloss for s in wordnet.synsets('female')] +
+                     [s.gloss for s in wordnet.synsets('woman')] +
+                     [s.gloss for s in wordnet.synsets('wife')] +
+                     [s.gloss for s in wordnet.synsets('actress')] +
+                     [s.gloss for s in wordnet.synsets('female_aristocrat')] +
+                     [s.gloss for s in wordnet.synsets('mother')] +
+                     [s.gloss for s in wordnet.synsets('sister')] +
+                     [s.gloss for s in wordnet.synsets('daughter')] +
+                     [s.gloss for s in wordnet.synsets('queen')] +
+                     [s.gloss for s in wordnet.synsets('princess')])
+
+ANIMATE_SYNSETS = set([s.gloss for s in wordnet.synsets('animate thing')])
+PHYSICAL_SYNSETS = set([s.gloss for s in wordnet.synsets('physical object')])
 
 PLURAL_PRONOUNS = ['ours', 'ourselves', 'theirs', 'them', 'themselves', 'they', 'us', 'our', 'ours', 'their']
 MALE_PRONOUNS = ['him', 'himself', 'hisself', 'his']
@@ -27,7 +41,7 @@ def create_characters(dependencies):
         gender = ''
         object_state = ''
 
-        if word['CPOSTAG'].startswith('P'):
+        if dependency['CPOSTAG'].startswith('P'):
             if word in PLURAL_PRONOUNS:
                 num = 'pl'
             else:
@@ -49,12 +63,18 @@ def create_characters(dependencies):
             else:
                 num = 'sg'
 
-            synset = wordnet.synsets(word)[0]
-            hypernyms = set(synset.hypernyms(recursive=True)).add(synset)
+            try:
+                synset = wordnet.synsets(singularize(lemmatise(word)))[0]
+            except IndexError:
+                print "Failed to find synset for " + word
+                continue
 
-            if hypernyms & ANIMATE_SYNSETS:
+            hyps = set([h.gloss for h in synset.hypernyms(recursive=True)])
+            hyps.add(synset.gloss)
+
+            if hyps & ANIMATE_SYNSETS:
                 object_state = 'a'
-            elif hypernyms & PHYSICAL_SYNSETS:
+            elif hyps & PHYSICAL_SYNSETS:
                 object_state = 'p'
             else:
                 object_state = 'n'
@@ -62,9 +82,9 @@ def create_characters(dependencies):
             if object_state == 'p':
                 gender = 'n'
             elif object_state == 'a':
-                if hypernyms & MALE_SYNSETS:
+                if hyps & MALE_SYNSETS:
                     gender = 'm'
-                elif hypernyms & FEMALE_SYNSETS:
+                elif hyps & FEMALE_SYNSETS:
                     gender = 'f'
 
         characters[dependency['ID']] = Character(dependency['ID'], num, gender, object_state)
