@@ -11,6 +11,7 @@ from frame_to_relation_converter import build_candidate_relations_from_frames
 
 NEXT_CHARACTER_ID = 0
 
+
 def build_story(poem):
     lines = ""
     for line in poem:
@@ -28,18 +29,28 @@ def build_story(poem):
         print candidate_relations
         #Find the root.
         root = [dep for dep in dependencies if dep['HEAD'] == '0'][0]
-        root_node = build_semantic_dependency_tree(dependencies, root, characters)
+        root_node = build_semantic_dependency_tree(dependencies, root, characters, candidate_relations)
+        build_relations(root_node)
 
 
-def build_semantic_dependency_tree(dependencies, root, characters):
+def build_relations(root_node):
+    return 'yay'
+
+
+def build_semantic_dependency_tree(dependencies, root, characters, candidate_relations):
     root_node = SemanticDependencyNode(root['ID'], root['FORM'], root['CPOSTAG'], root['POSTAG'])
 
     if root['CHARACTER_ID']:
         root_node.add_character(characters[root['ID']])
 
+    try:
+        root_node.add_candidate_relation(candidate_relations[root['FORM']])
+    except KeyError:
+        pass
+
     children = [dep for dep in dependencies if dep['HEAD'] == root['ID']]
     for child in children:
-        child_node = build_semantic_dependency_tree(dependencies, child, characters)
+        child_node = build_semantic_dependency_tree(dependencies, child, characters, candidate_relations)
         root_node.add_child(child['DEPREL'], child_node)
 
     return root_node
