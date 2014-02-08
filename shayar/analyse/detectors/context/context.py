@@ -11,7 +11,6 @@ from frame_to_relation_converter import build_candidate_relations_from_frames
 
 NEXT_CHARACTER_ID = 0
 
-
 def build_story(poem):
     lines = ""
     for line in poem:
@@ -36,12 +35,12 @@ def build_semantic_dependency_tree(dependencies, root, characters):
     root_node = SemanticDependencyNode(root['ID'], root['FORM'], root['CPOSTAG'], root['POSTAG'])
 
     if root['CHARACTER_ID']:
-        root_node.add_character(characters[root['CHARACTER_ID']])
+        root_node.add_character(characters[root['ID']])
 
-    #children = [dep for dep in dependencies if dep['HEAD'] == root['ID']]
-    #for child in children:
-    #    child_node = build_semantic_dependency_tree(dependencies, child)
-    #    root_node.add_child(child['DEPREL'], child_node)
+    children = [dep for dep in dependencies if dep['HEAD'] == root['ID']]
+    for child in children:
+        child_node = build_semantic_dependency_tree(dependencies, child, characters)
+        root_node.add_child(child['DEPREL'], child_node)
 
     return root_node
 

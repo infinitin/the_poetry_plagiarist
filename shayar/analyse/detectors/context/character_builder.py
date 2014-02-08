@@ -87,6 +87,6 @@ def create_characters(dependencies):
                 elif hyps & FEMALE_SYNSETS:
                     gender = 'f'
 
-        characters[dependency['ID']] = Character(dependency['ID'], num, gender, object_state)
+        characters[dependency['ID']] = Character(dependency['CHARACTER_ID'], num, gender, object_state)
 
     return characters
