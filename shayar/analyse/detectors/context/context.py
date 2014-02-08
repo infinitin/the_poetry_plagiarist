@@ -25,7 +25,7 @@ def build_story(poem):
         json_parse_data = make_request(sentence)
         dependencies = get_dependencies(json_parse_data)
         characters = create_characters([d for d in dependencies if d['CHARACTER']])
-        candidate_relations = build_candidate_relations_from_frames(json_parse_data)
+        candidate_relations = build_candidate_relations_from_frames(json_parse_data, dependencies)
         #Find the root.
         root = [dep for dep in dependencies if dep['HEAD'] == '0'][0]
         root_node = build_semantic_dependency_tree(dependencies, root, characters)
