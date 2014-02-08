@@ -19,7 +19,7 @@ def build_candidate_relations_from_frames(json, dependencies):
             candidate_relation_template = frame_relations[frame["target"]["name"]]
             candidate_relation = fill_relation_template(candidate_relation_template, frame)
 
-            if not validate_relation_syntax(candidate_relation, dependencies):
+            if not validate_relation_syntax(candidate_relation, frame["target"]["text"], dependencies):
                 print 'The operative word is not of the right POS'
                 continue
 
@@ -93,14 +93,27 @@ def check_special_params(param, frame):
     return param
 
 
-def validate_relation_syntax(candidate_relation, dependencies):
+def validate_relation_syntax(candidate_relation, word, dependencies):
     #Make sure that the operative word is the pos that Framenet expects
+
+    #Get the LUs for this relation
+    #Get word out of that set
+    #Check its type up against the type stored in dependencies
+    #return the result
+
     return True
 
 
 def validate_relation_semantics(candidate_relation, dependencies):
     #Make sure that the operative parameters are of the semtype that Framenet expects
-    #Might need the characters as well to check the object_state
+
+    #Map the relation parameter TYPE to the word(s) itself
+    #Check the semtype of that paramater TYPE
+    #Get the noun out of the words
+    #Check its character object for the object_state
+    #Match up the object_State and the semtype
+    #return the result
+
     return True
 
 
