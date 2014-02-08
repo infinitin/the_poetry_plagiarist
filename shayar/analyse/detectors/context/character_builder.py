@@ -33,11 +33,56 @@ MALE_PRONOUNS = ['him', 'himself', 'hisself', 'his']
 FEMALE_PRONOUNS = ['hers', 'herself', 'she', 'her']
 NEUTRAL_PRONOUNS = ['it', 'itself', 'one', 'oneself', 'ownself', 'self']
 
+NEXT_CHARACTER_ID = 0
+ENTITY_ID = -1
+ENTITY_CHARACTER = None
 
-def create_characters(dependencies):
+
+def create_characters(dependencies, frames):
+    quantity = ''
+    entity = ''
+    for frame in frames:
+        if frame["target"]["name"] == 'Quantity':
+            if len(frame["annotationSets"][0]["frameElements"]) > 1:
+                quantity = frame["annotationSets"][0]["frameElements"][0]["text"]
+                entity = frame["annotationSets"][0]["frameElements"][1]["text"]
+
+            break
+
     characters = {}
     for dependency in dependencies:
+        cpostag = dependency['CPOSTAG']
+        if not (cpostag.startswith('N') or cpostag.startswith('PR')):
+            dependency['CHARACTER_ID'] = ''
+            continue
+
+        global NEXT_CHARACTER_ID
+        global ENTITY_ID
         word = dependency['FORM']
+        form = word
+
+        if word in entity:
+            form = quantity + ' ' + entity
+            if ENTITY_ID >= 0:
+                dependency['CHARACTER_ID'] = str(ENTITY_ID)
+            else:
+                dependency['CHARACTER_ID'] = str(NEXT_CHARACTER_ID)
+                ENTITY_ID = NEXT_CHARACTER_ID
+                NEXT_CHARACTER_ID += 1
+
+        elif word in quantity:
+            if ENTITY_ID >= 0:
+                dependency['CHARACTER_ID'] = str(ENTITY_ID)
+            else:
+                dependency['CHARACTER_ID'] = str(NEXT_CHARACTER_ID)
+                ENTITY_ID = NEXT_CHARACTER_ID
+                NEXT_CHARACTER_ID += 1
+            continue
+
+        else:
+            dependency['CHARACTER_ID'] = str(NEXT_CHARACTER_ID)
+            NEXT_CHARACTER_ID += 1
+
         gender = ''
         object_state = ''
 
@@ -87,6 +132,18 @@ def create_characters(dependencies):
                 elif hyps & FEMALE_SYNSETS:
                     gender = 'f'
 
-        characters[dependency['ID']] = Character(dependency['CHARACTER_ID'], num, gender, object_state)
+        character = Character(dependency['CHARACTER_ID'], num, gender, object_state)
+        character.is_a.append(form)
+        characters[dependency['ID']] = character
+        if word in entity:
+            global ENTITY_CHARACTER
+            ENTITY_CHARACTER = character
+
+    for dependency in dependencies:
+        word = dependency['FORM']
+        cpostag = dependency['CPOSTAG']
+        if word in quantity and (cpostag.startswith('N') or cpostag.startswith('PR')):
+            characters[dependency['ID']] = ENTITY_CHARACTER
+            break
 
     return characters

@@ -1,15 +1,12 @@
 __author__ = 'Nitin'
 
 from pattern.text.en import parsetree
-from nltk.corpus import verbnet
 from urllib2 import urlopen
-from shayar.character import Character
 from json import loads as json_load
 from semantic_dependency_node import SemanticDependencyNode
 from character_builder import create_characters
 from frame_to_relation_converter import build_candidate_relations_from_frames
-
-NEXT_CHARACTER_ID = 0
+from concept_relation_builder import build_relations
 
 
 def build_story(poem):
@@ -24,17 +21,13 @@ def build_story(poem):
     for sentence in sentences:
         json_parse_data = make_request(sentence)
         dependencies = get_dependencies(json_parse_data)
-        characters = create_characters([d for d in dependencies if d['CHARACTER_ID']])
+        characters = create_characters(dependencies, json_parse_data["sentences"][0]["frames"])
         candidate_relations = build_candidate_relations_from_frames(json_parse_data, dependencies)
         print candidate_relations
         #Find the root.
         root = [dep for dep in dependencies if dep['HEAD'] == '0'][0]
         root_node = build_semantic_dependency_tree(dependencies, root, characters, candidate_relations)
         build_relations(root_node)
-
-
-def build_relations(root_node):
-    return 'yay'
 
 
 def build_semantic_dependency_tree(dependencies, root, characters, candidate_relations):
@@ -73,14 +66,6 @@ def get_dependencies(json):
         dependency['DEPREL'] = entry[7]
         #dependency['PHEAD'] = entry[8] nor these
         #dependency['PDEPREL'] = entry[9]
-        cpostag = dependency['CPOSTAG']
-        if cpostag.startswith('N') or cpostag.startswith('PR'):
-            global NEXT_CHARACTER_ID
-            dependency['CHARACTER_ID'] = str(NEXT_CHARACTER_ID)
-            NEXT_CHARACTER_ID += 1
-        else:
-            dependency['CHARACTER_ID'] = ''
-
         dependencies.append(dependency)
 
     return dependencies
