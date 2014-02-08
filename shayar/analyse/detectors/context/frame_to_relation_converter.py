@@ -11,7 +11,7 @@ NEGATIVE_EXPERIENCES = {'abhor', 'abhorrence', 'abominate', 'afraid', 'antipathy
                         'terrified', 'upset', 'worked up', 'worried'}
 
 
-def build_candidate_relations_from_frames(json, dependencies):
+def build_candidate_relations_from_frames(json, dependencies, characters):
     build_frame_relations()
     candidate_relations = {}
     frames = json["sentences"][0]["frames"]
@@ -28,11 +28,25 @@ def build_candidate_relations_from_frames(json, dependencies):
                 print 'The relation parameters are not of the correct semtype'
                 continue
 
+            accept_if_complete(candidate_relation, characters)
             candidate_relations[frame["target"]["text"]] = candidate_relation
         except KeyError:
             continue
 
     return candidate_relations
+
+
+def accept_if_complete(candidate_relation, characters):
+    #Check for completion
+    for param in candidate_relation:
+        if not param:
+            return
+
+    subject_text = candidate_relation[0]
+    relation_type = candidate_relation[1]
+    for character in characters:
+        if subject_text in character.text:
+            character.add_relation(relation_type, candidate_relation[2])
 
 
 def fill_relation_template(candidate_relation_template, frame):

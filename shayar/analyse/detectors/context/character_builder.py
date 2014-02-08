@@ -133,7 +133,8 @@ def create_characters(dependencies, frames):
                     gender = 'f'
 
         character = Character(dependency['CHARACTER_ID'], num, gender, object_state)
-        character.is_a.append(form)
+        character.text = form
+        character.add_relation("IsA", form)
         characters[dependency['ID']] = character
         if word in entity:
             global ENTITY_CHARACTER
