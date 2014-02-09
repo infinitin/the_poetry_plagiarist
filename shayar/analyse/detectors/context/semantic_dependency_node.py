@@ -8,14 +8,12 @@ class SemanticDependencyNode:
         self.form = form
         self.cpostag = cpostag
         self.postag = postag
-        self.children = []
-        self.deprel = {}                # Map of child node id and dependency relation to that node
+        self.deprel = {}                # Map of dependency relation to child node
         self.character = None           # Related Character object if this is a character node
         self.candidate_relation = ()    # Possible candidate relation found from framenet with this as the opword
 
-    def add_child(self, deprel, child_node):
-        self.deprel[child_node.id] = deprel
-        self.children.append(child_node)
+    def add_child(self, relation, child_node):
+        self.deprel[relation] = child_node
 
     def add_character(self, character):
         self.character = character

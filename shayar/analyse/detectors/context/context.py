@@ -20,14 +20,18 @@ def build_story(poem):
 
     for sentence in sentences:
         json_parse_data = make_request(sentence)
-        dependencies = get_dependencies(json_parse_data)
-        characters = create_characters(dependencies, json_parse_data["sentences"][0]["frames"])
+        dependencies = collapse_loose_leaves(get_dependencies(json_parse_data))
+        print dependencies
+        characters = create_characters(dependencies)
+        for character in characters.values():
+            print character.text
         candidate_relations = build_candidate_relations_from_frames(json_parse_data, dependencies, characters)
-        print candidate_relations
         #Find the root.
         root = [dep for dep in dependencies if dep['HEAD'] == '0'][0]
         root_node = build_semantic_dependency_tree(dependencies, root, characters, candidate_relations)
         build_relations(root_node)
+        for character in characters.values():
+            print character
 
 
 def build_semantic_dependency_tree(dependencies, root, characters, candidate_relations):
@@ -47,6 +51,48 @@ def build_semantic_dependency_tree(dependencies, root, characters, candidate_rel
         root_node.add_child(child['DEPREL'], child_node)
 
     return root_node
+
+
+def collapse_loose_leaves(dependencies):
+    collapsable_branches = ['acomp', 'advmod', 'dep', 'det', 'measure', 'nn', 'num', 'number', 'preconj', 'predet',
+                            'prep', 'pobj', 'quantmod']
+
+    non_leaves_nums = set([dependency['HEAD'] for dependency in dependencies])
+    leaves = [dependency for dependency in dependencies if dependency['ID'] not in non_leaves_nums]
+    leaves.reverse()
+
+    for leaf in leaves:
+        curr_leaf = leaf
+        deprel = curr_leaf['DEPREL']
+        while deprel in collapsable_branches:
+            if deprel == 'prep' and not curr_leaf['FORM'].startswith('of'):
+                break
+
+            #Get the parent (long way so that we can change dependencies directly by reference)
+            for dep in dependencies:
+                if dep['ID'] == curr_leaf['HEAD']:
+                    parent = dep
+                    break
+
+            #Pass the form on to the parent to append
+            if (int(parent['ID']) < int(curr_leaf['ID'])):
+                parent['FORM'] += ' ' + curr_leaf['FORM']
+            else:
+                parent['FORM'] = curr_leaf['FORM'] + ' ' + parent['FORM']
+
+            #Preserve this postag by changing the parent's
+            if (curr_leaf['POSTAG'].startswith('J') and parent['POSTAG'].startswith('V') and deprel == 'dep') or \
+                            deprel == 'pobj' or deprel == 'acomp' or deprel == 'prep':
+                parent['CPOSTAG'] = curr_leaf['CPOSTAG']
+                parent['POSTAG'] = curr_leaf['POSTAG']
+
+            #delete this from dependencies
+            dependencies.remove(curr_leaf)
+            #change deprel to the parent deprel
+            deprel = parent['DEPREL']
+            curr_leaf = parent
+
+    return dependencies
 
 
 def get_dependencies(json):

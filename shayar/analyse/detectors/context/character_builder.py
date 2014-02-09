@@ -28,27 +28,15 @@ FEMALE_SYNSETS = set([s.gloss for s in wordnet.synsets('female')] +
 ANIMATE_SYNSETS = set([s.gloss for s in wordnet.synsets('animate thing')])
 PHYSICAL_SYNSETS = set([s.gloss for s in wordnet.synsets('physical object')])
 
-PLURAL_PRONOUNS = ['ours', 'ourselves', 'theirs', 'them', 'themselves', 'they', 'us', 'our', 'ours', 'their']
-MALE_PRONOUNS = ['him', 'himself', 'hisself', 'his']
-FEMALE_PRONOUNS = ['hers', 'herself', 'she', 'her']
-NEUTRAL_PRONOUNS = ['it', 'itself', 'one', 'oneself', 'ownself', 'self']
+PLURAL_PRONOUNS = {'ours', 'ourselves', 'theirs', 'them', 'themselves', 'they', 'us', 'our', 'ours', 'their'}
+MALE_PRONOUNS = {'him', 'himself', 'hisself', 'his'}
+FEMALE_PRONOUNS = {'hers', 'herself', 'she', 'her'}
+NEUTRAL_PRONOUNS = {'it', 'itself', 'one', 'oneself', 'ownself', 'self'}
 
 NEXT_CHARACTER_ID = 0
-ENTITY_ID = -1
-ENTITY_CHARACTER = None
 
 
-def create_characters(dependencies, frames):
-    quantity = ''
-    entity = ''
-    for frame in frames:
-        if frame["target"]["name"] == 'Quantity':
-            if len(frame["annotationSets"][0]["frameElements"]) > 1:
-                quantity = frame["annotationSets"][0]["frameElements"][0]["text"]
-                entity = frame["annotationSets"][0]["frameElements"][1]["text"]
-
-            break
-
+def create_characters(dependencies):
     characters = {}
     for dependency in dependencies:
         cpostag = dependency['CPOSTAG']
@@ -57,46 +45,25 @@ def create_characters(dependencies, frames):
             continue
 
         global NEXT_CHARACTER_ID
-        global ENTITY_ID
-        word = dependency['FORM']
-        form = word
+        dependency['CHARACTER_ID'] = str(NEXT_CHARACTER_ID)
+        NEXT_CHARACTER_ID += 1
 
-        if word in entity:
-            form = quantity + ' ' + entity
-            if ENTITY_ID >= 0:
-                dependency['CHARACTER_ID'] = str(ENTITY_ID)
-            else:
-                dependency['CHARACTER_ID'] = str(NEXT_CHARACTER_ID)
-                ENTITY_ID = NEXT_CHARACTER_ID
-                NEXT_CHARACTER_ID += 1
-
-        elif word in quantity:
-            if ENTITY_ID >= 0:
-                dependency['CHARACTER_ID'] = str(ENTITY_ID)
-            else:
-                dependency['CHARACTER_ID'] = str(NEXT_CHARACTER_ID)
-                ENTITY_ID = NEXT_CHARACTER_ID
-                NEXT_CHARACTER_ID += 1
-            continue
-
-        else:
-            dependency['CHARACTER_ID'] = str(NEXT_CHARACTER_ID)
-            NEXT_CHARACTER_ID += 1
-
+        form = dependency['FORM']
+        words = form.split(' ')
         gender = ''
         object_state = ''
 
         if dependency['CPOSTAG'].startswith('P'):
-            if word in PLURAL_PRONOUNS:
+            if set(words) & PLURAL_PRONOUNS:
                 num = 'pl'
             else:
                 num = 'sg'
 
-            if word in MALE_PRONOUNS:
+            if set(words) & MALE_PRONOUNS:
                 gender = 'm'
-            elif word in FEMALE_PRONOUNS:
+            elif set(words) & FEMALE_PRONOUNS:
                 gender = 'f'
-            elif word in NEUTRAL_PRONOUNS:
+            elif set(words) & NEUTRAL_PRONOUNS:
                 gender = 'n'
 
             if gender == 'm' or gender == 'f':
@@ -109,9 +76,9 @@ def create_characters(dependencies, frames):
                 num = 'sg'
 
             try:
-                synset = wordnet.synsets(singularize(lemmatise(word)))[0]
+                synset = wordnet.synsets(singularize(lemmatise(words[-1])))[0]
             except IndexError:
-                print "Failed to find synset for " + word
+                print "Failed to find synset for '" + words[-1] + "'"
                 continue
 
             hyps = set([h.gloss for h in synset.hypernyms(recursive=True)])
@@ -136,15 +103,5 @@ def create_characters(dependencies, frames):
         character.text = form
         character.add_relation("IsA", form)
         characters[dependency['ID']] = character
-        if word in entity:
-            global ENTITY_CHARACTER
-            ENTITY_CHARACTER = character
-
-    for dependency in dependencies:
-        word = dependency['FORM']
-        cpostag = dependency['CPOSTAG']
-        if word in quantity and (cpostag.startswith('N') or cpostag.startswith('PR')):
-            characters[dependency['ID']] = ENTITY_CHARACTER
-            break
 
     return characters

@@ -40,11 +40,12 @@ def accept_if_complete(candidate_relation, characters):
     #Check for completion
     for param in candidate_relation:
         if not param:
+            #Actually, turn this into a Syntax instruction
             return
 
     subject_text = candidate_relation[0]
     relation_type = candidate_relation[1]
-    for character in characters:
+    for character in characters.values():
         if subject_text in character.text:
             character.add_relation(relation_type, candidate_relation[2])
 
