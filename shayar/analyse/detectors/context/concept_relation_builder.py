@@ -120,6 +120,8 @@ def build_relations(root_node):
         for child in root_node.deprel.values():
                 build_relations(child)
 
+        #if 'xcomp'... capable of
+
         '''
         word = root_node.form
         if root_node.postag.startswith('V'):

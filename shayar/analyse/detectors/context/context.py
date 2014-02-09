@@ -6,7 +6,6 @@ from json import loads as json_load
 from semantic_dependency_node import SemanticDependencyNode
 from character_builder import create_characters
 from frame_to_relation_converter import build_candidate_relations_from_frames
-from concept_relation_builder import build_relations
 
 
 def build_story(poem):
@@ -21,17 +20,94 @@ def build_story(poem):
     for sentence in sentences:
         json_parse_data = make_request(sentence)
         dependencies = collapse_loose_leaves(get_dependencies(json_parse_data))
-        print dependencies
         characters = create_characters(dependencies)
-        for character in characters.values():
-            print character.text
         candidate_relations = build_candidate_relations_from_frames(json_parse_data, dependencies, characters)
-        #Find the root.
-        root = [dep for dep in dependencies if dep['HEAD'] == '0'][0]
-        root_node = build_semantic_dependency_tree(dependencies, root, characters, candidate_relations)
-        build_relations(root_node)
+        #We probably won't need this stuffFind the root.
+        #root = [dep for dep in dependencies if dep['HEAD'] == '0'][0]
+        #root_node = build_semantic_dependency_tree(dependencies, root, characters, candidate_relations)
+        build_relations(dependencies, characters, candidate_relations)
         for character in characters.values():
             print character
+
+
+def build_relations(dependencies, characters, candidate_relations):
+    for character in characters.values():
+        for dependency in dependencies:
+            if character.text == dependency['FORM']:
+                related_dependencies = get_all_related_dependencies(dependency, dependencies, candidate_relations)
+                for related_dependency in related_dependencies:
+                    determine_relation_types(related_dependency, character)
+
+
+def determine_relation_types(related_dependency, character):
+    deprel = related_dependency[0]
+    form = related_dependency[1]['FORM']
+
+    if deprel == 'amod' or deprel == 'conj' or deprel == 'poss' or related_dependency[1]['POSTAG'].startswith('J'):
+        character.add_relation('HasProperty', form)
+
+    elif deprel == 'cop':
+        if related_dependency[1]['POSTAG'].startswith('J'):
+            character.add_relation('HasProperty', form)
+        else:
+            character.add_relation('IsA', form)
+
+    elif deprel == 'nsubjpass':
+        character.add_relation('ReceivesAction', form)
+        
+    elif deprel == 'prep':
+        character.add_relation('AtLocation', form)
+        
+    elif deprel == 'xsubj' or deprel == 'xcomp':
+        character.add_relation('CapableOf', form)
+
+
+def get_all_related_dependencies(dependency, dependencies, candidate_relations):
+    related_dependencies = []
+
+    in_deps = get_in_dependencies(dependency, dependencies, candidate_relations)
+
+    for in_dep in in_deps:
+        related_dependencies.append(in_dep)
+
+    out_deps = get_out_dependencies(dependency, dependencies, candidate_relations)
+
+    for out_dep in out_deps:
+        related_dependencies.append(out_dep)
+
+    return related_dependencies
+
+
+def get_out_dependencies(dependency, dependencies, candidate_relations):
+    out_deps = []
+    for dep in dependencies:
+        #Ignore subtree if it has a candidate relation (for now) since they are already added
+        try:
+            candiate_relation = candidate_relations[dep['FORM']]
+            continue
+        except KeyError:
+            if dep['HEAD'] == dependency['ID']:
+                    out_dep = dep['DEPREL'], dep
+                    out_deps.append(out_dep)
+                    out_deps.extend(get_out_dependencies(dep, dependencies, candidate_relations))
+
+    return out_deps
+
+
+def get_in_dependencies(dependency, dependencies, candidate_relations):
+    in_deps = []
+    for dep in dependencies:
+        #Ignore subtree if it has a candidate relation (for now) since they are already added
+        try:
+            candiate_relation = candidate_relations[dep['FORM']]
+            continue
+        except KeyError:
+            if dep['ID'] == dependency['HEAD']:
+                    in_dep = dep['DEPREL'], dep
+                    in_deps.append(in_dep)
+                    in_deps.extend(get_out_dependencies(dep, dependencies, candidate_relations))
+
+    return in_deps
 
 
 def build_semantic_dependency_tree(dependencies, root, characters, candidate_relations):
@@ -54,8 +130,8 @@ def build_semantic_dependency_tree(dependencies, root, characters, candidate_rel
 
 
 def collapse_loose_leaves(dependencies):
-    collapsable_branches = ['acomp', 'advmod', 'dep', 'det', 'measure', 'nn', 'num', 'number', 'preconj', 'predet',
-                            'prep', 'pobj', 'quantmod']
+    collapsable_branches = ['acomp', 'advmod', 'dep', 'det', 'measure', 'nn', 'num', 'number', 'neg', 'preconj',
+                            'predet', 'prep', 'pobj', 'quantmod']
 
     non_leaves_nums = set([dependency['HEAD'] for dependency in dependencies])
     leaves = [dependency for dependency in dependencies if dependency['ID'] not in non_leaves_nums]
