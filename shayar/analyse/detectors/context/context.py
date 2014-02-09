@@ -52,13 +52,13 @@ def determine_relation_types(related_dependency, character):
         else:
             character.add_relation('IsA', form)
 
-    elif deprel == 'nsubjpass':
+    elif deprel == 'nsubjpass' or deprel == 'dobj':
         character.add_relation('ReceivesAction', form)
         
     elif deprel == 'prep':
         character.add_relation('AtLocation', form)
         
-    elif deprel == 'xsubj' or deprel == 'xcomp':
+    elif deprel == 'xsubj':
         character.add_relation('CapableOf', form)
 
 
@@ -87,6 +87,9 @@ def get_out_dependencies(dependency, dependencies, candidate_relations):
             continue
         except KeyError:
             if dep['HEAD'] == dependency['ID']:
+                    #if dep['DEPREL'] == 'dobj' or dep['DEPREL'] == 'nsubjpass':
+                    #    out_dep = dep['DEPREL'], dependency
+                    #else:
                     out_dep = dep['DEPREL'], dep
                     out_deps.append(out_dep)
                     out_deps.extend(get_out_dependencies(dep, dependencies, candidate_relations))
@@ -103,9 +106,11 @@ def get_in_dependencies(dependency, dependencies, candidate_relations):
             continue
         except KeyError:
             if dep['ID'] == dependency['HEAD']:
-                    in_dep = dep['DEPREL'], dep
-                    in_deps.append(in_dep)
-                    in_deps.extend(get_out_dependencies(dep, dependencies, candidate_relations))
+                in_dep = dependency['DEPREL'], dep
+                in_deps.append(in_dep)
+                dependencies_without_this_one = dependencies
+                dependencies_without_this_one.remove(dependency)
+                in_deps.extend(get_out_dependencies(dep, dependencies_without_this_one, candidate_relations))
 
     return in_deps
 
