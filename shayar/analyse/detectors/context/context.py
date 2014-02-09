@@ -38,6 +38,16 @@ def build_relations(dependencies, characters, candidate_relations):
                 for related_dependency in related_dependencies:
                     determine_relation_types(related_dependency, character)
 
+    n = 1
+    for character in characters:
+        first_has_property = character.has_property
+        for i in range(n, len(characters)):
+            second_has_property = characters[n].has_property
+            for has_p in second_has_property:
+                if has_p in first_has_property:
+                    first_has_property.remove(has_p)
+            n += 1
+
 
 def determine_relation_types(related_dependency, character):
     deprel = related_dependency[0]
