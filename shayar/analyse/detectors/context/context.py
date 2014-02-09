@@ -26,14 +26,14 @@ def build_story(poem):
         #root = [dep for dep in dependencies if dep['HEAD'] == '0'][0]
         #root_node = build_semantic_dependency_tree(dependencies, root, characters, candidate_relations)
         build_relations(dependencies, characters, candidate_relations)
-        for character in characters.values():
+        for character in characters:
             print character
 
 
 def build_relations(dependencies, characters, candidate_relations):
-    for character in characters.values():
+    for character in characters:
         for dependency in dependencies:
-            if character.text == dependency['FORM']:
+            if character.character_id == dependency['ID']:
                 related_dependencies = get_all_related_dependencies(dependency, dependencies, candidate_relations)
                 for related_dependency in related_dependencies:
                     determine_relation_types(related_dependency, character)
@@ -58,7 +58,7 @@ def determine_relation_types(related_dependency, character):
     elif deprel == 'prep':
         character.add_relation('AtLocation', form)
         
-    elif deprel == 'xsubj':
+    elif deprel == 'xsubj' or deprel == 'rcmod':
         character.add_relation('CapableOf', form)
 
 

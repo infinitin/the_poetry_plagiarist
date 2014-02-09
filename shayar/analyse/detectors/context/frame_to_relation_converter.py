@@ -45,7 +45,7 @@ def accept_if_complete(candidate_relation, characters):
 
     subject_text = candidate_relation[0]
     relation_type = candidate_relation[1]
-    for character in characters.values():
+    for character in characters:
         if subject_text in character.text:
             character.add_relation(relation_type, candidate_relation[2])
 

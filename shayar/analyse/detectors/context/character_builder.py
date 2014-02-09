@@ -37,7 +37,7 @@ NEXT_CHARACTER_ID = 0
 
 
 def create_characters(dependencies):
-    characters = {}
+    characters = []
     for dependency in dependencies:
         cpostag = dependency['CPOSTAG']
         if not (cpostag.startswith('N') or cpostag.startswith('PR')):
@@ -99,9 +99,9 @@ def create_characters(dependencies):
                 elif hyps & FEMALE_SYNSETS:
                     gender = 'f'
 
-        character = Character(dependency['CHARACTER_ID'], num, gender, object_state)
+        character = Character(dependency['ID'], num, gender, object_state)
         character.text = form
         character.add_relation("IsA", form)
-        characters[dependency['ID']] = character
+        characters.append(character)
 
     return characters
