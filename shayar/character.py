@@ -62,12 +62,16 @@ class Character:
                 return_text += "They are female.\n"
         else:
             if self.num == 'sg':
-                if self.object_state == 'p':
+                if self.object_state == 'a':
+                    return_text += "It is a living thing.\n"
+                elif self.object_state == 'p':
                     return_text += "It is a physical object.\n"
                 else:
                     return_text += "It is not a physical object.\n"
             else:
-                if self.object_state == 'p':
+                if self.object_state == 'a':
+                    return_text += "They are a living things.\n"
+                elif self.object_state == 'p':
                     return_text += "They are physical objects.\n"
                 else:
                     return_text += "They are not physical objects.\n"

@@ -1,4 +1,5 @@
 __author__ = 'Nitin'
+from pattern.text.en import wordnet
 
 
 def resolve_anaphora(characters):
@@ -49,23 +50,49 @@ def resolve_pronoun_anaphora(characters):
                     inherit_all(possibilities[0], character)
                     characters_to_remove.append(character)
                 else:
-                    possibilities = [poss for poss in possibilities if poss.object_state == character.object_state]
-                    if not possibilities:
-                        print 'Could not resolve: ' + character
-
-                    elif len(possibilities) == 1:
-                        inherit_all(possibilities[0], character)
-                        characters_to_remove.append(character)
-
-                    else:
+                    if not character.object_state:
                         pragmatic_anaphora_resolution(character, characters)
+                    else:
+                        possibilities = [poss for poss in possibilities if poss.object_state == character.object_state or poss.object_state == '']
+
+                        if not possibilities:
+                            print 'Could not resolve: ' + character
+
+                        elif len(possibilities) == 1:
+                            inherit_all(possibilities[0], character)
+                            characters_to_remove.append(character)
+
+                        else:
+                            pragmatic_anaphora_resolution(character, characters)
 
     for character_to_remove in characters_to_remove:
         characters.remove(character_to_remove)
 
 
 def resolve_hypernym_anaphora(characters):
-    pass
+    characters_to_remove = []
+    for character in characters:
+        try:
+            character_synset = wordnet.synsets(character.text.split(' ')[-1])[0]
+            character_hypernyms = character_synset.hypernyms(recursive=True)
+        except (KeyError, IndexError) as e:
+            continue
+        for char in characters:
+            if char == character:
+                continue
+            else:
+                try:
+                    char_synset = wordnet.synsets(char.text.split(' ')[-1])[0]
+                    if char_synset in character_hypernyms:
+                        inherit_all(character, char)
+                        characters_to_remove.append(char)
+
+                except (KeyError, IndexError) as e:
+                    continue
+
+    for character_to_remove in characters_to_remove:
+        characters.remove(character_to_remove)
+
 
 
 def resolve_action_anaphora(characters):
@@ -91,6 +118,13 @@ def get_initial_possibilities(character, characters):
 
 
 def inherit_all(taker, giver):
+    if giver.gender == 'm' or giver.gender == 'f':
+        if taker.gender != 'm' and taker.gender != 'f':
+            taker.gender = giver.gender
+
+    if not taker.object_state:
+        taker.object_state = giver.object_state
+
     taker.named.extend(giver.named)
     taker.not_named.extend(giver.not_named)
     taker.is_a.extend(giver.is_a)
