@@ -7,6 +7,8 @@ from semantic_dependency_node import SemanticDependencyNode
 from character_builder import create_characters
 from frame_to_relation_converter import build_candidate_relations_from_frames
 
+negative_words = set(['not', 'seldom', 'hardly', 'barely', 'scarcely', 'rarely', 'no', 'neither', "n't"])
+
 
 def build_story(poem):
     lines = ""
@@ -41,11 +43,16 @@ def build_relations(dependencies, characters, candidate_relations):
     n = 1
     for character in characters:
         first_has_property = character.has_property
+        first_not_has_property = character.not_has_property
         for i in range(n, len(characters)):
             second_has_property = characters[n].has_property
+            second_not_has_property = characters[n].not_has_property
             for has_p in second_has_property:
                 if has_p in first_has_property:
                     first_has_property.remove(has_p)
+            for not_has_p in second_not_has_property:
+                if not_has_p in first_not_has_property:
+                    first_not_has_property.remove(not_has_p)
             n += 1
 
 
@@ -54,22 +61,31 @@ def determine_relation_types(related_dependency, character):
     form = related_dependency[1]['FORM']
 
     if deprel == 'amod' or deprel == 'conj' or deprel == 'poss' or related_dependency[1]['POSTAG'].startswith('J'):
-        character.add_relation('HasProperty', form)
+        relation = 'HasProperty'
+        negatives = [neg for neg in set(form.split(' ')) if neg in negative_words]
+        if len(negatives) % 2 == 1:
+            relation = 'Not' + relation
+            words = form.split(' ')
+            form = ' '.join(words[words.index(negatives[-1])+1:])
+
+        character.add_relation(relation, form)
 
     elif deprel == 'cop':
-        if related_dependency[1]['POSTAG'].startswith('J'):
-            character.add_relation('HasProperty', form)
-        else:
-            character.add_relation('IsA', form)
+        pass
+        #character.add_relation('IsA', form)
 
     elif deprel == 'nsubjpass' or deprel == 'dobj':
         character.add_relation('ReceivesAction', form)
         
     elif deprel == 'prep':
-        character.add_relation('AtLocation', form)
+        pass
+        #character.add_relation('AtLocation', form)
         
     elif deprel == 'xsubj' or deprel == 'rcmod':
         character.add_relation('CapableOf', form)
+
+    elif related_dependency[1]['POSTAG'].startswith('V'):
+        character.add_relation('TakesAction', form)
 
 
 def get_all_related_dependencies(dependency, dependencies, candidate_relations):
@@ -97,9 +113,6 @@ def get_out_dependencies(dependency, dependencies, candidate_relations):
             continue
         except KeyError:
             if dep['HEAD'] == dependency['ID']:
-                    #if dep['DEPREL'] == 'dobj' or dep['DEPREL'] == 'nsubjpass':
-                    #    out_dep = dep['DEPREL'], dependency
-                    #else:
                     out_dep = dep['DEPREL'], dep
                     out_deps.append(out_dep)
                     out_deps.extend(get_out_dependencies(dep, dependencies, candidate_relations))
