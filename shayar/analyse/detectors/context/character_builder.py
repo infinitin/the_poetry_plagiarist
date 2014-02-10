@@ -101,6 +101,8 @@ def create_characters(dependencies):
 
         character = Character(dependency['ID'], num, gender, object_state)
         character.text = form
+        if dependency['POSTAG'].startswith('P'):
+            character.is_pronoun = True
         character.add_relation("IsA", form)
         characters.append(character)
 

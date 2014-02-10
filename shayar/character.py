@@ -11,6 +11,7 @@ class Character:
         self.object_state = object_state      # 'a' for animate, 'p' for physical object, 'n' for not an object
 
         self.text = ""               # Text in the poem referring to it
+        self.is_pronoun = False      # Whether or not it is a pronoun (and needs to be resolved)
 
         self.named = []              # list of Named
         self.is_a = []               # list of IsA
@@ -25,6 +26,9 @@ class Character:
         self.used_for = []           # list of UsedFor
         self.desires = []            # list of Desires
         self.made_of = []            # list of MadeOf
+        self.believes = []
+        self.send_message = []
+        self.receive_message = []
 
         self.not_named = []              # list of NotNamed
         self.not_is_a = []               # list of NotIsA
@@ -39,6 +43,9 @@ class Character:
         self.not_used_for = []           # list of NotUsedFor
         self.not_desires = []            # list of NotDesires
         self.not_made_of = []            # list of NotMadeOf
+        self.not_believes = []
+        self.not_send_message = []
+        self.not_receive_message = []
 
     def __str__(self):
         return_text = "This character is represented by the text: '" + self.text + "'.\n"
@@ -67,111 +74,99 @@ class Character:
 
         for elem in self.named:
             return_text += "Named: " + elem + ".\n"
-        return_text + '\n'
 
         for elem in self.not_named:
             return_text += "NotNamed: " + elem + ".\n"
-        return_text + '\n'
 
         for elem in self.is_a:
             return_text += "Is: " + elem + ".\n"
-        return_text + '\n'
 
         for elem in self.not_is_a:
             return_text += "NotIs: " + elem + ".\n"
-        return_text + '\n'
 
         for elem in self.has_property:
             return_text += "HasProperty: " + elem + ".\n"
-        return_text + '\n'
 
         for elem in self.not_has_property:
             return_text += "NotHasProperty: " + elem + ".\n"
-        return_text + '\n'
 
         for elem in self.has_a:
             return_text += "Has: " + elem + ".\n"
-        return_text + '\n'
 
         for elem in self.not_has_a:
             return_text += "NotHas: " + elem + ".\n"
-        return_text + '\n'
 
         for elem in self.part_of:
             return_text += "PartOf: " + elem + ".\n"
-        return_text + '\n'
 
         for elem in self.not_part_of:
             return_text += "NotPartOf: " + elem + ".\n"
-        return_text + '\n'
 
         for elem in self.capable_of:
             return_text += "CapableOf: " + elem + ".\n"
-        return_text + '\n'
 
         for elem in self.not_capable_of:
             return_text += "NotCapableOf: " + elem + ".\n"
-        return_text + '\n'
 
         for elem in self.at_location:
             return_text += "AtLocation: " + elem + ".\n"
-        return_text + '\n'
 
         for elem in self.not_at_location:
             return_text += "NotAtLocation: " + elem + ".\n"
-        return_text + '\n'
 
         for elem in self.receives_action:
             return_text += "ReceivesAction: " + elem + ".\n"
-        return_text + '\n'
 
         for elem in self.not_receives_action:
             return_text += "NotReceivesAction: " + elem + ".\n"
-        return_text + '\n'
 
         for elem in self.takes_action:
             return_text += "TakesAction: " + elem + ".\n"
-        return_text + '\n'
 
         for elem in self.not_takes_action:
             return_text += "NotTakesAction: " + elem + ".\n"
-        return_text + '\n'
 
         for elem in self.created_by:
             return_text += "CreatedBy: " + elem + ".\n"
-        return_text + '\n'
 
         for elem in self.not_created_by:
             return_text += "NotCreatedBy: " + elem + ".\n"
-        return_text + '\n'
 
         for elem in self.used_for:
             return_text += "UsedFor: " + elem + ".\n"
-        return_text + '\n'
 
         for elem in self.not_used_for:
             return_text += "NotUsedFor: " + elem + ".\n"
-        return_text + '\n'
 
         for elem in self.desires:
             return_text += "Desires: " + elem + ".\n"
-        return_text + '\n'
 
         for elem in self.not_desires:
             return_text += "NotDesires: " + elem + ".\n"
-        return_text + '\n'
 
         for elem in self.made_of:
             return_text += "MadeOf: " + elem + ".\n"
-        return_text + '\n'
 
         for elem in self.not_made_of:
             return_text += "NotMadeOf: " + elem + ".\n"
-        return_text + '\n'
 
+        for elem in self.believes:
+            return_text += "Believes: " + elem + ".\n"
 
+        for elem in self.not_believes:
+            return_text += "NotBelieves: " + elem + ".\n"
 
+        for elem in self.send_message:
+            return_text += "SendMessage: " + elem + ".\n"
 
+        for elem in self.not_send_message:
+            return_text += "NotSendMessage: " + elem + ".\n"
+
+        for elem in self.receive_message:
+            return_text += "ReceiveMessage: " + elem + ".\n"
+        
+        for elem in self.not_receive_message:
+            return_text += "NotReceiveMessage: " + elem + ".\n"
 
         if self.num == 'pl':
             pr = 'They are'
@@ -186,7 +181,7 @@ class Character:
 
     def add_relation(self, type, text):
         if type == 'Named':
-            self.elemd.append(text)
+            self.named.append(text)
         if type == 'IsA':
             self.is_a.append(text)
         if type == 'HasProperty':
@@ -211,9 +206,15 @@ class Character:
             self.desires.append(text)
         if type == 'MadeOf':
             self.made_of.append(text)
+        if type == 'Believes':
+            self.believes.append(text)
+        if type == 'SendMessage':
+            self.send_message.append(text)
+        if type == 'ReceiveMessage':
+            self.receive_message.append(text)
 
         if type == 'NotNamed':
-            self.not_elemd.append(text)
+            self.not_named.append(text)
         if type == 'NotIsA':
             self.not_is_a.append(text)
         if type == 'NotHasProperty':
@@ -238,3 +239,9 @@ class Character:
             self.not_desires.append(text)
         if type == 'NotMadeOf':
             self.not_made_of.append(text)
+        if type == 'NotBelieves':
+            self.not_believes.append(text)
+        if type == 'NotSendMessage':
+            self.not_send_message.append(text)
+        if type == 'NotReceiveMessage':
+            self.not_receive_message.append(text)

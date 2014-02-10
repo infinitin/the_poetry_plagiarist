@@ -45,9 +45,18 @@ def accept_if_complete(candidate_relation, characters):
 
     subject_text = candidate_relation[0]
     relation_type = candidate_relation[1]
-    for character in characters:
-        if subject_text in character.text:
-            character.add_relation(relation_type, candidate_relation[2])
+    if relation_type == 'SendMessage':
+        message = candidate_relation[2]
+        object_text = candidate_relation[3]
+        for character in characters:
+            if subject_text in character.text:
+                character.add_relation(relation_type, message)
+            elif object_text in character.text:
+                character.add_relation('ReceiveMessage', message)
+    else:
+        for character in characters:
+            if subject_text in character.text:
+                character.add_relation(relation_type, candidate_relation[2])
 
 
 def fill_relation_template(candidate_relation_template, frame):
@@ -208,21 +217,21 @@ def build_frame_relations():
 
     frame_relations['Being_named'] = ('Entity', 'Named', 'Name')
 
-    frame_relations['Awareness'] = ('Cognizer', 'Belief', 'Content')
-    frame_relations['Certainty'] = ('Cognizer', 'Belief', 'Content')
-    frame_relations['Religious_belief'] = ('Believer', 'Belief', 'Content')
-    frame_relations['Trust'] = ('Cognizer', 'Belief', 'Information')
-    frame_relations['Opinion'] = ('Cognizer', 'Belief', 'Opinion')
+    frame_relations['Awareness'] = ('Cognizer', 'Believes', 'Content')
+    frame_relations['Certainty'] = ('Cognizer', 'Believes', 'Content')
+    frame_relations['Religious_belief'] = ('Believer', 'Believes', 'Content')
+    frame_relations['Trust'] = ('Cognizer', 'Believes', 'Information')
+    frame_relations['Opinion'] = ('Cognizer', 'Believes', 'Opinion')
 
-    frame_relations['Communication'] = ('Communicator', 'Communication', 'Message/Topic', 'Addressee')
-    frame_relations['Telling'] = ('Speaker', 'Communication', 'Message', 'Addressee')
-    frame_relations['Request'] = ('Speaker', 'Communication', 'Message', 'Addressee')
-    frame_relations['Speak_on_topic'] = ('Speaker', 'Communication', 'Topic', 'Audience')
-    frame_relations['Statement'] = ('Speaker', 'Communication', 'Message/Topic', 'Addressee')
-    frame_relations['Prevarication'] = ('Speaker', 'Communication', 'Topic', 'Addressee')
-    frame_relations['Reporting'] = ('Informer', 'Communication', 'Behaviour/Wrongdoer', 'Authorities')
-    frame_relations['Text_creation'] = ('Author', 'Communication', 'Text', 'Addressee')
-    frame_relations['Chatting'] = ('Interlocutor_1', 'Communication', 'Topic', 'Interlocutor_2')
+    frame_relations['Communication'] = ('Communicator', 'SendMessage', 'Message/Topic', 'Addressee')
+    frame_relations['Telling'] = ('Speaker', 'SendMessage', 'Message', 'Addressee')
+    frame_relations['Request'] = ('Speaker', 'SendMessage', 'Message', 'Addressee')
+    frame_relations['Speak_on_topic'] = ('Speaker', 'SendMessage', 'Topic', 'Audience')
+    frame_relations['Statement'] = ('Speaker', 'SendMessage', 'Message/Topic', 'Addressee')
+    frame_relations['Prevarication'] = ('Speaker', 'SendMessage', 'Topic', 'Addressee')
+    frame_relations['Reporting'] = ('Informer', 'SendMessage', 'Behaviour/Wrongdoer', 'Authorities')
+    frame_relations['Text_creation'] = ('Author', 'SendMessage', 'Text', 'Addressee')
+    frame_relations['Chatting'] = ('Interlocutor_1', 'SendMessage', 'Topic', 'Interlocutor_2')
 
     frame_relations['Relation'] = ('Entitiy_1', 'Relation', 'Relation_type', 'Entity_2')
     frame_relations['Relation_between_individuals'] = ('Individual_1', 'Relation', 'Relation', 'Individual_2')

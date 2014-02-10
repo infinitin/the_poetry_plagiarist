@@ -6,6 +6,7 @@ from json import loads as json_load
 from semantic_dependency_node import SemanticDependencyNode
 from character_builder import create_characters
 from frame_to_relation_converter import build_candidate_relations_from_frames
+from anaphora_resolution import resolve_anaphora
 
 negative_words = set(['not', 'seldom', 'hardly', 'barely', 'scarcely', 'rarely', 'no', 'neither', "n't"])
 
@@ -19,6 +20,8 @@ def build_story(poem):
 
     sentences = [sentence.string for sentence in parse_sentences]
 
+    all_characters = []
+
     for sentence in sentences:
         json_parse_data = make_request(sentence)
         dependencies = collapse_loose_leaves(get_dependencies(json_parse_data))
@@ -28,8 +31,11 @@ def build_story(poem):
         #root = [dep for dep in dependencies if dep['HEAD'] == '0'][0]
         #root_node = build_semantic_dependency_tree(dependencies, root, characters, candidate_relations)
         build_relations(dependencies, characters, candidate_relations)
-        for character in characters:
-            print character
+        all_characters.extend(characters)
+
+    resolve_anaphora(all_characters)
+    for character in all_characters:
+        print character
 
 
 def build_relations(dependencies, characters, candidate_relations):
@@ -40,6 +46,7 @@ def build_relations(dependencies, characters, candidate_relations):
                 for related_dependency in related_dependencies:
                     determine_relation_types(related_dependency, character)
 
+    # Make this less hacky pls.
     n = 1
     for character in characters:
         first_has_property = character.has_property
