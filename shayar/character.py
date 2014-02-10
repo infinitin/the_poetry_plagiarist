@@ -41,6 +41,138 @@ class Character:
         self.not_made_of = []            # list of NotMadeOf
 
     def __str__(self):
+        return_text = "This character is represented by the text: '" + self.text + "'.\n"
+
+        if self.gender == 'm':
+            if self.num == 'sg':
+                return_text += "He is male.\n"
+            else:
+                return_text += "They are male.\n"
+        elif self.gender == 'f':
+            if self.num == 'sg':
+                return_text += "She is female.\n"
+            else:
+                return_text += "They are female.\n"
+        else:
+            if self.num == 'sg':
+                if self.object_state == 'p':
+                    return_text += "It is a physical object.\n"
+                else:
+                    return_text += "It is not a physical object.\n"
+            else:
+                if self.object_state == 'p':
+                    return_text += "They are physical objects.\n"
+                else:
+                    return_text += "They are not physical objects.\n"
+
+        for elem in self.named:
+            return_text += "Named: " + elem + ".\n"
+        return_text + '\n'
+
+        for elem in self.not_named:
+            return_text += "NotNamed: " + elem + ".\n"
+        return_text + '\n'
+
+        for elem in self.is_a:
+            return_text += "Is: " + elem + ".\n"
+        return_text + '\n'
+
+        for elem in self.not_is_a:
+            return_text += "NotIs: " + elem + ".\n"
+        return_text + '\n'
+
+        for elem in self.has_property:
+            return_text += "HasProperty: " + elem + ".\n"
+        return_text + '\n'
+
+        for elem in self.not_has_property:
+            return_text += "NotHasProperty: " + elem + ".\n"
+        return_text + '\n'
+
+        for elem in self.has_a:
+            return_text += "Has: " + elem + ".\n"
+        return_text + '\n'
+
+        for elem in self.not_has_a:
+            return_text += "NotHas: " + elem + ".\n"
+        return_text + '\n'
+
+        for elem in self.part_of:
+            return_text += "PartOf: " + elem + ".\n"
+        return_text + '\n'
+
+        for elem in self.not_part_of:
+            return_text += "NotPartOf: " + elem + ".\n"
+        return_text + '\n'
+
+        for elem in self.capable_of:
+            return_text += "CapableOf: " + elem + ".\n"
+        return_text + '\n'
+
+        for elem in self.not_capable_of:
+            return_text += "NotCapableOf: " + elem + ".\n"
+        return_text + '\n'
+
+        for elem in self.at_location:
+            return_text += "AtLocation: " + elem + ".\n"
+        return_text + '\n'
+
+        for elem in self.not_at_location:
+            return_text += "NotAtLocation: " + elem + ".\n"
+        return_text + '\n'
+
+        for elem in self.receives_action:
+            return_text += "ReceivesAction: " + elem + ".\n"
+        return_text + '\n'
+
+        for elem in self.not_receives_action:
+            return_text += "NotReceivesAction: " + elem + ".\n"
+        return_text + '\n'
+
+        for elem in self.takes_action:
+            return_text += "TakesAction: " + elem + ".\n"
+        return_text + '\n'
+
+        for elem in self.not_takes_action:
+            return_text += "NotTakesAction: " + elem + ".\n"
+        return_text + '\n'
+
+        for elem in self.created_by:
+            return_text += "CreatedBy: " + elem + ".\n"
+        return_text + '\n'
+
+        for elem in self.not_created_by:
+            return_text += "NotCreatedBy: " + elem + ".\n"
+        return_text + '\n'
+
+        for elem in self.used_for:
+            return_text += "UsedFor: " + elem + ".\n"
+        return_text + '\n'
+
+        for elem in self.not_used_for:
+            return_text += "NotUsedFor: " + elem + ".\n"
+        return_text + '\n'
+
+        for elem in self.desires:
+            return_text += "Desires: " + elem + ".\n"
+        return_text + '\n'
+
+        for elem in self.not_desires:
+            return_text += "NotDesires: " + elem + ".\n"
+        return_text + '\n'
+
+        for elem in self.made_of:
+            return_text += "MadeOf: " + elem + ".\n"
+        return_text + '\n'
+
+        for elem in self.not_made_of:
+            return_text += "NotMadeOf: " + elem + ".\n"
+        return_text + '\n'
+
+
+
+
+
         if self.num == 'pl':
             pr = 'They are'
         else: 
@@ -50,24 +182,11 @@ class Character:
             elif self.gender == 'f':
                 pr = 'She is'
 
-        return "This character is represented by the text: '" + self.text + "'.\n\n" + \
-            pr + " named " + str(self.named) + "\nbut not named " + str(self.not_named) + ".\n\n" +\
-            pr + " " + str(self.is_a) + "\nbut not " + str(self.not_is_a) + ".\n\n" +\
-            pr + "has the properties " + str(self.has_property) + "\nbut not the properties " + str(self.not_has_property) + ".\n\n" +\
-            pr + "has " + str(self.has_a) + "\nbut doesn't have " + str(self.not_has_a) + ".\n\n" +\
-            pr + " part of " + str(self.part_of) + "\nbut not part of " + str(self.not_part_of) + ".\n\n" +\
-            pr + " capable of " + str(self.capable_of) + "\nbut not capable of " + str(self.not_capable_of) + ".\n\n" +\
-            pr + "can generally be found near " + str(self.at_location) + "\nbut not near " + str(self.not_at_location) + ".\n\n" +\
-            pr + "generally has " + str(self.receives_action) + "\nhappen to it but not so much " + str(self.not_receives_action) + ".\n\n" +\
-            pr + "generally does " + str(self.takes_action) + "\nbut not so much " + str(self.not_receives_action) + ".\n\n" +\
-            pr + " created by " + str(self.created_by) + "\nbut not by " + str(self.not_created_by) + ".\n\n" +\
-            pr + " used for " + str(self.used_for) + "\nbut not for " + str(self.not_used_for) + ".\n\n" +\
-            pr + " desires " + str(self.desires) + "\nbut doesn't want " + str(self.not_desires) + ".\n\n" +\
-            pr + " made of " + str(self.made_of) + "\nbut not " + str(self.not_made_of) + ".\n\n"
+        return return_text
 
     def add_relation(self, type, text):
         if type == 'Named':
-            self.named.append(text)
+            self.elemd.append(text)
         if type == 'IsA':
             self.is_a.append(text)
         if type == 'HasProperty':
@@ -94,7 +213,7 @@ class Character:
             self.made_of.append(text)
 
         if type == 'NotNamed':
-            self.not_named.append(text)
+            self.not_elemd.append(text)
         if type == 'NotIsA':
             self.not_is_a.append(text)
         if type == 'NotHasProperty':
