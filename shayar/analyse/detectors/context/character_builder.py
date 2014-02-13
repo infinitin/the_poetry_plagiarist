@@ -36,6 +36,11 @@ NEUTRAL_PRONOUNS = {'it', 'itself', 'one', 'oneself', 'ownself', 'self'}
 NEXT_CHARACTER_ID = 0
 
 
+# Find the nouns and pronouns of the sentence.
+# Determine the gender (m/f/n/[unknown])
+# Determine whether it is plural or singular
+# Determine if it is an animate object ('a'), inanimate physical object ('p') or not an object ('n')
+# Create the character objects for each and send them back (anaphor resolution to be done later)
 def create_characters(dependencies):
     characters = []
     for dependency in dependencies:

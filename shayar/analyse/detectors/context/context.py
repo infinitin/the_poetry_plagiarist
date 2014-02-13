@@ -7,10 +7,11 @@ from character_builder import create_characters
 from frame_to_relation_converter import build_candidate_relations_from_frames
 from anaphora_resolution import resolve_anaphora
 
+# List of words that imply a negative. Used in conjunction with the 'neg' dependency
 negative_words = {'not', 'seldom', 'hardly', 'barely', 'scarcely', 'rarely', 'no', 'neither', "n't"}
 
 
-def build_story(poem):
+def identify_characters_and_relationships(poem):
     # Break it down into lines and lower all characters.
     # NOTE: This may cause some issues with pronouns and I
     lines = ""
@@ -99,6 +100,9 @@ def build_relations(dependencies, characters, candidate_relations):
             n += 1
 
 
+# Using the dependency relations only, find possible ConceptNet relations.
+# See doc for meanings of each of the relations.
+# If it is just a verb an doesn't match anything else, then we say that it was a TakeAction
 def determine_relation_types(related_dependency, character):
     deprel = related_dependency[0]
     form = related_dependency[1]['FORM']
@@ -131,22 +135,26 @@ def determine_relation_types(related_dependency, character):
         character.add_relation('TakesAction', form)
 
 
+# We want everything to be character centric, so we use this to get all of the related dependencies to a character.
+# Builds the spider diagram from the character chunk. Anything going out stays, anything coming in is reversed.
+# Going out relations are transitive
+# We also want all of the ones going out of the one that comes in, although this can lead to some duplication.
+#   We handle this downstream though.
 def get_all_related_dependencies(dependency, dependencies, candidate_relations):
     related_dependencies = []
 
     in_deps = get_in_dependencies(dependency, dependencies, candidate_relations)
-
     for in_dep in in_deps:
         related_dependencies.append(in_dep)
 
     out_deps = get_out_dependencies(dependency, dependencies, candidate_relations)
-
     for out_dep in out_deps:
         related_dependencies.append(out_dep)
 
     return related_dependencies
 
 
+# Find all nodes going out (i.e. ID of current is same as HEAD of considered)
 def get_out_dependencies(dependency, dependencies, candidate_relations):
     out_deps = []
     for dep in dependencies:
@@ -158,6 +166,8 @@ def get_out_dependencies(dependency, dependencies, candidate_relations):
     return out_deps
 
 
+# Find the (single) node coming in (i.e. HEAD of current is same as ID of considered)
+# Recurse on the others going out of the one coming in
 def get_in_dependencies(dependency, dependencies, candidate_relations):
     in_deps = []
     for dep in dependencies:
@@ -171,6 +181,11 @@ def get_in_dependencies(dependency, dependencies, candidate_relations):
     return in_deps
 
 
+# We want to deal with characters, actions and descriptions on a phrase by phrase level. This increases accuracy and
+#  simplifies the problem as well. We chunk phrases together by collapsing branches of the type below. See doc for
+#  explanation on each of them.
+# Note that by default we keep the POS of the highest dep, but in some cases we must inherit the POS
+#  e.g. tasted so nice should inherit the adjective POS from nice rather than keeping the verb POS of tasted.
 def collapse_loose_leaves(dependencies):
     collapsable_branches = ['acomp', 'advmod', 'dep', 'det', 'measure', 'nn', 'num', 'number', 'neg', 'preconj',
                             'predet', 'prep', 'pobj', 'quantmod']
@@ -213,6 +228,7 @@ def collapse_loose_leaves(dependencies):
     return dependencies
 
 
+# Extract the dependencies from the Syntactic Dependency Parse from TurboParser CoNLL API call
 def get_dependencies(json):
     full = json["sentences"][0]["conll"]
     entries = full.split('\n')
@@ -222,19 +238,16 @@ def get_dependencies(json):
         entry = entry.split('\t')
         dependency['ID'] = entry[0]
         dependency['FORM'] = entry[1]
-        #dependency['LEMMA'] = entry[2] but we don't get this
         dependency['CPOSTAG'] = entry[3]
         dependency['POSTAG'] = entry[4]
-        #dependency['FEATS'] = entry[5] nor do we get this
         dependency['HEAD'] = entry[6]
         dependency['DEPREL'] = entry[7]
-        #dependency['PHEAD'] = entry[8] nor these
-        #dependency['PDEPREL'] = entry[9]
         dependencies.append(dependency)
 
     return dependencies
 
 
+#Make an API request to Noah's Ark to get the Syntactic Dependency and Frame-Semantic Parses in JSON form
 def make_request(sentence):
     url = "http://demo.ark.cs.cmu.edu/parse/api/v1/parse?sentence="
     request_url = url + sentence.replace(' ', '+')

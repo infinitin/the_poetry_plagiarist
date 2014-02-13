@@ -80,6 +80,6 @@ test.characters = point_of_view.identify_characters(test.poem)
 '''
 
 logging.info("Reading in-between the lines")
-context.build_story(test.poem)
+context.identify_characters_and_relationships(test.poem)
 
 print str(test)
