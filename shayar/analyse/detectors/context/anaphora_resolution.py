@@ -75,7 +75,7 @@ def resolve_hypernym_anaphora(characters):
         try:
             character_synset = wordnet.synsets(character.text.split(' ')[-1])[0]
             character_hypernyms = character_synset.hypernyms(recursive=True)
-        except (KeyError, IndexError) as e:
+        except (KeyError, IndexError):
             continue
         for char in characters:
             if char == character:
@@ -87,12 +87,11 @@ def resolve_hypernym_anaphora(characters):
                         inherit_all(character, char)
                         characters_to_remove.append(char)
 
-                except (KeyError, IndexError) as e:
+                except (KeyError, IndexError):
                     continue
 
     for character_to_remove in characters_to_remove:
         characters.remove(character_to_remove)
-
 
 
 def resolve_action_anaphora(characters):

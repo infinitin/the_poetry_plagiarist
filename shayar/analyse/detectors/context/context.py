@@ -3,54 +3,65 @@ __author__ = 'Nitin'
 from pattern.text.en import parsetree
 from urllib2 import urlopen
 from json import loads as json_load
-from semantic_dependency_node import SemanticDependencyNode
 from character_builder import create_characters
 from frame_to_relation_converter import build_candidate_relations_from_frames
 from anaphora_resolution import resolve_anaphora
 
-negative_words = set(['not', 'seldom', 'hardly', 'barely', 'scarcely', 'rarely', 'no', 'neither', "n't"])
+negative_words = {'not', 'seldom', 'hardly', 'barely', 'scarcely', 'rarely', 'no', 'neither', "n't"}
 
 
 def build_story(poem):
+    # Break it down into lines and lower all characters.
+    # NOTE: This may cause some issues with pronouns and I
     lines = ""
     for line in poem:
         lines += line.lower() + " "
 
+    # Split into natural sentences.
     parse_sentences = parsetree(lines, tags=True, chunks=True, relations=True, lemmata=True, tagset=True)
-
     sentences = [sentence.string for sentence in parse_sentences]
 
     all_characters = []
 
+    # Send a sentence at a time to Noah's Ark.
+    # Simplify the dependency tree by chunking based on certain dependencies.
+    # Create the character objects out of these dependencies.
+    # Determine relations from the Semafor Frame-Semantic parse.
+    # Build relations for each character based on the relations from Semafor and the dependencies.
+    # Save all the characters for anaphora resolution later and to be returned for abstraction.
     for sentence in sentences:
         json_parse_data = make_request(sentence)
         dependencies = collapse_loose_leaves(get_dependencies(json_parse_data))
         characters = create_characters(dependencies)
-        candidate_relations = build_candidate_relations_from_frames(json_parse_data, dependencies, characters)
-        #We probably won't need this stuffFind the root.
-        #root = [dep for dep in dependencies if dep['HEAD'] == '0'][0]
-        #root_node = build_semantic_dependency_tree(dependencies, root, characters, candidate_relations)
+        candidate_relations = build_candidate_relations_from_frames(json_parse_data)
         build_relations(dependencies, characters, candidate_relations)
         all_characters.extend(characters)
 
+    # Perform anaphora resolution of all types.
     resolve_anaphora(all_characters)
     for character in all_characters:
         print character
 
+    return all_characters
 
+
+# Add ConceptNet-style relations to character object based on the candidate relations derived from Semafor
+#  and from heuristics of the dependency tree.
 def build_relations(dependencies, characters, candidate_relations):
     for character in characters:
         for dependency in dependencies:
             if character.character_id == dependency['ID']:
+                # Related dependencies are the ones that might create a relation for a particular character.
                 related_dependencies = get_all_related_dependencies(dependency, dependencies, candidate_relations)
                 for related_dependency in related_dependencies:
                     try:
+                        # Check if Semafor found a relation, take it if it did since it is likely to be more accurate.
                         candidate_relation = candidate_relations[related_dependency[1]['FORM']]
                         relation_type = candidate_relation[1]
                         object_text = candidate_relation[2]
 
-                        #Send message is a four tuple so we get the receiver and give them the message as well as
-                        # making the current character the sender
+                        # Send message is a four tuple so we get the receiver and give them the message as well as
+                        #  making the current character the sender
                         if relation_type == 'SendMessage':
                             message = candidate_relation[2]
                             character.add_relation(relation_type, message)
@@ -59,14 +70,19 @@ def build_relations(dependencies, characters, candidate_relations):
                                 if object_text in char.text or char.text in object_text:
                                     char.add_relation('ReceiveMessage', message)
                         else:
+                            # If the object could not be deciphered by Semafor, we can take a guess.
                             if not object_text:
                                 object_text = characters[characters.index(character)+1].text
                             character.add_relation(relation_type, object_text)
                         continue
                     except KeyError:
+                        # If nothing for this word found by Semafor, try to find something using the dependencies
                         determine_relation_types(related_dependency, character)
 
-    # Make this less hacky pls.
+    # Sometimes the related dependencies of an object earlier in a sentence overlaps with that of objects later in the
+    #  same sentence (not usually the other way around).
+    # This causes duplication and ultimately incorrect relations for the earlier object. So we arbitrarily remove any
+    #  relations that earlier objects have that overlap with later objects.
     n = 1
     for character in characters:
         first_has_property = character.has_property
@@ -155,25 +171,6 @@ def get_in_dependencies(dependency, dependencies, candidate_relations):
     return in_deps
 
 
-def build_semantic_dependency_tree(dependencies, root, characters, candidate_relations):
-    root_node = SemanticDependencyNode(root['ID'], root['FORM'], root['CPOSTAG'], root['POSTAG'])
-
-    if root['CHARACTER_ID']:
-        root_node.add_character(characters[root['ID']])
-
-    try:
-        root_node.add_candidate_relation(candidate_relations[root['FORM']])
-    except KeyError:
-        pass
-
-    children = [dep for dep in dependencies if dep['HEAD'] == root['ID']]
-    for child in children:
-        child_node = build_semantic_dependency_tree(dependencies, child, characters, candidate_relations)
-        root_node.add_child(child['DEPREL'], child_node)
-
-    return root_node
-
-
 def collapse_loose_leaves(dependencies):
     collapsable_branches = ['acomp', 'advmod', 'dep', 'det', 'measure', 'nn', 'num', 'number', 'neg', 'preconj',
                             'predet', 'prep', 'pobj', 'quantmod']
@@ -196,7 +193,7 @@ def collapse_loose_leaves(dependencies):
                     break
 
             #Pass the form on to the parent to append
-            if (int(parent['ID']) < int(curr_leaf['ID'])):
+            if int(parent['ID']) < int(curr_leaf['ID']):
                 parent['FORM'] += ' ' + curr_leaf['FORM']
             else:
                 parent['FORM'] = curr_leaf['FORM'] + ' ' + parent['FORM']

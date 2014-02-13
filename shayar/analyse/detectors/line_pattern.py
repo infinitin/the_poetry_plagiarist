@@ -2,7 +2,6 @@ from __future__ import division
 __author__ = 'Nitin'
 
 
-import utils
 from utils import get_line_permutations
 
 
@@ -78,7 +77,7 @@ def __get_start_or_stressed_phonemes(line):
                     else:
                         previous_phoneme = phoneme
                 else:
-                    if str(phoneme[-1]) == utils.stressed:
+                    if str(phoneme[-1]) == '1':
                         phonemes.append(previous_phoneme)
         phoneme_set.append(phonemes)
 

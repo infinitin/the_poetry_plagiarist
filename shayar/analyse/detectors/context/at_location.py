@@ -1,32 +1,31 @@
 __author__ = 'Nitin'
 from shayar.analyse import timex
 
-negative_adverbs = set(['not', 'seldom', 'hardly', 'barely', 'scarcely', 'rarely'])
+negative_adverbs = {'not', 'seldom', 'hardly', 'barely', 'scarcely', 'rarely'}
 
 
 def find_at_location_relations(sentence):
     #Assume this is an AtLocation not NotAtLocation
     positive = True
 
-    single_at_location_preps = set(['abaft', 'aboard', 'about', 'above', 'across', 'after', 'against', 'along',
-                                    'alongside', 'amid', 'amidst', 'among', 'amongst', 'anenst', 'around', 'aside',
-                                    'astride', 'at', 'athwart', 'atop', 'before', 'behind', 'below', 'beneath',
-                                    'beside', 'besides', 'between', 'betwixt', 'by', 'down', 'forenenst', 'in',
-                                    'inside', 'into', 'mid', 'midst', 'near', 'next', 'nigh', 'on', 'onto', 'opposite',
-                                    'outside', 'over', 'through', 'thru', 'toward', 'towards', 'under',
-                                    'underneath', 'up', 'upon', 'with', 'within', 'behither', 'betwixen', 'betwixt',
-                                    'biforn', 'ere', 'fornent', 'gainst', "'gainst", 'neath', "'neath", 'overthwart',
-                                    'twixt', "'twixt"])
+    single_at_location_preps = {'abaft', 'aboard', 'about', 'above', 'across', 'after', 'against', 'along', 'alongside',
+                                'amid', 'amidst', 'among', 'amongst', 'anenst', 'around', 'aside', 'astride', 'at',
+                                'athwart', 'atop', 'before', 'behind', 'below', 'beneath', 'beside', 'besides',
+                                'between', 'betwixt', 'by', 'down', 'forenenst', 'in', 'inside', 'into', 'mid', 'midst',
+                                'near', 'next', 'nigh', 'on', 'onto', 'opposite', 'outside', 'over', 'through', 'thru',
+                                'toward', 'towards', 'under', 'underneath', 'up', 'upon', 'with', 'within', 'behither',
+                                'betwixen', 'betwixt', 'biforn', 'ere', 'fornent', 'gainst', "'gainst", 'neath',
+                                "'neath", 'overthwart', 'twixt', "'twixt"}
 
-    double_at_location_preps = set(['ahead of', 'back to', 'close to', 'in to', 'inside of', 'left of', 'near to',
-                                    'next to', 'on to', 'outside of', 'right of'])
+    double_at_location_preps = {'ahead of', 'back to', 'close to', 'in to', 'inside of', 'left of', 'near to',
+                                'next to', 'on to', 'outside of', 'right of'}
 
-    triple_at_location_preps = set(['in front of', 'on top of'])
+    triple_at_location_preps = {'in front of', 'on top of'}
 
-    single_not_at_location_preps = set(['beyond', 'from', 'off', 'out', 'via', 'ayond', 'ayont', 'froward', 'frowards',
-                                        'fromward', 'outwith'])
+    single_not_at_location_preps = {'beyond', 'from', 'off', 'out', 'via', 'ayond', 'ayont', 'froward', 'frowards',
+                                    'fromward', 'outwith'}
 
-    double_not_at_location_preps = set(['far from', 'out from', 'out of', 'away from'])
+    double_not_at_location_preps = {'far from', 'out from', 'out of', 'away from'}
 
     unparsed = ''
     for word in sentence:

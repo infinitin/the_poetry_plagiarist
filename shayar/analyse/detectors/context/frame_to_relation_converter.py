@@ -11,7 +11,7 @@ NEGATIVE_EXPERIENCES = {'abhor', 'abhorrence', 'abominate', 'afraid', 'antipathy
                         'terrified', 'upset', 'worked up', 'worried'}
 
 
-def build_candidate_relations_from_frames(json, dependencies, characters):
+def build_candidate_relations_from_frames(json):
     build_frame_relations()
     candidate_relations = {}
     frames = json["sentences"][0]["frames"]
@@ -20,43 +20,11 @@ def build_candidate_relations_from_frames(json, dependencies, characters):
             candidate_relation_template = frame_relations[frame["target"]["name"]]
             candidate_relation = fill_relation_template(candidate_relation_template, frame)
 
-            if not validate_relation_syntax(candidate_relation, frame["target"]["text"], dependencies):
-                print 'The operative word is not of the right POS'
-                continue
-
-            if not validate_relation_semantics(candidate_relation, dependencies):
-                print 'The relation parameters are not of the correct semtype'
-                continue
-
-            #accept_if_complete(candidate_relation, characters)
             candidate_relations[frame["target"]["text"]] = candidate_relation
         except KeyError:
             continue
 
     return candidate_relations
-
-
-def accept_if_complete(candidate_relation, characters):
-    #Check for completion
-    for param in candidate_relation:
-        if not param:
-            #Actually, turn this into a Syntax instruction
-            return
-
-    subject_text = candidate_relation[0]
-    relation_type = candidate_relation[1]
-    if relation_type == 'SendMessage':
-        message = candidate_relation[2]
-        object_text = candidate_relation[3]
-        for character in characters:
-            if subject_text in character.text:
-                character.add_relation(relation_type, message)
-            elif object_text in character.text:
-                character.add_relation('ReceiveMessage', message)
-    else:
-        for character in characters:
-            if subject_text in character.text:
-                character.add_relation(relation_type, candidate_relation[2])
 
 
 def fill_relation_template(candidate_relation_template, frame):
@@ -131,30 +99,6 @@ def get_element_text(element_name, frame_elements):
             return element["text"]
 
     return ''
-
-
-def validate_relation_syntax(candidate_relation, word, dependencies):
-    #Make sure that the operative word is the pos that Framenet expects
-
-    #Get the LUs for this relation
-    #Get word out of that set
-    #Check its type up against the type stored in dependencies
-    #return the result
-
-    return True
-
-
-def validate_relation_semantics(candidate_relation, dependencies):
-    #Make sure that the operative parameters are of the semtype that Framenet expects
-
-    #Map the relation parameter TYPE to the word(s) itself
-    #Check the semtype of that paramater TYPE
-    #Get the noun out of the words
-    #Check its character object for the object_state
-    #Match up the object_State and the semtype
-    #return the result
-
-    return True
 
 
 def build_frame_relations():

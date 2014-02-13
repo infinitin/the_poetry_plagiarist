@@ -172,80 +172,71 @@ class Character:
         for elem in self.not_receive_message:
             return_text += "NotReceiveMessage: " + elem + ".\n"
 
-        if self.num == 'pl':
-            pr = 'They are'
-        else: 
-            pr = 'It is'
-            if self.gender ==  'm':
-                pr = 'He is'
-            elif self.gender == 'f':
-                pr = 'She is'
-
         return return_text
 
-    def add_relation(self, type, text):
-        if type == 'Named':
+    def add_relation(self, relation_type, text):
+        if relation_type == 'Named':
             self.named.append(text)
-        if type == 'IsA':
+        if relation_type == 'IsA':
             self.is_a.append(text)
-        if type == 'HasProperty':
+        if relation_type == 'HasProperty':
             self.has_property.append(text)
-        if type == 'HasA':
+        if relation_type == 'HasA':
             self.has_a.append(text)
-        if type == 'PartOf':
+        if relation_type == 'PartOf':
             self.part_of.append(text)
-        if type == 'CapableOf':
+        if relation_type == 'CapableOf':
             self.capable_of.append(text)
-        if type == 'AtLocation':
+        if relation_type == 'AtLocation':
             self.at_location.append(text)
-        if type == 'ReceivesAction':
+        if relation_type == 'ReceivesAction':
             self.receives_action.append(text)
-        if type == 'TakesAction':
+        if relation_type == 'TakesAction':
             self.takes_action.append(text)
-        if type == 'CreatedBy':
+        if relation_type == 'CreatedBy':
             self.created_by.append(text)
-        if type == 'UsedFor':
+        if relation_type == 'UsedFor':
             self.used_for.append(text)
-        if type == 'Desires':
+        if relation_type == 'Desires':
             self.desires.append(text)
-        if type == 'MadeOf':
+        if relation_type == 'MadeOf':
             self.made_of.append(text)
-        if type == 'Believes':
+        if relation_type == 'Believes':
             self.believes.append(text)
-        if type == 'SendMessage':
+        if relation_type == 'SendMessage':
             self.send_message.append(text)
-        if type == 'ReceiveMessage':
+        if relation_type == 'ReceiveMessage':
             self.receive_message.append(text)
 
-        if type == 'NotNamed':
+        if relation_type == 'NotNamed':
             self.not_named.append(text)
-        if type == 'NotIsA':
+        if relation_type == 'NotIsA':
             self.not_is_a.append(text)
-        if type == 'NotHasProperty':
+        if relation_type == 'NotHasProperty':
             self.not_has_property.append(text)
-        if type == 'NotHasA':
+        if relation_type == 'NotHasA':
             self.not_has_a.append(text)
-        if type == 'NotPartOf':
+        if relation_type == 'NotPartOf':
             self.not_part_of.append(text)
-        if type == 'NotCapableOf':
+        if relation_type == 'NotCapableOf':
             self.not_capable_of.append(text)
-        if type == 'NotAtLocation':
+        if relation_type == 'NotAtLocation':
             self.not_at_location.append(text)
-        if type == 'NotReceivesAction':
+        if relation_type == 'NotReceivesAction':
             self.not_receives_action.append(text)
-        if type == 'NotTakesAction':
+        if relation_type == 'NotTakesAction':
             self.not_takes_action.append(text)
-        if type == 'NotCreatedBy':
+        if relation_type == 'NotCreatedBy':
             self.not_created_by.append(text)
-        if type == 'NotUsedFor':
+        if relation_type == 'NotUsedFor':
             self.not_used_for.append(text)
-        if type == 'NotDesires':
+        if relation_type == 'NotDesires':
             self.not_desires.append(text)
-        if type == 'NotMadeOf':
+        if relation_type == 'NotMadeOf':
             self.not_made_of.append(text)
-        if type == 'NotBelieves':
+        if relation_type == 'NotBelieves':
             self.not_believes.append(text)
-        if type == 'NotSendMessage':
+        if relation_type == 'NotSendMessage':
             self.not_send_message.append(text)
-        if type == 'NotReceiveMessage':
+        if relation_type == 'NotReceiveMessage':
             self.not_receive_message.append(text)

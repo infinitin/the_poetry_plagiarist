@@ -1,7 +1,6 @@
 __author__ = 'Nitin'
 
 from utils import get_stanzas
-import utils
 from utils import get_tokenized_words
 from utils import get_pronunciations
 from itertools import product
@@ -59,7 +58,7 @@ def __get_rhyme_scheme(words):
             index = 0
 
             for phoneme in pronunciation:
-                if str(phoneme[-1]).isdigit() and str(phoneme[-1]) == utils.stressed:
+                if str(phoneme[-1]).isdigit() and str(phoneme[-1]) == '1':
                     rhyme_phonemes = __get_rhyme_phonemes(pronunciation[index:])
 
                     if not rhyme_phonemes in rhyme_scheme_map:
