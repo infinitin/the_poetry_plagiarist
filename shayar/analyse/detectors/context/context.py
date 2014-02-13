@@ -44,7 +44,27 @@ def build_relations(dependencies, characters, candidate_relations):
             if character.character_id == dependency['ID']:
                 related_dependencies = get_all_related_dependencies(dependency, dependencies, candidate_relations)
                 for related_dependency in related_dependencies:
-                    determine_relation_types(related_dependency, character)
+                    try:
+                        candidate_relation = candidate_relations[related_dependency[1]['FORM']]
+                        relation_type = candidate_relation[1]
+                        object_text = candidate_relation[2]
+
+                        #Send message is a four tuple so we get the receiver and give them the message as well as
+                        # making the current character the sender
+                        if relation_type == 'SendMessage':
+                            message = candidate_relation[2]
+                            character.add_relation(relation_type, message)
+                            object_text = candidate_relation[3]
+                            for char in characters:
+                                if object_text in char.text or char.text in object_text:
+                                    char.add_relation('ReceiveMessage', message)
+                        else:
+                            if not object_text:
+                                object_text = characters[characters.index(character)+1].text
+                            character.add_relation(relation_type, object_text)
+                        continue
+                    except KeyError:
+                        determine_relation_types(related_dependency, character)
 
     # Make this less hacky pls.
     n = 1
@@ -114,15 +134,10 @@ def get_all_related_dependencies(dependency, dependencies, candidate_relations):
 def get_out_dependencies(dependency, dependencies, candidate_relations):
     out_deps = []
     for dep in dependencies:
-        #Ignore subtree if it has a candidate relation (for now) since they are already added
-        try:
-            candiate_relation = candidate_relations[dep['FORM']]
-            continue
-        except KeyError:
-            if dep['HEAD'] == dependency['ID']:
-                    out_dep = dep['DEPREL'], dep
-                    out_deps.append(out_dep)
-                    out_deps.extend(get_out_dependencies(dep, dependencies, candidate_relations))
+        if dep['HEAD'] == dependency['ID']:
+                out_dep = dep['DEPREL'], dep
+                out_deps.append(out_dep)
+                out_deps.extend(get_out_dependencies(dep, dependencies, candidate_relations))
 
     return out_deps
 
@@ -130,17 +145,12 @@ def get_out_dependencies(dependency, dependencies, candidate_relations):
 def get_in_dependencies(dependency, dependencies, candidate_relations):
     in_deps = []
     for dep in dependencies:
-        #Ignore subtree if it has a candidate relation (for now) since they are already added
-        try:
-            candiate_relation = candidate_relations[dep['FORM']]
-            continue
-        except KeyError:
-            if dep['ID'] == dependency['HEAD']:
-                in_dep = dependency['DEPREL'], dep
-                in_deps.append(in_dep)
-                dependencies_without_this_one = dependencies
-                dependencies_without_this_one.remove(dependency)
-                in_deps.extend(get_out_dependencies(dep, dependencies_without_this_one, candidate_relations))
+        if dep['ID'] == dependency['HEAD']:
+            in_dep = dependency['DEPREL'], dep
+            in_deps.append(in_dep)
+            dependencies_without_this_one = dependencies
+            dependencies_without_this_one.remove(dependency)
+            in_deps.extend(get_out_dependencies(dep, dependencies_without_this_one, candidate_relations))
 
     return in_deps
 

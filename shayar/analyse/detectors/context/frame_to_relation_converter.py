@@ -28,7 +28,7 @@ def build_candidate_relations_from_frames(json, dependencies, characters):
                 print 'The relation parameters are not of the correct semtype'
                 continue
 
-            accept_if_complete(candidate_relation, characters)
+            #accept_if_complete(candidate_relation, characters)
             candidate_relations[frame["target"]["text"]] = candidate_relation
         except KeyError:
             continue
@@ -180,16 +180,7 @@ def build_frame_relations():
     frame_relations['Text_creation'] = ('Text', 'CreatedBy', 'Author')
     frame_relations['Manufacturing'] = ('Product', 'CreatedBy', 'Producer/Factory')
 
-    frame_relations['Substance'] = ('Syntax: Noun After', 'MadeOf', 'Substance')
-
-    frame_relations['Causes'] = ('Cause_to_start', 'Causes', 'Effect')
-    frame_relations['Causation'] = ('Actor', 'Causes', 'Affected')
-    frame_relations['Causation'] = ('Cause', 'Causes', 'Effect')
-    frame_relations['Condition_Symptom_Relation'] = ('Medical_condition', 'Causes', 'Symptom')
-    frame_relations['Corroding_caused'] = ('Cause', 'Causes', '"Corrosion of " Undergoer')
-    frame_relations['Cognitive_connection'] = ('Concept_1', 'Causes', 'Concept_2')
-    #if not above and startswith('Cause'), Cause, endofcategory (e.g. Cause_to_wake)
-    frame_relations[''] = ('', 'Causes', '')
+    frame_relations['Substance'] = ('', 'MadeOf', 'Substance')
 
     frame_relations['Desiring'] = ('Experiencer', 'Desires', 'Event')
     #Polarity of operative word needs to be checked
@@ -211,8 +202,8 @@ def build_frame_relations():
     frame_relations['Inclusion'] = ('Total', 'Has', 'Part')
     frame_relations['Containers'] = ('Container', 'Has', 'Contents')
 
-    frame_relations['Used_up'] = ('Syntax: Subject', 'NotHas', 'Resource')
-    frame_relations['Expend_resource'] = ('Syntax: Subject', 'NotHas', 'Resource')
+    frame_relations['Used_up'] = ('', 'NotHas', 'Resource')
+    frame_relations['Expend_resource'] = ('', 'NotHas', 'Resource')
     frame_relations['Abandonment'] = ('Agent', 'NotHas', 'Theme')
 
     frame_relations['Being_named'] = ('Entity', 'Named', 'Name')
