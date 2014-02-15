@@ -11,6 +11,26 @@ from shayar.analyse.detectors.utils import replace_contractions
 # List of words that imply a negative. Used in conjunction with the 'neg' dependency
 negative_words = {'not', 'seldom', 'hardly', 'barely', 'scarcely', 'rarely', 'no', 'neither', "n't"}
 
+#All of the location prepositions (as opposed to any others)
+single_at_location_preps = {'abaft', 'aboard', 'about', 'above', 'across', 'after', 'against', 'along', 'alongside',
+                            'amid', 'amidst', 'among', 'amongst', 'anenst', 'around', 'aside', 'astride', 'at',
+                            'athwart', 'atop', 'before', 'behind', 'below', 'beneath', 'beside', 'besides',
+                            'between', 'betwixt', 'by', 'down', 'forenenst', 'in', 'inside', 'into', 'mid', 'midst',
+                            'near', 'next', 'nigh', 'on', 'onto', 'opposite', 'outside', 'over', 'through', 'thru',
+                            'toward', 'towards', 'under', 'underneath', 'up', 'upon', 'with', 'within', 'behither',
+                            'betwixen', 'betwixt', 'biforn', 'ere', 'fornent', 'gainst', "'gainst", 'neath',
+                            "'neath", 'overthwart', 'twixt', "'twixt"}
+
+double_at_location_preps = {'ahead of', 'back to', 'close to', 'in to', 'inside of', 'left of', 'near to',
+                            'next to', 'on to', 'outside of', 'right of'}
+
+triple_at_location_preps = {'in front of', 'on top of'}
+
+single_not_at_location_preps = {'beyond', 'from', 'off', 'out', 'via', 'ayond', 'ayont', 'froward', 'frowards',
+                                'fromward', 'outwith'}
+
+double_not_at_location_preps = {'far from', 'out from', 'out of', 'away from'}
+
 
 def identify_characters_and_relationships(poem):
     # Break it down into lines and lower all characters.
@@ -31,6 +51,7 @@ def identify_characters_and_relationships(poem):
     # Create the character objects out of these dependencies.
     # Determine relations from the Semafor Frame-Semantic parse.
     # Build relations for each character based on the relations from Semafor and the dependencies.
+    # Remove location prepositions from characters texts and is_a relations
     # Save all the characters for anaphora resolution later and to be returned for abstraction.
     for sentence in sentences:
         json_parse_data = make_request(sentence)
@@ -38,6 +59,7 @@ def identify_characters_and_relationships(poem):
         characters = create_characters(dependencies)
         candidate_relations = build_candidate_relations_from_frames(json_parse_data)
         build_relations(dependencies, characters, candidate_relations)
+        remove_location_preps(characters)
         all_characters.extend(characters)
 
     # Perform anaphora resolution of all types.
@@ -46,6 +68,23 @@ def identify_characters_and_relationships(poem):
         print character
 
     return all_characters
+
+
+# Remove location prepositions from characters texts and is_a relations
+def remove_location_preps(characters):
+    for character in characters:
+        location_prep = has_location_prep(character.text)[0]
+        character.text = character.text.replace(location_prep, '').strip()
+
+        is_a_list = character.type_to_list['IsA']
+        to_remove = None
+        for is_a_rel in is_a_list:
+            to_remove = is_a_rel
+            break
+
+        to_add = to_remove.replace(location_prep, '').strip()
+        character.type_to_list['IsA'].remove(to_remove)
+        character.type_to_list['IsA'].append(to_add)
 
 
 # Add ConceptNet-style relations to character object based on the candidate relations derived from Semafor
@@ -130,18 +169,26 @@ def determine_relation_types(related_dependency, character):
         relation += 'HasProperty'
         character.add_relation(relation, form)
 
-    elif deprel == 'agent' or deprel == 'nsubj' and form != 'that' \
+    elif deprel == 'agent' or deprel == 'nsubj' or deprel == 'prep' and form != 'that' \
             and not postag.startswith('P') and not postag.startswith('V'):
-        relation += 'IsA'
-        character.add_relation(relation, form)
+        location_prep = has_location_prep(form)
+        if location_prep[0]:
+
+            if not location_prep[1]:
+                if relation:
+                    relation = ''
+                else:
+                    relation = 'Not'
+
+            relation += 'AtLocation'
+            character.add_relation(relation, form)
+        elif deprel != 'prep':
+            relation += 'IsA'
+            character.add_relation(relation, form)
 
     elif deprel == 'nsubjpass' or deprel == 'dobj':
         relation += 'ReceivesAction'
         character.add_relation(relation, form)
-        
-    elif deprel == 'prep':
-        pass
-        #character.add_relation('AtLocation', form)
         
     elif deprel == 'xsubj' or deprel == 'rcmod':
         character.add_relation('CapableOf', form)
@@ -150,6 +197,45 @@ def determine_relation_types(related_dependency, character):
         relation += 'TakesAction'
         character.add_relation(relation, form)
 
+
+def has_location_prep(form):
+    form_words = form.lstrip().split(' ')
+    prep = ''
+    positive = True
+
+    # Try from the longest sequence first, for obvious reasons
+    for triple_prep in triple_at_location_preps:
+        if triple_prep in form:
+            prep = triple_prep
+            break
+
+    if not prep:
+        for double_prep in double_at_location_preps:
+            if double_prep in form:
+                prep = double_prep
+                break
+
+    if not prep:
+        for double_not_prep in double_not_at_location_preps:
+            if double_not_prep in form:
+                prep = double_not_prep
+                positive = False
+                break
+
+    if not prep:
+        for single_prep in single_at_location_preps:
+            if single_prep in form_words:
+                prep = single_prep
+                break
+
+    if not prep:
+        for single_not_prep in single_not_at_location_preps:
+            if single_not_prep in form_words:
+                prep = single_not_prep
+                positive = False
+                break
+
+    return prep, positive
 
 # We want everything to be character centric, so we use this to get all of the related dependencies to a character.
 # Builds the spider diagram from the character chunk. Anything going out stays, anything coming in is reversed.
