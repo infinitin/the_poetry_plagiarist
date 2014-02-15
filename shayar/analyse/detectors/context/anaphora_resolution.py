@@ -2,6 +2,7 @@ __author__ = 'Nitin'
 from pattern.text.en import wordnet
 
 
+# Resolve ALL the anaphora!
 def resolve_anaphora(characters):
     resolve_ones_anaphora(characters)
     resolve_pronoun_anaphora(characters)
@@ -10,6 +11,10 @@ def resolve_anaphora(characters):
     resolve_presuppositional_anaphora(characters)
 
 
+# Find all the instances of 'one' or 'ones' in the characters
+# Find all the possibilities based purely on num
+# Check if any work and inherit the gender and object state into the possibility
+# Otherwise we look pragmatically - object state and gender won't help differentiate.
 def resolve_ones_anaphora(characters):
     for character in characters:
         for relation in character.is_a:
@@ -29,6 +34,12 @@ def resolve_ones_anaphora(characters):
                     pragmatic_anaphora_resolution(character, possibilities)
 
 
+# Find all instances of a pronoun being used
+# Get all possibilities based on num only and try to resolve
+# If still too many possibilities, try to narrow it down by gender
+# If still too many possibilities, try to narrow it down by object state
+# If still too many possibilities, look pragmatically
+# Inherit everything if we resolve
 def resolve_pronoun_anaphora(characters):
     characters_to_remove = []
     for character in characters:
@@ -69,6 +80,8 @@ def resolve_pronoun_anaphora(characters):
         characters.remove(character_to_remove)
 
 
+# Check if any characters are hypernyms of other characters
+# Inherit all if resolved
 def resolve_hypernym_anaphora(characters):
     characters_to_remove = []
     for character in characters:
@@ -94,18 +107,23 @@ def resolve_hypernym_anaphora(characters):
         characters.remove(character_to_remove)
 
 
+# He did it resolution
 def resolve_action_anaphora(characters):
     pass
 
 
+# They tasted so nice -> they were eaten
 def resolve_presuppositional_anaphora(characters):
     pass
 
 
+# He got fat when he ate them -> which he is more likely to be the one that gets eaten?
 def pragmatic_anaphora_resolution(character, possibilities):
     pass
 
 
+# Just look at num for the initial possibilities
+# Ignore it if it has 'one' or 'ones' in it (FIXME: IS THIS ALWAYS THE CASE?
 def get_initial_possibilities(character, characters):
     possibilities = [char for char in characters if char.num == character.num]
     to_remove = [character]
@@ -116,6 +134,7 @@ def get_initial_possibilities(character, characters):
     return [poss for poss in possibilities if poss not in to_remove]
 
 
+# The taker inherits all properties and relations of the giver
 def inherit_all(taker, giver):
     if giver.gender == 'm' or giver.gender == 'f':
         if taker.gender != 'm' and taker.gender != 'f':

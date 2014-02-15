@@ -25,11 +25,11 @@ simple = Poem(map(str.strip, f.readlines()))
 f.close()
 
 logging.info('Begin analysis')
-test = limerick
+test = simple
 
 logging.info('Setting up cmudict and other tools')
 set_up_globals()
-'''
+
 logging.info('Counting number of stanzas')
 test.stanzas = basic_structure.count_stanzas(test.poem)
 
@@ -75,9 +75,8 @@ test.onomatopoeia = rhetoric.identify_onomatopoeia(test.poem)
 logging.info("Determining speaker's point of view")
 test.point_of_view = point_of_view.determine_perspective(test.poem)
 
-logging.info("Identifying the characters in the poem")
-test.characters = point_of_view.identify_characters(test.poem)
-'''
+#logging.info("Identifying the characters in the poem")
+#test.characters = point_of_view.identify_characters(test.poem)
 
 logging.info("Reading in-between the lines")
 context.identify_characters_and_relationships(test.poem)

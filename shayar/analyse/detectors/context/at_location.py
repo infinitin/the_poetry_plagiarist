@@ -8,6 +8,7 @@ def find_at_location_relations(sentence):
     #Assume this is an AtLocation not NotAtLocation
     positive = True
 
+    #All of the location prepositions (as opposed to any others)
     single_at_location_preps = {'abaft', 'aboard', 'about', 'above', 'across', 'after', 'against', 'along', 'alongside',
                                 'amid', 'amidst', 'among', 'amongst', 'anenst', 'around', 'aside', 'astride', 'at',
                                 'athwart', 'atop', 'before', 'behind', 'below', 'beneath', 'beside', 'besides',
@@ -27,6 +28,7 @@ def find_at_location_relations(sentence):
 
     double_not_at_location_preps = {'far from', 'out from', 'out of', 'away from'}
 
+    # Get the unparsed sentence to find if the prepositions exist in the sentence.
     unparsed = ''
     for word in sentence:
         unparsed += ' ' + word.string
@@ -34,6 +36,7 @@ def find_at_location_relations(sentence):
 
     prep = ''
 
+    # Try from the longest sequence first, for obvious reasons
     for triple_prep in triple_at_location_preps:
         if triple_prep in unparsed:
             prep = triple_prep
@@ -68,11 +71,12 @@ def find_at_location_relations(sentence):
     if not prep:
         return ()
 
+    # Get the index of the first and last words of the preposition, since they can be multiple
     prep_first_word_index = unparsed_words.index(prep.split(' ')[0])
     prep_last_word_index = prep_first_word_index + prep.count(' ')
 
     n = 1
-    #Check that the next noun is not a time
+    # Get the index of the next noun (after any 'and's)
     for i in range(1, len(sentence) - prep_last_word_index):
         if sentence[prep_last_word_index + i].type.startswith('N'):
             if sentence[prep_last_word_index + i + 1].string == 'and':
@@ -81,19 +85,21 @@ def find_at_location_relations(sentence):
                 n = i
                 break
 
-    #while not sentence[prep_last_word_index + n].type.startswith('N') and prep_last_word_index + n < len(sentence):
-        #n += 1
+    # Check that the next noun is not a time instead of a location
     if not timex.tag(sentence[prep_last_word_index + n].string):
         m = 1
+        # Try to find all of the words before the first word
         while not sentence[prep_first_word_index - m].type.startswith('N') and m <= prep_first_word_index:
             m += 1
-
         before_prep = sentence[:prep_first_word_index]
         after_prep = sentence[prep_last_word_index+1:]
+
+        # Get all the adverbs and check if this is a positive or negative statement
         adverbs = set([word for word in sentence if word not in before_prep and word not in after_prep])
         if len(adverbs & negative_adverbs) % 2 == 1:
             positive = not positive
-        #The object that can be found, the preposition, the location (need to take into account len(prep)
+
+        # Return the object that can be found, the preposition, the location
         return positive, sentence[prep_first_word_index - m], prep, \
                sentence[prep_last_word_index + 1:prep_last_word_index + n + 1]
 

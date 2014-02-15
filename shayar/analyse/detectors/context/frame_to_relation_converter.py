@@ -3,6 +3,8 @@ from pattern.text.en import lemma as lemmatise
 
 frame_relations = {}
 
+
+# Some of the Experience focus lexical units carry a negative naturally
 NEGATIVE_EXPERIENCES = {'abhor', 'abhorrence', 'abominate', 'afraid', 'antipathy', 'apprehensive', 'despair',
                         'desperation', 'despise', 'detest', 'detestation', 'discomfort', 'dislike', 'dislike',
                         'dissatisfied', 'dread', 'envy', 'fazed', 'fear', 'fed up', 'feverish', 'feverishly', 'grieve',
@@ -11,6 +13,10 @@ NEGATIVE_EXPERIENCES = {'abhor', 'abhorrence', 'abominate', 'afraid', 'antipathy
                         'terrified', 'upset', 'worked up', 'worried'}
 
 
+# Grab the 'target' i.e. the word that determines the type of frame from the frame semantic parse in the json
+# Get the corresponding concept-frame net relation template for this target (if any)
+# Fill the relation template with the parameters given from the frame semantic parse
+# Add it to a map from the target
 def build_candidate_relations_from_frames(json):
     build_frame_relations()
     candidate_relations = {}
@@ -27,6 +33,10 @@ def build_candidate_relations_from_frames(json):
     return candidate_relations
 
 
+# Take a concept-frame net relation template and fill it in with the parameters provided in the frame-semantic parse
+# If the parameter that we desire cannot be found, we just leave it blank and deal with it downstream.
+# Special case for Experiencer focus because of the inherent polarity issues
+# Also need to watch for the relations with more than two parameters (SendMessage etc.)
 def fill_relation_template(candidate_relation_template, frame):
     #Replace the first and last tuple 'key' with the value
     relation = candidate_relation_template[1]
@@ -49,28 +59,23 @@ def fill_relation_template(candidate_relation_template, frame):
     return final_relation
 
 
+# Check if the Experiencer_focus relation has a target that is negative or positive
 def check_desirability_polarity(target):
     polarity = ''
     lemma = lemmatise(target)
     if lemma in NEGATIVE_EXPERIENCES:
         polarity = 'Not'
-    #check if it is in the list of negatives
+
     return polarity
 
 
+# Some parameters do not come straight out of the box:
+# If / character, the parameter on either side of the slash
+# OpWord brings in the target word as the parameter
 def check_special_params(param, frame):
     original = param
     frame_elements = frame["annotationSets"][0]["frameElements"]
-    if '"' in param:
-        param.replace('"', '')
-        words = param.split(' ')
-        try:
-            words[-1] = get_element_text(words[-1], frame_elements)
-            param = ' '.join(words)
-        except KeyError:
-            param = ''
-
-    elif '/' in param:
+    if '/' in param:
         first_params = param.split('/')
         for param in first_params:
             try:
@@ -93,6 +98,7 @@ def check_special_params(param, frame):
     return param
 
 
+# Get the actual text of the desired parameter in the json frame sematic parse
 def get_element_text(element_name, frame_elements):
     for element in frame_elements:
         if element["name"] == element_name:
@@ -101,6 +107,7 @@ def get_element_text(element_name, frame_elements):
     return ''
 
 
+# All of the relations that have been manually selected from FrameNet, mapped from type of target
 def build_frame_relations():
     #map from target text name to the relation three-tuple
     frame_relations['Architectural_part'] = ('Part', 'PartOf', 'Whole')
