@@ -98,11 +98,11 @@ def build_relations(dependencies, characters, candidate_relations):
     #  relations that earlier objects have that overlap with later objects.
     n = 1
     for character in characters:
-        first_has_property = character.has_property
-        first_not_has_property = character.not_has_property
+        first_has_property = character.type_to_list['HasProperty']
+        first_not_has_property = character.type_to_list['NotHasProperty']
         for i in range(n, len(characters)):
-            second_has_property = characters[n].has_property
-            second_not_has_property = characters[n].not_has_property
+            second_has_property = characters[n].type_to_list['HasProperty']
+            second_not_has_property = characters[n].type_to_list['NotHasProperty']
             for has_p in second_has_property:
                 if has_p in first_has_property:
                     first_has_property.remove(has_p)
@@ -118,6 +118,7 @@ def build_relations(dependencies, characters, candidate_relations):
 def determine_relation_types(related_dependency, character):
     deprel = related_dependency[0]
     form = related_dependency[1]['FORM']
+    postag = related_dependency[1]['POSTAG']
     negatives = [neg for neg in set(form.split(' ')) if neg in negative_words]
     relation = ''
     if len(negatives) % 2 == 1:
@@ -125,13 +126,14 @@ def determine_relation_types(related_dependency, character):
         words = form.split(' ')
         form = ' '.join(words[words.index(negatives[-1])+1:])
 
-    if deprel == 'amod' or deprel == 'conj' or deprel == 'poss' or related_dependency[1]['POSTAG'].startswith('J'):
+    if deprel == 'amod' or deprel == 'conj' or deprel == 'poss' or postag.startswith('J'):
         relation += 'HasProperty'
         character.add_relation(relation, form)
 
-    elif deprel == 'cop':
-        pass
-        #character.add_relation('IsA', form)
+    elif deprel == 'agent' or deprel == 'nsubj' and form != 'that' \
+            and not postag.startswith('P') and not postag.startswith('V'):
+        relation += 'IsA'
+        character.add_relation(relation, form)
 
     elif deprel == 'nsubjpass' or deprel == 'dobj':
         relation += 'ReceivesAction'
@@ -201,7 +203,7 @@ def get_in_dependencies(dependency, dependencies, candidate_relations):
 # Note that by default we keep the POS of the highest dep, but in some cases we must inherit the POS
 #  e.g. tasted so nice should inherit the adjective POS from nice rather than keeping the verb POS of tasted.
 def collapse_loose_leaves(dependencies):
-    collapsable_branches = ['acomp', 'advmod', 'aux', 'dep', 'det', 'measure', 'nn', 'num', 'number', 'neg', 'preconj',
+    collapsable_branches = ['acomp', 'advmod', 'aux', 'cop', 'dep', 'det', 'measure', 'nn', 'num', 'number', 'neg', 'preconj',
                             'predet', 'prep', 'pobj', 'quantmod']
 
     non_leaves_nums = set([dependency['HEAD'] for dependency in dependencies])
@@ -221,11 +223,12 @@ def collapse_loose_leaves(dependencies):
                     parent = dep
                     break
 
-            #Pass the form on to the parent to append
-            if int(parent['ID']) < int(curr_leaf['ID']):
-                parent['FORM'] += ' ' + curr_leaf['FORM']
-            else:
-                parent['FORM'] = curr_leaf['FORM'] + ' ' + parent['FORM']
+            #Pass the form on to the parent to append unless it is a cop dependency
+            if not deprel == 'cop':
+                if int(parent['ID']) < int(curr_leaf['ID']):
+                    parent['FORM'] += ' ' + curr_leaf['FORM']
+                else:
+                    parent['FORM'] = curr_leaf['FORM'] + ' ' + parent['FORM']
 
             #Preserve this postag by changing the parent's
             if (curr_leaf['POSTAG'].startswith('J') and parent['POSTAG'].startswith('V') and deprel == 'dep') or \

@@ -2,7 +2,6 @@ __author__ = 'Nitin'
 
 
 class Character:
-
     def __init__(self, character_id, num, gender, object_state):
 
         self.character_id = character_id      # id given from dependencies
@@ -13,39 +12,41 @@ class Character:
         self.text = ""               # Text in the poem referring to it
         self.is_pronoun = False      # Whether or not it is a pronoun (and needs to be resolved)
 
-        self.named = []              # list of Named
-        self.is_a = []               # list of IsA
-        self.has_property = []       # list of HasProperty
-        self.has_a = []              # list of HasA
-        self.part_of = []            # list of PartOf
-        self.capable_of = []         # list of CapableOf
-        self.at_location = []        # list of NearLocation
-        self.receives_action = []    # list of ReceivesAction
-        self.takes_action = []       # list of TakesAction
-        self.created_by = []         # list of CreatedBy
-        self.used_for = []           # list of UsedFor
-        self.desires = []            # list of Desires
-        self.made_of = []            # list of MadeOf
-        self.believes = []
-        self.send_message = []
-        self.receive_message = []
+        self.type_to_list = {
+            'Named': list(),
+            'IsA': list(),
+            'HasProperty': list(),
+            'HasA': list(),
+            'PartOf': list(),
+            'CapableOf': list(),
+            'AtLocation': list(),
+            'ReceivesAction': list(),
+            'TakesAction': list(),
+            'CreatedBy': list(),
+            'UsedFor': list(),
+            'Desires': list(),
+            'MadeOf': list(),
+            'Believes': list(),
+            'SendMessage': list(),
+            'ReceiveMessage': list(),
 
-        self.not_named = []              # list of NotNamed
-        self.not_is_a = []               # list of NotIsA
-        self.not_has_property = []       # list of NotHasProperty
-        self.not_has_a = []              # list of NotHasA
-        self.not_part_of = []            # list of NotPartOf
-        self.not_capable_of = []         # list of NotCapableOf
-        self.not_at_location = []        # list of NotNearLocation
-        self.not_receives_action = []    # list of NotReceivesAction
-        self.not_takes_action = []       # list of NotTakesAction
-        self.not_created_by = []         # list of NotCreatedBy
-        self.not_used_for = []           # list of NotUsedFor
-        self.not_desires = []            # list of NotDesires
-        self.not_made_of = []            # list of NotMadeOf
-        self.not_believes = []
-        self.not_send_message = []
-        self.not_receive_message = []
+            'NotNamed': list(),
+            'NotIsA': list(),
+            'NotHasProperty': list(),
+            'NotHasA': list(),
+            'NotPartOf': list(),
+            'NotCapableOf': list(),
+            'NotAtLocation': list(),
+            'NotReceivesAction': list(),
+            'NotTakesAction': list(),
+            'NotCreatedBy': list(),
+            'NotUsedFor': list(),
+            'NotDesires': list(),
+            'NotMadeOf': list(),
+            'NotBelieves': list(),
+            'NotSendMessage': list(),
+            'NotReceiveMessage': list(),
+        }
 
     def __str__(self):
         return_text = "This character is represented by the text: '" + self.text + "'.\n"
@@ -76,167 +77,13 @@ class Character:
                 else:
                     return_text += "They are not physical objects.\n"
 
-        for elem in self.named:
-            return_text += "Named: " + elem + ".\n"
-
-        for elem in self.not_named:
-            return_text += "NotNamed: " + elem + ".\n"
-
-        for elem in self.is_a:
-            return_text += "Is: " + elem + ".\n"
-
-        for elem in self.not_is_a:
-            return_text += "NotIs: " + elem + ".\n"
-
-        for elem in self.has_property:
-            return_text += "HasProperty: " + elem + ".\n"
-
-        for elem in self.not_has_property:
-            return_text += "NotHasProperty: " + elem + ".\n"
-
-        for elem in self.has_a:
-            return_text += "Has: " + elem + ".\n"
-
-        for elem in self.not_has_a:
-            return_text += "NotHas: " + elem + ".\n"
-
-        for elem in self.part_of:
-            return_text += "PartOf: " + elem + ".\n"
-
-        for elem in self.not_part_of:
-            return_text += "NotPartOf: " + elem + ".\n"
-
-        for elem in self.capable_of:
-            return_text += "CapableOf: " + elem + ".\n"
-
-        for elem in self.not_capable_of:
-            return_text += "NotCapableOf: " + elem + ".\n"
-
-        for elem in self.at_location:
-            return_text += "AtLocation: " + elem + ".\n"
-
-        for elem in self.not_at_location:
-            return_text += "NotAtLocation: " + elem + ".\n"
-
-        for elem in self.receives_action:
-            return_text += "ReceivesAction: " + elem + ".\n"
-
-        for elem in self.not_receives_action:
-            return_text += "NotReceivesAction: " + elem + ".\n"
-
-        for elem in self.takes_action:
-            return_text += "TakesAction: " + elem + ".\n"
-
-        for elem in self.not_takes_action:
-            return_text += "NotTakesAction: " + elem + ".\n"
-
-        for elem in self.created_by:
-            return_text += "CreatedBy: " + elem + ".\n"
-
-        for elem in self.not_created_by:
-            return_text += "NotCreatedBy: " + elem + ".\n"
-
-        for elem in self.used_for:
-            return_text += "UsedFor: " + elem + ".\n"
-
-        for elem in self.not_used_for:
-            return_text += "NotUsedFor: " + elem + ".\n"
-
-        for elem in self.desires:
-            return_text += "Desires: " + elem + ".\n"
-
-        for elem in self.not_desires:
-            return_text += "NotDesires: " + elem + ".\n"
-
-        for elem in self.made_of:
-            return_text += "MadeOf: " + elem + ".\n"
-
-        for elem in self.not_made_of:
-            return_text += "NotMadeOf: " + elem + ".\n"
-
-        for elem in self.believes:
-            return_text += "Believes: " + elem + ".\n"
-
-        for elem in self.not_believes:
-            return_text += "NotBelieves: " + elem + ".\n"
-
-        for elem in self.send_message:
-            return_text += "SendMessage: " + elem + ".\n"
-
-        for elem in self.not_send_message:
-            return_text += "NotSendMessage: " + elem + ".\n"
-
-        for elem in self.receive_message:
-            return_text += "ReceiveMessage: " + elem + ".\n"
+        for relation_type in self.type_to_list.keys():
+            for elem in self.type_to_list[relation_type]:
+                return_text += relation_type + ": " + elem + ".\n"
         
-        for elem in self.not_receive_message:
-            return_text += "NotReceiveMessage: " + elem + ".\n"
-
         return return_text
 
     def add_relation(self, relation_type, text):
-        if relation_type == 'Named':
-            self.named.append(text)
-        if relation_type == 'IsA':
-            self.is_a.append(text)
-        if relation_type == 'HasProperty':
-            self.has_property.append(text)
-        if relation_type == 'HasA':
-            self.has_a.append(text)
-        if relation_type == 'PartOf':
-            self.part_of.append(text)
-        if relation_type == 'CapableOf':
-            self.capable_of.append(text)
-        if relation_type == 'AtLocation':
-            self.at_location.append(text)
-        if relation_type == 'ReceivesAction':
-            self.receives_action.append(text)
-        if relation_type == 'TakesAction':
-            self.takes_action.append(text)
-        if relation_type == 'CreatedBy':
-            self.created_by.append(text)
-        if relation_type == 'UsedFor':
-            self.used_for.append(text)
-        if relation_type == 'Desires':
-            self.desires.append(text)
-        if relation_type == 'MadeOf':
-            self.made_of.append(text)
-        if relation_type == 'Believes':
-            self.believes.append(text)
-        if relation_type == 'SendMessage':
-            self.send_message.append(text)
-        if relation_type == 'ReceiveMessage':
-            self.receive_message.append(text)
-
-        if relation_type == 'NotNamed':
-            self.not_named.append(text)
-        if relation_type == 'NotIsA':
-            self.not_is_a.append(text)
-        if relation_type == 'NotHasProperty':
-            self.not_has_property.append(text)
-        if relation_type == 'NotHasA':
-            self.not_has_a.append(text)
-        if relation_type == 'NotPartOf':
-            self.not_part_of.append(text)
-        if relation_type == 'NotCapableOf':
-            self.not_capable_of.append(text)
-        if relation_type == 'NotAtLocation':
-            self.not_at_location.append(text)
-        if relation_type == 'NotReceivesAction':
-            self.not_receives_action.append(text)
-        if relation_type == 'NotTakesAction':
-            self.not_takes_action.append(text)
-        if relation_type == 'NotCreatedBy':
-            self.not_created_by.append(text)
-        if relation_type == 'NotUsedFor':
-            self.not_used_for.append(text)
-        if relation_type == 'NotDesires':
-            self.not_desires.append(text)
-        if relation_type == 'NotMadeOf':
-            self.not_made_of.append(text)
-        if relation_type == 'NotBelieves':
-            self.not_believes.append(text)
-        if relation_type == 'NotSendMessage':
-            self.not_send_message.append(text)
-        if relation_type == 'NotReceiveMessage':
-            self.not_receive_message.append(text)
+        relation_list = self.type_to_list[relation_type]
+        if text not in relation_list:
+            relation_list.append(text)

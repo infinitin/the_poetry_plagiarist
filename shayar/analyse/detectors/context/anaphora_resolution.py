@@ -17,14 +17,14 @@ def resolve_anaphora(characters):
 # Otherwise we look pragmatically - object state and gender won't help differentiate.
 def resolve_ones_anaphora(characters):
     for character in characters:
-        for relation in character.is_a:
+        for relation in character.type_to_list['IsA']:
             if 'one' in relation or 'ones' in relation:
                 possibilities = get_initial_possibilities(character, characters)
                 if not possibilities:
                     break
 
                 elif len(possibilities) == 1:
-                    for rel in possibilities[0].is_a:
+                    for rel in possibilities[0].type_to_list['IsA']:
                         character.add_relation("IsA", rel)
 
                     character.gender = possibilities[0].gender
@@ -128,7 +128,7 @@ def get_initial_possibilities(character, characters):
     possibilities = [char for char in characters if char.num == character.num]
     to_remove = [character]
     for possibility in possibilities:
-        for relation in possibility.is_a:
+        for relation in possibility.type_to_list['IsA']:
             if 'one' in relation or 'ones' in relation:
                 to_remove.append(possibility)
     return [poss for poss in possibilities if poss not in to_remove]
@@ -143,34 +143,5 @@ def inherit_all(taker, giver):
     if not taker.object_state:
         taker.object_state = giver.object_state
 
-    taker.named.extend(giver.named)
-    taker.not_named.extend(giver.not_named)
-    taker.is_a.extend(giver.is_a)
-    taker.not_is_a.extend(giver.not_is_a)
-    taker.has_property.extend(giver.has_property)
-    taker.not_has_property.extend(giver.not_has_property)
-    taker.has_a.extend(giver.has_a)
-    taker.not_has_a.extend(giver.not_has_a)
-    taker.part_of.extend(giver.part_of)
-    taker.not_part_of.extend(giver.not_part_of)
-    taker.capable_of.extend(giver.capable_of)
-    taker.not_capable_of.extend(giver.not_capable_of)
-    taker.at_location.extend(giver.at_location)
-    taker.not_at_location.extend(giver.not_at_location)
-    taker.receives_action.extend(giver.receives_action)
-    taker.not_receives_action.extend(giver.not_receives_action)
-    taker.takes_action.extend(giver.takes_action)
-    taker.not_takes_action.extend(giver.not_takes_action)
-    taker.created_by.extend(giver.created_by)
-    taker.not_created_by.extend(giver.not_created_by)
-    taker.used_for.extend(giver.used_for)
-    taker.not_used_for.extend(giver.not_used_for)
-    taker.desires.extend(giver.desires)
-    taker.not_desires.extend(giver.not_desires)
-    taker.made_of.extend(giver.made_of)
-    taker.not_made_of.extend(giver.not_made_of)
-    taker.believes.extend(giver.believes)
-    taker.not_believes.extend(giver.not_believes)
-    taker.send_message.extend(giver.send_message)
-    taker.not_send_message.extend(giver.not_send_message)
-    taker.receive_message.extend(giver.receive_message)
+    for relation_type in taker.type_to_list.keys():
+            taker.type_to_list[relation_type].extend(giver.type_to_list[relation_type])
