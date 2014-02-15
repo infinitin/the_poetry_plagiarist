@@ -25,7 +25,7 @@ simple = Poem(map(str.strip, f.readlines()))
 f.close()
 
 logging.info('Begin analysis')
-test = simple
+test = limerick
 
 logging.info('Setting up cmudict and other tools')
 set_up_globals()

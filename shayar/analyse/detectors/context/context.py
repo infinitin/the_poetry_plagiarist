@@ -6,6 +6,7 @@ from json import loads as json_load
 from character_builder import create_characters
 from frame_to_relation_converter import build_candidate_relations_from_frames
 from anaphora_resolution import resolve_anaphora
+from shayar.analyse.detectors.utils import replace_contractions
 
 # List of words that imply a negative. Used in conjunction with the 'neg' dependency
 negative_words = {'not', 'seldom', 'hardly', 'barely', 'scarcely', 'rarely', 'no', 'neither', "n't"}
@@ -16,6 +17,7 @@ def identify_characters_and_relationships(poem):
     # NOTE: This may cause some issues with pronouns and I
     lines = ""
     for line in poem:
+        line = replace_contractions(line)
         lines += line.lower() + " "
 
     # Split into natural sentences.
@@ -58,7 +60,17 @@ def build_relations(dependencies, characters, candidate_relations):
                     try:
                         # Check if Semafor found a relation, take it if it did since it is likely to be more accurate.
                         candidate_relation = candidate_relations[related_dependency[1]['FORM']]
-                        relation_type = candidate_relation[1]
+                        form = related_dependency[1]['FORM']
+                        negatives = [neg for neg in set(form.split(' ')) if neg in negative_words]
+                        relation = ''
+                        if len(negatives) % 2 == 1:
+                            relation = 'Not'
+
+                        if candidate_relation[1].startswith('Not') and relation:
+                            relation_type = candidate_relation[1][3:]
+                        else:
+                            relation_type = relation + candidate_relation[1]
+
                         object_text = candidate_relation[2]
 
                         # Send message is a four tuple so we get the receiver and give them the message as well as
@@ -106,15 +118,15 @@ def build_relations(dependencies, characters, candidate_relations):
 def determine_relation_types(related_dependency, character):
     deprel = related_dependency[0]
     form = related_dependency[1]['FORM']
+    negatives = [neg for neg in set(form.split(' ')) if neg in negative_words]
+    relation = ''
+    if len(negatives) % 2 == 1:
+        relation = 'Not'
+        words = form.split(' ')
+        form = ' '.join(words[words.index(negatives[-1])+1:])
 
     if deprel == 'amod' or deprel == 'conj' or deprel == 'poss' or related_dependency[1]['POSTAG'].startswith('J'):
-        relation = 'HasProperty'
-        negatives = [neg for neg in set(form.split(' ')) if neg in negative_words]
-        if len(negatives) % 2 == 1:
-            relation = 'Not' + relation
-            words = form.split(' ')
-            form = ' '.join(words[words.index(negatives[-1])+1:])
-
+        relation += 'HasProperty'
         character.add_relation(relation, form)
 
     elif deprel == 'cop':
@@ -122,7 +134,8 @@ def determine_relation_types(related_dependency, character):
         #character.add_relation('IsA', form)
 
     elif deprel == 'nsubjpass' or deprel == 'dobj':
-        character.add_relation('ReceivesAction', form)
+        relation += 'ReceivesAction'
+        character.add_relation(relation, form)
         
     elif deprel == 'prep':
         pass
@@ -132,7 +145,8 @@ def determine_relation_types(related_dependency, character):
         character.add_relation('CapableOf', form)
 
     elif related_dependency[1]['POSTAG'].startswith('V'):
-        character.add_relation('TakesAction', form)
+        relation += 'TakesAction'
+        character.add_relation(relation, form)
 
 
 # We want everything to be character centric, so we use this to get all of the related dependencies to a character.
@@ -187,7 +201,7 @@ def get_in_dependencies(dependency, dependencies, candidate_relations):
 # Note that by default we keep the POS of the highest dep, but in some cases we must inherit the POS
 #  e.g. tasted so nice should inherit the adjective POS from nice rather than keeping the verb POS of tasted.
 def collapse_loose_leaves(dependencies):
-    collapsable_branches = ['acomp', 'advmod', 'dep', 'det', 'measure', 'nn', 'num', 'number', 'neg', 'preconj',
+    collapsable_branches = ['acomp', 'advmod', 'aux', 'dep', 'det', 'measure', 'nn', 'num', 'number', 'neg', 'preconj',
                             'predet', 'prep', 'pobj', 'quantmod']
 
     non_leaves_nums = set([dependency['HEAD'] for dependency in dependencies])

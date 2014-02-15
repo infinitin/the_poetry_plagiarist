@@ -28,10 +28,12 @@ FEMALE_SYNSETS = set([s.gloss for s in wordnet.synsets('female')] +
 ANIMATE_SYNSETS = set([s.gloss for s in wordnet.synsets('animate thing')])
 PHYSICAL_SYNSETS = set([s.gloss for s in wordnet.synsets('physical object')])
 
-PLURAL_PRONOUNS = {'ours', 'ourselves', 'theirs', 'them', 'themselves', 'they', 'us', 'our', 'ours', 'their'}
+PLURAL_PRONOUNS = {'ours', 'ourselves', 'theirs', 'them', 'themselves', 'they', 'us', 'our', 'their', 'we'}
 MALE_PRONOUNS = {'him', 'himself', 'hisself', 'his'}
 FEMALE_PRONOUNS = {'hers', 'herself', 'she', 'her'}
 NEUTRAL_PRONOUNS = {'it', 'itself', 'one', 'oneself', 'ownself', 'self'}
+NON_RESOLUTION_PRONOUNS = {'i', 'we', 'me', 'us', 'you', 'thee', 'thou', 'thy', 'your', 'yours', 'thine', 'ours',
+                           'ourselves', 'us', 'our'}
 
 NEXT_CHARACTER_ID = 0
 
@@ -71,7 +73,7 @@ def create_characters(dependencies):
             elif set(words) & NEUTRAL_PRONOUNS:
                 gender = 'n'
 
-            if gender == 'm' or gender == 'f':
+            if not gender == 'n':
                 object_state = 'a'
 
         else:
@@ -106,7 +108,7 @@ def create_characters(dependencies):
 
         character = Character(dependency['ID'], num, gender, object_state)
         character.text = form
-        if dependency['POSTAG'].startswith('P'):
+        if dependency['POSTAG'].startswith('P') and not set(words) & NON_RESOLUTION_PRONOUNS:
             character.is_pronoun = True
         character.add_relation("IsA", form)
         characters.append(character)

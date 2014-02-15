@@ -5,6 +5,7 @@ import string
 import nltk
 from difflib import get_close_matches
 from itertools import product
+import re
 
 
 def set_up_globals():
@@ -106,3 +107,24 @@ def get_extended_line_permutations(line):
 
         extended_pronunciations.append(extended_word_pronunciations)
     return list(product(*extended_pronunciations))
+
+
+# Replace known abbreviations with the full form so that it gets picked up by cmudict.
+# Can be removed by simply extending the cmudict.
+def replace_contractions(line):
+    replacement_patterns = [(r'won\'t', 'will not'),
+                            (r'can\'t', 'cannot'),
+                            (r'i\'m', 'i am'),
+                            (r'ain\'t', 'is not'),
+                            (r'(\w+)\'ll', '\g<1> will'),
+                            (r'(\w+)n\'t', '\g<1> not'),
+                            (r'(\w+)\'ve', '\g<1> have'),
+                            (r'(\w+t)\'s', '\g<1> is'),
+                            (r'(\w+)\'re', '\g<1> are'),
+                            (r'(\w+)\'d', '\g<1> would'),
+                            (r'(\w+)\'st', '\g<1>')]
+    expanded_line = line
+    patterns = [(re.compile(regex), expansion) for (regex, expansion) in replacement_patterns]
+    for (pattern, expansion) in patterns:
+        (expanded_line, count) = re.subn(pattern, expansion, expanded_line)
+    return expanded_line

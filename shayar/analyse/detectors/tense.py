@@ -1,8 +1,8 @@
 __author__ = 'Nitin'
 
-import re
 from pattern.text.en import tag, tenses
 from collections import Counter
+from utils import replace_contractions
 
 
 # First grab all the verbs in the line
@@ -14,7 +14,7 @@ def detect_line_tense(poem):
     for line in poem:
         line_verb = ""
         if "'" in line:
-            line = __replace_contractions(line)
+            line = replace_contractions(line)
         for word, t in tag(line, tokenize=True):
             if t.startswith("V"):
                 line_verb = str(word)
@@ -38,24 +38,3 @@ def detect_line_tense(poem):
 # We take the mode of the tenses in a line as the overall tense.
 def detect_overall_tense(line_tenses):
     return [x for x, y in Counter(line_tenses).most_common()][0]
-
-
-# Replace known abbreviations with the full form so that it gets picked up by cmudict.
-# Can be removed by simply extending the cmudict.
-def __replace_contractions(line):
-    replacement_patterns = [(r'won\'t', 'will not'),
-                            (r'can\'t', 'cannot'),
-                            (r'i\'m', 'i am'),
-                            (r'ain\'t', 'is not'),
-                            (r'(\w+)\'ll', '\g<1> will'),
-                            (r'(\w+)n\'t', '\g<1> not'),
-                            (r'(\w+)\'ve', '\g<1> have'),
-                            (r'(\w+t)\'s', '\g<1> is'),
-                            (r'(\w+)\'re', '\g<1> are'),
-                            (r'(\w+)\'d', '\g<1> would'),
-                            (r'(\w+)\'st', '\g<1>')]
-    expanded_line = line
-    patterns = [(re.compile(regex), expansion) for (regex, expansion) in replacement_patterns]
-    for (pattern, expansion) in patterns:
-        (expanded_line, count) = re.subn(pattern, expansion, expanded_line)
-    return expanded_line
