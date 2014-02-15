@@ -6,7 +6,7 @@ import logging
 logging.basicConfig(level=logging.INFO)
 logging.getLogger(__name__)
 
-from detectors import basic_structure, tense, rhythm, line_pattern, rhyme, point_of_view, rhetoric
+from detectors import basic_structure, tense, rhythm, line_pattern, rhyme, point_of_view, rhetoric, personification
 from detectors.context import context
 
 logging.info('Grabbing poems')
@@ -79,6 +79,9 @@ test.point_of_view = point_of_view.determine_perspective(test.poem)
 #test.characters = point_of_view.identify_characters(test.poem)
 
 logging.info("Reading in-between the lines")
-context.identify_characters_and_relationships(test.poem)
+test.characters = context.identify_characters_and_relationships(test.poem)
+
+logging.info("Detecting personification")
+test.personification = personification.detect_personification(test.characters)
 
 print str(test)

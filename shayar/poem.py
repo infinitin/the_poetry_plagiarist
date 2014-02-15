@@ -36,6 +36,7 @@ class Poem:
         self.onomatopoeia = []              # List of set of onomatopoeia used per line
         self.similes = []                   # List of set of similes used
         self.metaphors = []                 # List of set of metaphors used
+        self.personification = []           # List of characters that might be evidence for personification
 
         self.point_of_view = ""             # first/second/third person
 
