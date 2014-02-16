@@ -9,8 +9,9 @@ class Character:
         self.num = num                        # 'sg' or 'pl'
         self.object_state = object_state      # 'a' for animate, 'p' for physical object, 'n' for not an object
 
-        self.text = ""               # Text in the poem referring to it
-        self.is_pronoun = False      # Whether or not it is a pronoun (and needs to be resolved)
+        self.text = ""                  # Text in the poem referring to it
+        self.is_pronoun = False         # Whether or not it is a pronoun (and needs to be resolved)
+        self.personification = False    # Boolean as to whether this character is evidence of personification
 
         self.type_to_list = {
             'Named': list(),

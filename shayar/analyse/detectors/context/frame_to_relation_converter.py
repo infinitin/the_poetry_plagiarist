@@ -17,10 +17,9 @@ NEGATIVE_EXPERIENCES = {'abhor', 'abhorrence', 'abominate', 'afraid', 'antipathy
 # Get the corresponding concept-frame net relation template for this target (if any)
 # Fill the relation template with the parameters given from the frame semantic parse
 # Add it to a map from the target
-def build_candidate_relations_from_frames(json):
+def build_candidate_relations_from_frames(frames):
     build_frame_relations()
     candidate_relations = {}
-    frames = json["sentences"][0]["frames"]
     for frame in frames:
         try:
             candidate_relation_template = frame_relations[frame["target"]["name"]]

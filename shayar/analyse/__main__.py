@@ -1,3 +1,5 @@
+from shayar.analyse.detectors.context import personification
+
 __author__ = 'Nitin'
 
 from shayar.poem import Poem
@@ -6,7 +8,7 @@ import logging
 logging.basicConfig(level=logging.INFO)
 logging.getLogger(__name__)
 
-from detectors import basic_structure, tense, rhythm, line_pattern, rhyme, point_of_view, rhetoric, personification
+from detectors import basic_structure, tense, rhythm, line_pattern, rhyme, point_of_view, rhetoric
 from detectors.context import context
 
 logging.info('Grabbing poems')
