@@ -51,6 +51,8 @@ class Character:
 
     def __str__(self):
         return_text = "This character is represented by the text: '" + self.text + "'.\n"
+        if self.personification:
+            return_text += "This portrays sentient behaviour, despite being inanimate.\n"
 
         if self.gender == 'm':
             if self.num == 'sg':

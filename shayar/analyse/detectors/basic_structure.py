@@ -42,3 +42,25 @@ def count_distinct_sentences(poem):
         lines += line.lower() + " "
 
     return len(parsetree(lines))
+
+
+def determine_perspective(poem):
+    altogether = ''
+    for line in poem:
+        altogether += line + ' '
+
+    words = set(altogether.split(' '))
+
+    first_person_words = {'i', 'me', 'my', 'myself', 'mine'}
+    second_person_words = {'you', 'your', 'yourself', 'yours', 'thy', 'thine', 'thou', 'thee'}
+
+    first_person = list(first_person_words & words)
+    second_person = list(second_person_words & words)
+
+    if first_person or second_person:
+        if len(first_person) >= len(second_person):
+            return "first"
+        else:
+            return "second"
+    else:
+        return "third"

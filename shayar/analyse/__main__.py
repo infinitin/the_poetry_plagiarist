@@ -1,5 +1,3 @@
-from shayar.analyse.detectors.context import personification
-
 __author__ = 'Nitin'
 
 from shayar.poem import Poem
@@ -8,7 +6,7 @@ import logging
 logging.basicConfig(level=logging.INFO)
 logging.getLogger(__name__)
 
-from detectors import basic_structure, tense, rhythm, line_pattern, rhyme, point_of_view, rhetoric
+from detectors import basic_structure, tense, rhythm, line_pattern, rhyme, rhetoric
 from detectors.context import context
 
 logging.info('Grabbing poems')
@@ -27,7 +25,7 @@ simple = Poem(map(str.strip, f.readlines()))
 f.close()
 
 logging.info('Begin analysis')
-test = simple
+test = limerick
 
 logging.info('Setting up cmudict and other tools')
 set_up_globals()
@@ -75,15 +73,9 @@ logging.info('Listening for onomatopoeia')
 test.onomatopoeia = rhetoric.identify_onomatopoeia(test.poem)
 
 logging.info("Determining speaker's point of view")
-test.point_of_view = point_of_view.determine_perspective(test.poem)
-
-#logging.info("Identifying the characters in the poem")
-#test.characters = point_of_view.identify_characters(test.poem)
+test.point_of_view = basic_structure.determine_perspective(test.poem)
 
 logging.info("Reading in-between the lines")
 test.characters = context.identify_characters_and_relationships(test.poem)
-
-logging.info("Detecting personification")
-test.personification = personification.detect_personification(test.characters)
 
 print str(test)
