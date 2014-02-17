@@ -6,7 +6,7 @@ import logging
 logging.basicConfig(level=logging.INFO)
 logging.getLogger(__name__)
 
-from detectors import basic_structure, tense, rhythm, line_pattern, rhyme, rhetoric
+from detectors import basic_structure, rhythm, line_pattern, rhyme, rhetoric
 from detectors.context import context
 
 logging.info('Grabbing poems')
@@ -40,10 +40,10 @@ logging.info('Finding and counting repeated lines')
 test.repeated_lines = basic_structure.count_repeated_lines(test.poem)
 
 logging.info('Deciphering tenses of poem')
-test.tenses = tense.detect_line_tense(test.poem)
+test.tenses = basic_structure.detect_line_tense(test.poem)
 
 logging.info('Compiling overall tense')
-test.overall_tense = tense.detect_overall_tense(test.tenses)
+test.overall_tense = basic_structure.detect_overall_tense(test.tenses)
 
 logging.info('Counting syllables in each line')
 test.syllable_count = rhythm.count_syllables(test.poem)
