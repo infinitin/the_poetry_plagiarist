@@ -1,5 +1,5 @@
 \def\baselinestretch{1}
-\chapter{Project Plan}
+\chapter{Poem Analysis}
 \ifpdf
     \graphicspath{{Theory/TheoryFigs/PNG/}{Theory/TheoryFigs/PDF/}{Theory/TheoryFigs/}}
 \else
@@ -8,119 +8,146 @@
 
 \def\baselinestretch{1.66}
 
-This project is split up into three main phases. The first two phases, Analysis and Abstraction, is planned to span roughly the first two terms. The final stage, Generation, is to be completed in the third term. Some implementation details are included in this section.
-\section{Analysis}
+\section{Obtaining Phonetic Structure}
 
-First we analyse a single poem in great depth. This means that we write algorithms to detect the use of:
-\begin{itemize}
-\setlength{\itemsep}{0pt}
-\item{Rhyme and internal rhyme}
-\item{Rhythm, including meter and syllable count}
-\item{Alliteration, assonance, consonance, onomatopoeia and other sound devices}
-\item{Structure, tense and repetition}
-\end{itemize}
 
-Then we try to understand the context of the poem to extract:
-\begin{itemize}
-\setlength{\itemsep}{0pt}
-\item{Characters}
-\item{Objects}
-\item{Locations}
-\item{Descriptions}
-\item{Relationships}
-\item{Actions}
-\item{Point of View}
-\item{Symbolism, such as metaphors and similes}
-\end{itemize}
 
-The implementations of these detectors, as of this report, use:
-\begin{itemize}
-\setlength{\itemsep}{0pt}
-\item{Basic string parsing algorithms}
-\item{Python Natural Language Toolkit, a suite of text processing libraries, corpora and lexical resources}
-\item{The CMU Pronunciation Dictionary, which gives phonetic spellings of 133,000 English words in ARPAbet}
-\item{WordNet, a lexical database that provides conceptual-semantic and lexical relations of 155,287 English words}
-\item{VerbNet, a lexical database that groups verbs by semantic and syntactic linking behaviour}
-\item{CLiPS Pattern, a web-mining module for Python}
-\item{Written Sound, a dictionary of onomatopoeia to their meanings and associated objects}
-\item{Discourse Representation Theory}
-\item{Metaphor Magnet, a web application that maps commonplace metaphors in everyday texts}
-\end{itemize}
+\section{Rhyme}
 
-This stage is currently on schedule and expected to be completed within two weeks of the submission of this paper. The tasks that remain are an improved grammar and lexicon for parsing to a Discourse Representation Structure (DRS) and metaphor detection using Metaphor Magnet.
+\subsection{Detecting Rhyme}
 
-Note that the theme of the poem is not be addressed at this stage. The algorithm for detecting theme uses a very similar process to Abstraction as explained below, so has been moved to that phase.
+\subsection{Rhyme Scheme Representation}
 
-\section{Abstraction}
 
-A prerequisite to this stage is that all of the output from the detectors is as general as possible, leaving all options open for consideration during this phase. They should also be in an easily comparable format such as numerical scores and simple strings. The first task of this stage is to make sure that this is the case and make any adjustments if necessary.
 
-The major algorithm to be written in this stage will analyse a large set of poems, compare each aspect of the results individually and find significant overlaps. The overlapping features will be saved as a template for poems of that type. Any single type of poem may have several templates. For example, overlapping features of all limerick include its rhythm and \textit{AABBA} rhyme scheme, but only some start with \textit{"There once was a"}, so one template will be created with that start string and one without.
+\section{Rhythm}
 
-We then take a large list of poems of the same theme, as determined by classifications on poets.org and run it through this algorithm. We will then be able to analyse and generate poetry with theme-associated constraints. For example, love poems may talk about roses and flowers, so we associate these objects as having a theme of love. It may also, for example, reveal that limericks are mostly humourous.
+\subsection{Detecting Syllabic Rhythm}
 
-Thereafter, we will find abstractions of the following types of poems:
-\begin{itemize}
-\setlength{\itemsep}{0pt}
-\item{Haiku}
-\item{Limerick}
-\item{Sonnet}
-\item{Elegy}
-\item{Ode}
-\item{Ballad}
-\item{Cinquain}
-\item{Riddle}
-\item{Free Verse}
-\end{itemize}
+\subsection{Detecting Quantitative and Accentual Rhythm}
 
-The data acquired in this stage will then be stored in a relational database.
+\subsection{Rhythm Representation}
 
-This algorithm can do most of its processing unsupervised and in parallel so should not take very much time. However, to be on the safe side we will employ agile methodologies to avoid running out of time for the generation phase. Firstly, we will only run abstraction on a limited number of themes. Then we will work on Haikus initially because they are short and have relatively simple structure. We will then move on to the Generation phase. Once we are able to generate Haikus, we will return to this stage and abstract the next type of poem down the list and try to generate it. We will oscillate between Abstraction and Generation in this way until the end of the list and all themes are completed, or we run out of time.
 
-\section{Generation}
 
-The process of generating a poem begins with a seed of inspiration. It could come in the form of a command from the user, for example "write me a limerick about a computer that is bored with data but finds poetry fun". Or it could come from another source, perhaps the top trending Tweet for that day. A type, and optionally theme, for the poem is also given, which imposes constraints on the features and form of the poem as well as preferences for the words to be used.
+\section{Sound Devices}
 
-The inspiration is converted into a DRS, as in the Analysis phase. As part of generating the requested type of poem, we wish to aim for the a DRS of that found in the generalisation stage for the requested poem. This enforces descriptive poems to have more descriptions or narrative ones to have more action, for example.
+\subsection{Onomatopoeia}
 
-The corresponding template for the requested poem is loaded. If there are multiple candidate templates, one is chosen at random. This randomness is encouraged as it could ensure non-determinism, making the poem seem more creative. An added feature would be to allow the user to alter the constraints manually and add words or phrases to be excluded from the poem. If given time, the generator could autonomously 'mutate' low priority constraints as another way of including non-determinism.
+\subsection{Detecting Consecutive Sounds}
 
-The poem template is then filled as far as possible using the seeds only. The following algorithm is then executed to complete the rest of the poem:\\
+\subsection{Representation of Sound Device Analysis}
 
-\begin{lstlisting}
-For each line in the poem:
-	If full sentence and valid structure, 
-		continue.
-	Elif full sentence and invalid structure, 
-		rephrase to fit structure (using error code if provided).
-	Elif almost full sentence, 
-		use collocations to fill gaps.
-	Elif non-empty sentence,
-		determine goal of sentence based on target DRS.
-		find phrases/similes/metaphors to fit.
-	Elif empty sentence,
-		find association to subject/object of prev line.
-		add association as subject/object of sentence.
-Check against constraints of type of poem.
-If not all constraints are met,
-	Restart loop with error codes to help rephrasing process.
-\end{lstlisting}		
-Words selected during the algorithm are weighted to include more alliteration and other features. A dry run example is given in the appendix. Rephrasing entails replacing a word or phrase in a sentence with a substitute that fixes the broken constraint without breaking anything further. 
 
-A dry run for this algorithm can be found in the Appendix.
 
-This algorithm will be implemented using all the tools listed in the Analysis section, as well as from the following sources and libraries:
-\begin{itemize}
-\setlength{\itemsep}{0pt}
-\item{Oxford Collocations Dictionary, a source of word pairings and phrases that occur with greater than chance probability}
-\item{Phrase Finder, a database of 2048 English sayings, phrases, idioms, expressions}
-\item{Wordnik, a multi-faceted dictionary and semantic language database collected from a variety of sources}
-\item{LinguaTools DISCO, a tool to derive semantic similarity between words based on statistical analysis of large text collections}
-\item{ConceptNet 5, a semantic general knowledge network}
-\item{Thesaurus Rex, a monster thesaurus generated from web texts}
-\end{itemize}
+\section{Form and Structure}
 
-Once the poem is generated, the user can once again ask for certain changes in constraints. The most useful one will perhaps be rephrasal of certain words or phrases by asking for them to be excluded. For example, if the phrase "bored to death" was used in the poem, the user could ask for the word death to be replaced. This would involve running the same algorithm as above, but with the word 'death' removed and the added constraint that the word 'death' cannot be used. This would enter the 'almost full sentence' elif condition and use collocations, possibly using 'tears' instead.
+\subsection{Stanzas, Lines and Sentences}
+
+\subsection{Point of View}
+
+\subsection{Tense and Aspect}
+
+
+
+\section{Context and Pragmatics}
+Here we describe the approach to the difficult challenge of determining the context of the poem in terms of its characters and their relations, descriptions etc. as described in section \ref{sec:pragpers}. The aim is to build a representation of the characters much like a human reader would in their mind. This will then be compared in the abstraction section to find a correlation between these structures and types of poetry.
+
+\subsection{ConceptNet Relations}
+ConceptNet is a semantic network of '\textit{general knowledge}'. Each node in the network is a natural language word or phrase called a \textit{concept}. Edges in the network represent a relationship between two concepts. These relationships come in various types, for example:
+
+**Big list of the relations with the ones that we are concerned with at the top.**
+
+We can use these relationships to build a cohesive story about particular characters during the generation phase. However, in keeping with the theme of this paper we cannot simply hard-code or randomise this process. Therefore, we need to be able to analyse these relationships in existing poems during the abstraction phase to find correlations. For example, we may find that descriptive poems have a high number of \textit{HasProperty} relations and very few characters.  
+
+To do this, we need to be able to extract relationships between concepts in a particular poem in lieu of ConceptNet relations. For example:
+
+**Give the cat example**
+
+\subsection{Semantic Labelling using Noah's ARK}
+
+It would be very difficult to determine these relationships from a syntactical parse alone. This is due to the complex nature of the English language, in particular verb usage. For example, the phrase \textit{tasted so nice} is a description rather than an action because the word \textit{tasted} in this case is being used as a linking verb, where it is usually an action verb.
+
+These complexities are further compounded by the fact that we cannot rely on correct grammar in poems. We therefore need a \textit{semantic} parse. Noah's ARK is an informal research group run by Noah Smith at Carnegie Mellon University. They provide online API access to two tools for linguistic structure analysis, \textit{SEMAFOR} and \textit{TurboParser}. Both of these tools in conjunction are satisfactory for our aim to extract ConceptNet relations from natural language.
+
+\subsubsection{FrameNet Semantic Role Labelling using SEMAFOR}
+
+Semantic Role Labelling (SRL) is best described with an example. Take the sentence \textit{"The shopkeeper told the hoodlum to go away"}, we wish to recognise the verb \textit{'to tell'} as the target, \textit{'the shopkeeper'} as the speaker, \textit{'go away'} as the message and \textit{'the hoodlum'} as the addressee. This can be seen clearly in Figure BLAH. 
+
+This is independent of the syntactic structure of the sentence and does require grammatical correctness. The SRL for the \textit{'Yoda-speak'} equivalent will remain the same, as shown in Figure BLAH.
+
+These labels are retrieved through the SEMAFOR tool, which uses FrameNet to determine the frame-semantic structure of the text. FrameNet is a lexical database of \textit{semantic frames}, which describe the meaning of a word based on the words that typically participate with it, known as frame elements. It is based on the Frame Semantics Theory, introduced by Charles J.Fillmore et al.
+
+We can use these to derive the ConceptNet relations by looking for the occurrence of frames, and elements thereof, that correspond to the ConceptNet relation. These manually chosen lists can be found in THE APPENDIX. However, each list may not be exhaustive for its corresponding ConceptNet relation and there are some relations that will not be picked up by this method.
+
+
+\subsubsection{Semantic Dependency Relations using TurboParser}
+
+The Stanford Dependencies is another representation based around the relationships between words. All dependency relations are strictly binary and come in various types depending on the participants (called the \textit{governor} and the \textit{dependent}).
+
+The semantic dependency tree for the previous shopkeeper example can be seen in Figure BLAH.
+
+This representation fills the gaps left by the frame-semantic parse using the following heuristics:
+
+PSEUDO-CODE HEURISTICS HERE
+
+Together, these tools provide a fairly complete coverage of the ConceptNet relations.
+
+
+\subsection{Binding Relations to Characters}
+
+At this point, the derived ConceptNet relations are only a set of abstracted FrameNet frames and matched dependencies. This alone does not give us much more information than if we were to use the frame-semantic parse on its own. The true usefulness of this approach only arises if the relations can be bound to characters of the poem. For the shopkeeper example, we would recognise \textit{the shopkeeper} and \textit{the hoodlum} as objects with SendMessage and ReceiveMessage relations bound to each of them respectively with respect to the \textit{go away} message.
+
+We can represent the desired output as a set of 'hubs', with each character at the centre of the hub as in Figure BLAH. This will also improve our knowledge for the generation phase in that we will know the \textit{number} of characters typical for a poem type, the \textit{number and type} of relations associated with \textit{each} character, as well as allow us to find commonalities in the types of characters themselves.
+
+To reach the desired representation, we execute the following algorithm:
+
+for each sentence in the poem:
+	get the dependency relations and frame semantic parse
+	collapse loose leaves of the dependency relations
+	find and create possible characters
+	find candidate ConceptNet relations from the frame-semantic parse
+	for each character:
+		get all associated dependency relations
+		for each associated dependency relation:
+			if the dependent is involved in a candidate relation from the frame-semantic parse:
+				bind the relation to the current character and continue
+			else:
+				use the heuristics for dependency relations to find possible ConceptNet relations
+				bind any that are found to the current character and continue
+				
+Here we describe each step in detail.
+
+\subsubsection{Obtaining the Semantic Dependency Relations and Frame-Semantic Parse from Noah's ARK}
+
+\subsubsection{Collapsing Loose Leaves of the Semantic Dependency Relations}
+
+\subsubsection{Finding and Creating Characters}
+
+\subsubsection{Extracting Candidate ConceptNet Relations from the Frame-Semantic Parse}
+
+\subsubsection{Obtaining the Associated Dependency Relations for a Particular Character}
+
+\subsubsection{Using Semantic Dependency Relations to Extract ConceptNet Relations}
+
+\subsubsection{Binding Extracted ConceptNet Relations Characters}
+	
+	
+
+\subsection{Anaphora Resolution}
+
+
+
+\subsection{Peeks at Future Development of Pragmatic Language Analysis}
+
+
+
+\section{Symbolism and Imagery}
+
+\subsection{Simile}
+
+\subsection{Personification}
+
 
 %%% ----------------------------------------------------------------------
 
