@@ -38,6 +38,7 @@ To summarise the purpose of poetry from this, we would say that it is using one'
 We must keep this in mind throughout the project, as it is important to realise that the features of poetry discussed in the next section might be seen as arbitrary rules on form rather than purposeful techniques used to make the language more concise and effective.
 
 \subsection{Features of Poetry}
+\label{sec:features}
 
 The definition above mentions the use of \textit{meaning, sound and rhythm} in poetry. These add an extra layer of subtext to poems to help the author remain concise while still eliciting a full emotional response from the reader. We call these techniques \textit{features} of poetry throughout this paper. There are many features of poetry to address, but we have scoped this project down to concentrate on the following popular ones.
 
@@ -181,6 +182,7 @@ The Haiku in Figure \ref{fig:haiku} has a single tercet structure with no repeti
 We concentrate on detecting and reproducing accurate structures of common poetry types in this project.
 
 \subsubsection{Symbolism and Imagery}
+\label{sec:symbol}
 Symbolism and imagery are general terms for creating an overall image in the reader's mind by describing a subject or object as something else with desired qualities.
 
 Techniques include:
@@ -436,6 +438,7 @@ Automatic Poetry Generation uses many lessons from Computational Linguistics. He
 %http://www.cse.iitk.ac.in/users/mohit/Speech-and-Language-Processing.pdf
 
 \subsection{Words}
+\ref{sec:words}
 Words are the fundamental building blocks of language. They have been studied for creation of spell-checkers, text-to-speech synthesis and automatic speech recognition. Two major subsets where poetry is concerned is the study of pronunciation and morphology. 
 
 The CMU Pronunciation Dictionary\cite{weide1998cmu} has taken the first steps towards computationally modelling the phonetics of words. It uses the ARPAbet phoneme set (see Table \ref{tab:arpa} in the Appendix) is highly important for poetry generation as it helps machines reason about rhyme and sound devices by simply comparing phonemes. It has over 133,000 words mapped to its corresponding pronunciation.
@@ -532,6 +535,11 @@ This allows us to provide background knowledge to the system and make inferences
 In poetry, like any text, we can use this to analyse the semantics and pragmatics of the storyline. Furthermore, we hypothesis that it can be used to model each poetry type since they each have their own forms and purposes, and provide coherency to the story when generating text.
 %http://aclweb.org/anthology/W/W11/W11-2819.pdf
 %http://www.let.rug.nl/bos/pubs/BasileBosEvangVenhuizen2012LREC.pdf
+
+\subsection{Anaphora Resolution and Presupposition Projection}
+\label{sec:arback}
+
+Need some stuff here. Probably remove the DRT section as well.
 
 \subsection{Natural Language Generation}
 Natural Language Generation is the term for putting some non-linguistic form of content into understandable text in a human language. Reiter and Dale give the framework\cite{reiter2000building} illustrated in figure \ref{fig:nlg} for the process of generating natural language.
