@@ -43,6 +43,8 @@ We must keep this in mind throughout the project, as it is important to realise 
 The definition above mentions the use of \textit{meaning, sound and rhythm} in poetry. These add an extra layer of subtext to poems to help the author remain concise while still eliciting a full emotional response from the reader. We call these techniques \textit{features} of poetry throughout this paper. There are many features of poetry to address, but we have scoped this project down to concentrate on the following popular ones.
 
 \subsubsection{Rhyme}
+\label{sec:rhyme}
+
 \begin{figure}[h!]
 \centering
 \textit{
@@ -72,6 +74,7 @@ Rhyme can also occur within a line (internal rhyme) or between words in the midd
 In this project, we will detect and reproduce end-line rhyme and internal rhyme where applicable. It will also be prioritised when producing poetry for which a rhyme scheme is not mandatory but fits the purposes.
 
 \subsubsection{Rhythm}
+\label{sec:rhythm}
 Rhythm is the pattern of emphasis of syllables that occurs in a line of poetry. There are three major ways of measuring rhythm, often used in tandem - syllabic, quantitative and accentual.
 
 \begin{figure}[h!]
@@ -131,6 +134,7 @@ All Shakepeare's sonnets are written in iambic pentameter, i.e. five repetitions
 Rhythm is a fundamentally important feature of poetry, so this project aims to be able to detect and reproduce it consistently and to a high level of accuracy.
 
 \subsubsection{Sound Devices}
+\label{sec:sound}
 This project considers four types of sound devices.
 
 The first is \textbf{onomatopoeia} - words that imitate or suggest sounds of particular sources. For example, the \textit{pow} of a punch or the \textit{tick-tock} of a clock. This technique has mostly been used in comic books to help the reader experience the sound of the scene to go with the image.
@@ -438,12 +442,19 @@ Automatic Poetry Generation uses many lessons from Computational Linguistics. He
 %http://www.cse.iitk.ac.in/users/mohit/Speech-and-Language-Processing.pdf
 
 \subsection{Words}
-\ref{sec:words}
+\label{sec:words}
 Words are the fundamental building blocks of language. They have been studied for creation of spell-checkers, text-to-speech synthesis and automatic speech recognition. Two major subsets where poetry is concerned is the study of pronunciation and morphology. 
 
 The CMU Pronunciation Dictionary\cite{weide1998cmu} has taken the first steps towards computationally modelling the phonetics of words. It uses the ARPAbet phoneme set (see Table \ref{tab:arpa} in the Appendix) is highly important for poetry generation as it helps machines reason about rhyme and sound devices by simply comparing phonemes. It has over 133,000 words mapped to its corresponding pronunciation.
 
-To illustrate how this works, let us take two words that are spelled differently but pronounced the same - \textit{kite} and \textit{height}. The Jaro-Winkler distance, a normalised score of similarity between strings, for the tail of these words (in search of rhyme) gives 51.11\%, indicating that it is barely probable that they rhyme if we only looked at spelling. Their corresponding phoneme sets are \textit{'K AY T'} and \textit{'HH AY T} respectively. Now it is trivial to compare them and see that the tails are exactly the same and therefore rhyme.
+To illustrate how this works, let us take two words that are spelled differently but pronounced the same - \textit{kite} and \textit{height}. The Jaro-Winkler distance, a normalised score of similarity between strings, for the tail of these words (in search of rhyme) gives 51.11\%, indicating that it is barely probable that they rhyme if we only looked at spelling. Their corresponding phoneme sets are \textit{'K AY1 T'} and \textit{'HH AY1 T} respectively. Now it is trivial to compare them and see that the tails are exactly the same and therefore rhyme.
+
+Notice the '1' appended to the 'AY' phonemes. Vowel phonemes come with a digit appended to them that defines the emphasis placed on this syllable:
+\begin{itemize}
+\item{0: unstressed}
+\item{1: stressed}
+\item{2: light/secondary stress}
+\end{itemize}
 
 Morphology of words is the study of putting words together with morphemes, the smallest unit of grammar. To use Jarufsky and Martin's example, the word \textit{fox} consists of a single morpheme that is itself, but \textit{cats} has two morphemes, \textit{cat} and \textit{-s}. This is of vital importance in our project as we need to understand the difference between different forms of the same word and how they relate to context. Furthermore, when generating text we wish to produce coherent grammar with consistent tense and perspective.
 

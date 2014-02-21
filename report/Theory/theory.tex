@@ -64,9 +64,9 @@ And the clean ones so seldom are comical.
 
 \section{Obtaining Phonetic Structure}
 
-When poets choose words they take the sound of the words when spoken out loud into account as well as their (literal or symbolic) meaning. As explained in section \ref{sec:words}, we can use CMU Pronounciation Dictionary to get around the difficulty of determining phonetic structure by spelling.
+When poets choose words they take the sound of the words when spoken out loud into account as well as their (literal or symbolic) meaning. As explained in section \ref{sec:words}, we can use CMU Pronounciation Dictionary (CMUPD) to get around the difficulty of determining phonetic structure by spelling. A word in the CMUPD is mapped to a list of different pronunciations for the same word. Each pronunciation is a list of phonemes that make up that particular pronunciation of that word, including indication of emphasis on the syllables as explained in section \ref{sec:words}.
 
-Therefore, we want to convert the poems into their phonetic structure for use by the detection algorithms. This needs to be done word by word, so we first need to \textit{tokenise} the sentence. Tokenisation involves splitting each sentence into a list of its basic components; words and punctuation. Once we have done that, we can simply iterate through the list and run each word through the CMU Pronunciation Dictionary. Some words have multiple pronunciations, so we consider each possible permutation of pronouncing each line of the poem. Each of the pronunciations of the first line of Figure \ref{fig:cat} is shown in Figure \ref{fig:catpronun}.
+We want to convert the poems into their phoneme lists for use by the detection algorithms. This needs to be done word by word, so we first need to \textit{tokenise} the sentence. Tokenisation involves splitting each sentence into a list of its basic components; words and punctuation. Once we have done that, we can simply iterate through the list and run each word through the CMUPD. Some words have multiple pronunciations, so we consider each possible permutation of pronouncing each line of the poem. Each of the pronunciations of the first line of Figure \ref{fig:cat} is shown in Figure \ref{fig:catpronun}.
 
 \begin{figure}
 \centering
@@ -99,35 +99,105 @@ The final option is the most viable and would be used if the generation phase de
 
 \section{Rhyme}
 
+We want to detect end-line and internal rhyme, as described in section \ref{sec:rhyme}. Along with detecting it, we want to be able to build a normalised rhyme scheme representation for easy analysis in the abstraction phase. 
 
+First we collect the phoneme set of the words that we wish to analyse for rhyme. For end-line, we collect the last word of each line of the poem. For internal rhyme, we collect the all the words in a particular stanza.
 
-\subsection{Detecting Rhyme}
+Once we have our list, we can run it through Algorithm BLAH.
 
-\subsection{Rhyme Scheme Representation}
+1 for each word in the list:
+2 	for each pronuciation of the word:
+3		for each phoneme in the pronunciation:
+4			if this phoneme is stressed:
+5				get all the rhyme phoneme pattern from this phoneme onwards in this pronunciation
+6				if we have seen this pattern before: 
+7					assign it corresponding rhyme token
+8				else:
+9					map this pattern to a new rhyme token
+10				
+11				append this token to a set of possible tokens for this word				
+12	append the set possible tokens for this word to the unzipped rhyme scheme
+13 build all possible permutations of rhyme scheme from they unzipped rhyme scheme
+14 normalise the rhyme schemes
+	
+There are a few tricks to this algorithm, namely obtaining the rhyme phoneme pattern on line 5 and the process of building and normalising the rhyme scheme in lines 11 to 14.
 
+\subsection{Obtaining the Rhyme Phoneme Pattern}
 
+Two words rhyme when:
+\begin{itemize}
+\item{the last phoneme of each word match}
+\item{the vowel sounds after and including the first stressed syllable match \textbf{in order}}
+\end{itemize}
+
+The algorithm finds the first stressed syllable in line 4. At that point we only need to iterate through the rest of the pronunciation and find the vowel sounds and the last phoneme check that the last phonemes. Putting them together in order gives the unique rhyme phoneme pattern. 
+
+For example strategy and tragedy, kite and height - colourful diagrams!			
+
+\subsection{Building and Normalising the Rhyme Scheme}
+
+Each unique rhyme phoneme pattern is represented by a single capital letter starting with 'A'. This is matches with the standard convention for rhyme schemes used in theory. 
+
+The complication comes in the various ways of pronouncing a single word. Therefore, we create a list for every possible rhyme pattern for a each word. The list of these lists is what the algorithm refers to as the 'unzipped' rhyme scheme on line 12 and 13. Figure BLAH shows the unzipped rhyme scheme for the limerick in Figure BLAH. Not that the word 'anatomical' has two pronunciations that affect the rhyme pattern, according to the CMUPD.
+
+FIGURE OF THE UNZIPPED RHYME SCHEME
+
+We then build every possible permutation of this list, which then gives us a list of the possible rhyme schemes for these given words. We leave this list as it is and do not make a claim for any rhyme scheme to be more likely than any other at this stage.
 
 \section{Rhythm}
 
+We attempt to recognise all three types of rhythm described in \ref{sec:rhythm}. 
+
 \subsection{Detecting Syllabic Rhythm}
+
+The number of syllables in a word is equal to the number of vowel phonemes it has. We know that all vowel phonemes have a stress marker appended to it so we can just count the number of stress markers in the word.
+
+However, Syllabic Rhythm is done on a line-by-line basis. Therefore we tokenise each line and aggregate the vowel phonemes across all words in the line to get the number of syllables for that line.
+
+If we take one permutation of the line in Figure \ref{fig:catpronun}, we can see that each word has one vowel phoneme, so each word in that sentence is monosyllabic. Therefore the number of syllables in the line is 7.
+
+The full syllabic rhythm for the poems in Figure \ref{fig:cat} and \ref{fig:limerick} are 7-8-6-7 and 11-6-5-11-11 respectively. We represent these as a list of integers. We create a separate list for each stanza.
 
 \subsection{Detecting Quantitative and Accentual Rhythm}
 
-\subsection{Rhythm Representation}
+While theory counts rhythm in terms of metre and feet, as described in \ref{sec:rhythm}, some poems might have rhythm without following one of these pre-defined popular styles. Instead of searching for them, we will extract the pattern of stressed and unstressed syllables for each line without making a claim on how it matches to theory yet.
 
+We choose to do this mainly because there could be multiple possibilities for the stress pattern of a line due to variations in emphasis for particular words, e.g. '\textbf{ob}ject' and 'ob\textbf{ject}'. The variability of possible stress patterns is compounded by some limitations of the CMUPD:
+\begin{itemize}
+\item{Some words are restricted to a single stress pattern even though it does not lose or change the meaning of the word if it was emphasised differently. For example, '\textbf{quan}tity', 'quan\textbf{ti}ty' and 'quanti\textbf{ty}' are all valid, but the CMUPD only recognises the first because the other two are unusual in normal speech (but not for poetry).}
+\item{Similarly, the CMUPD fixes monosyllabic words to one of stressed or unstressed as in Figure \ref{fig:catpronun}. However, they can be either so we need to allow for both possibilities.}
+\item{Stresses on some words have changed over time. For example \textbf{prov}ed was pronounced prov\textbf{ed} in Shakespeare's era}
+\item{Though not necessarily a limitation, we do not give importance to light or secondary stress in a word (the '2' stress marker). We therefore assume it could be either '1' or '0'.}
+\item{Poetic license often allows words to be pronounced with an entire extra syllable. For example \textit{de-served} could be pronounced as \textit{de-ser-ved}.}
+\end{itemize}
+
+We account for these by increasing the number of possible readings. However, this will lead to a lot of possibilities. For example the line in Figure \ref{fig:catpronun} will give us any combination of '1's and '0's since they are all monosyllabic and by the second point above we want to allow for either. 
+
+We narrow this down initially by taking away any occurrences of the same stress three or more times in a row in the same line, because no one will ever read a poem in this way.  Like with rhyme, we do not make a claim for any stress pattern to be more likely than any other at this stage.
 
 
 \section{Sound Devices}
 
-\subsection{Onomatopoeia}
+We aim to detect each of the sound devices described in \ref{sec:sound}.
 
 \subsection{Detecting Consecutive Sounds}
 
-\subsection{Representation of Sound Device Analysis}
+RETHINK THIS IMPLEMENTATION
 
+For assonance, consonance and alliteration, we only care about whether or not they are being used, not necessarily which sounds are repeated or where in the poem it occurs.
+
+\subsection{Onomatopoeia}
+
+Some onomatopoeia are recognised in traditional dictionaries, while some are not. There are also many variations of the same sound, e.g. 'Aah' versus 'Aaah'. New onomatopoeia can be created at any point depending on the sound the writer wants to portray. This range of variation and lack of consistency makes it difficult to detect all occurrences of onomatopoeia.
+
+However, we can use the WrittenSound.com dictionary of onomatopoeia to recognise the most common ones. We can check each word in the poem for existence in the dictionary or for a very similar words to those in the dictionary. To do this we can use the Levenshtein distance, a measure of the number of changes required to turn one string into another. If the Levenshtien distance between a word and an entry in the dictionary is less than or equal to 1, not including extensions to the head or tail of the onomatopoeia, then we consider it to be onomatopoeic.
+
+Furthermore, WrittenSound has mappings between the onomatopoeia and the type of sound they represent. For example, \textit{'ding'} represents a 'hard hit', probably of a 'metal' object. This can be useful somehow.
 
 
 \section{Form and Structure}
+
+
 
 \subsection{Stanzas, Lines and Sentences}
 
