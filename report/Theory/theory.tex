@@ -70,13 +70,13 @@ We want to convert the poems into their phoneme lists for use by the detection a
 
 \begin{figure}
 \centering
-[['DH', 'EH1', 'R']] \\
-['W', 'AH1', 'N', 'S']\\
-[['W', 'AA1', 'Z'], ['W', 'AH1', 'Z'], ['W', 'AH0', 'Z'], ['W', 'AO1', 'Z']]\\
-[['AH0'], ['EY1']]\\
-[['B', 'IH1', 'G']]\\
-[['B', 'R', 'AW1', 'N']]\\
-[['K', 'AE1', 'T']]
+{[{['DH', 'EH1', 'R']}]} \\
+{[{['W', 'AH1', 'N', 'S']}]}\\
+{[{['W', 'AA1', 'Z']}, {['W', 'AH1', 'Z']}, {['W', 'AH0', 'Z']}, {['W', 'AO1', 'Z']}]}\\
+{[{['AH0']}, {['EY1']}]}\\
+{[{['B', 'IH1', 'G']}]}\\
+{[{['B', 'R', 'AW1', 'N']}]}\\
+{[{['K', 'AE1', 'T']}]}
 \caption{The different ways of pronouncing the first line of the cat poem}
 \label{fig:catpronun}
 \end{figure}
@@ -197,25 +197,59 @@ Furthermore, WrittenSound has mappings between the onomatopoeia and the type of 
 
 \section{Form and Structure}
 
+We implement some basic detectors for the form and structure of the poem. This does not include analysis of words and phrases themselves as that will be done in the abstraction phase, as described in section BLAH.
 
+The algorithms for detecting the features of structure described in section \ref{sec:structure} are fairly simple:
 
-\subsection{Stanzas, Lines and Sentences}
+\begin{itemize}
+\item{\textbf{Number of stanzas} = Number of blank lines + 1}
+\item{\textbf{Number of lines per stanza} = Number of new line characters per stanza}
+\item{\textbf{Number of repeated lines} = Length of the list of lines - Size of the set of lines (sets only hold unique elements)}
+\item{\textbf{Number of distinct sentences} = The number of sentences returned when parsed using the CLiPS \textit{parsetree} function. More lines than sentences indicates enjambment.}
+\end{itemize}
 
-\subsection{Point of View}
+The poem in Figure \ref{fig:cat} has one stanza, four lines, no repeated lines and two distinct sentences, indicating enjambment.
 
-\subsection{Tense and Aspect}
+We can also determine the point of view of the speaker, i.e. whether it is in first or third person. We look for the word 'I' anywhere in the poem and as long as it is outside speech marks, we say that the entire poem is in first person. Otherwise we default to third person. Figure \ref{fig:cat} is written in third person but Figure \ref{fig:limerick} is in first person.
 
+The tense of each line can be found by analysing the verb in that sentence. CLiPS pattern library provides a very easy method of doing this using their 'tenses' algorithm. It also gives us the \textit{aspect}, e.g. perfect, progressive. However, tests found this to be less accurate so we will settle for just the tense for this stage.
 
+We record the tense of each line as well as the overall tense of the poem. EXAMPLES
 
 \section{Context and Pragmatics}
 Here we describe the approach to the difficult challenge of determining the context of the poem in terms of its characters and their relations, descriptions etc. as described in section \ref{sec:pragpers}. The aim is to build a representation of the characters much like a human reader would in their mind. This will then be compared in the abstraction section to find a correlation between these structures and types of poetry.
 
 \subsection{ConceptNet Relations}
-ConceptNet is a semantic network of '\textit{general knowledge}'. Each node in the network is a natural language word or phrase called a \textit{concept}. Edges in the network represent a relationship between two concepts. These relationships come in various types, for example:
+ConceptNet is a semantic network of '\textit{general knowledge}'. Each node in the network is a natural language word or phrase called a \textit{concept}. Edges in the network represent a relationship between two concepts. These relationships come in various types including, but not limited to:
 
-**Big list of the relations with the ones that we are concerned with at the top.**
+\begin{description}
+\item[MadeOf] \hfill \\ What is it made of? \hfill \\ E.g. tree - MadeOf $\rightarrow$ wood
+\item[IsA] \hfill \\ What kind of thing is it? \hfill \\ E.g. banana - IsA $\rightarrow$ fruit
+\item[AtLocation] \hfill \\ Where would you find it? \hfill \\ E.g. priest - AtLocation $\rightarrow$ church
+\item[CapableOf] \hfill \\ What can it do? \hfill \\ bird - CapableOf $\rightarrow$ sing
+\item[Desires] \hfill \\ What does it want? \hfill \\ banker - Desires $\rightarrow$ his loan to be repay
+\item[HasA] \hfill \\ What does it have in its possession? \hfill \\ old person - HasA $\rightarrow$ white hair
+\item[HasProperty] \hfill \\ What properties does it have? \hfill \\ doctor - HasProperty $\rightarrow$ smart
+\item[PartOf] \hfill \\ What is it part of? \hfill \\ player - PartOf $\rightarrow$ team
+\item[ReceivesAction] \hfill \\What can you do to it? \hfill \\ book - ReceivesAction $\rightarrow$ read
+\item[CreatedBy] \hfill \\ How do you bring it into existence? \hfill \\ sound - CreatedBy $\rightarrow$ vibration
+\item[UsedFor] \hfill \\ What do you use it for? \hfill \\ guitar - UsedFor $\rightarrow$ make music
+\item[MotivatedByGoal] \hfill \\ Why would you do it? \hfill \\ learn - MotivatedByGoal $\rightarrow$ knowledge
+\end{description}
 
-We can use these relationships to build a cohesive story about particular characters during the generation phase. However, in keeping with the theme of this paper we cannot simply hard-code or randomise this process. Therefore, we need to be able to analyse these relationships in existing poems during the abstraction phase to find correlations. For example, we may find that descriptive poems have a high number of \textit{HasProperty} relations and very few characters.  
+Each of these relationships also has its inverse, e.g. NotIsA. We can use these relationships to build a cohesive story about particular characters during the generation phase as well as a few of our own:
+
+\begin{description}
+\item[Believes] \hfill \\ What does the character perceive to be true? \hfill \\ Little Red Riding Hood - Believes $\rightarrow$ Wolf is her grandma
+\item[SendMessage] \hfill \\ What did the character say or write?  \hfill \\ Little Red Riding Hood - SendMessage $\rightarrow$ What a big mouth you have
+\item[ReceiveMessage] \hfill \\ What did the character hear or read?  \hfill \\ Little Red Riding Hood - ReceiveMessage $\rightarrow$ The better to eat you with!
+\item[TakesAction] \hfill \\ What did the character do?  \hfill \\ Wolf - TakesAction $\rightarrow$ Swallow Little Red Riding Hood
+\item[Named] \hfill \\ What is the name of the character? \hfill \\ Gotham Vigilante - Named $\rightarrow$ Batman
+\end{description}
+
+We also have the corresponding inverses for these relations. 
+
+In keeping with the theme of this paper we cannot simply hard-code or randomise the choice of relations in building a poem. Therefore, we need to be able to analyse these relationships in existing poems during the abstraction phase to find correlations. For example, we may find that descriptive poems have a high number of \textit{HasProperty} relations and very few characters.  
 
 To do this, we need to be able to extract relationships between concepts in a particular poem in lieu of ConceptNet relations. For example:
 
@@ -236,7 +270,9 @@ This is independent of the syntactic structure of the sentence and does require 
 
 These labels are retrieved through the SEMAFOR tool, which was trained on FrameNet data to determine the frame-semantic structure of the text. FrameNet is a lexical database of \textit{semantic frames}, which describe the meaning of a word based on the words that typically participate with it, known as frame elements. It is based on the Frame Semantics Theory, introduced by Charles J.Fillmore et al.
 
-We can use these to derive the ConceptNet relations by looking for the occurrence of frames, and elements thereof, that correspond to the ConceptNet relation. These manually chosen lists can be found in THE APPENDIX. However, each list may not be exhaustive for its corresponding ConceptNet relation and there are some relations that will not be picked up by this method.
+We can use these to derive the ConceptNet relations by looking for the occurrence of frames, and elements thereof, that correspond to the ConceptNet relation. The manually chosen list of the ConceptNet relations with the frames and corresponding elements that translate directly into that relation is given in the APPENDIX.
+
+However, each list may not be exhaustive for its corresponding ConceptNet relation and there are some relations that will not be picked up by this method.
 
 
 \subsubsection{Semantic Dependency Relations using TurboParser}
@@ -283,9 +319,55 @@ Noah's ARK provides parse data from both SEMAFOR and TurboParser in a JSON forma
 
 SEMAFOR returns the Frame-Semantic parse in JSON format, an example of which can be seen in Figure BLAH. We leave it in this format because we only need to access this data once when finding the candidate relations on line 5 of Algorithm BLAH.
 
-TurboParser returns the Semantic Dependency Parse in CoNLL data format, whose structure can be seen in Table BLAH. An example of the output can be seen in Figure BLAH.
+TurboParser returns the Semantic Dependency Parse in CoNLL data format, whose structure can be seen in Table \ref{tab:CoNLL}. An example of the output can be seen in Figure BLAH.
 
-We parse this into a simple dependencies dictionary format shown in Table BLAH for easy access and processing downstream. 
+\begin{table}
+\centering
+    \begin{tabular}{|l|l|l|}
+    \hline
+    Field Number & Field Name & Description                                                \\ \hline
+    1            & ID         & Token counter, starting at 1 for each new sentence.        \\
+    2            & FORM       & Word text form or punctuation symbol                       \\
+    3            & LEMMA      & Lemma or stem of FORM                                      \\
+    4            & CPOSTAG    & Coarse-grained part-of-speech tag                          \\
+    5            & POSTAG     & Fine-grained part-of-speech tag                            \\
+    6            & FEATS      & Unordered set of syntactic and/or morphological features   \\
+    7            & HEAD       & ID of the parent of the current token ('0' if root)        \\
+    8            & DEPREL     & Dependency relation to the HEAD                            \\
+    9            & PHEAD      & Projective head of current token                           \\
+    10           & PDEPREL    & Dependency relation to the PHEAD                           \\ \hline
+    \end{tabular}
+\caption{The CoNLL data format output by TurboParser.}
+\label{tab:CoNLL}
+\end{table}
+
+We parse this into a simple dependencies dictionary format shown in Table \ref{tab:DepDict} for easy access and processing downstream.
+
+\begin{table}
+\centering
+    \begin{tabular}{|l|l|l|l|l|l|}
+    \hline
+    ID & FORM   & CPOSTAG & POSTAG & HEAD & DEPREL \\ \hline
+    1  & There  & EX      & EX     & 3    & expl   \\
+    2  & once   & RB      & RB     & 3    & advmod \\
+    3  & was    & VB      & VBD    & 0    & null   \\
+    4  & a      & DT      & DT     & 7    & det    \\
+    5  & big    & JJ      & JJ     & 7    & amod   \\
+    6  & brown  & JJ      & JJ     & 7    & amod   \\
+    7  & cat    & NN      & NN     & 3    & nsubj  \\
+    8  & who    & WP      & WP     & 9    & nsubj  \\
+    9  & liked. & VB      & VBD    & 7    & rcmod  \\
+    10 & to     & TO      & TO     & 11   & aux    \\
+    11 & eat    & VB      & VB     & 9    & xcomp  \\
+    12 & a      & DT      & DT     & 13   & det    \\
+    13 & lot    & NN      & NN     & 11   & dobj   \\
+    14 & of     & IN      & IN     & 13   & prep   \\
+    15 & mice   & NN      & NNS    & 14   & pobj   \\
+    16 & .      & .       & .      & 3    & punct  \\ \hline
+    \end{tabular}
+\caption{The dependencies dictionary data structure for the first sentence of the cat poem.}
+\label{tab:DepDict}
+\end{table}
 
 TurboParser and SEMAFOR are resource heavy (SEMAFOR requires minimum 8GB RAM), so it makes sense to run it on a server. Since the output from Noah's ARK is exactly what we want and the request is fairly quick (typically BLAH milliseconds for simple sentences, BLAH milliseconds for complex ones) and speed is not a priority for this project, there is no need to run our own copy on our own server.
 
@@ -296,13 +378,15 @@ In a lot of cases, the character or relation that we look for is a phrase, not j
 
 Another example is the phrase \textit{tasted so nice}. If we did not collapse the tree, we would have that \textit{they} took the action of \textit{tasted} and can be described as \textit{nice}, both of which are wrong again.
 
-The non-demo version of TurboParser provides different styles of dependency representation. This includes collapsed dependencies but not exactly in the way we want it done. First, we manually select the dependencies that we want to collapse:
+The non-demo version of TurboParser provides different styles of dependency representation. This includes collapsed dependencies but not exactly in the way we want it done. First, we manually select the dependencies that we want to collapse (APPENDIX).
 
-LIST OF DEPENDENCIES TO COLLAPSE
+By default, the parent of the dependency keeps all its attributes unchanged except for merging its form with that of the leaf, e.g. \textit{of} and \textit{mice} becomes \textit{of mice}. However, there are some cases where we wish to retain the part-of-speech (POS) tag of the leaf and overwrite the parent's part of speech tag. For example, \textit{of mice} should retain the 'NNS' POS tag of \textit{mice} rather than keep the 'PRP' POS tag of \textit{of}. The full list of these conditions are in the APPENDIX.
 
-By default, the parent of the dependency keeps all its attributes unchanged except for merging its form with that of the leaf, e.g. \textit{of} and \textit{mice} becomes \textit{of mice}. However, there are some cases where we wish to retain the part-of-speech (POS) tag of the leaf and overwrite the parent's part of speech tag. For example, \textit{of mice} should retain the 'NNS' POS tag of \textit{mice} rather than keep the 'PRP' POS tag of \textit{of}. The full list of these conditions are:
-
-LIST OF CONDITIONS TO RETAIN POSTAG FROM LEAF
+\begin{itemize}
+\item{If the leaf is an adjective, the parent is a verb and the dependency relation is \textit{'dep'} then we retain the adjective POS. These conditions usually imply a \textit{linking verb} generally used to describe a property, not an action. E.g. 'tasted so nice' is an adjectival phrase despite the use of a verb.}
+\item{The \textit{'acomp'} dependency relation is also evidence of a linking verb.}
+\item{The \textit{'pobj'} and \textit{'prep'} dependency relations are evidence of the preposition example described above. }
+\end{itemize}
 
 Then we follow Algorithm 2:
 1 Get a list of all the leaves in the graph.
@@ -421,7 +505,13 @@ We used the animation state of characters for anaphora resolution. We can take t
 
 The following relations are symptomatic of a sentient being:
 
-LIST OF ANIMATE RELATIONS
+\begin{itemize}
+\item{'Named' and 'NotNamed'}
+\item{'Desires' and 'NotDesires'}
+\item{'Believes' and 'NotBelieves'}
+\item{'SendMessage' and 'NotSendMessage'}
+\item{'ReceiveMessage' and 'NotReceiveMessage'}
+\end{itemize}
 
 Therefore, if a character that is marked as an inanimate physical object has any of these relations, it is likely that the author of the poem was using personification to give the object human-like behaviour.
 
@@ -438,8 +528,6 @@ We could take this further by using ConceptNet btw. As fast as a cheetah + cheet
 \subsection{Metaphor}
 
 We need to do something here. Can't just leave it...
-
-\section{Optimisation}
 
 %%% ----------------------------------------------------------------------
 

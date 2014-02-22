@@ -148,6 +148,117 @@ Further rephrasing of lifted sentences, such as the last one, could be beneficia
     \caption{Penn Treebank Tagset in alphabetical order}
     \label{tab:penn}
 \end{table}
+
+\textbf{FrameNet Frames to ConceptNet Relations}
+
+\begin{description}
+\item[PartOf] \hfill \\ 
+\textit{Architectural_part}: Part, Whole \hfill \\ 
+\textit{Building_subparts}: Building_part, Whole \hfill \\ 
+\textit{Clothing_parts}: Subpart, Clothing \hfill \\ 
+\textit{Observable_body_parts}: Body_part, Possessor \hfill \\ 
+\textit{Part_edge}: Part, Whole \hfill \\ 
+\textit{Part_inner_outer}: Part, Whole \hfill \\ 
+\textit{Part_ordered_segments}: Part, Whole \hfill \\ 
+\textit{Part_orientational}: Part, Whole \hfill \\ 
+\textit{Part_piece}: Piece, Substance \hfill \\ 
+\textit{Part_whole}: Part, Whole \hfill \\ 
+\textit{Shaped_part}: Part, Whole \hfill \\ 
+\textit{Vehicle_subpart}: Part, Whole \hfill \\ 
+\textit{Wholes_and_parts}: Part, Whole \hfill \\ 
+\textit{Inclusion}: Part, Total \hfill \\ 
+
+\item[CreatedBy] \hfill \\ 
+\textit{Creating}: Created_Entity, Creator \hfill \\ 
+\textit{Cooking_creation}: Produced_food, Cook \hfill \\ 
+\textit{Intentionally_create}: Created_Entity, Creator \hfill \\ 
+\textit{Text_creation}: Text, Author \hfill \\ 
+\textit{Manufacturing}: Product, Producer/Factory \hfill \\
+
+\item[MadeOf] \hfill \\ 
+Substance, [Noun after], Substance \hfill \\ 
+
+\item[Causes] \hfill \\ 
+Cause_to_start, Cause, Effect \hfill \\ 
+Causation, Actor,  Affected \hfill \\ 
+Causation, Cause,  Effect \hfill \\ 
+Condition_Symptom_Relation, Medical_condition, Symptom \hfill \\ 
+Cognitive_connection, Concept_1, Concept_2 \hfill \\ 
+
+\item[Desire] \hfill \\ 
+Desiring, Experiencer, Event \hfill \\ 
+Experiencer_focus, Experiencer, Content  \hfill \\ 
+
+\item[CapableOf] \hfill \\ 
+Capability, Entity, Event \hfill \\ 
+
+\item[UsedFor] \hfill \\ 
+Expend_resource, Resource, Purpose \hfill \\ 
+Using, Instrument, Purpose \hfill \\ 
+Tool_purpose, Tool, Purpose \hfill \\ 
+Ingest_substance, Substance, Purpose \hfill \\ 
+Using_resource, Resource, Purpose \hfill \\ 
+Usefulness, Entity, Purpose \hfill \\ 
+
+\item[MotivatedByGoal]
+Purpose, Means, Goal/Value \hfill \\ 
+
+\item[AtLocation] \hfill \\ 
+Prep with list that I made manually \hfill \\ 
+
+\item[Has] \hfill \\ 
+Possession, Owner, Possession \hfill \\ 
+Have_associated, Topical_entity, Entity \hfill \\ 
+Inclusion, Total, Part \hfill \\ 
+Containers, Container, Contents \hfill \\ 
+
+\item[NotHas] \hfill \\ 
+Used_up, Resource \hfill \\ 
+Expend_resource, Resource \hfill \\ 
+Abandonment, Agent, Theme \hfill \\ 
+
+\item[Named] \hfill \\ 
+Being_named, Entity, Name \hfill \\ 
+
+\item[Believes] \hfill \\ 
+Awareness, Cognizer, Content \hfill \\ 
+Certainty, Cognizer, Content \hfill \\ 
+Religious_belief, Believer, Content \hfill \\ 
+Trust, Cognizer, Information \hfill \\ 
+Opinion, Cognizer, Opinion \hfill \\ 
+
+\item[SendMessage and ReceiveMessage] \hfill \\ 
+Communication, Communicator, Message/Topic, Addressee \hfill \\ 
+Telling, Speaker, Message, Addressee \hfill \\ 
+Request, Speaker, Message, Addressee \hfill \\ 
+Speak_on_topic, Speaker, Topic, Audience \hfill \\ 
+Statement, Speaker, Message/Topic, Addressee \hfill \\ 
+Prevarication, Speaker, Topic, Addressee \hfill \\ 
+Reporting, Informer, Behaviour/Wrongdoer, Authorities \hfill \\ 
+Text_creation, Author, Text, Addressee \hfill \\ 
+Chatting, Interlocutor_1, Topic, Interlocutor_2 \hfill \\ 
+\end{description}
+
+\textbf{List of collapsable dependencies}
+
+\begin{itemize}
+\item{acomp}
+\item{advmod}
+\item{aux}
+\item{cop}
+\item{dep}
+\item{det}
+\item{measure}
+\item{neg}
+\item{nn}
+\item{num}
+\item{number}
+\item{preconj}
+\item{predet}
+\item{prep}
+\item{pobj}
+\item{quantmod}
+\end{itemize}
 % ------------------------------------------------------------------------
 
 %%% Local Variables: 
