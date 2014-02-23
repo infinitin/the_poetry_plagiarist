@@ -1,6 +1,6 @@
 \chapter{Appendix A}
 
-\textbf{Dry run of generation phase with commentary}
+\section{Dry Run of Generation Phase with Commentary}
 
 Input seed: Limerick about a computer that is bored with data and finds poetry fun
 
@@ -57,7 +57,9 @@ Note too that we added the input data to the first three lines. Separating them 
 
 Further rephrasing of lifted sentences, such as the last one, could be beneficial to adding randomness and creativity.
 
-\begin{table}
+\section{CMU Pronunciation Dictionary ARPABET Phoneme Set}
+\label{tab:arpa}
+\begin{table}[!htbp]
     \begin{tabular}{|l|l|l|}
     \hline
     Phoneme & Example & Tranlsation \\ \hline
@@ -102,9 +104,12 @@ Further rephrasing of lifted sentences, such as the last one, could be beneficia
     ZH      & seizure & S IY ZH ER  \\ \hline
     \end{tabular}
     \caption{ARPAbet phoneme set with corresponding examples}
-    \label{tab:arpa}
 \end{table}
-\begin{table}
+
+
+\section{Penn Treebank Tagset}
+\label{tab:penn}
+\begin{table}[!htbp]
     \begin{tabular}{|l|l|}
     \hline
     Tag  & ~                                        \\ \hline
@@ -146,101 +151,173 @@ Further rephrasing of lifted sentences, such as the last one, could be beneficia
     WRB  & Wh-adverb                                \\ \hline
     \end{tabular}
     \caption{Penn Treebank Tagset in alphabetical order}
-    \label{tab:penn}
 \end{table}
 
-\textbf{FrameNet Frames to ConceptNet Relations}
+\section{FrameNet Frames to ConceptNet Relations}
+\label{sec:fntocn}
+\textbf{PartOf}
+\begin{table}[!htbp]
+    \begin{tabular}{|l|l|l|}
+    \hline
+    \textbf{Frame}                 & \textbf{Character Frame Element} & \textbf{Whole Frame Element} \\ \hline
+    Architectural\_part   & Part                    & Whole               \\ \hline
+    Building\_subparts    & Building\_part          & Whole               \\ \hline
+    Clothing\_parts       & Subpart                 & Clothing            \\ \hline
+    Observable\_body\_parts & Body\_part              & Possessor           \\ \hline
+    Part\_edge            & Part                    & Whole               \\ \hline
+    Part\_inner\_outer    & Part                    & Whole               \\ \hline
+    Part\_ordered\_segments & Part                    & Whole               \\ \hline
+    Part\_orientational   & Part                    & Whole               \\ \hline
+    Part\_piece           & Piece                   & Substance           \\ \hline
+    Part\_whole           & Part                    & Whole               \\ \hline
+    Shaped\_part          & Part                    & Whole               \\ \hline
+    Vehicle\_subpart      & Part                    & Whole               \\ \hline
+    Wholes\_and\_parts    & Part                    & Whole               \\ \hline
+    Inclusion             & Part                    & Whole               \\ \hline
+    \end{tabular}
+\end{table}
 
-\begin{description}
-\item[PartOf] \hfill \\ 
-\textit{Architectural_part}: Part, Whole \hfill \\ 
-\textit{Building_subparts}: Building_part, Whole \hfill \\ 
-\textit{Clothing_parts}: Subpart, Clothing \hfill \\ 
-\textit{Observable_body_parts}: Body_part, Possessor \hfill \\ 
-\textit{Part_edge}: Part, Whole \hfill \\ 
-\textit{Part_inner_outer}: Part, Whole \hfill \\ 
-\textit{Part_ordered_segments}: Part, Whole \hfill \\ 
-\textit{Part_orientational}: Part, Whole \hfill \\ 
-\textit{Part_piece}: Piece, Substance \hfill \\ 
-\textit{Part_whole}: Part, Whole \hfill \\ 
-\textit{Shaped_part}: Part, Whole \hfill \\ 
-\textit{Vehicle_subpart}: Part, Whole \hfill \\ 
-\textit{Wholes_and_parts}: Part, Whole \hfill \\ 
-\textit{Inclusion}: Part, Total \hfill \\ 
+\textbf{CreatedBy}
+\begin{table}[!htbp]
+    \begin{tabular}{|l|l|l|}
+    \hline
+    \textbf{Frame}                & \textbf{Character Frame Element} & \textbf{Creator Frame Element} \\ \hline
+    Creating             & Created\_Entity         & Creator               \\ \hline
+    Cooking\_creation    & Produced\_food          & Cook                  \\ \hline
+    Intentionally\_create & Created\_Entity         & Creator               \\ \hline
+    Text\_creation       & Text                    & Author                \\ \hline
+    Manufacturing        & Product                 & Producer/Factory      \\ \hline
+    \end{tabular}
+\end{table}
 
-\item[CreatedBy] \hfill \\ 
-\textit{Creating}: Created_Entity, Creator \hfill \\ 
-\textit{Cooking_creation}: Produced_food, Cook \hfill \\ 
-\textit{Intentionally_create}: Created_Entity, Creator \hfill \\ 
-\textit{Text_creation}: Text, Author \hfill \\ 
-\textit{Manufacturing}: Product, Producer/Factory \hfill \\
+\textbf{MadeOf}
+\begin{table}[!htbp]
+    \begin{tabular}{|l|l|l|}
+    \hline
+    \textbf{Frame}     & \textbf{Character Frame Element} & \textbf{Substance Frame Element} \\ \hline
+    Substance & [Noun After]            & Substance               \\ \hline
+    \end{tabular}
+\end{table}
 
-\item[MadeOf] \hfill \\ 
-Substance, [Noun after], Substance \hfill \\ 
+\textbf{Causes} 
+\begin{table}[!htbp]
+    \begin{tabular}{|l|l|l|}
+    \hline
+    \textbf{Frame}                      & \textbf{Character Frame Element} & \textbf{Effect Frame Element} \\ \hline
+    Cause\_to\_start           & Cause                   & Effect               \\ \hline
+    Causation                  & Actor                   & Affected             \\ \hline
+    Causation                  & Cause                   & Effect               \\ \hline
+    Condition\_Symptom\_Relation & Medical\_condition      & Symptom              \\ \hline
+    Cognitive\_connection      & Concept\_1              & Concept\_2           \\ \hline
+    \end{tabular}
+\end{table}
 
-\item[Causes] \hfill \\ 
-Cause_to_start, Cause, Effect \hfill \\ 
-Causation, Actor,  Affected \hfill \\ 
-Causation, Cause,  Effect \hfill \\ 
-Condition_Symptom_Relation, Medical_condition, Symptom \hfill \\ 
-Cognitive_connection, Concept_1, Concept_2 \hfill \\ 
+\textbf{Desire}
+\begin{table}[!htbp]
+    \begin{tabular}{|l|l|l|}
+    \hline
+    \textbf{Frame}             & \textbf{Character Frame Element} & \textbf{Desirable Frame Element} \\ \hline
+    Desiring          & Experiencer             & Event                   \\ \hline
+    Experiencer\_focus & Experiencer             & Content                 \\ \hline
+    \end{tabular}
+\end{table}
 
-\item[Desire] \hfill \\ 
-Desiring, Experiencer, Event \hfill \\ 
-Experiencer_focus, Experiencer, Content  \hfill \\ 
+\textbf{CapableOf}
+\begin{table}[!htbp]
+    \begin{tabular}{|l|l|l|}
+    \hline
+    \textbf{Frame}      & \textbf{Character Frame Element} & \textbf{Activity Frame Element} \\ \hline
+    Capability & Entity                  & Event                  \\ \hline
+    \end{tabular}
+\end{table} 
 
-\item[CapableOf] \hfill \\ 
-Capability, Entity, Event \hfill \\ 
+\textbf{UsedFor}
+\begin{table}[!htbp]
+    \begin{tabular}{|l|l|l|}
+    \hline
+    \textbf{Frame}            & \textbf{Character Frame Element} & \textbf{Purpose Frame Element} \\ \hline
+    Expend\_resource & Resource                & Purpose               \\ \hline
+    Using            & Instrument              & Purpose               \\ \hline
+    Tool\_purpose    & Tool                    & Purpose               \\ \hline
+    Ingest\_substance & Substance               & Purpose               \\ \hline
+    Using\_resource  & Resource                & Purpose               \\ \hline
+    Usefulness       & Entity                  & Purpose               \\ \hline
+    \end{tabular}
+\end{table}
 
-\item[UsedFor] \hfill \\ 
-Expend_resource, Resource, Purpose \hfill \\ 
-Using, Instrument, Purpose \hfill \\ 
-Tool_purpose, Tool, Purpose \hfill \\ 
-Ingest_substance, Substance, Purpose \hfill \\ 
-Using_resource, Resource, Purpose \hfill \\ 
-Usefulness, Entity, Purpose \hfill \\ 
+\textbf{MotivatedByGoal}
+\begin{table}[!htbp]
+    \begin{tabular}{|l|l|l|}
+    \hline
+    \textbf{Frame}   & \textbf{Character Frame Element} & \textbf{Goal Frame Element} \\ \hline
+    Purpose & Means                   & Goal/Value         \\ \hline
+    \end{tabular}
+\end{table}
 
-\item[MotivatedByGoal]
-Purpose, Means, Goal/Value \hfill \\ 
+\textbf{Has} 
+\begin{table}[!htbp]
+    \begin{tabular}{|l|l|l|}
+    \hline
+    \textbf{Frame}           & \textbf{Character Frame Element} & \textbf{Possession Frame Element} \\ \hline
+    Possession      & Owner                   & Possession               \\ \hline
+    Have\_associated & Topical\_entity         & Entity                   \\ \hline
+    Inclusion       & Total                   & Part                     \\ \hline
+    Containers      & Container               & Contents                 \\ \hline
+    \end{tabular}
+\end{table}
 
-\item[AtLocation] \hfill \\ 
-Prep with list that I made manually \hfill \\ 
+\textbf{NotHas} 
+\begin{table}[!htbp]
+    \begin{tabular}{lll}
+    \textbf{Frame}           & \textbf{Character Frame Element} & \textbf{Possession Frame Element} \\
+    Used\_up        & [Character in view]     & Resource                 \\
+    Expend\_resource & [Character in view]     & Resource                 \\
+    Abandonment     & Agent                   & Theme                    \\
+    \end{tabular}
+\end{table}
 
-\item[Has] \hfill \\ 
-Possession, Owner, Possession \hfill \\ 
-Have_associated, Topical_entity, Entity \hfill \\ 
-Inclusion, Total, Part \hfill \\ 
-Containers, Container, Contents \hfill \\ 
+\textbf{Named} 
+\begin{table}[!htbp]
+    \begin{tabular}{|l|l|l|}
+    \hline
+    \textbf{Frame}       & \textbf{Character Frame Element} & \textbf{Name Frame Element} \\ \hline
+    Being\_named & Entity                  & Name               \\ \hline
+    \end{tabular}
+\end{table} 
 
-\item[NotHas] \hfill \\ 
-Used_up, Resource \hfill \\ 
-Expend_resource, Resource \hfill \\ 
-Abandonment, Agent, Theme \hfill \\ 
+\textbf{Believes} 
+\begin{table}[!htbp]
+    \begin{tabular}{|l|l|l|}
+    \hline
+    \textbf{Frame}            & \textbf{Character Frame Element} & \textbf{Belief Frame Element} \\ \hline
+    Awareness        & Cognizer                & Content              \\ \hline
+    Certainty        & Cognizer                & Content              \\ \hline
+    Religious\_belief & Believer                & Content              \\ \hline
+    Trust            & Cognizer                & Information          \\ \hline
+    Opinion          & Cognizer                & Opinion              \\ \hline
+    \end{tabular}
+\end{table}
 
-\item[Named] \hfill \\ 
-Being_named, Entity, Name \hfill \\ 
+\textbf{SendMessage and ReceiveMessage}
+\begin{table}[!htbp]
+    \begin{tabular}{|l|l|l|l|}
+    \hline
+    \textbf{Frame}          & \textbf{Speaker Character Frame Element} & \textbf{Message Frame Element} & \textbf{Addressee Character Frame Element} \\ \hline
+    Communication  & Communicator                    & Message/Topic         & Addressee                         \\ \hline
+    Telling        & Speaker                         & Message               & Addressee                         \\ \hline
+    Request        & Speaker                         & Message               & Addressee                         \\ \hline
+    Speak\_on\_topic & Speaker                         & Topic                 & Audience                          \\ \hline
+    Statement      & Speaker                         & Message/Topic         & Addressee                         \\ \hline
+    Prevarication  & Speaker                         & Topic                 & Addressee                         \\ \hline
+    Reporting      & Informer                        & Behaviour/Wrongdoer   & Authorities                       \\ \hline
+    Text\_creation & Author                          & Text                  & Addressee                         \\ \hline
+    Chatting       & Interlocutor\_1                 & Topic                 & Interlocutor\_2                   \\ \hline
+    \end{tabular}
+\end{table}
 
-\item[Believes] \hfill \\ 
-Awareness, Cognizer, Content \hfill \\ 
-Certainty, Cognizer, Content \hfill \\ 
-Religious_belief, Believer, Content \hfill \\ 
-Trust, Cognizer, Information \hfill \\ 
-Opinion, Cognizer, Opinion \hfill \\ 
 
-\item[SendMessage and ReceiveMessage] \hfill \\ 
-Communication, Communicator, Message/Topic, Addressee \hfill \\ 
-Telling, Speaker, Message, Addressee \hfill \\ 
-Request, Speaker, Message, Addressee \hfill \\ 
-Speak_on_topic, Speaker, Topic, Audience \hfill \\ 
-Statement, Speaker, Message/Topic, Addressee \hfill \\ 
-Prevarication, Speaker, Topic, Addressee \hfill \\ 
-Reporting, Informer, Behaviour/Wrongdoer, Authorities \hfill \\ 
-Text_creation, Author, Text, Addressee \hfill \\ 
-Chatting, Interlocutor_1, Topic, Interlocutor_2 \hfill \\ 
-\end{description}
-
-\textbf{List of collapsable dependencies}
-
+\section{List of collapsable dependencies}
+\label{sec:collapsable}
 \begin{itemize}
 \item{acomp}
 \item{advmod}

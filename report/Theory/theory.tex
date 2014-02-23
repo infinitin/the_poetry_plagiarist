@@ -8,7 +8,7 @@
 
 \def\baselinestretch{1.66}
 
-The first phase of implementation is to write a suite of algorithms to analyse a single poem in terms of all the features mentioned in section \ref{sec:features}. The aim is to analyse a large collection of poems in such depth to learn the usage patterns of poetic features for that collection of poems. This is in line with the ultimate aim of avoiding hard-coded rules for different types of poems.
+The first phase of implementation involves writing a suite of algorithms to analyse a single poem in terms of all the features mentioned in section \ref{sec:features}. The aim is to run a large collection of poems through this analysis to learn the usage patterns of poetic features for that collection of poems. This is in line with the ultimate aim of avoiding hard-coded rules for different types of poems.
 
 The algorithms will cover the detection of the use of:
 \begin{itemize}
@@ -19,7 +19,7 @@ The algorithms will cover the detection of the use of:
 \item{Structure, tense, point of view and repetition}
 \end{itemize}
 
-Other algorithms will attempt understand the context of the poem to extract:
+Other algorithms will attempt to understand the context of the poem to extract:
 \begin{itemize}
 \setlength{\itemsep}{0pt}
 \item{Characters}
@@ -64,85 +64,90 @@ And the clean ones so seldom are comical.
 
 \section{Obtaining Phonetic Structure}
 
-When poets choose words they take the sound of the words when spoken out loud into account as well as their (literal or symbolic) meaning. As explained in section \ref{sec:words}, we can use CMU Pronounciation Dictionary (CMUPD) to get around the difficulty of determining phonetic structure by spelling. A word in the CMUPD is mapped to a list of different pronunciations for the same word. Each pronunciation is a list of phonemes that make up that particular pronunciation of that word, including indication of emphasis on the syllables as explained in section \ref{sec:words}.
+Poets choose words based the \textit{sound} when spoken out loud as well as their (literal or symbolic) meaning. As explained in section \ref{sec:words}, we can use CMU Pronounciation Dictionary (CMUPD) to get around the difficulty of determining phonetic structure. A word in the CMUPD is mapped to a list of different pronunciations for the same word. Each pronunciation is a list of phonemes that make up that particular pronunciation of that word, including indication of emphasis on the syllables as explained in section \ref{sec:words}.
 
 We want to convert the poems into their phoneme lists for use by the detection algorithms. This needs to be done word by word, so we first need to \textit{tokenise} the sentence. Tokenisation involves splitting each sentence into a list of its basic components; words and punctuation. Once we have done that, we can simply iterate through the list and run each word through the CMUPD. Some words have multiple pronunciations, so we consider each possible permutation of pronouncing each line of the poem. Each of the pronunciations of the first line of Figure \ref{fig:cat} is shown in Figure \ref{fig:catpronun}.
 
 \begin{figure}
 \centering
-{[{['DH', 'EH1', 'R']}]} \\
-{[{['W', 'AH1', 'N', 'S']}]}\\
-{[{['W', 'AA1', 'Z']}, {['W', 'AH1', 'Z']}, {['W', 'AH0', 'Z']}, {['W', 'AO1', 'Z']}]}\\
-{[{['AH0']}, {['EY1']}]}\\
-{[{['B', 'IH1', 'G']}]}\\
-{[{['B', 'R', 'AW1', 'N']}]}\\
-{[{['K', 'AE1', 'T']}]}
+{[ {['DH', 'EH1', 'R']} ]} \\
+{[ {['W', 'AH1', 'N', 'S']} ]}\\
+{[ {['W', 'AA1', 'Z']}, {['W', 'AH1', 'Z']}, {['W', 'AH0', 'Z']}, {['W', 'AO1', 'Z']} ]}\\
+{[ {['AH0']}, {['EY1']} ]}\\
+{[ {['B', 'IH1', 'G']} ]}\\
+{[ {['B', 'R', 'AW1', 'N']} ]}\\
+{[ {['K', 'AE1', 'T']} ]}
 \caption{The different ways of pronouncing the first line of the cat poem}
 \label{fig:catpronun}
 \end{figure}
 
-Unfortunately, the CMU Pronunciation Dictionary only has about 133,000 words. This means that occasionally we will fail to translate to the phonetic structure, particularly in Shakespearean poems. We get around this by temporarily converting the word into its closest match that exists in the dictionary and returning the phonetic structure in its place.
+Unfortunately, the CMUPD only has about 133,000 words. This means that we are occasionally unable to translate to the phonetic structure, particularly in Shakespearean poems. We get around this by temporarily converting the word into its closest match that exists in the dictionary and returning the phonetic structure in its place.
 
-Python difflib provides a function to find the closest matches of a word to a list of words, based on the Ratcliff/Obershelp pattern recognition algorithm. The complexity of this algorithm is quadratic in the average case and cubic in the worst case. However, difflib's implementation avoids this using a 'junk' heuristic and hashing so the worst case becomes quadratic and the best case linear. The behaviour is based on  how many sequences have in common. Since we are only dealing with single words at a time, we have a higher chance of the best case. On average it takes X MILLISECONDS to look up a 4-letter word and Y MILLISECONDS to look up an 8-letter word, which is easily fast enough given that speed is not a priority for this phase since it is a pre-processing phase, not a time-sensitive one.
+Python \textit{difflib} [REFERENCE] provides a function to find the closest matches of a word to a list of words, based on the Ratcliff/Obershelp pattern recognition algorithm. The complexity of this algorithm is quadratic in the average case and cubic in the worst case. However, \textit{difflib}'s implementation avoids this using hashing a 'junk' heuristic so the worst case becomes quadratic and the best case linear. 
+
+The behaviour is based on  how many subsequences the words have in common. Since we are only dealing with single words at a time, we have a higher chance of the best case. On average it takes X MILLISECONDS to look up a 4-letter word and Y MILLISECONDS to look up an 8-letter word, which is easily fast enough given that speed is not a priority for this phase since it is a pre-processing phase, not a time-sensitive one.
 
 We could use a variety of other techniques to get around this problem other than string matching:
 \begin{itemize}
-\item{Break many syllable words into likely part-words, e.g. 'thrift' and 'less' instead of 'thriftless'}
+\item{Break many syllable words into likely part-words, e.g. \textit{'thrift'} and \textit{'less'} instead of \textit{'thriftless'}}
 \item{Try all combinations of stress and syllables}
-\item{Train a finite-state transducer model as in \cite{dobrivsek2010towards}}
+\item{Train a finite-state transducer model as in \cite{dobrivsek2010towards}[REFERENCE]}
 \end{itemize}
 
-The first option only works in a limited number of situations that are reasonably handled by the string matching solution. For example, 'thriftless' would become 'shiftless', which has an identical phonetic structure. The second option can result in poor performance and more false negatives or false positives than would be worth the added processing.
+The first option only works in a limited number of situations, most of which are handled by the string matching solution. For example, \textit{'thriftless'} would become \textit{'shiftless'}, which has an identical phonetic structure. The second option can result in poor performance and more false negatives or false positives than would be worth the added processing.
 
-The final option is the most viable and would be used if the generation phase depended on perfect readings of the poems, as the stochastic n-gram methodology of RKCP would. However, as we only use this as an approximation for abstraction in later phases, we can afford to use a more naive implementation.
+The final option is the most viable and would be used if the generation phase depended on perfect readings of the poems, such as in the stochastic n-gram methodology of RKCP would (section \ref{sec:RKCP}). However, as we only use this as an approximation for abstraction in later phases, this implementation is not necessary.
 
 
 \section{Rhyme}
 
 We want to detect end-line and internal rhyme, as described in section \ref{sec:rhyme}. Along with detecting it, we want to be able to build a normalised rhyme scheme representation for easy analysis in the abstraction phase. 
 
-First we collect the phoneme set of the words that we wish to analyse for rhyme. For end-line, we collect the last word of each line of the poem. For internal rhyme, we collect the all the words in a particular stanza.
+First we collect the phoneme set of the words for which we wish to build a rhyme scheme. For end-line, we collect the last word of each line of the poem. For internal rhyme, we collect the all the words in a particular stanza.
 
 Once we have our list, we can run it through Algorithm BLAH.
 
-1 for each word in the list:
-2 	for each pronuciation of the word:
-3		for each phoneme in the pronunciation:
-4			if this phoneme is stressed:
-5				get all the rhyme phoneme pattern from this phoneme onwards in this pronunciation
-6				if we have seen this pattern before: 
-7					assign it corresponding rhyme token
-8				else:
-9					map this pattern to a new rhyme token
-10				
-11				append this token to a set of possible tokens for this word				
-12	append the set possible tokens for this word to the unzipped rhyme scheme
-13 build all possible permutations of rhyme scheme from they unzipped rhyme scheme
-14 normalise the rhyme schemes
+1 for each word in the list:\\
+2 	for each pronunciation of the word:\\
+3		for each phoneme in the pronunciation:\\
+4			if this phoneme is stressed:\\
+5				get the tail of the pronunciation from this phoneme onwards\\
+6				get the rhyme phoneme pattern of this tail\\
+7				if we have seen this pattern before: \\
+8					assign it the corresponding rhyme token\\
+9				else:\\
+10					assign this pattern a new rhyme token\\
+11				\\
+12				append this token to a set of possible tokens for this word\\				
+13	append the set of possible tokens for this word to the unzipped rhyme scheme\\
+14 build all possible permutations of rhyme scheme from they unzipped rhyme scheme\\
+15 normalise the rhyme schemes\\
 	
-There are a few tricks to this algorithm, namely obtaining the rhyme phoneme pattern on line 5 and the process of building and normalising the rhyme scheme in lines 11 to 14.
+There are a few tricks to this algorithm, namely obtaining the rhyme phoneme pattern on line 6 and the process of building and normalising the rhyme scheme in lines 12 to 15.
 
 \subsection{Obtaining the Rhyme Phoneme Pattern}
 
 Two words rhyme when:
 \begin{itemize}
-\item{the last phoneme of each word match}
+\item{the last phoneme of each word match \\\textit{and}}
 \item{the vowel sounds after and including the first stressed syllable match \textbf{in order}}
 \end{itemize}
 
-The algorithm finds the first stressed syllable in line 4. At that point we only need to iterate through the rest of the pronunciation and find the vowel sounds and the last phoneme check that the last phonemes. Putting them together in order gives the unique rhyme phoneme pattern. 
+The algorithm finds the first stressed syllable in line 4. At that point we only need to iterate through the rest of the pronunciation and check the vowel sounds and the last phonemes. Putting them together, in order, gives the unique rhyme phoneme pattern. 
 
-For example strategy and tragedy, kite and height - colourful diagrams!			
+For EXAMPLE strategy and tragedy, kite and height - colourful diagrams!			
 
 \subsection{Building and Normalising the Rhyme Scheme}
 
-Each unique rhyme phoneme pattern is represented by a single capital letter starting with 'A'. This is matches with the standard convention for rhyme schemes used in theory. 
+Each unique rhyme phoneme pattern is represented by a single capital letter starting with 'A'. This is the standard convention for rhyme schemes used in theory. 
 
-The complication comes in the various ways of pronouncing a single word. Therefore, we create a list for every possible rhyme pattern for a each word. The list of these lists is what the algorithm refers to as the 'unzipped' rhyme scheme on line 12 and 13. Figure BLAH shows the unzipped rhyme scheme for the limerick in Figure BLAH. Not that the word 'anatomical' has two pronunciations that affect the rhyme pattern, according to the CMUPD.
+The complication comes in the various ways of pronouncing a single word. Therefore, we create a list for every possible rhyme pattern for a each word. The list of these lists is what the algorithm refers to as the 'unzipped' rhyme scheme on line 12 and 13. Figure BLAH shows the unzipped rhyme scheme for the limerick in Figure BLAH. Note that the word \textit{'anatomical'} has two pronunciations that affect the rhyme pattern, according to the CMUPD.
 
 FIGURE OF THE UNZIPPED RHYME SCHEME
 
-We then build every possible permutation of this list, which then gives us a list of the possible rhyme schemes for these given words. We leave this list as it is and do not make a claim for any rhyme scheme to be more likely than any other at this stage.
+We then build every possible permutation of this list, which then gives us all of the possible rhyme schemes for the given words. We leave this list as it is and do not make a claim for any rhyme scheme to be more likely than any other at this stage.
+
+EXAMPLE RHYME SCHEMES OF CAT AND LIMERICK
 
 \section{Rhythm}
 
@@ -150,30 +155,32 @@ We attempt to recognise all three types of rhythm described in \ref{sec:rhythm}.
 
 \subsection{Detecting Syllabic Rhythm}
 
-The number of syllables in a word is equal to the number of vowel phonemes it has. We know that all vowel phonemes have a stress marker appended to it so we can just count the number of stress markers in the word.
+The number of syllables in a word is equal to the number of vowel phonemes it has. We know that all vowel phonemes have a stress marker appended to them so we can just count the number of stress markers in the word.
 
-However, Syllabic Rhythm is done on a line-by-line basis. Therefore we tokenise each line and aggregate the vowel phonemes across all words in the line to get the number of syllables for that line.
+However, Syllabic Rhythm is done on a line-by-line basis. Therefore we tokenise each line and aggregate the syllables across all words in the line.
 
 If we take one permutation of the line in Figure \ref{fig:catpronun}, we can see that each word has one vowel phoneme, so each word in that sentence is monosyllabic. Therefore the number of syllables in the line is 7.
 
-The full syllabic rhythm for the poems in Figure \ref{fig:cat} and \ref{fig:limerick} are 7-8-6-7 and 11-6-5-11-11 respectively. We represent these as a list of integers. We create a separate list for each stanza.
+The full syllabic rhythm for the poems in Figure \ref{fig:cat} and \ref{fig:limerick} are 7-8-6-7 and 11-6-5-11-11 respectively. We represent these as a list of integers and create a separate list for each stanza.
 
 \subsection{Detecting Quantitative and Accentual Rhythm}
 
-While theory counts rhythm in terms of metre and feet, as described in \ref{sec:rhythm}, some poems might have rhythm without following one of these pre-defined popular styles. Instead of searching for them, we will extract the pattern of stressed and unstressed syllables for each line without making a claim on how it matches to theory yet.
+While theory counts rhythm in terms of metre and feet, as described in \ref{sec:rhythm}, some poems might have rhythm without following one of these pre-defined popular styles. Instead of searching for them specifically, we will extract the pattern of stressed and unstressed syllables for each line without making a claim on how it matches to theory yet.
 
-We choose to do this mainly because there could be multiple possibilities for the stress pattern of a line due to variations in emphasis for particular words, e.g. '\textbf{ob}ject' and 'ob\textbf{ject}'. The variability of possible stress patterns is compounded by some limitations of the CMUPD:
+We choose to do this mainly because there could be multiple possibilities for the stress pattern of a line due to variations in emphasis for particular words, e.g. \textit{'\textbf{ob}ject'} and \textit{'ob\textbf{ject}'}. The variability of possible stress patterns is compounded by some limitations of the CMUPD:
 \begin{itemize}
-\item{Some words are restricted to a single stress pattern even though it does not lose or change the meaning of the word if it was emphasised differently. For example, '\textbf{quan}tity', 'quan\textbf{ti}ty' and 'quanti\textbf{ty}' are all valid, but the CMUPD only recognises the first because the other two are unusual in normal speech (but not for poetry).}
+\item{Some words are restricted to a single stress pattern even though it does not lose or change the meaning of the word if it was emphasised differently. For example, \textit{'\textbf{quan}tity'}, \textit{'quan\textbf{ti}ty'} and \textit{'quanti\textbf{ty}'} are all valid, but the CMUPD only recognises the first because the other two are unusual in normal speech (but not for poetry).}
 \item{Similarly, the CMUPD fixes monosyllabic words to one of stressed or unstressed as in Figure \ref{fig:catpronun}. However, they can be either so we need to allow for both possibilities.}
-\item{Stresses on some words have changed over time. For example \textbf{prov}ed was pronounced prov\textbf{ed} in Shakespeare's era}
-\item{Though not necessarily a limitation, we do not give importance to light or secondary stress in a word (the '2' stress marker). We therefore assume it could be either '1' or '0'.}
-\item{Poetic license often allows words to be pronounced with an entire extra syllable. For example \textit{de-served} could be pronounced as \textit{de-ser-ved}.}
+\item{Stresses on some words have changed over time. For example \textit{\textbf{prov}ed} was pronounced \textit{prov\textbf{ed}} in Shakespeare's era.}
+\item{Though not necessarily a limitation, we do not recognise light or secondary stress in a word (the '2' stress marker). We therefore assume it could be either '1' or '0'.}
+\item{Poetic license often allows words to be pronounced with an entire extra syllable. For example \textit{'de-served'} could be pronounced as \textit{'de-ser-ved'}.}
 \end{itemize}
 
-We account for these by increasing the number of possible readings. However, this will lead to a lot of possibilities. For example the line in Figure \ref{fig:catpronun} will give us any combination of '1's and '0's since they are all monosyllabic and by the second point above we want to allow for either. 
+We account for these by increasing the number of possible phonetic stress marker readings. However, this will lead to an unrealistically large number of possibilities. For example the line in Figure \ref{fig:catpronun} will give us any combination of '1's and '0's since they are all monosyllabic and by the second point above we want to allow for either. 
 
-We narrow this down initially by taking away any occurrences of the same stress three or more times in a row in the same line, because no one will ever read a poem in this way.  Like with rhyme, we do not make a claim for any stress pattern to be more likely than any other at this stage.
+We narrow this down by taking away any occurrences of the same stress three or more times in a row in the same line, because no one will ever read a poem in this way.  Like with rhyme, we do not make a claim for any stress pattern to be more likely than any other at this stage.
+
+FIGURE of possible stress patterns for first line of cat and limerick
 
 
 \section{Sound Devices}
@@ -195,29 +202,41 @@ However, we can use the WrittenSound.com dictionary of onomatopoeia to recognise
 Furthermore, WrittenSound has mappings between the onomatopoeia and the type of sound they represent. For example, \textit{'ding'} represents a 'hard hit', probably of a 'metal' object. This can be useful somehow.
 
 
-\section{Form and Structure}
+\section{Form}
 
-We implement some basic detectors for the form and structure of the poem. This does not include analysis of words and phrases themselves as that will be done in the abstraction phase, as described in section BLAH.
+We implement some detectors for the form and structure of the poem. This does not include analysis of words and phrases themselves as that will be done in the abstraction phase, as described in section BLAH [future abstraction section].
 
-The algorithms for detecting the features of structure described in section \ref{sec:structure} are fairly simple:
+\subsection{Structure and Repitition}
 
-\begin{itemize}
-\item{\textbf{Number of stanzas} = Number of blank lines + 1}
-\item{\textbf{Number of lines per stanza} = Number of new line characters per stanza}
-\item{\textbf{Number of repeated lines} = Length of the list of lines - Size of the set of lines (sets only hold unique elements)}
-\item{\textbf{Number of distinct sentences} = The number of sentences returned when parsed using the CLiPS \textit{parsetree} function. More lines than sentences indicates enjambment.}
-\end{itemize}
+The algorithms for detecting the features of structure described in section \ref{sec:structure} are:
+
+\begin{description}
+\item[Number of stanzas] \hfill \\
+Number of blank lines + 1
+\item[Number of lines per stanza]
+Number of new line characters per stanza
+\item[Number of repeated lines]
+Length of the list of lines - Size of the set of lines (sets only hold unique elements)
+\item[Number of distinct sentences]
+The number of sentences returned when parsed using the CLiPS \textit{parsetree} function. More lines than sentences indicates \textbf{enjambment}.
+\end{description}
 
 The poem in Figure \ref{fig:cat} has one stanza, four lines, no repeated lines and two distinct sentences, indicating enjambment.
 
-We can also determine the point of view of the speaker, i.e. whether it is in first or third person. We look for the word 'I' anywhere in the poem and as long as it is outside speech marks, we say that the entire poem is in first person. Otherwise we default to third person. Figure \ref{fig:cat} is written in third person but Figure \ref{fig:limerick} is in first person.
+The poem in Figure \ref{fig:limerick} has one stanza, five lines, no repeated lines and four distinct sentences, indicating enjambment.
 
-The tense of each line can be found by analysing the verb in that sentence. CLiPS pattern library provides a very easy method of doing this using their 'tenses' algorithm. It also gives us the \textit{aspect}, e.g. perfect, progressive. However, tests found this to be less accurate so we will settle for just the tense for this stage.
+\subsection{Point of View}
+
+We can also determine the point of view of the speaker, i.e. whether it is in first or third person. If we find the word \textit{'I'} anywhere in the poem and as long as it is outside speech marks, we say that the entire poem is in first person. Otherwise we default to third person. Figure \ref{fig:cat} is written in third person but Figure \ref{fig:limerick} is in first person.
+
+\subsection{Tense}
+
+The tense of each line can be found by analysing the verb in that sentence. CLiPS pattern library provides a very easy method of doing this using their \textit{'tenses'} function. It also gives us the \textit{aspect}, e.g. perfect, progressive. However, tests found this to be less accurate so we will settle for just the tense.
 
 We record the tense of each line as well as the overall tense of the poem. EXAMPLES
 
 \section{Context and Pragmatics}
-Here we describe the approach to the difficult challenge of determining the context of the poem in terms of its characters and their relations, descriptions etc. as described in section \ref{sec:pragpers}. The aim is to build a representation of the characters much like a human reader would in their mind. This will then be compared in the abstraction section to find a correlation between these structures and types of poetry.
+Here we describe the approach to the difficult challenge of determining the context of the poem in terms of its characters, their relationships, descriptions etc. as described in section \ref{sec:pragpers}. The aim is to build a representation of the characters much like a human reader would in their mind. This will then be compared in the abstraction section to find a correlation between these representations and collections of poetry.
 
 \subsection{ConceptNet Relations}
 ConceptNet is a semantic network of '\textit{general knowledge}'. Each node in the network is a natural language word or phrase called a \textit{concept}. Edges in the network represent a relationship between two concepts. These relationships come in various types including, but not limited to:
@@ -237,7 +256,7 @@ ConceptNet is a semantic network of '\textit{general knowledge}'. Each node in t
 \item[MotivatedByGoal] \hfill \\ Why would you do it? \hfill \\ learn - MotivatedByGoal $\rightarrow$ knowledge
 \end{description}
 
-Each of these relationships also has its inverse, e.g. NotIsA. We can use these relationships to build a cohesive story about particular characters during the generation phase as well as a few of our own:
+Each of these relationships also has its inverse, e.g. NotIsA. We can use these relationships, along with a few of our own listed below, to build a cohesive story about particular characters during the generation phase.
 
 \begin{description}
 \item[Believes] \hfill \\ What does the character perceive to be true? \hfill \\ Little Red Riding Hood - Believes $\rightarrow$ Wolf is her grandma
@@ -249,75 +268,94 @@ Each of these relationships also has its inverse, e.g. NotIsA. We can use these 
 
 We also have the corresponding inverses for these relations. 
 
-In keeping with the theme of this paper we cannot simply hard-code or randomise the choice of relations in building a poem. Therefore, we need to be able to analyse these relationships in existing poems during the abstraction phase to find correlations. For example, we may find that descriptive poems have a high number of \textit{HasProperty} relations and very few characters.  
+In keeping with the theme of this paper we cannot simply hard-code or randomise these relations in building a poem. Therefore, we need to be able to analyse these relationships in existing poems during the abstraction phase to find correlations. For example, we may find that descriptive poems have a high number of \textit{HasProperty} relations and very few characters.  
 
 To do this, we need to be able to extract relationships between concepts in a particular poem in lieu of ConceptNet relations. For example:
 
-**Give the cat example**
+GIVE THE CAT EXAMPLE
 
 \subsection{Semantic Labelling using Noah's ARK}
 
 It would be very difficult to determine these relationships from a syntactical parse alone. This is due to the complex nature of the English language, in particular verb usage. For example, the phrase \textit{tasted so nice} is a description rather than an action because the word \textit{tasted} in this case is being used as a linking verb, where it is usually an action verb.
 
-These complexities are further compounded by the fact that we cannot rely on correct grammar in poems. We therefore need a \textit{semantic} parse. Noah's ARK is an informal research group run by Noah Smith at Carnegie Mellon University. They provide online API access to two tools for linguistic structure analysis, \textit{SEMAFOR} and \textit{TurboParser}. Both of these tools in conjunction are satisfactory for our aim to extract ConceptNet relations from natural language.
+These complexities are further compounded by the fact that we cannot rely on correct grammar in poems. We therefore need a \textit{semantic} parse. Noah's ARK is an informal research group run by Noah Smith at Carnegie Mellon University [REFERENCE]. They provide online API access to two tools for linguistic structure analysis, \textit{SEMAFOR} and \textit{TurboParser}. Both of these tools can be used in conjunction to extract ConceptNet relations from natural language.
 
 \subsubsection{FrameNet Semantic Role Labelling using SEMAFOR}
 \label{sec:sema}
 
-Semantic Role Labelling (SRL) is best described with an example. Take the sentence \textit{"The shopkeeper told the hoodlum to go away"}, we wish to recognise the verb \textit{'to tell'} as the target, \textit{'the shopkeeper'} as the speaker, \textit{'go away'} as the message and \textit{'the hoodlum'} as the addressee. This can be seen clearly in Figure BLAH. 
+Semantic Role Labelling (SRL) is best described with an example. Take the sentence:
+{\centering\textit{"The shopkeeper told the hoodlum to go away"}}
+We wish to recognise the verb \textit{'to tell'} as the coordinating word (called the \textbf{target}}), \textit{'the shopkeeper'} as the speaker, \textit{'go away'} as the message and \textit{'the hoodlum'} as the addressee. This can be seen clearly in Figure BLAH. 
 
-This is independent of the syntactic structure of the sentence and does require grammatical correctness. The SRL for the \textit{'Yoda-speak'} equivalent will remain the same, as shown in Figure BLAH.
+This is independent of the syntactic structure of the sentence and does require grammatical correctness. The SRL for the \textit{"Yoda-speak"} equivalent will remain the same, as shown in Figure BLAH.
 
-These labels are retrieved through the SEMAFOR tool, which was trained on FrameNet data to determine the frame-semantic structure of the text. FrameNet is a lexical database of \textit{semantic frames}, which describe the meaning of a word based on the words that typically participate with it, known as frame elements. It is based on the Frame Semantics Theory, introduced by Charles J.Fillmore et al.
+These labels are retrieved through the SEMAFOR tool, which was trained on FrameNet data to determine the frame-semantic structure of the text. FrameNet [REFERENCE] is a lexical database of \textit{semantic frames}, which describe the meaning of a word based on the words that typically participate with it, known as \textit{frame elements}. It is based on the Frame Semantics Theory, introduced by Charles J.Fillmore et al.[REFERENCE]
 
-We can use these to derive the ConceptNet relations by looking for the occurrence of frames, and elements thereof, that correspond to the ConceptNet relation. The manually chosen list of the ConceptNet relations with the frames and corresponding elements that translate directly into that relation is given in the APPENDIX.
+We can use these to derive the ConceptNet relations by looking for the occurrence of frames, and elements thereof, that correspond to the ConceptNet relation. The manually chosen list of frames and elements that translate directly into a particular ConceptNet relation is given in the Appendix, section \ref{sec:fntocn}.
 
-However, each list may not be exhaustive for its corresponding ConceptNet relation and there are some relations that will not be picked up by this method.
+Each list may not be exhaustive for its corresponding ConceptNet relation and there are some relations that will not be picked up by this method.
 
 
 \subsubsection{Semantic Dependency Relations using TurboParser}
 \label{sec:turbo}
 
-The Stanford Dependencies is another representation based around the relationships between words. All dependency relations are strictly binary and come in various types depending on the participants (called the \textit{governor} and the \textit{dependent}).
+The Stanford Dependencies is another representation based around the relationships between words. All dependency relations are strictly binary and come in various types depending on the participants, called the \textit{governor} and the \textit{dependent}.
 
 The semantic dependency tree for the previous shopkeeper example can be seen in Figure BLAH.
 
 This representation fills the gaps left by the frame-semantic parse using the following heuristics:
 
-PSEUDO-CODE HEURISTICS HERE
+\begin{description}
+\item[governor - HasProperty $\rightarrow$ dependent]  \hfill \\
+If the dependency relation is \textit{'amod'}, \textit{'conj'} or \textit{'poss'}.
+If the dependent is an adjective
+
+\item[governor - atLocation $\rightarrow$ dependent] \hfill \\
+If the dependency relation is \textit{'agent'}, \textit{'nsubj'} or \textit{'prep'}
+	\textbf{and} dependent is not \textit{'that'} \textbf{and} is not a preposition or a verb.
+	
+\item[governer - ReceivesAction $\rightarrow$ dependent] \hfill \\
+If the dependency relation is \textit{'nusbjpass'} or \textit{'dobj'}.
+
+\item[governer - CapableOf $\rightarrow$ dependent] \hfill \\
+If the dependency relation is \textit{'xsubj'} or \textit{'rcmod'}.
+
+\item[governer - TakesAction $\rightarrow$ dependent] \hfill \\
+If the dependency is a verb and no other relation has been found for this dependency.
+\end{description}
 
 Together, these tools provide a fairly complete coverage of the ConceptNet relations.
 
 
 \subsection{Extracting and Binding Relations to Characters}
 
-At this point, the derived ConceptNet relations are only a set of abstracted FrameNet frames and matched dependencies. This alone does not give us much more information than if we were to use the frame-semantic parse on its own. The true usefulness of this approach only arises if the relations can be bound to characters of the poem. For the shopkeeper example, we would recognise \textit{the shopkeeper} and \textit{the hoodlum} as objects with SendMessage and ReceiveMessage relations bound to each of them respectively with respect to the \textit{go away} message.
+If we were to use the methods described above as they are, the derived ConceptNet relations would only be a set of abstracted FrameNet frames and matched dependencies. This alone does not give us much more information than if we were to use the frame-semantic parse on its own. The true usefulness of this approach only arises if the relations can be bound to characters of the poem. 
 
-We can represent the desired output as a set of 'hubs', with each character at the centre of the hub as in Figure BLAH. This will also improve our knowledge for the generation phase in that we will know the \textit{number} of characters typical for a poem type, the \textit{number and type} of relations associated with \textit{each} character, as well as allow us to find commonalities in the types of characters themselves.
+For the shopkeeper example, we would recognise \textit{the shopkeeper} and \textit{the hoodlum} as \textbf{character objects} with SendMessage and ReceiveMessage relations bound to each of them with respect to the \textit{go away} message.
+
+We can represent the desired output as a set of 'hubs', with each character at the centre of the hub as in Figure BLAH. This will also improve our knowledge for the generation phase in that we will know the \textit{number of characters} typical for a collection of poems, the \textit{number and type of relations} associated with \textit{each} character, as well as allow us to find commonalities in the types of characters themselves.
 
 To reach the desired representation, we execute Algorithm BLAH:
 
-1 for each sentence in the poem:
-2   get the dependency relations and frame semantic parse
-3	collapse loose leaves of the dependency relations
-4	find and create possible characters
-5	find candidate ConceptNet relations from the frame-semantic parse
-6	for each character:
-7		get all associated dependency relations
-8		for each associated dependency relation:
-9			if the dependent is involved in a candidate relation from the frame-semantic parse:
-10				bind the relation to the current character and continue
-11			else:
-12				use the heuristics for dependency relations to find possible ConceptNet relations
-13				bind any that are found to the current character and continue
+1 for each sentence in the poem:\\
+2   get the dependency relations and frame-semantic parse\\
+3	collapse loose leaves of the dependency relations\\
+4	find and create possible character objects\\
+5	find candidate ConceptNet relations from the frame-semantic parse\\
+6	for each character object:\\
+7		get all associated dependency relations\\
+8		for each associated dependency relation:\\
+9			if the dependent is involved in a candidate relation from the frame-semantic parse:\\
+10				bind the relation to the current character object and continue\\
+11			else:\\
+12				use the heuristics for dependency relations to find possible ConceptNet relations\\
+13				bind any that are found to the current character object and continue\\
 				
-Here we describe each step in detail.
+We will describe each step in detail.
 
 \subsubsection{Obtaining the Semantic Dependency Relations and Frame-Semantic Parse from Noah's ARK}
 
-Noah's ARK provides parse data from both SEMAFOR and TurboParser in a JSON format that can be accessed by sending a request to their demo API. However, there is a cap of 20 seconds processing time for any request so we only send one sentence at a time to be safe. Some basic experimentation has shown that this does not hinder accuracy.
-
-SEMAFOR returns the Frame-Semantic parse in JSON format, an example of which can be seen in Figure BLAH. We leave it in this format because we only need to access this data once when finding the candidate relations on line 5 of Algorithm BLAH.
+Noah's ARK provides parse data from both SEMAFOR and TurboParser in a JSON format that can be accessed by sending a request to their demo API. We leave the frame-semantic parse from SEMAFOR in this format because we only need to access this data once when finding the candidate relations on line 5 of Algorithm BLAH.
 
 TurboParser returns the Semantic Dependency Parse in CoNLL data format, whose structure can be seen in Table \ref{tab:CoNLL}. An example of the output can be seen in Figure BLAH.
 
@@ -341,7 +379,7 @@ TurboParser returns the Semantic Dependency Parse in CoNLL data format, whose st
 \label{tab:CoNLL}
 \end{table}
 
-We parse this into a simple dependencies dictionary format shown in Table \ref{tab:DepDict} for easy access and processing downstream.
+We parse this into a dependencies dictionary format shown in Table \ref{tab:DepDict} for easy access and processing downstream.
 
 \begin{table}
 \centering
@@ -369,83 +407,83 @@ We parse this into a simple dependencies dictionary format shown in Table \ref{t
 \label{tab:DepDict}
 \end{table}
 
-TurboParser and SEMAFOR are resource heavy (SEMAFOR requires minimum 8GB RAM), so it makes sense to run it on a server. Since the output from Noah's ARK is exactly what we want and the request is fairly quick (typically BLAH milliseconds for simple sentences, BLAH milliseconds for complex ones) and speed is not a priority for this project, there is no need to run our own copy on our own server.
+TurboParser and SEMAFOR are resource heavy (SEMAFOR requires minimum 8GB RAM), so it makes sense to run it on a server. Since the output from Noah's ARK is exactly what we want, the request is fairly quick (typically X MILLISECONDS for simple sentences and Y MILLISECONDS for complex ones) and speed is not a priority for this project, there is no need to run our own copy on our own local server.
 
 \subsubsection{Collapsing Loose Leaves of the Semantic Dependency Relations}
 \label{sec:collapse}
 
-In a lot of cases, the character or relation that we look for is a phrase, not just a word. For example in Figure BLAH the character should be \textit{a lot of mice} rather than just \textit{mice}. In fact if we skipped this step, we would get two characters; \textit{a lot} and \textit{mice}, which is obviously wrong.
+In a lot of cases, the character or relation that we look for is a phrase, not just a word. For example in Figure BLAH the character should be \textit{'a lot of mice'} rather than just \textit{'mice'}. In fact if we skipped this step, we would get two characters; \textit{'a lot'} and \textit{'mice'}, which is obviously wrong.
 
-Another example is the phrase \textit{tasted so nice}. If we did not collapse the tree, we would have that \textit{they} took the action of \textit{tasted} and can be described as \textit{nice}, both of which are wrong again.
+Another example is the phrase \textit{tasted so nice}. If we did not collapse the tree, we would have that \textit{'they'} took the action of \textit{'tasted'} and can be described as \textit{'nice'}, both of which are wrong again.
 
-The non-demo version of TurboParser provides different styles of dependency representation. This includes collapsed dependencies but not exactly in the way we want it done. First, we manually select the dependencies that we want to collapse (APPENDIX).
+To solve this, we merge leaves of the dependency tree together depending on a set of maunually selected dependencies that we want to collapse, listed in the Appendiex, section \ref{sec:collapsable}.
 
-By default, the parent of the dependency keeps all its attributes unchanged except for merging its form with that of the leaf, e.g. \textit{of} and \textit{mice} becomes \textit{of mice}. However, there are some cases where we wish to retain the part-of-speech (POS) tag of the leaf and overwrite the parent's part of speech tag. For example, \textit{of mice} should retain the 'NNS' POS tag of \textit{mice} rather than keep the 'PRP' POS tag of \textit{of}. The full list of these conditions are in the APPENDIX.
+By default, the parent of the dependency keeps all its attributes unchanged except for merging its form with that of the leaf, e.g. \textit{'of'} and \textit{'mice'} becomes \textit{'of mice'}. However, there are some cases where we wish to retain the part-of-speech (POS) tag of the leaf and overwrite the parent's POS tag:
 
 \begin{itemize}
 \item{If the leaf is an adjective, the parent is a verb and the dependency relation is \textit{'dep'} then we retain the adjective POS. These conditions usually imply a \textit{linking verb} generally used to describe a property, not an action. E.g. 'tasted so nice' is an adjectival phrase despite the use of a verb.}
 \item{The \textit{'acomp'} dependency relation is also evidence of a linking verb.}
-\item{The \textit{'pobj'} and \textit{'prep'} dependency relations are evidence of the preposition example described above. }
+\item{The \textit{'pobj'} and \textit{'prep'} dependency relations are evidence of prepositions, which often link words together that we do not want to keep separate. For example, \textit{of mice} should retain the 'NNS' POS tag of \textit{mice} rather than keep the 'PRP' POS tag of \textit{of}. }
 \end{itemize}
 
-Then we follow Algorithm 2:
-1 Get a list of all the leaves in the graph.
-2 For each leaf in the reverse of this list:
-3	If the dependency relation of this leaf (i.e. from its parent) is collapsable:
-4		Get the parent
-5		Merge the form of the parent and the leaf
-6		If necessary, the parent retains the part-of-speech tag of the leaf
-7		The leaf is destroyed and the parent becomes the leaf.
-8		Loop back to line 3.
+Then we follow Algorithm 2:\\
+1 Get a list of all the leaves in the graph.\\
+2 For each leaf in the reverse of this list:\\
+3	If the dependency relation of this leaf (i.e. from its parent to it) is collapsable:\\
+4		Get the parent\\
+5		Merge the form of the parent and the leaf\\
+6		If necessary, the parent retains the part-of-speech tag of the leaf\\
+7		The leaf is destroyed and the parent becomes the leaf.\\
+8		Loop back to line 3.\\
 
 Figure BLAH shows a dry run of this algorithm on the sentence \textit{"There once was a big brown cat who liked to eat a lot of mice."}
 
 \subsubsection{Finding and Creating Characters}
 \label{sec:characters} 
 
-A naive method for finding characters would be to look for nouns and pronouns to recognise characters in a poem. This would actually be sufficient, but we can do better. Notice in the poem in Figure BLAH, the cat character is represented by the words \textit{'a cat'} and \textit{'he'}. Similarly, \textit{'a lot of mice'} and \textit{'they'} represent the same character.
+A naive method for finding characters would be to look for nouns and pronouns to recognise characters in a poem. This would actually be sufficient for a basic level of analysis, but we can do better. Notice in the poem in Figure BLAH, the cat character is represented by the words \textit{'a cat'} and \textit{'he'}. Similarly, \textit{'a lot of mice'} and \textit{'they'} represent the same character.
 
-In Computational Linguistics, this problem is called \textbf{Anaphora Resolution}. It is an ongoing research area and I will present a new potential solution in section \ref{sec:ar}.
+In Computational Linguistics, the problem of matching these words is called \textit{Anaphora Resolution}. It is an ongoing research area and I will present a new potential solution in section \ref{sec:ar}.
 
-Part of the solution is gathering some basic semantic information about the character. We would like to determine whether the character:
+Part of the solution is gathering some basic semantic information about the character. We would like to determine whether the phrase representing the character:
 
 \begin{enumerate}
 \item{is plural or singular.}
 \item{is male, female, neutral or unknown.}
-\item{the character is an animate/living object, an inanimate physical object or a non-object.}
+\item{is a living object, an inanimate physical object or a non-object.}
 \end{enumerate}
 
-The first point is easiest:
+Determining the first point is easiest:
 \begin{itemize}
-\item{If it is a noun and the part-of-speech tag ends in an 'S', it is plural.}
+\item{If it is a noun and the POS tag ends in an 'S', it is plural.}
 \item{If it is a pronoun, check for membership in the manually built list of plural pronouns (e.g. 'they', 'them').}
 \end{itemize}
 
 The pronoun case for the second point is similar; we check for membership in the manually built list of male pronouns (e.g. 'he', 'him') and the separate list of female pronouns (e.g. 'she', 'her'). 
 
-The noun case is trickier. First we need to find the \textit{synset} of the noun. Synsets are sets of cognitive synonyms, e.g. \textit{car} and \textit{automobile} are in the same synset, but not \textit{cable car}. Once we have this, we can use the hypernym relationships between synsets.
+The noun case is trickier. First we need to find the \textit{synset} of the noun. Synsets are sets of cognitive synonyms, e.g. \textit{car} and \textit{automobile} are in the same synset, but not \textit{cable car}. Once we have this, we can use the \textit{hypernym} relationships between synsets.
 
-A hypernym of a synset is a \textbf{type-of} relation. For example, the synset \textit{mammal} is a hypernym of \textit{cat} because cat is a type of mammal. Similarly, \textit{animal} is also a hypernym of cat, as well as being a hypernym of mammal. The full hypernym tree for \textit{cat} can be seen in Figure BLAH. 
+A hypernym of a synset is a \textbf{type-of} relation. For example, the synset \textit{mammal} is a hypernym of \textit{cat} because cats are mammals. Similarly, \textit{animal} is also a hypernym of \textit{cat}, as well as being a hypernym of \textit{mammal}. The full hypernym tree for \textit{cat} can be seen in Figure BLAH. 
 
-The \textit{direct hypernym} of a synset is the synset directly above it in the hypernym tree; \textit{feline} in the case of the cat. The \textit{inherited hypernym} of a word refers to any word that appears in its hypernym tree. WordNet, a lexical database of the cognitive relations between words provides all of these resources.
+The \textit{direct hypernym} of a synset is the synset directly above it in the hypernym tree; \textit{feline} in the case of the cat. The \textit{inherited hypernym} of a word refers to any word that appears in its hypernym tree. WordNet[REFERENCE], a lexical database of the cognitive relations between words provides all of these resources.
 
 Now, finally, we can check for whether a noun is male or female by looking for the existence of particular synsets that imply a gender. For example, the \textit{'female'} synset would be an inherited hypernym of the synset \textit{'cow'}. Therefore we know that cows are female. Similarly, \textit{'maharaja'} has the hypernym \textit{'prince'}, which we know to be male.
 
-We can extend this practice to the final point of determining the animation of the character by checking if the \textit{'living thing'} and \textit{'physical object'} synset is an inherited hypernym of the synset of the noun concerned.
+We can extend this practice to the final point of determining the animation of the character by checking if the \textit{'living thing'} and \textit{'physical object'} synsets are inherited hypernyms of the synset of the noun concerned.
 
 
 \subsubsection{Extracting Candidate ConceptNet Relations from the Frame-Semantic Parse}
 \label{sec:candidate}
 
-As mentioned in section \ref{sec:sema}, we have a manually built map between FrameNet frames and ConceptNet relations. Given this, we can carry out Algorithm BLAH.
+As mentioned in section \ref{sec:sema}, we have a map between FrameNet frames and ConceptNet relations. Using this, we can carry out Algorithm BLAH.
 
-1 for each frame found in the frame-semantic parse:
-2	look up the target of the frame in the map
-3	if it can help build a ConceptNet relation:	
-4		retrieve the frame elements
-5		replace the frame elements with the corresponding text from the poem
-6			if we cannot find all the elements we are looking for, we leave it blank
-7		add mapping from the text of the frame target to the newly built relation
+1 for each frame found in the frame-semantic parse:\\
+2	look up the target of the frame in the map\\
+3	if it can help build a ConceptNet relation:	\\
+4		retrieve the frame elements\\
+5		replace the frame elements with the corresponding text from the poem\\
+6			if we cannot find all the elements we are looking for, we leave it blank\\
+7		add mapping from the text of the target to the newly built relation\\
 	
 Let us take the shopkeeper example from earlier. If it exists, we then look for the specific frame elements that will allow us to build the ConceptNet relation.
 
@@ -453,9 +491,9 @@ GO THROUGH THE SHOPKEEPER EXAMPLE
 
 \subsubsection{Obtaining the Associated Dependency Relations for a Particular Character}
 
-This step breaks up the semantic dependency tree and flatten it into the character-centric hubs as shown in Figure BLAH.
+This step breaks up the semantic dependency tree and flattens it into the character-centric hubs as shown in Figure BLAH.
 
-First, we want to identify the character in the dependency tree. All of the relations going out from it are naturally related dependencies of the character, so they get added to the list, see Figure BLAH.
+First, we want to identify the character object in the dependency tree. All of the relations going out from it are naturally related dependencies of the character, so they get added to the hub, see Figure BLAH.
 
 The single relation coming into this character is also a related dependency, so we added that to the hub and reverse the direction of the branch, see Figure BLAH.
 
@@ -468,9 +506,11 @@ This works because the head of the last character will be lower down in the tree
 
 \subsubsection{Binding ConceptNet Relations to Characters}
 	
-Now that we have our hub data structure for all characters, we now need to look at each branch and of each hub and decide if it can be converted into a ConceptNet relation.
+Now that we have our hub data structure for all characters, we now need to look at each branch of each hub and decide if it can be converted into a ConceptNet relation.
 
-First, we check if the text of the child maps to one of the candidate relations we extracted from the frame-semantic parse in section \ref{sec:candidate}. If it does, then we accept that and move on to the next child without checking the dependency relation since it is likely to be the more accurate. Sometimes the dependant of the relation will be blank because we could not find the right frame element as explained earlier. In this case, we just assume that this is a relation to the next character in the characters list. This is a fair assumption given the limited number of characters per sentence, the general forward reference structure of sentences and the fact that most of the relations we look to build are between characters.
+First, we check if the text of the child maps to the target of one of the candidate relations we extracted from the frame-semantic parse in section \ref{sec:candidate}. If it does, then we accept that and move on to the next child without checking the dependency relation since it is likely to be the less accurate. 
+
+Sometimes the dependant of the relation will be blank because we could not find the right frame element as explained earlier. In this case, we just assume that this is a relation to the next character in the characters list. This is a fair assumption given the limited number of characters per sentence, the general forward reference structure of sentences and the fact that most of the relations we look to build are between characters.
 
 If there is no candidate relation for this child, we then look at the type of the dependency between it and the character. We use the heuristics described in section \ref{sec:turbo} to convert it into a ConceptNet relation.
 
@@ -497,7 +537,7 @@ If I get time...
 
 \section{Symbolism and Imagery}
 
-This particular poetic technique can be very subtle and difficult to detect. Of the ones listed in section \ref{sec:symbol}, we are able to recognise the use of two; similes and personification.
+This particular poetic technique can be very subtle and difficult to detect. Of the ones listed in section \ref{sec:symbol}, we are able to recognise the use of two, similes and personification, with confidence. We can also detect metaphors, however, accuracy is not as high.
 
 \subsection{Personification}
 
@@ -515,13 +555,15 @@ The following relations are symptomatic of a sentient being:
 
 Therefore, if a character that is marked as an inanimate physical object has any of these relations, it is likely that the author of the poem was using personification to give the object human-like behaviour.
 
-We can also take advantage of the \textit{Semantic Type} attribute of FrameNet elements. FrameNet marks frame elements with a semantic precondition if they are to be of a certain type, for example only \textit{'Sentient'} semantic types can be the \textit{'Abuser'} and the \textit{Victim} in the \textit{'Abusing'} frame. By looking up these semantic types in FrameNet as we are building the ConceptNet relations, we are able to flag characters as evidence for personification.
+We can also take advantage of the \textit{Semantic Type} attribute of FrameNet elements. FrameNet marks frame elements with a semantic precondition if they are to be of a certain type, for example only \textit{'Sentient'} semantic types can be the \textit{'Abuser'} and the \textit{'Victim'} in the \textit{'Abusing'} frame. By looking up these semantic types in FrameNet as we are building the ConceptNet relations, we are able to flag characters for personification.
 
 \subsection{Simile}
 
-Similes are relatively easy to detect because they often use the phrases 'like a' or 'as a' and 'than'. They also follow certain syntactical patterns in that it is usually a noun followed by a verb or adjective, then one of the aforementioned phrases, followed by a noun or an adjective.
+Similes are relatively easy to detect because they often use the phrases 'like a' or 'as a' and 'than'. They also follow certain syntactical patterns, as in Figure BLAH.
 
-A particular symptom of simile use is that the aforementioned phrases will be involved in a prepositional noun phrase, or 'PNP Chunks' to use the parser terminology.
+Figure: in that it is usually a noun followed by a verb or adjective, then one of the aforementioned phrases, followed by a noun or an adjective.
+
+A particular symptom of simile use is that the aforementioned phrases will be involved in a prepositional noun phrase, or 'PNP Chunk' to use the parser terminology.
 
 We could take this further by using ConceptNet btw. As fast as a cheetah + cheetah HasProperty fast -> simile.
 

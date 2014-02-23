@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2014.1.22)  22 FEB 2014 20:20
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2014.1.22)  23 FEB 2014 15:19
 entering extended mode
 **report.tex
 (C:\Users\Lenovo\PycharmProjects\the_poetry_plagiarist\report\report.tex
@@ -1473,6 +1473,38 @@ Now handling font encoding PD1 ...
    defining Unicode char U+2122 (decimal 8482)
    defining Unicode char U+2423 (decimal 9251)
 ))
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\algorithmicx\algorithmicx.sty"
+Package: algorithmicx 2005/04/27 v1.2 Algorithmicx
+
+Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
+\c@ALG@line=\count322
+\c@ALG@rem=\count323
+\c@ALG@nested=\count324
+\ALG@tlm=\skip70
+\ALG@thistlm=\skip71
+\c@ALG@Lnr=\count325
+\c@ALG@blocknr=\count326
+\c@ALG@storecount=\count327
+\c@ALG@tmpcounter=\count328
+\ALG@tmplength=\skip72
+) ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\algorithmicx\algpseudocode.sty"
+Package: algpseudocode 
+Document Style - pseudocode environments for use with the `algorithmicx' style
+) ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\algorithms\algorithm.sty"
+Package: algorithm 2009/08/24 v0.1 Document Style `algorithm' - floating enviro
+nment
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\float\float.sty"
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count329
+\float@exts=\toks42
+\float@box=\box90
+\@float@everytoks=\toks43
+\@floatcapt=\box91
+)
+\@float@every@algorithm=\toks44
+\c@algorithm=\count330
+)
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\listings\lstlang1.sty"
 File: lstlang1.sty 2004/09/05 1.3 listings language file
 )
@@ -1486,8 +1518,8 @@ File: english.lbx 2013/05/01 v2.6 biblatex localization (PK/JW/AB)
 Package biblatex Warning: 'babel' detected but 'csquotes' missing.
 (biblatex)                Loading 'csquotes' recommended.
 
-\@quotelevel=\count322
-\@quotereset=\count323
+\@quotelevel=\count331
+\@quotereset=\count332
 
 LaTeX Warning: Unused global option(s):
     [pdftex].
@@ -1503,33 +1535,33 @@ oduction.aux)
 tion.aux)
 (C:\Users\Lenovo\PycharmProjects\the_poetry_plagiarist\report\Appendix1/appendi
 x1.aux))
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 76.
-LaTeX Font Info:    ... okay on input line 76.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 76.
-LaTeX Font Info:    ... okay on input line 76.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 76.
-LaTeX Font Info:    ... okay on input line 76.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 76.
-LaTeX Font Info:    ... okay on input line 76.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 76.
-LaTeX Font Info:    ... okay on input line 76.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 76.
-LaTeX Font Info:    ... okay on input line 76.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 76.
-LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 79.
+LaTeX Font Info:    ... okay on input line 79.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 79.
+LaTeX Font Info:    ... okay on input line 79.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 79.
+LaTeX Font Info:    ... okay on input line 79.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 79.
+LaTeX Font Info:    ... okay on input line 79.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 79.
+LaTeX Font Info:    ... okay on input line 79.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 79.
+LaTeX Font Info:    ... okay on input line 79.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 79.
+LaTeX Font Info:    ... okay on input line 79.
  ("C:\Program Files (x86)\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count324
+\scratchcounter=\count333
 \scratchdimen=\dimen205
-\scratchbox=\box90
-\nofMPsegments=\count325
-\nofMParguments=\count326
-\everyMPshowfont=\toks42
-\MPscratchCnt=\count327
+\scratchbox=\box92
+\nofMPsegments=\count334
+\nofMParguments=\count335
+\everyMPshowfont=\toks45
+\MPscratchCnt=\count336
 \MPscratchDim=\dimen206
-\MPnumerator=\count328
-\makeMPintoPDFobject=\count329
-\everyMPtoPDFconversion=\toks43
+\MPnumerator=\count337
+\makeMPintoPDFobject=\count338
+\everyMPtoPDFconversion=\toks46
 )
 Package biblatex Info: Input encoding 'utf8' detected.
 Package biblatex Info: Automatic encoding selection.
@@ -1537,44 +1569,45 @@ Package biblatex Info: Automatic encoding selection.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'report.bbl' found.
  (C:\Users\Lenovo\PycharmProjects\the_poetry_plagiarist\report\report.bbl)
-Package biblatex Info: Reference section=0 on input line 76.
-Package biblatex Info: Reference segment=0 on input line 76.
+Package biblatex Info: Reference section=0 on input line 79.
+Package biblatex Info: Reference segment=0 on input line 79.
 
 ABD: EveryShipout initializing macros
 
 Package pgfplots Warning: running in backwards compatibility mode (unsuitable t
 ick labels; missing features). Consider writing \pgfplotsset{compat=1.8} into y
 our preamble.
- on input line 76.
+ on input line 79.
 
 Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
 Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
-\c@lstlisting=\count330
-\AtBeginShipoutBox=\box91
-Package hyperref Info: Link coloring ON on input line 76.
+\c@lstlisting=\count339
+\AtBeginShipoutBox=\box93
+Package hyperref Info: Link coloring ON on input line 79.
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\hyperref\nameref.sty"
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\gettitlestring.sty"
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
-\c@section@level=\count331
+\c@section@level=\count340
 )
-LaTeX Info: Redefining \ref on input line 76.
-LaTeX Info: Redefining \pageref on input line 76.
-LaTeX Info: Redefining \nameref on input line 76.
+LaTeX Info: Redefining \ref on input line 79.
+LaTeX Info: Redefining \pageref on input line 79.
+LaTeX Info: Redefining \nameref on input line 79.
 
 (C:\Users\Lenovo\PycharmProjects\the_poetry_plagiarist\report\report.out)
 (C:\Users\Lenovo\PycharmProjects\the_poetry_plagiarist\report\report.out)
 \@outlinefile=\write6
 
-<ThesisFigs/logo.jpg, id=286, 564.60938pt x 148.30406pt>
+<ThesisFigs/logo.jpg, id=306, 564.60938pt x 148.30406pt>
 File: ThesisFigs/logo.jpg Graphic file (type jpg)
 
 <use ThesisFigs/logo.jpg>
-Package pdftex.def Info: ThesisFigs/logo.jpg used on input line 97.
+Package pdftex.def Info: ThesisFigs/logo.jpg used on input line 100.
 (pdftex.def)             Requested size: 199.16928pt x 52.31451pt.
  [0
 
@@ -1630,7 +1663,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[15] <Design/DesignFigs/Constraint.jpg, id=471, 644.4075pt x 225.84375pt>
+[15] <Design/DesignFigs/Constraint.jpg, id=496, 644.4075pt x 225.84375pt>
 File: Design/DesignFigs/Constraint.jpg Graphic file (type jpg)
 
 <use Design/DesignFigs/Constraint.jpg>
@@ -1646,7 +1679,7 @@ Figs/Constraint.jpg>] [17]
 LaTeX Font Info:    Font shape `OMS/cmr/m/it' in size <12> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 351.
 
-<Design/DesignFigs/lion.jpg, id=490, 368.1253pt x 487.06969pt>
+<Design/DesignFigs/lion.jpg, id=515, 368.1253pt x 487.06969pt>
 File: Design/DesignFigs/lion.jpg Graphic file (type jpg)
 
 <use Design/DesignFigs/lion.jpg>
@@ -1662,7 +1695,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [19 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Design/Design
 Figs/lion.jpg>] [20]
-<Design/DesignFigs/Chair.jpg, id=523, 501.875pt x 432.61626pt>
+<Design/DesignFigs/Chair.jpg, id=548, 501.875pt x 432.61626pt>
 File: Design/DesignFigs/Chair.jpg Graphic file (type jpg)
 
 <use Design/DesignFigs/Chair.jpg>
@@ -1674,7 +1707,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [21] [22 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Design/D
 esignFigs/Chair.jpg>] [23]
-<Design/DesignFigs/Treebank.png, id=556, 401.5pt x 329.23pt>
+<Design/DesignFigs/Treebank.png, id=579, 401.5pt x 329.23pt>
 File: Design/DesignFigs/Treebank.png Graphic file (type png)
 
 <use Design/DesignFigs/Treebank.png>
@@ -1683,7 +1716,7 @@ Package pdftex.def Info: Design/DesignFigs/Treebank.png used on input line 479.
 (pdftex.def)             Requested size: 284.52756pt x 233.32791pt.
  [24 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Design/Desig
 nFigs/Treebank.png (PNG copy)>]
-<Design/DesignFigs/Groningen.jpg, id=569, 446.41782pt x 166.37157pt>
+<Design/DesignFigs/Groningen.jpg, id=592, 446.41782pt x 166.37157pt>
 File: Design/DesignFigs/Groningen.jpg Graphic file (type jpg)
 
 <use Design/DesignFigs/Groningen.jpg>
@@ -1701,7 +1734,7 @@ File: omlcmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <12> not available
 (Font)              Font shape `OML/cmm/m/it' tried instead on input line 544.
  [27]
-<Design/DesignFigs/NLG.png, id=620, 225.09094pt x 723.45282pt>
+<Design/DesignFigs/NLG.png, id=643, 225.09094pt x 723.45282pt>
 File: Design/DesignFigs/NLG.png Graphic file (type png)
 
 <use Design/DesignFigs/NLG.png>
@@ -1721,36 +1754,53 @@ LaTeX Warning: Citation 'dobrivsek2010towards' on page 32 undefined on input li
 ne 92.
 
 [32] [33] [34] [35] [36] [37] [38] [39] [40] [41] [42]
-
-LaTeX Warning: Reference `{tab:CoNLL}' on page 43 undefined on input line 319.
-
-
-Overfull \hbox (141.58365pt too wide) in paragraph at lines 323--336
+Overfull \hbox (20.11543pt too wide) in paragraph at lines 326--340
  [][] 
  []
 
-[43] [44] [45] [46] [47] [48] [49]) [50]
+[43] [44] [45] [46] [47] [48] [49] [50]) [51]
 (C:\Users\Lenovo\PycharmProjects\the_poetry_plagiarist\report\Evaluation/evalua
 tion.tex
 Chapter 4.
-[51
+[52
 
 
 
-] [52] [53]) [54]
+] [53] [54]) [55]
 (C:\Users\Lenovo\PycharmProjects\the_poetry_plagiarist\report\Appendix1/appendi
-x1.tex [55
+x1.tex [56
 
 
 
 
-]) [56] [57] [58] [59
+]
+Overfull \hbox (56.91786pt too wide) in paragraph at lines 60--60
+ |[]\OT1/cmr/bx/n/17.28 CMU Pro-nun-ci-a-tion Dic-tio-nary ARPA-BET Phoneme
+ []
+
+[57] [58] [59]
+Overfull \hbox (28.65047pt too wide) in paragraph at lines 204--213
+[][] 
+ []
 
 
-] [60] [61] [62]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 142.
- [63]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 142.
+Package Fancyhdr Warning: \headheight is too small (23.69576pt): 
+ Make it at least 27.08337pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[60] [61]
+Overfull \hbox (253.53154pt too wide) in paragraph at lines 303--316
+[][] 
+ []
+
+[62]) [63] [64
+
+
+] [65] [66] [67]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 145.
+ [68]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 145.
 
 (C:\Users\Lenovo\PycharmProjects\the_poetry_plagiarist\report\report.aux
 (C:\Users\Lenovo\PycharmProjects\the_poetry_plagiarist\report\Introduction/intr
@@ -1763,10 +1813,10 @@ oduction.aux)
 tion.aux)
 (C:\Users\Lenovo\PycharmProjects\the_poetry_plagiarist\report\Appendix1/appendi
 x1.aux))
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 142.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 142.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 145.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 145.
 Package rerunfilecheck Info: File `report.out' has not changed.
-(rerunfilecheck)             Checksum: B3CF5C1CCA7748679FAA356888661459;5859.
+(rerunfilecheck)             Checksum: 8288A287DB984DAB6EE129A5690B0037;6331.
 
 
 LaTeX Warning: There were undefined references.
@@ -1779,10 +1829,10 @@ Package biblatex Warning: Please (re)run Biber on the file:
 Package logreq Info: Writing requests to 'report.run.xml'.
  ) 
 Here is how much of TeX's memory you used:
- 34319 strings out of 493921
- 732888 string characters out of 3144873
- 1229172 words of memory out of 3000000
- 36715 multiletter control sequences out of 15000+200000
+ 34891 strings out of 493921
+ 741273 string characters out of 3144873
+ 1244374 words of memory out of 3000000
+ 37249 multiletter control sequences out of 15000+200000
  11932 words of font info for 44 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
  70i,12n,76p,894b,3191s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1795,9 +1845,9 @@ ogram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Progr
 am Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program
  Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Program F
 iles (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on report.pdf (67 pages, 625463 bytes).
+Output written on report.pdf (72 pages, 641064 bytes).
 PDF statistics:
- 908 PDF objects out of 1000 (max. 8388607)
- 213 named destinations out of 1000 (max. 500000)
- 608 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 974 PDF objects out of 1000 (max. 8388607)
+ 236 named destinations out of 1000 (max. 500000)
+ 648 words of extra memory for PDF output out of 10000 (max. 10000000)
 

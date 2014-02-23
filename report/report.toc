@@ -102,7 +102,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {3.6.2.1}FrameNet Semantic Role Labelling using SEMAFOR}{41}{subsubsection.3.6.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.6.2.2}Semantic Dependency Relations using TurboParser}{41}{subsubsection.3.6.2.2}
+\contentsline {subsubsection}{\numberline {3.6.2.2}Semantic Dependency Relations using TurboParser}{42}{subsubsection.3.6.2.2}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {3.6.3}Extracting and Binding Relations to Characters}{42}{subsection.3.6.3}
 \defcounter {refsection}{0}\relax 
@@ -112,32 +112,42 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {3.6.3.3}Finding and Creating Characters}{45}{subsubsection.3.6.3.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.6.3.4}Extracting Candidate ConceptNet Relations from the Frame-Semantic Parse}{46}{subsubsection.3.6.3.4}
+\contentsline {subsubsection}{\numberline {3.6.3.4}Extracting Candidate ConceptNet Relations from the Frame-Semantic Parse}{47}{subsubsection.3.6.3.4}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {3.6.3.5}Obtaining the Associated Dependency Relations for a Particular Character}{47}{subsubsection.3.6.3.5}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {3.6.3.6}Binding ConceptNet Relations to Characters}{48}{subsubsection.3.6.3.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.6.4}Anaphora Resolution}{48}{subsection.3.6.4}
+\contentsline {subsection}{\numberline {3.6.4}Anaphora Resolution}{49}{subsection.3.6.4}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {3.6.5}Peeks at Future Development of Pragmatic Language Analysis}{49}{subsection.3.6.5}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {3.7}Symbolism and Imagery}{49}{section.3.7}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.7.1}Personification}{49}{subsection.3.7.1}
+\contentsline {subsection}{\numberline {3.7.1}Personification}{50}{subsection.3.7.1}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {3.7.2}Simile}{50}{subsection.3.7.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.7.3}Metaphor}{50}{subsection.3.7.3}
+\contentsline {subsection}{\numberline {3.7.3}Metaphor}{51}{subsection.3.7.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {4}Evaluation Plan}{51}{chapter.4}
+\contentsline {chapter}{\numberline {4}Evaluation Plan}{52}{chapter.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.1}Comparison of Analysis Results to Theory}{51}{section.4.1}
+\contentsline {section}{\numberline {4.1}Comparison of Analysis Results to Theory}{52}{section.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.2}Turing-style Tests}{52}{section.4.2}
+\contentsline {section}{\numberline {4.2}Turing-style Tests}{53}{section.4.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.3}FACE Descriptive Model}{53}{section.4.3}
+\contentsline {section}{\numberline {4.3}FACE Descriptive Model}{54}{section.4.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.4}IDEA Descriptive Model}{53}{section.4.4}
+\contentsline {section}{\numberline {4.4}IDEA Descriptive Model}{54}{section.4.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Appendix A}{55}{appendix*.20}
+\contentsline {chapter}{Appendix A}{56}{appendix*.20}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {A.1}Dry Run of Generation Phase with Commentary}{56}{section.Alph0.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {A.2}CMU Pronunciation Dictionary ARPABET Phoneme Set}{60}{section.Alph0.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {A.3}Penn Treebank Tagset}{60}{section.Alph0.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {A.4}FrameNet Frames to ConceptNet Relations}{60}{section.Alph0.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {A.5}List of collapsable dependencies}{63}{section.Alph0.5}
