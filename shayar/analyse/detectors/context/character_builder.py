@@ -12,7 +12,10 @@ MALE_SYNSETS = set([s.gloss for s in wordnet.synsets('male')] +
                    [s.gloss for s in wordnet.synsets('brother')] +
                    [s.gloss for s in wordnet.synsets('son')] +
                    [s.gloss for s in wordnet.synsets('king')] +
-                   [s.gloss for s in wordnet.synsets('prince')])
+                   [s.gloss for s in wordnet.synsets('prince')] +
+                   [s.gloss for s in wordnet.synsets('kinsman')] +
+                   [s.gloss for s in wordnet.synsets('male_aristocrat')] +
+                   [s.gloss for s in wordnet.synsets('male_offspring')])
 
 FEMALE_SYNSETS = set([s.gloss for s in wordnet.synsets('female')] +
                      [s.gloss for s in wordnet.synsets('woman')] +
@@ -23,6 +26,8 @@ FEMALE_SYNSETS = set([s.gloss for s in wordnet.synsets('female')] +
                      [s.gloss for s in wordnet.synsets('sister')] +
                      [s.gloss for s in wordnet.synsets('daughter')] +
                      [s.gloss for s in wordnet.synsets('queen')] +
+                     [s.gloss for s in wordnet.synsets('kinswoman')] +
+                     [s.gloss for s in wordnet.synsets('female_offspring')] +
                      [s.gloss for s in wordnet.synsets('princess')])
 
 ANIMATE_SYNSETS = set([s.gloss for s in wordnet.synsets('animate thing')])

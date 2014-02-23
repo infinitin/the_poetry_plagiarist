@@ -22,7 +22,8 @@ def get_stress_pattern(poem):
                 for phoneme in pronunciation:
                     if str(phoneme[-1]).isdigit():
                         stress_pattern += str(phoneme[-1])
-            line_stress_patterns.add(stress_pattern)
+            if not '111' in stress_pattern and not '000' in stress_pattern:
+                line_stress_patterns.add(stress_pattern)
 
         stress_patterns.append(list(line_stress_patterns))
 

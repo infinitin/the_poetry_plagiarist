@@ -23,6 +23,7 @@ single_not_at_location_preps = {'beyond', 'from', 'off', 'out', 'via', 'ayond', 
 
 double_not_at_location_preps = {'far from', 'out from', 'out of', 'away from'}
 
+
 # Add ConceptNet-style relations to character object based on the candidate relations derived from Semafor
 #  and from heuristics of the dependency tree.
 def build_relations(dependencies, characters, candidate_relations):

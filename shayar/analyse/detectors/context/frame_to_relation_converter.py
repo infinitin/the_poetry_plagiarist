@@ -173,9 +173,3 @@ def build_frame_relations():
     frame_relations['Reporting'] = ('Informer', 'SendMessage', 'Behaviour/Wrongdoer', 'Authorities')
     frame_relations['Text_creation'] = ('Author', 'SendMessage', 'Text', 'Addressee')
     frame_relations['Chatting'] = ('Interlocutor_1', 'SendMessage', 'Topic', 'Interlocutor_2')
-
-    frame_relations['Relation'] = ('Entitiy_1', 'Relation', 'Relation_type', 'Entity_2')
-    frame_relations['Relation_between_individuals'] = ('Individual_1', 'Relation', 'Relation', 'Individual_2')
-    frame_relations['Social_connection'] = ('Individual_1', 'Relation', 'Connection', 'Individual_2')
-    frame_relations['Kinship'] = ('Alter', 'Relation', 'OpWord', 'Ego')
-    frame_relations['Personal_relationship'] = ('Partner_1', 'Relation', 'Relationship', 'Partner_2')
