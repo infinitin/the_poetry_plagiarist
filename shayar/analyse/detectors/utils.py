@@ -6,6 +6,9 @@ import nltk
 from difflib import get_close_matches
 from itertools import product
 import re
+import csv
+
+ono_type_map = {}
 
 
 def set_up_globals():
@@ -15,7 +18,17 @@ def set_up_globals():
     stressed = "1"
     global unstressed
     unstressed = "0"
+    setup_ono_type_map()
 
+
+def setup_ono_type_map():
+    f = open('ono.csv', 'rb')
+    reader = csv.reader(f)
+    for row in reader:
+        ono_type_map[row[0]] = str(row[1:]).strip('[]')
+    f.close()
+
+    return ono_type_map
 
 def get_stanzas(poem):
     stanzas = []

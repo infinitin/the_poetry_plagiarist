@@ -1,13 +1,6 @@
 __author__ = 'Nitin'
 from difflib import get_close_matches
-import csv
-
-ono_type_map = {}
-f = open('ono.csv', 'rb')
-reader = csv.reader(f)
-for row in reader:
-    ono_type_map[row[0]] = str(row[1:]).strip('[]')
-f.close()
+from shayar.analyse.detectors.utils import ono_type_map
 
 ono_relation_map_top = {
     'coins': 'IsA money',
