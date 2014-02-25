@@ -99,4 +99,7 @@ def detect_line_tense(poem):
 
 # We take the mode of the tenses in a line as the overall tense.
 def detect_overall_tense(line_tenses):
-    return [x for x, y in Counter(line_tenses).most_common()][0]
+    try:
+        return [x for x, y in Counter(line_tenses).most_common()][0]
+    except IndexError:
+        return 'unknown'

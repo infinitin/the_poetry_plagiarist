@@ -53,8 +53,7 @@ class Poem:
             "The syllable lengths of each line are as follows: " + str(self.syllable_count) + ".\n\n" +\
             "The poem has consonance scores of: " + str(self.consonance) + ",\n" +\
             " assonance scores of: " + str(self.assonance) + "\n" +\
-            " and alliteration scores of " + str(self.alliteration) + "\n" +\
-            "Scores >0.5 indicate presence, <0.5 indicate abscence and 0.5 indicate uncertainty.\n\n" +\
+            " and alliteration scores of " + str(self.alliteration) + ".\n\n" +\
             "The rhyme scheme is " + str(self.rhyme_scheme) + ".\n" +\
             "There is also internal rhyme: " + str(self.internal_rhyme_scheme) + ".\n\n" +\
             "The stress patterns of each of the lines is: " + str(self.stress_pattern) + ".\n\n" +\

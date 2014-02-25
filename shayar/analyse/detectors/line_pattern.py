@@ -21,18 +21,19 @@ def detect_alliteration(poem):
 # Find the number of repeated chosen phonemes
 # Normalise it (more investigation needed perhaps)
 def __detect_pattern(poem, consonance, alliteration):
-    pattern_lengths = []
+    patterns = []
 
     for line in poem:
         phoneme_set = __get_start_or_stressed_phonemes(line) if alliteration else __get_phonemes(line, consonance)
-        normalized_counts = []
-
+        line_patterns = {}
         for phonemes in phoneme_set:
-            normalizer = len(set(phonemes)) if consonance else len(line.split(' '))
-            normalized_counts.append((len(phonemes) - len(set(phonemes)) + 1)/normalizer)
-        pattern_lengths.append(max(normalized_counts))
+            multiple = [phoneme for phoneme in phonemes if phonemes.count(phoneme) >= 2 and phoneme]
+            for phoneme in multiple:
+                line_patterns[phoneme] = phonemes.count(phoneme)
 
-    return pattern_lengths
+        patterns.append(line_patterns)
+
+    return patterns
 
 
 # Get the phonemes of all different pronunciations in the line

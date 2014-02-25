@@ -1,5 +1,7 @@
 __author__ = 'Nitin'
 
+from onomatopoeia import add_onomatopoeia_relations
+
 # List of words that imply a negative. Used in conjunction with the 'neg' dependency
 negative_words = {'not', 'seldom', 'hardly', 'barely', 'scarcely', 'rarely', 'no', 'neither', "n't"}
 
@@ -133,6 +135,8 @@ def determine_relation_types(related_dependency, character):
     elif related_dependency[1]['POSTAG'].startswith('V'):
         relation += 'TakesAction'
         character.add_relation(relation, form)
+
+    add_onomatopoeia_relations(form, character)
 
 
 def has_location_prep(form):

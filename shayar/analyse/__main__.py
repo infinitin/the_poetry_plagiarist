@@ -25,7 +25,7 @@ simple = Poem(map(str.strip, f.readlines()))
 f.close()
 
 logging.info('Begin analysis')
-test = limerick
+test = line_patterns
 
 logging.info('Setting up cmudict and other tools')
 set_up_globals()
@@ -68,9 +68,6 @@ test.stress_pattern = rhythm.get_stress_pattern(test.poem)
 
 logging.info('Looking out for similes')
 test.similes = rhetoric.detect_simile(test.poem)
-
-logging.info('Listening for onomatopoeia')
-test.onomatopoeia = rhetoric.identify_onomatopoeia(test.poem)
 
 logging.info("Determining speaker's point of view")
 test.point_of_view = basic_structure.determine_perspective(test.poem)
