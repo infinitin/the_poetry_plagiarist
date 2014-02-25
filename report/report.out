@@ -41,35 +41,38 @@
 \BOOKMARK [2][]{subsection.3.3.1}{3.3.1 Detecting Syllabic Rhythm}{section.3.3}% 41
 \BOOKMARK [2][]{subsection.3.3.2}{3.3.2 Detecting Quantitative and Accentual Rhythm}{section.3.3}% 42
 \BOOKMARK [1][]{section.3.4}{3.4 Sound Devices}{chapter.3}% 43
-\BOOKMARK [2][]{subsection.3.4.1}{3.4.1 Detecting Consecutive Sounds}{section.3.4}% 44
-\BOOKMARK [2][]{subsection.3.4.2}{3.4.2 Onomatopoeia}{section.3.4}% 45
-\BOOKMARK [1][]{section.3.5}{3.5 Form and Structure}{chapter.3}% 46
-\BOOKMARK [1][]{section.3.6}{3.6 Context and Pragmatics}{chapter.3}% 47
-\BOOKMARK [2][]{subsection.3.6.1}{3.6.1 ConceptNet Relations}{section.3.6}% 48
-\BOOKMARK [2][]{subsection.3.6.2}{3.6.2 Semantic Labelling using Noah's ARK}{section.3.6}% 49
-\BOOKMARK [3][]{subsubsection.3.6.2.1}{3.6.2.1 FrameNet Semantic Role Labelling using SEMAFOR}{subsection.3.6.2}% 50
-\BOOKMARK [3][]{subsubsection.3.6.2.2}{3.6.2.2 Semantic Dependency Relations using TurboParser}{subsection.3.6.2}% 51
-\BOOKMARK [2][]{subsection.3.6.3}{3.6.3 Extracting and Binding Relations to Characters}{section.3.6}% 52
-\BOOKMARK [3][]{subsubsection.3.6.3.1}{3.6.3.1 Obtaining the Semantic Dependency Relations and Frame-Semantic Parse from Noah's ARK}{subsection.3.6.3}% 53
-\BOOKMARK [3][]{subsubsection.3.6.3.2}{3.6.3.2 Collapsing Loose Leaves of the Semantic Dependency Relations}{subsection.3.6.3}% 54
-\BOOKMARK [3][]{subsubsection.3.6.3.3}{3.6.3.3 Finding and Creating Characters}{subsection.3.6.3}% 55
-\BOOKMARK [3][]{subsubsection.3.6.3.4}{3.6.3.4 Extracting Candidate ConceptNet Relations from the Frame-Semantic Parse}{subsection.3.6.3}% 56
-\BOOKMARK [3][]{subsubsection.3.6.3.5}{3.6.3.5 Obtaining the Associated Dependency Relations for a Particular Character}{subsection.3.6.3}% 57
-\BOOKMARK [3][]{subsubsection.3.6.3.6}{3.6.3.6 Binding ConceptNet Relations to Characters}{subsection.3.6.3}% 58
-\BOOKMARK [2][]{subsection.3.6.4}{3.6.4 Anaphora Resolution}{section.3.6}% 59
-\BOOKMARK [2][]{subsection.3.6.5}{3.6.5 Peeks at Future Development of Pragmatic Language Analysis}{section.3.6}% 60
-\BOOKMARK [1][]{section.3.7}{3.7 Symbolism and Imagery}{chapter.3}% 61
-\BOOKMARK [2][]{subsection.3.7.1}{3.7.1 Personification}{section.3.7}% 62
-\BOOKMARK [2][]{subsection.3.7.2}{3.7.2 Simile}{section.3.7}% 63
-\BOOKMARK [2][]{subsection.3.7.3}{3.7.3 Metaphor}{section.3.7}% 64
-\BOOKMARK [0][]{chapter.4}{4 Evaluation Plan}{}% 65
-\BOOKMARK [1][]{section.4.1}{4.1 Comparison of Analysis Results to Theory}{chapter.4}% 66
-\BOOKMARK [1][]{section.4.2}{4.2 Turing-style Tests}{chapter.4}% 67
-\BOOKMARK [1][]{section.4.3}{4.3 FACE Descriptive Model}{chapter.4}% 68
-\BOOKMARK [1][]{section.4.4}{4.4 IDEA Descriptive Model}{chapter.4}% 69
-\BOOKMARK [0][]{appendix*.20}{Appendix A}{}% 70
-\BOOKMARK [1][]{section.Alph0.1}{A.1 Dry Run of Generation Phase with Commentary}{appendix*.20}% 71
-\BOOKMARK [1][]{section.Alph0.2}{A.2 CMU Pronunciation Dictionary ARPABET Phoneme Set}{appendix*.20}% 72
-\BOOKMARK [1][]{section.Alph0.3}{A.3 Penn Treebank Tagset}{appendix*.20}% 73
-\BOOKMARK [1][]{section.Alph0.4}{A.4 FrameNet Frames to ConceptNet Relations}{appendix*.20}% 74
-\BOOKMARK [1][]{section.Alph0.5}{A.5 List of collapsable dependencies}{appendix*.20}% 75
+\BOOKMARK [1][]{section.3.5}{3.5 Form}{chapter.3}% 44
+\BOOKMARK [2][]{subsection.3.5.1}{3.5.1 Structure and Repetition}{section.3.5}% 45
+\BOOKMARK [2][]{subsection.3.5.2}{3.5.2 Point of View}{section.3.5}% 46
+\BOOKMARK [2][]{subsection.3.5.3}{3.5.3 Tense}{section.3.5}% 47
+\BOOKMARK [1][]{section.3.6}{3.6 Context and Pragmatics}{chapter.3}% 48
+\BOOKMARK [2][]{subsection.3.6.1}{3.6.1 ConceptNet Relations}{section.3.6}% 49
+\BOOKMARK [2][]{subsection.3.6.2}{3.6.2 Semantic Labelling using Noah's ARK}{section.3.6}% 50
+\BOOKMARK [3][]{subsubsection.3.6.2.1}{3.6.2.1 FrameNet Semantic Role Labelling using SEMAFOR}{subsection.3.6.2}% 51
+\BOOKMARK [3][]{subsubsection.3.6.2.2}{3.6.2.2 Semantic Dependency Relations using TurboParser}{subsection.3.6.2}% 52
+\BOOKMARK [2][]{subsection.3.6.3}{3.6.3 Extracting and Binding Relations to Characters}{section.3.6}% 53
+\BOOKMARK [3][]{subsubsection.3.6.3.1}{3.6.3.1 Obtaining the Semantic Dependency Relations and Frame-Semantic Parse from Noah's ARK}{subsection.3.6.3}% 54
+\BOOKMARK [3][]{subsubsection.3.6.3.2}{3.6.3.2 Collapsing Loose Leaves of the Semantic Dependency Relations}{subsection.3.6.3}% 55
+\BOOKMARK [3][]{subsubsection.3.6.3.3}{3.6.3.3 Finding and Creating Characters}{subsection.3.6.3}% 56
+\BOOKMARK [3][]{subsubsection.3.6.3.4}{3.6.3.4 Extracting Candidate ConceptNet Relations from the Frame-Semantic Parse}{subsection.3.6.3}% 57
+\BOOKMARK [3][]{subsubsection.3.6.3.5}{3.6.3.5 Obtaining the Associated Dependency Relations for each Character}{subsection.3.6.3}% 58
+\BOOKMARK [3][]{subsubsection.3.6.3.6}{3.6.3.6 Binding ConceptNet Relations to Characters}{subsection.3.6.3}% 59
+\BOOKMARK [2][]{subsection.3.6.4}{3.6.4 Anaphora Resolution}{section.3.6}% 60
+\BOOKMARK [2][]{subsection.3.6.5}{3.6.5 Peeks at Future Development of Pragmatic Language Analysis}{section.3.6}% 61
+\BOOKMARK [1][]{section.3.7}{3.7 Symbolism and Imagery}{chapter.3}% 62
+\BOOKMARK [2][]{subsection.3.7.1}{3.7.1 Personification}{section.3.7}% 63
+\BOOKMARK [2][]{subsection.3.7.2}{3.7.2 Onomatopoeia}{section.3.7}% 64
+\BOOKMARK [2][]{subsection.3.7.3}{3.7.3 Simile}{section.3.7}% 65
+\BOOKMARK [0][]{chapter.4}{4 Evaluation Plan}{}% 66
+\BOOKMARK [1][]{section.4.1}{4.1 Comparison of Analysis Results to Theory}{chapter.4}% 67
+\BOOKMARK [1][]{section.4.2}{4.2 Turing-style Tests}{chapter.4}% 68
+\BOOKMARK [1][]{section.4.3}{4.3 FACE Descriptive Model}{chapter.4}% 69
+\BOOKMARK [1][]{section.4.4}{4.4 IDEA Descriptive Model}{chapter.4}% 70
+\BOOKMARK [0][]{appendix*.25}{Appendix A}{}% 71
+\BOOKMARK [1][]{section.Alph0.1}{A.1 Dry Run of Generation Phase with Commentary}{appendix*.25}% 72
+\BOOKMARK [1][]{section.Alph0.2}{A.2 CMU Pronunciation Dictionary ARPABET Phoneme Set}{appendix*.25}% 73
+\BOOKMARK [1][]{section.Alph0.3}{A.3 Penn Treebank Tagset}{appendix*.25}% 74
+\BOOKMARK [1][]{section.Alph0.4}{A.4 Testing Specifications}{appendix*.25}% 75
+\BOOKMARK [1][]{section.Alph0.5}{A.5 FrameNet Frames to ConceptNet Relations}{appendix*.25}% 76
+\BOOKMARK [1][]{section.Alph0.6}{A.6 List of collapsable dependencies}{appendix*.25}% 77
+\BOOKMARK [1][]{section.Alph0.7}{A.7 Onomatopoeia Types to ConceptNet Relations}{appendix*.25}% 78

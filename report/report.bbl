@@ -31,6 +31,24 @@
       \verb http://www.writtensound.com/about.php
       \endverb
     \endentry
+    \entry{difflib}{online}{}
+      \field{sortinit}{0}
+      \verb{url}
+      \verb http://docs.python.org/2/library/difflib.html
+      \endverb
+    \endentry
+    \entry{ark}{online}{}
+      \field{sortinit}{0}
+      \verb{url}
+      \verb http://www.ark.cs.cmu.edu/
+      \endverb
+    \endentry
+    \entry{turboparser}{online}{}
+      \field{sortinit}{0}
+      \verb{url}
+      \verb http://www.ark.cs.cmu.edu/TurboParser
+      \endverb
+    \endentry
     \entry{baker1998berkeley}{inproceedings}{}
       \name{labelname}{3}{}{%
         {{hash=a05f6dccc2782fe82991bad69864b53e}{Baker}{B\bibinitperiod}{Collin\bibnamedelima F}{C\bibinitperiod\bibinitdelim F\bibinitperiod}{}{}{}{}}%
@@ -200,6 +218,31 @@
       \field{title}{The Policeman’s Beard is Half-Constructed: Computer Prose and Poetry}
       \field{year}{1984}
     \endentry
+    \entry{chen2010semafor}{inproceedings}{}
+      \name{labelname}{4}{}{%
+        {{hash=8ebfe272d6a6f905a041a965419c0f8a}{Chen}{C\bibinitperiod}{Desai}{D\bibinitperiod}{}{}{}{}}%
+        {{hash=989a024048b92d0c851aa77e90dfa766}{Schneider}{S\bibinitperiod}{Nathan}{N\bibinitperiod}{}{}{}{}}%
+        {{hash=b8019d13f15afa35450262916b4cec44}{Das}{D\bibinitperiod}{Dipanjan}{D\bibinitperiod}{}{}{}{}}%
+        {{hash=9a7134e1e77eb89fe5582543a3025f2a}{Smith}{S\bibinitperiod}{Noah\bibnamedelima A}{N\bibinitperiod\bibinitdelim A\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{4}{}{%
+        {{hash=8ebfe272d6a6f905a041a965419c0f8a}{Chen}{C\bibinitperiod}{Desai}{D\bibinitperiod}{}{}{}{}}%
+        {{hash=989a024048b92d0c851aa77e90dfa766}{Schneider}{S\bibinitperiod}{Nathan}{N\bibinitperiod}{}{}{}{}}%
+        {{hash=b8019d13f15afa35450262916b4cec44}{Das}{D\bibinitperiod}{Dipanjan}{D\bibinitperiod}{}{}{}{}}%
+        {{hash=9a7134e1e77eb89fe5582543a3025f2a}{Smith}{S\bibinitperiod}{Noah\bibnamedelima A}{N\bibinitperiod\bibinitdelim A\bibinitperiod}{}{}{}{}}%
+      }
+      \list{organization}{1}{%
+        {Association for Computational Linguistics}%
+      }
+      \strng{namehash}{5ed86308c5ae8579d51684bd6ed6bea5}
+      \strng{fullhash}{82ef2a3c0e92eb298ea4d0506bf168fa}
+      \field{sortinit}{C}
+      \field{labeltitle}{SEMAFOR: Frame argument resolution with log-linear models}
+      \field{booktitle}{Proceedings of the 5th international workshop on semantic evaluation}
+      \field{title}{SEMAFOR: Frame argument resolution with log-linear models}
+      \field{year}{2010}
+      \field{pages}{264\bibrangedash 267}
+    \endentry
     \entry{chomsky2002syntactic}{book}{}
       \name{labelname}{1}{}{%
         {{hash=28167c0b3800bc5cfb686676277005b0}{Chomsky}{C\bibinitperiod}{Noam}{N\bibinitperiod}{}{}{}{}}%
@@ -315,6 +358,23 @@
       \field{title}{Oxford Collocations Dictionary: For Students of English}
       \field{year}{2003}
     \endentry
+    \entry{de2008stanford}{article}{}
+      \name{labelname}{2}{}{%
+        {{hash=13e662301b8832e09ea5cb0cbe4b7daf}{De\bibnamedelima Marneffe}{D\bibinitperiod\bibinitdelim M\bibinitperiod}{Marie-Catherine}{M\bibinithyphendelim C\bibinitperiod}{}{}{}{}}%
+        {{hash=1261894eaefc186bfeabf336e05e6294}{Manning}{M\bibinitperiod}{Christopher\bibnamedelima D}{C\bibinitperiod\bibinitdelim D\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{2}{}{%
+        {{hash=13e662301b8832e09ea5cb0cbe4b7daf}{De\bibnamedelima Marneffe}{D\bibinitperiod\bibinitdelim M\bibinitperiod}{Marie-Catherine}{M\bibinithyphendelim C\bibinitperiod}{}{}{}{}}%
+        {{hash=1261894eaefc186bfeabf336e05e6294}{Manning}{M\bibinitperiod}{Christopher\bibnamedelima D}{C\bibinitperiod\bibinitdelim D\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{19cafd5d29e2bbd7ec16b26ac5ece9a4}
+      \strng{fullhash}{19cafd5d29e2bbd7ec16b26ac5ece9a4}
+      \field{sortinit}{D}
+      \field{labeltitle}{Stanford typed dependencies manual}
+      \field{journaltitle}{URL http://nlp. stanford. edu/software/dependencies manual. pdf}
+      \field{title}{Stanford typed dependencies manual}
+      \field{year}{2008}
+    \endentry
     \entry{de2012pattern}{article}{}
       \name{labelname}{2}{}{%
         {{hash=228232ebcc92016d11200def64fb561b}{De\bibnamedelima Smedt}{D\bibinitperiod\bibinitdelim S\bibinitperiod}{Tom}{T\bibinitperiod}{}{}{}{}}%
@@ -356,6 +416,29 @@
       \field{volume}{21}
       \field{year}{2011}
       \field{pages}{13\bibrangedash 14}
+    \endentry
+    \entry{dobrivsek2010towards}{inproceedings}{}
+      \name{labelname}{3}{}{%
+        {{hash=dbd31ac8bd4613ab267a47d05bfbf615}{Dobrišek}{D\bibinitperiod}{Simon}{S\bibinitperiod}{}{}{}{}}%
+        {{hash=f1554d19ab3dd6bb605c66b51ddec9a1}{Žibert}{Ž\bibinitperiod}{Janez}{J\bibinitperiod}{}{}{}{}}%
+        {{hash=8a37feb9d915af756f89ed412fc97854}{Mihelič}{M\bibinitperiod}{France}{F\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{3}{}{%
+        {{hash=dbd31ac8bd4613ab267a47d05bfbf615}{Dobrišek}{D\bibinitperiod}{Simon}{S\bibinitperiod}{}{}{}{}}%
+        {{hash=f1554d19ab3dd6bb605c66b51ddec9a1}{Žibert}{Ž\bibinitperiod}{Janez}{J\bibinitperiod}{}{}{}{}}%
+        {{hash=8a37feb9d915af756f89ed412fc97854}{Mihelič}{M\bibinitperiod}{France}{F\bibinitperiod}{}{}{}{}}%
+      }
+      \list{organization}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{d63422951094c0d710e1dafbf8093d2c}
+      \strng{fullhash}{d63422951094c0d710e1dafbf8093d2c}
+      \field{sortinit}{D}
+      \field{labeltitle}{Towards the optimal minimization of a pronunciation dictionary model}
+      \field{booktitle}{Text, Speech and Dialogue}
+      \field{title}{Towards the optimal minimization of a pronunciation dictionary model}
+      \field{year}{2010}
+      \field{pages}{267\bibrangedash 274}
     \endentry
     \entry{doddington2004automatic}{inproceedings}{}
       \name{labelname}{6}{}{%
