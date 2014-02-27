@@ -1,5 +1,6 @@
 __author__ = 'Nitin'
 
+
 #There are many more, such as half line, caesurae, alliterative verse etc etc.
 class Poem:
 

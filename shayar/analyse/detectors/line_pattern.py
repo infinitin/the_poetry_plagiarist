@@ -31,7 +31,14 @@ def __detect_pattern(poem, consonance, alliteration):
             for phoneme in multiple:
                 line_patterns[phoneme] = phonemes.count(phoneme)
 
-        patterns.append(line_patterns)
+        total = 0
+        for occurrence in line_patterns.values():
+            total += occurrence
+
+        if total > 2:
+            patterns.append(line_patterns)
+        else:
+            patterns.append({})
 
     return patterns
 
