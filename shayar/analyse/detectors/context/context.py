@@ -44,8 +44,6 @@ def identify_characters_and_relationships(poem):
 
     # Perform anaphora resolution of all types.
     resolve_anaphora(all_characters)
-    for character in all_characters:
-        print character
 
     return all_characters
 

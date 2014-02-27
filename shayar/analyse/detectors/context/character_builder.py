@@ -1,5 +1,5 @@
 __author__ = 'Nitin'
-
+import logging
 from pattern.text.en import wordnet
 from shayar.character import Character
 from pattern.text.en import lemma as lemmatise
@@ -90,7 +90,7 @@ def create_characters(dependencies):
             try:
                 synset = wordnet.synsets(singularize(lemmatise(words[-1])))[0]
             except IndexError:
-                print "Failed to find synset for '" + words[-1] + "'"
+                logging.error("Failed to find synset for '" + words[-1] + "'")
                 continue
 
             hyps = set([h.gloss for h in synset.hypernyms(recursive=True)])

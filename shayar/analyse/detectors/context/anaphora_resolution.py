@@ -1,4 +1,5 @@
 __author__ = 'Nitin'
+import logging
 from pattern.text.en import wordnet
 
 
@@ -46,7 +47,7 @@ def resolve_pronoun_anaphora(characters):
         if character.is_pronoun:
             possibilities = get_initial_possibilities(character, characters)
             if not possibilities:
-                print 'Could not resolve: ' + character
+                logging.error('Could not resolve: ' + str(character))
 
             elif len(possibilities) == 1:
                 inherit_all(possibilities[0], character)
@@ -55,7 +56,7 @@ def resolve_pronoun_anaphora(characters):
             else:
                 possibilities = [poss for poss in possibilities if poss.gender == character.gender]
                 if not possibilities:
-                    print 'Could not resolve: ' + character
+                    logging.error('Could not resolve: ' + str(character))
 
                 elif len(possibilities) == 1:
                     inherit_all(possibilities[0], character)
@@ -67,7 +68,7 @@ def resolve_pronoun_anaphora(characters):
                         possibilities = [poss for poss in possibilities if poss.object_state == character.object_state or poss.object_state == '']
 
                         if not possibilities:
-                            print 'Could not resolve: ' + character
+                            logging.error('Could not resolve: ' + str(character))
 
                         elif len(possibilities) == 1:
                             inherit_all(possibilities[0], character)
