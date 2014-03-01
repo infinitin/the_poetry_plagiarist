@@ -1,32 +1,18 @@
 __author__ = 'Nitin'
 
+import sys
+import os
 from shayar.poem import Poem
 from detectors.utils import set_up_globals
 import logging
 import threading
+import cPickle
 
 logging.basicConfig(level=logging.INFO)
 logging.getLogger(__name__)
 
 from detectors import basic_structure, rhythm, line_pattern, rhyme, rhetoric
 from detectors.context import context
-
-poems = []
-
-logging.info('Grabbing poems')
-f = open("limerick.txt")
-poems.append(Poem(map(str.strip, f.readlines())))
-f = open("sonnet.txt")
-poems.append(Poem(map(str.strip, f.readlines())))
-f = open("line patterns.txt")
-poems.append(Poem(map(str.strip, f.readlines())))
-f = open("haiku.txt")
-poems.append(Poem(map(str.strip, f.readlines())))
-f = open("similes.txt")
-poems.append(Poem(map(str.strip, f.readlines())))
-f = open("simple.txt")
-poems.append(Poem(map(str.strip, f.readlines())))
-f.close()
 
 
 def analyse_poem(test):
@@ -88,12 +74,31 @@ class AnalysisEngine(threading.Thread):
 
     def run(self):
         analyse_poem(self.poem)
+        return self.poem
 
 
+poems = []
+logging.info('Grabbing poems')
+for filename in os.listdir(os.getcwd()):
+    if filename.endswith('.txt'):
+        f = open(filename)
+        poems.append(Poem(map(str.strip, f.readlines())))
+        f.close()
+
+collection = sys.argv[1]
 logging.info('Setting up cmudict and other tools')
 set_up_globals()
+analysed_poems = []
 threads = []
 for poem in poems:
     thread = AnalysisEngine(poem)
-    thread.start()
+    analysed_poem = thread.start()
+    analysed_poems.append(analysed_poem)
     threads.append(thread)
+
+for thread in threads:
+    thread.join()
+
+out = open(collection+'.poems', 'w+')
+cPickle.dump(analysed_poems, out, -1)
+out.close()
