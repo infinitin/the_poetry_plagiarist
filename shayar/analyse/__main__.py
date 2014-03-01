@@ -90,15 +90,15 @@ logging.info('Setting up cmudict and other tools')
 set_up_globals()
 analysed_poems = []
 threads = []
-for poem in poems:
-    thread = AnalysisEngine(poem)
-    analysed_poem = thread.start()
-    analysed_poems.append(analysed_poem)
+for p in poems:
+    thread = AnalysisEngine(p)
+    thread.start()
     threads.append(thread)
 
 for thread in threads:
     thread.join()
 
-out = open(collection+'.poems', 'w+')
-cPickle.dump(analysed_poems, out, -1)
+out = open(collection+'.poems', 'wb+')
+out.truncate()
+cPickle.dump(poems, out, -1)
 out.close()

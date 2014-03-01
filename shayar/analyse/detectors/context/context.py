@@ -1,7 +1,8 @@
 __author__ = 'Nitin'
 
+import logging
 from pattern.text.en import parsetree
-from urllib2 import urlopen
+from urllib2 import urlopen, URLError
 from json import loads as json_load
 from character_builder import create_characters
 from frame_to_relation_converter import build_candidate_relations_from_frames
@@ -119,7 +120,10 @@ def get_dependencies(json):
 def make_request(sentence):
     url = "http://demo.ark.cs.cmu.edu/parse/api/v1/parse?sentence="
     request_url = url + sentence.replace(' ', '+')
-    socket = urlopen(request_url)
-    json = json_load(socket.read())
-    socket.close()
+    try:
+        socket = urlopen(request_url)
+        json = json_load(socket.read())
+        socket.close()
+    except URLError:
+        logging.error("You are not connected to the Internet!")
     return json
