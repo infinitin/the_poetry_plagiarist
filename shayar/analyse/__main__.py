@@ -5,7 +5,7 @@ import os
 from shayar.poem import Poem
 from detectors.utils import set_up_globals
 import logging
-import threading
+from threading import Thread
 import cPickle
 
 logging.basicConfig(level=logging.INFO)
@@ -66,17 +66,6 @@ def analyse_poem(test):
     logging.info('Done' + str(test.poem))
 
 
-class AnalysisEngine(threading.Thread):
-
-    def __init__(self, poem):
-        threading.Thread.__init__(self)
-        self.poem = poem
-
-    def run(self):
-        analyse_poem(self.poem)
-        return self.poem
-
-
 poems = []
 logging.info('Grabbing poems')
 for filename in os.listdir(os.getcwd()):
@@ -91,7 +80,7 @@ set_up_globals()
 analysed_poems = []
 threads = []
 for p in poems:
-    thread = AnalysisEngine(p)
+    thread = Thread(target=analyse_poem, args=(p,))
     thread.start()
     threads.append(thread)
 
