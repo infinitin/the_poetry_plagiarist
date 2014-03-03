@@ -6,7 +6,9 @@ from threading import Thread
 # This import is required for the pickle load
 # noinspection PyUnresolvedReferences,PyPep8Naming
 import shayar.poem as poem
-from n_stanzas_agg import agg_n_stanzas
+from shayar.poem_template import Template
+from aggregators.basic_structure import agg_n_stanzas, agg_lines_per_stanza
+
 
 parser = argparse.ArgumentParser(description='Gather insight on poems.')
 parser.add_argument('collection', choices=['test'], help='The particular collection of poems to be analysed.')
@@ -19,6 +21,13 @@ f = open(os.path.abspath(os.path.join(os.path.dirname(__file__), '..\\analyse', 
 poems = cPickle.load(f)
 f.close()
 
-# Filter poems here according to parse args
-n_stanzas = Thread(target=agg_n_stanzas, args=([p.stanzas for p in poems], args.plot))
-n_stanzas.start()
+template = Template(args.collection)
+
+
+aggregators = [agg_n_stanzas, agg_lines_per_stanza]
+# Remove from list of aggregators according to parse args
+for aggregator in aggregators:
+    thread = Thread(target=aggregator, args=(poems, template))
+    thread.start()
+
+template.plot('all')
