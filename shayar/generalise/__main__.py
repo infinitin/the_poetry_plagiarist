@@ -7,7 +7,8 @@ from threading import Thread
 # noinspection PyUnresolvedReferences,PyPep8Naming
 import shayar.poem as poem
 from shayar.poem_template import Template
-from aggregators.basic_structure import agg_n_stanzas, agg_lines_per_stanza
+from aggregators.basic_structure import agg_n_stanzas, agg_lines_per_stanza, agg_repeated_line_locations, \
+    agg_n_repeated_lines, agg_n_distinct_sentences
 
 
 parser = argparse.ArgumentParser(description='Gather insight on poems.')
@@ -23,11 +24,12 @@ f.close()
 
 template = Template(args.collection)
 
-
-aggregators = [agg_n_stanzas, agg_lines_per_stanza]
+aggregators = [agg_n_stanzas, agg_lines_per_stanza, agg_repeated_line_locations, agg_n_repeated_lines,
+               agg_n_distinct_sentences]
 # Remove from list of aggregators according to parse args
 for aggregator in aggregators:
     thread = Thread(target=aggregator, args=(poems, template))
     thread.start()
 
-template.plot('all')
+
+template.plot('num_distinct_sentences')

@@ -33,6 +33,9 @@ def analyse_poem(test):
     logging.info('Compiling overall tense')
     test.overall_tense = basic_structure.detect_overall_tense(test.tenses)
 
+    logging.info('Counting distinct sentences')
+    test.distinct_sentences = basic_structure.count_distinct_sentences(test.poem)
+
     logging.info('Counting syllables in each line')
     test.syllable_count = rhythm.count_syllables(test.poem)
 

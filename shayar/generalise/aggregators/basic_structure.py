@@ -2,10 +2,20 @@ __author__ = 'Nitin'
 
 
 def agg_lines_per_stanza(poems, template):
-    lines_per_stanza = [str(poem.lines) for poem in poems]
-    template.lines = lines_per_stanza
+    template.num_lines = [tuple(poem.lines) for poem in poems]
 
 
 def agg_n_stanzas(poems, template):
-    stanza_nums = [poem.stanzas for poem in poems]
-    template.stanzas = stanza_nums
+    template.stanzas = [poem.stanzas for poem in poems]
+
+
+def agg_repeated_line_locations(poems, template):
+    template.repeated_lines_locations = [tuple(poem.repeated_lines.values()) for poem in poems]
+
+
+def agg_n_repeated_lines(poems, template):
+    template.num_repeated_lines = [len(poem.repeated_lines.values()) for poem in poems]
+
+
+def agg_n_distinct_sentences(poems, template):
+    template.num_distinct_sentences = [poem.distinct_sentences for poem in poems]
