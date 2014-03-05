@@ -32,4 +32,4 @@ for aggregator in aggregators:
     thread.start()
 
 
-template.plot('num_distinct_sentences')
+template.plot('all')
