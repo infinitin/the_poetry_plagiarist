@@ -19,3 +19,11 @@ def agg_n_repeated_lines(poems, template):
 
 def agg_n_distinct_sentences(poems, template):
     template.num_distinct_sentences = [poem.distinct_sentences for poem in poems]
+
+
+def agg_line_tenses(poems, template):
+    template.line_tenses = [tuple(poem.tenses) for poem in poems]
+
+
+def agg_overall_tense(poems, template):
+    template.overall_tense = [poem.overall_tense for poem in poems]
