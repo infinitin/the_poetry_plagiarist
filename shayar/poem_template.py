@@ -21,6 +21,8 @@ class Template:
         self.consonance = {}
         self.alliteration = {}
 
+        self.rhyme_schemes = []
+
     def plot(self, attribute):
         if not attribute:
             pass
@@ -120,6 +122,13 @@ class Template:
         plot_bar_stacked(x, zipped_ys, 'Consonant Phonemes', 'Number of occurrences stacked by poem', x_ticks,
                          'Alliteration')
 
+    def plot_rhyme(self):
+        counts = Counter(self.rhyme_schemes).most_common()
+        x = tuple(np.arange(len(counts)))
+        x_ticks = tuple([num for num, count in counts])
+        y = tuple([count for num, count in counts])
+        plot_bar_simple(x, y, 'Rhyme Scheme', 'Number of occurrences', x_ticks, 'Range of Possible Rhyme Schemes')
+
 
 attribute_plot_map = {
     'stanzas': Template.plot_stanzas,
@@ -131,7 +140,8 @@ attribute_plot_map = {
     'overall_tense': Template.plot_overall_tense,
     'assonance': Template.plot_assonance,
     'consonance': Template.plot_consonance,
-    'alliteration': Template.plot_alliteration
+    'alliteration': Template.plot_alliteration,
+    'rhyme': Template.plot_rhyme,
 }
 
 

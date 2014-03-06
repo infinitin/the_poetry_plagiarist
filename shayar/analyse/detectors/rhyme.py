@@ -7,20 +7,14 @@ from itertools import product
 
 
 def determine_rhyme_scheme(poem):
-    stanzas = get_stanzas(poem)
-    stanza_rhyme_scheme = []
+    last_words = []
 
-    for stanza in stanzas:
-        last_words = []
+    for line in poem:
+        if line.strip():
+            last_word = get_tokenized_words(line)[-1]
+            last_words.append(get_pronunciations(last_word))
 
-        for line in stanza:
-            if line.strip():
-                last_word = get_tokenized_words(line)[-1]
-                last_words.append(get_pronunciations(last_word))
-
-        stanza_rhyme_scheme.append(__get_rhyme_scheme(last_words))
-
-    return stanza_rhyme_scheme
+    return __get_rhyme_scheme(last_words)
 
 
 def detect_internal_rhyme(poem):
