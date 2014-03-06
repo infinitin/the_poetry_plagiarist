@@ -29,9 +29,13 @@ aggregators = [agg_n_stanzas, agg_lines_per_stanza, agg_repeated_line_locations,
                agg_n_distinct_sentences, agg_line_tenses, agg_overall_tense, agg_assonance, agg_consonance,
                agg_alliteration]
 # Remove from list of aggregators according to parse args
+threads = []
 for aggregator in aggregators:
     thread = Thread(target=aggregator, args=(poems, template))
     thread.start()
+    threads.append(thread)
 
+for thread in threads:
+    thread.join()
 
-template.plot('')
+template.plot('alliteration')

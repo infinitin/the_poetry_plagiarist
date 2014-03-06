@@ -18,6 +18,8 @@ class Template:
         self.overall_tense = []
 
         self.assonance = {}
+        self.consonance = {}
+        self.alliteration = {}
 
     def plot(self, attribute):
         if not attribute:
@@ -78,16 +80,45 @@ class Template:
         x = tuple(np.arange(len(counts)))
         x_ticks = tuple([num for num, count in counts])
         y = tuple([count for num, count in counts])
-        plot_bar_simple(x, y, 'Overall tense', 'Number of occurrences', x_ticks,
-                        'Range of overall poem tense')
+        plot_bar_simple(x, y, 'Overall tense', 'Number of occurrences', x_ticks, 'Range of overall poem tense')
 
     def plot_assonance(self):
-        counts = Counter(self.overall_tense).most_common()
-        x = tuple(np.arange(len(counts)))
-        x_ticks = tuple([num for num, count in counts])
-        y = tuple([count for num, count in counts])
-        plot_bar_stacked(x, y, 'Overall tense', 'Number of occurrences', x_ticks,
-                         'Range of overall poem tense')
+        x = tuple(np.arange(len(self.assonance.keys())))
+        x_ticks = tuple(self.assonance.keys())
+        ys = self.assonance.values()
+
+        for y in ys:
+            if len(y) < len(x):
+                y.extend([0] * (len(x) - len(y)))
+
+        zipped_ys = zip(*ys)
+        plot_bar_stacked(x, zipped_ys, 'Vowel Phonemes', 'Number of occurrences stacked by poem', x_ticks, 'Assonance')
+
+    def plot_consonance(self):
+        x = tuple(np.arange(len(self.consonance.keys())))
+        x_ticks = tuple(self.consonance.keys())
+        ys = self.consonance.values()
+
+        for y in ys:
+            if len(y) < len(x):
+                y.extend([0] * (len(x) - len(y)))
+
+        zipped_ys = zip(*ys)
+        plot_bar_stacked(x, zipped_ys, 'Consonant Phonemes', 'Number of occurrences stacked by poem', x_ticks,
+                         'Consonance')
+
+    def plot_alliteration(self):
+        x = tuple(np.arange(len(self.alliteration.keys())))
+        x_ticks = tuple(self.alliteration.keys())
+        ys = self.alliteration.values()
+
+        for y in ys:
+            if len(y) < len(x):
+                y.extend([0] * (len(x) - len(y)))
+
+        zipped_ys = zip(*ys)
+        plot_bar_stacked(x, zipped_ys, 'Consonant Phonemes', 'Number of occurrences stacked by poem', x_ticks,
+                         'Alliteration')
 
 
 attribute_plot_map = {
@@ -98,7 +129,9 @@ attribute_plot_map = {
     'num_distinct_sentences': Template.plot_num_distinct_sentences,
     'line_tenses': Template.plot_line_tenses,
     'overall_tense': Template.plot_overall_tense,
-    'assonance': Template.plot_assonance
+    'assonance': Template.plot_assonance,
+    'consonance': Template.plot_consonance,
+    'alliteration': Template.plot_alliteration
 }
 
 
@@ -117,11 +150,19 @@ def plot_bar_simple(x, y, x_axis, y_axis, x_ticks, title):
     plt.show()
 
 
-def plot_bar_stacked(x, y, x_axis, y_axis, x_ticks, title):
+def plot_bar_stacked(x, ys, x_axis, y_axis, x_ticks, title):
     width = 0.5
 
     fig, ax = plt.subplots()
-    ax.bar(x, y, width=width, align='center')
+    prev = 0
+    colour = 'b'
+    for y in ys:
+        ax.bar(x, y, bottom=prev, width=width, color=colour, align='center')
+        prev = y
+        if colour == 'b':
+            colour = 'r'
+        else:
+            colour = 'b'
 
     ax.set_xticklabels(x_ticks)
     ax.set_xlabel(x_axis)
