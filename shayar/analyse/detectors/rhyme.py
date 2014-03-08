@@ -71,7 +71,7 @@ def __get_rhyme_scheme(words):
 
     all_possibilities = list(product(*rhyme_scheme))
     normalized_rhyme_schemes = [__normalize_rhyme_scheme(possibility)for possibility in all_possibilities]
-    return [list(x) for x in set(tuple(x) for x in normalized_rhyme_schemes)]
+    return [tuple(x) for x in set(tuple(x) for x in normalized_rhyme_schemes)]
 
 
 # The phonemes that determine rhyme are the vowels and the last consonant.
