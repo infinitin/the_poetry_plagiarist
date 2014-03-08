@@ -27,6 +27,8 @@ class Template:
 
         self.similes = []
 
+        self.character_count = []
+
     def plot(self, attribute):
         if not attribute:
             pass
@@ -156,6 +158,13 @@ class Template:
         y = tuple([count for num, count in counts])
         plot_bar_simple(x, y, 'Existence', 'Number of occurrences', x_ticks, 'Exsistence of Simile')
 
+    def plot_character_count(self):
+        counts = Counter(self.character_count).most_common()
+        x = tuple(np.arange(len(counts)))
+        x_ticks = tuple([num for num, count in counts])
+        y = tuple([count for num, count in counts])
+        plot_bar_simple(x, y, 'Number of characters', 'Number of occurrences', x_ticks, 'Range of number of characters')
+
 
 attribute_plot_map = {
     'stanzas': Template.plot_stanzas,
@@ -171,7 +180,8 @@ attribute_plot_map = {
     'rhyme': Template.plot_rhyme,
     'syllable_patterns': Template.plot_syllable_patterns,
     'stress_patterns': Template.plot_stress_patterns,
-    'similes': Template.plot_similes
+    'similes': Template.plot_similes,
+    'character_count': Template.plot_character_count
 }
 
 
