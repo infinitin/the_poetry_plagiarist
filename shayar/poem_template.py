@@ -23,6 +23,7 @@ class Template:
 
         self.rhyme_schemes = []
         self.syllable_patterns = []
+        self.stress_patterns = []
 
     def plot(self, attribute):
         if not attribute:
@@ -137,6 +138,13 @@ class Template:
         y = tuple([count for num, count in counts])
         plot_bar_simple(x, y, 'Syllable Patterns', 'Number of occurrences', x_ticks, 'Possible Syllabic Rhythm')
 
+    def plot_stress_patterns(self):
+        counts = Counter(self.stress_patterns).most_common()
+        x = tuple(np.arange(len(counts)))
+        x_ticks = tuple([num for num, count in counts])
+        y = tuple([count for num, count in counts])
+        plot_bar_simple(x, y, 'Stress Pattern', 'Number of occurrences', x_ticks, 'Range of Possible Stress Patterns')
+
 
 attribute_plot_map = {
     'stanzas': Template.plot_stanzas,
@@ -150,7 +158,8 @@ attribute_plot_map = {
     'consonance': Template.plot_consonance,
     'alliteration': Template.plot_alliteration,
     'rhyme': Template.plot_rhyme,
-    'syllable_patterns': Template.plot_syllable_patterns
+    'syllable_patterns': Template.plot_syllable_patterns,
+    'stress_patterns': Template.plot_stress_patterns
 }
 
 

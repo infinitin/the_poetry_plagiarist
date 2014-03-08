@@ -11,7 +11,7 @@ from aggregators.basic_structure import agg_n_stanzas, agg_lines_per_stanza, agg
     agg_n_repeated_lines, agg_n_distinct_sentences, agg_line_tenses, agg_overall_tense
 from aggregators.line_patterns import agg_assonance, agg_consonance, agg_alliteration
 from aggregators.rhyme import agg_rhyme
-from aggregators.rhythm import agg_syllable
+from aggregators.rhythm import agg_syllable, agg_rhythm
 
 
 parser = argparse.ArgumentParser(description='Gather insight on poems.')
@@ -29,7 +29,7 @@ template = Template(args.collection)
 
 aggregators = [agg_n_stanzas, agg_lines_per_stanza, agg_repeated_line_locations, agg_n_repeated_lines,
                agg_n_distinct_sentences, agg_line_tenses, agg_overall_tense, agg_assonance, agg_consonance,
-               agg_alliteration, agg_rhyme, agg_syllable]
+               agg_alliteration, agg_rhyme, agg_syllable, agg_rhythm]
 # Remove from list of aggregators according to parse args
 threads = []
 for aggregator in aggregators:
@@ -40,4 +40,4 @@ for aggregator in aggregators:
 for thread in threads:
     thread.join()
 
-template.plot('syllable_patterns')
+template.plot('stress_patterns')

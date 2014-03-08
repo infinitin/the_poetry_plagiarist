@@ -26,7 +26,6 @@ class Poem:
         self.internal_rhyme_scheme = []     # A list of locations in the poem with internal rhyme
 
         self.stress_pattern = []            # Stresses for each lines
-        self.rhythm = ""                    # Foot and metre stress according to pattern, e.g. iambic pentameter
         self.syllable_count = []            # List of number of syllables per line
         self.parallel_structure = []        # List consistent verb-noun order for each line, if any
 
