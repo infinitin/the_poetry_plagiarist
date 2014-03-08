@@ -2,6 +2,7 @@ __author__ = 'Nitin'
 import matplotlib.pyplot as plt
 import numpy as np
 from collections import Counter
+from copy import copy
 
 
 # Has all the options for producing poems, as well as plot functions for viewing the options
@@ -139,11 +140,13 @@ class Template:
         plot_bar_simple(x, y, 'Syllable Patterns', 'Number of occurrences', x_ticks, 'Possible Syllabic Rhythm')
 
     def plot_stress_patterns(self):
-        counts = Counter(self.stress_patterns).most_common()
-        x = tuple(np.arange(len(counts)))
-        x_ticks = tuple([num for num, count in counts])
-        y = tuple([count for num, count in counts])
-        plot_bar_simple(x, y, 'Stress Pattern', 'Number of occurrences', x_ticks, 'Range of Possible Stress Patterns')
+        for line in self.stress_patterns:
+            counts = Counter(line).most_common()
+            x = tuple(np.arange(len(counts)))
+            x_ticks = tuple([num for num, count in counts])
+            y = tuple([count for num, count in counts])
+            plot_bar_simple(x, y, 'Stress Pattern', 'Number of occurrences', x_ticks,
+                            'Range of Possible Stress Patterns for Line ' + str(self.stress_patterns.index(line) + 1))
 
 
 attribute_plot_map = {

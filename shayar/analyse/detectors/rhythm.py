@@ -1,6 +1,5 @@
 __author__ = 'Nitin'
 
-from utils import get_stanzas
 from utils import get_tokenized_words
 from utils import get_pronunciations
 from utils import get_extended_line_permutations
