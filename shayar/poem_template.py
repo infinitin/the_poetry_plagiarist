@@ -2,7 +2,6 @@ __author__ = 'Nitin'
 import matplotlib.pyplot as plt
 import numpy as np
 from collections import Counter
-from copy import copy
 
 
 # Has all the options for producing poems, as well as plot functions for viewing the options
@@ -25,6 +24,8 @@ class Template:
         self.rhyme_schemes = []
         self.syllable_patterns = []
         self.stress_patterns = []
+
+        self.similes = []
 
     def plot(self, attribute):
         if not attribute:
@@ -148,6 +149,13 @@ class Template:
             plot_bar_simple(x, y, 'Stress Pattern', 'Number of occurrences', x_ticks,
                             'Range of Possible Stress Patterns for Line ' + str(self.stress_patterns.index(line) + 1))
 
+    def plot_similes(self):
+        counts = Counter(self.similes).most_common()
+        x = tuple(np.arange(len(counts)))
+        x_ticks = tuple([num for num, count in counts])
+        y = tuple([count for num, count in counts])
+        plot_bar_simple(x, y, 'Existence', 'Number of occurrences', x_ticks, 'Exsistence of Simile')
+
 
 attribute_plot_map = {
     'stanzas': Template.plot_stanzas,
@@ -162,7 +170,8 @@ attribute_plot_map = {
     'alliteration': Template.plot_alliteration,
     'rhyme': Template.plot_rhyme,
     'syllable_patterns': Template.plot_syllable_patterns,
-    'stress_patterns': Template.plot_stress_patterns
+    'stress_patterns': Template.plot_stress_patterns,
+    'similes': Template.plot_similes
 }
 
 

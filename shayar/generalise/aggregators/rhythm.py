@@ -34,8 +34,6 @@ def agg_rhythm(poems, template):
 
     template.stress_patterns = stress_patterns
 
-    print(str(template.stress_patterns))
-
 
 def get_best(most_commons):
     r = re.compile(r"(.+?)(?=\1)")
