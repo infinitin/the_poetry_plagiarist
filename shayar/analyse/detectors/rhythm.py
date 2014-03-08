@@ -33,24 +33,19 @@ def get_stress_pattern(poem):
 # We want a list of of the syllable counts of each line as well as a pattern for each stanza
 # This is because we may have an alternating pattern of syllabic rhythm
 def count_syllables(poem):
-    stanzas = get_stanzas(poem)
-    syllabic_stanza_lengths = []
 
-    for stanza in stanzas:
-        syllabic_line_lengths = []
+    syllabic_line_lengths = []
 
-        for line in stanza:
-            words = get_tokenized_words(line)
+    for line in poem:
+        words = get_tokenized_words(line)
 
-            syllabic_line_length = 0
-            for word in words:
-                syllabic_line_length += __count_syllables_in_word(word)
+        syllabic_line_length = 0
+        for word in words:
+            syllabic_line_length += __count_syllables_in_word(word)
 
-            syllabic_line_lengths.append(syllabic_line_length)
+        syllabic_line_lengths.append(syllabic_line_length)
 
-        syllabic_stanza_lengths.append(syllabic_line_lengths)
-
-    return syllabic_stanza_lengths
+    return tuple(syllabic_line_lengths)
 
 
 def __count_syllables_in_word(word):
