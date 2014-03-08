@@ -28,6 +28,10 @@ class Template:
         self.similes = []
 
         self.character_count = []
+        self.character_genders = []
+        self.character_nums = []
+        self.character_animations = []
+        self.character_personifications = []
 
     def plot(self, attribute):
         if not attribute:
@@ -165,6 +169,35 @@ class Template:
         y = tuple([count for num, count in counts])
         plot_bar_simple(x, y, 'Number of characters', 'Number of occurrences', x_ticks, 'Range of number of characters')
 
+    def plot_character_genders(self):
+        counts = Counter(self.character_genders).most_common()
+        x = tuple(np.arange(len(counts)))
+        x_ticks = tuple([num for num, count in counts])
+        y = tuple([count for num, count in counts])
+        plot_bar_simple(x, y, 'Gender', 'Number of occurrences', x_ticks, 'Range of character genders')
+
+    def plot_character_nums(self):
+        counts = Counter(self.character_nums).most_common()
+        x = tuple(np.arange(len(counts)))
+        x_ticks = tuple([num for num, count in counts])
+        y = tuple([count for num, count in counts])
+        plot_bar_simple(x, y, 'Num', 'Number of occurrences', x_ticks, 'Range of character nums')
+
+    def plot_character_animations(self):
+        counts = Counter(self.character_animations).most_common()
+        x = tuple(np.arange(len(counts)))
+        x_ticks = tuple([num for num, count in counts])
+        y = tuple([count for num, count in counts])
+        plot_bar_simple(x, y, 'Object State', 'Number of occurrences', x_ticks, 'Range of character animation')
+
+    def plot_character_personifications(self):
+        counts = Counter(self.character_personifications).most_common()
+        x = tuple(np.arange(len(counts)))
+        x_ticks = tuple([num for num, count in counts])
+        y = tuple([count for num, count in counts])
+        plot_bar_simple(x, y, 'Existence', 'Number of occurrences', x_ticks, 'Existence of character personification')
+
+
 
 attribute_plot_map = {
     'stanzas': Template.plot_stanzas,
@@ -181,7 +214,11 @@ attribute_plot_map = {
     'syllable_patterns': Template.plot_syllable_patterns,
     'stress_patterns': Template.plot_stress_patterns,
     'similes': Template.plot_similes,
-    'character_count': Template.plot_character_count
+    'character_count': Template.plot_character_count,
+    'character_genders': Template.plot_character_genders,
+    'character_nums': Template.plot_character_nums,
+    'character_animations': Template.plot_character_animations,
+    'character_personifications': Template.plot_character_personifications,
 }
 
 
