@@ -32,6 +32,7 @@ class Template:
         self.character_nums = []
         self.character_animations = []
         self.character_personifications = []
+        self.character_relations = {}
 
     def plot(self, attribute):
         if not attribute:
@@ -43,56 +44,31 @@ class Template:
             attribute_plot_map[attribute](self)
 
     def plot_stanzas(self):
-        counts = Counter(self.stanzas).most_common()
-        x = tuple([num for num, count in counts])
-        y = tuple([count for num, count in counts])
-        plot_bar_simple(x, y, 'Number of stanzas', 'Number of occurrences', x, 'Range of number of stanzas')
+        simple_plotter(self.stanzas, 'Number of stanzas', 'Number of occurrences', 'Range of number of stanzas',
+                       use_x=True)
 
     def plot_num_lines(self):
-        counts = Counter(self.num_lines).most_common()
-        x = tuple(np.arange(len(counts)))
-        x_ticks = tuple([num for num, count in counts])
-        y = tuple([count for num, count in counts])
-        plot_bar_simple(x, y, 'Number of lines for all stanza amounts', 'Number of occurrences', x_ticks,
-                        'Range of number of lines per stanza')
+        simple_plotter(self.num_lines, 'Number of lines for all stanza amounts', 'Number of occurrences',
+                       'Range of number of lines per stanza')
 
     def plot_repeated_lines(self):
-        counts = Counter(self.repeated_lines_locations).most_common()
-        x = tuple(np.arange(len(counts)))
-        x_ticks = tuple([num for num, count in counts])
-        y = tuple([count for num, count in counts])
-        plot_bar_simple(x, y, 'Positions of repeated lines', 'Number of occurrences', x_ticks,
-                        'Range of positions of repeated lines')
+        simple_plotter(self.repeated_lines_locations, 'Positions of repeated lines', 'Number of occurrences',
+                       'Range of positions of repeated lines')
 
     def plot_num_repeated_lines(self):
-        counts = Counter(self.num_repeated_lines).most_common()
-        x = tuple([num for num, count in counts])
-        y = tuple([count for num, count in counts])
-        plot_bar_simple(x, y, 'Number of repeated lines', 'Number of occurrences', x,
-                        'Range of number of repeated lines')
+        simple_plotter(self.num_repeated_lines, 'Number of repeated lines', 'Number of occurrences',
+                       'Range of number of repeated lines', use_x=True)
 
     def plot_num_distinct_sentences(self):
-        counts = Counter(self.num_distinct_sentences).most_common()
-        x = tuple(np.arange(len(counts)))
-        x_ticks = tuple([num for num, count in counts])
-        y = tuple([count for num, count in counts])
-        plot_bar_simple(x, y, 'Number of distinct sentences', 'Number of occurrences', x_ticks,
-                        'Range of number of distinct sentences')
+        simple_plotter(self.num_distinct_sentences, 'Number of distinct sentences', 'Number of occurrences',
+                       'Range of number of distinct sentences')
 
     def plot_line_tenses(self):
-        counts = Counter(self.line_tenses).most_common()
-        x = tuple(np.arange(len(counts)))
-        x_ticks = tuple([num for num, count in counts])
-        y = tuple([count for num, count in counts])
-        plot_bar_simple(x, y, 'Permutations of line tenses', 'Number of occurrences', x_ticks,
-                        'Range of permutations of tenses for each line')
+        simple_plotter(self.line_tenses, 'Permutations of line tenses', 'Number of occurrences',
+                       'Range of permutations of tenses for each line')
 
     def plot_overall_tense(self):
-        counts = Counter(self.overall_tense).most_common()
-        x = tuple(np.arange(len(counts)))
-        x_ticks = tuple([num for num, count in counts])
-        y = tuple([count for num, count in counts])
-        plot_bar_simple(x, y, 'Overall tense', 'Number of occurrences', x_ticks, 'Range of overall poem tense')
+        simple_plotter(self.overall_tense, 'Overall tense', 'Number of occurrences', 'Range of overall poem tense')
 
     def plot_assonance(self):
         x = tuple(np.arange(len(self.assonance.keys())))
@@ -133,70 +109,42 @@ class Template:
                          'Alliteration')
 
     def plot_rhyme(self):
-        counts = Counter(self.rhyme_schemes).most_common()
-        x = tuple(np.arange(len(counts)))
-        x_ticks = tuple([num for num, count in counts])
-        y = tuple([count for num, count in counts])
-        plot_bar_simple(x, y, 'Rhyme Scheme', 'Number of occurrences', x_ticks, 'Range of Possible Rhyme Schemes')
+        simple_plotter(self.rhyme_schemes, 'Rhyme Scheme', 'Number of occurrences', 'Range of Possible Rhyme Schemes')
 
     def plot_syllable_patterns(self):
-        counts = Counter(self.syllable_patterns).most_common()
-        x = tuple(np.arange(len(counts)))
-        x_ticks = tuple([num for num, count in counts])
-        y = tuple([count for num, count in counts])
-        plot_bar_simple(x, y, 'Syllable Patterns', 'Number of occurrences', x_ticks, 'Possible Syllabic Rhythm')
+        simple_plotter(self.syllable_patterns, 'Syllable Patterns', 'Number of occurrences', 'Possible Syllabic Rhythm')
 
     def plot_stress_patterns(self):
         for line in self.stress_patterns:
-            counts = Counter(line).most_common()
-            x = tuple(np.arange(len(counts)))
-            x_ticks = tuple([num for num, count in counts])
-            y = tuple([count for num, count in counts])
-            plot_bar_simple(x, y, 'Stress Pattern', 'Number of occurrences', x_ticks,
-                            'Range of Possible Stress Patterns for Line ' + str(self.stress_patterns.index(line) + 1))
+            simple_plotter(line, 'Stress Pattern', 'Number of occurrences',
+                           'Range of Possible Stress Patterns for Line ' + str(self.stress_patterns.index(line) + 1))
 
     def plot_similes(self):
-        counts = Counter(self.similes).most_common()
-        x = tuple(np.arange(len(counts)))
-        x_ticks = tuple([num for num, count in counts])
-        y = tuple([count for num, count in counts])
-        plot_bar_simple(x, y, 'Existence', 'Number of occurrences', x_ticks, 'Exsistence of Simile')
+        simple_plotter(self.similes, 'Existence', 'Number of occurrences', 'Exsistence of Simile')
 
     def plot_character_count(self):
-        counts = Counter(self.character_count).most_common()
-        x = tuple(np.arange(len(counts)))
-        x_ticks = tuple([num for num, count in counts])
-        y = tuple([count for num, count in counts])
-        plot_bar_simple(x, y, 'Number of characters', 'Number of occurrences', x_ticks, 'Range of number of characters')
+        simple_plotter(self.character_count, 'Number of characters', 'Number of occurrences',
+                       'Range of number of characters')
 
     def plot_character_genders(self):
-        counts = Counter(self.character_genders).most_common()
-        x = tuple(np.arange(len(counts)))
-        x_ticks = tuple([num for num, count in counts])
-        y = tuple([count for num, count in counts])
-        plot_bar_simple(x, y, 'Gender', 'Number of occurrences', x_ticks, 'Range of character genders')
+        simple_plotter(self.character_genders, 'Gender', 'Number of occurrences', 'Range of character genders')
 
     def plot_character_nums(self):
-        counts = Counter(self.character_nums).most_common()
-        x = tuple(np.arange(len(counts)))
-        x_ticks = tuple([num for num, count in counts])
-        y = tuple([count for num, count in counts])
-        plot_bar_simple(x, y, 'Num', 'Number of occurrences', x_ticks, 'Range of character nums')
+        simple_plotter(self.character_nums, 'Num', 'Number of occurrences', 'Range of character nums')
 
     def plot_character_animations(self):
-        counts = Counter(self.character_animations).most_common()
-        x = tuple(np.arange(len(counts)))
-        x_ticks = tuple([num for num, count in counts])
-        y = tuple([count for num, count in counts])
-        plot_bar_simple(x, y, 'Object State', 'Number of occurrences', x_ticks, 'Range of character animation')
+        simple_plotter(self.character_animations, 'Object State', 'Number of occurrences',
+                       'Range of character animation')
 
     def plot_character_personifications(self):
-        counts = Counter(self.character_personifications).most_common()
-        x = tuple(np.arange(len(counts)))
-        x_ticks = tuple([num for num, count in counts])
-        y = tuple([count for num, count in counts])
-        plot_bar_simple(x, y, 'Existence', 'Number of occurrences', x_ticks, 'Existence of character personification')
+        simple_plotter(self.character_personifications, 'Existence', 'Number of occurrences',
+                       'Existence of character personification')
 
+    def plot_character_relations(self):
+        x = tuple(np.arange(len(self.character_relations.keys())))
+        x_ticks = tuple(self.character_relations.keys())
+        y = tuple(self.character_relations.values())
+        plot_bar_simple(x, y, 'Relation', 'Number of occurrences', x_ticks, 'Range of character relations')
 
 
 attribute_plot_map = {
@@ -219,6 +167,7 @@ attribute_plot_map = {
     'character_nums': Template.plot_character_nums,
     'character_animations': Template.plot_character_animations,
     'character_personifications': Template.plot_character_personifications,
+    'character_relations': Template.plot_character_relations,
 }
 
 
@@ -260,7 +209,12 @@ def plot_bar_stacked(x, ys, x_axis, y_axis, x_ticks, title):
     plt.show()
 
 
-
+def simple_plotter(attribute, x_axis, y_axis, title, use_x=False):
+    counts = Counter(attribute).most_common()
+    x = tuple(np.arange(len(counts)))
+    x_ticks = x if use_x else tuple([num for num, count in counts])
+    y = tuple([count for num, count in counts])
+    plot_bar_simple(x, y, x_axis, y_axis, x_ticks, title)
 
 
 
