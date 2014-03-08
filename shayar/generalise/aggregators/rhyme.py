@@ -1,4 +1,5 @@
 __author__ = 'Nitin'
+from utils import get_most_common
 
 
 def agg_rhyme(poems, template):
@@ -9,7 +10,7 @@ def agg_rhyme(poems, template):
     while rhyme_scheme_possibilities:
         possibilities = [rhyme_scheme for rhyme_scheme_possibility in rhyme_scheme_possibilities
                          for rhyme_scheme in rhyme_scheme_possibility]
-        most_common = max(set(possibilities), key=possibilities.count)
+        most_common = min(get_most_common(possibilities))
         rhyme_schemes.extend([possibility for possibility in possibilities if possibility == most_common])
         rhyme_scheme_possibilities = [rhyme_scheme_possibility for rhyme_scheme_possibility in
                                       rhyme_scheme_possibilities if most_common not in rhyme_scheme_possibility]
