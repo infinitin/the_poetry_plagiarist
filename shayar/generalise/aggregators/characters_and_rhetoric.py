@@ -49,3 +49,36 @@ def agg_character_relations(poems, template):
             relations_dict[relation] += len(character.type_to_list[relation])
 
     template.character_relations = relations_dict
+
+
+def agg_character_relation_distribution(poems, template):
+    max_num_characters = max([len(poem.characters) for poem in poems])
+    character_heirarchy = [[] for i in range(max_num_characters)]
+
+    for poem in poems:
+        ordered_characters = sort_characters(poem.characters)
+        for n in range(0, len(ordered_characters)):
+            character_heirarchy[n].append(ordered_characters[n])
+
+    template.character_relation_distribution = [relation_distribution(level) for level in character_heirarchy]
+    print str(template.character_relation_distribution)
+
+
+def sort_characters(characters):
+    totals = [0] * len(characters)
+    for n in range(0, len(characters)):
+        totals[n] = len([entry for relation in characters[n].type_to_list.values() for entry in relation])
+
+    return [character for (total, character) in sorted(zip(totals, characters))]
+
+
+def relation_distribution(characters):
+    sums = defaultdict(float)
+    for character in characters:
+        for relation in character.type_to_list.keys():
+            sums[relation] += len(character.type_to_list[relation])
+
+    for relation in sums.keys():
+        sums[relation] /= len(characters)
+
+    return sums

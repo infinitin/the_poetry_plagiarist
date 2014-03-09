@@ -33,6 +33,7 @@ class Template:
         self.character_animations = []
         self.character_personifications = []
         self.character_relations = {}
+        self.character_relation_distribution = []
 
     def plot(self, attribute):
         if not attribute:
@@ -146,6 +147,15 @@ class Template:
         y = tuple(self.character_relations.values())
         plot_bar_simple(x, y, 'Relation', 'Number of occurrences', x_ticks, 'Range of character relations')
 
+    def plot_character_relation_distribution(self):
+        n = 1
+        for relation_distribution in self.character_relation_distribution:
+            x = tuple(np.arange(len(relation_distribution.keys())))
+            x_ticks = tuple(relation_distribution.keys())
+            y = tuple(relation_distribution.values())
+            plot_bar_simple(x, y, 'Relation', 'Number of occurrences', x_ticks,
+                            'Average number of each relation for character ' + str(n))
+            n += 1
 
 attribute_plot_map = {
     'stanzas': Template.plot_stanzas,
@@ -168,6 +178,7 @@ attribute_plot_map = {
     'character_animations': Template.plot_character_animations,
     'character_personifications': Template.plot_character_personifications,
     'character_relations': Template.plot_character_relations,
+    'character_relation_distributions': Template.plot_character_relation_distribution,
 }
 
 
