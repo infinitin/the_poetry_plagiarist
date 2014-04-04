@@ -1,7 +1,7 @@
 __author__ = 'Nitin'
 from nltk.util import ngrams
 from collections import Counter
-
+from shayar.analyse.detectors.utils import get_tokenized_words
 
 stop_words = {'a', 'about', 'above', 'above', 'across', 'after', 'afterwards', 'again', 'against', 'all', 'almost',
               'alone', 'along', 'already', 'also', 'although', 'always', 'am', 'among', 'amongst', 'amoungst', 'amount',
@@ -31,7 +31,7 @@ stop_words = {'a', 'about', 'above', 'above', 'across', 'after', 'afterwards', '
               'we', 'well', 'were', 'what', 'whatever', 'when', 'whence', 'whenever', 'where', 'whereafter', 'whereas',
               'whereby', 'wherein', 'whereupon', 'wherever', 'whether', 'which', 'while', 'whither', 'who', 'whoever',
               'whole', 'whom', 'whose', 'why', 'will', 'with', 'within', 'without', 'would', 'yet', 'you', 'your',
-              'yours', 'yourself', 'yourselves', 'the'}
+              'yours', 'yourself', 'yourselves', 'the' "'s", "'d", "'ve", "'t", "'m", "'ll", "'re", "'st"}
 
 
 def agg_n_grams_by_line(poems, template):
@@ -47,11 +47,10 @@ def agg_n_grams_by_line(poems, template):
         n_grams = []
         for poem_line in line:
             #Now get the n_grams for this line for all n up to the length of the line and add it if not just stop words
-            split_line = poem_line.lower().split()
+            split_line = get_tokenized_words(poem_line)
             for n in range(1, len(split_line)):
                 grams = ngrams(split_line, n)
-                non_stop_words = [gram for gram in grams if len(set(gram) - stop_words)]
-                n_grams.extend(non_stop_words)
+                n_grams.extend([gram for gram in grams if len(set(gram) - stop_words)])
         n_grams_by_line.append(n_grams)
 
     #Now filter by the ones that actually occur with some significant frequency
@@ -60,5 +59,22 @@ def agg_n_grams_by_line(poems, template):
         counts = Counter(n_grams_line)
         template.n_grams_by_line.append([gram for gram, count in counts.items() if count > min_num_occurrences])
 
-    print str(template.n_grams_by_line)
 
+def agg_n_grams(poems, template):
+    n_grams_by_poem = []
+    for poem in poems:
+        full_poem = ''
+        for line in poem.poem:
+            full_poem += line + ' '
+
+        n_grams = []
+        split_poem = get_tokenized_words(full_poem)
+        for n in range(1, len(split_poem)):
+            grams = ngrams(split_poem, n)
+            n_grams.extend([gram for gram in grams if len(set(gram) - stop_words)])
+        n_grams_by_poem.extend(n_grams)
+
+    #Now filter by the ones that actually occur with some significant frequency
+    min_num_occurrences = round(len(poems) * 0.03)
+    counts = Counter(n_grams_by_poem)
+    template.n_grams.append([gram for gram, count in counts.items() if count > min_num_occurrences + 1])

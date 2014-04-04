@@ -15,7 +15,7 @@ from aggregators.rhythm import agg_syllable, agg_rhythm
 from aggregators.characters_and_rhetoric import agg_similes, agg_character_count, agg_character_gender, \
     agg_character_num, agg_character_animation, agg_character_personification, agg_character_relations, \
     agg_character_relation_distribution
-from aggregators.n_grams import agg_n_grams_by_line
+from aggregators.n_grams import agg_n_grams_by_line, agg_n_grams
 
 
 parser = argparse.ArgumentParser(description='Gather insight on poems.')
@@ -35,7 +35,7 @@ aggregators = [agg_n_stanzas, agg_lines_per_stanza, agg_repeated_line_locations,
                agg_n_distinct_sentences, agg_line_tenses, agg_overall_tense, agg_assonance, agg_consonance,
                agg_alliteration, agg_rhyme, agg_syllable, agg_rhythm, agg_similes, agg_character_count,
                agg_character_gender, agg_character_num, agg_character_animation, agg_character_personification,
-               agg_character_relations, agg_character_relation_distribution, agg_n_grams_by_line]
+               agg_character_relations, agg_character_relation_distribution, agg_n_grams_by_line, agg_n_grams]
 # Remove from list of aggregators according to parse args
 threads = []
 for aggregator in aggregators:
