@@ -35,6 +35,9 @@ class Template:
         self.character_relations = {}
         self.character_relation_distribution = []
 
+        self.n_grams_by_line = []
+        self.n_grams = []
+
     def plot(self, attribute):
         if not attribute:
             pass

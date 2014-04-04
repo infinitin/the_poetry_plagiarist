@@ -61,7 +61,6 @@ def agg_character_relation_distribution(poems, template):
             character_heirarchy[n].append(ordered_characters[n])
 
     template.character_relation_distribution = [relation_distribution(level) for level in character_heirarchy]
-    print str(template.character_relation_distribution)
 
 
 def sort_characters(characters):
