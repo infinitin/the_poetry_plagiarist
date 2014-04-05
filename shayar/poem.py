@@ -40,6 +40,9 @@ class Poem:
 
         self.point_of_view = ""             # first/second/third person
 
+        self.sentiment_by_line = []
+        self.modality_by_line = []
+
     def __str__(self):
         return \
             "This poem has " + str(self.stanzas) + " stanza(s)\n" +\

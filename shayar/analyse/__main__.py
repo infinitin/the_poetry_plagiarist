@@ -11,7 +11,7 @@ import cPickle
 logging.basicConfig(level=logging.INFO)
 logging.getLogger(__name__)
 
-from detectors import basic_structure, rhythm, line_pattern, rhyme, rhetoric
+from detectors import basic_structure, rhythm, line_pattern, rhyme, rhetoric, sentiment
 from detectors.context import context
 
 
@@ -65,6 +65,10 @@ def analyse_poem(test):
 
     logging.info("Reading in-between the lines")
     test.characters = context.identify_characters_and_relationships(test.poem)
+
+    logging.info("Empathising")
+    test.sentiment_by_line = sentiment.get_sentiment_by_line(test.poem)
+    test.modality_by_line = sentiment.get_modality_by_line(test.poem)
 
     logging.info('Done' + str(test.poem))
 
