@@ -2,6 +2,7 @@ __author__ = 'Nitin'
 from nltk.util import ngrams
 from collections import Counter
 from shayar.analyse.detectors.utils import get_tokenized_words
+from pattern.text.en import lemma
 
 stop_words = {'a', 'about', 'above', 'above', 'across', 'after', 'afterwards', 'again', 'against', 'all', 'almost',
               'alone', 'along', 'already', 'also', 'although', 'always', 'am', 'among', 'amongst', 'amoungst', 'amount',
@@ -48,6 +49,7 @@ def agg_n_grams_by_line(poems, template):
         for poem_line in line:
             #Now get the n_grams for this line for all n up to the length of the line and add it if not just stop words
             split_line = get_tokenized_words(poem_line)
+            split_line = [lemma(word) for word in split_line]
             for n in range(1, len(split_line)):
                 grams = ngrams(split_line, n)
                 n_grams.extend([gram for gram in grams if len(set(gram) - stop_words)])
@@ -59,6 +61,8 @@ def agg_n_grams_by_line(poems, template):
         counts = Counter(n_grams_line)
         template.n_grams_by_line.append([gram for gram, count in counts.items() if count > min_num_occurrences])
 
+    print str(template.n_grams_by_line)
+
 
 def agg_n_grams(poems, template):
     n_grams_by_poem = []
@@ -69,6 +73,7 @@ def agg_n_grams(poems, template):
 
         n_grams = []
         split_poem = get_tokenized_words(full_poem)
+        split_poem = [lemma(word) for word in split_poem]
         for n in range(1, len(split_poem)):
             grams = ngrams(split_poem, n)
             n_grams.extend([gram for gram in grams if len(set(gram) - stop_words)])

@@ -19,7 +19,7 @@ def agg_character_hypernyms(poems, template):
     for pair in combinations(all_synsets, 2):
         all_common_ancestors.append(str(wordnet.ancestor(*pair)).partition("'")[-1].rpartition("'")[0])
 
-    template.hypernym_ancestors(all_common_ancestors)
+    template.hypernym_ancestors = all_common_ancestors
 
 
 def synset(phrase):
