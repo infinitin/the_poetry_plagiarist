@@ -38,7 +38,7 @@ class Template:
         self.n_grams_by_line = []
         self.n_grams = []
 
-        self.hypernym_ancestors = []
+        self.hypernym_ancestors = {}
 
     def plot(self, attribute):
         if not attribute:
