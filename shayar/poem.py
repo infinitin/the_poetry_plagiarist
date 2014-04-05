@@ -40,7 +40,8 @@ class Poem:
 
         self.point_of_view = ""             # first/second/third person
 
-        self.sentiment_by_line = []
+        self.polarity_by_line = []
+        self.subjectivity_by_line = []
         self.modality_by_line = []
 
     def __str__(self):

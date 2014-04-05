@@ -67,7 +67,9 @@ def analyse_poem(test):
     test.characters = context.identify_characters_and_relationships(test.poem)
 
     logging.info("Empathising")
-    test.sentiment_by_line = sentiment.get_sentiment_by_line(test.poem)
+    sentiment_tuples = sentiment.get_sentiment_by_line(test.poem)
+    test.polarity_by_line = [polarity for polarity, subjectivity in sentiment_tuples]
+    test.subjectivity_by_line = [subjectivity for polarity, subjectivity in sentiment_tuples]
     test.modality_by_line = sentiment.get_modality_by_line(test.poem)
 
     logging.info('Done' + str(test.poem))
