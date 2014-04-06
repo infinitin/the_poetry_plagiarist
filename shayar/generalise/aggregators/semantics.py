@@ -1,5 +1,5 @@
 __author__ = 'Nitin'
-from itertools import combinations
+from itertools import combinations, izip_longest
 from pattern.text.en import tag, wordnet, lemma
 from collections import Counter
 import logging
@@ -32,3 +32,17 @@ def synset(phrase):
         elif pos == 'PRP':
             return wordnet.synsets('living thing')[0]
 
+
+def agg_polarity_by_line(poems, template):
+    all_polarity = [poem.polarity_by_line for poem in poems]
+    template.polarity_by_line = list(izip_longest(*all_polarity))
+    
+
+def agg_subjectivity_by_line(poems, template):
+    all_subjectivity = [poem.subjectivity_by_line for poem in poems]
+    template.subjectivity_by_line = list(izip_longest(*all_subjectivity))
+
+
+def agg_modality_by_line(poems, template):
+    all_modality = [poem.modality_by_line for poem in poems]
+    template.modality_by_line = list(izip_longest(*all_modality))

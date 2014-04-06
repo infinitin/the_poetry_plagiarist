@@ -61,8 +61,6 @@ def agg_n_grams_by_line(poems, template):
         counts = Counter(n_grams_line)
         template.n_grams_by_line.append([gram for gram, count in counts.items() if count > min_num_occurrences])
 
-    print str(template.n_grams_by_line)
-
 
 def agg_n_grams(poems, template):
     n_grams_by_poem = []
