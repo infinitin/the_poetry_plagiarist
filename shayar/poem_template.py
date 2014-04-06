@@ -43,6 +43,7 @@ class Template:
         self.polarity_by_line = []
         self.subjectivity_by_line = []
         self.modality_by_line = []
+        self.mood_by_line = []
 
     def plot(self, attribute):
         if not attribute:

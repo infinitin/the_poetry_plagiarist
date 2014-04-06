@@ -46,3 +46,9 @@ def agg_subjectivity_by_line(poems, template):
 def agg_modality_by_line(poems, template):
     all_modality = [poem.modality_by_line for poem in poems]
     template.modality_by_line = list(izip_longest(*all_modality))
+
+
+def agg_mood_by_line(poems, template):
+    all_mood = [poem.mood_by_line for poem in poems]
+    template.mood_by_line = list(izip_longest(*all_mood))
+    print str(template.mood_by_line)
