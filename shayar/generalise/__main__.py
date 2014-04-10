@@ -1,53 +1,65 @@
 __author__ = 'Nitin'
-import os
-import argparse
-import cPickle
-from threading import Thread
-# This import is required for the pickle load
-# noinspection PyUnresolvedReferences,PyPep8Naming
-import shayar.poem as poem
-from shayar.poem_template import Template
-from aggregators.basic_structure import agg_n_stanzas, agg_lines_per_stanza, agg_repeated_line_locations, \
-    agg_n_repeated_lines, agg_n_distinct_sentences, agg_line_tenses, agg_overall_tense
-from aggregators.line_patterns import agg_assonance, agg_consonance, agg_alliteration
-from aggregators.rhyme import agg_rhyme
-from aggregators.rhythm import agg_syllable, agg_rhythm
-from aggregators.characters_and_rhetoric import agg_similes, agg_character_count, agg_character_gender, \
-    agg_character_num, agg_character_animation, agg_character_personification, agg_character_relations, \
-    agg_character_relation_distribution
-from aggregators.n_grams import agg_n_grams_by_line, agg_n_grams
-from aggregators.semantics import agg_character_hypernyms, agg_modality_by_line, agg_polarity_by_line, \
-    agg_subjectivity_by_line, agg_mood_by_line
+import web
+from web import form
+
+render = web.template.render('templates/')
+
+urls = ('/', 'index')
+app = web.application(urls, globals())
+
+settings_form = form.Form(
+    form.Dropdown('Number of stanzas', ['mustard', 'fries', 'wine']),
+    form.Dropdown('Lines per stanza', ['mustard', 'fries', 'wine']),
+    form.Dropdown('Locations of repeated lines', ['mustard', 'fries', 'wine']),
+    form.Dropdown('Number of repeated lines', ['mustard', 'fries', 'wine']),
+    form.Dropdown('Number of distinct sentences', ['mustard', 'fries', 'wine']),
+    form.Dropdown('Tenses of each line', ['mustard', 'fries', 'wine']),
+    form.Dropdown('Overall tense', ['mustard', 'fries', 'wine']),
+    form.Dropdown('Assonance', ['mustard', 'fries', 'wine']),
+    form.Dropdown('Consonance', ['mustard', 'fries', 'wine']),
+    form.Dropdown('Alliteration', ['mustard', 'fries', 'wine']),
+    form.Dropdown('Rhyme', ['mustard', 'fries', 'wine']),
+    form.Dropdown('Syllables per line', ['mustard', 'fries', 'wine']),
+    form.Dropdown('Rhythm', ['mustard', 'fries', 'wine']),
+    form.Dropdown('Similes', ['mustard', 'fries', 'wine']),
+    form.Dropdown('Number of characters', ['mustard', 'fries', 'wine']),
+    form.Dropdown('Genders of each character', ['mustard', 'fries', 'wine']),
+    form.Dropdown('Singular/Plural for each character', ['mustard', 'fries', 'wine']),
+    form.Dropdown('Animation of each character', ['mustard', 'fries', 'wine']),
+    form.Dropdown('Personification for each character', ['mustard', 'fries', 'wine']),
+    form.Dropdown('Relations for each character', ['mustard', 'fries', 'wine']),
+    form.Dropdown('Distribution of relations over characters', ['mustard', 'fries', 'wine']),
+    form.Dropdown('Phrases to include in each line', ['mustard', 'fries', 'wine']),
+    form.Dropdown('Phrases to include in the poem', ['mustard', 'fries', 'wine']),
+    form.Dropdown('Topics', ['mustard', 'fries', 'wine']),
+    form.Dropdown('Modality by line', ['mustard', 'fries', 'wine']),
+    form.Dropdown('Polarity by line', ['mustard', 'fries', 'wine']),
+    form.Dropdown('Subjectivity by line', ['mustard', 'fries', 'wine']),
+    form.Dropdown('Mood by line', ['mustard', 'fries', 'wine']),
+    form.Checkbox('Plot'),
+    form.Checkbox('Persist')
+)
+
+class index:
+    def __init__(self):
+        pass
+
+    def GET(self):
+        settings = settings_form()
+        # make sure you create a copy of the form by calling it (line above)
+        # Otherwise changes will appear globally
+        return render.formtest(settings)
+
+    def POST(self):
+        settings = settings_form()
+        if not settings.validates():
+            return render.formtest(settings)
+        else:
+            # form.d.boe and form['boe'].value are equivalent ways of
+            # extracting the validated arguments from the form.
+            return "Grrreat success! boe: %s, bax: %s" % (settings.d.boe, settings['bax'].value)
 
 
-parser = argparse.ArgumentParser(description='Gather insight on poems.')
-parser.add_argument('collection', choices=['test'], help='The particular collection of poems to be analysed.')
-parser.add_argument('-plot', type=bool, default=False, metavar='plot',
-                    help='If true, shows a plot of every attribute. False by default.')
-#parser.add_argument('-nstanzas', type=int, choices=[1, 2, 3], help='Fix the number of stanzas in the poem')
-
-args = parser.parse_args()
-f = open(os.path.abspath(os.path.join(os.path.dirname(__file__), '..\\analyse', args.collection + '.poems')), 'rb')
-poems = cPickle.load(f)
-f.close()
-
-template = Template(args.collection)
-
-aggregators = [agg_n_stanzas, agg_lines_per_stanza, agg_repeated_line_locations, agg_n_repeated_lines,
-               agg_n_distinct_sentences, agg_line_tenses, agg_overall_tense, agg_assonance, agg_consonance,
-               agg_alliteration, agg_rhyme, agg_syllable, agg_rhythm, agg_similes, agg_character_count,
-               agg_character_gender, agg_character_num, agg_character_animation, agg_character_personification,
-               agg_character_relations, agg_character_relation_distribution, agg_n_grams_by_line, agg_n_grams,
-               agg_character_hypernyms, agg_modality_by_line, agg_polarity_by_line, agg_subjectivity_by_line,
-               agg_mood_by_line]
-# Remove from list of aggregators according to parse args
-threads = []
-for aggregator in aggregators:
-    thread = Thread(target=aggregator, args=(poems, template))
-    thread.start()
-    threads.append(thread)
-
-for thread in threads:
-    thread.join()
-
-template.plot('')
+if __name__ == "__main__":
+    #web.internalerror = web.debugerror
+    app.run()
