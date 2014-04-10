@@ -1,0 +1,8 @@
+$def with (form)
+
+<form name="main" method="post">
+$:form.render()
+<input type="submit" />
+$if not form.valid: <p class="error">Not valid, try again!</p>
+$if form.valid: <p class="error">Working... (this might take a while)</p>
+</form>
