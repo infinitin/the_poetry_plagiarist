@@ -1,6 +1,4 @@
 __author__ = 'Nitin'
-import web
-from web import form
 from aggregate import generalise
 from shayar.poem_template import Template
 # This import is required for the pickle load
@@ -8,88 +6,26 @@ from shayar.poem_template import Template
 import shayar.poem as poem
 import os
 import cPickle
+import json
 
-render = web.template.render('templates/')
+from aggregators.basic_structure import agg_n_stanzas, agg_lines_per_stanza, agg_repeated_line_locations, \
+    agg_n_repeated_lines, agg_n_distinct_sentences, agg_line_tenses, agg_overall_tense
+from aggregators.line_patterns import agg_assonance, agg_consonance, agg_alliteration
+from aggregators.rhyme import agg_rhyme
+from aggregators.rhythm import agg_syllable, agg_rhythm
+from aggregators.characters_and_rhetoric import agg_similes, agg_character_count, agg_character_gender, \
+    agg_character_num, agg_character_animation, agg_character_personification, agg_character_relations, \
+    agg_character_relation_distribution
+from aggregators.n_grams import agg_n_grams_by_line, agg_n_grams
+from aggregators.semantics import agg_character_hypernyms, agg_modality_by_line, agg_polarity_by_line, \
+    agg_subjectivity_by_line, agg_mood_by_line
 
-urls = ('/', 'index')
-app = web.application(urls, globals())
-
-settings_form = form.Form(
-    form.Textbox('collection', form.notnull),
-    form.Textbox('stanzas', form.regexp('\d+', 'Must be a digit')),
-    form.Textbox('num_lines', form.regexp('\d+', 'Must be a digit')),
-    form.Textbox('repeated_lines_locations', form.regexp('(\d+)(,\s*\d+)*', 'Must be a list of digits')),
-    form.Textbox('num_repeated_lines', form.regexp('\d+', 'Must be a digit')),
-    form.Textbox('num_distinct_sentences', form.regexp('\d+', 'Must be a digit')),
-    form.Textbox('line_tenses', form.regexp('(past|present|future|infinitive)(,\s*\d+)*', 'Must be a list of of strings from the list below')),
-    form.Dropdown('overall_tense', ['past', 'present', 'future', 'infinitive']),
-    
-    form.Dropdown('assonance', ['AA', 'AE', 'AH']),
-    form.Dropdown('consonance', []),
-    form.Dropdown('alliteration', []),
-    
-    form.Textbox('rhyme_schemes', []),
-    form.Textbox('syllable_patterns', []),
-    form.Textbox('stress_patterns', []),
-    
-    form.Dropdown('Similes', [True, False]),
-    
-    form.Dropdown('character_count', form.regexp('\d+', 'Must be a digit')),
-    form.Dropdown('character_genders', []),
-    form.Dropdown('character_nums', []),
-    form.Dropdown('character_animations', []),
-    form.Dropdown('character_personifications', [True, False]),
-    form.Dropdown('character_relations', []),
-    form.Dropdown('character_relation_distribution', []),
-    
-    form.Dropdown('n_grams_by_line', []),
-    form.Dropdown('n_grams', []),
-    form.Dropdown('hypernym_ancestors', []),
-    
-    form.Textbox('polarity_by_line', form.regexp('\d+.\d+', 'Must be a digit')),
-    form.Textbox('subjectivity_by_line', form.regexp('\d+.\d+', 'Must be a digit')),
-    form.Textbox('modality_by_line', form.regexp('\d+.\d+', 'Must be a digit')),
-    form.Dropdown('mood_by_line'),
-
-    form.Checkbox('Plot'),
-    form.Checkbox('Persist')
-)
-
-
-class index:
-    def __init__(self):
-        pass
-
-    def GET(self):
-        settings = settings_form()
-        return render.feature_settings(settings)
-
-    def POST(self):
-        settings = settings_form()
-        if not settings.validates():
-            return render.feature_settings(settings)
-        else:
-            # Should probably send this off to another thread so not to leave the request hanging.
-            #  The return will never come through!
-            template = Template(settings)
-            poems = apply_givens(retrieve_all_poems(template.collection), template)
-            generalise(template, poems, settings['Plot'].value, settings['Persist'].value)
-            return "All done!"    # Render the plots if plot
-
-
-if __name__ == "__main__":
-    web.internalerror = web.debugerror
-    app.run()
-    
 
 #Given the current set of applicable poems and the (new) givens, filter the poems accordingly.
 #The keys of the givens correspond exactly to the attributes of the poem template object.
-def apply_givens(poems, givens):
-    #Run some list comprehensions in some nice way
-    for attr in givens:
-        # Not quite but you get the point:
-        poems = [poem for poem in poems if givens[attr].value in getattr(poem, attr)]
-
+def apply_settings(poems, attr, value):
+    # Not quite but you get the point:
+    poems = [poem for poem in poems if value in getattr(poem, attr)]
     return poems
 
 
@@ -99,3 +35,32 @@ def retrieve_all_poems(collection):
     poems = cPickle.load(f)
     f.close()
     return poems
+
+#Needs to be exactly as poem_template for this to work
+json_input = '{"collection": "test", "plot": false, "persist": false}'
+settings = json.loads(json_input)
+
+aggregators = [agg_n_stanzas, agg_lines_per_stanza, agg_repeated_line_locations, agg_n_repeated_lines,
+               agg_n_distinct_sentences, agg_line_tenses, agg_overall_tense, agg_assonance, agg_consonance,
+               agg_alliteration, agg_rhyme, agg_syllable, agg_rhythm, agg_similes, agg_character_count,
+               agg_character_gender, agg_character_num, agg_character_animation, agg_character_personification,
+               agg_character_relations, agg_character_relation_distribution, agg_n_grams_by_line, agg_n_grams,
+               agg_character_hypernyms, agg_modality_by_line, agg_polarity_by_line, agg_subjectivity_by_line,
+               agg_mood_by_line]
+possibles = globals().copy()
+possibles.update(locals())
+
+collection = settings["collection"]
+poems = retrieve_all_poems(collection)
+template = Template(collection)
+
+# Set the value in the template
+# Remove corresponding aggregators from list to execute
+# Filter poems by this value
+for attr in settings:
+    if attr != "collection" and attr != "plot" and attr != "persist":
+        setattr(template, attr, settings[attr])
+        aggregators.remove(possibles.get('aggr_'+attr))
+        apply_settings(poems, attr, settings[attr])
+
+generalise(template, poems, settings["plot"], settings["persist"])
