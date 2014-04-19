@@ -9,41 +9,42 @@ class Template:
     def __init__(self, collection):
         self.collection = collection        # The collection of poems that this template applies to
 
-        self.stanzas = []                   # Number of stanzas
-        self.num_lines = []                 # List of numbers indicating lines per stanza
-        self.repeated_lines_locations = []  # List of tuples of lines that are the same
-        self.num_repeated_lines = []
-        self.num_distinct_sentences = []
-        self.line_tenses = []
-        self.overall_tense = []
+        #Pick one randomly out of the lists, repetitions will take care of probability
+        self.stanzas = []                   # List of numbers
+        self.num_lines = []                 # List of numbers
+        self.repeated_lines_locations = []  # List of tuples of numbers
+        self.num_repeated_lines = []        # List of numbers
+        self.num_distinct_sentences = []    # List of numbers
+        self.line_tenses = []               # List of tuples of strings
+        self.overall_tense = []             # List of strings
 
-        self.assonance = {}
-        self.consonance = {}
-        self.alliteration = {}
+        self.assonance = {}                 # Dictionary<string, list(num)>
+        self.consonance = {}                # Dictionary<string, list(num)>
+        self.alliteration = {}              # Dictionary<string, list(num)>
 
-        self.rhyme_schemes = []
-        self.syllable_patterns = []
-        self.stress_patterns = []
+        self.rhyme_schemes = []             # List of strings
+        self.syllable_patterns = []         # List of tuples of numbers
+        self.stress_patterns = []           # List of strings
 
-        self.similes = []
+        self.similes = []                   # List of booleans
 
-        self.character_count = []
-        self.character_genders = []
-        self.character_nums = []
-        self.character_animations = []
-        self.character_personifications = []
-        self.character_relations = {}
-        self.character_relation_distribution = []
+        self.character_count = []                  # List of numbers
+        self.character_genders = []                # List of strings
+        self.character_nums = []                   # List of strings
+        self.character_animations = []             # List of strings
+        self.character_personifications = []       # List of booleans
+        self.character_relations = {}              # Dictionary<string, list(num)>
+        self.character_relation_distribution = []  # List of dictionary<string, num)
 
-        self.n_grams_by_line = []
-        self.n_grams = []
+        self.n_grams_by_line = []           # List of list of strings
+        self.n_grams = []                   # List of strings
 
-        self.hypernym_ancestors = {}
+        self.hypernym_ancestors = {}        # Dictionary<string, num)
 
-        self.polarity_by_line = []
-        self.subjectivity_by_line = []
-        self.modality_by_line = []
-        self.mood_by_line = []
+        self.polarity_by_line = []          # List of floats
+        self.subjectivity_by_line = []      # List of floats
+        self.modality_by_line = []          # List of floats
+        self.mood_by_line = []              # List of strings
 
     def plot(self, attribute):
         if not attribute:

@@ -15,30 +15,30 @@ urls = ('/', 'index')
 app = web.application(urls, globals())
 
 settings_form = form.Form(
-    form.Dropdown('collection', []),
-    form.Dropdown('stanzas', []),
-    form.Dropdown('num_lines', []),
-    form.Dropdown('repeated_lines_locations', []),
-    form.Dropdown('num_repeated_lines', []),
-    form.Dropdown('num_distinct_sentences', []),
-    form.Dropdown('line_tenses', []),
-    form.Dropdown('overall_tense', []),
+    form.Textbox('collection', form.notnull),
+    form.Textbox('stanzas', form.regexp('\d+', 'Must be a digit')),
+    form.Textbox('num_lines', form.regexp('\d+', 'Must be a digit')),
+    form.Textbox('repeated_lines_locations', form.regexp('(\d+)(,\s*\d+)*', 'Must be a list of digits')),
+    form.Textbox('num_repeated_lines', form.regexp('\d+', 'Must be a digit')),
+    form.Textbox('num_distinct_sentences', form.regexp('\d+', 'Must be a digit')),
+    form.Textbox('line_tenses', form.regexp('(past|present|future|infinitive)(,\s*\d+)*', 'Must be a list of of strings from the list below')),
+    form.Dropdown('overall_tense', ['past', 'present', 'future', 'infinitive']),
     
-    form.Dropdown('assonance', []),
+    form.Dropdown('assonance', ['AA', 'AE', 'AH']),
     form.Dropdown('consonance', []),
     form.Dropdown('alliteration', []),
     
-    form.Dropdown('rhyme_schemes', []),
-    form.Dropdown('syllable_patterns', []),
-    form.Dropdown('stress_patterns', []),
+    form.Textbox('rhyme_schemes', []),
+    form.Textbox('syllable_patterns', []),
+    form.Textbox('stress_patterns', []),
     
-    form.Dropdown('Similes', []),
+    form.Dropdown('Similes', [True, False]),
     
-    form.Dropdown('character_count', []),
+    form.Dropdown('character_count', form.regexp('\d+', 'Must be a digit')),
     form.Dropdown('character_genders', []),
     form.Dropdown('character_nums', []),
     form.Dropdown('character_animations', []),
-    form.Dropdown('character_personifications', []),
+    form.Dropdown('character_personifications', [True, False]),
     form.Dropdown('character_relations', []),
     form.Dropdown('character_relation_distribution', []),
     
@@ -46,10 +46,10 @@ settings_form = form.Form(
     form.Dropdown('n_grams', []),
     form.Dropdown('hypernym_ancestors', []),
     
-    form.Dropdown('polarity_by_line', []),
-    form.Dropdown('subjectivity_by_line', []),
-    form.Dropdown('modality_by_line', []),
-    form.Dropdown('mood_by_line', []),
+    form.Textbox('polarity_by_line', form.regexp('\d+.\d+', 'Must be a digit')),
+    form.Textbox('subjectivity_by_line', form.regexp('\d+.\d+', 'Must be a digit')),
+    form.Textbox('modality_by_line', form.regexp('\d+.\d+', 'Must be a digit')),
+    form.Dropdown('mood_by_line'),
 
     form.Checkbox('Plot'),
     form.Checkbox('Persist')

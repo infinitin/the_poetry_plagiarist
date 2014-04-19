@@ -15,8 +15,10 @@ def agg_alliteration(poems, template):
 
 
 def aggregate(poems, attribute):
+    # Dictionary whose values are lists
     pattern_dict = defaultdict(list)
     per_poem_pattern = []
+    # Get the
     for poem in poems:
         line_pattern = Counter({})
         line_pattern_dicts = getattr(poem, attribute)

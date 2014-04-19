@@ -1,6 +1,7 @@
 __author__ = 'Nitin'
 from collections import defaultdict
 
+
 def agg_similes(poems, template):
     template.similes = [not not poem.similes for poem in poems]
 
@@ -53,17 +54,19 @@ def agg_character_relations(poems, template):
 
 def agg_character_relation_distribution(poems, template):
     max_num_characters = max([len(poem.characters) for poem in poems])
+    #The first list in the heirarchy contains the characters with the most relations.
+    # The number of relations decreases as you go down the heirarchy.
     character_heirarchy = [[] for i in range(max_num_characters)]
 
     for poem in poems:
-        ordered_characters = sort_characters(poem.characters)
+        ordered_characters = sort_characters_by_num_relations(poem.characters)
         for n in range(0, len(ordered_characters)):
             character_heirarchy[n].append(ordered_characters[n])
 
     template.character_relation_distribution = [relation_distribution(level) for level in character_heirarchy]
 
 
-def sort_characters(characters):
+def sort_characters_by_num_relations(characters):
     totals = [0] * len(characters)
     for n in range(0, len(characters)):
         totals[n] = len([entry for relation in characters[n].type_to_list.values() for entry in relation])

@@ -4,5 +4,5 @@ $def with (form)
 $:form.render()
 <input type="submit" />
 $if not form.valid: <p class="error">Not valid, try again!</p>
-$if form.valid: <p class="error">Working... (this might take a while)</p>
+$if form.valid: <p>Working... (this might take a while)</p>
 </form>

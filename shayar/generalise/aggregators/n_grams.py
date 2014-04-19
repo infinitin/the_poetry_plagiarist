@@ -42,7 +42,7 @@ def agg_n_grams_by_line(poems, template):
     #Then zip all together
     poem_lines = zip(*[poem for poem in extended_poems])
 
-    #Then look a line at a time (so each first line of each poem, each second line of each poem etc.)
+    #Then look a line at a time (so each first line of each poem, second line of each poem etc.)
     n_grams_by_line = []
     for line in poem_lines:
         n_grams = []

@@ -4,7 +4,7 @@ import re
 
 
 def agg_syllable(poems, template):
-    template.syllable_patterns = [poem.syllable_count for poem in poems]
+    template.syllable_patterns = [tuple(poem.syllable_count) for poem in poems]
 
 
 def agg_rhythm(poems, template):
