@@ -4,14 +4,17 @@ from utils import get_stanzas
 from utils import get_tokenized_words
 from utils import get_pronunciations
 from itertools import product
-
+import logging
 
 def determine_rhyme_scheme(poem):
     last_words = []
 
     for line in poem:
         if line.strip():
-            last_word = get_tokenized_words(line)[-1]
+            try:
+                last_word = get_tokenized_words(line)[-1]
+            except IndexError:
+                logging.warn('Weird line: ' + line)
             last_words.append(get_pronunciations(last_word))
 
     return __get_rhyme_scheme(last_words)
@@ -88,7 +91,10 @@ def __get_rhyme_phonemes(phonemes):
 
 def __normalize_rhyme_scheme(rhyme_scheme):
     normalized_rhyme_scheme = []
-    diff = ord(min(rhyme_scheme)) - ord('A')
+    try:
+        diff = ord(min(rhyme_scheme)) - ord('A')
+    except ValueError:
+        return ['A']
     for letter in rhyme_scheme:
         normalized_rhyme_scheme.append(chr(ord(letter) - diff))
 
