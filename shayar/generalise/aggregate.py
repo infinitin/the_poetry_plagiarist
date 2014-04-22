@@ -17,7 +17,7 @@ def generalise(template, poems, aggregators, plot, persist):
         thread.join()
 
     if plot:
-        template.plot('')
+        template.plot('all')
 
     if persist:
         out = open(template.collection+'.template', 'wb+')

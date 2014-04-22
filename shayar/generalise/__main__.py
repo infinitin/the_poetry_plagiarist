@@ -76,11 +76,13 @@ template = Template(collection)
 
 # Set the value in the template
 # Remove corresponding aggregators from list to execute
-# Filter poems by this value
+# Filter poems by this value as long as we still have some poems to work with
 for attr in settings:
     if attr != "collection" and attr != "plot" and attr != "persist":
         setattr(template, attr, settings[attr])
         aggregators.remove(possibles.get('aggr_'+attr))
-        apply_settings(poems, attr, settings[attr])
+        filtered_poems = apply_settings(poems, attr, settings[attr])
+        if filtered_poems:
+            poems = filtered_poems
 
-generalise(template, poems, settings["plot"], settings["persist"])
+generalise(template, poems, aggregators, settings["plot"], settings["persist"])
