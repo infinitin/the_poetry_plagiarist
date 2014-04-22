@@ -2,6 +2,7 @@ __author__ = 'Nitin'
 import cPickle
 from threading import Thread
 
+
 #Given a set of poems, fill up the template with options
 #Plot graphs and persist if necessary
 def generalise(template, poems, aggregators, plot, persist):

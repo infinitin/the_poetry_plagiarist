@@ -11,7 +11,7 @@ class Template:
 
         #Pick one randomly out of the lists, repetitions will take care of probability
         self.stanzas = []                   # List of numbers
-        self.num_lines = []                 # List of numbers
+        self.num_lines = []                 # List of tuples of numbers
         self.repeated_lines_locations = []  # List of tuples of numbers
         self.num_repeated_lines = []        # List of numbers
         self.num_distinct_sentences = []    # List of numbers

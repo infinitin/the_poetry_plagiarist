@@ -14,12 +14,6 @@ class Poem:
 
         self.tenses = []                     # Tense of each line (use an enum for tense)
         self.overall_tense = ""
-        self.unusual_words = []             # List of words that are unusual (perhaps indicative of the era)
-        self.verbs = []                     # A list of the set of verbs used in each line
-        self.nouns = []                     # A list of the set of nouns used in each line
-        self.adjectives = []                # A list of the set of adjectives used in each line
-        self.pronouns = []                  # A list of the set of pronouns used in each line
-        self.adverbs = []                   # A list of the set of adverbs used in each line
         self.characters = []                # A list of characters (subjects and objects) in the poem
 
         self.rhyme_scheme = []              # A list of characters representing the rhyme for each line: [A,A,B,B,A]
@@ -27,7 +21,6 @@ class Poem:
 
         self.stress_pattern = []            # Stresses for each lines
         self.syllable_count = []            # List of number of syllables per line
-        self.parallel_structure = []        # List consistent verb-noun order for each line, if any
 
         self.consonance = []                # List of lengths of the longest consonance for each line
         self.assonance = []                 # List of lengths of the longest assonance for each line

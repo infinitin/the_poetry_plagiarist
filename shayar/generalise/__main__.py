@@ -23,10 +23,30 @@ from aggregators.semantics import agg_character_hypernyms, agg_modality_by_line,
 
 #Given the current set of applicable poems and the (new) givens, filter the poems accordingly.
 #The keys of the givens correspond exactly to the attributes of the poem template object.
-def apply_settings(poems, attr, value):
+def apply_settings(ps, a, value):
     # Not quite but you get the point:
-    poems = [poem for poem in poems if value in getattr(poem, attr)]
-    return poems
+    if a == "n_stanzas":
+        ps = [p for p in ps if value == p.stanzas]
+    elif a == "lines_per_stanza":
+        ps = [p for p in ps if value == p.lines]
+    elif a == "repeated_line_locations":
+        ps = [p for p in ps if set(value) == p.repeated_lines.values()]
+    elif a == "n_repeated_lines":
+        ps = [p for p in ps if value == len(p.repeated_lines.values())]
+    elif a == "n_distinct_sentences":
+        ps = [p for p in ps if value == p.distinct_sentences == value]
+    elif a == "line_tenses":
+        ps = [p for p in ps if value == p.tenses]
+    elif a == "overall_tense":
+        ps = [p for p in ps if value == p.tense]
+    elif a == "assonance" or a == "consonance" or a == "alliteration":
+        ps = [p for p in ps if value in [d.keys() for d in getattr(p, a)]]
+    elif a == "rhyme":
+        ps = [p for p in ps if tuple(value) in p.rhyme_scheme]
+    elif a == "syllable":
+        ps = [p for p in ps if tuple(value) in p.syllable_count]
+
+    return ps
 
 
 #Grab all the poems of a particular collection from store

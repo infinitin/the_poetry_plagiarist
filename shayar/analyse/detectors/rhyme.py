@@ -39,7 +39,6 @@ def detect_internal_rhyme(poem):
 # When determining the rhyme token to assign, check if it has been to the map first, or otherwise add it
 # Some words have more than one pronunciation so we need to take both into account and give all permutations in the
 #  generalisation stage
-# If there is only one permutation, we show it as a single list. May want to remove this.
 def __get_rhyme_scheme(words):
     rhyme_scheme_map = {}
     rhyme_scheme = []
