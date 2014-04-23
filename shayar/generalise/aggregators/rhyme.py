@@ -10,7 +10,11 @@ def agg_rhyme(poems, template):
     while rhyme_scheme_possibilities:
         possibilities = [rhyme_scheme for rhyme_scheme_possibility in rhyme_scheme_possibilities
                          for rhyme_scheme in rhyme_scheme_possibility]
-        most_common = min(get_most_common(possibilities))
+        try:
+            most_common = min(get_most_common(possibilities))
+        except ValueError:
+            break
+
         rhyme_schemes.extend([possibility for possibility in possibilities if possibility == most_common])
         rhyme_scheme_possibilities = [rhyme_scheme_possibility for rhyme_scheme_possibility in
                                       rhyme_scheme_possibilities if most_common not in rhyme_scheme_possibility]

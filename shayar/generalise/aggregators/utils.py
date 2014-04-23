@@ -5,7 +5,7 @@ import logging
 
 def get_most_common(list):
     if not list:
-        logging.error("List is empty!")
+        return []
 
     count = Counter(list)
     max_count = count.most_common()[0][1]

@@ -1,6 +1,7 @@
 __author__ = 'Nitin'
 from itertools import combinations, izip_longest
-from pattern.text.en import tag, wordnet, lemma
+from pattern.text.en import tag, wordnet, singularize
+from pattern.text.en import lemma as lemmatise
 from collections import Counter
 import logging
 
@@ -25,10 +26,19 @@ def synset(phrase):
     for word, pos in tag(phrase):
         if pos.startswith('N'):
             try:
-                return wordnet.synsets(lemma(word))[0]
+                synset = wordnet.synsets(singularize(lemmatise(word)))[0]
             except IndexError:
-                logging.error('Could not find synset for: ' + phrase)
-                return None
+                try:
+                    synset = wordnet.synsets(lemmatise(word))[0]
+                except IndexError:
+                    try:
+                        synset = wordnet.synsets(singularize(word))[0]
+                    except IndexError:
+                        try:
+                            synset = wordnet.synsets(word)[0]
+                        except IndexError:
+                            logging.error("Failed to find synset for '" + word + "'")
+                            continue
         elif pos == 'PRP':
             return wordnet.synsets('living thing')[0]
 

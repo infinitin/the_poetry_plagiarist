@@ -57,7 +57,7 @@ def retrieve_all_poems(collection):
     return poems
 
 #Needs to be exactly as poem_template for this to work
-json_input = '{"collection": "test", "plot": false, "persist": false}'
+json_input = '{"collection": "limericks", "plot": false, "persist": false}'
 settings = json.loads(json_input)
 
 aggregators = [agg_n_stanzas, agg_lines_per_stanza, agg_repeated_line_locations, agg_n_repeated_lines,

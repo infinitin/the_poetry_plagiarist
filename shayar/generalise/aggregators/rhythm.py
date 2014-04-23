@@ -10,6 +10,7 @@ def agg_syllable(poems, template):
 def agg_rhythm(poems, template):
     stress_patterns = []
 
+    # Transpose the lists so that you have a list of list of patterns for each line in order
     max_num_lines = max([len(poem.stress_pattern) for poem in poems])
     rhythm_possibilities_by_line = []
     for line in range(0, max_num_lines):
@@ -19,6 +20,13 @@ def agg_rhythm(poems, template):
                 line_rhythm_possibilities.append(poem.stress_pattern[line])
         rhythm_possibilities_by_line.append(line_rhythm_possibilities)
 
+    # For each set of possible rhythms for each line,
+    #   - Flatten the list
+    #   - Get the most common ones
+    #   - Choose the 'best' out of the most common - i.e. the one with the most substring repetitions of a pattern
+    #   - Remove all lists of possibilities that contained the chosen one from the overall list
+    #   - Repeat until nothing is left
+    #       (so we have the frequency of options of stress patterns for line 1, then line 2 etc.)
     for line_rhythm_possibilities in rhythm_possibilities_by_line:
         line_stress_patterns = []
         while line_rhythm_possibilities:
@@ -41,5 +49,8 @@ def get_best(most_commons):
         num_max_repeated_substrings = [pattern.count(r.findall(pattern)[0]) for pattern in most_commons]
         index_of_most_common = num_max_repeated_substrings.index(max(num_max_repeated_substrings))
         return most_commons[index_of_most_common]
-    except IndexError:
-        return most_commons[0]
+    except (IndexError, ValueError):
+        try:
+            return most_commons[0]
+        except (IndexError, ValueError):
+            return ''
