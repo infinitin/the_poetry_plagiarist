@@ -90,10 +90,25 @@ def create_characters(dependencies):
             try:
                 synset = wordnet.synsets(singularize(lemmatise(words[-1])))[0]
             except IndexError:
-                logging.error("Failed to find synset for '" + words[-1] + "'")
-                continue
+                try:
+                    synset = wordnet.synsets(lemmatise(words[-1]))[0]
+                except IndexError:
+                    try:
+                        synset = wordnet.synsets(singularize(words[-1]))[0]
+                    except IndexError:
+                        try:
+                            synset = wordnet.synsets(words[-1])[0]
+                        except IndexError:
+                            logging.error("Failed to find synset for '" + words[-1] + "'")
+                            continue
 
-            hyps = set([h.gloss for h in synset.hypernyms(recursive=True)])
+            hyps = set()
+            for h in synset.hypernyms(recursive=True):
+                try:
+                    hyps.add(h.gloss)
+                except ValueError:
+                    continue
+
             hyps.add(synset.gloss)
 
             if hyps & ANIMATE_SYNSETS:

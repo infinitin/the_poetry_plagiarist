@@ -65,7 +65,7 @@ def analyse_poem(test):
     test.point_of_view = basic_structure.determine_perspective(test.poem)
 
     #logging.info("Reading in-between the lines")
-    #test.characters = context.identify_characters_and_relationships(test.poem)
+    test.characters = context.identify_characters_and_relationships(test.poem)
 
     #logging.info("Empathising")
     sentiment_tuples = sentiment.get_sentiment_by_line(test.poem)

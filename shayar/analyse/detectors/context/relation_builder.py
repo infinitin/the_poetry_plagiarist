@@ -63,7 +63,14 @@ def build_relations(dependencies, characters, candidate_relations):
                         else:
                             # If the object could not be deciphered by Semafor, we can take a guess.
                             if not object_text:
-                                object_text = characters[characters.index(character)+1].text
+                                try:
+                                    object_text = characters[characters.index(character)+1].text
+                                except IndexError:
+                                    try:
+                                        object_text = characters[characters.index(character)-1].text
+                                    except IndexError:
+                                            object_text = characters[character.index(character)].text
+
                             character.add_relation(relation_type, object_text)
                         continue
                     except KeyError:
