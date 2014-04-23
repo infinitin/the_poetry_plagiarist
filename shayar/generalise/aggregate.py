@@ -1,20 +1,25 @@
 __author__ = 'Nitin'
 import cPickle
-from threading import Thread
+import futures
 
 
 #Given a set of poems, fill up the template with options
 #Plot graphs and persist if necessary
 def generalise(template, poems, aggregators, plot, persist):
     # Remove from list of aggregators according to parse args
-    threads = []
-    for aggregator in aggregators:
-        thread = Thread(target=aggregator, args=(poems, template))
-        thread.start()
-        threads.append(thread)
+    #threads = []
+    #for aggregator in aggregators:
+    #    thread = Thread(target=aggregator, args=(poems, template))
+    #    thread.start()
+    #    threads.append(thread)
 
-    for thread in threads:
-        thread.join()
+    #for thread in threads:
+    #    thread.join()
+
+    with futures.ThreadPoolExecutor(max_workers=10) as executor:
+        future_to_poem = {executor.submit(aggregator, poems, template): aggregator for aggregator in aggregators}
+
+    executor.shutdown()
 
     if plot:
         template.plot('all')
