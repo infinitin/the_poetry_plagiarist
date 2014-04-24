@@ -61,8 +61,7 @@ class Template:
             attribute_plot_map[attribute](self)
 
     def plot_stanzas(self):
-        simple_plotter(self.stanzas, 'Number of stanzas', 'Number of occurrences', 'Range of number of stanzas',
-                       use_x=True)
+        simple_plotter(self.stanzas, 'Number of stanzas', 'Number of occurrences', 'Range of number of stanzas')
 
     def plot_num_lines(self):
         simple_plotter(self.num_lines, 'Number of lines for all stanza amounts', 'Number of occurrences',
@@ -208,7 +207,12 @@ def plot_bar_simple(x, y, x_axis, y_axis, x_ticks, title):
     ax.set_xlabel(x_axis)
     ax.set_ylabel(y_axis)
     ax.set_title(title)
-    plt.xticks(x, ha='center')
+    plt.xticks(x, ha='center', size='small')
+
+    locs, labels = plt.xticks()
+    plt.setp(labels, rotation=90)
+
+    plt.tight_layout()
 
     pp.savefig(bbox_inches='tight')
     plt.close()
@@ -232,7 +236,12 @@ def plot_bar_stacked(x, ys, x_axis, y_axis, x_ticks, title):
     ax.set_xlabel(x_axis)
     ax.set_ylabel(y_axis)
     ax.set_title(title)
-    plt.xticks(x, ha='center')
+    plt.xticks(x, ha='center', size='small')
+
+    locs, labels = plt.xticks()
+    plt.setp(labels, rotation=90)
+
+    plt.tight_layout()
 
     pp.savefig(bbox_inches='tight')
     plt.close()

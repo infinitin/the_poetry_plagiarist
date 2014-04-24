@@ -20,7 +20,17 @@ def agg_character_gender(poems, template):
     characters = []
     for poem in poems:
         characters.extend(poem.characters)
-    template.character_genders = [character.gender for character in characters]
+
+    for character in characters:
+        if not character.gender:
+            template.character_genders.append('unknown')
+        elif character.gender == 'm':
+            template.character_genders.append('male')
+        elif character.gender == 'f':
+            template.character_genders.append('female')
+        elif character.gender == 'n':
+            template.character_genders.append('neutral')
+
     logging.info('Aggregator finished: agg_character_gender')
 
 
@@ -38,7 +48,17 @@ def agg_character_animation(poems, template):
     characters = []
     for poem in poems:
         characters.extend(poem.characters)
-    template.character_animations = [character.object_state for character in characters]
+
+    for character in characters:
+        if not character.object_state:
+            template.character_animations.append('unknown')
+        elif character.object_state == 'a':
+            template.character_animations.append('animate')
+        elif character.object_state == 'p':
+            template.character_animations.append('physical')
+        elif character.object_state == 'n':
+            template.character_animations.append('non-object')
+
     logging.info('Aggregator finished: agg_character_animation')
 
 
