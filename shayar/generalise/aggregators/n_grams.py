@@ -3,6 +3,7 @@ from nltk.util import ngrams
 from collections import Counter
 from shayar.analyse.detectors.utils import get_tokenized_words
 from pattern.text.en import lemma
+import logging
 
 stop_words = {'a', 'about', 'above', 'above', 'across', 'after', 'afterwards', 'again', 'against', 'all', 'almost',
               'alone', 'along', 'already', 'also', 'although', 'always', 'am', 'among', 'amongst', 'amoungst', 'amount',
@@ -36,6 +37,7 @@ stop_words = {'a', 'about', 'above', 'above', 'across', 'after', 'afterwards', '
 
 
 def agg_n_grams_by_line(poems, template):
+    logging.info('Starting aggregator: agg_n_grams_by_line')
     #First extend all poems to the length of the longest poem
     max_len = max([len(poem.poem) for poem in poems])
     extended_poems = [(poem.poem + ['']*(max_len-len(poem.poem))) for poem in poems]
@@ -61,8 +63,11 @@ def agg_n_grams_by_line(poems, template):
         counts = Counter(n_grams_line)
         template.n_grams_by_line.append([gram for gram, count in counts.items() if count > min_num_occurrences])
 
+    logging.info('Aggregator finished: agg_n_grams_by_line')
+
 
 def agg_n_grams(poems, template):
+    logging.info('Starting aggregator: agg_n_grams')
     n_grams_by_poem = []
     for poem in poems:
         full_poem = ''
@@ -81,3 +86,4 @@ def agg_n_grams(poems, template):
     min_num_occurrences = round(len(poems) * 0.03)
     counts = Counter(n_grams_by_poem)
     template.n_grams.append([gram for gram, count in counts.items() if count > min_num_occurrences + 1])
+    logging.info('Aggregator finished: agg_n_grams')

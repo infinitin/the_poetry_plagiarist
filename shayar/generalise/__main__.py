@@ -7,6 +7,9 @@ import shayar.poem as poem
 import os
 import cPickle
 import json
+import logging
+logging.basicConfig(level=logging.INFO)
+logging.getLogger(__name__)
 
 from aggregators.basic_structure import agg_n_stanzas, agg_lines_per_stanza, agg_repeated_line_locations, \
     agg_n_repeated_lines, agg_n_distinct_sentences, agg_line_tenses, agg_overall_tense
@@ -57,7 +60,7 @@ def retrieve_all_poems(collection):
     return poems
 
 #Needs to be exactly as poem_template for this to work
-json_input = '{"collection": "limericks", "plot": true, "persist": false}'
+json_input = '{"collection": "limericks", "plot": false, "persist": false}'
 settings = json.loads(json_input)
 
 aggregators = [agg_n_stanzas, agg_lines_per_stanza, agg_repeated_line_locations, agg_n_repeated_lines,

@@ -1,8 +1,10 @@
 __author__ = 'Nitin'
 from utils import get_most_common
+import logging
 
 
 def agg_rhyme(poems, template):
+    logging.info('Starting aggregator: agg_rhyme')
     rhyme_schemes = []
 
     rhyme_scheme_possibilities = [poem.rhyme_scheme for poem in poems]
@@ -20,3 +22,5 @@ def agg_rhyme(poems, template):
                                       rhyme_scheme_possibilities if most_common not in rhyme_scheme_possibility]
 
     template.rhyme_schemes = rhyme_schemes
+
+    logging.info('Aggregator finished: agg_rhyme')

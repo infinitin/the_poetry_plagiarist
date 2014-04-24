@@ -1,44 +1,58 @@
 __author__ = 'Nitin'
 from collections import defaultdict
+import logging
 
 
 def agg_similes(poems, template):
+    logging.info('Starting aggregator: agg_similes')
     template.similes = [not not poem.similes for poem in poems]
+    logging.info('Aggregator finished: agg_similes')
 
 
 def agg_character_count(poems, template):
+    logging.info('Starting aggregator: agg_character_count')
     template.character_count = [len(poem.characters) for poem in poems]
+    logging.info('Aggregator finished: agg_character_count')
 
 
 def agg_character_gender(poems, template):
+    logging.info('Starting aggregator: agg_character_gender')
     characters = []
     for poem in poems:
         characters.extend(poem.characters)
     template.character_genders = [character.gender for character in characters]
+    logging.info('Aggregator finished: agg_character_gender')
 
 
 def agg_character_num(poems, template):
+    logging.info('Starting aggregator: agg_character_num')
     characters = []
     for poem in poems:
         characters.extend(poem.characters)
     template.character_nums = [character.num for character in characters]
+    logging.info('Aggregator finished: agg_character_num')
 
 
 def agg_character_animation(poems, template):
+    logging.info('Starting aggregator: agg_character_animation')
     characters = []
     for poem in poems:
         characters.extend(poem.characters)
     template.character_animations = [character.object_state for character in characters]
+    logging.info('Aggregator finished: agg_character_animation')
 
 
 def agg_character_personification(poems, template):
+    logging.info('Starting aggregator: agg_character_personification')
     characters = []
     for poem in poems:
         characters.extend(poem.characters)
     template.character_personifications = [character.personification for character in characters]
+    logging.info('Aggregator finished: agg_character_personification')
 
 
 def agg_character_relations(poems, template):
+    logging.info('Starting aggregator: agg_character_relations')
     characters = []
     for poem in poems:
         characters.extend(poem.characters)
@@ -50,9 +64,11 @@ def agg_character_relations(poems, template):
             relations_dict[relation] += len(character.type_to_list[relation])
 
     template.character_relations = relations_dict
+    logging.info('Aggregator finished: agg_character_relations')
 
 
 def agg_character_relation_distribution(poems, template):
+    logging.info('Starting aggregator: agg_character_relation_distribution')
     max_num_characters = max([len(poem.characters) for poem in poems])
     #The first list in the heirarchy contains the characters with the most relations.
     # The number of relations decreases as you go down the heirarchy.
@@ -64,6 +80,8 @@ def agg_character_relation_distribution(poems, template):
             character_heirarchy[n].append(ordered_characters[n])
 
     template.character_relation_distribution = [relation_distribution(level) for level in character_heirarchy]
+
+    logging.info('Aggregator finished: agg_character_relation_distribution')
 
 
 def sort_characters_by_num_relations(characters):

@@ -1,17 +1,24 @@
 __author__ = 'Nitin'
 from collections import Counter, defaultdict
+import logging
 
 
 def agg_assonance(poems, template):
+    logging.info('Starting aggregator: agg_assonance')
     template.assonance = aggregate(poems, 'assonance')
+    logging.info('Aggregator finished: agg_assonance')
 
 
 def agg_consonance(poems, template):
+    logging.info('Starting aggregator: agg_consonance')
     template.consonance = aggregate(poems, 'consonance')
+    logging.info('Aggregator finished: agg_consonance')
 
 
 def agg_alliteration(poems, template):
+    logging.info('Starting aggregator: agg_alliteration')
     template.alliteration = aggregate(poems, 'alliteration')
+    logging.info('Aggregator finished: agg_alliteration')
 
 
 def aggregate(poems, attribute):

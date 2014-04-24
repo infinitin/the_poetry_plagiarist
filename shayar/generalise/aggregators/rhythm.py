@@ -1,13 +1,17 @@
 __author__ = 'Nitin'
 from utils import get_most_common
 import re
+import logging
 
 
 def agg_syllable(poems, template):
+    logging.info('Starting aggregator: agg_syllable')
     template.syllable_patterns = [tuple(poem.syllable_count) for poem in poems]
+    logging.info('Aggregator finished: agg_syllable')
 
 
 def agg_rhythm(poems, template):
+    logging.info('Starting aggregator: agg_rhythm')
     stress_patterns = []
 
     # Transpose the lists so that you have a list of list of patterns for each line in order
@@ -41,6 +45,7 @@ def agg_rhythm(poems, template):
         stress_patterns.append(line_stress_patterns)
 
     template.stress_patterns = stress_patterns
+    logging.info('Aggregator finished: agg_rhythm')
 
 
 def get_best(most_commons):
