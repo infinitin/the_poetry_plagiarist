@@ -16,15 +16,15 @@ def generalise(template, poems, aggregators, plot, persist):
 
     #for thread in threads:
     #    thread.join()
-    with futures.ThreadPoolExecutor(max_workers=1) as executor:
-        future_to_poem = {executor.submit(aggregator, poems[:18], template): aggregator for aggregator in aggregators}
+    with futures.ThreadPoolExecutor(max_workers=10) as executor:
+        future_to_poem = {executor.submit(aggregator, poems, template): aggregator for aggregator in aggregators}
 
     logging.info('Shutting down...')
     executor.shutdown()
 
-    #logging.info('Printing template')
-    #for attribute in template.__dict__:
-    #    print str(attribute) + ": " + str(getattr(template, attribute))
+    logging.info('Printing template')
+    for attribute in template.__dict__:
+        print str(attribute) + ": " + str(getattr(template, attribute))
 
     if plot:
         logging.info('Compiling graph plots')

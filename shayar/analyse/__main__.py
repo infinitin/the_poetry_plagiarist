@@ -84,6 +84,12 @@ with open('limericks.txt', 'r') as f:
     buffer = []
     for line in f:
         if '~' in line:
+            while not buffer[0].strip():
+                buffer = buffer[1:]
+
+            while not buffer[-1].strip():
+                buffer = buffer[:-1]
+
             poems.append(Poem(map(str.strip, buffer)))
             buffer = []
         else:

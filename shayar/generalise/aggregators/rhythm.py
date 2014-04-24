@@ -33,7 +33,7 @@ def agg_rhythm(poems, template):
     #       (so we have the frequency of options of stress patterns for line 1, then line 2 etc.)
     for line_rhythm_possibilities in rhythm_possibilities_by_line:
         line_stress_patterns = []
-        while line_rhythm_possibilities:
+        while line_rhythm_possibilities and line_rhythm_possibilities[0]:
             possibilities = [rhythm for line_rhythm_possibility in line_rhythm_possibilities
                              for rhythm in line_rhythm_possibility]
             most_commons = get_most_common(possibilities)

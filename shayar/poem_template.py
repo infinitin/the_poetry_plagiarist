@@ -4,61 +4,61 @@ import matplotlib.pyplot as plt
 import numpy as np
 from collections import Counter
 
+global pp
+
 
 # Has all the options for producing poems, as well as plot functions for viewing the options
 class Template:
     def __init__(self, collection):
-        self.collection = collection  # The collection of poems that this template applies to
+        self.collection = collection        # The collection of poems that this template applies to
 
         #Pick one randomly out of the lists, repetitions will take care of probability
-        self.stanzas = []  # List of numbers
-        self.num_lines = []  # List of tuples of numbers
+        self.stanzas = []                   # List of numbers
+        self.num_lines = []                 # List of tuples of numbers
         self.repeated_lines_locations = []  # List of tuples of numbers
-        self.num_repeated_lines = []  # List of numbers
-        self.num_distinct_sentences = []  # List of numbers
-        self.line_tenses = []  # List of tuples of strings
-        self.overall_tense = []  # List of strings
+        self.num_repeated_lines = []        # List of numbers
+        self.num_distinct_sentences = []    # List of numbers
+        self.line_tenses = []               # List of tuples of strings
+        self.overall_tense = []             # List of strings
 
-        self.assonance = {}  # Dictionary<string, list(num)>
-        self.consonance = {}  # Dictionary<string, list(num)>
-        self.alliteration = {}  # Dictionary<string, list(num)>
+        self.assonance = {}                 # Dictionary<string, list(num)>
+        self.consonance = {}                # Dictionary<string, list(num)>
+        self.alliteration = {}              # Dictionary<string, list(num)>
 
-        self.rhyme_schemes = []  # List of strings
-        self.syllable_patterns = []  # List of tuples of numbers
-        self.stress_patterns = []  # List of strings
+        self.rhyme_schemes = []             # List of strings
+        self.syllable_patterns = []         # List of tuples of numbers
+        self.stress_patterns = []           # List of strings
 
-        self.similes = []  # List of booleans
+        self.similes = []                   # List of booleans
 
-        self.character_count = []  # List of numbers
-        self.character_genders = []  # List of strings
-        self.character_nums = []  # List of strings
-        self.character_animations = []  # List of strings
-        self.character_personifications = []  # List of booleans
-        self.character_relations = {}  # Dictionary<string, list(num)>
+        self.character_count = []                  # List of numbers
+        self.character_genders = []                # List of strings
+        self.character_nums = []                   # List of strings
+        self.character_animations = []             # List of strings
+        self.character_personifications = []       # List of booleans
+        self.character_relations = {}              # Dictionary<string, list(num)>
         self.character_relation_distribution = []  # List of dictionary<string, num)
 
-        self.n_grams_by_line = []  # List of list of strings
-        self.n_grams = []  # List of strings
+        self.n_grams_by_line = []           # List of list of strings
+        self.n_grams = []                   # List of strings
 
-        self.hypernym_ancestors = {}  # Dictionary<string, num)
+        self.hypernym_ancestors = {}        # Dictionary<string, num)
 
-        self.polarity_by_line = []  # List of floats
-        self.subjectivity_by_line = []  # List of floats
-        self.modality_by_line = []  # List of floats
-        self.mood_by_line = []  # List of strings
+        self.polarity_by_line = []          # List of floats
+        self.subjectivity_by_line = []      # List of floats
+        self.modality_by_line = []          # List of floats
+        self.mood_by_line = []              # List of strings
 
-    def plot(self, attribute, pp):
+    def plot(self, attribute, pdfpages):
+        global pp
+        pp = pdfpages
         if not attribute:
             pass
         elif attribute == 'all':
             for func in attribute_plot_map.values():
                 func(self)
-                pp.savefig(bbox_inches='tight')
-                plt.close()
         else:
             attribute_plot_map[attribute](self)
-            pp.savefig(bbox_inches='tight')
-            plt.close()
 
     def plot_stanzas(self):
         simple_plotter(self.stanzas, 'Number of stanzas', 'Number of occurrences', 'Range of number of stanzas',
@@ -137,7 +137,7 @@ class Template:
                            'Range of Possible Stress Patterns for Line ' + str(self.stress_patterns.index(line) + 1))
 
     def plot_similes(self):
-        simple_plotter(self.similes, 'Existence', 'Number of occurrences', 'Exsistence of Simile')
+        simple_plotter(self.similes, 'Existence', 'Number of occurrences', 'Existence of Simile')
 
     def plot_character_count(self):
         simple_plotter(self.character_count, 'Number of characters', 'Number of occurrences',
@@ -172,7 +172,6 @@ class Template:
             plot_bar_simple(x, y, 'Relation', 'Number of occurrences', x_ticks,
                             'Average number of each relation for character ' + str(n))
             n += 1
-
 
 attribute_plot_map = {
     'stanzas': Template.plot_stanzas,
@@ -211,6 +210,9 @@ def plot_bar_simple(x, y, x_axis, y_axis, x_ticks, title):
     ax.set_title(title)
     plt.xticks(x, ha='center')
 
+    pp.savefig(bbox_inches='tight')
+    plt.close()
+
 
 def plot_bar_stacked(x, ys, x_axis, y_axis, x_ticks, title):
     width = 0.5
@@ -231,6 +233,9 @@ def plot_bar_stacked(x, ys, x_axis, y_axis, x_ticks, title):
     ax.set_ylabel(y_axis)
     ax.set_title(title)
     plt.xticks(x, ha='center')
+
+    pp.savefig(bbox_inches='tight')
+    plt.close()
 
 
 def simple_plotter(attribute, x_axis, y_axis, title, use_x=False):
