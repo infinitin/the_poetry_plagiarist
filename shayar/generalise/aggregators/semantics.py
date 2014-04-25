@@ -23,7 +23,7 @@ def agg_hypernym_ancestors(poems, template):
 
     #Now filter by the ones that actually occur with some significant frequency
     ignorables = ['entity', 'physical entity', 'object', 'abstraction', 'whole']
-    min_num_occurrences = round(len(all_synsets) * 0.04)
+    min_num_occurrences = round(len(all_synsets) * 0.03)
     counts = Counter(all_hypernyms)
     template.hypernym_ancestors.extend(
         [(hypernym, count) for hypernym, count in counts.items() if
