@@ -22,11 +22,12 @@ def agg_hypernym_ancestors(poems, template):
             [str(hypernym).partition("'")[-1].rpartition("'")[0] for hypernym in synset.hypernyms(recursive=True)])
 
     #Now filter by the ones that actually occur with some significant frequency
-    min_num_occurrences = round(len(all_synsets) * 0.05)
+    ignorables = ['entity', 'physical entity', 'object', 'abstraction', 'whole']
+    min_num_occurrences = round(len(all_synsets) * 0.04)
     counts = Counter(all_hypernyms)
     template.hypernym_ancestors.extend(
         [(hypernym, count) for hypernym, count in counts.items() if
-         count > min_num_occurrences and hypernym != 'entity'])
+         count > min_num_occurrences and hypernym not in ignorables])
 
     logging.info('Aggregator finished: agg_character_hypernyms')
 
