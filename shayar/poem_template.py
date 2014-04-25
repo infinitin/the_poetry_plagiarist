@@ -139,28 +139,28 @@ class Template:
         simple_plotter(self.similes, 'Existence', 'Number of occurrences', 'Existence of Simile')
 
     def plot_character_count(self):
-        simple_plotter(self.character_count, 'Number of characters', 'Number of occurrences',
-                       'Range of number of characters')
+        simple_plotter(self.character_count, 'Number of persona', 'Number of occurrences',
+                       'Range of number of persona')
 
     def plot_character_genders(self):
-        simple_plotter(self.character_genders, 'Gender', 'Number of occurrences', 'Range of character genders')
+        simple_plotter(self.character_genders, 'Gender', 'Number of occurrences', 'Range of persona genders')
 
     def plot_character_nums(self):
-        simple_plotter(self.character_nums, 'Num', 'Number of occurrences', 'Range of character nums')
+        simple_plotter(self.character_nums, 'Num', 'Number of occurrences', 'Range of persona nums')
 
     def plot_character_animations(self):
         simple_plotter(self.character_animations, 'Object State', 'Number of occurrences',
-                       'Range of character animation')
+                       'Range of persona animation')
 
     def plot_character_personifications(self):
-        simple_plotter(self.character_personifications, 'Existence', 'Number of occurrences',
-                       'Existence of character personification')
+        simple_plotter(self.character_personifications, 'Personification', 'Number of occurrences',
+                       'Existence of persona personification')
 
     def plot_character_relations(self):
         x = tuple(np.arange(len(self.character_relations.keys())))
         x_ticks = tuple(self.character_relations.keys())
         y = tuple(self.character_relations.values())
-        plot_bar_simple(x, y, 'Relation', 'Number of occurrences', x_ticks, 'Range of character relations')
+        plot_bar_simple(x, y, 'Relation', 'Number of occurrences', x_ticks, 'Range of persona relations')
 
     def plot_character_relation_distribution(self):
         n = 1
@@ -169,7 +169,7 @@ class Template:
             x_ticks = tuple(relation_distribution.keys())
             y = tuple(relation_distribution.values())
             plot_bar_simple(x, y, 'Relation', 'Number of occurrences', x_ticks,
-                            'Average number of each relation for character ' + str(n))
+                            'Average number of each relation for persona' + str(n))
             n += 1
 
 attribute_plot_map = {
@@ -194,6 +194,13 @@ attribute_plot_map = {
     'character_personifications': Template.plot_character_personifications,
     'character_relations': Template.plot_character_relations,
     'character_relation_distributions': Template.plot_character_relation_distribution,
+    'agg_n_grams_by_line': Template.plot_n_grams_by_line,
+    'agg_n_grams': Template.plot_n_grams,
+    'agg_character_hypernyms': Template.plot_character_hypernyms,
+    'agg_modality_by_line': Template.plot_modality_by_line,
+    'agg_polarity_by_line': Template.plot_polarity_by_line,
+    'agg_subjectivity_by_line': Template.plot_subjectivity_by_line,
+    'agg_mood_by_line': Template.plot_mood_by_line,
 }
 
 
