@@ -242,14 +242,9 @@ def plot_bar_stacked(x, ys, x_axis, y_axis, x_ticks, title):
 
     fig, ax = plt.subplots()
     prev = 0
-    colour = 'b'
     for y in ys:
-        ax.bar(x, y, bottom=prev, width=width, color=colour, align='center')
+        ax.bar(x, y, bottom=prev, width=width, align='center')
         prev = y
-        if colour == 'b':
-            colour = 'r'
-        else:
-            colour = 'b'
 
     ax.set_xticklabels(x_ticks)
     ax.set_xlabel(x_axis)
