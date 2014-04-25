@@ -6,27 +6,35 @@ from collections import Counter
 import logging
 
 
-def agg_character_hypernyms(poems, template):
+def agg_hypernym_ancestors(poems, template):
     logging.info('Starting aggregator: agg_character_hypernyms')
     all_characters = []
     for poem in poems:
         all_characters.extend(poem.characters)
 
     #Get the synsets of the operative word in each of the characters
-    all_synsets = [synset(character.text) for character in all_characters]
+    all_synsets = [get_synset(character.text) for character in all_characters]
     all_synsets = [s for s in all_synsets if s is not None]
 
-    all_common_ancestors = []
-    for pair in combinations(all_synsets, 2):
-        all_common_ancestors.append(str(wordnet.ancestor(*pair)).partition("'")[-1].rpartition("'")[0])
+    all_hypernyms = []
+    for synset in all_synsets:
+        all_hypernyms.extend(
+            [str(hypernym).partition("'")[-1].rpartition("'")[0] for hypernym in synset.hypernyms(recursive=True)])
 
-    template.hypernym_ancestors = Counter(template.hypernym_ancestors)
+    #Now filter by the ones that actually occur with some significant frequency
+    min_num_occurrences = round(len(all_synsets) * 0.05)
+    counts = Counter(all_hypernyms)
+    template.hypernym_ancestors.extend(
+        [(hypernym, count) for hypernym, count in counts.items() if
+         count > min_num_occurrences and hypernym != 'entity'])
+
     logging.info('Aggregator finished: agg_character_hypernyms')
 
 
-def synset(phrase):
+def get_synset(phrase):
+    synset = None
     for word, pos in tag(phrase):
-        if pos.startswith('N'):
+        if pos.startswith('N') and word != 'of':
             try:
                 synset = wordnet.synsets(singularize(lemmatise(word)))[0]
             except IndexError:
@@ -44,13 +52,15 @@ def synset(phrase):
         elif pos == 'PRP':
             return wordnet.synsets('living thing')[0]
 
+    return synset
+
 
 def agg_polarity_by_line(poems, template):
     logging.info('Starting aggregator: agg_polarity_by_line')
     all_polarity = [poem.polarity_by_line for poem in poems]
     template.polarity_by_line = list(izip_longest(*all_polarity))
     logging.info('Aggregator finished: agg_polarity_by_line')
-    
+
 
 def agg_subjectivity_by_line(poems, template):
     logging.info('Starting aggregator: agg_subjectivity_by_line')

@@ -58,10 +58,10 @@ def agg_n_grams_by_line(poems, template):
         n_grams_by_line.append(n_grams)
 
     #Now filter by the ones that actually occur with some significant frequency
-    min_num_occurrences = round(len(poems) * 0.03)
+    min_num_occurrences = round(len(poems) * 0.1)
     for n_grams_line in n_grams_by_line:
         counts = Counter(n_grams_line)
-        template.n_grams_by_line.append([gram for gram, count in counts.items() if count > min_num_occurrences])
+        template.n_grams_by_line.append([(' '.join(g for g in gram), count) for gram, count in counts.items() if count > min_num_occurrences])
 
     logging.info('Aggregator finished: agg_n_grams_by_line')
 
@@ -83,7 +83,7 @@ def agg_n_grams(poems, template):
         n_grams_by_poem.extend(n_grams)
 
     #Now filter by the ones that actually occur with some significant frequency
-    min_num_occurrences = round(len(poems) * 0.03)
+    min_num_occurrences = round(len(poems) * 0.1)
     counts = Counter(n_grams_by_poem)
-    template.n_grams.append([gram for gram, count in counts.items() if count > min_num_occurrences + 1])
+    template.n_grams.extend([(' '.join(g for g in gram), count) for gram, count in counts.items() if count > min_num_occurrences + 1])
     logging.info('Aggregator finished: agg_n_grams')

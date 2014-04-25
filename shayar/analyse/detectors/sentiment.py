@@ -7,7 +7,7 @@ def get_sentiment_by_line(poem):
 
 
 def get_modality_by_line(poem):
-    return [round(modality(Sentence(parse(line, lemmata=True)))) for line in poem]
+    return [round(modality(Sentence(parse(line, lemmata=True))), 1) for line in poem]
 
 
 def get_mood_by_line(poem):

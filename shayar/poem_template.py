@@ -10,44 +10,44 @@ global pp
 # Has all the options for producing poems, as well as plot functions for viewing the options
 class Template:
     def __init__(self, collection):
-        self.collection = collection        # The collection of poems that this template applies to
+        self.collection = collection  # The collection of poems that this template applies to
 
         #Pick one randomly out of the lists, repetitions will take care of probability
-        self.stanzas = []                   # List of numbers
-        self.num_lines = []                 # List of tuples of numbers
+        self.stanzas = []  # List of numbers
+        self.num_lines = []  # List of tuples of numbers
         self.repeated_lines_locations = []  # List of tuples of numbers
-        self.num_repeated_lines = []        # List of numbers
-        self.num_distinct_sentences = []    # List of numbers
-        self.line_tenses = []               # List of tuples of strings
-        self.overall_tense = []             # List of strings
+        self.num_repeated_lines = []  # List of numbers
+        self.num_distinct_sentences = []  # List of numbers
+        self.line_tenses = []  # List of tuples of strings
+        self.overall_tense = []  # List of strings
 
-        self.assonance = {}                 # Dictionary<string, list(num)>
-        self.consonance = {}                # Dictionary<string, list(num)>
-        self.alliteration = {}              # Dictionary<string, list(num)>
+        self.assonance = {}  # Dictionary<string, list(num)>
+        self.consonance = {}  # Dictionary<string, list(num)>
+        self.alliteration = {}  # Dictionary<string, list(num)>
 
-        self.rhyme_schemes = []             # List of strings
-        self.syllable_patterns = []         # List of tuples of numbers
-        self.stress_patterns = []           # List of strings
+        self.rhyme_schemes = []  # List of strings
+        self.syllable_patterns = []  # List of tuples of numbers
+        self.stress_patterns = []  # List of strings
 
-        self.similes = []                   # List of booleans
+        self.similes = []  # List of booleans
 
-        self.character_count = []                  # List of numbers
-        self.character_genders = []                # List of strings
-        self.character_nums = []                   # List of strings
-        self.character_animations = []             # List of strings
-        self.character_personifications = []       # List of booleans
-        self.character_relations = {}              # Dictionary<string, list(num)>
+        self.character_count = []  # List of numbers
+        self.character_genders = []  # List of strings
+        self.character_nums = []  # List of strings
+        self.character_animations = []  # List of strings
+        self.character_personifications = []  # List of booleans
+        self.character_relations = {}  # Dictionary<string, list(num)>
         self.character_relation_distribution = []  # List of dictionary<string, num)
 
-        self.n_grams_by_line = []           # List of list of strings
-        self.n_grams = []                   # List of strings
+        self.n_grams_by_line = []  # List of list of strings
+        self.n_grams = []  # List of strings
 
-        self.hypernym_ancestors = {}        # Dictionary<string, num)
+        self.hypernym_ancestors = []  # List of tuples<string, num>
 
-        self.polarity_by_line = []          # List of floats
-        self.subjectivity_by_line = []      # List of floats
-        self.modality_by_line = []          # List of floats
-        self.mood_by_line = []              # List of strings
+        self.polarity_by_line = []  # List of floats
+        self.subjectivity_by_line = []  # List of floats
+        self.modality_by_line = []  # List of floats
+        self.mood_by_line = []  # List of strings
 
     def plot(self, attribute, pdfpages):
         global pp
@@ -172,6 +172,47 @@ class Template:
                             'Average number of each relation for persona' + str(n))
             n += 1
 
+    def plot_n_grams_by_line(self):
+        for line in self.n_grams_by_line:
+            x = tuple(np.arange(len(line)))
+            x_ticks = tuple([gram for gram, count in line])
+            y = tuple([count for gram, count in line])
+            plot_bar_simple(x, y, 'Lemmatised n-grams', 'Number of occurrences', x_ticks,
+                            'Common n-grams for Line ' + str(self.n_grams_by_line.index(line) + 1))
+
+    def plot_n_grams(self):
+        x = tuple(np.arange(len(self.n_grams)))
+        x_ticks = tuple([gram for gram, count in self.n_grams])
+        y = tuple([count for gram, count in self.n_grams])
+        plot_bar_simple(x, y, 'Lemmatised n-grams', 'Number of occurrences', x_ticks, 'Common n-grams throughout poem')
+
+    def plot_hypernym_ancestors(self):
+        x = tuple(np.arange(len(self.hypernym_ancestors)))
+        x_ticks = tuple([hypernym for hypernym, count in self.hypernym_ancestors])
+        y = tuple([count for hypernym, count in self.hypernym_ancestors])
+        plot_bar_simple(x, y, 'Hypernym Ancestors', 'Number of occurrences', x_ticks, 'Types of Persona')
+
+    def plot_modality_by_line(self):
+        for line in self.modality_by_line:
+            simple_plotter(line, 'Modality (degree of certainty)', 'Number of occurrences',
+                           'Modality for Line ' + str(self.modality_by_line.index(line) + 1))
+
+    def plot_polarity_by_line(self):
+        for line in self.polarity_by_line:
+            simple_plotter(line, 'Polarity (degree of positivity)', 'Number of occurrences',
+                           'Polarity for Line ' + str(self.polarity_by_line.index(line) + 1))
+
+    def plot_subjectivity_by_line(self):
+        for line in self.subjectivity_by_line:
+            simple_plotter(line, 'Subjectivity (degree of bias)', 'Number of occurrences',
+                           'Subjectivity for Line ' + str(self.subjectivity_by_line.index(line) + 1))
+
+    def plot_mood_by_line(self):
+        for line in self.mood_by_line:
+            simple_plotter(line, 'Mood (fact/command/conjecture/wish)', 'Number of occurrences',
+                           'Mood for Line ' + str(self.mood_by_line.index(line) + 1))
+
+
 attribute_plot_map = {
     'stanzas': Template.plot_stanzas,
     'num_lines': Template.plot_num_lines,
@@ -196,7 +237,7 @@ attribute_plot_map = {
     'character_relation_distributions': Template.plot_character_relation_distribution,
     'agg_n_grams_by_line': Template.plot_n_grams_by_line,
     'agg_n_grams': Template.plot_n_grams,
-    'agg_character_hypernyms': Template.plot_character_hypernyms,
+    'agg_hypernym_ancestors': Template.plot_hypernym_ancestors,
     'agg_modality_by_line': Template.plot_modality_by_line,
     'agg_polarity_by_line': Template.plot_polarity_by_line,
     'agg_subjectivity_by_line': Template.plot_subjectivity_by_line,

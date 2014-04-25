@@ -69,8 +69,8 @@ def analyse_poem(test):
 
     #logging.info("Empathising")
     sentiment_tuples = sentiment.get_sentiment_by_line(test.poem)
-    test.polarity_by_line = [round(polarity) for polarity, subjectivity in sentiment_tuples]
-    test.subjectivity_by_line = [round(subjectivity) for polarity, subjectivity in sentiment_tuples]
+    test.polarity_by_line = [round(polarity, 1) for polarity, subjectivity in sentiment_tuples]
+    test.subjectivity_by_line = [round(subjectivity, 1) for polarity, subjectivity in sentiment_tuples]
     test.modality_by_line = sentiment.get_modality_by_line(test.poem)
     test.mood_by_line = sentiment.get_mood_by_line(test.poem)
 
