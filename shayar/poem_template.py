@@ -55,10 +55,13 @@ class Template:
         if not attribute:
             pass
         elif attribute == 'all':
-            for func in attribute_plot_map.values():
-                func(self)
+            for a in self.__dict__:
+                if a != 'collection':
+                    plot_func = getattr(self, 'plot_' + a)
+                    plot_func()
         else:
-            attribute_plot_map[attribute](self)
+            plot_func = getattr(self, 'plot_' + attribute)
+            plot_func()
 
     def plot_stanzas(self):
         simple_plotter(self.stanzas, 'Number of stanzas', 'Number of occurrences', 'Range of number of stanzas')
@@ -67,7 +70,7 @@ class Template:
         simple_plotter(self.num_lines, 'Number of lines for all stanza amounts', 'Number of occurrences',
                        'Range of number of lines per stanza')
 
-    def plot_repeated_lines(self):
+    def plot_repeated_lines_locations(self):
         simple_plotter(self.repeated_lines_locations, 'Positions of repeated lines', 'Number of occurrences',
                        'Range of positions of repeated lines')
 
@@ -124,7 +127,7 @@ class Template:
         plot_bar_stacked(x, zipped_ys, 'Consonant Phonemes', 'Number of occurrences stacked by poem', x_ticks,
                          'Alliteration')
 
-    def plot_rhyme(self):
+    def plot_rhyme_schemes(self):
         simple_plotter(self.rhyme_schemes, 'Rhyme Scheme', 'Number of occurrences', 'Range of Possible Rhyme Schemes')
 
     def plot_syllable_patterns(self):
@@ -211,38 +214,6 @@ class Template:
         for line in self.mood_by_line:
             simple_plotter(line, 'Mood (fact/command/conjecture/wish)', 'Number of occurrences',
                            'Mood for Line ' + str(self.mood_by_line.index(line) + 1))
-
-
-attribute_plot_map = {
-    'stanzas': Template.plot_stanzas,
-    'num_lines': Template.plot_num_lines,
-    'repeated_lines': Template.plot_repeated_lines,
-    'num_repeated_lines': Template.plot_num_repeated_lines,
-    'num_distinct_sentences': Template.plot_num_distinct_sentences,
-    'line_tenses': Template.plot_line_tenses,
-    'overall_tense': Template.plot_overall_tense,
-    'assonance': Template.plot_assonance,
-    'consonance': Template.plot_consonance,
-    'alliteration': Template.plot_alliteration,
-    'rhyme': Template.plot_rhyme,
-    'syllable_patterns': Template.plot_syllable_patterns,
-    'stress_patterns': Template.plot_stress_patterns,
-    'similes': Template.plot_similes,
-    'character_count': Template.plot_character_count,
-    'character_genders': Template.plot_character_genders,
-    'character_nums': Template.plot_character_nums,
-    'character_animations': Template.plot_character_animations,
-    'character_personifications': Template.plot_character_personifications,
-    'character_relations': Template.plot_character_relations,
-    'character_relation_distributions': Template.plot_character_relation_distribution,
-    'agg_n_grams_by_line': Template.plot_n_grams_by_line,
-    'agg_n_grams': Template.plot_n_grams,
-    'agg_hypernym_ancestors': Template.plot_hypernym_ancestors,
-    'agg_modality_by_line': Template.plot_modality_by_line,
-    'agg_polarity_by_line': Template.plot_polarity_by_line,
-    'agg_subjectivity_by_line': Template.plot_subjectivity_by_line,
-    'agg_mood_by_line': Template.plot_mood_by_line,
-}
 
 
 def plot_bar_simple(x, y, x_axis, y_axis, x_ticks, title):
