@@ -1,5 +1,6 @@
 __author__ = 'Nitin'
 from collections import defaultdict
+from pattern.text.en import tag
 import logging
 
 
@@ -11,7 +12,16 @@ def agg_similes(poems, template):
 
 def agg_character_count(poems, template):
     logging.info('Starting aggregator: agg_character_count')
-    template.character_count = [len(poem.characters) for poem in poems]
+
+    for poem in poems:
+        n = 0
+        for character in poem.characters:
+            for word, pos in tag(character.text):
+                if pos.startswith('N') and word != 'of':
+                    n += 1
+                    continue
+        template.character_count.append(n)
+
     logging.info('Aggregator finished: agg_character_count')
 
 
