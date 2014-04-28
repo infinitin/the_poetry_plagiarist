@@ -132,28 +132,48 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {3.7.3}Simile}{55}{subsection.3.7.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {4}Evaluation Plan}{56}{chapter.4}
+\contentsline {chapter}{\numberline {4}Analysis Interpretation}{56}{chapter.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.1}Comparison of Analysis Results to Theory}{56}{section.4.1}
+\contentsline {section}{\numberline {4.1}Priorities}{56}{section.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.2}Turing-style Tests}{57}{section.4.2}
+\contentsline {subsection}{\numberline {4.1.1}The Corpus}{56}{subsection.4.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.3}FACE Descriptive Model}{58}{section.4.3}
+\contentsline {subsection}{\numberline {4.1.2}Subcategories of Collections}{57}{subsection.4.1.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.4}IDEA Descriptive Model}{58}{section.4.4}
+\contentsline {subsection}{\numberline {4.1.3}Novel and Creative Generation}{57}{subsection.4.1.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Appendix A}{60}{appendix*.25}
+\contentsline {section}{\numberline {4.2}Approach}{58}{section.4.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.1}Dry Run of Generation Phase with Commentary}{60}{section.Alph0.1}
+\contentsline {section}{\numberline {4.3}Algorithms}{58}{section.4.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.2}CMU Pronunciation Dictionary ARPABET Phoneme Set}{64}{section.Alph0.2}
+\contentsline {section}{\numberline {4.4}Results}{58}{section.4.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.3}Penn Treebank Tagset}{64}{section.Alph0.3}
+\contentsline {section}{\numberline {4.5}User Interface}{59}{section.4.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.4}Testing Specifications}{64}{section.Alph0.4}
+\contentsline {section}{\numberline {4.6}Performance}{59}{section.4.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.5}FrameNet Frames to ConceptNet Relations}{64}{section.Alph0.5}
+\contentsline {chapter}{\numberline {5}Evaluation Plan}{60}{chapter.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.6}List of collapsable dependencies}{67}{section.Alph0.6}
+\contentsline {section}{\numberline {5.1}Comparison of Analysis Results to Theory}{60}{section.5.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.7}Onomatopoeia Types to ConceptNet Relations}{68}{section.Alph0.7}
+\contentsline {section}{\numberline {5.2}Turing-style Tests}{61}{section.5.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5.3}FACE Descriptive Model}{62}{section.5.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5.4}IDEA Descriptive Model}{62}{section.5.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{Appendix A}{64}{appendix*.26}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {A.1}Dry Run of Generation Phase with Commentary}{64}{section.Alph0.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {A.2}CMU Pronunciation Dictionary ARPABET Phoneme Set}{68}{section.Alph0.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {A.3}Penn Treebank Tagset}{68}{section.Alph0.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {A.4}Testing Specifications}{68}{section.Alph0.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {A.5}FrameNet Frames to ConceptNet Relations}{68}{section.Alph0.5}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {A.6}List of collapsable dependencies}{71}{section.Alph0.6}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {A.7}Onomatopoeia Types to ConceptNet Relations}{72}{section.Alph0.7}

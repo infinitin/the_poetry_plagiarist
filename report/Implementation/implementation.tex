@@ -1,9 +1,86 @@
-\chapter{Implementation}
+\chapter{Analysis Interpretation}
 \ifpdf
     \graphicspath{{Implementation/ImplementationFigs/PNG/}{Implementation/ImplementationFigs/PDF/}{Implementation/ImplementationFigs/}}
 \else
     \graphicspath{{Implementation/ImplementationFigs/EPS/}{Implementation/ImplementationFigs/}}
 \fi
+
+The second phase of implementation involves interpreting the results of the analysis done in the first phase. The goal is that these interpretations can be used to template the structure and outline the content for certain collections of poems, ultimately guiding the generation of novel poetry in the final phase.
+
+\section{Priorities}
+In deciding how to approach this phase, we need to make some predictions about how we are going to use the final interpretation and assumptions about the quality, or lack thereof, of the corpus. Doing this will outline the priorities and trade-offs that can then be implemented in our approach.
+
+
+\subsection{The Corpus}
+
+The corpus is a large collection of poems. We may assume that each poem is already marked with the type of the collection - limerick, haiku, riddle etc. - in lieu of data in a \textit{supervised} machine learning problem. However, the poems should otherwise be unseen before analysis; we know nothing else about the data. 
+
+Poems are most easily obtained from anthologies - books of poems usually of a certain type. This works very well with our assumptions; the data is already labelled with the type of poem by looking at the type of anthology, but we know nothing else about the contents.
+
+Another way to gather these poems is by looking for those freely available on the Internet. However, the corpus obtained from an Internet search will most likely be lower quality than directly from a published anthology. For example, we may get the limerick in Figure \ref{fig:awkward-limerick} that is clearly very awkward. We can immediately see that it does not follow the typical \textit{'AABBA'} rhyme scheme, and even more so that it doesn't have a fifth line!
+
+\begin{figure}[h!]
+\centering
+\textit{
+A limerick fan from Australia\\
+regarded his work as a failure:\\
+his verses were fine\\
+until the fourth line\\
+?
+}
+\caption{A rhyming quatrain often used in teaching poetry}
+\label{fig:awkward-limerick}
+\end{figure}
+Nevertheless, our blindness to the content of the corpus means the system must be robust to such outliers. This means that we \textit{will} get anomalous results in our data that should be ignored.
+
+\subsection{Subcategories of Collections}
+
+The first two stages aim to be an exhaustive analysis of any type of poem. The first stage achieves this by detecting as many features in a single poem as possible. The second stage does this not only by finding highlights among features of homogeneous poems, but correlations between them as well.
+
+For example, limericks that start with \textit{'There was a...'} may have a very distinctive rhythm pattern for the first line that is otherwise not strictly followed. Therefore, when generating new poetry in the next phase that starts with \textit{'There was a...'}, we want to make sure we abide by this correlation.
+
+Naturally, there will be many correlations with more than two variables that may be more difficult to spot, but the problem of finding all of these correlations is exponential. We need to find a balance between using this data and the complexity in obtaining it.
+
+\subsection{Novel and Creative Generation}
+
+There's another catch to the correlation problem - red herrings. Some features can be taken as law; 5 lines in a limerick, 5-7-5 syllable pattern in Haiku, iambic pentameter in Shakespearean Sonnets. However, some may just be coincidences or a very biased corpus.
+
+Furthermore, we want to be able to create poems that are \textit{novel} and \textit{creative}. So while we need to be guided by prior art on structure and content to create authentic pieces of literary art, we need to balance that with freedom of creativity. Perhaps this generalisation stage will also give us an idea of when and how we are allowed to go off and explore new routes.
+
+
+\section{Approach}
+- Probabilistic
+- Majority wins
+- Given X, what happens to the rest? We get precision
+- As above, also this is simple and quick computationally
+- Each feature to their own in terms of aggregation, interpretation and usage
+- Due to individuality as above, we can introduce new values for features whenever and wherever
+- As above, can be done from user as well as programmatically
+
+\section{Algorithms}
+- Simplest list comp
+- Line by line
+- Pick best then repeat among those without it
+- Significant number of occurrences only
+
+\section{Results}
+- Pretty graphs!
+- Some interpretations
+- How it can be used in next stage
+- How it can be extended upon
+
+\section{User Interface}
+- Cloud SaaS
+- Many possible clients
+- Can be used with generation phase as well
+
+\section{Performance}
+- Threaded analysis
+- 2 hours 7 minutes
+- No parallelism, but space for it
+- 40 seconds without graphs, 75 extra seconds with
+
+
 
 % ------------------------------------------------------------------------
 
