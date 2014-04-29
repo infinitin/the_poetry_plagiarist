@@ -48,16 +48,57 @@ There's another catch to the correlation problem - red herrings. Some features c
 Furthermore, we want to be able to create poems that are \textit{novel} and \textit{creative}. So while we need to be guided by prior art on structure and content to create authentic pieces of literary art, we need to balance that with freedom of creativity. Perhaps this generalisation stage will also give us an idea of when and how we are allowed to go off and explore new routes.
 
 
-\section{Approach}
-- Probabilistic
-- Majority wins
-- Given X, what happens to the rest? We get precision
-- As above, also this is simple and quick computationally
-- Each feature to their own in terms of aggregation, interpretation and usage
-- Due to individuality as above, we can introduce new values for features whenever and wherever
-- As above, can be done from user as well as programmatically
+\section{A Probabilistic Approach}
+
+The most suitable implementation that meets the priorities listed above is:
+\begin{itemize}
+\item{Analyse each poem individually as planned.}
+\item{Store collections of poems by type (limerick, haiku etc.). This avoids unnecessary filtering downstream. This stored data can also be made open source to be used for future research.}
+\item{Put the analysis results of each poem in a collection together, keeping each feature independent. For example, we put all of the rhyme schemes for all poems of a collection in one big list, saving it separately from a similar list of stanza lengths. I will refer to this process as \textit{'feature aggregation'} from now on.}
+\item{Then for each feature, create a distribution of the results that represents the probability of any particular value occurring for each feature. If 95 out of a 100 limericks have an AABBA rhyme scheme, then we consider the probability of an AABBA rhyme scheme in a limerick to be 95\%.}
+\end{itemize}
+
+The aggregation of any feature can be bespoke to that feature. For example, we would aggregate the tenses for each line of each poem differently to the way we would aggregate the overall tense for each poem. This enables us to handle outliers on a case-by-case basis since what is considered an 'outlier' will vary feature-by-feature.
+
+We can also decide how to interpret the data on a case-by-case basis. This helps us handle the varying error bands for each feature. For example, since detecting the rhyme scheme is more error-prone than detecting the number of syllables, we may round a 95\% result for rhyme scheme up to 100\%, but take it literally for syllable pattern.
+
+This implementation also gives a simple way of finding correlations. We simply take a value for one of the features as a \textit{'given'}, filter the store of analysed poems by this value and aggregate in the same way as before. We can take any number of givens and of any permutation since each feature is aggregated and interpreted in isolation.
+
+The added bonus to all of this is that it is quite efficient both in terms of time and space. By storing the original poem analysis results, we do not need to find correlations until they are needed, which we can then do by applying the appropriate given.
+
 
 \section{Algorithms}
+
+There are four main algorithms that are used to aggregate features. All features can be aggregated using some variant of these algorithms, with slight feature-specific amendments so to have the flexibility and precision mentioned in the previous sections.
+
+\subsection{List Comprehension}
+\label{sec:listcomp}
+
+The simplest of the four algorithms utilises Python's built in functional programming feature; list comprehensions. In a single line of code we put all of the results for a particular feature from all poems in the collections into one big list. Algorithm BLAH shows the code for aggregating the number of stanzas.
+
+\textit{
+1. num\_stanzas = [poem.n\_stanzas for poem in poems]
+2. return Count(num\_stanzas)
+}
+
+The second line gets the frequency distribution of this list, which can easily be turned into probabilities as required.
+
+
+\subsection{Line by Line}
+
+Sometimes we can gain more insight by interpreting patterns in a feature for \textbf{each line} rather than the poem altogether. In these cases, the analysis result is usually saved in the form of a tuple, one entry for each line.
+
+Take stress patterns for example. The analysis of a single poem will store the result as \texttt{(x$_1$, x$_2$, ..., x$_n$)} where \texttt{x$_i$} is the stress pattern for line \texttt{i} up to the total number of lines in that poem, \texttt{n}.
+
+Suppose we have three poems in the corpus altogether. Then we have three tuples to aggregate: \texttt{(x$_1$, x$_2$, ..., x$_n$)}, \texttt{(y$_1$, y$_2$, ..., y$_n$)} and \texttt{(z$_1$, z$_2$, ..., z$_n$)}. If we are looking generalise the results on a line by line basis, we want to \textbf{transpose} the data to group each line together into \texttt{(x$_1$, y$_1$, z$_1$), (x$_2$, y$_2$, z$_2$), ... ,(x$_n$, y$_n$, z$_n$)}.
+
+Once this is done, we can apply the earlier list comprehension algorithm described in Section \ref{sec:listcomp}.
+
+\subsection{Greedy Selection}
+
+\subsection{Threshold Filter}
+
+
 - Simplest list comp
 - Line by line
 - Pick best then repeat among those without it
@@ -68,11 +109,6 @@ Furthermore, we want to be able to create poems that are \textit{novel} and \tex
 - Some interpretations
 - How it can be used in next stage
 - How it can be extended upon
-
-\section{User Interface}
-- Cloud SaaS
-- Many possible clients
-- Can be used with generation phase as well
 
 \section{Performance}
 - Threaded analysis
