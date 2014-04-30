@@ -7,17 +7,19 @@
 
 The second phase of implementation involves interpreting the results of the analysis done in the first phase. The goal is that these interpretations can be used to template the structure and outline the content for certain collections of poems, ultimately guiding the generation of novel poetry in the final phase.
 
-\section{Priorities}
-In deciding how to approach this phase, we need to make some predictions about how we are going to use the final interpretation and assumptions about the quality, or lack thereof, of the corpus. Doing this will outline the priorities and trade-offs that can then be implemented in our approach.
+\section{Balancing Priorities and Trade-offs}
+\label{sec:balance-priorities}
+
+In deciding how to approach this phase, we need to make predictions about the usage of the final interpretation and assumptions about the quality, or lack thereof, of the corpus and analysis. Doing this will outline the priorities and trade-offs that can then be implemented at this stage to benefit the generation phase.
 
 
 \subsection{The Corpus}
 
-The corpus is a large collection of poems. We may assume that each poem is already marked with the type of the collection - limerick, haiku, riddle etc. - in lieu of data in a \textit{supervised} machine learning problem. However, the poems should otherwise be unseen before analysis; we know nothing else about the data. 
+The corpus is a large collection of poems. We may assume that each poem is already marked with the type of the collection - limerick, haiku, riddle etc. - much like data in a supervised machine learning problem. However, the poems should otherwise be \textit{unseen} before analysis; we know nothing else about the data. 
 
-Poems are most easily obtained from anthologies - books of poems usually of a certain type. This works very well with our assumptions; the data is already labelled with the type of poem by looking at the type of anthology, but we know nothing else about the contents.
+Poems are most easily obtained from anthologies. This works very well with our assumptions; the data is already labelled with the type of poem, but we know nothing else about the contents.
 
-Another way to gather these poems is by looking for those freely available on the Internet. However, the corpus obtained from an Internet search will most likely be lower quality than directly from a published anthology. For example, we may get the limerick in Figure \ref{fig:awkward-limerick} that is clearly very awkward. We can immediately see that it does not follow the typical \textit{'AABBA'} rhyme scheme, and even more so that it doesn't have a fifth line!
+Another way to gather poems is by looking for those freely available on the Internet. However, the corpus obtained from an Internet search will most likely be lower quality than directly from a published anthology. For example, we may get the limerick in Figure \ref{fig:awkward-limerick}, which is clearly very awkward. We can immediately see that it does not follow the typical \textit{'AABBA'} rhyme scheme, and even more so that it doesn't have a fifth line!
 
 \begin{figure}[h!]
 \centering
@@ -28,7 +30,7 @@ his verses were fine\\
 until the fourth line\\
 ?
 }
-\caption{A rhyming quatrain often used in teaching poetry}
+\caption{A very awkward limerick}
 \label{fig:awkward-limerick}
 \end{figure}
 Nevertheless, our blindness to the content of the corpus means the system must be robust to such outliers. This means that we \textit{will} get anomalous results in our data that should be ignored.
@@ -43,38 +45,41 @@ Naturally, there will be many correlations with more than two variables that may
 
 \subsection{Novel and Creative Generation}
 
-There's another catch to the correlation problem - red herrings. Some features can be taken as law; 5 lines in a limerick, 5-7-5 syllable pattern in Haiku, iambic pentameter in Shakespearean Sonnets. However, some may just be coincidences or a very biased corpus.
+There's another catch to the correlation problem - red herrings. Some features can be taken as law; 5 lines in a limerick, 5-7-5 syllable pattern in Haiku, iambic pentameter in Shakespearean Sonnets. However, some may just be coincidences or the result of a very biased corpus.
 
-Furthermore, we want to be able to create poems that are \textit{novel} and \textit{creative}. So while we need to be guided by prior art on structure and content to create authentic pieces of literary art, we need to balance that with freedom of creativity. Perhaps this generalisation stage will also give us an idea of when and how we are allowed to go off and explore new routes.
+Furthermore, we want to be able to create poems that are \textit{novel} and \textit{creative}. So while we need to be guided by prior art on structure and content to create authentic pieces of literary art, we need to balance that with freedom of creativity. 
+
+Perhaps we can use this stage to give us an idea of when and how we are allowed to diverge.
 
 
-\section{A Probabilistic Approach}
+\section{A Stochastic Approach}
+\label{sec:approach}
 
 The most suitable implementation that meets the priorities listed above is:
 \begin{itemize}
 \item{Analyse each poem individually as planned.}
 \item{Store collections of poems by type (limerick, haiku etc.). This avoids unnecessary filtering downstream. This stored data can also be made open source to be used for future research.}
-\item{Put the analysis results of each poem in a collection together, keeping each feature independent. For example, we put all of the rhyme schemes for all poems of a collection in one big list, saving it separately from a similar list of stanza lengths. I will refer to this process as \textit{'feature aggregation'} from now on.}
-\item{Then for each feature, create a distribution of the results that represents the probability of any particular value occurring for each feature. If 95 out of a 100 limericks have an AABBA rhyme scheme, then we consider the probability of an AABBA rhyme scheme in a limerick to be 95\%.}
+\item{Put the analysis results of each poem in a particular collection together, keeping each feature independent. For example, we put all of the rhyme schemes for all poems of a collection in one big list, saving it separately from a similar list of stanza lengths. I will refer to this step as \textit{'aggregation'} from now on.}
+\item{Then for each feature, create a probability distribution of the results that represents the likelihood of any particular value occurring for each feature. If 95 out of a 100 limericks have an \textit{AABBA} rhyme scheme, then we consider the probability of an \textit{AABBA} rhyme scheme in a limerick to be 95\%.}
 \end{itemize}
 
-The aggregation of any feature can be bespoke to that feature. For example, we would aggregate the tenses for each line of each poem differently to the way we would aggregate the overall tense for each poem. This enables us to handle outliers on a case-by-case basis since what is considered an 'outlier' will vary feature-by-feature.
+The aggregation step can be bespoke to each feature. For example, we would aggregate the tenses for each line of each poem differently to the way we would aggregate the overall tense for each poem. This enables us to handle outliers on a case-by-case basis since they are defined differently for every feature.
 
 We can also decide how to interpret the data on a case-by-case basis. This helps us handle the varying error bands for each feature. For example, since detecting the rhyme scheme is more error-prone than detecting the number of syllables, we may round a 95\% result for rhyme scheme up to 100\%, but take it literally for syllable pattern.
 
-This implementation also gives a simple way of finding correlations. We simply take a value for one of the features as a \textit{'given'}, filter the store of analysed poems by this value and aggregate in the same way as before. We can take any number of givens and of any permutation since each feature is aggregated and interpreted in isolation.
+This implementation also gives a simple way of finding correlations. We simply take a value for one of the features as a \textit{given}, filter the store of analysed poems by this value and aggregate in the same way as before. We can take any number of given values and of any permutation since each feature is aggregated and interpreted in isolation.
 
-The added bonus to all of this is that it is quite efficient both in terms of time and space. By storing the original poem analysis results, we do not need to find correlations until they are needed, which we can then do by applying the appropriate given.
+The added bonus to all of this is that it is quite efficient both in terms of time and space (see Section \ref{sec:interpret-perf}). By storing the original poem analysis results, we can apply given values and find correlations \textit{lazily}, i.e. only when needed.
 
 
 \section{Algorithms}
 
-There are four main algorithms that are used to aggregate features. All features can be aggregated using some variant of these algorithms, with slight feature-specific amendments so to have the flexibility and precision mentioned in the previous sections.
+There are four main algorithms that are used for aggregation. All features can be aggregated using some variant of these algorithms, with slight feature-specific amendments so to have the flexibility and precision mentioned in the previous sections.
 
 \subsection{List Comprehension}
 \label{sec:listcomp}
 
-The simplest of the four algorithms utilises Python's built in functional programming feature; list comprehensions. In a single line of code we put all of the results for a particular feature from all poems in the collections into one big list. Algorithm BLAH shows the code for aggregating the number of stanzas.
+The simplest of the four algorithms utilises Python's built in functional programming feature; list comprehensions. In a single line of code we put all of the results for a particular feature from all poems in the collection into one big list. Algorithm BLAH shows the code for aggregating the number of stanzas.
 
 \textit{
 1. num\_stanzas = [poem.n\_stanzas for poem in poems]\\
@@ -92,36 +97,49 @@ Take stress patterns for example. The analysis of a single poem will store the r
 
 Suppose we have three poems in the corpus altogether. Then we have three tuples to aggregate: \texttt{(x$_1$, x$_2$, ..., x$_n$)}, \texttt{(y$_1$, y$_2$, ..., y$_n$)} and \texttt{(z$_1$, z$_2$, ..., z$_n$)}. If we are looking generalise the results on a line by line basis, we want to \textbf{transpose} the data to group each line together and put them in a list with the format \texttt{[(x$_1$, y$_1$, z$_1$), (x$_2$, y$_2$, z$_2$), ... ,(x$_n$, y$_n$, z$_n$)]}.
 
-Once this is done, we can apply the earlier list comprehension algorithm described in Section \ref{sec:listcomp}. Algorithm BLAH outlines this full process with the stress pattern example.
+Once this is done, we can apply the list comprehension algorithm described in Section \ref{sec:listcomp}. Algorithm BLAH outlines this full process with the stress pattern example.
 
 \textit{
 1. stress\_patterns = [poem.stress\_patterns for poem in poems]\\
-2. stress\_patterns = transpose(stress\_patterns)\\
-3. return [Count(stress\_pattern\_single\_line) for stress\_pattern\_single\_line in stress\_patterns]\\
+2. stress\_patterns\_all\_lines = transpose(stress\_patterns)\\
+3. return [Count(stress\_pattern\_single\_line) for stress\_pattern\_single\_line in stress\_patterns\_all\_lines]\\
 }
 
 \subsection{Pick the Most Popular}
 
-The analysis of a single poem often has some ambiguities. For example, the rhyme scheme for a collection can never be decided by looking at just one poem because words can be pronounced in more than one way. The limerick in Figure BLAH could either be 'AABBA' or 'ABCCA' because \textit{blah} can be pronounced as \textit{('BL', 'AH')} or \textit{('BL', 'EH')}.
+The analysis of a single poem often has some ambiguities. For example, the rhyme scheme for a collection can never be decided by looking at just one poem because words can be pronounced in more than one way. The limerick in Figure \ref{fig:ambiguous-rhyme} could either be \textit{AABBA} or \textit{AABBC} because \textit{invited} can be pronounced as \textit{('IH', 'N', 'V', 'AY', 'T', \textbf{'AH'}, 'D')} or \textit{('IH0', 'N', 'V', 'AY', 'T', \textbf{'IH'}, 'D')} according to the CMU pronunciation dictionary.
 
-Because of this, the analysis phase doesn't make a claim on which rhyme scheme is the correct one and instead stores all possibilities in a list \texttt{[x$_1$, x$_2$, ..., x$_n$]}, where \texttt{x$_i$} is the \texttt{i\textsuperscript{th}} rhyme scheme possibility up to \texttt{n} possibilities for the particular poem being analysed.
+\begin{figure}[h!]
+\centering
+\textit{
+There was a young man so benighted\\
+He never knew when he was slighted;\\
+He would go to a party\\
+And eat just as hearty,\\
+As if he'd been really invited.\\
+}
+\caption{A limerick with more than one possible rhyme scheme}
+\label{fig:ambiguous-rhyme}
+\end{figure}
+
+The analysis phase doesn't make a claim on which rhyme scheme is 'correct' and instead stores all possibilities in a list \texttt{[x$_1$, x$_2$, ..., x$_n$]}, where \texttt{x$_i$} is the \texttt{i\textsuperscript{th}} rhyme scheme possibility up to \texttt{n} possibilities for the particular poem being analysed.
 
 Let's assume again that we only have three poems in the corpus. Once they are all analysed, we get three lists \texttt{[x$_1$, x$_2$, ..., x$_n$]}, \texttt{[y$_1$, y$_2$, ..., y$_n$]} and \texttt{[z$_1$, z$_2$, ..., z$_n$]} of possible rhyme schemes for all three poems.
 
-The next step can be done inductively, but I will illustrate what we want to happen by taking three cases:
+The next step can be done inductively, but I will illustrate what we want to happen by taking four cases:
 \begin{itemize}
 \item{None of the possibilities across all poems are the same. Then all are equally probable and that gives us our probability distribution.}
-\item{There is \textit{one} set \texttt{(p, q, r)} such that \texttt{x$_p$} == \texttt{y$_q$} == \texttt{z$_r$}. Then we take that to be the rhyme scheme and no other possibility is considered.}
-\item{There is more than one set \texttt{(p$_1$, q$_1$, r$_1$), (p$_2$, q$_2$, r$_2$), ..., (p$_m$, q$_m$, r$_m$)} such that for all \texttt{i} up to \texttt{m}, \texttt{x$_p{_i}$} == \texttt{y$_q{_i}$} == \texttt{z$_r{_i}$}. Then all sets are candidate rhyme schemes where each rhyme scheme has a probability of \texttt{1/m}.}
-\item{There is a \texttt{p} and a \texttt{q} such that \texttt{x$_p$} == \texttt{y$_q$}, but no \texttt{r} such that \texttt{y$_q$} == \texttt{z$_r$}. In this case, the rhyme scheme \texttt{x$_p$} has a probability of two thirds, while every rhyme scheme in z has the probability of one third each.}
+\item{There is \textit{one} set of indices $(p, q, r)$ such that \texttt{x$_p$} == \texttt{y$_q$} == \texttt{z$_r$}. Then we take that to be the rhyme scheme and no other possibility is considered.}
+\item{There is $m$\textit{\textgreater 1} sets of indices $(p_1, q_1, r_1), (p_2, q_2, r_2), ..., (p_m, q_m, r_m)$ such that for all $i$ up to $m$, \texttt{x$_{p_i}$} == \texttt{y$_{q_i}$} == \texttt{z$_{r_i}$}. Then all sets are candidate rhyme schemes where each rhyme scheme has a probability of $1/m$.}
+\item{There is a $p$ and a $q$ such that \texttt{x$_p$} == \texttt{y$_q$}, but no \texttt{r} such that \texttt{y$_q$} == \texttt{z$_r$}. In this case, the rhyme scheme \texttt{x$_p$} has a probability of two thirds, while every rhyme scheme in \texttt{z} has the probability of one third each.}
 \end{itemize}
 
-Essentially we want to find the most popular rhyme scheme among all poems, then remove all sets of possibilities that have it. We then repeat on the remaining poems over and over until we have no more poems. 
+Essentially we want to find and save the most popular rhyme scheme among all poems and remove all sets of possibilities that contain it. We repeat on the remaining poems over and over until we have no more poems. 
 
 Algorithm BLAH shows the pseudo-code for this implementation.
 
 \textit{
- 1. rhyme\_scheme\_counts = {}\\
+ 1. rhyme\_scheme\_counts = \{\}\\
  2. possible\_rhyme\_scheme\_lists = [poem.rhyme\_schemes for poem in poems]\\
  3. all\_possible\_rhyme\_schemes = flatten(possible\_rhyme\_schemes)\\
  4. most\_popular\_rhyme\_schemes = most\_common(all\_possible\_rhyme\_schemes)\\
@@ -134,27 +152,48 @@ Algorithm BLAH shows the pseudo-code for this implementation.
 11. return rhyme\_scheme\_counts\\
 }
 
-
 \subsection{Filter Below Threshold}
 
 This algorithm deals mostly with content-based features such as n-grams, persona relations and types of persona. These features are varied, unpredictable, error-prone and highly sensitive to bias in the corpus. However, they can still provide very interesting and useful data to guide generation and create authentic poems. For example, starting a limerick with 'There was a...' and talking about nature in Haikus.
 
-In this case, we perform any of the three aforementioned algorithms to collect all possible results. We then apply a filter so that only results that occur with \textit{significant frequency} can be taken into account.
+In this case, we perform the most suitable of the three aforementioned algorithms to collect all possible results. We then apply a filter so that only results that occur with \textit{significant frequency} can be taken into account.
 
 Unfortunately, there is no way to tell what frequency can really be counted as significant. It will vary greatly between types and subcategories of poems and is prone to many red-herrings. At the moment, we arbitrarily set the threshold to 10\% of the corpus, but this will need further research to refine.
 
-\section{Results}
-- Pretty graphs!
-- Some interpretations
-- How it can be used in next stage
-- How it can be extended upon
+\section{Testing by Inspection}
 
-\section{Performance}
-- Threaded analysis
-- 2 hours 7 minutes
-- No parallelism, but space for it
-- 40 seconds without graphs, 75 extra seconds with
+It is vital that the results are inspected carefully as it will be used to guide the generation process. Firstly, we want to make sure that our assumptions and predictions made at the beginning of this chapter in Section \ref{sec:balance-priorities} are correct. Secondly, we want to make sure that this data is usable in the generation stage and finally, we want to compare the data with known theory to see how well it matches. If there is any dispute then the feedback needs to be acted upon by improving the corpus and/or the code.
 
+While it is intended that such inspection will not be done in all cases, it is a necessary part of initial testing, investigation and refinement. 
+
+The results of the corpus of 444 limericks initially used to test this system are shown in Figures BLAH through BLAH for easy reading.
+
+AABBA rhyme scheme by far the most common (slide 9)
+5 lines long, one stanza (slide 27)
+No discernible syllable pattern (slide 35)
+Picks up that limericks generally talk about people and other animate objects (slide 32 and 59)
+Limericks talk about what these people are, what properties they have, what they are named, where they are, their capabilities, what they do, what is done to them (slide 39)
+The first line generally introduces the person, usually as either old or young (slide 54)
+Whole poem seems to be one sentence according to slide 60. This actually tells us that grammar, particularly full stops, is not entirely important. If it is, then we tend to have 2 distinct sentences (which is generally correct - first two lines and then last three lines)
+The lines in limericks tend to be statements of facts (not commands, opinions or probabilities). Slides 63-67
+Never in future tense, mostly in past an sometimes in present (slide 2)
+
+- Some interpretations + how it can be used in next stage
+
+\section{Concurrency and Performance}
+\label{sec:interpret-perf}
+
+Since poems are analysed and features are aggregated in isolation, there is plenty of scope for concurrency.
+
+For the poem analysis, a thread pool managed the concurrent execution of 10 workers, each analysing one poem. Trial and error showed 10 to be the optimal number of worker threads. Large resources such as the CMU Pronouncing Dictionary and WordNet were created once (as they take time to create) and shared amongst the threads.
+
+Under this set up with machine specifications as given in the Appendix section \ref{sec:specs} analysed 444 limericks in an average of 2 hours and 7 minutes.
+
+This was sufficiently fast for this corpus and since this is data is pre-processed and stored. However, using Python's Pool Executor library rather than the Threading module enables us to move over to processes instead of threads if we need multi-core parallelism. It should be noted that this might be slower due to larger overhead and the need for large resources to be created in multiple locations since memory cannot be shared.
+
+The generalisation process was actually fastest without the overhead of constructing the thread pool. With any number of workers, the average processing time of 42.3 seconds for the results of the 444 analysed limericks. Without threading, the process took 40.1 seconds on average (not including charting the data).
+
+This generalisation process is fast enough for it to be done over again with different given values as discussed in Section \ref{sec:approach} earlier in the chapter. This is will be very important in getting precise guidance during the generalisation phase. 
 
 
 % ------------------------------------------------------------------------
