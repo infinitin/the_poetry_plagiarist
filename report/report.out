@@ -72,8 +72,8 @@
 \BOOKMARK [1][]{section.4.3}{4.3 Algorithms}{chapter.4}% 72
 \BOOKMARK [2][]{subsection.4.3.1}{4.3.1 List Comprehension}{section.4.3}% 73
 \BOOKMARK [2][]{subsection.4.3.2}{4.3.2 Line by Line}{section.4.3}% 74
-\BOOKMARK [2][]{subsection.4.3.3}{4.3.3 Greedy Selection}{section.4.3}% 75
-\BOOKMARK [2][]{subsection.4.3.4}{4.3.4 Threshold Filter}{section.4.3}% 76
+\BOOKMARK [2][]{subsection.4.3.3}{4.3.3 Pick the Most Popular}{section.4.3}% 75
+\BOOKMARK [2][]{subsection.4.3.4}{4.3.4 Filter Below Threshold}{section.4.3}% 76
 \BOOKMARK [1][]{section.4.4}{4.4 Results}{chapter.4}% 77
 \BOOKMARK [1][]{section.4.5}{4.5 Performance}{chapter.4}% 78
 \BOOKMARK [0][]{chapter.5}{5 Evaluation Plan}{}% 79

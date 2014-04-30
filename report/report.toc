@@ -148,38 +148,38 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {4.3.1}List Comprehension}{59}{subsection.4.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.3.2}Line by Line}{59}{subsection.4.3.2}
+\contentsline {subsection}{\numberline {4.3.2}Line by Line}{60}{subsection.4.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.3.3}Greedy Selection}{60}{subsection.4.3.3}
+\contentsline {subsection}{\numberline {4.3.3}Pick the Most Popular}{60}{subsection.4.3.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.3.4}Threshold Filter}{60}{subsection.4.3.4}
+\contentsline {subsection}{\numberline {4.3.4}Filter Below Threshold}{62}{subsection.4.3.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.4}Results}{60}{section.4.4}
+\contentsline {section}{\numberline {4.4}Results}{62}{section.4.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.5}Performance}{60}{section.4.5}
+\contentsline {section}{\numberline {4.5}Performance}{62}{section.4.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {5}Evaluation Plan}{61}{chapter.5}
+\contentsline {chapter}{\numberline {5}Evaluation Plan}{63}{chapter.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.1}Comparison of Analysis Results to Theory}{61}{section.5.1}
+\contentsline {section}{\numberline {5.1}Comparison of Analysis Results to Theory}{63}{section.5.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.2}Turing-style Tests}{62}{section.5.2}
+\contentsline {section}{\numberline {5.2}Turing-style Tests}{64}{section.5.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.3}FACE Descriptive Model}{63}{section.5.3}
+\contentsline {section}{\numberline {5.3}FACE Descriptive Model}{65}{section.5.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.4}IDEA Descriptive Model}{63}{section.5.4}
+\contentsline {section}{\numberline {5.4}IDEA Descriptive Model}{65}{section.5.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Appendix A}{65}{appendix*.26}
+\contentsline {chapter}{Appendix A}{67}{appendix*.26}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.1}Dry Run of Generation Phase with Commentary}{65}{section.Alph0.1}
+\contentsline {section}{\numberline {A.1}Dry Run of Generation Phase with Commentary}{67}{section.Alph0.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.2}CMU Pronunciation Dictionary ARPABET Phoneme Set}{69}{section.Alph0.2}
+\contentsline {section}{\numberline {A.2}CMU Pronunciation Dictionary ARPABET Phoneme Set}{71}{section.Alph0.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.3}Penn Treebank Tagset}{69}{section.Alph0.3}
+\contentsline {section}{\numberline {A.3}Penn Treebank Tagset}{71}{section.Alph0.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.4}Testing Specifications}{69}{section.Alph0.4}
+\contentsline {section}{\numberline {A.4}Testing Specifications}{71}{section.Alph0.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.5}FrameNet Frames to ConceptNet Relations}{69}{section.Alph0.5}
+\contentsline {section}{\numberline {A.5}FrameNet Frames to ConceptNet Relations}{71}{section.Alph0.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.6}List of collapsable dependencies}{72}{section.Alph0.6}
+\contentsline {section}{\numberline {A.6}List of collapsable dependencies}{74}{section.Alph0.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.7}Onomatopoeia Types to ConceptNet Relations}{73}{section.Alph0.7}
+\contentsline {section}{\numberline {A.7}Onomatopoeia Types to ConceptNet Relations}{75}{section.Alph0.7}

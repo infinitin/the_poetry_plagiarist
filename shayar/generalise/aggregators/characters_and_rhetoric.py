@@ -20,7 +20,8 @@ def agg_character_count(poems, template):
                 if pos.startswith('N') and word != 'of':
                     n += 1
                     continue
-        template.character_count.append(n)
+        if n > 0:
+            template.character_count.append(n)
 
     logging.info('Aggregator finished: agg_character_count')
 

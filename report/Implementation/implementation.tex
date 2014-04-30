@@ -77,7 +77,7 @@ There are four main algorithms that are used to aggregate features. All features
 The simplest of the four algorithms utilises Python's built in functional programming feature; list comprehensions. In a single line of code we put all of the results for a particular feature from all poems in the collections into one big list. Algorithm BLAH shows the code for aggregating the number of stanzas.
 
 \textit{
-1. num\_stanzas = [poem.n\_stanzas for poem in poems]
+1. num\_stanzas = [poem.n\_stanzas for poem in poems]\\
 2. return Count(num\_stanzas)
 }
 
@@ -90,19 +90,58 @@ Sometimes we can gain more insight by interpreting patterns in a feature for \te
 
 Take stress patterns for example. The analysis of a single poem will store the result as \texttt{(x$_1$, x$_2$, ..., x$_n$)} where \texttt{x$_i$} is the stress pattern for line \texttt{i} up to the total number of lines in that poem, \texttt{n}.
 
-Suppose we have three poems in the corpus altogether. Then we have three tuples to aggregate: \texttt{(x$_1$, x$_2$, ..., x$_n$)}, \texttt{(y$_1$, y$_2$, ..., y$_n$)} and \texttt{(z$_1$, z$_2$, ..., z$_n$)}. If we are looking generalise the results on a line by line basis, we want to \textbf{transpose} the data to group each line together into \texttt{(x$_1$, y$_1$, z$_1$), (x$_2$, y$_2$, z$_2$), ... ,(x$_n$, y$_n$, z$_n$)}.
+Suppose we have three poems in the corpus altogether. Then we have three tuples to aggregate: \texttt{(x$_1$, x$_2$, ..., x$_n$)}, \texttt{(y$_1$, y$_2$, ..., y$_n$)} and \texttt{(z$_1$, z$_2$, ..., z$_n$)}. If we are looking generalise the results on a line by line basis, we want to \textbf{transpose} the data to group each line together and put them in a list with the format \texttt{[(x$_1$, y$_1$, z$_1$), (x$_2$, y$_2$, z$_2$), ... ,(x$_n$, y$_n$, z$_n$)]}.
 
-Once this is done, we can apply the earlier list comprehension algorithm described in Section \ref{sec:listcomp}.
+Once this is done, we can apply the earlier list comprehension algorithm described in Section \ref{sec:listcomp}. Algorithm BLAH outlines this full process with the stress pattern example.
 
-\subsection{Greedy Selection}
+\textit{
+1. stress\_patterns = [poem.stress\_patterns for poem in poems]\\
+2. stress\_patterns = transpose(stress\_patterns)\\
+3. return [Count(stress\_pattern\_single\_line) for stress\_pattern\_single\_line in stress\_patterns]\\
+}
 
-\subsection{Threshold Filter}
+\subsection{Pick the Most Popular}
+
+The analysis of a single poem often has some ambiguities. For example, the rhyme scheme for a collection can never be decided by looking at just one poem because words can be pronounced in more than one way. The limerick in Figure BLAH could either be 'AABBA' or 'ABCCA' because \textit{blah} can be pronounced as \textit{('BL', 'AH')} or \textit{('BL', 'EH')}.
+
+Because of this, the analysis phase doesn't make a claim on which rhyme scheme is the correct one and instead stores all possibilities in a list \texttt{[x$_1$, x$_2$, ..., x$_n$]}, where \texttt{x$_i$} is the \texttt{i\textsuperscript{th}} rhyme scheme possibility up to \texttt{n} possibilities for the particular poem being analysed.
+
+Let's assume again that we only have three poems in the corpus. Once they are all analysed, we get three lists \texttt{[x$_1$, x$_2$, ..., x$_n$]}, \texttt{[y$_1$, y$_2$, ..., y$_n$]} and \texttt{[z$_1$, z$_2$, ..., z$_n$]} of possible rhyme schemes for all three poems.
+
+The next step can be done inductively, but I will illustrate what we want to happen by taking three cases:
+\begin{itemize}
+\item{None of the possibilities across all poems are the same. Then all are equally probable and that gives us our probability distribution.}
+\item{There is \textit{one} set \texttt{(p, q, r)} such that \texttt{x$_p$} == \texttt{y$_q$} == \texttt{z$_r$}. Then we take that to be the rhyme scheme and no other possibility is considered.}
+\item{There is more than one set \texttt{(p$_1$, q$_1$, r$_1$), (p$_2$, q$_2$, r$_2$), ..., (p$_m$, q$_m$, r$_m$)} such that for all \texttt{i} up to \texttt{m}, \texttt{x$_p{_i}$} == \texttt{y$_q{_i}$} == \texttt{z$_r{_i}$}. Then all sets are candidate rhyme schemes where each rhyme scheme has a probability of \texttt{1/m}.}
+\item{There is a \texttt{p} and a \texttt{q} such that \texttt{x$_p$} == \texttt{y$_q$}, but no \texttt{r} such that \texttt{y$_q$} == \texttt{z$_r$}. In this case, the rhyme scheme \texttt{x$_p$} has a probability of two thirds, while every rhyme scheme in z has the probability of one third each.}
+\end{itemize}
+
+Essentially we want to find the most popular rhyme scheme among all poems, then remove all sets of possibilities that have it. We then repeat on the remaining poems over and over until we have no more poems. 
+
+Algorithm BLAH shows the pseudo-code for this implementation.
+
+\textit{
+ 1. rhyme\_scheme\_counts = {}\\
+ 2. possible\_rhyme\_scheme\_lists = [poem.rhyme\_schemes for poem in poems]\\
+ 3. all\_possible\_rhyme\_schemes = flatten(possible\_rhyme\_schemes)\\
+ 4. most\_popular\_rhyme\_schemes = most\_common(all\_possible\_rhyme\_schemes)\\
+ 5. for each rhyme\_scheme in most\_popular\_rhyme\_schemes\\
+ 6. 		rhyme\_scheme\_counts[most\_popular\_rhyme\_scheme)] = all\_possible\_rhyme\_schemes.count(rhyme\_scheme)\\
+ 7. for each possible\_rhyme\_scheme\_list in possible\_rhyme\_scheme\_lists\\
+ 8.		if possible\_rhyme\_scheme\_list contains any of  most\_popular\_rhyme\_schemes\\
+ 9.			remove possible\_rhyme\_scheme\_list from possible\_rhyme\_scheme\_lists\\
+10. if possible\_rhyme\_scheme\_lists is not empty, go to 3.\\
+11. return rhyme\_scheme\_counts\\
+}
 
 
-- Simplest list comp
-- Line by line
-- Pick best then repeat among those without it
-- Significant number of occurrences only
+\subsection{Filter Below Threshold}
+
+This algorithm deals mostly with content-based features such as n-grams, persona relations and types of persona. These features are varied, unpredictable, error-prone and highly sensitive to bias in the corpus. However, they can still provide very interesting and useful data to guide generation and create authentic poems. For example, starting a limerick with 'There was a...' and talking about nature in Haikus.
+
+In this case, we perform any of the three aforementioned algorithms to collect all possible results. We then apply a filter so that only results that occur with \textit{significant frequency} can be taken into account.
+
+Unfortunately, there is no way to tell what frequency can really be counted as significant. It will vary greatly between types and subcategories of poems and is prone to many red-herrings. At the moment, we arbitrarily set the threshold to 10\% of the corpus, but this will need further research to refine.
 
 \section{Results}
 - Pretty graphs!
