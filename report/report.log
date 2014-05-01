@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2014.1.22)  30 APR 2014 23:25
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2014.1.22)  1 MAY 2014 15:00
 entering extended mode
 **report.tex
 (C:\Users\Lenovo\PycharmProjects\the_poetry_plagiarist\report\report.tex
@@ -1889,17 +1889,99 @@ Overfull \hbox (103.41747pt too wide) in paragraph at lines 153--154
 ]possible[]rhyme[]schemes.count(rhyme[]scheme) 
  []
 
-[61] [62]) [63]
+[61]
+<Implementation/ImplementationFigs/RhymeSchemes.png, id=981, 567.3195pt x 422.7
+795pt>
+File: Implementation/ImplementationFigs/RhymeSchemes.png Graphic file (type png
+)
+ <use Implementation/ImplementationFigs/RhymeSchemes.png>
+Package pdftex.def Info: Implementation/ImplementationFigs/RhymeSchemes.png use
+d on input line 178.
+(pdftex.def)             Requested size: 178.60974pt x 133.10527pt.
+
+<Implementation/ImplementationFigs/StanzaLines.png, id=983, 567.3195pt x 422.77
+95pt>
+File: Implementation/ImplementationFigs/StanzaLines.png Graphic file (type png)
+
+ <use Implementation/ImplementationFigs/StanzaLines.png>
+Package pdftex.def Info: Implementation/ImplementationFigs/StanzaLines.png used
+ on input line 185.
+(pdftex.def)             Requested size: 178.60974pt x 133.10527pt.
+
+<Implementation/ImplementationFigs/PersonaTypesAndAnimation.png, id=984, 1218.0
+5063pt x 439.6425pt>
+File: Implementation/ImplementationFigs/PersonaTypesAndAnimation.png Graphic fi
+le (type png)
+
+<use Implementation/ImplementationFigs/PersonaTypesAndAnimation.png>
+Package pdftex.def Info: Implementation/ImplementationFigs/PersonaTypesAndAnima
+tion.png used on input line 193.
+(pdftex.def)             Requested size: 396.91324pt x 143.25778pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+<Implementation/ImplementationFigs/PersonaRelation.png, id=985, 567.3195pt x 42
+2.7795pt>
+File: Implementation/ImplementationFigs/PersonaRelation.png Graphic file (type 
+png)
+ <use Implementation/ImplementationFigs/PersonaRelation.png>
+Package pdftex.def Info: Implementation/ImplementationFigs/PersonaRelation.png 
+used on input line 203.
+(pdftex.def)             Requested size: 178.60974pt x 133.10527pt.
+
+<Implementation/ImplementationFigs/Line1NGrams.png, id=986, 567.3195pt x 422.77
+95pt>
+File: Implementation/ImplementationFigs/Line1NGrams.png Graphic file (type png)
+
+ <use Implementation/ImplementationFigs/Line1NGrams.png>
+Package pdftex.def Info: Implementation/ImplementationFigs/Line1NGrams.png used
+ on input line 210.
+(pdftex.def)             Requested size: 178.60974pt x 133.10527pt.
+
+<Implementation/ImplementationFigs/DistinctSentences.png, id=987, 567.3195pt x 
+422.7795pt>
+File: Implementation/ImplementationFigs/DistinctSentences.png Graphic file (typ
+e png)
+ <use Implementation/ImplementationFigs/DistinctSentences.png>
+Package pdftex.def Info: Implementation/ImplementationFigs/DistinctSentences.pn
+g used on input line 221.
+(pdftex.def)             Requested size: 178.60974pt x 133.10527pt.
+
+<Implementation/ImplementationFigs/OverallTense.png, id=988, 567.3195pt x 422.7
+795pt>
+File: Implementation/ImplementationFigs/OverallTense.png Graphic file (type png
+)
+ <use Implementation/ImplementationFigs/OverallTense.png>
+Package pdftex.def Info: Implementation/ImplementationFigs/OverallTense.png use
+d on input line 228.
+(pdftex.def)             Requested size: 178.60974pt x 133.10527pt.
+ [62]
+
+LaTeX Warning: Text page 63 contains only floats.
+
+[63 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Implementatio
+n/ImplementationFigs/RhymeSchemes.png> <C:/Users/Lenovo/PycharmProjects/the_poe
+try_plagiarist/report/Implementation/ImplementationFigs/StanzaLines.png> <C:/Us
+ers/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Implementation/Implemen
+tationFigs/PersonaTypesAndAnimation.png> <C:/Users/Lenovo/PycharmProjects/the_p
+oetry_plagiarist/report/Implementation/ImplementationFigs/PersonaRelation.png> 
+<C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Implementation/Im
+plementationFigs/Line1NGrams.png>] [64 <C:/Users/Lenovo/PycharmProjects/the_poe
+try_plagiarist/report/Implementation/ImplementationFigs/DistinctSentences.png> 
+<C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Implementation/Im
+plementationFigs/OverallTense.png>]) [65]
 (C:\Users\Lenovo\PycharmProjects\the_poetry_plagiarist\report\Evaluation/evalua
 tion.tex
 Chapter 5.
-[64
+[66
 
 
 
-] [65] [66]) [67]
+] [67] [68]) [69]
 (C:\Users\Lenovo\PycharmProjects\the_poetry_plagiarist\report\Appendix1/appendi
-x1.tex [68
+x1.tex [70
 
 
 
@@ -1909,29 +1991,29 @@ Overfull \hbox (56.91786pt too wide) in paragraph at lines 60--60
  |[]\OT1/cmr/bx/n/17.28 CMU Pro-nun-ci-a-tion Dic-tio-nary ARPA-BET Phoneme
  []
 
-[69] [70] [71]
+[71] [72] [73]
 
 Package Fancyhdr Warning: \headheight is too small (23.69576pt): 
  Make it at least 27.08337pt.
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[72]
+[74]
 Overfull \hbox (28.65047pt too wide) in paragraph at lines 212--221
 [][] 
  []
 
-[73] [74]
+[75] [76]
 Overfull \hbox (253.53154pt too wide) in paragraph at lines 311--324
 [][] 
  []
 
-[75] [76]) [77] [78
+[77] [78]) [79] [80
 
 
-] [79] [80] [81]
+] [81] [82] [83]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 145.
- [82]
+ [84]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 145.
 
 (C:\Users\Lenovo\PycharmProjects\the_poetry_plagiarist\report\report.aux
@@ -1950,7 +2032,7 @@ x1.aux))
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 145.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 145.
 Package rerunfilecheck Info: File `report.out' has not changed.
-(rerunfilecheck)             Checksum: D60A5D2A318410C5BD4CC730F810AEC4;7515.
+(rerunfilecheck)             Checksum: F0BBDBC61FBF1CF9994A6E15DE1666C1;7545.
 
 
 LaTeX Warning: There were undefined references.
@@ -1958,10 +2040,10 @@ LaTeX Warning: There were undefined references.
 Package logreq Info: Writing requests to 'report.run.xml'.
  ) 
 Here is how much of TeX's memory you used:
- 35038 strings out of 493921
- 744747 string characters out of 3144873
- 1244451 words of memory out of 3000000
- 37335 multiletter control sequences out of 15000+200000
+ 35097 strings out of 493921
+ 747058 string characters out of 3144873
+ 1245499 words of memory out of 3000000
+ 37378 multiletter control sequences out of 15000+200000
  12100 words of font info for 45 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
  70i,12n,76p,894b,3191s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1978,9 +2060,9 @@ x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x8
 6)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Program Files (x86)
 /MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt12.pfb><C:/Program Files (x86)/M
 iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt8.pfb>
-Output written on report.pdf (86 pages, 819872 bytes).
+Output written on report.pdf (88 pages, 1042352 bytes).
 PDF statistics:
- 1200 PDF objects out of 1200 (max. 8388607)
- 279 named destinations out of 1000 (max. 500000)
- 801 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1230 PDF objects out of 1440 (max. 8388607)
+ 285 named destinations out of 1000 (max. 500000)
+ 836 words of extra memory for PDF output out of 10000 (max. 10000000)
 

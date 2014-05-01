@@ -74,18 +74,18 @@
 \BOOKMARK [2][]{subsection.4.3.2}{4.3.2 Line by Line}{section.4.3}% 74
 \BOOKMARK [2][]{subsection.4.3.3}{4.3.3 Pick the Most Popular}{section.4.3}% 75
 \BOOKMARK [2][]{subsection.4.3.4}{4.3.4 Filter Below Threshold}{section.4.3}% 76
-\BOOKMARK [1][]{section.4.4}{4.4 Results}{chapter.4}% 77
-\BOOKMARK [1][]{section.4.5}{4.5 Performance}{chapter.4}% 78
+\BOOKMARK [1][]{section.4.4}{4.4 Testing by Inspection}{chapter.4}% 77
+\BOOKMARK [1][]{section.4.5}{4.5 Concurrency and Performance}{chapter.4}% 78
 \BOOKMARK [0][]{chapter.5}{5 Evaluation Plan}{}% 79
 \BOOKMARK [1][]{section.5.1}{5.1 Comparison of Analysis Results to Theory}{chapter.5}% 80
 \BOOKMARK [1][]{section.5.2}{5.2 Turing-style Tests}{chapter.5}% 81
 \BOOKMARK [1][]{section.5.3}{5.3 FACE Descriptive Model}{chapter.5}% 82
 \BOOKMARK [1][]{section.5.4}{5.4 IDEA Descriptive Model}{chapter.5}% 83
-\BOOKMARK [0][]{appendix*.27}{Appendix A}{}% 84
-\BOOKMARK [1][]{section.Alph0.1}{A.1 Dry Run of Generation Phase with Commentary}{appendix*.27}% 85
-\BOOKMARK [1][]{section.Alph0.2}{A.2 CMU Pronunciation Dictionary ARPABET Phoneme Set}{appendix*.27}% 86
-\BOOKMARK [1][]{section.Alph0.3}{A.3 Penn Treebank Tagset}{appendix*.27}% 87
-\BOOKMARK [1][]{section.Alph0.4}{A.4 Testing Specifications}{appendix*.27}% 88
-\BOOKMARK [1][]{section.Alph0.5}{A.5 FrameNet Frames to ConceptNet Relations}{appendix*.27}% 89
-\BOOKMARK [1][]{section.Alph0.6}{A.6 List of collapsable dependencies}{appendix*.27}% 90
-\BOOKMARK [1][]{section.Alph0.7}{A.7 Onomatopoeia Types to ConceptNet Relations}{appendix*.27}% 91
+\BOOKMARK [0][]{appendix*.31}{Appendix A}{}% 84
+\BOOKMARK [1][]{section.Alph0.1}{A.1 Dry Run of Generation Phase with Commentary}{appendix*.31}% 85
+\BOOKMARK [1][]{section.Alph0.2}{A.2 CMU Pronunciation Dictionary ARPABET Phoneme Set}{appendix*.31}% 86
+\BOOKMARK [1][]{section.Alph0.3}{A.3 Penn Treebank Tagset}{appendix*.31}% 87
+\BOOKMARK [1][]{section.Alph0.4}{A.4 Testing Specifications}{appendix*.31}% 88
+\BOOKMARK [1][]{section.Alph0.5}{A.5 FrameNet Frames to ConceptNet Relations}{appendix*.31}% 89
+\BOOKMARK [1][]{section.Alph0.6}{A.6 List of collapsable dependencies}{appendix*.31}% 90
+\BOOKMARK [1][]{section.Alph0.7}{A.7 Onomatopoeia Types to ConceptNet Relations}{appendix*.31}% 91

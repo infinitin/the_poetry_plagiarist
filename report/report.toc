@@ -154,32 +154,32 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {4.3.4}Filter Below Threshold}{62}{subsection.4.3.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.4}Results}{62}{section.4.4}
+\contentsline {section}{\numberline {4.4}Testing by Inspection}{62}{section.4.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.5}Performance}{63}{section.4.5}
+\contentsline {section}{\numberline {4.5}Concurrency and Performance}{64}{section.4.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {5}Evaluation Plan}{64}{chapter.5}
+\contentsline {chapter}{\numberline {5}Evaluation Plan}{66}{chapter.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.1}Comparison of Analysis Results to Theory}{64}{section.5.1}
+\contentsline {section}{\numberline {5.1}Comparison of Analysis Results to Theory}{66}{section.5.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.2}Turing-style Tests}{65}{section.5.2}
+\contentsline {section}{\numberline {5.2}Turing-style Tests}{67}{section.5.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.3}FACE Descriptive Model}{66}{section.5.3}
+\contentsline {section}{\numberline {5.3}FACE Descriptive Model}{68}{section.5.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.4}IDEA Descriptive Model}{66}{section.5.4}
+\contentsline {section}{\numberline {5.4}IDEA Descriptive Model}{68}{section.5.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Appendix A}{68}{appendix*.27}
+\contentsline {chapter}{Appendix A}{70}{appendix*.31}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.1}Dry Run of Generation Phase with Commentary}{68}{section.Alph0.1}
+\contentsline {section}{\numberline {A.1}Dry Run of Generation Phase with Commentary}{70}{section.Alph0.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.2}CMU Pronunciation Dictionary ARPABET Phoneme Set}{72}{section.Alph0.2}
+\contentsline {section}{\numberline {A.2}CMU Pronunciation Dictionary ARPABET Phoneme Set}{74}{section.Alph0.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.3}Penn Treebank Tagset}{72}{section.Alph0.3}
+\contentsline {section}{\numberline {A.3}Penn Treebank Tagset}{74}{section.Alph0.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.4}Testing Specifications}{72}{section.Alph0.4}
+\contentsline {section}{\numberline {A.4}Testing Specifications}{74}{section.Alph0.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.5}FrameNet Frames to ConceptNet Relations}{72}{section.Alph0.5}
+\contentsline {section}{\numberline {A.5}FrameNet Frames to ConceptNet Relations}{74}{section.Alph0.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.6}List of collapsable dependencies}{75}{section.Alph0.6}
+\contentsline {section}{\numberline {A.6}List of collapsable dependencies}{77}{section.Alph0.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.7}Onomatopoeia Types to ConceptNet Relations}{76}{section.Alph0.7}
+\contentsline {section}{\numberline {A.7}Onomatopoeia Types to ConceptNet Relations}{78}{section.Alph0.7}
