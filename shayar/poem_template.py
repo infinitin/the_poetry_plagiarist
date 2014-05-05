@@ -233,7 +233,7 @@ def plot_bar_simple(x, y, x_axis, y_axis, x_ticks, title):
 
     plt.tight_layout()
 
-    pp.savefig(bbox_inches='tight')
+    plt.savefig(title + '.png', bbox_inches='tight')
     plt.close()
 
 
@@ -257,7 +257,7 @@ def plot_bar_stacked(x, ys, x_axis, y_axis, x_ticks, title):
 
     plt.tight_layout()
 
-    pp.savefig(bbox_inches='tight')
+    plt.savefig(title + '.png', bbox_inches='tight')
     plt.close()
 
 

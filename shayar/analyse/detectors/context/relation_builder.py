@@ -1,6 +1,7 @@
 __author__ = 'Nitin'
 
 from onomatopoeia import add_onomatopoeia_relations
+from pattern.text.en import lemma
 
 # List of words that imply a negative. Used in conjunction with the 'neg' dependency
 negative_words = {'not', 'seldom', 'hardly', 'barely', 'scarcely', 'rarely', 'no', 'neither', "n't"}
@@ -79,7 +80,7 @@ def build_relations(dependencies, characters, candidate_relations):
 
     # Sometimes the related dependencies of an object earlier in a sentence overlaps with that of objects later in the
     #  same sentence (not usually the other way around).
-    # This causes duplication and ultimately incorrect relations for the earlier object. So we arbitrarily remove any
+    # This causes duplication and ultimately incorrect relations for the earlier object. So we remove any
     #  relations that earlier objects have that overlap with later objects.
     n = 1
     for character in characters:
@@ -115,8 +116,7 @@ def determine_relation_types(related_dependency, character):
         relation += 'HasProperty'
         character.add_relation(relation, form)
 
-    elif deprel == 'agent' or deprel == 'nsubj' or deprel == 'prep' and form != 'that' \
-            and not postag.startswith('P') and not postag.startswith('V'):
+    elif (deprel == 'agent' or deprel == 'nsubj' or deprel == 'prep') and form != 'that' and not postag.startswith('W') and not postag.startswith('P') and not postag.startswith('V'):
         location_prep = has_location_prep(form)
         if location_prep[0]:
 
@@ -132,7 +132,7 @@ def determine_relation_types(related_dependency, character):
             relation += 'IsA'
             character.add_relation(relation, form)
 
-    elif deprel == 'nsubjpass' or deprel == 'dobj':
+    elif deprel == 'nsubjpass' or deprel == 'dobj' and postag.startswith('V'):
         relation += 'ReceivesAction'
         character.add_relation(relation, form)
 
@@ -140,8 +140,10 @@ def determine_relation_types(related_dependency, character):
         character.add_relation('CapableOf', form)
 
     elif related_dependency[1]['POSTAG'].startswith('V'):
-        relation += 'TakesAction'
-        character.add_relation(relation, form)
+        lemmas = [lemma(word) for word in form.split(' ')]
+        if not 'be' in lemmas:
+            relation += 'TakesAction'
+            character.add_relation(relation, form)
 
     add_onomatopoeia_relations(form, character)
 

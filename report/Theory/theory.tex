@@ -8,7 +8,7 @@
 
 \def\baselinestretch{1.66}
 
-The first phase of implementation involves writing a suite of algorithms to analyse a single poem in terms of all the features mentioned in section \ref{sec:features}. The aim is to run a large collection of poems through this analysis to learn the usage patterns of poetic features for that collection of poems. This is in line with the ultimate aim of avoiding hard-coded rules for different types of poems.
+The first phase of implementation involves writing a suite of algorithms to analyse a single poem in terms of the features mentioned in section \ref{sec:features}. The aim is to run a large collection of poems through this analysis to learn the usage patterns of poetic features for any collection of poems. This is in line with the ultimate aim of generating poems without hard-coded rules for different types of poems.
 
 The algorithms will cover the detection of the use of:
 \begin{itemize}
@@ -40,9 +40,9 @@ The output of this phase is a full analysis of a single poem. In lieu of this, w
 \centering
 \textit{
 There once was a big brown cat\\
-That liked to eat a lot of mice\\
+That liked to eat a lot of mice.\\
 He got all round and fat\\
-Because they tasted so nice
+Because they tasted so nice.
 }
 \caption{A rhyming quatrain often used in teaching poetry}
 \label{fig:cat}
@@ -64,7 +64,7 @@ And the clean ones so seldom are comical.
 
 \section{Obtaining Phonetic Structure}
 
-Poets choose words based the \textit{sound} when spoken out loud as well as their (literal or symbolic) meaning. As explained in section \ref{sec:words}, we can use CMU Pronounciation Dictionary (CMUPD) to get around the difficulty of determining phonetic structure. A word in the CMUPD is mapped to a list of different pronunciations for the same word. Each pronunciation is a list of phonemes that make up that particular pronunciation of that word, including indication of emphasis on the syllables as explained in section \ref{sec:words}.
+Poets choose words based the \textit{sound} when spoken out loud as well as their (literal or symbolic) meaning. As explained in section \ref{sec:words}, we can use Carnegie Mellon University Pronounciation Dictionary (CMUPD) to get around the difficulty of determining phonetic structure. A word in the CMUPD is mapped to a list of different pronunciations for the same word. Each pronunciation is a list of phonemes that make up that particular pronunciation of that word, including indication of emphasis on the syllables.
 
 We want to convert the poems into their phoneme lists for use by the detection algorithms. This needs to be done word by word, so we first need to \textit{tokenise} the sentence. Tokenisation involves splitting each sentence into a list of its basic components; words and punctuation. Once we have done that, we can simply iterate through the list and run each word through the CMUPD. Some words have multiple pronunciations, so we consider each possible permutation of pronouncing each line of the poem. Each of the pronunciations of the first line of Figure \ref{fig:cat} is shown in Figure \ref{fig:catpronun}.
 
@@ -83,20 +83,20 @@ We want to convert the poems into their phoneme lists for use by the detection a
 
 Unfortunately, the CMUPD only has about 133,000 words. This means that we are occasionally unable to translate to the phonetic structure, particularly in Shakespearean poems. We get around this by temporarily converting the word into its closest match that exists in the dictionary and returning the phonetic structure in its place.
 
-Python \textit{difflib}\cite{difflib} provides a function to find the closest matches of a word to a list of words, based on the Ratcliff/Obershelp pattern recognition algorithm. The complexity of this algorithm is quadratic in the average case and cubic in the worst case. However, \textit{difflib}'s implementation avoids this using hashing a 'junk' heuristic so the worst case becomes quadratic and the best case linear. 
+Python \textit{difflib}\cite{difflib} provides a function to find the closest matches of a word to a list of words, based on the Ratcliff/Obershelp pattern recognition algorithm. The complexity of this algorithm is quadratic in the worst and average case, linear in the best case. 
 
-The behaviour is based on  how many subsequences the words have in common. Since we are only dealing with single words at a time, we have a higher chance of the best case. On average it takes 0.81 seconds to look up a 4-letter word and 1.09 seconds to look up an 10-letter word using machine specifications given in Appendix \ref{sec:specs}, which is easily fast enough given that speed is not a priority for this phase since it is a pre-processing phase, not a time-sensitive one.
+The behaviour is based on  how many subsequences the words have in common. Since we are only dealing with single words at a time, we have a higher chance of the best case. On average it takes 0.81 seconds to look up a 4-letter word and 1.09 seconds to look up an 10-letter word using machine specifications given in Appendix \ref{sec:specs}, which is fast enough given that this is a pre-processing phase, not a time-sensitive one.
 
 We could use a variety of other techniques to get around this problem other than string matching:
 \begin{itemize}
 \item{Break many syllable words into likely part-words, e.g. \textit{'thrift'} and \textit{'less'} instead of \textit{'thriftless'}}
 \item{Try all combinations of stress and syllables}
-\item{Train a finite-state transducer model as in \cite{dobrivsek2010towards}}
+\item{Train a finite-state transducer model as in Dobrivsek et al. 2010\cite{dobrivsek2010towards}}
 \end{itemize}
 
 The first option only works in a limited number of situations, most of which are handled by the string matching solution. For example, \textit{'thriftless'} would become \textit{'shiftless'}, which has an identical phonetic structure. The second option can result in poor performance and more false negatives or false positives than would be worth the added processing.
 
-The final option is the most viable and would be used if the generation phase depended on perfect readings of the poems, such as in the stochastic n-gram methodology of RKCP would (section \ref{sec:RKCP}). However, as we only use this as an approximation for abstraction in later phases, this implementation is not necessary.
+The final option is the most viable and would be used if the generation phase depended on perfect readings of the poems, such as in the stochastic n-gram methodology of RKCP (section \ref{sec:RKCP}). However, as we only use this as an approximation for a more general solution in later phases, such precision is beyond the scope of this project.
 
 
 \section{Rhyme}
@@ -243,11 +243,11 @@ The tense of each line can be found by analysing the verb in that sentence. CLiP
 We record the tense of each line as well as the overall tense of the poem. Each line in the cat poem in Figure \ref{fig:cat} is in past tense giving a past tense overall. The limerick in Figure \ref{fig:limerick} is in present tense overall because all but one line, is in present tense. 
 
 
-\section{Context and Pragmatics}
+\section{Characters and Context}
 Here we describe the approach to the difficult challenge of determining the context of the poem in terms of its characters, their relationships, descriptions etc. as described in section \ref{sec:pragpers}. The aim is to build a representation of the characters much like a human reader would in their mind. This will then be compared in the abstraction phase to find a correlation between these representations and collections of poetry.
 
 \subsection{ConceptNet Relations}
-ConceptNet is a semantic network of '\textit{general knowledge}'. Each node in the network is a natural language word or phrase called a \textit{concept}. Edges in the network represent a relationship between two concepts. These relationships come in various types including, but not limited to:
+ConceptNet is a semantic network of common sense and general knowledge. Each node in the network is a natural language word or phrase called a \textit{concept}. Edges in the network represent a relationship between two concepts. These relationships come in various types including, but not limited to:
 
 \begin{description}
 \item[MadeOf] \hfill \\ What is it made of? \hfill \\ E.g. tree - MadeOf $\rightarrow$ wood
@@ -277,9 +277,9 @@ Each of these relationships also has its inverse, e.g. NotIsA. We can use these 
 
 We also have the corresponding inverses for each of these relations. 
 
-In keeping with the theme of this paper we cannot simply hard-code or randomise these relations when building a poem. Therefore, we need to be able to analyse these relationships in existing poems during the abstraction phase to find correlations. For example, we may find that descriptive poems have a high number of \textit{HasProperty} relations and very few characters.  
+In keeping with the theme of this paper we cannot simply hard-code or randomise these relations when building a poem. We will instead analyse these relationships in existing poems and find correlations between them in the intepretation phase. For example, we may find that descriptive poems have a high number of \textit{HasProperty} relations and very few characters.  
 
-To do this, we need to be able to extract relationships between concepts in a particular poem in lieu of ConceptNet relations. For example, we would aim for the poem in Figure \ref{fig:cat} to give us: 
+To do this, we need to be able to extract ConceptNet-style relationships between concepts in a particular poem. If done correctly, the poem in Figure \ref{fig:cat} will give us: 
 \begin{itemize}
 \item{cat - HasProperty $\rightarrow$ big}
 \item{cat - HasProperty $\rightarrow$ brown}
@@ -290,7 +290,7 @@ To do this, we need to be able to extract relationships between concepts in a pa
 \item{lot of mice tasted so nice - Causes $\rightarrow$ cat got all round and fat}
 \end{itemize}
 
-The poem in Figure \ref{fig:limerick} would give us:
+The poem in Figure \ref{fig:limerick} will give us:
 \begin{itemize}
 \item{limerick - TakesAction $\rightarrow$ packs}
 \item{laughs - ReceivesAction $\rightarrow$ packs}
@@ -299,6 +299,7 @@ The poem in Figure \ref{fig:limerick} would give us:
 \item{laughs - AtLocation $\rightarrow$ space}
 \item{ones - HasProperty $\rightarrow$ good}
 \item{ones - NotHasProperty $\rightarrow$ clean}
+\item{ones - ReceivesAction $\rightarrow$ seen}
 \item{I - TakesAction $\rightarrow$ seen}
 \item{ones - ReceivesAction $\rightarrow$ seen}
 \item{ones - HasProperty $\rightarrow$ clean}
@@ -310,14 +311,16 @@ The poem in Figure \ref{fig:limerick} would give us:
 
 It would be very difficult to determine these relationships from a syntactical parse alone. This is due to the complex nature of the English language, in particular verb usage. For example, the phrase \textit{tasted so nice} is a description rather than an action because the word \textit{tasted} in this case is being used as a linking verb, where it is usually an action verb.
 
-These complexities are further compounded by the fact that we cannot rely on correct grammar in poems. We therefore need a \textit{semantic} parse. Noah's ARK is an informal research group run by Noah Smith at Carnegie Mellon University\cite{ark}. They provide online API access to two tools for linguistic structure analysis, \textit{SEMAFOR}\cite{chen2010semafor} and \textit{TurboParser}\cite{turboparser}. Both of these tools can be used in conjunction to extract ConceptNet relations from natural language.
+These complexities are further compounded by the fact that we cannot rely on correct grammar in poems. We therefore need a \textit{semantic} parse. 
+
+Noah's ARK is an informal research group run by Noah Smith at Carnegie Mellon University\cite{ark}. They provide online API access to two tools for linguistic structure analysis, \textit{SEMAFOR}\cite{chen2010semafor} and \textit{TurboParser}\cite{turboparser}. Both of these tools can be used in conjunction to extract ConceptNet relations from natural language.
 
 \subsubsection{FrameNet Semantic Role Labelling using SEMAFOR}
 \label{sec:sema}
 
 Semantic Role Labelling (SRL) is best described with an example. Take the sentence:
 {\centering\textit{"The shopkeeper told the customer to have a nice day"}}
-We wish to recognise the verb \textit{'to tell'} as the coordinating word (called the \textbf{target}), \textit{'the shopkeeper'} as the speaker, \textit{'have a nice day'} as the message and \textit{'the customer'} as the addressee. This can be seen clearly in Figure \ref{fig:shopkeeper-frames}, along with other potential labels. 
+We wish to recognise the verb \textit{'to tell'} as the coordinating word (called the \textbf{target}), \textit{'the shopkeeper'} as the speaker, \textit{'have a nice day'} as the message and \textit{'the customer'} as the addressee. This output from SEMAFOR can be seen clearly in Figure \ref{fig:shopkeeper-frames}, along with other potential labels. 
 
 \begin{figure}[h!]
 \centering
@@ -360,33 +363,241 @@ This representation fills the gaps left by the frame-semantic parse using the fo
 
 \begin{description}
 \item[governor - HasProperty $\rightarrow$ dependent]  \hfill \\
-If the dependency relation is \textit{'amod'}, \textit{'conj'} or \textit{'poss'}.
-If the dependent is an adjective
+If the dependency relation is \textit{'amod'}, \textit{'conj'} or \textit{'poss'} or if the dependent is an adjective.
 
 \item[governor - atLocation $\rightarrow$ dependent] \hfill \\
-If the dependency relation is \textit{'agent'}, \textit{'nsubj'} or \textit{'prep'}
-	and dependent is not a preposition or a verb.
+If the dependency relation is \textit{'agent'}, \textit{'nsubj'} or \textit{'prep'}, dependent is not a preposition, verb or 'WH' word and is a \textit{location preposition} (in, at etc.).
+	
+\item[governor - IsA $\rightarrow$ dependent] \hfill \\
+If the dependency relation is \textit{'agent'}, \textit{'nsubj'} or \textit{'prep'}, dependent is not a preposition, verb or 'WH' word and is not a preposition itself.
 	
 \item[governer - ReceivesAction $\rightarrow$ dependent] \hfill \\
-If the dependency relation is \textit{'nusbjpass'} or \textit{'dobj'}.
+If the dependency relation is \textit{'nusbjpass'} or \textit{'dobj'} and the dependent is a verb.
 
 \item[governer - CapableOf $\rightarrow$ dependent] \hfill \\
 If the dependency relation is \textit{'xsubj'} or \textit{'rcmod'}.
 
 \item[governer - TakesAction $\rightarrow$ dependent] \hfill \\
-If the dependency is a verb and no other relation has been found for this dependency.
+If the dependency is a verb whose lemma is not 'be' and no other relation has been found for this dependency.
 \end{description}
 
-Together, these tools provide a fairly complete coverage of the ConceptNet relations.
+Together, these tools provide fairly comprehensive coverage of the ConceptNet relations.
 
 
 \subsection{Extracting and Binding Relations to Characters}
 
-If we were to use the methods described above as they are, the derived ConceptNet relations would only be a set of abstracted FrameNet frames and matched dependencies. This alone does not give us much more information than if we were to use the frame-semantic parse on its own. The true usefulness of this approach only arises if the relations can be bound to characters of the poem. 
+If we were to use the methods described above as they are, the derived ConceptNet relations would only be a set of abstracted FrameNet frames and matched dependencies. This alone does not give us much more information than if we were to use the frame-semantic parse on its own. The true usefulness of this approach only arises if the relations can be \textbf{bound} to persona in the poem. 
 
-For the shopkeeper example, we would recognise \textit{'the shopkeeper'} and \textit{'the customer'} as \textbf{character objects} with \textit{SendMessage} and \textit{ReceiveMessage} relations bound to each of them with respect to the \textit{'have a nice day'} message.
+For the shopkeeper example, we would recognise \textit{'the shopkeeper'} and \textit{'the customer'} as \textbf{persona} with \textit{SendMessage} and \textit{ReceiveMessage} relations bound to each of them with respect to the \textit{'have a nice day'} message.
 
-We can represent the desired output as a set of 'hubs', with each character at the centre of the hub as in Figure \ref{fig:shopkeeper-hubs}. This will also improve our knowledge for the generation phase in that we will know the \textit{number of characters} typical for a collection of poems, the \textit{number and type of relations} associated with \textit{each} character, as well as allow us to find commonalities in the types of characters themselves.
+To accentuate the persona-centred structure, we can represent the desired output as a set of 'hubs', with each persona at the centre of the hub. Figures \ref{fig:shopkeeper-hubs}, \ref{fig:cat-hubs}, \ref{fig:limerick-hubs} show this for the shopkeeper, cat poem and limerick examples respectively. 
+
+\begin{figure*}[t!]
+    \centering
+    \begin{subfigure}[t]{0.45\textwidth}
+        \begin{tikzpicture}[->, node distance=2cm,main node/.style={circle, draw, font=\sffamily\bfseries}]
+        \tikzstyle{every node}=[font=\small]
+        
+          \node[main node] (1) [] {1};
+          \node[] (2) [left of=1] {shopkeeper};
+          \node[] (3) [above of=1]{have a nice day};
+          
+        
+          \path[every node/.style={font=\sffamily\small}]
+            (1) edge node [above] {IsA} (2)
+            	edge node [right] {SendMessage} (3);
+            	
+        \end{tikzpicture}
+        \caption{Hub for the 'shopkeeper' persona}
+    \end{subfigure}%
+    ~ 
+    \begin{subfigure}[t]{0.45\textwidth}
+        \begin{tikzpicture}[->, node distance=2cm,main node/.style={circle, draw, font=\sffamily\bfseries}]
+        \tikzstyle{every node}=[font=\small]
+        
+          \node[main node] (1) [] {2};
+          \node[] (2) [right of=1] {customer};
+          \node[] (3) [above of=1]{have a nice day};
+          
+          
+        
+          \path[every node/.style={font=\sffamily\small}]
+            (1) edge node [above] {IsA} (2)
+            	edge node [left] {ReceiveMessage} (3);
+            	
+        \end{tikzpicture}
+        \caption{Hub for 'customer' persona}
+    \end{subfigure}
+    \caption{Persona hubs diagram for shopkeeper example}
+    \label{fig:shopkeeper-hubs}
+\end{figure*}
+
+\begin{figure*}[t!]
+    \centering
+    \begin{subfigure}[t]{0.45\textwidth}
+        \centering
+        \begin{tikzpicture}[->, node distance=3cm,main node/.style={circle, draw, font=\sffamily\bfseries}]
+        \tikzstyle{every node}=[font=\small]
+        
+          \node[main node] (1) [] {1};
+          \node[] (2) [above of=1] {cat};
+          \node[] (3) [above left of=1]{big};
+          \node[] (4) [above right of=1] {brown};
+          \node[] (5) [below right of=1] {round};
+          \node[] (6) [below left of=1] {fat};
+          \node[] (7) [below of=1] {eat a lot of mice};
+          
+        
+          \path[every node/.style={font=\sffamily\small}]
+            (1) edge node [right] {IsA} (2)
+            	edge node [left] {HasProperty} (3)
+            	edge node [right] {HasProperty} (4)
+            	edge node [right] {HasProperty} (5)
+            	edge node [left] {HasProperty} (6)
+            	edge node [left] {Desires} (7);
+            	
+        \end{tikzpicture}
+        \caption{Hub for the 'cat' persona}
+    \end{subfigure}%
+    ~ 
+    \begin{subfigure}[t]{0.45\textwidth}
+        \centering
+        \begin{tikzpicture}[->, node distance=2cm,main node/.style={circle, draw, font=\sffamily\bfseries}]
+        \tikzstyle{every node}=[font=\small]
+        
+          \node[main node] (1) [] {2};
+          \node[] (2) [right of=1] {lot of mice};
+          \node[] (3) [above of=1]{tasted so nice};
+          
+          
+          \path[every node/.style={font=\sffamily\small}]
+            (1) edge node [above] {IsA} (2)
+            	edge node [left] {HasProperty} (3);
+            	
+        \end{tikzpicture}
+        \caption{Hub for the 'lot of mice' persona}
+    \end{subfigure}
+    \caption{Persona hubs diagram for cat poem example}
+    \label{fig:cat-hubs}
+\end{figure*}
+
+
+\begin{figure*}[t!]
+    \centering
+    \begin{subfigure}[t]{0.45\textwidth}
+            \begin{tikzpicture}[->, node distance=2cm,main node/.style={circle, draw, font=\sffamily\bfseries}]
+            \tikzstyle{every node}=[font=\small]
+            
+              \node[main node] (1) [] {1};
+              \node[] (2) [left of=1] {limerick};
+              \node[] (3) [above of=1]{packs};
+              
+            
+              \path[every node/.style={font=\sffamily\small}]
+                (1) edge node [above] {IsA} (2)
+                	edge node [right] {TakesAction} (3);
+                	
+            \end{tikzpicture}
+            \caption{Hub for the 'limerick' persona}
+        \end{subfigure}%
+        ~ 
+        \begin{subfigure}[t]{0.45\textwidth}
+            \begin{tikzpicture}[->, node distance=2cm,main node/.style={circle, draw, font=\sffamily\bfseries}]
+            \tikzstyle{every node}=[font=\small]
+            
+              \node[main node] (1) [] {2};
+              \node[] (2) [right of=1] {customer};
+              \node[] (3) [above of=1]{quite economical};
+              
+              
+              \path[every node/.style={font=\sffamily\small}]
+                (1) edge node [above] {IsA} (2)
+                	edge node [left] {HasProperty} (3);
+                	
+            \end{tikzpicture}
+            \caption{Hub for 'space' persona}
+        \end{subfigure}
+    \begin{subfigure}[t]{0.45\textwidth}
+                \begin{tikzpicture}[->, node distance=2cm,main node/.style={circle, draw, font=\sffamily\bfseries}]
+                \tikzstyle{every node}=[font=\small]
+                
+                  \node[main node] (1) [] {3};
+                  \node[] (2) [right of=1] {laughs};
+                  \node[] (3) [above of=1]{packs};
+                  \node[] (4) [below of=1]{anatomical};
+                  
+                
+                  \path[every node/.style={font=\sffamily\small}]
+                    (1) edge node [above] {IsA} (2)
+                       	edge node [right] {ReceivesAction} (3)
+                       	edge node [right] {HasProperty} (4);
+                       	
+                \end{tikzpicture}
+                \caption{Hub for the 'laughs' persona}
+            \end{subfigure}%
+            ~ 
+            \begin{subfigure}[t]{0.45\textwidth}
+                \begin{tikzpicture}[->, node distance=2cm,main node/.style={circle, draw, font=\sffamily\bfseries}]
+                \tikzstyle{every node}=[font=\small]
+                
+                  \node[main node] (1) [] {4};
+                  \node[] (2) [right of=1] {I};
+                  \node[] (3) [above of=1]{seen};
+                  
+                  
+                  \path[every node/.style={font=\sffamily\small}]
+                    (1) edge node [above] {IsA} (2)
+                       	edge node [left] {TakesAction} (3);
+                       	
+                \end{tikzpicture}
+                \caption{Hub for 'I' persona}
+            \end{subfigure}
+    \begin{subfigure}[t]{0.45\textwidth}
+            \begin{tikzpicture}[->, node distance=2cm,main node/.style={circle, draw, font=\sffamily\bfseries}]
+            \tikzstyle{every node}=[font=\small]
+            
+              \node[main node] (1) [] {5};
+              \node[] (2) [above right of=1] {limericks};
+              \node[] (3) [above left of=1]{good};
+              \node[] (4) [below right of=1]{clean};
+              \node[] (5) [below left of=1]{seen};
+              
+            
+              \path[every node/.style={font=\sffamily\small}]
+                (1) edge node [right] {IsA} (2)
+                    edge node [left] {HasProperty} (3)
+                    edge node [right] {NotHasProperty} (4)
+                    edge node [left] {ReceivesAction} (5);
+                         	
+            \end{tikzpicture}
+            \caption{Hub for the persona represented by the first occurrence of 'ones'}
+        \end{subfigure}%
+        ~ 
+        \begin{subfigure}[t]{0.45\textwidth}
+            \begin{tikzpicture}[->, node distance=2cm,main node/.style={circle, draw, font=\sffamily\bfseries}]
+            \tikzstyle{every node}=[font=\small]
+            
+              \node[main node] (1) [] {6};
+	          \node[] (2) [above right of=1] {limericks};
+	          \node[] (3) [above left of=1]{clean};
+	          \node[] (4) [below right of=1]{comical};
+	          \node[] (5) [below left of=1]{seen};
+	            
+	          
+	          \path[every node/.style={font=\sffamily\small}]
+	            (1) edge node [right] {IsA} (2)
+	                edge node [left] {HasProperty} (3)
+	                edge node [right] {NotHasProperty} (4)
+	                edge node [left] {ReceivesAction} (5);
+                         	
+            \end{tikzpicture}
+            \caption{Hub for the persona represented by the second occurrence of 'ones'}
+        \end{subfigure}
+    \caption{Persona hubs diagram for limerick example}
+    \label{fig:limerick-hubs}
+\end{figure*}
+
+This will also improve our knowledge for the generation phase in that we will know the \textit{number of characters} typical for a collection of poems, the \textit{number and type of relations} associated with \textit{each} character, as well as allow us to find commonalities in the types of characters themselves.
 
 To reach the desired representation, we execute Algorithm BLAH:
 
@@ -460,12 +671,12 @@ We parse this into a dependencies dictionary format shown in Table \ref{tab:DepD
 \label{tab:DepDict}
 \end{table}
 
-TurboParser and SEMAFOR are resource heavy (SEMAFOR requires minimum 8GB RAM), so it makes sense to run it on a server. Since the output from Noah's ARK is exactly what we want, the request is fairly quick (typically 1.24 seconds for simple sentences and 1.61 seconds for complex ones, tested using the specifications in Appendix \ref{sec:specs}) and speed is not a priority for this project, there is no need to run our own copy on our own local server.
+TurboParser and SEMAFOR are resource heavy (SEMAFOR requires minimum 8GB RAM), so it makes sense to run it on a server. Since the output from Noah's ARK is exactly what we want, the request is fairly quick (typically 1.24 seconds for simple sentences and 1.61 seconds for complex ones, tested using the specifications in Appendix \ref{sec:specs}) and speed is not a priority for this project, there is no need to run a copy on our own server.
 
 \subsubsection{Collapsing Loose Leaves of the Semantic Dependency Relations}
 \label{sec:collapse}
 
-In a lot of cases, the character or relation that we look for is a phrase, not just a word. For example in Figure \ref{fig:cat-deps1} the character should be \textit{'a lot of mice'} rather than just the noun \textit{'mice'}. In fact if we skipped this step, we would get two characters; \textit{'lot'} and \textit{'mice'}, which is obviously wrong.
+In a lot of cases, the character or relation that we look for is a phrase, not just a word. For example in Figure \ref{fig:cat-deps1} the character should be \textit{'a lot of mice'} rather than just the noun \textit{'mice'}. In fact if we skipped this step, we would get two characters - \textit{'lot'} and \textit{'mice'} - which is obviously wrong.
 
 \begin{figure}[h!]
 \centering
@@ -488,8 +699,8 @@ To solve this, we merge leaves of the tree together if the dependency is \textit
 By default, the parent of the dependency keeps all its attributes unchanged except for merging its form with that of the leaf, e.g. \textit{'of'} and \textit{'mice'} becomes \textit{'of mice'}. However, there are some cases where we wish to retain the part-of-speech (POS) tag of the leaf and overwrite the parent's POS tag:
 
 \begin{itemize}
-\item{If the leaf is an adjective, the parent is a verb and the dependency relation is \textit{'dep'} then we retain the adjective POS. These conditions usually imply a \textit{linking verb} generally used to describe a property, not an action. E.g. 'tasted so nice' is an adjectival phrase despite the use of a verb.}
-\item{The \textit{'acomp'} dependency relation is also evidence of a linking verb.}
+\item{If the leaf is an adjective, the parent is a verb and the dependency relation is \textit{'dep'} then we retain the adjective POS tag. These conditions usually imply a \textit{linking verb} generally used to describe a property, not an action. E.g. 'tasted so nice' is an adjectival phrase despite the use of a verb.}
+\item{Collapsing an \textit{'acomp'} dependency relation should also retain the child POS tag because it too is evidence of a linking verb.}
 \item{The \textit{'pobj'} and \textit{'prep'} dependency relations are evidence of prepositions, which often link words together that we do not want to keep separate. For example, \textit{of mice} should retain the 'NNS' POS tag of \textit{mice} rather than keep the 'PRP' POS tag of \textit{of}. }
 \end{itemize}
 
@@ -503,16 +714,76 @@ Then we follow Algorithm BLAH:\\
 7		The leaf is destroyed and the parent becomes the leaf.\\
 8		Loop back to line 3.\\
 
-Figure \ref{fig:collapsed-cat} shows a dry run of this algorithm is shown for of Figure \ref{fig:cat}.
+Figure \ref{fig:cat-deps1-collapsed} shows a dry run of this algorithm on the first line of the cat poem as shown in Figure \ref{fig:cat-deps1}.
 
-Figure \ref{fig:collapsed-limerick} shows the final output for the limerick in Figure \ref{fig:limerick}.
+\begin{figure}[h!]
+\centering
+\begin{subfigure}[t]{0.9\textwidth}
+	\centering
+    \includegraphics[width=140mm]{cat-deps1-collapsed-a}
+    \caption{Identify all of the leaves}
+\end{subfigure}
+\begin{subfigure}[t]{0.9\textwidth}
+	\centering
+    \includegraphics[width=140mm]{cat-deps1-collapsed-b}
+    \caption{Start from the rightmost leaf, \textit{'mice'} (ignore punctuation). Dependency \textit{'pobj'} is collapsable and we inherit the child POS tag.}
+\end{subfigure}
+\begin{subfigure}[t]{0.9\textwidth}
+	\centering
+    \includegraphics[width=140mm]{cat-deps1-collapsed-c}
+    \caption{Because we collapsed a leaf in the previous step and it remained a leaf, we see if we can collapse the same leaf further. Dependency \textit{'prep'} is collapsable and we inherit the child POS tag once again.}
+\end{subfigure}
+\begin{subfigure}[t]{0.9\textwidth}
+	\centering
+    \includegraphics[width=140mm]{cat-deps1-collapsed-d}
+    \caption{The leaf we collapsed is now a parent so we move left to the next leaf \textit{'a'}. Dependency \textit{'det'} is collapsable and we retain the parent POS tag this time.}
+\end{subfigure}
+\begin{subfigure}[t]{0.9\textwidth}
+	\centering
+    \includegraphics[width=140mm]{cat-deps1-collapsed-e}
+    \caption{We have a leaf again, but we cannot collapse any further. We move on to the next leaf, \textit{'to'}. Dependency \textit{'aux'} is collapsable and we retain the parent POS tag.}
+\end{subfigure}
+\begin{subfigure}[t]{0.9\textwidth}
+	\centering
+    \includegraphics[width=140mm]{cat-deps1-collapsed-f}
+    \caption{Move on to next leaves. Dependencies \textit{'nsubj'} and \textit{'amod'} are not collapsable, but \textit{'det'} is so we collapse leaf \textit{'a'} with its parent \textit{'cat'}.}
+\end{subfigure}
+\begin{subfigure}[t]{0.9\textwidth}
+	\centering
+    \includegraphics[width=140mm]{cat-deps1-collapsed-g}
+    \caption{Dependency \textit{'advmod'} is collapsable and \textit{'expl'} is not. Collapse accordingly and finish.}
+    \label{fig:cat-deps1-collapsed-g}
+\end{subfigure}
+\caption{Execution of Algorithm BLAH on the first half of the cat poem example.}
+\label{fig:cat-deps1-collapsed}
+\end{figure}
+
+The final diagrams of the collapsed dependencies for the full cat poem example can be seen in \ref{fig:cat-collapsed}
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.9\textwidth}
+	\centering
+    \includegraphics[width=140mm]{cat-deps1-collapsed-g}
+    \caption{First sentence.}
+    \label{fig:cat-deps1-collapsed-g-final}
+\end{subfigure}
+\begin{subfigure}[t]{0.9\textwidth}
+	\centering
+    \includegraphics[width=140mm]{cat-deps2-collapsed}
+    \caption{Second sentence.}
+    \label{fig:cat-deps2-collapsed}
+\end{subfigure}
+\caption{Final collapsed dependency diagrams for full cat poem example.}
+\label{fig:cat-collapsed}
+\end{figure}
 
 \subsubsection{Finding and Creating Characters}
 \label{sec:characters} 
 
-A naive method for finding characters would be to look for nouns and pronouns to recognise characters in a poem. This would actually be sufficient for a basic level of analysis, but we can do better. Notice in the poem in Figure \ref{fig:collapsed-cat}, the cat character is represented by the words \textit{'a cat'} and \textit{'he'}. Similarly, \textit{'a lot of mice'} and \textit{'they'} represent the same character.
+A naive method for finding persona would be to simply extract nouns and pronouns. This would actually be sufficient for a basic level of analysis, but we can do better. Notice that in the second half of the cat poem, the pronoun \textit{'he'} is used to refer to the 'cat' persona and \textit{'they'} to the 'a lot of mice' persona.
 
-In Computational Linguistics, the problem of matching these words is called \textit{Anaphora Resolution}. It is an ongoing research area and I will present a new potential solution in section \ref{sec:ar}.
+In Computational Linguistics, the problem of matching pronouns, or more generally \textit{anaphora}, with the \textit{antecedent} (or \textit{postcedent}) that it refers to is called \textit{\textbf{Anaphora Resolution}}. It is an ongoing research area and I will present a new potential solution in section \ref{sec:ar}.
 
 Part of the solution is gathering some basic semantic information about the character. We would like to determine whether the phrase representing the character:
 
@@ -524,15 +795,44 @@ Part of the solution is gathering some basic semantic information about the char
 
 Determining the first point is easiest:
 \begin{itemize}
-\item{If it is a noun and the POS tag ends in an 'S', it is plural.}
-\item{If it is a pronoun, check for membership in the manually built list of plural pronouns (e.g. 'they', 'them').}
+\item{If it is a noun and the POS tag ends in an 'S', it is plural (see \textit{'mice'} tag in \ref{fig:cat-deps1}).}
+\item{If it is a pronoun, check for membership in a manually built list of plural pronouns (e.g. 'they', 'them').}
 \end{itemize}
 
 The pronoun case for the second point is similar; we check for membership in the manually built list of male pronouns (e.g. 'he', 'him') and the separate list of female pronouns (e.g. 'she', 'her'). 
 
 The noun case is trickier. First we need to find the \textit{synset} of the noun. Synsets are sets of cognitive synonyms, e.g. \textit{car} and \textit{automobile} are in the same synset, but not \textit{cable car}. Once we have this, we can use the \textit{hypernym} relationships between synsets.
 
-A hypernym of a synset is a \textbf{type-of} relation. For example, the synset \textit{mammal} is a hypernym of \textit{cat} because cats are mammals. Similarly, \textit{animal} is also a hypernym of \textit{cat}, as well as being a hypernym of \textit{mammal}. The full hypernym tree for \textit{cat} can be seen in Figure \ref{fig:hypernym-tree-cat}. 
+A hypernym of a synset is a \textbf{type-of} relation. For example, the synset \textit{mammal} is a hypernym of \textit{cat} because cats are mammals. Similarly, \textit{animal} is also a hypernym of \textit{cat}, as well as being a hypernym of \textit{mammal}. The full hypernym tree for \textit{cat}, according to lexical database WordNet, can be seen in Figure \ref{fig:hypernym-tree-cat}. 
+
+
+\begin{figure}[h!]
+\centering
+\tikzstyle{every node}=[anchor=west]
+\begin{tikzpicture}[%
+  grow via three points={one child at (0.2,-0.5) and %
+  two children at (0.5,-0.7) and (0.5,-1.4)},%
+  edge from parent path={(\tikzparentnode.south)%
+  |- (\tikzchildnode.west)}]
+\node {cat}
+    child { node {feline}
+       child {node {carnivore}
+       	child {node {placental}
+       	 child {node {mammal}
+       	  child {node {vertebrate}
+       	   child {node {chordate}
+       		child {node {animal}
+       		 child {node {organism}
+       		  child {node {living thing}
+       		   child {node {whole}
+       			child {node {object}
+       			 child {node {physical entity}
+       			  child {node {entity}
+          }}}}}}}}}}}}};
+\end{tikzpicture}
+\caption{Full inherited hypernym tree for 'cat' synset according to WordNet}
+\label{fig:hypernym-tree-cat}
+\end{figure}
 
 The \textit{direct hypernym} of a synset is the synset directly above it in the hypernym tree; \textit{feline} in the case of the cat. The \textit{inherited hypernym} of a word refers to any word that appears in its hypernym tree. WordNet\cite{miller1995wordnet}, a lexical database of the cognitive relations between words provides all of these resources.
 
@@ -541,7 +841,7 @@ Now, finally, we can check for whether a noun is male or female by looking for t
 We can extend this practice to the final point of determining the animation of the character by checking if the \textit{'living thing'} and \textit{'physical object'} synsets are inherited hypernyms of the synset of the noun concerned.
 
 
-\subsubsection{Extracting Candidate ConceptNet Relations from the Frame-Semantic Parse}
+\subsubsection{Extracting Candidate Relations from the Frame-Semantic Parse}
 \label{sec:candidate}
 
 Using the map between FrameNet frames and ConceptNet relations mentioned in section \ref{sec:sema}, we can carry out Algorithm BLAH.
@@ -552,44 +852,412 @@ Using the map between FrameNet frames and ConceptNet relations mentioned in sect
 4		retrieve the frame elements\\
 5		replace the frame elements with the corresponding text from the poem\\
 6			if we cannot find all the elements we are looking for, we leave it blank\\
-7		add mapping from the text of the target to the newly built relation\\
+7		add mapping from the text of the target to the newly built relation so we can find it later\\
 	
-Let us use the cat poem in Figure \ref{fig:cat} again for a dry run.
+Figure \ref{fig:cat1-fn-cn} show a dry run of this algorithm using the first half of the cat poem in Figure \ref{fig:cat}.
 
-The final output for the limerick in Figure \ref{fig:limerick} would be...
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.9\textwidth}
+	\centering
+    \includegraphics[width=140mm]{cat1-fn-cn-a}
+    \caption{Get all the frames found by the frame-semantic parse}
+\end{subfigure}
+\begin{subfigure}[t]{0.9\textwidth}
+	\centering
+    \includegraphics[width=140mm]{cat1-fn-cn-b}
+    \caption{The only one that we can convert to a relation is the Experiencer\_Focus frame}
+\end{subfigure}
+\begin{subfigure}[t]{0.9\textwidth}
+	\centering
+    \includegraphics[width=140mm]{cat1-fn-cn-c}
+    \caption{Retrieve the frame elements with an anchor on the target text, \textit{'liked'}}
+\end{subfigure}
+\begin{subfigure}[t]{0.9\textwidth}
+	\centering
+    \includegraphics[width=140mm]{cat1-fn-cn-d}
+    \caption{Create the corresponding relation and map it to the target}
+\end{subfigure}
+\caption{Execution of Algorithm BLAH on the first half of the cat poem example.}
+\label{fig:cat1-fn-cn}
+\end{figure}
 
-\subsubsection{Obtaining the Associated Dependency Relations for each Character}
+No frames could be converted into ConceptNet relations for the second half of the cat poem example.
 
-This step breaks up the semantic dependency tree and flattens it into the character-centric hubs like the ones in Figure \ref{fig:shopkeeper-hubs}. We will walk through the cat poem in Figure \ref{fig:cat}.
+\subsubsection{Obtaining the Associated Dependency Relations for each Persona}
 
-First, we want to identify the character object in the dependency tree. All of the relations going out from it are naturally related dependencies of the character, so they get added to the hub, see Figure \ref{fig:cat-out-deps}.
+This step breaks up the semantic dependency tree and flattens it into the character-centric hubs like the ones in Figure \ref{fig:cat-hubs}. We start from Figure \ref{fig:cat-deps1-collapsed-g}.
 
-The single relation coming into this character is also a related dependency, so we added that to the hub and reverse the direction of the branch, see Figure \ref{fig:cat-in-deps}.
+First, we want to identify the persona in the dependency tree. All of the relations going out from it are naturally related dependencies of the persona, so they get added to the hub.
 
-Now we have a tree with the character as the root. The next step is to flatten it so that everything is related to the character. We do this by recursively converting all the grandchildren of the character root node to a direct child node until there are no more grandchildren. This process is illustrated in Figure \ref{fig:cat-gchild-child}.
+The single relation coming into this character is also a related dependency. We reverse the direction of the branch and add it to the hub. The hub so far is more like a spider diagram, as shown in Figure \ref{fig:cat-in-out-deps}.
 
-We repeat this process for each character starting from the leftmost character in the sentence. However, we quickly notice that there will be duplication; the same dependency will be associated to more than one character. To avoid this, we can prune these hubs by working backwards through the list of characters (i.e. starting from the rightmost in the sentence) and removing duplications in earlier nodes, as shown in Figure \ref{fig:cat-dups}. 
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[->, node distance=3cm,main node/.style={circle, draw, font=\sffamily\bfseries}]
+    \tikzstyle{every node}=[font=\small]
+    
+      \node[main node] (1) [] {a cat};
+      \node[] (3) [above left of=1]{big (JJ)};
+      \node[] (4) [above right of=1] {brown (JJ)};
+      \node[] (5) [below right of=1] {liked (VBD)};
+      \node[] (6) [below left of=5] {who (WP)};
+      \node[] (7) [above right of=5] {to eat (VB)};
+      \node[] (8) [below right of=7] {a lot of mice (VB)};
+      \node[] (9) [below left of=1] {once was (VBD)};
+      \node[] (10) [above left of=9] {There (EX)};
+      
+    
+      \path[every node/.style={font=\sffamily\small}]
+        (1) edge node [left] {amod} (3)
+           	edge node [right] {amod} (4)
+           	edge node [left] {rcmod} (5)
+           	edge node [left] {nsubj} (9)
+        (5) edge node [right] {nsubj} (6)
+            edge node [left] {xcomp} (7)
+        (7) edge node [right] {dobj} (8)
+        (9) edge node [left] {expl} (10);
+          
+    \end{tikzpicture}
+    \caption{Initial dependency hub for the 'cat' persona.}
+    \label{fig:cat-in-out-deps}
+\end{figure}%
 
-This works because the head of the last character will be lower down in the tree than the head of any other character. This has the effect of removing the duplicated dependencies such that the last one standing is only associated to the one it was closest to in the original tree.
+Now we have a tree with the character as the root. The next step is to flatten it so that everything is related to the character. We do this by recursively converting all the grandchildren of the character root node to a direct child node until there are no more grandchildren. This is shown in Figure \ref{fig:first-hubs}.
 
-The final associated dependency relation hubs for the limerick in Figure \ref{fig:limerick} can be seen in Figure \ref{fig:limerick-associated}
+We repeat this process for each persona starting from the leftmost character in the sentence. The persona hubs for the second half of the poem is shown in Figure \ref{fig:second-hubs}.
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.9\textwidth}
+	\centering
+    \begin{tikzpicture}[->, node distance=3cm,main node/.style={circle, draw, font=\sffamily\bfseries}]
+        \tikzstyle{every node}=[font=\small]
+        
+          \node[main node] (1) [] {a cat};
+          \node[] (3) [above left of=1]{big (JJ)};
+          \node[] (4) [above right of=1] {brown (JJ)};
+          \node[] (5) [below right of=1] {liked (VBD)};
+          \node[] (6) [below left of=5] {who (WP)};
+          \node[] (7) [above right of=5] {to eat (VB)};
+          \node[] (8) [below right of=7] {a lot of mice (VB)};
+          \node[] (9) [below left of=1] {once was (VBD)};
+          \node[] (10) [above left of=9] {There (EX)};
+          
+        
+          \path[every node/.style={font=\sffamily\small}]
+            (1) edge node [left] {amod} (3)
+               	edge node [right] {amod} (4)
+               	edge node [right] {rcmod} (5)
+               	edge node [left] {nsubj} (9)
+                edge node [below right] {nsubj} (6)
+                edge node [above] {xcomp} (7)
+                edge node [right] {dobj} (8)
+                edge node [above] {expl} (10);
+              
+        \end{tikzpicture}
+    \caption{Persona: 'cat'}
+\end{subfigure}
+\begin{subfigure}[t]{0.9\textwidth}
+	\centering
+    \begin{tikzpicture}[->, node distance=4cm,main node/.style={circle, draw, font=\sffamily\bfseries}]
+        \tikzstyle{every node}=[font=\small]
+        
+          \node[main node] (1) [] {a lot of mice};
+          \node[] (2) [right of=1]{to eat (VB)};
+          
+        
+          \path[every node/.style={font=\sffamily\small}]
+            (1) edge node [above] {dobj} (2);
+              
+        \end{tikzpicture}
+    \caption{Persona: 'a lot of mice'}
+\end{subfigure}
+\caption{All persona hubs for the first sentence of the cat example.}
+\label{fig:first-hubs}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.9\textwidth}
+	\centering
+    \begin{tikzpicture}[->, node distance=3cm,main node/.style={circle, draw, font=\sffamily\bfseries}]
+        \tikzstyle{every node}=[font=\small]
+        
+          \node[main node] (1) [] {he};
+          \node[] (2) [above of=1]{got (VBD)};
+          \node[] (3) [below right of=2]{tasted so nice (JJ)};
+          \node[] (4) [below of=3]{they (PRP)};
+          \node[] (5) [below right of=3]{because (IN)};
+          \node[] (6) [below left of=2]{all round (JJ)};
+          \node[] (7) [below of=6]{and (CC)};
+          \node[] (8) [below left of=6]{fat (JJ)};
+          
+        
+          \path[every node/.style={font=\sffamily\small}]
+            (1) edge node [right] {nsubj} (2)
+            (2) edge node [right] {conj} (3)
+                edge node [left] {dobj} (6)
+            (3) edge node [left] {nsubj} (4)
+                edge node [right] {mark} (5)
+            (6) edge node [right] {cc} (7)
+                edge node [left] {conj} (8);
+              
+        \end{tikzpicture}
+    \caption{Persona: 'he' before flattening.}
+\end{subfigure}
+\begin{subfigure}[t]{0.9\textwidth}
+	\centering
+    \begin{tikzpicture}[->, node distance=3cm,main node/.style={circle, draw, font=\sffamily\bfseries}]
+        \tikzstyle{every node}=[font=\small]
+        
+          \node[main node] (1) [] {he};
+          \node[] (2) [above of=1]{got (VBD)};
+          \node[] (3) [below right of=2]{tasted so nice (JJ)};
+          \node[] (4) [below of=3]{they (PRP)};
+          \node[] (5) [below right of=3]{because (IN)};
+          \node[] (6) [below left of=2]{all round (JJ)};
+          \node[] (7) [below of=6]{and (CC)};
+          \node[] (8) [below left of=6]{fat (JJ)};
+          
+        
+          \path[every node/.style={font=\sffamily\small}]
+            (1) edge node [right] {nsubj} (2)
+                edge node [below right] {conj} (3)
+                edge node [below left] {dobj} (6)
+                edge node [left] {nsubj} (4)
+                edge node [above right] {mark} (5)
+                edge node [right] {cc} (7)
+                edge node [above left] {conj} (8);
+              
+        \end{tikzpicture}
+    \caption{Persona: 'he' after flattening.}
+\end{subfigure}
+\begin{subfigure}[t]{0.45\textwidth}
+	\centering
+    \begin{tikzpicture}[->, node distance=4cm,main node/.style={circle, draw, font=\sffamily\bfseries}]
+        \tikzstyle{every node}=[font=\small]
+        
+          \node[main node] (1) [] {they};
+          \node[] (2) [right of=1]{tasted so nice (JJ)};
+          \node[] (3) [below left of=2]{because (IN)};
+          
+        
+          \path[every node/.style={font=\sffamily\small}]
+            (1) edge node [above] {nsubj} (2)
+            (2) edge node [right] {mark} (3);
+              
+        \end{tikzpicture}
+    \caption{Persona: 'they' before flattening}
+\end{subfigure}
+~
+\begin{subfigure}[t]{0.45\textwidth}
+	\centering
+    \begin{tikzpicture}[->, node distance=4cm,main node/.style={circle, draw, font=\sffamily\bfseries}]
+        \tikzstyle{every node}=[font=\small]
+        
+          \node[main node] (1) [] {they};
+          \node[] (2) [right of=1]{tasted so nice (JJ)};
+          \node[] (3) [below left of=2]{because (IN)};
+          
+        
+          \path[every node/.style={font=\sffamily\small}]
+            (1) edge node [above] {nsubj} (2)
+                edge node [right] {mark} (3);
+              
+        \end{tikzpicture}
+    \caption{Persona: 'they' after flattening}
+\end{subfigure}
+\caption{All persona hubs for the second sentence of the cat example.}
+\label{fig:second-hubs}
+\end{figure}
+
+Notice that the same dependency \textit{'mark'} dependency with \textit{because (IN)} is associated to both \textit{'he'} and \textit{'they'}. The \textit{tasted so nice (JJ)} node is also involved with both of those nodes, although the type of dependency differs.
+
+In most cases, we do not want either of these duplicated dependencies as it can lead to redundant relations. We will deal with this in the next step where we convert these dependencies into relations.
 
 \subsubsection{Binding ConceptNet Relations to Characters}
 	
-Now that we have our hub data structure for all characters, we now need to look at each branch of each hub and decide if it can be converted into a ConceptNet relation.
+Now that we have our hub data structure for all persona, we now need to look at each branch of each hub and decide if it can be converted into a ConceptNet relation.
 
 First, we check if the text of the child maps to the target of one of the candidate relations we extracted from the frame-semantic parse in section \ref{sec:candidate}. If it does, then we accept that and move on to the next child without checking the dependency relation since it is likely to be the less accurate. 
 
-Sometimes the dependant of the relation will be blank because we could not find the right frame element as explained earlier. In this case, we just assume that this is a relation to the next character in the characters list. This is a fair assumption given the limited number of characters per sentence, the general forward reference structure of sentences and the fact that most of the relations we look to build are between characters.
+Sometimes the dependant of the relation will be blank because we could not find the right frame element as explained earlier. In this case, we just assume that this is a relation to the next persona in the list. This is a fair assumption given the limited number of persona per sentence, the probable forward reference structure of sentences and the fact that most of the relations we look to build are between persona.
 
 If there is no candidate relation for this child, we then look at the type of the dependency between it and the character. We use the heuristics described in section \ref{sec:turbo} to convert it into a ConceptNet relation.
 
-If we cannot find a relation through either of the above methods then it is likely there isn't one, so we remove it from the hub.
+If we cannot find a relation through either of the above methods then it is likely there isn't one, so we remove it from the hub and move on to the next child.
 
-In all of those steps, we need to look out for negative adverbs such as 'not', 'seldom', 'rarely' etc. which we use to negate the ConceptNet relation found. We also need to look out for antonyms in the target word in the frame-semantic parse. For example, the \textit{Experiencer-focus} frame helps us find \textit{Desires} and \textit{NotDesires} ConceptNet relations depending on whether the target word is synonymous with 'love' or with 'hate', for example.
+In all of those steps, we need to look out for negative adverbs such as 'not', 'seldom', 'rarely' etc. which we use to negate the ConceptNet relation found. We also need to look out for antonyms in the target word in the frame-semantic parse. For example, the \textit{Experiencer-focus} frame helps us find \textit{Desires} and \textit{NotDesires} ConceptNet relations depending on whether the target word is synonymous with 'love' or with 'hate'.
 
-We can see this final step being applied to our ongoing examples are in Figure \ref{fig:cat-bind} Figure \ref{fig:limerick-bind}.
+To avoid the aforementioned duplication problem, we prune these hubs by working backwards through the persona (i.e. starting from the rightmost in the sentence) and removing any relations that occur in earlier persona. So in fact the \textit{'lot of mice'} persona has no relations (before anaphora resolution, see Section \ref{sec:ar}).
 
+The duplication is mostly due to the reversing of direction on incoming dependencies (heads). This pruning method works because the head of the last persona will be lower down in the dependency tree than the head of any other persona. Duplicated relations are removed such that it is solely associated to the one it was closest to in the original tree.
+
+We can see this entire process being applied step-by-step to the 'cat' persona in our ongoing example in Figure \ref{fig:cat-bind}. The final hubs for all persona can be seen in Figure \ref{fig:persona-binded}.
+
+\begin{figure}[h!]
+\centering
+\begin{subfigure}[t]{0.45\textwidth}
+	\centering
+    \begin{tikzpicture}[->, node distance=3cm,main node/.style={circle, draw, font=\sffamily\bfseries}]
+        \tikzstyle{every node}=[font=\small]
+        
+          \node[main node] (1) [] {a cat};
+          \node[] (3) [right of=1]{big (JJ)};
+          \node[] (4) [below right of=1] {brown (JJ)};
+          \node[] (5) [below left of=1] {liked (VBD)};
+          \node[] (6) [below of=1] {who (WP)};
+          \node[] (7) [left of=1] {to eat (VB)};
+          \node[] (8) [above left of=1] {a lot of mice (NNS)};
+          \node[] (9) [above right of=1] {once was (VBD)};
+          \node[] (10) [above of=1] {There (EX)};
+          
+        
+          \path[every node/.style={font=\sffamily\small}]
+            (1) edge node [below] {amod} (3)
+               	edge node [right] {amod} (4)
+               	edge node [left] {rcmod} (5)
+               	edge node [right] {nsubj} (9)
+                edge node [left] {nsubj} (6)
+                edge node [above] {xcomp} (7)
+                edge node [left] {dobj} (8)
+                edge node [right] {expl} (10);
+              
+        \end{tikzpicture}
+    \caption{Dependency hub for the 'cat' character, rearranged such that the children appear in the order they do in the original sentence, starting from \textit{'There'} in the 12 o'clock position in a clockwise direction.}
+\end{subfigure}
+~
+\begin{subfigure}[t]{0.45\textwidth}
+	\centering
+    \begin{tikzpicture}[->, node distance=3cm,main node/.style={circle, draw, font=\sffamily\bfseries}]
+        \tikzstyle{every node}=[font=\small]
+        
+          \node[main node] (1) [] {a cat};
+          \node[] (3) [right of=1]{big (JJ)};
+          \node[] (4) [below right of=1] {brown (JJ)};
+          \node[] (5) [below left of=1] {liked (VBD)};
+          \node[] (6) [below of=1] {who (WP)};
+          \node[] (7) [left of=1] {to eat (VB)};
+          \node[] (8) [above left of=1] {a lot of mice (NNS)};
+          
+        
+          \path[every node/.style={font=\sffamily\small}]
+            (1) edge node [below] {amod} (3)
+               	edge node [right] {amod} (4)
+               	edge node [left] {rcmod} (5)
+                edge node [left] {nsubj} (6)
+                edge node [above] {xcomp} (7)
+                edge node [left] {dobj} (8);
+              
+        \end{tikzpicture}
+    \caption{Dependency \textit{expl} does not map to any relation and the child \textit{'There (EX)'} does not map to any relation via the frame-semantic parse. It is removed. Similarly remove the \textit{'once was (VB)'} child because it is a verb but the lemma includes the verb 'be'.}
+\end{subfigure}
+\caption{Full binding process for the 'cat' character}
+\label{cat-bind}
+\end{figure}
+
+\begin{figure}[h!]
+\ContinuedFloat
+\centering
+\begin{subfigure}[t]{0.45\textwidth}
+	\centering
+    \begin{tikzpicture}[->, node distance=3cm,main node/.style={circle, draw, font=\sffamily\bfseries}]
+        \tikzstyle{every node}=[font=\small]
+        
+          \node[main node] (1) [] {a cat};
+          \node[] (3) [right of=1]{big};
+          \node[] (4) [below right of=1] {brown};
+          \node[] (5) [below left of=1] {liked (VBD)};
+          \node[] (6) [below of=1] {who (WP)};
+          \node[] (7) [left of=1] {to eat (VB)};
+          \node[] (8) [above left of=1] {a lot of mice (NNS)};
+          
+        
+          \path[every node/.style={font=\sffamily\small}]
+            (1) edge node [below] {HasProperty} (3)
+               	edge node [right] {HasProperty} (4)
+               	edge node [left] {rcmod} (5)
+                edge node [left] {nsubj} (6)
+                edge node [above] {xcomp} (7)
+                edge node [left] {dobj} (8);
+              
+        \end{tikzpicture}
+    \caption{Dependency \textit{'amod'} maps directly to a HasProperty relation for both the \textit{'big (JJ)'} and \textit{'brown (JJ)'} children.}
+\end{subfigure}
+~
+\begin{subfigure}[t]{0.45\textwidth}
+	\centering
+    \begin{tikzpicture}[->, node distance=3cm,main node/.style={circle, draw, font=\sffamily\bfseries}]
+        \tikzstyle{every node}=[font=\small]
+        
+          \node[main node] (1) [] {a cat};
+          \node[] (3) [right of=1]{big};
+          \node[] (4) [below right of=1] {brown};
+          \node[] (5) [below left of=1] {liked (VBD)};
+          \node[] (7) [left of=1] {to eat (VB)};
+          \node[] (8) [above left of=1] {a lot of mice (NNS)};
+          
+        
+          \path[every node/.style={font=\sffamily\small}]
+            (1) edge node [below] {HasProperty} (3)
+               	edge node [right] {HasProperty} (4)
+               	edge node [left] {rcmod} (5)
+                edge node [above] {xcomp} (7)
+                edge node [left] {dobj} (8);
+              
+        \end{tikzpicture}
+    \caption{Remove the \textit{'who (WP)'} child because it has a POS tag starting with W so the \textit{'nsubj'} relation does not matter.}
+\end{subfigure}
+~
+\begin{subfigure}[t]{0.45\textwidth}
+	\centering
+    \begin{tikzpicture}[->, node distance=3cm,main node/.style={circle, draw, font=\sffamily\bfseries}]
+        \tikzstyle{every node}=[font=\small]
+        
+          \node[main node] (1) [] {a cat};
+          \node[] (3) [right of=1]{big};
+          \node[] (4) [below right of=1] {brown};
+          \node[] (5) [below left of=1] {to eat a lot of mice};
+          \node[] (7) [left of=1] {to eat (VB)};
+          \node[] (8) [above left of=1] {a lot of mice (NNS)};
+          
+        
+          \path[every node/.style={font=\sffamily\small}]
+            (1) edge node [below] {HasProperty} (3)
+               	edge node [right] {HasProperty} (4)
+               	edge node [left] {Desires} (5)
+                edge node [above] {xcomp} (7)
+                edge node [left] {dobj} (8);
+              
+        \end{tikzpicture}
+    \caption{In this case, \textit{'liked (VBD)'} is a target mapped to a relation found from the frame-semantic parse. It gets replaced by this relation with no further consideration.}
+\end{subfigure}
+~
+\begin{subfigure}[t]{0.45\textwidth}
+	\centering
+    \begin{tikzpicture}[->, node distance=3cm,main node/.style={circle, draw, font=\sffamily\bfseries}]
+        \tikzstyle{every node}=[font=\small]
+        
+          \node[main node] (1) [] {a cat};
+          \node[] (3) [right of=1]{big};
+          \node[] (4) [below right of=1] {brown};
+          \node[] (5) [below left of=1] {to eat a lot of mice};
+          \node[] (7) [left of=1] {to eat};
+          
+        
+          \path[every node/.style={font=\sffamily\small}]
+            (1) edge node [below] {HasProperty} (3)
+               	edge node [right] {HasProperty} (4)
+               	edge node [left] {Desires} (5)
+                edge node [above] {TakeAction} (7);
+              
+        \end{tikzpicture}
+    \caption{The final \textit{'a lot of mice (NNS)'} child is not a verb so the \textit{'dobj'} relation has no effect.}
+\end{subfigure}
+\caption{Full binding process for the 'cat' character}
+\label{cat-bind}
+\end{figure}
 
 \subsection{Anaphora Resolution}
 \label{sec:ar}

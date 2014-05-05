@@ -45,7 +45,7 @@
 \BOOKMARK [2][]{subsection.3.5.1}{3.5.1 Structure and Repetition}{section.3.5}% 45
 \BOOKMARK [2][]{subsection.3.5.2}{3.5.2 Point of View}{section.3.5}% 46
 \BOOKMARK [2][]{subsection.3.5.3}{3.5.3 Tense}{section.3.5}% 47
-\BOOKMARK [1][]{section.3.6}{3.6 Context and Pragmatics}{chapter.3}% 48
+\BOOKMARK [1][]{section.3.6}{3.6 Characters and Context}{chapter.3}% 48
 \BOOKMARK [2][]{subsection.3.6.1}{3.6.1 ConceptNet Relations}{section.3.6}% 49
 \BOOKMARK [2][]{subsection.3.6.2}{3.6.2 Semantic Labelling using Noah's ARK}{section.3.6}% 50
 \BOOKMARK [3][]{subsubsection.3.6.2.1}{3.6.2.1 FrameNet Semantic Role Labelling using SEMAFOR}{subsection.3.6.2}% 51
@@ -54,8 +54,8 @@
 \BOOKMARK [3][]{subsubsection.3.6.3.1}{3.6.3.1 Obtaining the Semantic Dependency Relations and Frame-Semantic Parse from Noah's ARK}{subsection.3.6.3}% 54
 \BOOKMARK [3][]{subsubsection.3.6.3.2}{3.6.3.2 Collapsing Loose Leaves of the Semantic Dependency Relations}{subsection.3.6.3}% 55
 \BOOKMARK [3][]{subsubsection.3.6.3.3}{3.6.3.3 Finding and Creating Characters}{subsection.3.6.3}% 56
-\BOOKMARK [3][]{subsubsection.3.6.3.4}{3.6.3.4 Extracting Candidate ConceptNet Relations from the Frame-Semantic Parse}{subsection.3.6.3}% 57
-\BOOKMARK [3][]{subsubsection.3.6.3.5}{3.6.3.5 Obtaining the Associated Dependency Relations for each Character}{subsection.3.6.3}% 58
+\BOOKMARK [3][]{subsubsection.3.6.3.4}{3.6.3.4 Extracting Candidate Relations from the Frame-Semantic Parse}{subsection.3.6.3}% 57
+\BOOKMARK [3][]{subsubsection.3.6.3.5}{3.6.3.5 Obtaining the Associated Dependency Relations for each Persona}{subsection.3.6.3}% 58
 \BOOKMARK [3][]{subsubsection.3.6.3.6}{3.6.3.6 Binding ConceptNet Relations to Characters}{subsection.3.6.3}% 59
 \BOOKMARK [2][]{subsection.3.6.4}{3.6.4 Anaphora Resolution}{section.3.6}% 60
 \BOOKMARK [2][]{subsection.3.6.5}{3.6.5 Peeks at Future Development of Pragmatic Language Analysis}{section.3.6}% 61
@@ -74,18 +74,18 @@
 \BOOKMARK [2][]{subsection.4.3.2}{4.3.2 Line by Line}{section.4.3}% 74
 \BOOKMARK [2][]{subsection.4.3.3}{4.3.3 Pick the Most Popular}{section.4.3}% 75
 \BOOKMARK [2][]{subsection.4.3.4}{4.3.4 Filter Below Threshold}{section.4.3}% 76
-\BOOKMARK [1][]{section.4.4}{4.4 Testing by Inspection}{chapter.4}% 77
+\BOOKMARK [1][]{section.4.4}{4.4 Testing and Validation by Inspection}{chapter.4}% 77
 \BOOKMARK [1][]{section.4.5}{4.5 Concurrency and Performance}{chapter.4}% 78
 \BOOKMARK [0][]{chapter.5}{5 Evaluation Plan}{}% 79
 \BOOKMARK [1][]{section.5.1}{5.1 Comparison of Analysis Results to Theory}{chapter.5}% 80
 \BOOKMARK [1][]{section.5.2}{5.2 Turing-style Tests}{chapter.5}% 81
 \BOOKMARK [1][]{section.5.3}{5.3 FACE Descriptive Model}{chapter.5}% 82
 \BOOKMARK [1][]{section.5.4}{5.4 IDEA Descriptive Model}{chapter.5}% 83
-\BOOKMARK [0][]{appendix*.31}{Appendix A}{}% 84
-\BOOKMARK [1][]{section.Alph0.1}{A.1 Dry Run of Generation Phase with Commentary}{appendix*.31}% 85
-\BOOKMARK [1][]{section.Alph0.2}{A.2 CMU Pronunciation Dictionary ARPABET Phoneme Set}{appendix*.31}% 86
-\BOOKMARK [1][]{section.Alph0.3}{A.3 Penn Treebank Tagset}{appendix*.31}% 87
-\BOOKMARK [1][]{section.Alph0.4}{A.4 Testing Specifications}{appendix*.31}% 88
-\BOOKMARK [1][]{section.Alph0.5}{A.5 FrameNet Frames to ConceptNet Relations}{appendix*.31}% 89
-\BOOKMARK [1][]{section.Alph0.6}{A.6 List of collapsable dependencies}{appendix*.31}% 90
-\BOOKMARK [1][]{section.Alph0.7}{A.7 Onomatopoeia Types to ConceptNet Relations}{appendix*.31}% 91
+\BOOKMARK [0][]{appendix*.43}{Appendix A}{}% 84
+\BOOKMARK [1][]{section.Alph0.1}{A.1 Dry Run of Generation Phase with Commentary}{appendix*.43}% 85
+\BOOKMARK [1][]{section.Alph0.2}{A.2 CMU Pronunciation Dictionary ARPABET Phoneme Set}{appendix*.43}% 86
+\BOOKMARK [1][]{section.Alph0.3}{A.3 Penn Treebank Tagset}{appendix*.43}% 87
+\BOOKMARK [1][]{section.Alph0.4}{A.4 Testing Specifications}{appendix*.43}% 88
+\BOOKMARK [1][]{section.Alph0.5}{A.5 FrameNet Frames to ConceptNet Relations}{appendix*.43}% 89
+\BOOKMARK [1][]{section.Alph0.6}{A.6 List of collapsable dependencies}{appendix*.43}% 90
+\BOOKMARK [1][]{section.Alph0.7}{A.7 Onomatopoeia Types to ConceptNet Relations}{appendix*.43}% 91

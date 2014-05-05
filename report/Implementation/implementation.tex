@@ -161,13 +161,21 @@ In this case, we perform the most suitable of the three aforementioned algorithm
 
 Unfortunately, there is no way to tell what frequency can really be counted as significant. It will vary greatly between types and subcategories of poems and is prone to many red-herrings. Trial and error has given the optimal threshold of 9\% of the corpus, but this will need further research to refine.
 
-\section{Testing by Inspection}
+\section{Testing and Validation by Inspection}
 
-It is vital that the results are inspected carefully as it will be used to guide the generation process. Firstly, we want to make sure that our assumptions and predictions made at the beginning of this chapter in Section \ref{sec:balance-priorities} are correct. Secondly, we want to make sure that this data is usable in the generation stage. Finally, we want to compare the data with known theory to see how well it matches. If there is any dispute then the feedback needs to be acted upon by improving the corpus and/or the code.
+We test and validate this phase by looking at two factors:
+\begin{enumerate}
+\item{Accuracy of our assumptions and predictions made at the start of this chapter.}
+\item{Comparison of results with known poetry theory.}
+\end{enumerate}
 
-While it is intended that such inspection will not be done in all cases, it is a necessary part of initial testing, investigation and refinement. 
+While some automated tests can be written to make sure that the algorithms above are implemented correctly, there is no desired output against which to compare. We cannot check for exact matches with poetry theory because this is an \textit{investigation} where known theory is the hypothesis. Writing tests that fail if the hypothesis is not correct is a very biased investigation to say the least.
 
-A noteworthy subset of the results of the 444 limericks scrounged from the Internet initially used to test this system are shown in Figures \ref{fig:rhyme-scheme-chart} through \ref{fig:overall-tense-chart} for easy reading. The y-axis is given in raw values instead of probabilities for this testing stage.
+Therefore, the best way to test and validate the results of this stage is by inspection. Python provides a convenient interface for graphing large sets of data, which also make it easy to inspect by eye. 
+
+The corpus used to test the system comprises of 450 limericks scrounged from the Internet. As mentioned earlier, poems gathered from the Internet are likely to have more outliers and anomalies, which makes for a more rigorous examination of this system. 
+
+A noteworthy subset of the results are shown in Figures \ref{fig:rhyme-scheme-chart} through \ref{fig:overall-tense-chart}. The y-axis is given in raw values instead of probabilities for this testing stage.
 \newcommand{\exedout}{%
   \rule{0.8\textwidth}{0.5\textwidth}%
 }
@@ -189,13 +197,22 @@ A noteworthy subset of the results of the 444 limericks scrounged from the Inter
 \end{minipage}
 \end{figure}
 
-\begin{figure}[h!]
-\centering
-\includegraphics[width=.9\linewidth]{PersonaTypesAndAnimation}
-\caption{Limericks generally talk about people and other animate objects}
-\label{fig:persona-chart}
-\end{figure}
-
+\begin{figure*}[t!]
+    \centering
+    \begin{subfigure}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=.9\textwidth]{PersonaTypes}
+        \caption{Limericks talk a lot about people}
+    \end{subfigure}%
+    ~ 
+    \begin{subfigure}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=.9\textwidth]{PersonaAnimation}
+        \caption{Most persona are either animate objects or 'concepts' such as places}
+    \end{subfigure}
+    \caption{Limericks generally talk about people and other animate objects}
+    \label{fig:persona-chart}
+\end{figure*}
 
 \begin{figure}[t!]
 \centering
@@ -232,6 +249,8 @@ A noteworthy subset of the results of the 444 limericks scrounged from the Inter
 \end{minipage}
 \end{figure}
 
+The results of these and other corpora will be explored fully in the Evaluation chapter later. It is sufficient for the moment to say that these are good results because they match sufficiently to known poetry theory. They are also usable in the generation phase to apply rules but also guides us on the strength of these rules, suggesting where divergence may be applicable as desired.
+
 \section{Concurrency and Performance}
 \label{sec:interpret-perf}
 
@@ -239,11 +258,11 @@ Since poems are analysed and features are aggregated \textit{in isolation}, ther
 
 For the poem analysis, a thread pool managed the concurrent execution of 10 workers, each analysing one poem. Trial and error showed 10 to be the optimal number of worker threads. Large resources such as the CMU Pronouncing Dictionary and WordNet were created once and shared amongst the threads.
 
-Under this set up with machine specifications as given in the Appendix section \ref{sec:specs}, 444 limericks were analysed in an average of 2 hours and 7 minutes.
+Under this set up with machine specifications as given in the Appendix section \ref{sec:specs}, 450 limericks were analysed in an average of 2 hours and 14 minutes.
 
 This was sufficiently fast for this corpus and since this is data is pre-processed and stored. However, using Python's Pool Executor library rather than the Threading module enables us to move over to processes instead of threads with minimal effort if we need multi-core parallelism. It should be noted that this might be slower due to larger overhead and the need for large resources to be created in multiple locations since memory cannot be shared.
 
-The generalisation process was actually fastest without the overhead of constructing the thread pool. With a thread pool of any number of workers, the average processing time is above 42 seconds for the results of the 444 analysed limericks. Without threading, the process took 40.1 seconds on average.
+The generalisation process was actually fastest without the overhead of constructing the thread pool. With a thread pool of any number of workers, the average processing time is above 42 seconds for the results of the 450 analysed limericks. Without threading, the process took 40.1 seconds on average.
 
 This generalisation process is fast enough for it to be done over again with different given values as discussed in Section \ref{sec:approach} earlier in the chapter. This is will be very important in getting precise guidance during the generalisation phase. 
 
