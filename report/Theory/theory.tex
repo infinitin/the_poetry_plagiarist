@@ -1175,7 +1175,7 @@ We can see this entire process being applied step-by-step to the 'cat' persona i
           
         
           \path[every node/.style={font=\sffamily\small}]
-            (1) edge node [below] {HasProperty} (3)
+            (1) edge node [above] {HasProperty} (3)
                	edge node [right] {HasProperty} (4)
                	edge node [left] {rcmod} (5)
                 edge node [left] {nsubj} (6)
@@ -1200,7 +1200,7 @@ We can see this entire process being applied step-by-step to the 'cat' persona i
           
         
           \path[every node/.style={font=\sffamily\small}]
-            (1) edge node [below] {HasProperty} (3)
+            (1) edge node [above] {HasProperty} (3)
                	edge node [right] {HasProperty} (4)
                	edge node [left] {rcmod} (5)
                 edge node [above] {xcomp} (7)
@@ -1224,7 +1224,7 @@ We can see this entire process being applied step-by-step to the 'cat' persona i
           
         
           \path[every node/.style={font=\sffamily\small}]
-            (1) edge node [below] {HasProperty} (3)
+            (1) edge node [above] {HasProperty} (3)
                	edge node [right] {HasProperty} (4)
                	edge node [left] {Desires} (5)
                 edge node [above] {xcomp} (7)
@@ -1247,7 +1247,7 @@ We can see this entire process being applied step-by-step to the 'cat' persona i
           
         
           \path[every node/.style={font=\sffamily\small}]
-            (1) edge node [below] {HasProperty} (3)
+            (1) edge node [above] {HasProperty} (3)
                	edge node [right] {HasProperty} (4)
                	edge node [left] {Desires} (5)
                 edge node [above] {TakeAction} (7);
@@ -1257,6 +1257,81 @@ We can see this entire process being applied step-by-step to the 'cat' persona i
 \end{subfigure}
 \caption{Full binding process for the 'cat' character}
 \label{cat-bind}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\begin{subfigure}[t]{0.9\textwidth}
+	\centering
+    \begin{tikzpicture}[->, node distance=4.5cm,main node/.style={circle, draw, font=\sffamily\bfseries}]
+        \tikzstyle{every node}=[font=\small]
+        
+          \node[main node] (1) [] {a cat};
+          \node[] (3) [right of=1]{big};
+          \node[] (4) [below right of=1] {brown};
+          \node[] (5) [below left of=1] {to eat a lot of mice};
+          \node[] (7) [left of=1] {to eat};
+          
+        
+          \path[every node/.style={font=\sffamily\small}]
+            (1) edge node [above] {HasProperty} (3)
+               	edge node [right] {HasProperty} (4)
+               	edge node [left] {Desires} (5)
+                edge node [above] {TakeAction} (7);
+              
+        \end{tikzpicture}
+    \caption{Bindings for 'cat' persona.}
+\end{subfigure}
+\begin{subfigure}[t]{0.9\textwidth}
+	\centering
+    \begin{tikzpicture}[->, node distance=4.5cm,main node/.style={circle, draw, font=\sffamily\bfseries}]
+        \tikzstyle{every node}=[font=\small]
+        
+          \node[main node] (1) [] {a lot of mice};
+          \node[] (2) [right of=1]{to eat};
+          
+          \path[every node/.style={font=\sffamily\small}]
+            (1) edge node [above] {ReceiveAction} (2);
+              
+        \end{tikzpicture}
+    \caption{Bindings for 'lot of mice' persona.}
+\end{subfigure}
+\begin{subfigure}[t]{0.9\textwidth}
+	\centering
+    \begin{tikzpicture}[->, node distance=4.5cm,main node/.style={circle, draw, font=\sffamily\bfseries}]
+        \tikzstyle{every node}=[font=\small]
+        
+          \node[main node] (1) [] {he};
+          \node[] (2) [right of=1]{got (VBD)};
+          \node[] (6) [below left of=1]{all round};
+          \node[] (8) [above left of=1]{fat};
+          
+        
+          \path[every node/.style={font=\sffamily\small}]
+            (1) edge node [above] {TakeAction} (2)
+                edge node [left] {HasProperty} (6)
+                edge node [left] {HasProperty} (8);
+              
+        \end{tikzpicture}
+    \caption{Bindings for 'he' persona. Notice \textit{'tasted so nice (JJ)'} was removed from here because of duplication with \textit{'they'} persona below. We get one anomaly with \textit{'got'} because we were unable to distinguish between definitions of 'became' and 'retrieved'.}
+\end{subfigure}
+\begin{subfigure}[t]{0.9\textwidth}
+	\centering
+    \begin{tikzpicture}[->, node distance=4.5cm,main node/.style={circle, draw, font=\sffamily\bfseries}]
+        \tikzstyle{every node}=[font=\small]
+        
+          \node[main node] (1) [] {they};
+          \node[] (2) [right of=1]{tasted so nice (JJ)};
+          
+        
+          \path[every node/.style={font=\sffamily\small}]
+            (1) edge node [above] {HasProperty} (2);
+              
+        \end{tikzpicture}
+    \caption{Bindings for 'they' persona.}
+\end{subfigure}
+\caption{Complete bindings for all characters}
+\label{all-binded}
 \end{figure}
 
 \subsection{Anaphora Resolution}
