@@ -44,10 +44,10 @@ class Template:
 
         self.hypernym_ancestors = []  # List of tuples<string, num>
 
-        self.polarity_by_line = []  # List of floats
-        self.subjectivity_by_line = []  # List of floats
-        self.modality_by_line = []  # List of floats
-        self.mood_by_line = []  # List of strings
+        self.polarity_by_line = []  # List of list of floats
+        self.subjectivity_by_line = []  # List of list of floats
+        self.modality_by_line = []  # List of list of floats
+        self.mood_by_line = []  # List of list of strings
 
     def plot(self, attribute, pdfpages):
         global pp
@@ -233,7 +233,7 @@ def plot_bar_simple(x, y, x_axis, y_axis, x_ticks, title):
 
     plt.tight_layout()
 
-    plt.savefig(title + '.png', bbox_inches='tight')
+    pp.savefig(bbox_inches='tight')
     plt.close()
 
 
@@ -257,7 +257,7 @@ def plot_bar_stacked(x, ys, x_axis, y_axis, x_ticks, title):
 
     plt.tight_layout()
 
-    plt.savefig(title + '.png', bbox_inches='tight')
+    pp.savefig(bbox_inches='tight')
     plt.close()
 
 
