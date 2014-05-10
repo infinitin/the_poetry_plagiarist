@@ -31,7 +31,7 @@ class Poem:
         self.metaphors = []                 # List of set of metaphors used
         self.personification = []           # List of characters that might be evidence for personification
 
-        self.point_of_view = ""             # first/second/third person
+        self.perspective = ""             # first/second/third person
 
         self.polarity_by_line = []
         self.subjectivity_by_line = []
@@ -57,7 +57,7 @@ class Poem:
             "The stress patterns of each of the lines is: " + str(self.stress_pattern) + ".\n\n" +\
             "The use of similes probably has an affect: " + str(self.similes) + ",\n" +\
             "As does the use of onomatopoeia: " + str(self.onomatopoeia) + ".\n\n" +\
-            "The poem is written in " + str(self.point_of_view) + " person.\n" +\
+            "The poem is written in " + str(self.perspective) + " person.\n" +\
             "The characters in the poem are: " + str(self.characters)
 
 

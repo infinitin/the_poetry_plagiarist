@@ -1,10 +1,13 @@
 __author__ = 'Nitin'
 import random
+from shayar.poem import Poem
 
 
 def init_poem(settings):
-    stanzas = random.choice(settings["stanzas"])
-    distinct_sentences = list(random.choice(settings["distinct_sentences"]))
+    new_poem = Poem([])
+
+    poem.stanzas = random.choice(settings["stanzas"])
+    poem.dis = list(random.choice(settings["distinct_sentences"]))
     lines = list(random.choice(settings["num_lines"]))
 
     tenses = list(random.choice(settings["line_tenses"]))

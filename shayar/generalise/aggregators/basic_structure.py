@@ -34,7 +34,17 @@ def agg_n_distinct_sentences(poems, template):
 
 def agg_line_tenses(poems, template):
     logging.info('Starting aggregator: agg_line_tenses')
-    template.line_tenses = [tuple(poem.tenses) for poem in poems]
+    # Transpose the lists so that you have a list of tenses for each line in order
+    max_num_lines = max([len(poem.tenses) for poem in poems])-1
+    for line in range(0, max_num_lines):
+        line_tenses = []
+        for poem in poems:
+            try:
+                line_tenses.append(poem.tenses[line])
+            except IndexError:
+                logging.error('Could not find tense for: ' + str(poem.tenses) + ' with index ' + str(line))
+                line_tenses.append('unknown')
+        template.line_tenses.append(line_tenses)
     logging.info('Aggregator finished: agg_line_tenses')
 
 
@@ -42,3 +52,9 @@ def agg_overall_tense(poems, template):
     logging.info('Starting aggregator: agg_overall_tense')
     template.overall_tense = [poem.overall_tense for poem in poems]
     logging.info('Aggregator finished: agg_overall_tense')
+
+
+def agg_perspective(poems, template):
+    logging.info('Starting aggregator: agg_perspective')
+    template.perspective = [poem.perspective for poem in poems]
+    logging.info('Aggregator finished: agg_perspective')

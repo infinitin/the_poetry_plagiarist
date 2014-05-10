@@ -18,6 +18,7 @@ class Template:
         self.repeated_lines_locations = []  # List of tuples of numbers
         self.num_repeated_lines = []  # List of numbers
         self.num_distinct_sentences = []  # List of numbers
+        self.perspective = []  # List of strings
         self.line_tenses = []  # List of tuples of strings
         self.overall_tense = []  # List of strings
 
@@ -82,9 +83,14 @@ class Template:
         simple_plotter(self.num_distinct_sentences, 'Number of distinct sentences', 'Number of occurrences',
                        'Range of number of distinct sentences')
 
+    def plot_perspective(self):
+        simple_plotter(self.perspective, 'Perspective', 'Number of occurrences',
+                       'Range of Persona Perspective')
+
     def plot_line_tenses(self):
-        simple_plotter(self.line_tenses, 'Permutations of line tenses', 'Number of occurrences',
-                       'Range of permutations of tenses for each line')
+        for line in self.line_tenses:
+            simple_plotter(line, 'Tense', 'Number of occurrences',
+                           'Range of Possible Tenses for Line ' + str(self.line_tenses.index(line) + 1))
 
     def plot_overall_tense(self):
         simple_plotter(self.overall_tense, 'Overall tense', 'Number of occurrences', 'Range of overall poem tense')
@@ -131,7 +137,9 @@ class Template:
         simple_plotter(self.rhyme_schemes, 'Rhyme Scheme', 'Number of occurrences', 'Range of Possible Rhyme Schemes')
 
     def plot_syllable_patterns(self):
-        simple_plotter(self.syllable_patterns, 'Syllable Patterns', 'Number of occurrences', 'Possible Syllabic Rhythm')
+        for line in self.syllable_patterns:
+            simple_plotter(line, 'Syllable Patterns', 'Number of occurrences',
+                           'Range of Possible Syllables for Line ' + str(self.syllable_patterns.index(line) + 1))
 
     def plot_stress_patterns(self):
         for line in self.stress_patterns:

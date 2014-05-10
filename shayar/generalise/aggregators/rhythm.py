@@ -6,8 +6,17 @@ import logging
 
 def agg_syllable(poems, template):
     logging.info('Starting aggregator: agg_syllable')
-    template.syllable_patterns = [tuple(poem.syllable_count) for poem in poems]
-    logging.info('Aggregator finished: agg_syllable')
+    # Transpose the lists so that you have a list of tenses for each line in order
+    max_num_lines = max([len(poem.syllable_count) for poem in poems])-1
+    for line in range(0, max_num_lines):
+        syllable_counts = []
+        for poem in poems:
+            try:
+                syllable_counts.append(poem.syllable_count[line])
+            except IndexError:
+                logging.error('Could not find syllable count for: ' + str(poem.syllable_count) + ' with index ' + str(line))
+        template.syllable_patterns.append(syllable_counts)
+        logging.info('Aggregator finished: agg_syllable')
 
 
 def agg_rhythm(poems, template):

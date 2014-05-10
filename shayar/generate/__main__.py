@@ -26,6 +26,7 @@ from initialisation import init_poem
 #template = retrieve_template(settings["collection"])
 
 #new_poem = init_poem(settings)
+
 import jpype
 
 jpype.startJVM(jpype.getDefaultJVMPath(), "-Djava.class.path=simplenlg-v4.4.2.jar")
@@ -40,11 +41,38 @@ lex = lexicon.getDefaultLexicon()
 phraseFactory = framework.NLGFactory(lex)
 realiser = Realiser(lex)
 
-man = phraseFactory.createNounPhrase('the', 'man')
-man.addPostModifier('angry')
-man.addPreModifier('so')
+n1 = phraseFactory.createNounPhrase('the', 'shoes')
 
-output = realiser.realise(man).getRealisation()
+p1 = phraseFactory.createPrepositionPhrase('of')
+n2 = phraseFactory.createNounPhrase('eskimo joe')
+p1.addComplement(n2)
+
+n1.addComplement(p1)
+
+v1 = phraseFactory.createVerbPhrase('fell apart')
+v1.addModifier('quickly')
+
+p2 = phraseFactory.createPrepositionPhrase('as')
+n3 = phraseFactory.createNounPhrase('he')
+p2.addComplement(n3)
+
+v1.addComplement(p2)
+
+v2 = phraseFactory.createVerbPhrase('walked')
+
+p3 = phraseFactory.createPrepositionPhrase('in')
+n4 = phraseFactory.createNounPhrase('the snow')
+p3.addComplement(n4)
+
+v2.addComplement(p3)
+
+n3.addComplement(v2)
+
+n2.addModifier('old')
+
+s = phraseFactory.createClause(n1, v1)
+
+output = realiser.realise(s).getRealisation()
 print output
 
 jpype.shutdownJVM()

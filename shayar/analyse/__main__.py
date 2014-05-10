@@ -62,7 +62,7 @@ def analyse_poem(test):
     test.similes = rhetoric.detect_simile(test.poem)
 
     #logging.info("Determining speaker's point of view")
-    test.point_of_view = basic_structure.determine_perspective(test.poem)
+    test.perspective = basic_structure.determine_perspective(test.poem)
 
     #logging.info("Reading in-between the lines")
     test.characters = context.identify_characters_and_relationships(test.poem)
