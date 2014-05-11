@@ -64,6 +64,9 @@ class Template:
             plot_func = getattr(self, 'plot_' + attribute)
             plot_func()
 
+        for attr in self.__dict__:
+            print str(attr) + ": " + str(getattr(self, attr))
+
     def plot_stanzas(self):
         simple_plotter(self.stanzas, 'Number of stanzas', 'Number of occurrences', 'Range of number of stanzas')
 

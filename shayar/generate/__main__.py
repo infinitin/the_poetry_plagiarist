@@ -50,7 +50,7 @@ p1.addComplement(n2)
 n1.addComplement(p1)
 
 v1 = phraseFactory.createVerbPhrase('fell apart')
-v1.addModifier('quickly')
+v1.addPreModifier('quickly')
 
 p2 = phraseFactory.createPrepositionPhrase('as')
 n3 = phraseFactory.createNounPhrase('he')

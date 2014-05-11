@@ -14,9 +14,10 @@ def agg_syllable(poems, template):
             try:
                 syllable_counts.append(poem.syllable_count[line])
             except IndexError:
-                logging.error('Could not find syllable count for: ' + str(poem.syllable_count) + ' with index ' + str(line))
+                continue
         template.syllable_patterns.append(syllable_counts)
-        logging.info('Aggregator finished: agg_syllable')
+
+    logging.info('Aggregator finished: agg_syllable')
 
 
 def agg_rhythm(poems, template):

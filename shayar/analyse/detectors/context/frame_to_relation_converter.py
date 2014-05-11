@@ -157,6 +157,7 @@ def build_frame_relations():
     frame_relations['Abandonment'] = ('Agent', 'NotHas', 'Theme')
 
     frame_relations['Being_named'] = ('Entity', 'Named', 'Name')
+    frame_relations['Referring_by_name'] = ('Entity', 'Named', 'Name')
 
     frame_relations['Awareness'] = ('Cognizer', 'Believes', 'Content')
     frame_relations['Certainty'] = ('Cognizer', 'Believes', 'Content')
@@ -173,3 +174,6 @@ def build_frame_relations():
     frame_relations['Reporting'] = ('Informer', 'SendMessage', 'Behaviour/Wrongdoer', 'Authorities')
     frame_relations['Text_creation'] = ('Author', 'SendMessage', 'Text', 'Addressee')
     frame_relations['Chatting'] = ('Interlocutor_1', 'SendMessage', 'Topic', 'Interlocutor_2')
+
+    frame_relations['Being_located'] = ('Theme', 'AtLocation', 'Location')
+    frame_relations['Origin_Frame'] = ('Entity', 'AtLocation', 'Origin')
