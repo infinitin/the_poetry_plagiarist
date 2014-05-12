@@ -1,20 +1,37 @@
 __author__ = 'Nitin'
 import random
-from shayar.poem import Poem
 from collections import Counter
+from shayar.generalise.utils import apply_settings
 
 
-def init_poem(template):
-    new_poem = Poem([])
+def init_poem(new_poem, template, poems):
+    perspective = 'perspective'
+    overall_tense = 'overall_tense'
+    stanzas = 'stanzas'
+    num_lines = 'num_lines'
+    repeated_lines_locations = 'repeated_lines_locations'
 
-    new_poem.perspective = select(template.perspective)
-    new_poem.tenses = select(template.overall_tense)
-    new_poem.stanzas = select(template.stanzas)
-    new_poem.lines = select(num_lines for num_lines in template.num_lines if len(num_lines) == new_poem.stanzas)
+    new_poem.perspective = select(getattr(template, perspective))
+    setattr(template, perspective, [new_poem.perspective])
+    poems = apply_settings(poems, perspective, new_poem.perspective)
 
-    new_poem.repeated_lines = select_rl(template.repeated_lines_locations, sum(new_poem.lines))
+    new_poem.tenses = select(getattr(template, overall_tense))
+    setattr(template, overall_tense, [new_poem.tenses])
+    poems = apply_settings(poems, overall_tense, new_poem.tenses)
 
-    return new_poem
+    new_poem.stanzas = select(getattr(template, stanzas))
+    setattr(template, stanzas, [new_poem.stanzas])
+    poems = apply_settings(poems, stanzas, new_poem.stanzas)
+
+    new_poem.lines = select(num_lines for num_lines in getattr(template, num_lines) if len(num_lines) == new_poem.stanzas)
+    setattr(template, num_lines, [new_poem.lines])
+    poems = apply_settings(poems, num_lines, new_poem.lines)
+
+    new_poem.repeated_lines = select_rl(getattr(template, repeated_lines_locations), sum(new_poem.lines))
+    setattr(template, repeated_lines_locations, [new_poem.repeated_lines])
+    poems = apply_settings(poems, repeated_lines_locations, new_poem.repeated_lines)
+
+    return poems
 
 
 def select(options):

@@ -7,6 +7,9 @@ import cPickle
 import json
 import jpype
 from initialisation import init_poem
+from shayar.poem import Poem
+from shayar.generalise.utils import retrieve_all_poems
+
 import logging
 logging.basicConfig(level=logging.INFO)
 logging.getLogger(__name__)
@@ -22,11 +25,12 @@ def retrieve_template(collection):
 
 json_input = '{"collection": "limericks"}'
 settings = json.loads(json_input)
-template = retrieve_template(settings["collection"])
-new_poem = init_poem(template)
-
-for attr in new_poem.__dict__:
-    print str(attr) + ": " + str(getattr(new_poem, attr))
+collection = settings["collection"]
+template = retrieve_template(collection)
+poems = retrieve_all_poems(collection)
+new_poem = Poem([])
+# A bit weird to be returning the poems list here, but it seems to be passed by value for some reason
+poems = init_poem(new_poem, template, poems)
 
 """
 jpype.startJVM(jpype.getDefaultJVMPath(), "-Djava.class.path=simplenlg-v4.4.2.jar")

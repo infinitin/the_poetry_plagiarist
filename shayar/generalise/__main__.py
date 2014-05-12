@@ -4,8 +4,7 @@ from shayar.poem_template import Template
 # This import is required for the pickle load
 # noinspection PyUnresolvedReferences,PyPep8Naming
 import shayar.poem as poem
-import os
-import cPickle
+from utils import apply_settings, retrieve_all_poems
 import json
 import logging
 logging.basicConfig(level=logging.INFO)
@@ -22,42 +21,6 @@ from aggregators.characters_and_rhetoric import agg_similes, agg_character_count
 from aggregators.n_grams import agg_n_grams_by_line, agg_n_grams
 from aggregators.semantics import agg_hypernym_ancestors, agg_modality_by_line, agg_polarity_by_line, \
     agg_subjectivity_by_line, agg_mood_by_line
-
-
-#Given the current set of applicable poems and the (new) givens, filter the poems accordingly.
-#The keys of the givens correspond exactly to the attributes of the poem template object.
-def apply_settings(ps, a, value):
-    # Not quite but you get the point:
-    if a == "n_stanzas":
-        ps = [p for p in ps if value == p.stanzas]
-    elif a == "lines_per_stanza":
-        ps = [p for p in ps if value == p.lines]
-    elif a == "repeated_line_locations":
-        ps = [p for p in ps if set(value) == p.repeated_lines.values()]
-    elif a == "n_repeated_lines":
-        ps = [p for p in ps if value == len(p.repeated_lines.values())]
-    elif a == "n_distinct_sentences":
-        ps = [p for p in ps if value == p.distinct_sentences == value]
-    elif a == "line_tenses":
-        ps = [p for p in ps if value == p.tenses]
-    elif a == "overall_tense":
-        ps = [p for p in ps if value == p.tense]
-    elif a == "assonance" or a == "consonance" or a == "alliteration":
-        ps = [p for p in ps if value in [d.keys() for d in getattr(p, a)]]
-    elif a == "rhyme":
-        ps = [p for p in ps if tuple(value) in p.rhyme_scheme]
-    elif a == "syllable":
-        ps = [p for p in ps if tuple(value) in p.syllable_count]
-
-    return ps
-
-
-#Grab all the poems of a particular collection from store
-def retrieve_all_poems(collection):
-    f = open(os.path.abspath(os.path.join(os.path.dirname(__file__), '..\\analyse', collection + '.poems')), 'rb')
-    poems = cPickle.load(f)
-    f.close()
-    return poems
 
 #Needs to be exactly as poem_template for this to work
 json_input = '{"collection": "limericks", "plot": true, "persist": true}'
