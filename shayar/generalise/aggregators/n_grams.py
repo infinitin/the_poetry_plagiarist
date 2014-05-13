@@ -4,6 +4,7 @@ from collections import Counter
 from shayar.analyse.detectors.utils import get_tokenized_words
 from pattern.text.en import lemma
 import logging
+from operator import itemgetter
 
 stop_words = {'a', 'about', 'above', 'above', 'across', 'after', 'afterwards', 'again', 'against', 'all', 'almost',
               'alone', 'along', 'already', 'also', 'although', 'always', 'am', 'among', 'amongst', 'amoungst', 'amount',
@@ -63,8 +64,11 @@ def agg_n_grams_by_line(poems, template):
         counts = Counter(n_grams_line)
         template.n_grams_by_line.append([(' '.join(g for g in gram), count) for gram, count in counts.items() if count > min_num_occurrences])
 
+    reduced_n_grams_by_line = []
     for entry in template.n_grams_by_line:
-        remove_redundant_substring_occurences(entry)
+        reduced_n_grams_by_line.append(remove_redundant_substring_occurences(entry, min_num_occurrences))
+
+    template.n_grams_by_line = reduced_n_grams_by_line
 
     logging.info('Aggregator finished: agg_n_grams_by_line')
 
@@ -89,11 +93,24 @@ def agg_n_grams(poems, template):
     min_num_occurrences = round(len(poems) * 0.1)
     counts = Counter(n_grams_by_poem)
     template.n_grams.extend([(' '.join(g for g in gram), count) for gram, count in counts.items() if count > min_num_occurrences + 1])
-    remove_redundant_substring_occurences(template.n_grams)
+    template.n_grams = remove_redundant_substring_occurences(template.n_grams, min_num_occurrences)
     logging.info('Aggregator finished: agg_n_grams')
 
 
-def remove_redundant_substring_occurences(entry):
-    pass
+def remove_redundant_substring_occurences(entry, min_num_occurrences):
+    new_entry = []
     # Put entry in descending order of length of ngram
-    # If it is a substring of a previous entry, reduce its number of occurences by the total of of those previous entries (reduced)
+    entry.sort(key=lambda item: (-len(item[0]), item))
+    # If it is a substring of a previous entry, reduce its number of occurences by the total of of those previous
+    # entries (reduced)
+    for i in range(0, len(entry)):
+        total_superstring_occurence = sum([ngram[1] for ngram in entry[:i] if entry[i][0] in ngram[0]])
+        new_amount = entry[i][1] - total_superstring_occurence
+        if total_superstring_occurence and new_amount > min_num_occurrences:
+            new_entry_to_add = entry[i][0], new_amount
+            new_entry.append(new_entry_to_add)
+        elif not total_superstring_occurence:
+            new_entry.append(entry[i])
+
+    return new_entry
+
