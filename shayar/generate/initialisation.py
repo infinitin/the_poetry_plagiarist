@@ -18,8 +18,6 @@ def init_poem(new_poem, template, poems):
     new_poem.repeated_lines = select_rl(template.repeated_lines_locations, sum(new_poem.lines))
     setattr(template, 'repeated_lines_locations', [new_poem.repeated_lines])
 
-    return poems
-
 
 def select_rl(options, max_lines):
     filtered_rl = []

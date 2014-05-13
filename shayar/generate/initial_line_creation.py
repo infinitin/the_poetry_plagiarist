@@ -6,6 +6,7 @@ from random import random
 from collections import Counter
 from shayar.generalise.aggregators.rhythm import agg_rhythm
 from pattern.text.en import lemma
+from builder import build_poem_line
 
 
 def create_initial_line(new_poem, template, poems, init_line_index):
@@ -15,6 +16,12 @@ def create_initial_line(new_poem, template, poems, init_line_index):
         agg_rhythm(poems, template)
 
     #TODO: send to big builder
+    new_poem.phrases[init_line_index] = build_poem_line(new_poem, template, poems)
+
+    #TODO: Rephrase to fit to streess peetteerrns
+
+    #TODO: Save the final stress pattern in the template at this init index
+
 
 
 def select_n_gram(template, init_line_index):
