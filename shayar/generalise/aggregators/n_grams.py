@@ -63,6 +63,9 @@ def agg_n_grams_by_line(poems, template):
         counts = Counter(n_grams_line)
         template.n_grams_by_line.append([(' '.join(g for g in gram), count) for gram, count in counts.items() if count > min_num_occurrences])
 
+    for entry in template.n_grams_by_line:
+        remove_redundant_substring_occurences(entry)
+
     logging.info('Aggregator finished: agg_n_grams_by_line')
 
 
@@ -86,4 +89,11 @@ def agg_n_grams(poems, template):
     min_num_occurrences = round(len(poems) * 0.1)
     counts = Counter(n_grams_by_poem)
     template.n_grams.extend([(' '.join(g for g in gram), count) for gram, count in counts.items() if count > min_num_occurrences + 1])
+    remove_redundant_substring_occurences(template.n_grams)
     logging.info('Aggregator finished: agg_n_grams')
+
+
+def remove_redundant_substring_occurences(entry):
+    pass
+    # Put entry in descending order of length of ngram
+    # If it is a substring of a previous entry, reduce its number of occurences by the total of of those previous entries (reduced)

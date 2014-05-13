@@ -9,6 +9,8 @@ import jpype
 from initialisation import init_poem
 from shayar.poem import Poem
 from shayar.generalise.utils import retrieve_all_poems
+import utils
+from initial_line_creation import create_initial_line
 
 import logging
 logging.basicConfig(level=logging.INFO)
@@ -28,9 +30,13 @@ settings = json.loads(json_input)
 collection = settings["collection"]
 template = retrieve_template(collection)
 poems = retrieve_all_poems(collection)
+utils.num_poems = len(poems)
 new_poem = Poem([])
 # A bit weird to be returning the poems list here, but it seems to be passed by value for some reason
 poems = init_poem(new_poem, template, poems)
+
+create_initial_line(new_poem, template, poems, 0)
+
 
 """
 jpype.startJVM(jpype.getDefaultJVMPath(), "-Djava.class.path=simplenlg-v4.4.2.jar")
