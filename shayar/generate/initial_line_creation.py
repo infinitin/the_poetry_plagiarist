@@ -16,7 +16,7 @@ def create_initial_line(new_poem, template, poems, init_line_index):
         agg_rhythm(poems, template)
 
     #TODO: send to big builder
-    new_poem.phrases[init_line_index] = build_poem_line(new_poem, template, poems)
+    new_poem.phrases[init_line_index] = build_poem_line(new_poem, template, poems, init_line_index)
 
     #TODO: Rephrase to fit to streess peetteerrns
 

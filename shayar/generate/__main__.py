@@ -5,7 +5,6 @@ from shayar.poem_template import Template
 import os
 import cPickle
 import json
-import jpype
 from initialisation import init_poem
 from cyber_poem import CyberPoem
 from shayar.generalise.utils import retrieve_all_poems, apply_settings
@@ -13,6 +12,7 @@ import utils
 from initial_line_creation import create_initial_line
 from shayar.generalise.aggregators import rhythm, rhyme
 from collections import Counter
+from builder import boot_builder, shutdown_builder
 
 import logging
 logging.basicConfig(level=logging.INFO)
@@ -46,7 +46,8 @@ init_poem(new_poem, template, poems)
 init_line_index = 0
 create_initial_line(new_poem, template, poems, init_line_index)
 
-#Choose stress patterns and rhyme scheme of rest of the lines FIXME: TEST THIS STUFF
+#FIXME: TEST THIS STUFF
+#Choose stress patterns and rhyme scheme of rest of the lines
 #If there is an unambiguous rhyme scheme, use that
 options = template.rhyme_schemes
 two_most_popular = Counter(options).most_common(2)
@@ -73,60 +74,6 @@ for line_index in range(0, sum(new_poem.lines)):
 
 
 #Realise poem into the CyberPoem.poem attribute and return to user
-#FIXME: Make this work for stanzas
-#for phrase in new_poem.phrases:
-#    line = realiser.realise(phrase).getRealisation()
-#    new_poem.poem.append(line)
-#    print line
+CyberPoem.realise()
 
-
-"""
-jpype.startJVM(jpype.getDefaultJVMPath(), "-Djava.class.path=simplenlg-v4.4.2.jar")
-
-features = jpype.JPackage('simplenlg.features')
-phrasespec = jpype.JPackage('simplenlg.phrasespec')
-framework = jpype.JPackage('simplenlg.framework')
-lexicon = jpype.JClass('simplenlg.lexicon.Lexicon')
-
-Realiser = jpype.JClass('simplenlg.realiser.english.Realiser')
-lex = lexicon.getDefaultLexicon()
-phraseFactory = framework.NLGFactory(lex)
-realiser = Realiser(lex)
-
-n1 = phraseFactory.createNounPhrase('the', 'shoes')
-
-p1 = phraseFactory.createPrepositionPhrase('of')
-n2 = phraseFactory.createNounPhrase('eskimo joe')
-p1.addComplement(n2)
-
-n1.addComplement(p1)
-
-v1 = phraseFactory.createVerbPhrase('fell apart')
-
-p2 = phraseFactory.createPrepositionPhrase('as')
-n3 = phraseFactory.createNounPhrase('he')
-p2.addComplement(n3)
-
-v1.addComplement(p2)
-
-v2 = phraseFactory.createVerbPhrase('walked')
-
-p3 = phraseFactory.createPrepositionPhrase('in')
-n4 = phraseFactory.createNounPhrase('the snow')
-p3.addComplement(n4)
-
-v2.addComplement(p3)
-
-n3.addComplement(v2)
-
-n2.addModifier('old')
-
-s = phraseFactory.createClause(n1, v1)
-
-output = realiser.realise(n1).getRealisation()
-print output
-output = realiser.realise(v1).getRealisation()
-print output
-
-jpype.shutdownJVM()
-"""
+shutdown_builder()
