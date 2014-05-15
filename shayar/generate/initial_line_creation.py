@@ -23,7 +23,6 @@ def create_initial_line(new_poem, template, poems, init_line_index):
     #TODO: Save the final stress pattern in the template at this init index
 
 
-
 def select_n_gram(template, init_line_index):
     options = template.n_grams_by_line[init_line_index]
     two_most_popular = Counter(options).most_common(2)

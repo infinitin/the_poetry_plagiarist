@@ -12,7 +12,7 @@ import utils
 from initial_line_creation import create_initial_line
 from shayar.generalise.aggregators import rhythm, rhyme
 from collections import Counter
-from builder import boot_builder, shutdown_builder
+from builder import shutdown_builder
 
 import logging
 logging.basicConfig(level=logging.INFO)
@@ -62,10 +62,10 @@ if not new_poem.rhyme_scheme:
     new_poem.rhyme_scheme = utils.select(template.rhyme_schemes)
 
 #And choose the stress patterns for the rest of the poem
-rhythm.agg_rhythm(poems, template)
-for line_index in range(0, sum(new_poem.lines)):
-    if line_index != init_line_index:
-        new_poem.stress_pattern[line_index] = utils.select(template.stress_patterns[line_index])
+#rhythm.agg_rhythm(poems, template)
+#for line_index in range(0, sum(new_poem.lines)):
+#    if line_index != init_line_index:
+#        new_poem.stress_pattern[line_index] = utils.select(template.stress_patterns[line_index])
 
 
 #TODO: Build the rest of the lines, checking for rhyme scheme, ngrams, rhyme etc. etc.
@@ -74,6 +74,6 @@ for line_index in range(0, sum(new_poem.lines)):
 
 
 #Realise poem into the CyberPoem.poem attribute and return to user
-CyberPoem.realise()
+#CyberPoem.realise()
 
-shutdown_builder()
+#shutdown_builder()
