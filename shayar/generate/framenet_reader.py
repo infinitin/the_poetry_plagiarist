@@ -2,7 +2,8 @@ __author__ = 'Nitin'
 import xml.etree.ElementTree as ET
 import random
 
-luIndex = ET.parse('C:\\Python27\\nltk_data\corpora\\framenet_v15\\luIndex.xml')
+FRAMENET_DATA_LOC = 'C:\\Python27\\framenet_data\\'
+luIndex = ET.parse(FRAMENET_DATA_LOC + 'luIndex.xml')
 root = luIndex.getroot()
 pre_tag = '{http://framenet.icsi.berkeley.edu}'
 
@@ -17,7 +18,7 @@ def lu_from_frames(frames):
 
 
 def valence_pattern_from_id(lu_id):
-    lu_entry = ET.parse('C:\\Python27\\nltk_data\corpora\\framenet_v15\\lu\\lu' + lu_id + '.xml')
+    lu_entry = ET.parse(FRAMENET_DATA_LOC + 'lu\\lu' + lu_id + '.xml')
     lu = lu_entry.getroot()
 
     max_fe_group = None
@@ -55,3 +56,7 @@ def lu_from_word(word, pos):
         return random.choice(finished_frame_lus)
     else:
         return random.choice(lus)
+
+
+def lu_from_id(id):
+    pass

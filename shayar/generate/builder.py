@@ -30,6 +30,7 @@ def build_poem_line(new_poem, template, poems, line):
 
     # Add the returned phrase to the CyberPoem at this line
     build_name_phrase()
+    build_location_phrase()
 
 
 def build_is_phrase():
@@ -49,19 +50,15 @@ def build_name_phrase():
     lu = random.choice([lu_from_frames(frames), lu_from_word('named', 'a')])
     valence_pattern = valence_pattern_from_id(lu.get('ID'))
 
-    printed = False
-    for group in valence_pattern:
-        for valence_unit in group:
-            print valence_unit.get('GF') + ', ' + valence_unit.get('PT') + ', ' + valence_unit.get('FE')
-        print '---'
-        if not printed:
-            print str(lu.get('name'))
-            print '---'
-            printed = True
+    print_frame(lu, valence_pattern)
 
 
 def build_location_phrase():
-    pass
+    frames = ['Being_located']
+    lu = random.choice([lu_from_frames(frames), lu_from_word('from', 'prep')])
+    valence_pattern = valence_pattern_from_id(lu.get('ID'))
+
+    print_frame(lu, valence_pattern)
 
 
 def build_has_phrase():
@@ -86,3 +83,14 @@ def build_partof_phrase():
 
 def shutdown_builder():
     jpype.shutdownJVM()
+
+
+def print_frame(lu, valence_pattern):
+    printed = False
+    for group in valence_pattern:
+        for valence_unit in group:
+            print valence_unit.get('GF') + ', ' + valence_unit.get('PT') + ', ' + valence_unit.get('FE')
+        if not printed:
+            print str(lu.get('name'))
+            printed = True
+    print '---'
