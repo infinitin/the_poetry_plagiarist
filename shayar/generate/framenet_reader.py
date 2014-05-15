@@ -43,10 +43,7 @@ def valence_pattern_from_id(lu_id):
     objs = [valenceUnit for valenceUnit in pattern.findall(pre_tag + 'valenceUnit') if valenceUnit.get('GF') == 'Obj']
     deps = [valenceUnit for valenceUnit in pattern.findall(pre_tag + 'valenceUnit') if valenceUnit.get('GF') == 'Dep']
 
-    if not starters + objs + deps:
-        raise Exception('Where did they go?')
-
-    return starters + objs + deps
+    return [tuple(starters), tuple(objs), tuple(deps)]
 
 
 #Must be in lowercase. POS must be (converted to): n, v, a, adv, intj, prep, num

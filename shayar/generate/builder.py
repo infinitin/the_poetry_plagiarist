@@ -49,9 +49,15 @@ def build_name_phrase():
     lu = random.choice([lu_from_frames(frames), lu_from_word('named', 'a')])
     valence_pattern = valence_pattern_from_id(lu.get('ID'))
 
-    print str(lu.get('name'))
-    for valence_unit in valence_pattern:
-        print valence_unit.get('GF') + ', ' + valence_unit.get('PT') + ', ' + valence_unit.get('FE')
+    printed = False
+    for group in valence_pattern:
+        for valence_unit in group:
+            print valence_unit.get('GF') + ', ' + valence_unit.get('PT') + ', ' + valence_unit.get('FE')
+        print '---'
+        if not printed:
+            print str(lu.get('name'))
+            print '---'
+            printed = True
 
 
 def build_location_phrase():
