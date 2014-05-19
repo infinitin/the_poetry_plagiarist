@@ -3,8 +3,8 @@ import xml.etree.ElementTree as ET
 import random
 
 FRAMENET_DATA_LOC = 'C:\\Python27\\framenet_data\\'
-luIndex = ET.parse(FRAMENET_DATA_LOC + 'luIndex.xml')
-root = luIndex.getroot()
+lu_index = ET.parse(FRAMENET_DATA_LOC + 'luIndex.xml')
+root = lu_index.getroot()
 pre_tag = '{http://framenet.icsi.berkeley.edu}'
 
 
@@ -60,3 +60,19 @@ def lu_from_word(word, pos):
 
 def lu_from_id(id):
     return [lu for lu in root.findall(pre_tag + 'lu') if lu.get('ID') == id][0]
+
+
+simplenlg_lexicon = ET.parse('default-lexicon.xml')
+
+
+#We would like to look up framenet in the future, but for now we look up the default lexicon for simplenlg
+def get_random_word(pos):
+    category = 'noun'
+    if pos.startswith('V'):
+        category = 'verb'
+    elif pos.startswith('AVP'):
+        category = 'adverb'
+    elif pos.startswith('A'):
+        category = 'adjective'
+    word_root = simplenlg_lexicon.getroot()
+    return random.choice([word.find('base').text for word in word_root.findall('word') if word.find('category').text == category])
