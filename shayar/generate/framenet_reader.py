@@ -59,4 +59,4 @@ def lu_from_word(word, pos):
 
 
 def lu_from_id(id):
-    pass
+    return [lu for lu in root.findall(pre_tag + 'lu') if lu.get('ID') == id][0]
