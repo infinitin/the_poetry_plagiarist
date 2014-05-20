@@ -10,7 +10,7 @@ pre_tag = '{http://framenet.icsi.berkeley.edu}'
 
 def lu_from_frames(frames):
     all_lus = [lu for lu in root.findall(pre_tag + 'lu') if lu.get('frameName') in frames]
-    all_finished_frame_lus = [lu for lu in all_lus if lu.get('status') == 'Finished_Initial']
+    all_finished_frame_lus = [lu for lu in all_lus if lu.get('status') == 'Finished_Initial' and not '_' in lu.get('name')]
     if all_finished_frame_lus:
         return random.choice(all_finished_frame_lus)
     else:
