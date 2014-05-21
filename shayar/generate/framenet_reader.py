@@ -33,7 +33,7 @@ def valence_pattern_from_id(lu_id):
             max_total = group.get('total')
 
     if not max_total:
-        raise Exception("No FE Group found for LU " + str(lu_id))
+        raise Exception("No FE Group found for LU " + str(lu_id))  # FIXME: Find a synonym, don't just die.
 
     #The order given in the group is not necessarily the order in the sentence
     #We could either look up the order in the annoSets, which would be quite accurate

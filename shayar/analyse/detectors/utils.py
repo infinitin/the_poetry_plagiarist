@@ -11,14 +11,15 @@ import csv
 ono_type_map = {}
 
 
-def set_up_globals():
+def set_up_globals(ono=True):
     global dictionary
     dictionary = cmudict.dict()
     global stressed
     stressed = "1"
     global unstressed
     unstressed = "0"
-    setup_ono_type_map()
+    if ono:
+        setup_ono_type_map()
 
 
 def setup_ono_type_map():

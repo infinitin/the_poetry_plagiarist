@@ -1,25 +1,30 @@
 __author__ = 'Nitin'
-import xml.etree.ElementTree as ET
 from framenet_reader import lu_from_frames, valence_pattern_from_id, lu_from_word, lu_from_id, get_random_word
 import random
+import phrase_spec
+from rephrase import fit_rhythm_pattern
 
 import jpype
 
 jpype.startJVM(jpype.getDefaultJVMPath(), "-Djava.class.path=simplenlg-v4.4.2.jar")
 
-features = jpype.JPackage('simplenlg.features')
-phrasespec = jpype.JPackage('simplenlg.phrasespec')
 framework = jpype.JPackage('simplenlg.framework')
 lexicon = jpype.JClass('simplenlg.lexicon.Lexicon')
-feature = jpype.JClass('simplenlg.features.Feature')
-tense = jpype.JClass('simplenlg.features.Tense')
-internal_feature = jpype.JClass('simplenlg.features.InternalFeature')
-lexical_category = jpype.JClass('simplenlg.framework.LexicalCategory')
-
 Realiser = jpype.JClass('simplenlg.realiser.english.Realiser')
 lex = lexicon.getDefaultLexicon()
 phraseFactory = framework.NLGFactory(lex)
 realiser = Realiser(lex)
+
+features = jpype.JPackage('simplenlg.features')
+phrasespec = jpype.JPackage('simplenlg.phrasespec')
+feature = jpype.JClass('simplenlg.features.Feature')
+lexical_feature = jpype.JClass('simplenlg.features.LexicalFeature')
+gender = jpype.JClass('simplenlg.features.Gender')
+number_agreement = jpype.JClass('simplenlg.features.NumberAgreement')
+tense = jpype.JClass('simplenlg.features.Tense')
+person = jpype.JClass('simplenlg.features.Person')
+internal_feature = jpype.JClass('simplenlg.features.InternalFeature')
+lexical_category = jpype.JClass('simplenlg.framework.LexicalCategory')
 
 
 def build_poem_line(new_poem, template, poems, line_index):
@@ -33,8 +38,12 @@ def build_poem_line(new_poem, template, poems, line_index):
 
     # Add the returned phrase to the CyberPoem at this line
 
-    builders = [build_name_phrase, build_action_phrase, build_location_phrase, build_has_phrase, build_message_phrase, build_desire_phrase]
-    random.choice(builders)()
+    pattern = random.choice(template.stress_patterns)
+
+    #builders = [build_name_phrase, build_action_phrase, build_location_phrase, build_has_phrase, build_message_phrase, build_desire_phrase]
+    #random.choice(builders)(pattern)
+
+    build_action_phrase(pattern, '')
 
     shutdown_builder()
 
@@ -47,14 +56,19 @@ def build_hasproperty_phrase():
     pass
 
 
-def build_action_phrase():
+def build_action_phrase(pattern, verb):
     verb = str(get_random_word('V'))
     try:
         lu = lu_from_word(verb, 'v')
     except IndexError:
         raise Exception('Given word is not a verb, look for synonyms: ' + verb)
     valence_pattern = valence_pattern_from_id(lu.get('ID'))
-    print_nlg_statement(valence_pattern, lu)
+    phrases = create_phrases(valence_pattern, lu)
+    #phrases = fit_rhythm_pattern(phrases, pattern)
+    line = make_clause(phrases)
+    print str(realiser.realise(line).getRealisation())
+
+    return phrases
 
 
 def build_name_phrase():
@@ -228,14 +242,14 @@ def print_nlg_statement(valence_pattern, lu):
                 if group_phrase_elem:
                     group_phrase_elem[0].addComplement(new_elem)
                 else:
-                    group_phrase_elem = new_elem, 'N'
+                    group_phrase_elem = new_elem
 
             elif pos.startswith('V'):
                 new_elem = phraseFactory.createVerbPhrase(get_random_word(pos))
                 if group_phrase_elem:
                     group_phrase_elem[0].addComplement(new_elem)
                 else:
-                    group_phrase_elem = new_elem, 'V'
+                    group_phrase_elem = new_elem
 
             elif pos.startswith('P'):
                 new_elem = phraseFactory.createPrepositionPhrase(pos.partition('[')[-1].rpartition(']')[0])
@@ -244,7 +258,7 @@ def print_nlg_statement(valence_pattern, lu):
                 if group_phrase_elem:
                     group_phrase_elem[0].addComplement(new_elem)
                 else:
-                    group_phrase_elem = new_elem, 'P'
+                    group_phrase_elem = new_elem
 
         if not starters_done:
             word = lu.get('name').rpartition('.')[0]
@@ -254,14 +268,14 @@ def print_nlg_statement(valence_pattern, lu):
                 if group_phrase_elem:
                     group_phrase_elem[0].addComplement(new_elem)
                 else:
-                    group_phrase_elem = new_elem, 'N'
+                    group_phrase_elem = new_elem
 
             elif pos.startswith('V'):
                 new_elem = phraseFactory.createVerbPhrase(word)
                 if group_phrase_elem:
                     group_phrase_elem[0].addComplement(new_elem)
                 else:
-                    group_phrase_elem = new_elem, 'V'
+                    group_phrase_elem = new_elem
 
             elif pos.startswith('P'):
                 new_elem = phraseFactory.createPrepositionPhrase(pos.partition('[')[-1].rpartition(']')[0])
@@ -270,7 +284,7 @@ def print_nlg_statement(valence_pattern, lu):
                 if group_phrase_elem:
                     group_phrase_elem[0].addComplement(new_elem)
                 else:
-                    group_phrase_elem = new_elem, 'P'
+                    group_phrase_elem = new_elem
 
             starters_done = True
 
@@ -279,14 +293,84 @@ def print_nlg_statement(valence_pattern, lu):
     print realiser.realise(make_clause(phrases)).getRealisation()
 
 
-def make_clause(phrases):
+def create_phrases(valence_pattern, lu):
+    phrases = []
+    starters_done = False
+    for group in valence_pattern:
+        phrase = None
+        for valence_unit in group:
+
+            pos = valence_unit.get('PT')
+            if pos.startswith('N'):
+                new_elem = phrase_spec.NP(get_random_word(pos))
+                if phrase:
+                    phrase.complements.append(new_elem)
+                else:
+                    phrase = new_elem
+
+            elif pos.startswith('V'):
+                new_elem = phrase_spec.VP(get_random_word(pos))
+                if phrase:
+                    phrase.complements.append(new_elem)
+                else:
+                    phrase = new_elem
+
+            elif pos.startswith('P'):
+                n = phrase_spec.NP(get_random_word(pos))
+                new_elem = phrase_spec.PP(pos.partition('[')[-1].rpartition(']')[0], n)
+                if phrase:
+                    phrase.complements.append(new_elem)
+                else:
+                    phrase = new_elem
+
+        if not starters_done:
+            phrases.append(phrase)
+            phrase = None
+            word = lu.get('name').rpartition('.')[0]
+            pos = lu.get('name').partition('.')[-1].upper()
+            if pos.startswith('N'):
+                new_elem = phrase_spec.NP(word)
+                if phrase:
+                    phrase.complements.append(new_elem)
+                else:
+                    phrase = new_elem
+
+            elif pos.startswith('V'):
+                new_elem = phrase_spec.VP(word)
+                if phrase:
+                    phrase.complements.append(new_elem)
+                else:
+                    phrase = new_elem
+
+            elif pos.startswith('P'):
+                new_elem = phrase_spec.PP(pos.partition('[')[-1].rpartition(']')[0])
+                n = phrase_spec.NP(word)
+                new_elem.complements.append(n)
+                if phrase:
+                    phrase.complements.append(new_elem)
+                else:
+                    phrase = new_elem
+
+            starters_done = True
+
+        phrases.append(phrase)
+
+    return [phrase for phrase in phrases if phrase is not None]
+
+
+def make_clause(spec_phrases):
+    phrases = []
+
+    for spec_phrase in spec_phrases:
+        phrases.append(spec_phrase.translate_to_nlg())
+
     if len(phrases) > 2:
-        line = phraseFactory.createClause(phrases[0][0], phrases[1][0], phrases[2][0])
+        line = phraseFactory.createClause(phrases[0], phrases[1], phrases[2])
         for phrase in phrases[3:]:
-            line.addComplement(phrase[0])
+            line.addComplement(phrase)
     elif len(phrases) > 1:
-        line = phraseFactory.createClause(phrases[0][0], phrases[1][0])
+        line = phraseFactory.createClause(phrases[0], phrases[1])
     else:
-        line = phrases[0][0]
+        line = phrases[0]
 
     return line
