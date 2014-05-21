@@ -64,11 +64,23 @@ class PP():
     def __init__(self, prep, np):
         self.prep = prep
         self.np = np
-        self.complements = [np]
+        self.modifiers = []
+        self.premodifiers = []
+        self.postmodifiers = []
+        self.complements = []
         self.stress_patterns = get_stress_pattern(prep)
 
     def translate_to_nlg(self):
         phrase = builder.phraseFactory.createPrepositionPhrase(self.prep)
+        for modifier in self.modifiers:
+            self.np.addModifier(modifier.adjective)
+        for premodifier in self.premodifiers:
+            self.np.addPreModifier(premodifier.adjective)
+        for postmodifier in self.postmodifiers:
+            self.np.addPostModifier(postmodifier.adjective)
+        for complement in self.complements:
+            self.np.addComplement(complement)
+
         phrase.addComplement(self.np.translate_to_nlg())
         return phrase
 
@@ -91,11 +103,11 @@ class VP():
         phrase.setFeature(builder.feature.NEGATED, jpype.JBoolean(self.negated))
 
         for modifier in self.modifiers:
-            phrase.addModifier(modifier.adjective)
+            phrase.addModifier(modifier.adverb)
         for premodifier in self.premodifiers:
-            phrase.addPreModifier(premodifier.adjective)
+            phrase.addPreModifier(premodifier.adverb)
         for postmodifier in self.postmodifiers:
-            phrase.addPostModifier(postmodifier.adjective)
+            phrase.addPostModifier(postmodifier.adverb)
         for complement in self.complements:
             phrase.addComplement(complement)
 

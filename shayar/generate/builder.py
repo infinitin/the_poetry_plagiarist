@@ -38,7 +38,7 @@ def build_poem_line(new_poem, template, poems, line_index):
 
     # Add the returned phrase to the CyberPoem at this line
 
-    pattern = random.choice(template.stress_patterns)
+    pattern = random.choice(template.stress_patterns[line_index])
 
     #builders = [build_name_phrase, build_action_phrase, build_location_phrase, build_has_phrase, build_message_phrase, build_desire_phrase]
     #random.choice(builders)(pattern)
@@ -61,10 +61,11 @@ def build_action_phrase(pattern, verb):
     try:
         lu = lu_from_word(verb, 'v')
     except IndexError:
-        raise Exception('Given word is not a verb, look for synonyms: ' + verb)
+        raise Exception('Given word is not a verb, look for synonyms: ' + verb) # FIXME: Find a synonym, don't just die.
     valence_pattern = valence_pattern_from_id(lu.get('ID'))
     phrases = create_phrases(valence_pattern, lu)
-    #phrases = fit_rhythm_pattern(phrases, pattern)
+    line = make_clause(phrases)
+    phrases = fit_rhythm_pattern(line, phrases, pattern)
     line = make_clause(phrases)
     print str(realiser.realise(line).getRealisation())
 
