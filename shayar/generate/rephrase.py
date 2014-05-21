@@ -4,6 +4,7 @@ import builder
 from framenet_reader import get_random_word
 import random
 import phrase_spec
+from operator import itemgetter
 
 
 def fit_rhythm_pattern(line, phrases, pattern):
@@ -13,12 +14,65 @@ def fit_rhythm_pattern(line, phrases, pattern):
 
 #First get the number of syllables right
 def fit_syllables(line, phrases, target_num_syllables):
+    print target_num_syllables
     #Get the realisation
     realisation = builder.realiser.realise(line).getRealisation()
 
     #Count the syllables
     num_syllables = count_syllables([realisation])[0]
 
+    if num_syllables < target_num_syllables:
+        return extend_phrase(phrases, target_num_syllables, num_syllables)
+    else:
+        return reduce_phrase(phrases, target_num_syllables, num_syllables, realisation)
+
+
+def reduce_phrase(phrases, target_num_syllables, num_syllables, realisation):
+    for phrase in phrases:
+        phrase.modifiers = []
+        phrase.premodifiers = []
+        phrase.postmodifiers = []
+        phrase.complements = []
+        if 'np' in phrase.__dict__.keys():
+            phrase.np.modifiers = []
+            phrase.np.premodifiers = []
+            phrase.np.postmodifiers = []
+            phrase.np.complements = []
+
+    total_tries = 5
+    while target_num_syllables < num_syllables and total_tries:
+        syllables_for_each_word = zip(realisation.split(),
+                                      [item for sublist in count_syllables([realisation.split()]) for item in sublist])
+        longest_word = max(syllables_for_each_word, key=itemgetter(1))[0]
+
+        for phrase in phrases:
+            if 'noun' in phrase.__dict__.keys():
+                if phrase.noun == longest_word[0]:
+                    tries = 5
+                    while count_syllables(phrase.noun) >= longest_word[1] and tries:
+                        phrase = phrase_spec.NP(get_random_word('N'))
+                        tries -= 1
+
+            if 'verb' in phrase.__dict__.keys():
+                if phrase.verb == longest_word[0]:
+                    tries = 5
+                    while count_syllables(phrase.verb) >= longest_word[1] and tries:
+                        phrase = phrase_spec.VP(get_random_word('V'))
+                        tries -= 1
+
+            if 'np' in phrase.__dict__.keys():
+                if phrase.np.noun == longest_word[0]:
+                    tries = 5
+                    while count_syllables(phrase.np.noun) >= longest_word[1] and tries:
+                        phrase.np = phrase_spec.NP(get_random_word('N'))
+                        tries -= 1
+
+        total_tries -= 1
+
+    return phrases
+
+
+def extend_phrase(phrases, target_num_syllables, num_syllables):
     #While less than:
     #Add adjectives and adverbs as modifiers with max missing number of syllables
     while num_syllables < target_num_syllables:
@@ -28,7 +82,7 @@ def fit_syllables(line, phrases, target_num_syllables):
         word = ''
         added_syllables = 0
         tries = 5
-        while tries > 0:
+        while tries:
             word = get_random_word(pos)
             added_syllables = count_syllables([word])[0]
             if added_syllables <= (target_num_syllables - num_syllables):

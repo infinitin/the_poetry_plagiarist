@@ -73,13 +73,13 @@ class PP():
     def translate_to_nlg(self):
         phrase = builder.phraseFactory.createPrepositionPhrase(self.prep)
         for modifier in self.modifiers:
-            self.np.addModifier(modifier.adjective)
+            self.np.modifiers.append(modifier.adjective)
         for premodifier in self.premodifiers:
-            self.np.addPreModifier(premodifier.adjective)
+            self.np.premodifiers.append(premodifier.adjective)
         for postmodifier in self.postmodifiers:
-            self.np.addPostModifier(postmodifier.adjective)
+            self.np.postmodifiers.append(postmodifier.adjective)
         for complement in self.complements:
-            self.np.addComplement(complement)
+            self.np.complements.append(complement)
 
         phrase.addComplement(self.np.translate_to_nlg())
         return phrase
