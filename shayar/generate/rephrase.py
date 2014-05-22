@@ -5,16 +5,18 @@ from framenet_reader import get_random_word
 import random
 import phrase_spec
 from operator import itemgetter
+from pattern.text.en import lemma
 
 
 def fit_rhythm_pattern(line, phrases, pattern):
-    #return fit_pattern(fit_syllables(phrases, len(pattern)), pattern)
-    return fit_syllables(line, phrases, len(pattern))
+    print len(pattern)
+    #phrases = fit_pattern(line, fit_syllables(line, phrases, len(pattern)), pattern)
+    phrases = fit_syllables(line, phrases, len(pattern))
+    return [phrase for phrase in phrases if phrase is not None]
 
 
 #First get the number of syllables right
 def fit_syllables(line, phrases, target_num_syllables):
-    print target_num_syllables
     #Get the realisation
     realisation = builder.realiser.realise(line).getRealisation()
 
@@ -23,65 +25,82 @@ def fit_syllables(line, phrases, target_num_syllables):
 
     if num_syllables < target_num_syllables:
         return extend_phrase(phrases, target_num_syllables, num_syllables)
+    elif num_syllables > target_num_syllables:
+        return reduce_phrase(phrases, target_num_syllables, num_syllables)
     else:
-        return reduce_phrase(phrases, target_num_syllables, num_syllables, realisation)
+        return phrases
 
 
-def reduce_phrase(phrases, target_num_syllables, num_syllables, realisation):
+def reduce_phrase(phrases, target_num_syllables, num_syllables):
+    try_num = 10
     for phrase in phrases:
         phrase.modifiers = []
-        phrase.premodifiers = []
-        phrase.postmodifiers = []
         phrase.complements = []
         if 'np' in phrase.__dict__.keys():
             phrase.np.modifiers = []
-            phrase.np.premodifiers = []
-            phrase.np.postmodifiers = []
             phrase.np.complements = []
 
-    total_tries = 5
+    total_tries = try_num*2
+    new_phrases = phrases
+    line = builder.make_clause(phrases)
+    realisation = str(builder.realiser.realise(line).getRealisation())
     while target_num_syllables < num_syllables and total_tries:
-        syllables_for_each_word = zip(realisation.split(),
-                                      [item for sublist in count_syllables([realisation.split()]) for item in sublist])
-        longest_word = max(syllables_for_each_word, key=itemgetter(1))[0]
-
+        phrases = new_phrases
+        new_phrases = []
+        split_realisation = [[word] for word in realisation.split()]
+        syllables_for_each_word = zip(realisation.split(), count_syllables(split_realisation))
+        longest_word = max(syllables_for_each_word, key=itemgetter(1))
         for phrase in phrases:
             if 'noun' in phrase.__dict__.keys():
-                if phrase.noun == longest_word[0]:
-                    tries = 5
-                    while count_syllables(phrase.noun) >= longest_word[1] and tries:
+                if phrase.noun == lemma(longest_word[0]):
+                    tries = try_num
+                    while len(phrase.stress_patterns[0]) >= longest_word[1] and tries:
                         phrase = phrase_spec.NP(get_random_word('N'))
                         tries -= 1
 
-            if 'verb' in phrase.__dict__.keys():
-                if phrase.verb == longest_word[0]:
-                    tries = 5
-                    while count_syllables(phrase.verb) >= longest_word[1] and tries:
+            elif 'verb' in phrase.__dict__.keys():
+                if phrase.verb == lemma(longest_word[0]):
+                    tries = try_num
+                    while len(phrase.stress_patterns[0]) >= longest_word[1] and tries:
                         phrase = phrase_spec.VP(get_random_word('V'))
                         tries -= 1
 
-            if 'np' in phrase.__dict__.keys():
-                if phrase.np.noun == longest_word[0]:
-                    tries = 5
-                    while count_syllables(phrase.np.noun) >= longest_word[1] and tries:
+            elif 'np' in phrase.__dict__.keys():
+                if phrase.np.noun == lemma(longest_word[0]):
+                    tries = try_num
+                    while len(phrase.np.stress_patterns[0]) >= longest_word[1] and tries:
                         phrase.np = phrase_spec.NP(get_random_word('N'))
                         tries -= 1
 
-        total_tries -= 1
+            new_phrases.append(phrase)
 
-    return phrases
+        total_tries -= 1
+        line = builder.make_clause(new_phrases)
+        realisation = str(builder.realiser.realise(line).getRealisation())
+        num_syllables = count_syllables([realisation])[0]
+
+    if not new_phrases:
+        new_phrases = phrases
+
+    if num_syllables < target_num_syllables:
+        return extend_phrase(new_phrases, target_num_syllables, num_syllables)
+    else:
+        return new_phrases
 
 
 def extend_phrase(phrases, target_num_syllables, num_syllables):
     #While less than:
     #Add adjectives and adverbs as modifiers with max missing number of syllables
     while num_syllables < target_num_syllables:
-        pos = random.choice(['A', 'AVP'])
+        phrase_to_change = phrases.index(random.choice(phrases))
+        pos = 'A'
+        if 'verb' in phrases[phrase_to_change].__dict__.keys():
+            pos = 'AVP'
 
         #Need to check that it is <= the required number of syllables
         word = ''
         added_syllables = 0
-        tries = 5
+        tries = 10
         while tries:
             word = get_random_word(pos)
             added_syllables = count_syllables([word])[0]
@@ -89,19 +108,12 @@ def extend_phrase(phrases, target_num_syllables, num_syllables):
                 break
             tries -= 1
 
-        phrase_to_change = None
-        modifier_phrase = None
         if pos == 'A':
-            #Add it as a modifier to one of the noun/prep phrases
             modifier_phrase = phrase_spec.ADJ(word)
-            phrase_to_change = [phrases.index(phrase) for phrase in phrases if
-                                'noun' in phrase.__dict__.keys() or 'np' in phrase.__dict__.keys()]
-        elif pos == 'AVP':
-            #Add it as a modifier to one of the verb phrases
+        else:
             modifier_phrase = phrase_spec.ADV(word)
-            phrase_to_change = [phrases.index(phrase) for phrase in phrases if 'verb' in phrase.__dict__.keys()]
 
-        phrases[random.choice(phrase_to_change)].modifiers.append(modifier_phrase)
+        phrases[phrase_to_change].modifiers.append(modifier_phrase)
 
         num_syllables += added_syllables
 
@@ -111,23 +123,76 @@ def extend_phrase(phrases, target_num_syllables, num_syllables):
 #Now that we have the right number of syllables, fix the sentence so that it matches the rhythm patterns
 #Replace words that don't match the rhythm for their position
 def fit_pattern(line, phrases, pattern):
+    new_phrases = []
+
     #Find the stress pattern of each individual word
-    stress_patterns = get_stress_pattern(line.split())
+    words = builder.realiser.realise(line).getRealisation().split()
+    stress_patterns = get_stress_pattern(builder.realiser.realise(line).getRealisation().split())
+    stress_patterns = zip(words, stress_patterns)
 
     #If it does not match the given pattern for its position, add it to a 'replace' list, with the required pattern
     to_be_replaced = []
-    for word_patterns in stress_patterns:
-        word_len = len(word_patterns[0])
+    for word, patterns in stress_patterns:
+        word_len = len(patterns[0])     # FIXME: Some words have multiple syllable lengths e.g. towards
         required = pattern[:word_len]
 
-        if not required in word_patterns:
-            to_be_replaced.append(required)  # FIXME: Need to give some indication of the word to be replaced
+        if not required in patterns:
+            replace = (word, required)
+            to_be_replaced.append(replace)
 
         pattern = pattern[word_len:]
 
     #Find synonyms for those in the replace list, replace directly and return
-    for word in to_be_replaced:
-        pass
-        #Find a word with required pattern
+    for word, required in to_be_replaced:
+        #Find the word among the phrases
+        #Replace with different word with same pos and required pattern
+        for phrase in phrases:
+            if 'noun' in phrase.__dict__.keys():
+                if phrase.noun == word:
+                    tries = 5
+                    while required not in get_stress_pattern(phrase.noun) and tries:
+                        phrase = phrase_spec.NP(get_random_word('N'))
+                        tries -= 1
 
-    return builder.make_clause(phrases)
+            if 'verb' in phrase.__dict__.keys():
+                if phrase.verb == word:
+                    tries = 5
+                    while required not in get_stress_pattern(phrase.noun) and tries:
+                        phrase = phrase_spec.VP(get_random_word('V'))
+                        tries -= 1
+
+            if 'np' in phrase.__dict__.keys():
+                if phrase.np.noun == word:
+                    tries = 5
+                    while required not in get_stress_pattern(phrase.np .noun) and tries:
+                        phrase.np = phrase_spec.NP(get_random_word('N'))
+                        tries -= 1
+
+            for modifier in phrase.modifiers:
+                if 'adjective' in phrase.__dict__.keys():
+                    if modifier.adjective == word:
+                        new_modifier = modifier
+                        tries = 5
+                        while required not in get_stress_pattern(new_modifier.adjective) and tries:
+                            new_modifier = phrase_spec.ADJ(get_random_word('A'))
+                            tries -= 1
+                        if tries:
+                            modifier_index = phrase.modifiers.index(modifier)
+                            phrase.modifiers[modifier_index] = new_modifier
+                if 'adverb' in phrase.__dict__.keys():
+                    if modifier.adverb == word:
+                        new_modifier = modifier
+                        tries = 5
+                        while required not in get_stress_pattern(new_modifier.adverb) and tries:
+                            new_modifier = phrase_spec.ADV(get_random_word('AVP'))
+                            tries -= 1
+                        if tries:
+                            modifier_index = phrase.modifiers.index(modifier)
+                            phrase.modifiers[modifier_index] = new_modifier
+
+            new_phrases.append(phrase)
+
+    if not new_phrases:
+        new_phrases = phrases
+
+    return new_phrases

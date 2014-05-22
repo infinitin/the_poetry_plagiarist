@@ -3,6 +3,7 @@ from framenet_reader import lu_from_frames, valence_pattern_from_id, lu_from_wor
 import random
 import phrase_spec
 from rephrase import fit_rhythm_pattern
+from shayar.analyse.detectors.rhythm import get_stress_pattern
 
 import jpype
 
@@ -67,7 +68,9 @@ def build_action_phrase(pattern, verb):
     line = make_clause(phrases)
     phrases = fit_rhythm_pattern(line, phrases, pattern)
     line = make_clause(phrases)
-    print str(realiser.realise(line).getRealisation())
+    realisation = str(realiser.realise(line).getRealisation())
+    print realisation
+    print get_stress_pattern([realisation])
 
     return phrases
 

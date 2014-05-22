@@ -17,10 +17,8 @@ class NP():
         self.possessive = False
         self.pronominal = False
         self.modifiers = []
-        self.premodifiers = []
-        self.postmodifiers = []
         self.complements = []
-        self.stress_patterns = get_stress_pattern(noun)
+        self.stress_patterns = get_stress_pattern([noun])[0]
 
     def translate_to_nlg(self):
         phrase = builder.phraseFactory.createNounPhrase(self.noun)
@@ -31,12 +29,8 @@ class NP():
 
         for modifier in self.modifiers:
             phrase.addModifier(modifier.adjective)
-        for premodifier in self.premodifiers:
-            phrase.addPreModifier(premodifier.adjective)
-        for postmodifier in self.postmodifiers:
-            phrase.addPostModifier(postmodifier.adjective)
         for complement in self.complements:
-            phrase.addComplement(complement)
+            phrase.addComplement(complement.translate_to_nlg())
 
         if self.gender == 'n':
             phrase.setFeature(builder.lexical_feature.GENDER, builder.gender.NEUTER)
@@ -65,19 +59,13 @@ class PP():
         self.prep = prep
         self.np = np
         self.modifiers = []
-        self.premodifiers = []
-        self.postmodifiers = []
         self.complements = []
-        self.stress_patterns = get_stress_pattern(prep)
+        self.stress_patterns = get_stress_pattern([prep])[0]
 
     def translate_to_nlg(self):
         phrase = builder.phraseFactory.createPrepositionPhrase(self.prep)
         for modifier in self.modifiers:
-            self.np.modifiers.append(modifier.adjective)
-        for premodifier in self.premodifiers:
-            self.np.premodifiers.append(premodifier.adjective)
-        for postmodifier in self.postmodifiers:
-            self.np.postmodifiers.append(postmodifier.adjective)
+            self.np.modifiers.append(ADJ(modifier.adjective))
         for complement in self.complements:
             self.np.complements.append(complement)
 
@@ -92,10 +80,8 @@ class VP():
         self.tense = ''
         self.aspect = ''
         self.modifiers = []
-        self.premodifiers = []
-        self.postmodifiers = []
         self.complements = []
-        self.stress_patterns = get_stress_pattern(verb)
+        self.stress_patterns = get_stress_pattern([verb])[0]
 
     def translate_to_nlg(self):
         phrase = builder.phraseFactory.createVerbPhrase(self.verb)
@@ -104,12 +90,8 @@ class VP():
 
         for modifier in self.modifiers:
             phrase.addModifier(modifier.adverb)
-        for premodifier in self.premodifiers:
-            phrase.addPreModifier(premodifier.adverb)
-        for postmodifier in self.postmodifiers:
-            phrase.addPostModifier(postmodifier.adverb)
         for complement in self.complements:
-            phrase.addComplement(complement)
+            phrase.addComplement(complement.translate_to_nlg())
 
         if self.tense == 'past':
             phrase.setFeature(builder.feature.TENSE, builder.tense.PAST)
@@ -137,10 +119,10 @@ class VP():
 class ADJ():
     def __init__(self, adjective):
         self.adjective = adjective
-        self.stress_patterns = get_stress_pattern(adjective)
+        self.stress_patterns = get_stress_pattern([adjective])[0]
 
 
 class ADV():
     def __init__(self, adverb):
         self.adverb = adverb
-        self.stress_patterns = get_stress_pattern(adverb)
+        self.stress_patterns = get_stress_pattern([adverb])[0]
