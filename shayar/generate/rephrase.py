@@ -9,7 +9,8 @@ from pattern.text.en import lemma
 
 
 def fit_rhythm_pattern(phrases, pattern):
-    phrases = fit_pattern(fit_syllables(phrases, len(pattern)), pattern)
+    #phrases = fit_pattern(fit_syllables(phrases, len(pattern)), pattern)
+    phrases = fit_syllables(phrases, len(pattern))
     return [phrase for phrase in phrases if phrase is not None]
 
 
