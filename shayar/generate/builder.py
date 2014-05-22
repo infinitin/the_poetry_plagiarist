@@ -65,8 +65,7 @@ def build_action_phrase(pattern, verb):
         raise Exception('Given word is not a verb, look for synonyms: ' + verb) # FIXME: Find a synonym, don't just die.
     valence_pattern = valence_pattern_from_id(lu.get('ID'))
     phrases = create_phrases(valence_pattern, lu)
-    line = make_clause(phrases)
-    phrases = fit_rhythm_pattern(line, phrases, pattern)
+    phrases = fit_rhythm_pattern(phrases, pattern)
     line = make_clause(phrases)
     realisation = str(realiser.realise(line).getRealisation())
     print realisation

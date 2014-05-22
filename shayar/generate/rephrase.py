@@ -8,15 +8,15 @@ from operator import itemgetter
 from pattern.text.en import lemma
 
 
-def fit_rhythm_pattern(line, phrases, pattern):
-    print len(pattern)
-    #phrases = fit_pattern(line, fit_syllables(line, phrases, len(pattern)), pattern)
-    phrases = fit_syllables(line, phrases, len(pattern))
+def fit_rhythm_pattern(phrases, pattern):
+    print pattern
+    phrases = fit_pattern(fit_syllables(phrases, len(pattern)), pattern)
     return [phrase for phrase in phrases if phrase is not None]
 
 
 #First get the number of syllables right
-def fit_syllables(line, phrases, target_num_syllables):
+def fit_syllables(phrases, target_num_syllables):
+    line = builder.make_clause(phrases)
     #Get the realisation
     realisation = builder.realiser.realise(line).getRealisation()
 
@@ -122,9 +122,9 @@ def extend_phrase(phrases, target_num_syllables, num_syllables):
 
 #Now that we have the right number of syllables, fix the sentence so that it matches the rhythm patterns
 #Replace words that don't match the rhythm for their position
-def fit_pattern(line, phrases, pattern):
+def fit_pattern(phrases, pattern):
     new_phrases = []
-
+    line = builder.make_clause(phrases)
     #Find the stress pattern of each individual word
     words = builder.realiser.realise(line).getRealisation().split()
     stress_patterns = get_stress_pattern(builder.realiser.realise(line).getRealisation().split())
@@ -149,40 +149,40 @@ def fit_pattern(line, phrases, pattern):
         for phrase in phrases:
             if 'noun' in phrase.__dict__.keys():
                 if phrase.noun == word:
-                    tries = 5
+                    tries = 10
                     while required not in get_stress_pattern(phrase.noun) and tries:
                         phrase = phrase_spec.NP(get_random_word('N'))
                         tries -= 1
 
             if 'verb' in phrase.__dict__.keys():
                 if phrase.verb == word:
-                    tries = 5
+                    tries = 10
                     while required not in get_stress_pattern(phrase.noun) and tries:
                         phrase = phrase_spec.VP(get_random_word('V'))
                         tries -= 1
 
             if 'np' in phrase.__dict__.keys():
                 if phrase.np.noun == word:
-                    tries = 5
+                    tries = 10
                     while required not in get_stress_pattern(phrase.np .noun) and tries:
                         phrase.np = phrase_spec.NP(get_random_word('N'))
                         tries -= 1
 
             for modifier in phrase.modifiers:
-                if 'adjective' in phrase.__dict__.keys():
+                if 'adjective' in modifier.__dict__.keys():
                     if modifier.adjective == word:
                         new_modifier = modifier
-                        tries = 5
+                        tries = 10
                         while required not in get_stress_pattern(new_modifier.adjective) and tries:
                             new_modifier = phrase_spec.ADJ(get_random_word('A'))
                             tries -= 1
                         if tries:
                             modifier_index = phrase.modifiers.index(modifier)
                             phrase.modifiers[modifier_index] = new_modifier
-                if 'adverb' in phrase.__dict__.keys():
+                if 'adverb' in modifier.__dict__.keys():
                     if modifier.adverb == word:
                         new_modifier = modifier
-                        tries = 5
+                        tries = 10
                         while required not in get_stress_pattern(new_modifier.adverb) and tries:
                             new_modifier = phrase_spec.ADV(get_random_word('AVP'))
                             tries -= 1
