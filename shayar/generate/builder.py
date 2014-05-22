@@ -3,7 +3,6 @@ from framenet_reader import lu_from_frames, valence_pattern_from_id, lu_from_wor
 import random
 import phrase_spec
 from rephrase import fit_rhythm_pattern
-from shayar.analyse.detectors.rhythm import get_stress_pattern
 
 import jpype
 
@@ -28,7 +27,7 @@ internal_feature = jpype.JClass('simplenlg.features.InternalFeature')
 lexical_category = jpype.JClass('simplenlg.framework.LexicalCategory')
 
 
-def build_poem_line(new_poem, template, poems, line_index):
+def build_poem_line(template, line_index):
     # Check for a relation in order as given in google doc
 
     # Use all the separate functions that will be written below to:
@@ -39,14 +38,13 @@ def build_poem_line(new_poem, template, poems, line_index):
 
     # Add the returned phrase to the CyberPoem at this line
 
-    pattern = random.choice(template.stress_patterns[line_index])
-
-    #builders = [build_name_phrase, build_action_phrase, build_location_phrase, build_has_phrase, build_message_phrase, build_desire_phrase]
+    #builders = [build_name_phrase, build_action_phrase, build_location_phrase, build_has_phrase, build_message_phrase,
+    #            build_desire_phrase]
     #random.choice(builders)(pattern)
 
-    build_action_phrase(pattern, '')
+    phrases = build_action_phrase(template.stress_patterns[line_index], '')
 
-    shutdown_builder()
+    return phrases
 
 
 def build_is_phrase():
@@ -62,14 +60,11 @@ def build_action_phrase(pattern, verb):
     try:
         lu = lu_from_word(verb, 'v')
     except IndexError:
-        raise Exception('Given word is not a verb, look for synonyms: ' + verb) # FIXME: Find a synonym, don't just die.
+        raise Exception(
+            'Given word is not a verb, look for synonyms: ' + verb)  # FIXME: Find a synonym, don't just die.
     valence_pattern = valence_pattern_from_id(lu.get('ID'))
     phrases = create_phrases(valence_pattern, lu)
     phrases = fit_rhythm_pattern(phrases, pattern)
-    line = make_clause(phrases)
-    realisation = str(realiser.realise(line).getRealisation())
-    print realisation
-    print get_stress_pattern([realisation])
 
     return phrases
 
@@ -142,7 +137,7 @@ def build_name_phrase():
         phrases.append(group_phrase_elem)
 
     phrases = phrases[:2] + [phraseFactory.createNounPhrase(name)] + phrases[2:]
-    phrases[0].setDeterminer('a')   # FIXME: 'an' if starts with vowel phoneme
+    phrases[0].setDeterminer('a')  # FIXME: 'an' if starts with vowel phoneme
 
     if len(phrases) > 2:
         line = phraseFactory.createClause(phrases[0], phrases[1], phrases[2])

@@ -1,18 +1,22 @@
 __author__ = 'Nitin'
 from shayar.poem import Poem
+import builder
+from builder import make_clause
 
 
 class CyberPoem(Poem):
 
-    phrases = {}    # Will hold the NLG elements
+    phrases = []    # Will hold the phrase elements
 
     def __init__(self):
         Poem.__init__(self, [])
 
     def realise(self):
-        pass
-        #FIXME: Make this work for stanzas
-        #for phrase_num in range(0, len(phrases)):
-            #line = realiser.realise(phrases[phrase_num]).getRealisation()
-            #self.poem.append(line)
-            #print line
+        # FIXME: Make work with stanzas
+        for l in range(0, sum(self.lines)):
+            self.poem.append(str(builder.realiser.realise(make_clause(self.phrases[l])).getRealisation()))
+
+        for line in self.poem:
+            print line
+
+
