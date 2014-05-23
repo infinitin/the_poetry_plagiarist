@@ -57,21 +57,21 @@ def reduce_phrase(phrases, target_num_syllables, num_syllables):
             if 'noun' in phrase.__dict__.keys():
                 if phrase.noun == lemma(longest_word[0]):
                     tries = try_num
-                    while len(phrase.stress_patterns[0]) >= longest_word[1] and tries:
+                    while phrase.stress_patterns and len(phrase.stress_patterns[0]) >= longest_word[1] and tries:
                         phrase = phrase_spec.NP(get_random_word('N'))
                         tries -= 1
 
             elif 'verb' in phrase.__dict__.keys():
                 if phrase.verb == lemma(longest_word[0]):
                     tries = try_num
-                    while len(phrase.stress_patterns[0]) >= longest_word[1] and tries:
+                    while phrase.stress_patterns and len(phrase.stress_patterns[0]) >= longest_word[1] and tries:
                         phrase = phrase_spec.VP(get_random_word('V'))
                         tries -= 1
 
             elif 'np' in phrase.__dict__.keys():
                 if phrase.np.noun == lemma(longest_word[0]):
                     tries = try_num
-                    while len(phrase.np.stress_patterns[0]) >= longest_word[1] and tries:
+                    while phrase.stress_patterns and len(phrase.np.stress_patterns[0]) >= longest_word[1] and tries:
                         phrase.np = phrase_spec.NP(get_random_word('N'))
                         tries -= 1
 
@@ -140,8 +140,8 @@ def fit_pattern(phrases, pattern):
         required = pattern[:word_len]
 
         if not required in patterns:
-            replace = (word, required)
-            to_be_replaced.append(replace)
+            replacement = (word, required)
+            to_be_replaced.append(replacement)
 
         pattern = pattern[word_len:]
 
@@ -226,20 +226,23 @@ def fit_rhyme(phrases, rhyme_token, pattern):
         #FIXME: Get all with required stress pattern
         candidates = [entry for entry in json if
                       entry['syllables'] == str(len(required_stress_pattern)) and entry['word'] not in
-                      creation.rhyme_scheme[rhyme_token] and entry['score'] >= 250]
+                      creation.rhyme_scheme[rhyme_token] and entry['score'] >= 300]
         if not candidates:
             for x in range(1, 2):
                 candidates = [entry for entry in json if
                               entry['syllables'] == str(len(required_stress_pattern) + x) and entry['word'] not in
-                              creation.rhyme_scheme[rhyme_token] and entry['score'] >= 250]
+                              creation.rhyme_scheme[rhyme_token] and entry['score'] >= 300]
 
                 if not candidates:
                     candidates = [entry for entry in json if
                                   entry['syllables'] == str(len(required_stress_pattern) - x) and entry['word'] not in
-                                  creation.rhyme_scheme[rhyme_token] and entry['score'] >= 250]
+                                  creation.rhyme_scheme[rhyme_token] and entry['score'] >= 300]
 
                 if candidates:
                     break
+        if not candidates:
+            candidates = [entry for entry in json if
+                          entry['word'] not in creation.rhyme_scheme[rhyme_token] and entry['score'] >= 300]
         if not candidates:
             candidates = [entry for entry in json if
                           entry['word'] not in creation.rhyme_scheme[rhyme_token] and entry['score'] >= 250]
@@ -298,7 +301,7 @@ def get_rhyme_word(candidates, pos):
     options = [candidate for candidate in candidates if lemma(candidate['word']) in filtered_lemmas]
 
     if not options:
-        return get_random_word(pos)
+        options = candidates
 
     best_options = [candidate for candidate in candidates if candidate['score'] == options[0]['score']]
 

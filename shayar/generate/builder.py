@@ -321,9 +321,8 @@ def create_phrases(valence_pattern, lu):
                     phrase = new_elem
 
             elif pos.startswith('P'):
-                new_elem = phrase_spec.PP(pos.partition('[')[-1].rpartition(']')[0])
                 n = phrase_spec.NP(word)
-                new_elem.complements.append(n)
+                new_elem = phrase_spec.PP(pos.partition('[')[-1].rpartition(']')[0], n)
                 if phrase:
                     phrase.complements.append(new_elem)
                 else:

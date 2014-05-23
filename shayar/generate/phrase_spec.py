@@ -66,6 +66,7 @@ class PP():
         phrase = creation.phraseFactory.createPrepositionPhrase(self.prep)
         for modifier in self.modifiers:
             self.np.modifiers.append(ADJ(modifier.adjective))
+        self.modifiers = []
         for complement in self.complements:
             self.np.complements.append(complement)
 

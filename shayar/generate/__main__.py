@@ -20,8 +20,8 @@ logging.getLogger(__name__)
 
 
 #Grab the poem template of a particular collection from store
-def retrieve_template(collection):
-    f = open(os.path.abspath(os.path.join(os.path.dirname(__file__), '..\\generalise', collection + '.template')), 'rb')
+def retrieve_template(coll):
+    f = open(os.path.abspath(os.path.join(os.path.dirname(__file__), '..\\generalise', coll + '.template')), 'rb')
     stored_template = cPickle.load(f)
     f.close()
     return stored_template

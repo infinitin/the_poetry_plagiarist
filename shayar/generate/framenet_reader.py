@@ -60,8 +60,8 @@ def lu_from_word(word, pos):
         return random.choice(lus)
 
 
-def lu_from_id(id):
-    return [lu for lu in root.findall(pre_tag + 'lu') if lu.get('ID') == id][0]
+def lu_from_id(lu_id):
+    return [lu for lu in root.findall(pre_tag + 'lu') if lu.get('ID') == lu_id][0]
 
 
 simplenlg_lexicon = ET.parse('default-lexicon.xml')
