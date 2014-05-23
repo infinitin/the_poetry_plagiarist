@@ -226,7 +226,26 @@ def fit_rhyme(phrases, rhyme_token, pattern):
         #FIXME: Get all with required stress pattern
         candidates = [entry for entry in json if
                       entry['syllables'] == str(len(required_stress_pattern)) and entry['word'] not in
-                      creation.rhyme_scheme[rhyme_token]]
+                      creation.rhyme_scheme[rhyme_token] and entry['score'] >= 250]
+        if not candidates:
+            for x in range(1, 2):
+                candidates = [entry for entry in json if
+                              entry['syllables'] == str(len(required_stress_pattern) + x) and entry['word'] not in
+                              creation.rhyme_scheme[rhyme_token] and entry['score'] >= 250]
+
+                if not candidates:
+                    candidates = [entry for entry in json if
+                                  entry['syllables'] == str(len(required_stress_pattern) - x) and entry['word'] not in
+                                  creation.rhyme_scheme[rhyme_token] and entry['score'] >= 250]
+
+                if candidates:
+                    break
+        if not candidates:
+            candidates = [entry for entry in json if
+                          entry['word'] not in creation.rhyme_scheme[rhyme_token] and entry['score'] >= 250]
+        if not candidates:
+            candidates = json
+
         #Send to replace function
         phrases = replace(last_word, candidates, phrases)
         new_line = builder.make_clause(phrases)

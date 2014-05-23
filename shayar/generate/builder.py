@@ -20,7 +20,7 @@ def build_action_phrase(verb, pattern, rhyme_token):
     verb = str(get_random_word('V'))
 
     alternatives = []
-    tried_alternatives = []
+    tried_alternatives = set()
     synset = wordnet.synsets(verb, pos=VERB)
     if synset:
         alternatives = synset[0].synonyms
@@ -28,13 +28,14 @@ def build_action_phrase(verb, pattern, rhyme_token):
     valence_pattern = []
     lu = None
     while not valence_pattern:
-        tried_alternatives.append(verb)
+        tried_alternatives.add(verb)
         lu = None
         while lu is None:
             try:
                 lu = lu_from_word(verb, 'v')
             except IndexError:
                 logging.info("I don't know how to use this word, looking for alternatives: " + verb)
+                tried_alternatives.add(verb)
                 remaining_alternatives = [word for word in alternatives if word not in tried_alternatives]
                 if remaining_alternatives:
                     verb = random.choice(remaining_alternatives)
