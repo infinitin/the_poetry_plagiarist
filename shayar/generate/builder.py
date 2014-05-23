@@ -18,7 +18,7 @@ def build_hasproperty_phrase():
 
 def build_action_phrase(verb, pattern, rhyme_token):
     verb = str(get_random_word('V'))
-
+    logging.info('Building action phrase: ' + str(verb))
     alternatives = []
     tried_alternatives = set()
     synset = wordnet.synsets(verb, pos=VERB)
@@ -27,8 +27,8 @@ def build_action_phrase(verb, pattern, rhyme_token):
 
     valence_pattern = []
     lu = None
+    logging.info('Getting lu and valence pattern')
     while not valence_pattern:
-        tried_alternatives.add(verb)
         lu = None
         while lu is None:
             try:
@@ -43,11 +43,19 @@ def build_action_phrase(verb, pattern, rhyme_token):
                     verb = get_random_word('V')
 
         valence_pattern = valence_pattern_from_id(lu.get('ID'))
+        if not valence_pattern:
+            tried_alternatives.add(verb)
+            remaining_alternatives = [word for word in alternatives if word not in tried_alternatives]
+            if remaining_alternatives:
+                verb = random.choice(remaining_alternatives)
+            else:
+                verb = get_random_word('V')
 
+    logging.info('Creating phrases')
     phrases = create_phrases(valence_pattern, lu)
-
+    logging.info('Rephrasing to fit rhythm')
     phrases = fit_rhythm_pattern(phrases, pattern)
-
+    logging.info('Rephrasing to fit rhyme')
     phrases = fit_rhyme(phrases, rhyme_token, pattern)
 
     return phrases

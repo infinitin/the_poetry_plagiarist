@@ -1,6 +1,6 @@
 __author__ = 'Nitin'
 from builder import build_action_phrase
-
+import logging
 import jpype
 
 jpype.startJVM(jpype.getDefaultJVMPath(), "-Djava.class.path=simplenlg-v4.4.2.jar")
@@ -27,10 +27,12 @@ rhyme_scheme = {}
 
 
 def create_poem(new_poem, template):
+    logging.info('Setting up rhyme scheme map')
     for letter in template.rhyme_schemes[0]:
         rhyme_scheme[letter] = []
     #Send to builder
     for l in range(0, sum(new_poem.lines)):
+        logging.info('Building line ' + str(l))
         # Check for a relation in order as given in google doc
 
         # Use all the separate functions that will be written below to:

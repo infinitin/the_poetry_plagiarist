@@ -27,23 +27,29 @@ def retrieve_template(coll):
     return stored_template
 
 #Input from user
+logging.info('Getting user input')
 json_input = '{"collection": "limericks"}'
 settings = json.loads(json_input)
 collection = settings["collection"]
 
 #Get template, poems from store
+logging.info('Getting template and poems from store')
 template = retrieve_template(collection)
 poems = retrieve_all_poems(collection)
 utils.num_poems = len(poems)
 
 #Init poem
+logging.info('Creating poem')
 new_poem = CyberPoem()
+logging.info('Initialising poem')
 init_poem(new_poem, template)
 
 #Build all the lines. May want to do first line, then some aggregation, then subsequent lines later on
+logging.info('Creating poem')
 create_poem(new_poem, template)
 
 #Realise poem into the CyberPoem.poem attribute and return to user
+logging.info('Realising poem')
 new_poem.realise()
 
 shutdown_builder()
