@@ -10,7 +10,8 @@ pre_tag = '{http://framenet.icsi.berkeley.edu}'
 
 def lu_from_frames(frames):
     all_lus = [lu for lu in root.findall(pre_tag + 'lu') if lu.get('frameName') in frames]
-    all_finished_frame_lus = [lu for lu in all_lus if lu.get('status') == 'Finished_Initial' and not '_' in lu.get('name')]
+    all_finished_frame_lus = [lu for lu in all_lus if
+                              lu.get('status') == 'Finished_Initial' and not '_' in lu.get('name')]
     if all_finished_frame_lus:
         return random.choice(all_finished_frame_lus)
     else:
@@ -40,7 +41,8 @@ def valence_pattern_from_id(lu_id):
     #But an easier heuristic would be to look at the GF attribute of the valenceUnit
     #Dep always comes *last*, then Obj, then we take the order it came in
     pattern = random.choice(max_fe_group.findall(pre_tag + 'pattern'))
-    starters = [valenceUnit for valenceUnit in pattern.findall(pre_tag + 'valenceUnit') if valenceUnit.get('GF') != 'Dep' and valenceUnit.get('GF') != 'Obj']
+    starters = [valenceUnit for valenceUnit in pattern.findall(pre_tag + 'valenceUnit') if
+                valenceUnit.get('GF') != 'Dep' and valenceUnit.get('GF') != 'Obj']
     objs = [valenceUnit for valenceUnit in pattern.findall(pre_tag + 'valenceUnit') if valenceUnit.get('GF') == 'Obj']
     deps = [valenceUnit for valenceUnit in pattern.findall(pre_tag + 'valenceUnit') if valenceUnit.get('GF') == 'Dep']
 
@@ -63,6 +65,7 @@ def lu_from_id(id):
 
 
 simplenlg_lexicon = ET.parse('default-lexicon.xml')
+word_root = simplenlg_lexicon.getroot()
 
 
 #We would like to look up framenet in the future, but for now we look up the default lexicon for simplenlg
@@ -74,5 +77,28 @@ def get_random_word(pos):
         category = 'adverb'
     elif pos.startswith('A'):
         category = 'adjective'
-    word_root = simplenlg_lexicon.getroot()
-    return random.choice([word.find('base').text for word in word_root.findall('word') if word.find('category').text == category])
+    return random.choice(
+        [word.find('base').text for word in word_root.findall('word') if word.find('category').text == category])
+
+
+def filter_candidates(candidates, pos):
+    category = 'noun'
+    if pos.startswith('V'):
+        category = 'verb'
+    elif pos.startswith('AVP'):
+        category = 'adverb'
+    elif pos.startswith('A'):
+        category = 'adjective'
+
+    options = [word.find('base').text for word in word_root.findall('word') if
+               word.find('base').text in candidates and word.find('category').text == category]
+
+    if not options:
+        options = [word.find('base').text for word in word_root.findall('word') if
+                   word.find('base').text in candidates and word.find('category').text == 'A']
+
+    if not options:
+        options = [word.find('base').text for word in word_root.findall('word') if
+                   word.find('base').text in candidates]
+
+    return options

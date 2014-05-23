@@ -12,7 +12,7 @@ import utils
 from creation import create_poem
 from shayar.generalise.aggregators import rhythm, rhyme
 from collections import Counter
-from builder import shutdown_builder
+from creation import shutdown_builder
 
 import logging
 logging.basicConfig(level=logging.INFO)

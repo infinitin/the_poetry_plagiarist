@@ -1,6 +1,6 @@
 __author__ = 'Nitin'
 from shayar.analyse.detectors.rhythm import get_stress_pattern
-import builder
+import creation
 import jpype
 from shayar.analyse.detectors.utils import set_up_globals
 set_up_globals(ono=False)
@@ -21,11 +21,11 @@ class NP():
         self.stress_patterns = get_stress_pattern([noun])[0]
 
     def translate_to_nlg(self):
-        phrase = builder.phraseFactory.createNounPhrase(self.noun)
+        phrase = creation.phraseFactory.createNounPhrase(self.noun)
 
         phrase.setSpecifier(self.specifier)
-        phrase.setFeature(builder.feature.PRONOMINAL, jpype.JBoolean(self.pronominal))
-        phrase.setFeature(builder.feature.POSSESSIVE, jpype.JBoolean(self.possessive))
+        phrase.setFeature(creation.feature.PRONOMINAL, jpype.JBoolean(self.pronominal))
+        phrase.setFeature(creation.feature.POSSESSIVE, jpype.JBoolean(self.possessive))
 
         for modifier in self.modifiers:
             phrase.addModifier(modifier.adjective)
@@ -33,23 +33,23 @@ class NP():
             phrase.addComplement(complement.translate_to_nlg())
 
         if self.gender == 'n':
-            phrase.setFeature(builder.lexical_feature.GENDER, builder.gender.NEUTER)
+            phrase.setFeature(creation.lexical_feature.GENDER, creation.gender.NEUTER)
         elif self.gender == 'f':
-            phrase.setFeature(builder.lexical_feature.GENDER, builder.gender.FEMININE)
+            phrase.setFeature(creation.lexical_feature.GENDER, creation.gender.FEMININE)
         elif self.gender == 'm':
-            phrase.setFeature(builder.lexical_feature.GENDER, builder.gender.MASCULINE)
+            phrase.setFeature(creation.lexical_feature.GENDER, creation.gender.MASCULINE)
 
         if self.gender == 'sg':
-            phrase.setFeature(builder.feature.NUMBER, builder.number_agreement.SINGULAR)
+            phrase.setFeature(creation.feature.NUMBER, creation.number_agreement.SINGULAR)
         elif self.gender == 'pl':
-            phrase.setFeature(builder.feature.NUMBER, builder.number_agreement.PLURAL)
+            phrase.setFeature(creation.feature.NUMBER, creation.number_agreement.PLURAL)
 
         if self.gender == 'first':
-            phrase.setFeature(builder.feature.PERSON, builder.person.FIRST)
+            phrase.setFeature(creation.feature.PERSON, creation.person.FIRST)
         elif self.gender == 'second':
-            phrase.setFeature(builder.feature.PERSON, builder.person.SECOND)
+            phrase.setFeature(creation.feature.PERSON, creation.person.SECOND)
         elif self.gender == 'third':
-            phrase.setFeature(builder.feature.PERSON, builder.person.THIRD)
+            phrase.setFeature(creation.feature.PERSON, creation.person.THIRD)
 
         return phrase
 
@@ -63,7 +63,7 @@ class PP():
         self.stress_patterns = get_stress_pattern([prep])[0]
 
     def translate_to_nlg(self):
-        phrase = builder.phraseFactory.createPrepositionPhrase(self.prep)
+        phrase = creation.phraseFactory.createPrepositionPhrase(self.prep)
         for modifier in self.modifiers:
             self.np.modifiers.append(ADJ(modifier.adjective))
         for complement in self.complements:
@@ -84,9 +84,9 @@ class VP():
         self.stress_patterns = get_stress_pattern([verb])[0]
 
     def translate_to_nlg(self):
-        phrase = builder.phraseFactory.createVerbPhrase(self.verb)
+        phrase = creation.phraseFactory.createVerbPhrase(self.verb)
 
-        phrase.setFeature(builder.feature.NEGATED, jpype.JBoolean(self.negated))
+        phrase.setFeature(creation.feature.NEGATED, jpype.JBoolean(self.negated))
 
         for modifier in self.modifiers:
             phrase.addModifier(modifier.adverb)
@@ -94,24 +94,24 @@ class VP():
             phrase.addComplement(complement.translate_to_nlg())
 
         if self.tense == 'past':
-            phrase.setFeature(builder.feature.TENSE, builder.tense.PAST)
+            phrase.setFeature(creation.feature.TENSE, creation.tense.PAST)
         elif self.tense == 'present':
-            phrase.setFeature(builder.feature.TENSE, builder.tense.PRESENT)
+            phrase.setFeature(creation.feature.TENSE, creation.tense.PRESENT)
         elif self.tense == 'future':
-            phrase.setFeature(builder.feature.TENSE, builder.tense.FUTURE)
+            phrase.setFeature(creation.feature.TENSE, creation.tense.FUTURE)
 
         if self.aspect == 'perfect':
-            phrase.setFeature(builder.feature.PERFECT, True)
-            phrase.setFeature(builder.feature.PASSIVE, False)
-            phrase.setFeature(builder.feature.PROGRESSIVE, False)
+            phrase.setFeature(creation.feature.PERFECT, True)
+            phrase.setFeature(creation.feature.PASSIVE, False)
+            phrase.setFeature(creation.feature.PROGRESSIVE, False)
         elif self.aspect == 'passive':
-            phrase.setFeature(builder.feature.PASSIVE, True)
-            phrase.setFeature(builder.feature.PERFECT, False)
-            phrase.setFeature(builder.feature.PROGRESSIVE, False)
+            phrase.setFeature(creation.feature.PASSIVE, True)
+            phrase.setFeature(creation.feature.PERFECT, False)
+            phrase.setFeature(creation.feature.PROGRESSIVE, False)
         elif self.aspect == 'progressive':
-            phrase.setFeature(builder.feature.PROGRESSIVE, True)
-            phrase.setFeature(builder.feature.PERFECT, False)
-            phrase.setFeature(builder.feature.PASSIVE, False)
+            phrase.setFeature(creation.feature.PROGRESSIVE, True)
+            phrase.setFeature(creation.feature.PERFECT, False)
+            phrase.setFeature(creation.feature.PASSIVE, False)
 
         return phrase
 

@@ -1,6 +1,6 @@
 __author__ = 'Nitin'
 from shayar.poem import Poem
-import builder
+import creation
 from builder import make_clause
 
 
@@ -14,7 +14,7 @@ class CyberPoem(Poem):
     def realise(self):
         # FIXME: Make work with stanzas
         for l in range(0, sum(self.lines)):
-            self.poem.append(str(builder.realiser.realise(make_clause(self.phrases[l])).getRealisation()))
+            self.poem.append(str(creation.realiser.realise(make_clause(self.phrases[l])).getRealisation()))
 
         for line in self.poem:
             print line
