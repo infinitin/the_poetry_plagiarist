@@ -3,12 +3,8 @@ from framenet_reader import lu_from_frames, valence_pattern_from_id, lu_from_wor
 import random
 import phrase_spec
 from rephrase import fit_rhythm_pattern
-from wordnik import swagger, WordApi
-
-apiUrl = 'http://api.wordnik.com/v4'
-apiKey = 'd2194ae1a0c4be586853d0828d10f77db48039209ef684218'
-client = swagger.ApiClient(apiKey, apiUrl)
-wordnik = WordApi.WordApi(client)
+from pattern.text.en import wordnet, VERB
+import logging
 
 import jpype
 
@@ -63,7 +59,13 @@ def build_hasproperty_phrase():
 
 def build_action_phrase(pattern, verb):
     verb = str(get_random_word('V'))
+
+    alternatives = []
     tried_alternatives = []
+    synset = wordnet.synsets(verb, pos=VERB)
+    if synset:
+        alternatives = synset[0].synonyms
+
     valence_pattern = []
     lu = None
     while not valence_pattern:
@@ -72,10 +74,9 @@ def build_action_phrase(pattern, verb):
             try:
                 lu = lu_from_word(verb, 'v')
             except IndexError:
+                logging.info("I don't know how to use this word, looking for alternatives: " + verb)
                 tried_alternatives.append(verb)
-                remaining_alternatives = [word for word in
-                                          wordnik.getRelatedWords(verb, relationshipTypes='synonym')[0].words if
-                                          word not in tried_alternatives]
+                remaining_alternatives = [word for word in alternatives if word not in tried_alternatives]
                 if remaining_alternatives:
                     verb = random.choice(remaining_alternatives)
                 else:
