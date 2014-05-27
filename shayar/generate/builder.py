@@ -57,10 +57,7 @@ def build_takes_action_phrase(action):
 
     #Get an isa that has not already been chosen
     subj = get_is_a()
-    #If all chosen then use pronominal or typeof (introduce anaphora)
-    if not subj:
-        #TODO: Introduce typeof or synonym
-        subj_pronominal = True
+
 
     phrases = fit_rhyme(fit_rhythm_pattern(create_phrases(valence_pattern, lu, subj=subj), pattern), rhyme_token, pattern)
 
@@ -216,14 +213,18 @@ def create_phrases(valence_pattern, lu, subj='', obj=''):
 
             pos = valence_unit.get('PT')
             if pos.startswith('N'):
-                if not starters_done and subj:
+                if subj:
                     new_elem = phrase_spec.NP(subj)
-                    subj = ''
-                elif starters_done and subj:
-                    new_elem = phrase_spec.NP(subj)
+                    if subj_pronominal:
+                        new_elem.pronominal = True
+                    new_elem.animation = characters[character_index].object_state
+                    new_elem.num = characters[character_index].num
+                    new_elem.gender = characters[character_index].gender
                     subj = ''
                 elif starters_done and obj:
                     new_elem = phrase_spec.NP(obj)
+                    if obj_pronominal:
+                        new_elem.pronominal = True
                     obj = ''
                 else:
                     new_elem = phrase_spec.NP(get_random_word(pos))
@@ -327,9 +328,15 @@ def get_is_a():
     #Get an isa that has not already been chosen
     char = characters[character_index]
     isas = char.type_to_list['IsA']
-    isas = [isa for isa in isas if tuple([characters[character_index], 'IsA', isa]) not in used_relations]
-    if isas:
-        isa = random.choice(isas)
+    filtered_isas = [isa for isa in isas if tuple([characters[character_index], 'IsA', isa]) not in used_relations]
+    if filtered_isas:
+        isa = random.choice(filtered_isas)
         used_relations.append(tuple([characters[character_index], 'IsA', isa]))
-        return isa
-    return ''
+    else:
+        #If all chosen then use pronominal or typeof (introduce anaphora)
+        #TODO: Introduce typeof or synonym
+        global subj_pronominal
+        subj_pronominal = True
+        isa = random.choice(isas)
+
+    return isa
