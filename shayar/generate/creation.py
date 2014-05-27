@@ -36,6 +36,8 @@ def create_poem(new_poem, template):
     #FIXME: REMOVE BELOW LATER
     test_character = Character(0, 'sg', 'n', 'a')
     test_character.add_relation('IsA', 'pony')
+    test_character.add_relation('Desires', 'run')
+    test_character.add_relation('SendMessage', "'run pony run'")
     builder.characters = [test_character]
     #FIXME: REMOVE ABOVE LATER
 
@@ -56,11 +58,13 @@ def create_poem(new_poem, template):
         #phrases = build_name_phrase('Mary')
         #phrases = build_location_phrase('Japan')
         #phrases = build_hasproperty_phrase(prop)
-        #phrases = build_desire_phrase('bucket')
+        #desire = random.choice(builder.characters[builder.character_index].type_to_list['Desires'])
+        #phrases = build_desire_phrase(desire)
         #phrases = build_has_phrase('bucket')
-        #phrases = build_send_message_phrase(message)
+        message = random.choice(builder.characters[builder.character_index].type_to_list['SendMessage'])
+        phrases = build_send_message_phrase(message)
         #phrases = build_receive_message_phrase(message)
-        phrases = build_takes_action_phrase(str(get_random_word('V')))
+        #phrases = build_takes_action_phrase(str(get_random_word('V')))
         #phrases = build_receive_action_phrase(str(get_random_word('V')))
 
         new_poem.phrases.append(phrases)

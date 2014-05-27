@@ -58,7 +58,6 @@ def build_takes_action_phrase(action):
     #Get an isa that has not already been chosen
     subj = get_is_a()
 
-
     phrases = fit_rhyme(fit_rhythm_pattern(create_phrases(valence_pattern, lu, subj=subj), pattern), rhyme_token, pattern)
 
     return phrases
@@ -171,18 +170,24 @@ def build_has_phrase(possession):
     return phrases
 
 
-def build_message_phrase():
+def build_send_message_phrase(message):
     frames = ['Communication', 'Telling', 'Statement', 'Chatting']
     lu = lu_from_frames(frames)
     valence_pattern = valence_pattern_from_id(lu.get('ID'))
-    print_nlg_statement(valence_pattern, lu)
+    #Get an isa that has not already been chosen
+    subj = get_is_a()
+    phrases = fit_rhyme(fit_rhythm_pattern(create_phrases(valence_pattern, lu, subj=subj, obj=message), pattern), rhyme_token, pattern)
+
+    return phrases
 
 
 def build_desire_phrase(desire):
     frames = ['Desiring']
     lu = lu_from_frames(frames)
     valence_pattern = valence_pattern_from_id(lu.get('ID'))
-    phrases = fit_rhyme(fit_rhythm_pattern(create_phrases(valence_pattern, lu, obj=desire), pattern), rhyme_token, pattern)
+    subj = get_is_a()
+
+    phrases = fit_rhyme(fit_rhythm_pattern(create_phrases(valence_pattern, lu, subj=subj, obj=desire), pattern), rhyme_token, pattern)
 
     return phrases
 
