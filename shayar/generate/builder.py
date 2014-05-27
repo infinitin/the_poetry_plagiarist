@@ -16,10 +16,6 @@ subj_pronominal = False
 obj_pronominal = False
 
 
-def build_is_phrase():
-    pass
-
-
 def build_hasproperty_phrase():
     pass
 
@@ -69,10 +65,6 @@ def build_name_phrase(name):
     valence_pattern = valence_pattern_from_id(lu.get('ID'))
     #Get an isa that has not already been chosen
     subj = get_is_a()
-    #If all chosen then use pronominal or typeof (introduce anaphora)
-    if not subj:
-        #TODO: Introduce typeof or synonym
-        subj_pronominal = True
 
     logging.info('Creating phrases')
     phrases = []
@@ -83,7 +75,16 @@ def build_name_phrase(name):
 
             pos = valence_unit.get('PT')
             if pos.startswith('N'):
-                new_elem = phrase_spec.NP(get_random_word(pos))
+                if subj:
+                    new_elem = phrase_spec.NP(subj)
+                    if subj_pronominal:
+                        new_elem.pronominal = True
+                    new_elem.animation = characters[character_index].object_state
+                    new_elem.num = characters[character_index].num
+                    new_elem.gender = characters[character_index].gender
+                    subj = ''
+                else:
+                    new_elem = phrase_spec.NP(get_random_word(pos))
 
                 if phrase:
                     phrase.complements.append(new_elem)
@@ -170,17 +171,6 @@ def build_has_phrase(possession):
     return phrases
 
 
-def build_send_message_phrase(message):
-    frames = ['Communication', 'Telling', 'Statement', 'Chatting']
-    lu = lu_from_frames(frames)
-    valence_pattern = valence_pattern_from_id(lu.get('ID'))
-    #Get an isa that has not already been chosen
-    subj = get_is_a()
-    phrases = fit_rhyme(fit_rhythm_pattern(create_phrases(valence_pattern, lu, subj=subj, obj=message), pattern), rhyme_token, pattern)
-
-    return phrases
-
-
 def build_desire_phrase(desire):
     frames = ['Desiring']
     lu = lu_from_frames(frames)
@@ -206,6 +196,18 @@ def build_partof_phrase():
     lu = lu_from_frames(frames)
     valence_pattern = valence_pattern_from_id(lu.get('ID'))
     print_nlg_statement(valence_pattern, lu)
+
+
+#FIXME: This isn't great either
+def build_send_message_phrase(message):
+    frames = ['Communication', 'Telling', 'Statement', 'Chatting']
+    lu = lu_from_frames(frames)
+    valence_pattern = valence_pattern_from_id(lu.get('ID'))
+    #Get an isa that has not already been chosen
+    subj = get_is_a()
+    phrases = fit_rhyme(fit_rhythm_pattern(create_phrases(valence_pattern, lu, subj=subj, obj=message), pattern), rhyme_token, pattern)
+
+    return phrases
 
 
 def create_phrases(valence_pattern, lu, subj='', obj=''):
@@ -248,17 +250,21 @@ def create_phrases(valence_pattern, lu, subj='', obj=''):
                     phrase = new_elem
 
             elif pos.startswith('P'):
-                if not starters_done and subj:
+                if subj:
                     n = phrase_spec.NP(subj)
-                    subj = ''
-                elif starters_done and subj:
-                    n = phrase_spec.NP(subj)
+                    if subj_pronominal:
+                        n.pronominal = True
+                    n.animation = characters[character_index].object_state
+                    n.num = characters[character_index].num
+                    n.gender = characters[character_index].gender
                     subj = ''
                 elif starters_done and obj:
                     n = phrase_spec.NP(obj)
+                    if obj_pronominal:
+                        n.pronominal = True
                     obj = ''
                 else:
-                    n = phrase_spec.NP(get_random_word('N'))
+                    n = phrase_spec.NP(get_random_word(pos))
 
                 new_elem = phrase_spec.PP(pos.partition('[')[-1].rpartition(']')[0], n)
                 if phrase:
