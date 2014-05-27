@@ -43,14 +43,14 @@ def create_poem(new_poem, template):
         # Check for a relation in order as given in google doc
 
         # Use all the separate builder funtions to build phrases (lines of poetry)
-        #phrases = build_name_phrase('Mary')
+        phrases = build_name_phrase('Mary')
         #phrases = build_location_phrase(location)
         #phrases = build_hasproperty_phrase(prop)
         #phrases = build_desire_phrase(desire)
         #phrases = build_has_phrase(possession)
         #phrases = build_send_message_phrase(message)
         #phrases = build_receive_message_phrase(message)
-        phrases = build_takes_action_phrase(str(get_random_word('V')))
+        #phrases = build_takes_action_phrase(str(get_random_word('V')))
         #phrases = build_receive_action_phrase(str(get_random_word('V')))
 
         new_poem.phrases.append(phrases)

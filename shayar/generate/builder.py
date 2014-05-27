@@ -63,88 +63,79 @@ def build_name_phrase(name):
     frames = ['Referring_by_name']
     lu = random.choice([lu_from_frames(frames), lu_from_id('5544')])
     valence_pattern = valence_pattern_from_id(lu.get('ID'))
-    phrases = fit_rhyme(fit_rhythm_pattern(create_phrases(valence_pattern, lu), pattern), rhyme_token, pattern)
-
-    print phrases
-
-
-def build_name_phrase1(name):
-    frames = ['Referring_by_name']
-    lu = random.choice([lu_from_frames(frames), lu_from_id('5544')])
-    valence_pattern = valence_pattern_from_id(lu.get('ID'))
-
+    logging.info('Creating phrases')
     phrases = []
     starters_done = False
     for group in valence_pattern:
-        group_phrase_elem = None
+        phrase = None
         for valence_unit in group:
 
             pos = valence_unit.get('PT')
             if pos.startswith('N'):
-                new_elem = creation.phraseFactory.createNounPhrase(get_random_word(pos))
-                if group_phrase_elem:
-                    group_phrase_elem.addComplement(new_elem)
+                new_elem = phrase_spec.NP(get_random_word(pos))
+
+                if phrase:
+                    phrase.complements.append(new_elem)
                 else:
-                    group_phrase_elem = new_elem
+                    phrase = new_elem
 
             elif pos.startswith('V'):
-                new_elem = creation.phraseFactory.createVerbPhrase(get_random_word(pos))
-                if group_phrase_elem:
-                    group_phrase_elem.addComplement(new_elem)
+                new_elem = phrase_spec.VP(get_random_word(pos))
+                if phrase:
+                    phrase.complements.append(new_elem)
                 else:
-                    group_phrase_elem = new_elem
+                    phrase = new_elem
 
             elif pos.startswith('P'):
-                new_elem = creation.phraseFactory.createPrepositionPhrase(pos.partition('[')[-1].rpartition(']')[0])
-                n = creation.phraseFactory.createNounPhrase(get_random_word(pos))
-                new_elem.addComplement(n)
-                if group_phrase_elem:
-                    group_phrase_elem.addComplement(new_elem)
+                n = phrase_spec.NP(get_random_word('N'))
+
+                new_elem = phrase_spec.PP(pos.partition('[')[-1].rpartition(']')[0], n)
+                if phrase:
+                    phrase.complements.append(new_elem)
                 else:
-                    group_phrase_elem = new_elem
+                    phrase = new_elem
 
         if not starters_done:
+            phrases.append(phrase)
+            phrase = None
             word = lu.get('name').rpartition('.')[0]
             pos = lu.get('name').partition('.')[-1].upper()
             if pos.startswith('N'):
-                new_elem = creation.phraseFactory.createNounPhrase(word)
-                if group_phrase_elem:
-                    group_phrase_elem.addComplement(new_elem)
+                new_elem = phrase_spec.NP(word)
+                if phrase:
+                    phrase.complements.append(new_elem)
                 else:
-                    group_phrase_elem = new_elem
+                    phrase = new_elem
 
             elif pos.startswith('V') or pos.startswith('A'):
-                new_elem = creation.phraseFactory.createVerbPhrase(word)
-                new_elem.setFeature(creation.feature.TENSE, creation.tense.PAST)
-                if group_phrase_elem:
-                    group_phrase_elem.addComplement(new_elem)
+                new_elem = phrase_spec.VP(word)
+                new_elem.tense = 'past'
+                if phrase:
+                    phrase.complements.append(new_elem)
                 else:
-                    group_phrase_elem = new_elem
+                    phrase = new_elem
 
             elif pos.startswith('P'):
-                new_elem = creation.phraseFactory.createPrepositionPhrase(pos.partition('[')[-1].rpartition(']')[0])
-                n = creation.phraseFactory.createNounPhrase(word)
-                new_elem.addComplement(n)
-                if group_phrase_elem:
-                    group_phrase_elem.addComplement(new_elem)
+                n = phrase_spec.NP(word)
+                new_elem = phrase_spec.PP(pos.partition('[')[-1].rpartition(']')[0], n)
+                if phrase:
+                    phrase.complements.append(new_elem)
                 else:
-                    group_phrase_elem = new_elem
+                    phrase = new_elem
 
             starters_done = True
 
-        phrases.append(group_phrase_elem)
+        phrases.append(phrase)
 
-    phrases = phrases[:2] + [creation.phraseFactory.createNounPhrase(name)] + phrases[2:]
-    phrases[0].setDeterminer('a')
+    phrases = [phrase for phrase in phrases if phrase is not None]
 
-    if len(phrases) > 2:
-        line = creation.phraseFactory.createClause(phrases[0], phrases[1], phrases[2])
-    elif len(phrases) > 1:
-        line = creation.phraseFactory.createClause(phrases[0], phrases[1])
-    else:
-        line = phrases[0]
+    phrases = phrases[:2] + [phrase_spec.NP(name)] + phrases[2:]
+    if 'specifier' in phrases[0].__dict__:
+        phrases[0].specifier = 'a'
 
-    print creation.realiser.realise(line).getRealisation()
+    phrases = fit_rhyme(fit_rhythm_pattern(phrases, pattern), rhyme_token, pattern)
+
+    return phrases
 
 
 #FIXME: Guarantee a location for the object
@@ -192,97 +183,6 @@ def build_partof_phrase():
     lu = lu_from_frames(frames)
     valence_pattern = valence_pattern_from_id(lu.get('ID'))
     print_nlg_statement(valence_pattern, lu)
-
-
-def print_frame(lu, valence_pattern):
-    printed = False
-    for group in valence_pattern:
-        for valence_unit in group:
-            print valence_unit.get('GF') + ', ' + valence_unit.get('PT') + ', ' + valence_unit.get('FE')
-        if not printed:
-            print str(lu.get('name'))
-            printed = True
-    print ''
-
-
-def print_filled_gaps(valence_pattern, lu):
-    words = []
-    starters_done = False
-    for group in valence_pattern:
-        for valence_unit in group:
-            pos = valence_unit.get('PT')
-            if pos.startswith('P'):
-                words.append(pos.partition('[')[-1].rpartition(']')[0])
-            words.append(get_random_word(pos))
-        if not starters_done:
-            words.append(lu.get('name'))
-            starters_done = True
-
-    print ' '.join(words)
-
-
-def print_nlg_statement(valence_pattern, lu):
-    phrases = []
-    starters_done = False
-    for group in valence_pattern:
-        group_phrase_elem = ()
-        for valence_unit in group:
-
-            pos = valence_unit.get('PT')
-            if pos.startswith('N'):
-                new_elem = creation.phraseFactory.createNounPhrase(get_random_word(pos))
-                if group_phrase_elem:
-                    group_phrase_elem[0].addComplement(new_elem)
-                else:
-                    group_phrase_elem = new_elem
-
-            elif pos.startswith('V'):
-                new_elem = creation.phraseFactory.createVerbPhrase(get_random_word(pos))
-                if group_phrase_elem:
-                    group_phrase_elem[0].addComplement(new_elem)
-                else:
-                    group_phrase_elem = new_elem
-
-            elif pos.startswith('P'):
-                new_elem = creation.phraseFactory.createPrepositionPhrase(pos.partition('[')[-1].rpartition(']')[0])
-                n = creation.phraseFactory.createNounPhrase(get_random_word(pos))
-                new_elem.addComplement(n)
-                if group_phrase_elem:
-                    group_phrase_elem[0].addComplement(new_elem)
-                else:
-                    group_phrase_elem = new_elem
-
-        if not starters_done:
-            word = lu.get('name').rpartition('.')[0]
-            pos = lu.get('name').partition('.')[-1].upper()
-            if pos.startswith('N'):
-                new_elem = creation.phraseFactory.createNounPhrase(word)
-                if group_phrase_elem:
-                    group_phrase_elem[0].addComplement(new_elem)
-                else:
-                    group_phrase_elem = new_elem
-
-            elif pos.startswith('V'):
-                new_elem = creation.phraseFactory.createVerbPhrase(word)
-                if group_phrase_elem:
-                    group_phrase_elem[0].addComplement(new_elem)
-                else:
-                    group_phrase_elem = new_elem
-
-            elif pos.startswith('P'):
-                new_elem = creation.phraseFactory.createPrepositionPhrase(pos.partition('[')[-1].rpartition(']')[0])
-                n = creation.phraseFactory.createNounPhrase(word)
-                new_elem.addComplement(n)
-                if group_phrase_elem:
-                    group_phrase_elem[0].addComplement(new_elem)
-                else:
-                    group_phrase_elem = new_elem
-
-            starters_done = True
-
-        phrases.append(group_phrase_elem)
-
-    print creation.realise(make_clause(phrases)).getRealisation()
 
 
 def create_phrases(valence_pattern, lu, subj='', obj=''):
@@ -350,7 +250,7 @@ def create_phrases(valence_pattern, lu, subj='', obj=''):
                 else:
                     phrase = new_elem
 
-            elif pos.startswith('V'):
+            elif pos.startswith('V') or pos.startswith('A'):
                 new_elem = phrase_spec.VP(word)
                 if phrase:
                     phrase.complements.append(new_elem)
