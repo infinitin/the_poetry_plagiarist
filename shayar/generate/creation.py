@@ -1,7 +1,8 @@
 __author__ = 'Nitin'
-from builder import build_action_phrase
+from builder import *
 import logging
 import jpype
+import builder
 
 jpype.startJVM(jpype.getDefaultJVMPath(), "-Djava.class.path=simplenlg-v4.4.2.jar")
 
@@ -30,24 +31,27 @@ def create_poem(new_poem, template):
     logging.info('Setting up rhyme scheme map')
     for letter in template.rhyme_schemes[0]:
         rhyme_scheme[letter] = []
+
+    builder.characters = new_poem.characters
     #Send to builder
     for l in range(0, sum(new_poem.lines)):
         logging.info('Building line ' + str(l))
+        #Set globals
+        builder.pattern = template.stress_patterns[l]
+        builder.rhyme_token = template.rhyme_schemes[0][l]
+
         # Check for a relation in order as given in google doc
 
-        # Use all the separate functions that will be written below to:
-        # - Retrieve relevant frames from framenet
-        # - Fill in the gaps in the frames
-
-        # Do any other re-fitting (e.g. to match rhythm)
-
-        # Add the returned phrase to the CyberPoem at this line
-
-        #builders = [build_name_phrase, build_action_phrase, build_location_phrase, build_has_phrase, build_message_phrase,
-        #            build_desire_phrase]
-        #random.choice(builders)(pattern)
-
-        phrases = build_action_phrase('', template.stress_patterns[l], template.rhyme_schemes[0][l])
+        # Use all the separate builder funtions to build phrases (lines of poetry)
+        #phrases = build_name_phrase('Mary')
+        #phrases = build_location_phrase(location)
+        #phrases = build_hasproperty_phrase(prop)
+        #phrases = build_desire_phrase(desire)
+        #phrases = build_has_phrase(possession)
+        #phrases = build_send_message_phrase(message)
+        #phrases = build_receive_message_phrase(message)
+        phrases = build_takes_action_phrase(str(get_random_word('V')))
+        #phrases = build_receive_action_phrase(str(get_random_word('V')))
 
         new_poem.phrases.append(phrases)
 

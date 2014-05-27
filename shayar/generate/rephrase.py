@@ -9,6 +9,7 @@ import creation
 import builder
 from urllib2 import urlopen, URLError
 from json import loads as json_load
+import logging
 
 
 def fit_rhythm_pattern(phrases, pattern):
@@ -19,6 +20,7 @@ def fit_rhythm_pattern(phrases, pattern):
 
 #First get the number of syllables right
 def fit_syllables(phrases, target_num_syllables):
+    logging.info('Rephrasing to fit rhythm')
     line = builder.make_clause(phrases)
     #Get the realisation
     realisation = creation.realiser.realise(line).getRealisation()
@@ -202,6 +204,7 @@ def fit_pattern(phrases, pattern):
 
 
 def fit_rhyme(phrases, rhyme_token, pattern):
+    logging.info('Rephrasing to fit rhyme')
     line = builder.make_clause(phrases)
     last_word = creation.realiser.realise(line).getRealisation().split()[-1]
 

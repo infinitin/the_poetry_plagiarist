@@ -7,6 +7,10 @@ from pattern.text.en import wordnet, VERB
 import logging
 import creation
 
+pattern = ''
+rhyme_token = ''
+characters = ''
+
 
 def build_is_phrase():
     pass
@@ -16,12 +20,11 @@ def build_hasproperty_phrase():
     pass
 
 
-def build_action_phrase(verb, pattern, rhyme_token):
-    verb = str(get_random_word('V'))
-    logging.info('Building action phrase: ' + str(verb))
+def build_takes_action_phrase(action):
+    logging.info('Building action phrase: ' + str(action))
     alternatives = []
     tried_alternatives = set()
-    synset = wordnet.synsets(verb, pos=VERB)
+    synset = wordnet.synsets(action, pos=VERB)
     if synset:
         alternatives = synset[0].synonyms
 
@@ -32,37 +35,40 @@ def build_action_phrase(verb, pattern, rhyme_token):
         lu = None
         while lu is None:
             try:
-                lu = lu_from_word(verb, 'v')
+                lu = lu_from_word(action, 'v')
             except IndexError:
-                logging.info("I don't know how to use this word, looking for alternatives: " + verb)
-                tried_alternatives.add(verb)
+                logging.info("I don't know how to use this word, looking for alternatives: " + action)
+                tried_alternatives.add(action)
                 remaining_alternatives = [word for word in alternatives if word not in tried_alternatives]
                 if remaining_alternatives:
-                    verb = random.choice(remaining_alternatives)
+                    action = random.choice(remaining_alternatives)
                 else:
-                    verb = get_random_word('V')
+                    action = get_random_word('V')
 
         valence_pattern = valence_pattern_from_id(lu.get('ID'))
         if not valence_pattern:
-            tried_alternatives.add(verb)
+            tried_alternatives.add(action)
             remaining_alternatives = [word for word in alternatives if word not in tried_alternatives]
             if remaining_alternatives:
-                verb = random.choice(remaining_alternatives)
+                action = random.choice(remaining_alternatives)
             else:
-                verb = get_random_word('V')
+                action = get_random_word('V')
 
-    logging.info('Creating phrases')
-    phrases = create_phrases(valence_pattern, lu)
-    logging.info('Rephrasing to fit rhythm')
-    phrases = fit_rhythm_pattern(phrases, pattern)
-    logging.info('Rephrasing to fit rhyme')
-    phrases = fit_rhyme(phrases, rhyme_token, pattern)
+    phrases = fit_rhyme(fit_rhythm_pattern(create_phrases(valence_pattern, lu, subj='bucket'), pattern), rhyme_token, pattern)
 
     return phrases
 
 
-def build_name_phrase():
-    name = 'Mary'
+def build_name_phrase(name):
+    frames = ['Referring_by_name']
+    lu = random.choice([lu_from_frames(frames), lu_from_id('5544')])
+    valence_pattern = valence_pattern_from_id(lu.get('ID'))
+    phrases = fit_rhyme(fit_rhythm_pattern(create_phrases(valence_pattern, lu), pattern), rhyme_token, pattern)
+
+    print phrases
+
+
+def build_name_phrase1(name):
     frames = ['Referring_by_name']
     lu = random.choice([lu_from_frames(frames), lu_from_id('5544')])
     valence_pattern = valence_pattern_from_id(lu.get('ID'))
@@ -129,7 +135,7 @@ def build_name_phrase():
         phrases.append(group_phrase_elem)
 
     phrases = phrases[:2] + [creation.phraseFactory.createNounPhrase(name)] + phrases[2:]
-    phrases[0].setDeterminer('a')  # FIXME: 'an' if starts with vowel phoneme
+    phrases[0].setDeterminer('a')
 
     if len(phrases) > 2:
         line = creation.phraseFactory.createClause(phrases[0], phrases[1], phrases[2])
@@ -279,7 +285,8 @@ def print_nlg_statement(valence_pattern, lu):
     print creation.realise(make_clause(phrases)).getRealisation()
 
 
-def create_phrases(valence_pattern, lu):
+def create_phrases(valence_pattern, lu, subj='', obj=''):
+    logging.info('Creating phrases')
     phrases = []
     starters_done = False
     for group in valence_pattern:
@@ -288,7 +295,18 @@ def create_phrases(valence_pattern, lu):
 
             pos = valence_unit.get('PT')
             if pos.startswith('N'):
-                new_elem = phrase_spec.NP(get_random_word(pos))
+                if not starters_done and subj:
+                    new_elem = phrase_spec.NP(subj)
+                    subj = ''
+                elif starters_done and subj:
+                    new_elem = phrase_spec.NP(subj)
+                    subj = ''
+                elif starters_done and obj:
+                    new_elem = phrase_spec.NP(obj)
+                    obj = ''
+                else:
+                    new_elem = phrase_spec.NP(get_random_word(pos))
+
                 if phrase:
                     phrase.complements.append(new_elem)
                 else:
@@ -302,7 +320,18 @@ def create_phrases(valence_pattern, lu):
                     phrase = new_elem
 
             elif pos.startswith('P'):
-                n = phrase_spec.NP(get_random_word(pos))
+                if not starters_done and subj:
+                    n = phrase_spec.NP(subj)
+                    subj = ''
+                elif starters_done and subj:
+                    n = phrase_spec.NP(subj)
+                    subj = ''
+                elif starters_done and obj:
+                    n = phrase_spec.NP(obj)
+                    obj = ''
+                else:
+                    n = phrase_spec.NP(get_random_word('N'))
+
                 new_elem = phrase_spec.PP(pos.partition('[')[-1].rpartition(']')[0], n)
                 if phrase:
                     phrase.complements.append(new_elem)
@@ -359,3 +388,13 @@ def make_clause(spec_phrases):
         line = phrases[0]
 
     return line
+
+
+def get_synonyms(word, pos=None):
+    if pos is not None:
+        synset = wordnet.synsets(word, pos=pos)
+    else:
+        synset = wordnet.synsets(word)
+
+    if synset:
+        return synset[0].synonyms
