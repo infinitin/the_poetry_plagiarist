@@ -9,7 +9,11 @@ import creation
 
 pattern = ''
 rhyme_token = ''
-characters = ''
+characters = []
+character_index = None
+used_relations = []
+subj_pronominal = False
+obj_pronominal = False
 
 
 def build_is_phrase():
@@ -22,11 +26,8 @@ def build_hasproperty_phrase():
 
 def build_takes_action_phrase(action):
     logging.info('Building action phrase: ' + str(action))
-    alternatives = []
     tried_alternatives = set()
-    synset = wordnet.synsets(action, pos=VERB)
-    if synset:
-        alternatives = synset[0].synonyms
+    alternatives = get_synonyms(action, pos=VERB)
 
     valence_pattern = []
     lu = None
@@ -54,7 +55,14 @@ def build_takes_action_phrase(action):
             else:
                 action = get_random_word('V')
 
-    phrases = fit_rhyme(fit_rhythm_pattern(create_phrases(valence_pattern, lu, subj='bucket'), pattern), rhyme_token, pattern)
+    #Get an isa that has not already been chosen
+    subj = get_is_a()
+    #If all chosen then use pronominal or typeof (introduce anaphora)
+    if not subj:
+        #TODO: Introduce typeof or synonym
+        subj_pronominal = True
+
+    phrases = fit_rhyme(fit_rhythm_pattern(create_phrases(valence_pattern, lu, subj=subj), pattern), rhyme_token, pattern)
 
     return phrases
 
@@ -63,6 +71,13 @@ def build_name_phrase(name):
     frames = ['Referring_by_name']
     lu = random.choice([lu_from_frames(frames), lu_from_id('5544')])
     valence_pattern = valence_pattern_from_id(lu.get('ID'))
+    #Get an isa that has not already been chosen
+    subj = get_is_a()
+    #If all chosen then use pronominal or typeof (introduce anaphora)
+    if not subj:
+        #TODO: Introduce typeof or synonym
+        subj_pronominal = True
+
     logging.info('Creating phrases')
     phrases = []
     starters_done = False
@@ -139,20 +154,24 @@ def build_name_phrase(name):
 
 
 #FIXME: Guarantee a location for the object
-def build_location_phrase():
+def build_location_phrase(location):
     frames = ['Being_located']
     lu = random.choice([lu_from_frames(frames), lu_from_id('10640')])
     valence_pattern = valence_pattern_from_id(lu.get('ID'))
-    print_nlg_statement(valence_pattern, lu)
+    phrases = fit_rhyme(fit_rhythm_pattern(create_phrases(valence_pattern, lu, obj=location), pattern), rhyme_token, pattern)
+
+    return phrases
 
 
 #FIXME: Make sure that you check the pos of the 'has' word - sometimes noun, sometimes verb
-def build_has_phrase():
+def build_has_phrase(possession):
     # Need to use possessive pronouns as well
     frames = ['Possession']
     lu = lu_from_frames(frames)
     valence_pattern = valence_pattern_from_id(lu.get('ID'))
-    print_nlg_statement(valence_pattern, lu)
+    phrases = fit_rhyme(fit_rhythm_pattern(create_phrases(valence_pattern, lu, subj=possession), pattern), rhyme_token, pattern)
+
+    return phrases
 
 
 def build_message_phrase():
@@ -162,11 +181,13 @@ def build_message_phrase():
     print_nlg_statement(valence_pattern, lu)
 
 
-def build_desire_phrase():
+def build_desire_phrase(desire):
     frames = ['Desiring']
     lu = lu_from_frames(frames)
     valence_pattern = valence_pattern_from_id(lu.get('ID'))
-    print_nlg_statement(valence_pattern, lu)
+    phrases = fit_rhyme(fit_rhythm_pattern(create_phrases(valence_pattern, lu, obj=desire), pattern), rhyme_token, pattern)
+
+    return phrases
 
 
 #FIXME: This is pretty bad
@@ -214,6 +235,7 @@ def create_phrases(valence_pattern, lu, subj='', obj=''):
 
             elif pos.startswith('V'):
                 new_elem = phrase_spec.VP(get_random_word(pos))
+                new_elem.tense = 'past'
                 if phrase:
                     phrase.complements.append(new_elem)
                 else:
@@ -252,6 +274,7 @@ def create_phrases(valence_pattern, lu, subj='', obj=''):
 
             elif pos.startswith('V') or pos.startswith('A'):
                 new_elem = phrase_spec.VP(word)
+                new_elem.tense = 'past'
                 if phrase:
                     phrase.complements.append(new_elem)
                 else:
@@ -298,3 +321,15 @@ def get_synonyms(word, pos=None):
 
     if synset:
         return synset[0].synonyms
+
+
+def get_is_a():
+    #Get an isa that has not already been chosen
+    char = characters[character_index]
+    isas = char.type_to_list['IsA']
+    isas = [isa for isa in isas if tuple([characters[character_index], 'IsA', isa]) not in used_relations]
+    if isas:
+        isa = random.choice(isas)
+        used_relations.append(tuple([characters[character_index], 'IsA', isa]))
+        return isa
+    return ''
