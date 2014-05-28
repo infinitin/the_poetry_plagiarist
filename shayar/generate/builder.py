@@ -10,15 +10,22 @@ from shayar.knowledge.retrieval import collocations
 from character_creation import create_new_character
 from urllib2 import urlopen, URLError
 from json import loads as json_load
+from wordnik import swagger, WordApi
+
+apiUrl = 'http://api.wordnik.com/v4'
+apiKey = 'd2194ae1a0c4be586853d0828d10f77db48039209ef684218'
+client = swagger.ApiClient(apiKey, apiUrl)
+wordApi = WordApi.WordApi(client)
 
 knowledge = collocations()
 pattern = ''
 rhyme_token = ''
 characters = []
-character_i = None
+character_i = -1
 used_relations = []
 subj_pronominal = False
 obj_pronominal = False
+dep_pronominal = False
 
 
 def build_hasproperty_phrase():
@@ -57,7 +64,7 @@ def build_takes_action_phrase(action):
                 action = get_random_word('V')
 
     #Get an isa that has not already been chosen
-    subj = get_is_a()
+    subj = get_is_a(character_i)
 
     #Get an object that generally receives this action
     obj = ''
@@ -69,7 +76,7 @@ def build_takes_action_phrase(action):
     if valence_pattern[2]:
         dep = get_action_theme(valence_pattern, action, obj)
 
-    phrases = fit_rhyme(fit_rhythm_pattern(create_phrases(valence_pattern, lu, subj=subj), pattern), rhyme_token,
+    phrases = fit_rhyme(fit_rhythm_pattern(create_phrases(valence_pattern, lu, subj, obj, dep), pattern), rhyme_token,
                         pattern)
 
     return phrases
@@ -279,11 +286,16 @@ def create_phrases(valence_pattern, lu, subj='', obj='', dep=''):
                     n.num = characters[character_i].num
                     n.gender = characters[character_i].gender
                     subj = ''
-                elif starters_done and obj:
+                elif starters_done and not objects_done and obj:
                     n = phrase_spec.NP(obj)
                     if obj_pronominal:
                         n.pronominal = True
                     obj = ''
+                elif starters_done and objects_done and dep:
+                    n = phrase_spec.NP(dep)
+                    if dep_pronominal:
+                        n.pronominal = True
+                    dep = ''
                 else:
                     n = phrase_spec.NP(get_random_word(pos))
 
@@ -361,10 +373,13 @@ def get_synonyms(word, pos=None):
         synonyms.extend([str(holonym).partition("'")[-1].rpartition("'")[0] for holonym in synset[0].holonyms()])
         synonyms.extend([str(hypernym).partition("'")[-1].rpartition("'")[0] for hypernym in synset[0].hypernyms()])
 
+    #wordnik_synonyms = wordApi.getRelatedWords(word, relationshipTypes='synonym')[0].words
+    #synonyms.extend(wordnik_synonyms)
+
     return synonyms
 
 
-def get_is_a(character_index=character_i):
+def get_is_a(character_index):
     #Get an isa that has not already been chosen
     char = characters[character_index]
     isas = char.type_to_list['IsA']
@@ -389,12 +404,17 @@ def get_receives_action(action):
             return get_is_a(character_index=characters.index(character))
 
     #Otherwise, add a new character that *would* receive such an action
-    candidates = []
-    for similarity_score in [x / 20.0 for x in reversed(range(0, 21, 1))]:
-        candidates = [head for head, tail, relation in knowledge if relation == 'ReceivesAction' and
-                      wordnet.similarity(get_synset(tail), get_synset(action)) > similarity_score]
-        if candidates:
-            break
+    all_candidates = [tuple([head, tail, relation]) for head, tail, relation in knowledge if
+                      relation == 'ReceivesAction']
+    if all_candidates:
+        candidates = [head for head, tail, relation in knowledge if relation == 'ReceivesAction' and tail == action]
+        if not candidates:
+            candidates = [head for head, tail, relation in knowledge if
+                          relation == 'ReceivesAction' and tail in get_synonyms(action, pos=VERB)]
+            if not candidates:
+                candidates = all_candidates
+    else:
+        return get_random_word('N')
 
     noun = random.choice(candidates)
     new_character = create_new_character(noun, len(characters))
@@ -411,9 +431,16 @@ def get_action_theme(valence_pattern, action, obj):
             if pos.startswith('P'):
                 prep = pos.partition('[')[-1].rpartition(']')[0]
 
+    if not prep:
+        return ''
+
     #Make an API request to Google autocomplete (firefox gives fewer answers than chrome, but we only need one now)
     url = "http://suggestqueries.google.com/complete/search?client=firefox&q="
-    request_url = url + ' '.join([action, obj, prep])
+    if obj:
+        request_url = url + '%20'.join([action, obj, prep]) + '%20'
+    else:
+        request_url = url + '%20'.join([action, prep]) + '%20'
+
     try:
         socket = urlopen(request_url)
         json = json_load(socket.read())
@@ -421,9 +448,12 @@ def get_action_theme(valence_pattern, action, obj):
     except URLError:
         raise Exception("You are not connected to the Internet!")
 
-    dep = json[1][1].replace(json[0], '')
-    return dep
-
-
+    suggestions = json[1]
+    if suggestions:
+        original = json[0]
+        stripped = suggestions[0].replace(original, '')
+        return stripped
+    else:
+        return get_random_word('N')
 
 
