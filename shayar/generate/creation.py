@@ -51,6 +51,9 @@ def create_poem(new_poem, template):
         # Check for a relation in order as given in google doc
         #  Need to make sure that we don't pick the same relation twice
         builder.character_i = builder.characters.index(random.choice(builder.characters))
+        builder.dep_pronominal = False
+        builder.obj_pronominal = False
+        builder.subj_pronominal = False
         #relation = random.choice(flatten(builder.characters[builder.character_index].relations.values()))
 
         # Use all the separate builder funtions to build phrases (lines of poetry)
