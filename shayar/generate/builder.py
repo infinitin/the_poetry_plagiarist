@@ -33,7 +33,7 @@ def build_hasproperty_phrase():
 
 
 def build_takes_action_phrase(action):
-    logging.info('Building action phrase: ' + str(action))
+    logging.info('Building takes action phrase: ' + str(action))
     tried_alternatives = set()
     alternatives = get_synonyms(action, pos=VERB)
 
@@ -69,7 +69,55 @@ def build_takes_action_phrase(action):
     #Get an object that generally receives this action
     obj = ''
     if valence_pattern[1]:
-        obj = get_receives_action(action)
+        obj = get_action(action, 'ReceivesAction')
+
+    #Get an object that is usually involved in this action
+    dep = ''
+    if valence_pattern[2]:
+        dep = get_action_theme(valence_pattern, action, obj)
+
+    phrases = fit_rhyme(fit_rhythm_pattern(create_phrases(valence_pattern, lu, subj, obj, dep), pattern), rhyme_token,
+                        pattern)
+
+    return phrases
+
+
+def build_receives_action_phrase(action):
+    logging.info('Building receives action phrase: ' + str(action))
+    tried_alternatives = set()
+    alternatives = get_synonyms(action, pos=VERB)
+
+    valence_pattern = []
+    lu = None
+    logging.info('Getting lu and valence pattern')
+    while not valence_pattern:
+        lu = None
+        while lu is None:
+            try:
+                lu = lu_from_word(action, 'v')
+            except IndexError:
+                logging.info("I don't know how to use this word, looking for alternatives: " + action)
+                tried_alternatives.add(action)
+                remaining_alternatives = [word for word in alternatives if word not in tried_alternatives]
+                if remaining_alternatives:
+                    action = random.choice(remaining_alternatives)
+                else:
+                    action = get_random_word('V')
+
+        valence_pattern = valence_pattern_from_id(lu.get('ID'))
+        if not valence_pattern:
+            tried_alternatives.add(action)
+            remaining_alternatives = [word for word in alternatives if word not in tried_alternatives]
+            if remaining_alternatives:
+                action = random.choice(remaining_alternatives)
+            else:
+                action = get_random_word('V')
+
+    #Get an isa that has not already been chosen
+    subj = get_action(action, 'TakesAction')
+
+    #Get an object that generally receives this action
+    obj = get_is_a(character_i)
 
     #Get an object that is usually involved in this action
     dep = ''
@@ -343,6 +391,7 @@ def create_phrases(valence_pattern, lu, subj='', obj='', dep=''):
 
 
 def make_clause(spec_phrases):
+    logging.info('Building clauses')
     phrases = []
 
     for spec_phrase in spec_phrases:
@@ -360,7 +409,11 @@ def make_clause(spec_phrases):
     return line
 
 
-def get_synonyms(word, pos=None):
+def get_synonyms(word, pos=None, extended=False):
+    if extended:
+        logging.info('Getting extended synonyms for ' + word)
+    else:
+        logging.info('Getting synonyms for ' + word)
     synonyms = []
 
     if pos is not None:
@@ -373,13 +426,15 @@ def get_synonyms(word, pos=None):
         synonyms.extend([str(holonym).partition("'")[-1].rpartition("'")[0] for holonym in synset[0].holonyms()])
         synonyms.extend([str(hypernym).partition("'")[-1].rpartition("'")[0] for hypernym in synset[0].hypernyms()])
 
-    #wordnik_synonyms = wordApi.getRelatedWords(word, relationshipTypes='synonym')[0].words
-    #synonyms.extend(wordnik_synonyms)
+    if extended:
+        wordnik_synonyms = wordApi.getRelatedWords(word, relationshipTypes='synonym')[0].words
+        synonyms.extend(wordnik_synonyms)
 
     return synonyms
 
 
 def get_is_a(character_index):
+    logging.info('Getting IsA for character ' + str(character_index))
     #Get an isa that has not already been chosen
     char = characters[character_index]
     isas = char.type_to_list['IsA']
@@ -397,33 +452,37 @@ def get_is_a(character_index):
     return isa
 
 
-def get_receives_action(action):
+def get_action(action, action_relation):
+    logging.info('Getting ' + action_relation + ' parameters for ' + action)
     #Look through the other characters, finding a receives action for the given verb
     for character in characters:
-        if action in character.type_to_list['ReceivesAction']:
+        if action in character.type_to_list[action_relation]:
             return get_is_a(character_index=characters.index(character))
 
     #Otherwise, add a new character that *would* receive such an action
     all_candidates = [tuple([head, tail, relation]) for head, tail, relation in knowledge if
-                      relation == 'ReceivesAction']
+                      relation == action_relation]
     if all_candidates:
-        candidates = [head for head, tail, relation in knowledge if relation == 'ReceivesAction' and tail == action]
+        candidates = [head for head, tail, relation in knowledge if relation == action_relation and tail == action]
         if not candidates:
+            action_synonyms = get_synonyms(action, VERB, True)
             candidates = [head for head, tail, relation in knowledge if
-                          relation == 'ReceivesAction' and tail in get_synonyms(action, pos=VERB)]
+                          relation == action_relation and tail in action_synonyms]
             if not candidates:
-                candidates = all_candidates
+                candidates = [head for head, tail, relation in all_candidates]
     else:
         return get_random_word('N')
 
     noun = random.choice(candidates)
     new_character = create_new_character(noun, len(characters))
-    new_character.add_relation('ReceivesAction', action)
+    new_character.add_relation(action_relation, action)
+    characters.append(new_character)
 
     return noun
 
 
 def get_action_theme(valence_pattern, action, obj):
+    logging.info('Getting action theme for ' + action + ' ' + obj)
     prep = ''
     for group in valence_pattern:
         for valence_unit in group:
