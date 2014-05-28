@@ -9,6 +9,8 @@ import creation
 import builder
 from urllib2 import urlopen, URLError
 from json import loads as json_load
+from pattern.text.en import wordnet, singularize
+from pattern.text.en import lemma as lemmatise
 import logging
 
 
@@ -267,25 +269,25 @@ def replace(old_word, candidates, phrases):
     for phrase in phrases:
         if 'noun' in phrase.__dict__.keys():
             if phrase.noun == old_word:
-                phrase = phrase_spec.NP(get_rhyme_word(candidates, 'N'))
+                phrase = phrase_spec.NP(get_rhyme_word(old_word, candidates, 'N'))
 
         if 'verb' in phrase.__dict__.keys():
             if phrase.verb == old_word:
-                phrase = phrase_spec.VP(get_rhyme_word(candidates, 'V'))
+                phrase = phrase_spec.VP(get_rhyme_word(old_word, candidates, 'V'))
 
         if 'np' in phrase.__dict__.keys():
             if phrase.np.noun == old_word:
-                phrase.np = phrase_spec.NP(get_rhyme_word(candidates, 'N'))
+                phrase.np = phrase_spec.NP(get_rhyme_word(old_word, candidates, 'N'))
 
         for modifier in phrase.modifiers:
             if 'adjective' in modifier.__dict__.keys():
                 if modifier.adjective == old_word:
-                    new_modifier = phrase_spec.ADJ(get_rhyme_word(candidates, 'A'))
+                    new_modifier = phrase_spec.ADJ(get_rhyme_word(old_word, candidates, 'A'))
                     modifier_index = phrase.modifiers.index(modifier)
                     phrase.modifiers[modifier_index] = new_modifier
             if 'adverb' in modifier.__dict__.keys():
                 if modifier.adverb == old_word:
-                    new_modifier = phrase_spec.ADV(get_rhyme_word(candidates, 'AVP'))
+                    new_modifier = phrase_spec.ADV(get_rhyme_word(old_word, candidates, 'AVP'))
                     modifier_index = phrase.modifiers.index(modifier)
                     phrase.modifiers[modifier_index] = new_modifier
 
@@ -297,7 +299,7 @@ def replace(old_word, candidates, phrases):
     return new_phrases
 
 
-def get_rhyme_word(candidates, pos):
+def get_rhyme_word(old_word, candidates, pos):
     #Find the candidates in the lexicon
     lemmas = [lemma(candidate['word']) for candidate in candidates]
     filtered_lemmas = filter_candidates(lemmas, pos)
@@ -308,4 +310,44 @@ def get_rhyme_word(candidates, pos):
 
     best_options = [candidate for candidate in candidates if candidate['score'] == options[0]['score']]
 
-    return random.choice(best_options)['word']
+    return most_similar(old_word, best_options)['word']
+
+
+#Find the most conceptually similar words from a list of candidates
+def most_similar(word, candidates):
+    word_synset = get_synset(word)
+    if word_synset is None:
+        return random.choice(candidates)
+    max_similarity_score = 0
+    max_similarity_candidate = ''
+    for candidate in candidates:
+        candidate_synset = get_synset(candidate['word'])
+        if candidate_synset is None:
+            continue
+        similarity = wordnet.similarity(word_synset, candidate_synset)
+        if similarity > max_similarity_score:
+            max_similarity_score = similarity
+            max_similarity_candidate = candidate
+
+    if max_similarity_candidate:
+        return max_similarity_candidate
+    else:
+        return random.choice(candidates)
+
+def get_synset(word):
+    synset = None
+    try:
+        synset = wordnet.synsets(singularize(lemmatise(word)))[0]
+    except IndexError:
+        try:
+            synset = wordnet.synsets(lemmatise(word))[0]
+        except IndexError:
+            try:
+                synset = wordnet.synsets(singularize(word))[0]
+            except IndexError:
+                try:
+                    synset = wordnet.synsets(word)[0]
+                except IndexError:
+                    pass
+
+    return synset

@@ -2,7 +2,7 @@ __author__ = 'Nitin'
 from framenet_reader import lu_from_frames, valence_pattern_from_id, lu_from_word, lu_from_id, get_random_word
 import random
 import phrase_spec
-from rephrase import fit_rhythm_pattern, fit_rhyme
+from rephrase import fit_rhythm_pattern, fit_rhyme, get_synset
 from pattern.text.en import wordnet, VERB
 import logging
 import creation
@@ -326,13 +326,20 @@ def make_clause(spec_phrases):
 
 
 def get_synonyms(word, pos=None):
+    synonyms = []
+
     if pos is not None:
         synset = wordnet.synsets(word, pos=pos)
     else:
         synset = wordnet.synsets(word)
 
     if synset:
-        return synset[0].synonyms
+        synonyms.extend(synset[0].synonyms)
+        synonyms.extend([str(holonym).partition("'")[-1].rpartition("'")[0] for holonym in synset[0].holonyms()])
+        synonyms.extend([str(hypernym).partition("'")[-1].rpartition("'")[0] for hypernym in synset[0].hypernyms()])
+
+    return synonyms
+
 
 
 def get_is_a():
