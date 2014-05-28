@@ -10,7 +10,7 @@ import creation
 pattern = ''
 rhyme_token = ''
 characters = []
-character_index = None
+character_i = None
 used_relations = []
 subj_pronominal = False
 obj_pronominal = False
@@ -54,6 +54,16 @@ def build_takes_action_phrase(action):
     #Get an isa that has not already been chosen
     subj = get_is_a()
 
+    #Get an object that generally receives this action
+    obj = ''
+    if valence_pattern[1]:
+        obj = get_receives_action(action)
+
+    #Get an object that is usually involved in this action
+    dep = ''
+    if valence_pattern[2]:
+        dep = get_action_theme(action)
+
     phrases = fit_rhyme(fit_rhythm_pattern(create_phrases(valence_pattern, lu, subj=subj), pattern), rhyme_token, pattern)
 
     return phrases
@@ -79,9 +89,9 @@ def build_name_phrase(name):
                     new_elem = phrase_spec.NP(subj)
                     if subj_pronominal:
                         new_elem.pronominal = True
-                    new_elem.animation = characters[character_index].object_state
-                    new_elem.num = characters[character_index].num
-                    new_elem.gender = characters[character_index].gender
+                    new_elem.animation = characters[character_i].object_state
+                    new_elem.num = characters[character_i].num
+                    new_elem.gender = characters[character_i].gender
                     subj = ''
                 else:
                     new_elem = phrase_spec.NP(get_random_word(pos))
@@ -213,7 +223,8 @@ def build_send_message_phrase(message):
 def create_phrases(valence_pattern, lu, subj='', obj=''):
     logging.info('Creating phrases')
     phrases = []
-    starters_done = False
+    starters_done = len(valence_pattern[0]) == 0
+    objects_done = len(valence_pattern[1]) == 0
     for group in valence_pattern:
         phrase = None
         for valence_unit in group:
@@ -224,11 +235,11 @@ def create_phrases(valence_pattern, lu, subj='', obj=''):
                     new_elem = phrase_spec.NP(subj)
                     if subj_pronominal:
                         new_elem.pronominal = True
-                    new_elem.animation = characters[character_index].object_state
-                    new_elem.num = characters[character_index].num
-                    new_elem.gender = characters[character_index].gender
+                    new_elem.animation = characters[character_i].object_state
+                    new_elem.num = characters[character_i].num
+                    new_elem.gender = characters[character_i].gender
                     subj = ''
-                elif starters_done and obj:
+                elif starters_done and not objects_done and obj:
                     new_elem = phrase_spec.NP(obj)
                     if obj_pronominal:
                         new_elem.pronominal = True
@@ -254,9 +265,9 @@ def create_phrases(valence_pattern, lu, subj='', obj=''):
                     n = phrase_spec.NP(subj)
                     if subj_pronominal:
                         n.pronominal = True
-                    n.animation = characters[character_index].object_state
-                    n.num = characters[character_index].num
-                    n.gender = characters[character_index].gender
+                    n.animation = characters[character_i].object_state
+                    n.num = characters[character_i].num
+                    n.gender = characters[character_i].gender
                     subj = ''
                 elif starters_done and obj:
                     n = phrase_spec.NP(obj)
@@ -301,6 +312,8 @@ def create_phrases(valence_pattern, lu, subj='', obj=''):
                     phrase = new_elem
 
             starters_done = True
+        elif not objects_done:
+            objects_done = True
 
         phrases.append(phrase)
 
@@ -341,8 +354,7 @@ def get_synonyms(word, pos=None):
     return synonyms
 
 
-
-def get_is_a():
+def get_is_a(character_index=character_i):
     #Get an isa that has not already been chosen
     char = characters[character_index]
     isas = char.type_to_list['IsA']
@@ -358,3 +370,12 @@ def get_is_a():
         isa = random.choice(isas)
 
     return isa
+
+
+def get_receives_action(action):
+    #Look through the other characters, finding a receives action for the given verb
+    for character in characters:
+        if action in character.type_to_list['RecievesAction']:
+            return get_is_a(character_index=characters.index(character))
+
+    #Otherwise, add a new character that *would* receive such an action

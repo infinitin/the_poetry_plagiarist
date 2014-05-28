@@ -50,17 +50,16 @@ def create_poem(new_poem, template):
 
         # Check for a relation in order as given in google doc
         #  Need to make sure that we don't pick the same relation twice
-        builder.character_index = builder.characters.index(random.choice(builder.characters))
+        builder.character_i = builder.characters.index(random.choice(builder.characters))
         #relation = random.choice(flatten(builder.characters[builder.character_index].relations.values()))
 
         # Use all the separate builder funtions to build phrases (lines of poetry)
-        phrases = build_name_phrase('Mary')
+        #phrases = build_name_phrase('Mary')
         #phrases = build_location_phrase('Japan')
         #phrases = build_hasproperty_phrase(prop)
         #desire = random.choice(builder.characters[builder.character_index].type_to_list['Desires'])
         #phrases = build_desire_phrase(desire)
-        #phrases = build_has_phrase('bucket')
-        #phrases = build_takes_action_phrase(str(get_random_word('V')))
+        phrases = build_takes_action_phrase(str(get_random_word('V')))
         #phrases = build_receive_action_phrase(str(get_random_word('V')))
 
         new_poem.phrases.append(phrases)
