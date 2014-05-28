@@ -6,7 +6,12 @@ from rephrase import fit_rhythm_pattern, fit_rhyme, get_synset
 from pattern.text.en import wordnet, VERB
 import logging
 import creation
+from shayar.knowledge.retrieval import collocations
+from character_creation import create_new_character
+from urllib2 import urlopen, URLError
+from json import loads as json_load
 
+knowledge = collocations()
 pattern = ''
 rhyme_token = ''
 characters = []
@@ -62,9 +67,10 @@ def build_takes_action_phrase(action):
     #Get an object that is usually involved in this action
     dep = ''
     if valence_pattern[2]:
-        dep = get_action_theme(action)
+        dep = get_action_theme(valence_pattern, action, obj)
 
-    phrases = fit_rhyme(fit_rhythm_pattern(create_phrases(valence_pattern, lu, subj=subj), pattern), rhyme_token, pattern)
+    phrases = fit_rhyme(fit_rhythm_pattern(create_phrases(valence_pattern, lu, subj=subj), pattern), rhyme_token,
+                        pattern)
 
     return phrases
 
@@ -165,7 +171,8 @@ def build_location_phrase(location):
     frames = ['Being_located']
     lu = random.choice([lu_from_frames(frames), lu_from_id('10640')])
     valence_pattern = valence_pattern_from_id(lu.get('ID'))
-    phrases = fit_rhyme(fit_rhythm_pattern(create_phrases(valence_pattern, lu, obj=location), pattern), rhyme_token, pattern)
+    phrases = fit_rhyme(fit_rhythm_pattern(create_phrases(valence_pattern, lu, obj=location), pattern), rhyme_token,
+                        pattern)
 
     return phrases
 
@@ -176,7 +183,8 @@ def build_has_phrase(possession):
     frames = ['Possession']
     lu = lu_from_frames(frames)
     valence_pattern = valence_pattern_from_id(lu.get('ID'))
-    phrases = fit_rhyme(fit_rhythm_pattern(create_phrases(valence_pattern, lu, subj=possession), pattern), rhyme_token, pattern)
+    phrases = fit_rhyme(fit_rhythm_pattern(create_phrases(valence_pattern, lu, subj=possession), pattern), rhyme_token,
+                        pattern)
 
     return phrases
 
@@ -187,7 +195,8 @@ def build_desire_phrase(desire):
     valence_pattern = valence_pattern_from_id(lu.get('ID'))
     subj = get_is_a()
 
-    phrases = fit_rhyme(fit_rhythm_pattern(create_phrases(valence_pattern, lu, subj=subj, obj=desire), pattern), rhyme_token, pattern)
+    phrases = fit_rhyme(fit_rhythm_pattern(create_phrases(valence_pattern, lu, subj=subj, obj=desire), pattern),
+                        rhyme_token, pattern)
 
     return phrases
 
@@ -215,12 +224,13 @@ def build_send_message_phrase(message):
     valence_pattern = valence_pattern_from_id(lu.get('ID'))
     #Get an isa that has not already been chosen
     subj = get_is_a()
-    phrases = fit_rhyme(fit_rhythm_pattern(create_phrases(valence_pattern, lu, subj=subj, obj=message), pattern), rhyme_token, pattern)
+    phrases = fit_rhyme(fit_rhythm_pattern(create_phrases(valence_pattern, lu, subj=subj, obj=message), pattern),
+                        rhyme_token, pattern)
 
     return phrases
 
 
-def create_phrases(valence_pattern, lu, subj='', obj=''):
+def create_phrases(valence_pattern, lu, subj='', obj='', dep=''):
     logging.info('Creating phrases')
     phrases = []
     starters_done = len(valence_pattern[0]) == 0
@@ -375,7 +385,45 @@ def get_is_a(character_index=character_i):
 def get_receives_action(action):
     #Look through the other characters, finding a receives action for the given verb
     for character in characters:
-        if action in character.type_to_list['RecievesAction']:
+        if action in character.type_to_list['ReceivesAction']:
             return get_is_a(character_index=characters.index(character))
 
     #Otherwise, add a new character that *would* receive such an action
+    candidates = []
+    for similarity_score in [x / 20.0 for x in reversed(range(0, 21, 1))]:
+        candidates = [head for head, tail, relation in knowledge if relation == 'ReceivesAction' and
+                      wordnet.similarity(get_synset(tail), get_synset(action)) > similarity_score]
+        if candidates:
+            break
+
+    noun = random.choice(candidates)
+    new_character = create_new_character(noun, len(characters))
+    new_character.add_relation('ReceivesAction', action)
+
+    return noun
+
+
+def get_action_theme(valence_pattern, action, obj):
+    prep = ''
+    for group in valence_pattern:
+        for valence_unit in group:
+            pos = valence_unit.get('PT')
+            if pos.startswith('P'):
+                prep = pos.partition('[')[-1].rpartition(']')[0]
+
+    #Make an API request to Google autocomplete (firefox gives fewer answers than chrome, but we only need one now)
+    url = "http://suggestqueries.google.com/complete/search?client=firefox&q="
+    request_url = url + ' '.join([action, obj, prep])
+    try:
+        socket = urlopen(request_url)
+        json = json_load(socket.read())
+        socket.close()
+    except URLError:
+        raise Exception("You are not connected to the Internet!")
+
+    dep = json[1][1].replace(json[0], '')
+    return dep
+
+
+
+

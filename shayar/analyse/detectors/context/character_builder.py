@@ -111,20 +111,8 @@ def create_characters(dependencies):
 
             hyps.add(synset.gloss)
 
-            if hyps & ANIMATE_SYNSETS:
-                object_state = 'a'
-            elif hyps & PHYSICAL_SYNSETS:
-                object_state = 'p'
-            else:
-                object_state = 'n'
-
-            if object_state == 'p':
-                gender = 'n'
-            elif object_state == 'a':
-                if hyps & MALE_SYNSETS:
-                    gender = 'm'
-                elif hyps & FEMALE_SYNSETS:
-                    gender = 'f'
+            object_state = determine_object_state(hyps)
+            gender = determine_gender(hyps, object_state)
 
         character = Character(dependency['ID'], num, gender, object_state)
         character.text = form
@@ -134,3 +122,22 @@ def create_characters(dependencies):
         characters.append(character)
 
     return characters
+
+
+def determine_gender(hyps, object_state):
+    if object_state == 'p':
+        return 'n'
+    elif object_state == 'a':
+        if hyps & MALE_SYNSETS:
+            return 'm'
+        elif hyps & FEMALE_SYNSETS:
+            return 'f'
+
+
+def determine_object_state(hyps):
+    if hyps & ANIMATE_SYNSETS:
+        return 'a'
+    elif hyps & PHYSICAL_SYNSETS:
+        return 'p'
+    else:
+        return 'n'
