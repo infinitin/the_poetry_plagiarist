@@ -59,11 +59,11 @@ def create_poem(new_poem, template):
         # Use all the separate builder funtions to build phrases (lines of poetry)
         #phrases = build_name_phrase('Mary')
         #phrases = build_location_phrase('Japan')
-        #phrases = build_hasproperty_phrase(prop)
+        phrases = build_hasproperty_phrase('happy')
         #desire = random.choice(builder.characters[builder.character_index].type_to_list['Desires'])
         #phrases = build_desire_phrase(desire)
         #phrases = build_takes_action_phrase(str(get_random_word('V')))
-        phrases = build_receives_action_phrase(str(get_random_word('V')))
+        #phrases = build_receives_action_phrase(str(get_random_word('V')))
 
         new_poem.phrases.append(phrases)
 

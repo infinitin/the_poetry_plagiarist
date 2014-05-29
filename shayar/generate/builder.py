@@ -28,8 +28,19 @@ obj_pronominal = False
 dep_pronominal = False
 
 
-def build_hasproperty_phrase():
-    pass
+def build_hasproperty_phrase(prop):
+    logging.info('Building has property phrase')
+    #a p1, p2, p3 Y
+    prop_elem = phrase_spec.ADJ(prop)
+    subj = get_is_a(character_i)
+    new_elem = phrase_spec.NP(subj)
+    new_elem.animation = characters[character_i].object_state
+    new_elem.num = characters[character_i].num
+    new_elem.gender = characters[character_i].gender
+    new_elem.modifiers.append(prop_elem)
+    new_elem.specifier = 'a'
+    phrases = fit_rhyme(fit_rhythm_pattern([new_elem], pattern), rhyme_token, pattern)
+    return phrases
 
 
 def build_takes_action_phrase(action):
