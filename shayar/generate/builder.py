@@ -11,6 +11,7 @@ from character_creation import create_new_character
 from urllib2 import urlopen, URLError
 from json import loads as json_load
 from wordnik import swagger, WordApi
+from urllib2 import HTTPError
 
 apiUrl = 'http://api.wordnik.com/v4'
 apiKey = 'd2194ae1a0c4be586853d0828d10f77db48039209ef684218'
@@ -456,7 +457,7 @@ def get_synonyms(word, pos=None, extended=False):
         try:
             wordnik_synonyms = wordApi.getRelatedWords(word, relationshipTypes='synonym')[0].words
             synonyms.extend(wordnik_synonyms)
-        except TypeError:
+        except (TypeError, HTTPError):
             pass
 
 
@@ -526,9 +527,10 @@ def get_action_theme(valence_pattern, action, obj):
     #Make an API request to Google autocomplete (firefox gives fewer answers than chrome, but we only need one now)
     url = "http://suggestqueries.google.com/complete/search?client=firefox&q="
     if obj:
-        request_url = url + '%20'.join([action, obj, prep]) + '%20'
+        request_url = url + ' '.join([action, obj, prep]) + ' '
     else:
-        request_url = url + '%20'.join([action, prep]) + '%20'
+        request_url = url + ' '.join([action, prep]) + ' '
+    request_url = request_url.replace(' ', '%20')
 
     try:
         socket = urlopen(request_url)

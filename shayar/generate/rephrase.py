@@ -268,19 +268,14 @@ def fit_rhyme(phrases, rhyme_token):
 
 
 def shorten(word):
-    found = False
-    vowel_index = -1
-    for letter in reversed(word):
+    for letter in word[::-1][1:]:
         if letter in 'aeiou':
-            if not found:
-                found = True
-            else:
-                vowel_index = word.index(letter)
-
-    if vowel_index > -1:
-        return word[vowel_index + 1:]
-    else:
-        return ''
+            vowel_index = word.rindex(letter)
+            if vowel_index == 0:
+                return ''
+            elif word[vowel_index-1] not in 'aeiou':
+                return word[vowel_index:]
+    return ''
 
 
 def get_rhymes(rhyme_word):
