@@ -5,7 +5,7 @@ from shayar.analyse.detectors.context.character_builder import determine_gender,
 
 
 def create_new_character(noun, character_id):
-    synset = get_synset(noun)
+    synset = get_synset(noun, pos='N')
     hyps = set()
     for h in synset.hypernyms(recursive=True):
         try:

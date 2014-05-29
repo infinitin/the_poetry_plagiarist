@@ -318,18 +318,18 @@ def get_rhyme_word(old_word, candidates, pos):
 
     best_options = [candidate for candidate in candidates if candidate['score'] == options[0]['score']]
 
-    return most_similar(old_word, best_options)['word']
+    return most_similar(old_word, best_options, pos)['word']
 
 
 #Find the most conceptually similar words from a list of candidates
-def most_similar(word, candidates):
-    word_synset = get_synset(word)
+def most_similar(word, candidates, pos):
+    word_synset = get_synset(word, pos)
     if word_synset is None:
         return random.choice(candidates)
     max_similarity_score = 0
     max_similarity_candidate = ''
     for candidate in candidates:
-        candidate_synset = get_synset(candidate['word'])
+        candidate_synset = get_synset(candidate['word'], pos)
         if candidate_synset is None:
             continue
         similarity = wordnet.similarity(word_synset, candidate_synset)
@@ -343,21 +343,44 @@ def most_similar(word, candidates):
         return random.choice(candidates)
 
 
-def get_synset(word):
+def get_synset(word, pos=''):
+    wpos = wordnet.NOUN
+    if pos.startswith('V'):
+        wpos = wordnet.VERB
+    elif pos.startswith('AVP'):
+        wpos = wordnet.ADVERB
+    elif pos.startswith('A'):
+        wpos = wordnet.ADJECTIVE
+
     synset = None
     try:
-        synset = wordnet.synsets(singularize(lemmatise(word)))[0]
+        if pos:
+            synset = wordnet.synsets(singularize(lemmatise(word)), wpos)[0]
+        else:
+            synset = wordnet.synsets(singularize(lemmatise(word)))[0]
     except IndexError:
         try:
-            synset = wordnet.synsets(lemmatise(word))[0]
+            if pos:
+                synset = wordnet.synsets(lemmatise(word), wpos)[0]
+            else:
+                synset = wordnet.synsets(lemmatise(word))[0]
         except IndexError:
             try:
-                synset = wordnet.synsets(singularize(word))[0]
+                if pos:
+                    synset = wordnet.synsets(singularize(word), wpos)[0]
+                else:
+                    synset = wordnet.synsets(singularize(word))[0]
             except IndexError:
                 try:
-                    synset = wordnet.synsets(word)[0]
+                    if pos:
+                        synset = wordnet.synsets(word, wpos)[0]
+                    else:
+                        synset = wordnet.synsets(word)[0]
                 except IndexError:
                     pass
+
+    if pos:
+        return get_synset(word)
 
     return synset
 
