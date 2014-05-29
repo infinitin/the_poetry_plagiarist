@@ -57,7 +57,7 @@ def reduce_phrase(phrases, target_num_syllables, num_syllables):
         split_realisation = [[word] for word in realisation.split()]
         syllables_for_each_word = zip(realisation.split(), count_syllables(split_realisation))
         longest_word = max(syllables_for_each_word, key=itemgetter(1))
-        for phrase in phrases:
+        for phrase in phrases[:-1]:
             if 'noun' in phrase.__dict__.keys():
                 if phrase.noun == lemma(longest_word[0]):
                     tries = try_num
@@ -81,6 +81,7 @@ def reduce_phrase(phrases, target_num_syllables, num_syllables):
 
             new_phrases.append(phrase)
 
+        new_phrases.append(phrases[-1:][0])
         total_tries -= 1
         line = builder.make_clause(new_phrases)
         realisation = str(creation.realiser.realise(line).getRealisation())
@@ -96,10 +97,11 @@ def reduce_phrase(phrases, target_num_syllables, num_syllables):
 
 
 def extend_phrase(phrases, target_num_syllables, num_syllables):
+    changable_phrases = phrases[:-1]
     #While less than:
     #Add adjectives and adverbs as modifiers with max missing number of syllables
     while num_syllables < target_num_syllables:
-        phrase_to_change = phrases.index(random.choice(phrases))
+        phrase_to_change = phrases.index(random.choice(changable_phrases))
         pos = 'A'
         if 'verb' in phrases[phrase_to_change].__dict__.keys():
             pos = 'AVP'
@@ -205,7 +207,7 @@ def fit_pattern(phrases, pattern):
     return new_phrases
 
 
-def fit_rhyme(phrases, rhyme_token, pattern):
+def fit_rhyme(phrases, rhyme_token):
     logging.info('Rephrasing to fit rhyme')
     line = builder.make_clause(phrases)
     last_word = creation.realiser.realise(line).getRealisation().split()[-1]
@@ -215,7 +217,6 @@ def fit_rhyme(phrases, rhyme_token, pattern):
         return phrases
 
     rhyme_word = creation.rhyme_scheme[rhyme_token][0]
-    required_stress_pattern = pattern[(count_syllables([last_word])[0] * -1):]
     #Make an API request to RhymeBrain in JSON form
     url = "http://rhymebrain.com/talk?function=getRhymes&lang=en&word="
     request_url = url + rhyme_word
@@ -227,27 +228,8 @@ def fit_rhyme(phrases, rhyme_token, pattern):
         raise Exception("You are not connected to the Internet!")
 
     if json:
-        #Get all with the right number of syllables
-        #FIXME: Get all with required stress pattern
         candidates = [entry for entry in json if
-                      entry['syllables'] == str(len(required_stress_pattern)) and entry['word'] not in
-                      creation.rhyme_scheme[rhyme_token] and entry['score'] >= 300]
-        if not candidates:
-            for x in range(1, 2):
-                candidates = [entry for entry in json if
-                              entry['syllables'] == str(len(required_stress_pattern) + x) and entry['word'] not in
-                              creation.rhyme_scheme[rhyme_token] and entry['score'] >= 300]
-
-                if not candidates:
-                    candidates = [entry for entry in json if
-                                  entry['syllables'] == str(len(required_stress_pattern) - x) and entry['word'] not in
-                                  creation.rhyme_scheme[rhyme_token] and entry['score'] >= 300]
-
-                if candidates:
-                    break
-        if not candidates:
-            candidates = [entry for entry in json if
-                          entry['word'] not in creation.rhyme_scheme[rhyme_token] and entry['score'] >= 300]
+                      entry['word'] not in creation.rhyme_scheme[rhyme_token] and entry['score'] >= 300]
         if not candidates:
             candidates = [entry for entry in json if
                           entry['word'] not in creation.rhyme_scheme[rhyme_token] and entry['score'] >= 250]
@@ -257,6 +239,7 @@ def fit_rhyme(phrases, rhyme_token, pattern):
         #Send to replace function
         phrases = replace(last_word, candidates, phrases)
         new_line = builder.make_clause(phrases)
+
         chosen = creation.realiser.realise(new_line).getRealisation().split()[-1]
         creation.rhyme_scheme[rhyme_token].append(chosen)
 
@@ -333,6 +316,7 @@ def most_similar(word, candidates):
         return max_similarity_candidate
     else:
         return random.choice(candidates)
+
 
 def get_synset(word):
     synset = None

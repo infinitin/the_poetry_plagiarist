@@ -39,7 +39,7 @@ def build_hasproperty_phrase(prop):
     new_elem.gender = characters[character_i].gender
     new_elem.modifiers.append(prop_elem)
     new_elem.specifier = 'a'
-    phrases = fit_rhyme(fit_rhythm_pattern([new_elem], pattern), rhyme_token, pattern)
+    phrases = fit_rhythm_pattern(fit_rhyme([new_elem], rhyme_token), pattern)
     return phrases
 
 
@@ -87,8 +87,7 @@ def build_takes_action_phrase(action):
     if valence_pattern[2]:
         dep = get_action_theme(valence_pattern, action, obj)
 
-    phrases = fit_rhyme(fit_rhythm_pattern(create_phrases(valence_pattern, lu, subj, obj, dep), pattern), rhyme_token,
-                        pattern)
+    phrases = fit_rhythm_pattern(fit_rhyme(create_phrases(valence_pattern, lu, subj, obj, dep), rhyme_token), pattern)
 
     return phrases
 
@@ -135,8 +134,7 @@ def build_receives_action_phrase(action):
     if valence_pattern[2]:
         dep = get_action_theme(valence_pattern, action, obj)
 
-    phrases = fit_rhyme(fit_rhythm_pattern(create_phrases(valence_pattern, lu, subj, obj, dep), pattern), rhyme_token,
-                        pattern)
+    phrases = fit_rhythm_pattern(fit_rhyme(create_phrases(valence_pattern, lu, subj, obj, dep), rhyme_token), pattern)
 
     return phrases
 
@@ -227,7 +225,7 @@ def build_name_phrase(name):
     if 'specifier' in phrases[0].__dict__:
         phrases[0].specifier = 'a'
 
-    phrases = fit_rhyme(fit_rhythm_pattern(phrases, pattern), rhyme_token, pattern)
+    phrases = fit_rhythm_pattern(fit_rhyme(phrases, rhyme_token), pattern)
 
     return phrases
 
@@ -256,8 +254,7 @@ def build_location_phrase(location):
     else:
         phrases = create_phrases(valence_pattern, lu, subj=subj, dep=location)
 
-    phrases = fit_rhyme(fit_rhythm_pattern(phrases, pattern), rhyme_token,
-                        pattern)
+    phrases = fit_rhythm_pattern(fit_rhyme(phrases, rhyme_token), pattern)
 
     return phrases
 
@@ -268,8 +265,7 @@ def build_has_phrase(possession):
     frames = ['Possession']
     lu = lu_from_frames(frames)
     valence_pattern = valence_pattern_from_id(lu.get('ID'))
-    phrases = fit_rhyme(fit_rhythm_pattern(create_phrases(valence_pattern, lu, subj=possession), pattern), rhyme_token,
-                        pattern)
+    phrases = fit_rhythm_pattern(fit_rhyme(create_phrases(valence_pattern, lu, subj=possession), rhyme_token), pattern)
 
     return phrases
 
@@ -278,10 +274,10 @@ def build_desire_phrase(desire):
     frames = ['Desiring']
     lu = lu_from_frames(frames)
     valence_pattern = valence_pattern_from_id(lu.get('ID'))
-    subj = get_is_a()
+    subj = get_is_a(character_i)
 
-    phrases = fit_rhyme(fit_rhythm_pattern(create_phrases(valence_pattern, lu, subj=subj, obj=desire), pattern),
-                        rhyme_token, pattern)
+    phrases = fit_rhythm_pattern(fit_rhyme(create_phrases(valence_pattern, lu, subj=subj, obj=desire),
+                                           rhyme_token), pattern)
 
     return phrases
 
