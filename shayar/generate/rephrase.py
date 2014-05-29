@@ -98,20 +98,29 @@ def reduce_phrase(phrases, target_num_syllables, num_syllables):
 
 def extend_phrase(phrases, target_num_syllables, num_syllables):
     changable_phrases = phrases[:-1]
+    used = []
     #While less than:
     #Add adjectives and adverbs as modifiers with max missing number of syllables
     while num_syllables < target_num_syllables:
         phrase_to_change = phrases.index(random.choice(changable_phrases))
         pos = 'A'
+        target_pos = 'N'
         if 'verb' in phrases[phrase_to_change].__dict__.keys():
+            target_word = phrases[phrase_to_change].verb
+            target_pos = 'V'
             pos = 'AVP'
+        elif 'np' in phrases[phrase_to_change].__dict__.keys():
+            target_word = phrases[phrase_to_change].np.noun
+        else:
+            target_word = phrases[phrase_to_change].noun
 
         #Need to check that it is <= the required number of syllables
         word = ''
         added_syllables = 0
         tries = 10
         while tries:
-            word = get_random_word(pos)
+            word = get_property(target_word, target_pos, used)
+            used.append(word)
             added_syllables = count_syllables([word])[0]
             if added_syllables <= (target_num_syllables - num_syllables):
                 break
@@ -335,3 +344,26 @@ def get_synset(word):
                     pass
 
     return synset
+
+
+def get_property(target_word, pos, used):
+    options = [tail for head, tail, relation in builder.knowledge if
+               relation == 'HasProperty' and head == target_word and tail not in used]
+    if options:
+        return random.choice(options)
+
+    if pos.startswith('v'):
+        wpos = wordnet.VERB
+    else:
+        wpos = wordnet.NOUN
+    synonyms = builder.get_synonyms(target_word, wpos)
+    for synonym in synonyms:
+        options = [tail for head, tail, relation in builder.knowledge if
+                   relation == 'HasProperty' and head == synonym and tail not in used]
+        if options:
+            return random.choice(options)
+
+    if pos.startswith('v'):
+        return get_random_word('AVP')
+
+    return get_random_word('A')

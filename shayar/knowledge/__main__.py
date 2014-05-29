@@ -1,11 +1,11 @@
 __author__ = 'Nitin'
-from collocations import build_knowledge_graph_from_collocations
+from collocations import build_knowledge_graph_from_collocations, build_verbs_knowledge_graph_from_collocations
 import cPickle
 import logging
 logging.basicConfig(level=logging.INFO)
 logging.getLogger(__name__)
 
-collocations_knowldege = build_knowledge_graph_from_collocations()
+collocations_knowldege = build_knowledge_graph_from_collocations() + build_verbs_knowledge_graph_from_collocations()
 
 #Pickle it.
 out = open('collocations.knowledge', 'wb+')
