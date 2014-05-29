@@ -51,11 +51,13 @@ def get_tokenized_words(line):
     exclude.remove("'")
     exclude.remove("-")
     exclude.remove(".")
+    exclude.remove("/")
 
     no_punct_line = ''.join(char for char in line if char not in exclude)
     no_punct_line = no_punct_line.replace(" '", " ")
     no_punct_line = no_punct_line.replace("-", " ")
     no_punct_line = no_punct_line.replace(".", " ")
+    no_punct_line = no_punct_line.replace("/", " ")
 
     tokenized_line = nltk.Text(nltk.word_tokenize(no_punct_line))
     return [w.lower() for w in tokenized_line]

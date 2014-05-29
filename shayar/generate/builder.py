@@ -361,7 +361,7 @@ def create_phrases(valence_pattern, lu, subj='', obj='', dep=''):
                     n.num = characters[character_i].num
                     n.gender = characters[character_i].gender
                     subj = ''
-                elif starters_done and not objects_done and obj:
+                elif starters_done and obj:
                     n = phrase_spec.NP(obj)
                     if obj_pronominal:
                         n.pronominal = True

@@ -358,7 +358,7 @@ def get_rhyme_mod(word, candidates, mod_pos, pos):
     synonyms = builder.get_synonyms(word, wpos)
     modifiers = [tail for head, tail, relation in builder.knowledge if relation == 'HasProperty' and head in synonyms]
 
-    best_closest = ''
+    best_closest = None
     best_score = 999999
     for modifier in modifiers:
         closest, score = most_similar(modifier, best_options, mod_pos)

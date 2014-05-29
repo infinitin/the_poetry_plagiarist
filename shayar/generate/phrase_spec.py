@@ -76,6 +76,7 @@ class PP():
         self.post_modifiers = []
         for complement in self.complements:
             self.np.complements.append(complement)
+        self.complements = []
 
         phrase.addComplement(self.np.translate_to_nlg())
         return phrase

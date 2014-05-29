@@ -33,7 +33,8 @@ def build_knowledge_graph_from_collocations():
                 bs = p.findAll('b')
                 for b in bs:
                     try:
-                        words = [word for word in get_tokenized_words(b.contents) if word != ',' and word != '|']
+                        words = [word for word in get_tokenized_words(b.contents) if
+                                 word != ',' and word != '|' and word != '(' and word != ')']
                     except TypeError:
                         continue
                     for word in words:
@@ -64,7 +65,8 @@ def build_verbs_knowledge_graph_from_collocations():
                 bs = p.findAll('b')
                 for b in bs:
                     try:
-                        words = [word for word in get_tokenized_words(b.contents) if word != ',' and word != '|']
+                        words = [word for word in get_tokenized_words(b.contents) if
+                                 word != ',' and word != '|' and word != '(' and word != ')']
                     except TypeError:
                         continue
                     for word in words:
