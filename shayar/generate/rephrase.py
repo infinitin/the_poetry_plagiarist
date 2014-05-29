@@ -16,7 +16,7 @@ import logging
 
 def fit_rhythm_pattern(phrases, pattern):
     #phrases = fit_pattern(fit_syllables(phrases, len(pattern)), pattern)
-    phrases = fit_syllables(phrases, len(pattern))
+    #phrases = fit_syllables(phrases, len(pattern))
     return [phrase for phrase in phrases if phrase is not None]
 
 
@@ -102,7 +102,7 @@ def extend_phrase(phrases, target_num_syllables, num_syllables):
     #While less than:
     #Add adjectives and adverbs as modifiers with max missing number of syllables
     while num_syllables < target_num_syllables:
-        if target_num_syllables == num_syllables+1:
+        if target_num_syllables == num_syllables + 1:
             added_specifier = False
             for phrase in phrases:
                 if 'noun' in phrase.__dict__.keys():
@@ -242,24 +242,20 @@ def fit_rhyme(phrases, rhyme_token):
         return phrases
 
     rhyme_word = creation.rhyme_scheme[rhyme_token][0]
-    #Make an API request to RhymeBrain in JSON form
-    url = "http://rhymebrain.com/talk?function=getRhymes&lang=en&word="
-    request_url = url + rhyme_word
-    try:
-        socket = urlopen(request_url)
-        json = json_load(socket.read())
-        socket.close()
-    except URLError:
-        raise Exception("You are not connected to the Internet!")
+    short_rhyme_word = shorten(rhyme_word)
 
-    if json:
-        candidates = [entry for entry in json if
+    rhymes = get_rhymes(rhyme_word)
+    if short_rhyme_word:
+        rhymes.extend(get_rhymes(short_rhyme_word))
+
+    if rhymes:
+        candidates = [entry for entry in rhymes if
                       entry['word'] not in creation.rhyme_scheme[rhyme_token] and entry['score'] >= 300]
         if not candidates:
-            candidates = [entry for entry in json if
+            candidates = [entry for entry in rhymes if
                           entry['word'] not in creation.rhyme_scheme[rhyme_token] and entry['score'] >= 250]
         if not candidates:
-            candidates = json
+            candidates = rhymes
 
         #Send to replace function
         phrases = replace(last_word, candidates, phrases)
@@ -271,21 +267,63 @@ def fit_rhyme(phrases, rhyme_token):
     return phrases
 
 
+def shorten(word):
+    found = False
+    vowel_index = -1
+    for letter in reversed(word):
+        if letter in 'aeiou':
+            if not found:
+                found = True
+            else:
+                vowel_index = word.index(letter)
+
+    if vowel_index > -1:
+        return word[vowel_index + 1:]
+    else:
+        return ''
+
+
+def get_rhymes(rhyme_word):
+    #Make an API request to RhymeBrain in JSON form
+    url = "http://rhymebrain.com/talk?function=getRhymes&lang=en&word="
+    request_url = url + rhyme_word
+    try:
+        socket = urlopen(request_url)
+        json = json_load(socket.read())
+        socket.close()
+    except URLError:
+        raise Exception("You are not connected to the Internet!")
+
+    return json
+
+
 def replace(old_word, candidates, phrases):
     new_phrases = []
     #Find the word among the phrases, replace with candidate with same pos
     for phrase in phrases:
         if 'noun' in phrase.__dict__.keys():
             if phrase.noun == old_word:
-                phrase = phrase_spec.NP(get_rhyme_word(old_word, candidates, 'N'))
+                replacement = get_rhyme_word(old_word, candidates, 'N')
+                if not replacement:
+                    phrase.post_modifiers.append(phrase_spec.ADJ(get_rhyme_mod(old_word, candidates, 'A', 'N')))
+                else:
+                    phrase = phrase_spec.NP(replacement)
 
         if 'verb' in phrase.__dict__.keys():
             if phrase.verb == old_word:
-                phrase = phrase_spec.VP(get_rhyme_word(old_word, candidates, 'V'))
+                replacement = get_rhyme_word(old_word, candidates, 'V')
+                if not replacement:
+                    phrase.post_modifiers.append(phrase_spec.ADJ(get_rhyme_mod(old_word, candidates, 'AVP', 'V')))
+                else:
+                    phrase = phrase_spec.VP(replacement)
 
         if 'np' in phrase.__dict__.keys():
             if phrase.np.noun == old_word:
-                phrase.np = phrase_spec.NP(get_rhyme_word(old_word, candidates, 'N'))
+                replacement = get_rhyme_word(old_word, candidates, 'N')
+                if not replacement:
+                    phrase.np.post_modifiers.append(phrase_spec.ADJ(get_rhyme_mod(old_word, candidates, 'A', 'N')))
+                else:
+                    phrase.np = phrase_spec.NP(replacement)
 
         for modifier in phrase.modifiers:
             if 'adjective' in modifier.__dict__.keys():
@@ -307,40 +345,88 @@ def replace(old_word, candidates, phrases):
     return new_phrases
 
 
+def get_rhyme_mod(word, candidates, mod_pos, pos):
+    #Find the candidates in the lexicon
+    lemmas = [lemma(candidate['word']) for candidate in candidates]
+    filtered_lemmas = filter_candidates(lemmas, mod_pos)
+    options = [candidate for candidate in candidates if lemma(candidate['word']) in filtered_lemmas]
+
+    if not options:
+        return random.choice(candidates)['word']
+
+    best_options = [candidate for candidate in candidates if candidate['score'] == options[0]['score']]
+
+    wpos = wordnet.NOUN
+    if pos.startswith('V'):
+        wpos = wordnet.VERB
+
+    synonyms = builder.get_synonyms(word, wpos)
+    modifiers = [tail for head, tail, relation in builder.knowledge if relation == 'HasProperty' and head in synonyms]
+
+    best_closest = ''
+    best_score = 999999
+    for modifier in modifiers:
+        closest, score = most_similar(modifier, best_options, mod_pos)
+        if score < best_score:
+            best_score = score
+            best_closest = closest
+
+    return best_closest['word']
+
+
 def get_rhyme_word(old_word, candidates, pos):
     #Find the candidates in the lexicon
     lemmas = [lemma(candidate['word']) for candidate in candidates]
     filtered_lemmas = filter_candidates(lemmas, pos)
     options = [candidate for candidate in candidates if lemma(candidate['word']) in filtered_lemmas]
 
-    if not options:
-        options = candidates
+    if not options or options[0]['score'] < 300:
+        return ''
 
     best_options = [candidate for candidate in candidates if candidate['score'] == options[0]['score']]
 
-    return most_similar(old_word, best_options, pos)['word']
+    closest, score = most_similar(old_word, best_options, pos)
+    if score > 2.5:
+        return ''
+
+    return closest['word']
 
 
 #Find the most conceptually similar words from a list of candidates
 def most_similar(word, candidates, pos):
+    best_similarity_score = 999999
+    best_similarity_candidate = ''
     word_synset = get_synset(word, pos)
+
+    #FIXME: This isn't so good
     if word_synset is None:
-        return random.choice(candidates)
-    max_similarity_score = 0
-    max_similarity_candidate = ''
+        wpos = wordnet.NOUN
+        if pos.startswith('AVP'):
+            wpos = wordnet.ADVERB
+        elif pos.startswith('A'):
+            wpos = wordnet.ADJECTIVE
+        elif pos.startswith('V'):
+            wpos = wordnet.VERB
+        synonyms = builder.get_synonyms(word, wpos, True)
+        for candidate in candidates:
+            if candidate['word'] in synonyms:
+                return candidate, 2
+
+        return random.choice(candidates), best_similarity_score
+
     for candidate in candidates:
         candidate_synset = get_synset(candidate['word'], pos)
         if candidate_synset is None:
             continue
         similarity = wordnet.similarity(word_synset, candidate_synset)
-        if similarity > max_similarity_score:
-            max_similarity_score = similarity
-            max_similarity_candidate = candidate
+        if similarity < best_similarity_score:
+            best_similarity_score = similarity
+            best_similarity_candidate = candidate
 
-    if max_similarity_candidate:
-        return max_similarity_candidate
+    if best_similarity_candidate:
+        return best_similarity_candidate, best_similarity_score
     else:
-        return random.choice(candidates)
+        return random.choice(candidates), best_similarity_score
 
 
 def get_synset(word, pos=''):

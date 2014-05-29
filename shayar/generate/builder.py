@@ -453,8 +453,12 @@ def get_synonyms(word, pos=None, extended=False):
         synonyms.extend([str(hypernym).partition("'")[-1].rpartition("'")[0] for hypernym in synset[0].hypernyms()])
 
     if extended:
-        wordnik_synonyms = wordApi.getRelatedWords(word, relationshipTypes='synonym')[0].words
-        synonyms.extend(wordnik_synonyms)
+        try:
+            wordnik_synonyms = wordApi.getRelatedWords(word, relationshipTypes='synonym')[0].words
+            synonyms.extend(wordnik_synonyms)
+        except TypeError:
+            pass
+
 
     return synonyms
 

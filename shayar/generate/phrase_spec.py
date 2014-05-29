@@ -17,6 +17,7 @@ class NP():
         self.possessive = False
         self.pronominal = False
         self.modifiers = []
+        self.post_modifiers = []
         self.complements = []
         self.stress_patterns = get_stress_pattern([noun])[0]
 
@@ -29,6 +30,8 @@ class NP():
 
         for modifier in self.modifiers:
             phrase.addModifier(modifier.adjective)
+        for post_modifier in self.post_modifiers:
+            phrase.addPostModifier(post_modifier.adjective)
         for complement in self.complements:
             phrase.addComplement(complement.translate_to_nlg())
 
@@ -59,6 +62,7 @@ class PP():
         self.prep = prep
         self.np = np
         self.modifiers = []
+        self.post_modifiers = []
         self.complements = []
         self.stress_patterns = get_stress_pattern([prep])[0]
 
@@ -67,6 +71,9 @@ class PP():
         for modifier in self.modifiers:
             self.np.modifiers.append(ADJ(modifier.adjective))
         self.modifiers = []
+        for post_modifier in self.post_modifiers:
+            phrase.addPostModifier(post_modifier.adjective)
+        self.post_modifiers = []
         for complement in self.complements:
             self.np.complements.append(complement)
 
@@ -81,6 +88,7 @@ class VP():
         self.tense = ''
         self.aspect = ''
         self.modifiers = []
+        self.post_modifiers = []
         self.complements = []
         self.stress_patterns = get_stress_pattern([verb])[0]
 
@@ -91,6 +99,8 @@ class VP():
 
         for modifier in self.modifiers:
             phrase.addModifier(modifier.adverb)
+        for post_modifier in self.post_modifiers:
+            phrase.addPostModifier(post_modifier.adverb)
         for complement in self.complements:
             phrase.addComplement(complement.translate_to_nlg())
 
