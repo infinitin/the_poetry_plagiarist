@@ -245,7 +245,7 @@ def fit_rhyme(phrases, rhyme_token):
     short_rhyme_word = shorten(rhyme_word)
 
     rhymes = get_rhymes(rhyme_word)
-    if short_rhyme_word:
+    if short_rhyme_word and short_rhyme_word != 'ed':
         rhymes.extend(get_rhymes(short_rhyme_word))
 
     if rhymes:
