@@ -273,7 +273,7 @@ def shorten(word):
             vowel_index = word.rindex(letter)
             if vowel_index == 0:
                 return ''
-            elif word[vowel_index-1] not in 'aeiou':
+            elif word[vowel_index - 1] not in 'aeiou':
                 return word[vowel_index:]
     return ''
 
@@ -293,6 +293,11 @@ def get_rhymes(rhyme_word):
 
 
 def replace(old_word, candidates, phrases):
+    verb = ''
+    for phrase in phrases:
+        if 'verb' in phrase.__dict__.keys():
+            verb = phrase.verb
+            break
     new_phrases = []
     #Find the word among the phrases, replace with candidate with same pos
     for phrase in phrases:
@@ -300,7 +305,7 @@ def replace(old_word, candidates, phrases):
             if phrase.noun == old_word:
                 replacement = get_rhyme_word(old_word, candidates, 'N')
                 if not replacement:
-                    phrase.post_modifiers.append(phrase_spec.ADJ(get_rhyme_mod(old_word, candidates, 'A', 'N')))
+                    phrase.post_modifiers.append(phrase_spec.ADJ(get_rhyme_mod(old_word, candidates, 'A', 'N', verb)))
                 else:
                     phrase = phrase_spec.NP(replacement)
 
@@ -308,7 +313,7 @@ def replace(old_word, candidates, phrases):
             if phrase.verb == old_word:
                 replacement = get_rhyme_word(old_word, candidates, 'V')
                 if not replacement:
-                    phrase.post_modifiers.append(phrase_spec.ADJ(get_rhyme_mod(old_word, candidates, 'AVP', 'V')))
+                    phrase.post_modifiers.append(phrase_spec.ADJ(get_rhyme_mod(old_word, candidates, 'AVP', 'V', verb)))
                 else:
                     phrase = phrase_spec.VP(replacement)
 
@@ -316,7 +321,8 @@ def replace(old_word, candidates, phrases):
             if phrase.np.noun == old_word:
                 replacement = get_rhyme_word(old_word, candidates, 'N')
                 if not replacement:
-                    phrase.np.post_modifiers.append(phrase_spec.ADJ(get_rhyme_mod(old_word, candidates, 'A', 'N')))
+                    phrase.np.post_modifiers.append(
+                        phrase_spec.ADJ(get_rhyme_mod(old_word, candidates, 'A', 'N', verb)))
                 else:
                     phrase.np = phrase_spec.NP(replacement)
 
@@ -340,7 +346,7 @@ def replace(old_word, candidates, phrases):
     return new_phrases
 
 
-def get_rhyme_mod(word, candidates, mod_pos, pos):
+def get_rhyme_mod(word, candidates, mod_pos, pos, verb):
     #Find the candidates in the lexicon
     lemmas = [lemma(candidate['word']) for candidate in candidates]
     filtered_lemmas = filter_candidates(lemmas, mod_pos)
@@ -362,6 +368,16 @@ def get_rhyme_mod(word, candidates, mod_pos, pos):
     best_score = 999999
     for modifier in modifiers:
         closest, score = most_similar(modifier, best_options, mod_pos)
+        if score < best_score:
+            best_score = score
+            best_closest = closest
+
+    verb_synonyms = builder.get_synonyms(verb, wordnet.VERB)
+    verb_modifiers = [tail for head, tail, relation in builder.knowledge if
+                      relation == 'HasProperty' and head in verb_synonyms]
+
+    for verb_modifier in verb_modifiers:
+        closest, score = most_similar(verb_modifier, best_options, 'AVP')
         if score < best_score:
             best_score = score
             best_closest = closest
