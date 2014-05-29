@@ -2,7 +2,7 @@ __author__ = 'Nitin'
 from framenet_reader import lu_from_frames, valence_pattern_from_id, lu_from_word, lu_from_id, get_random_word
 import random
 import phrase_spec
-from rephrase import fit_rhythm_pattern, fit_rhyme, get_synset
+from rephrase import fit_rhythm_pattern, fit_rhyme
 from pattern.text.en import wordnet, VERB
 import logging
 import creation
@@ -235,9 +235,28 @@ def build_name_phrase(name):
 #FIXME: Guarantee a location for the object
 def build_location_phrase(location):
     frames = ['Being_located']
-    lu = random.choice([lu_from_frames(frames), lu_from_id('10640')])
+    lu = random.choice([lu_from_frames(frames), lu_from_id('16669')])
     valence_pattern = valence_pattern_from_id(lu.get('ID'))
-    phrases = fit_rhyme(fit_rhythm_pattern(create_phrases(valence_pattern, lu, obj=location), pattern), rhyme_token,
+    subj = get_is_a(character_i)
+    if lu.get('ID') == '16669':
+        subject_phrase = phrase_spec.NP(subj)
+        if subj_pronominal:
+            subject_phrase.pronominal = True
+        subject_phrase.animation = characters[character_i].object_state
+        subject_phrase.num = characters[character_i].num
+        subject_phrase.gender = characters[character_i].gender
+        subj = ''
+
+        verb_phrase = phrase_spec.VP(random.choice(['come', 'originate', 'hail', 'be']))
+        n = phrase_spec.NP(location)
+        dep_phrase = phrase_spec.PP('from', n)
+
+        phrases = [subject_phrase, verb_phrase, dep_phrase]
+
+    else:
+        phrases = create_phrases(valence_pattern, lu, subj=subj, dep=location)
+
+    phrases = fit_rhyme(fit_rhythm_pattern(phrases, pattern), rhyme_token,
                         pattern)
 
     return phrases
