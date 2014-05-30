@@ -47,6 +47,10 @@ def reduce_phrase(phrases, target_num_syllables, num_syllables):
             phrase.np.modifiers = []
             phrase.np.complements = []
 
+    line = builder.make_clause(phrases)
+    realisation = str(creation.realiser.realise(line).getRealisation())
+    num_syllables = count_syllables([realisation])[0]
+
     total_tries = try_num * 2
     new_phrases = phrases
     line = builder.make_clause(phrases)
