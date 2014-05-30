@@ -16,7 +16,7 @@ import logging
 
 def fit_rhythm_pattern(phrases, pattern):
     #phrases = fit_pattern(fit_syllables(phrases, len(pattern)), pattern)
-    #phrases = fit_syllables(phrases, len(pattern))
+    phrases = fit_syllables(phrases, len(pattern))
     return [phrase for phrase in phrases if phrase is not None]
 
 
@@ -40,7 +40,7 @@ def fit_syllables(phrases, target_num_syllables):
 
 def reduce_phrase(phrases, target_num_syllables, num_syllables):
     try_num = 10
-    for phrase in phrases:
+    for phrase in phrases[:-1]:
         phrase.modifiers = []
         phrase.complements = []
         if 'np' in phrase.__dict__.keys():
@@ -364,7 +364,7 @@ def get_rhyme_mod(word, candidates, mod_pos, pos, verb):
     synonyms = builder.get_synonyms(word, wpos)
     modifiers = [tail for head, tail, relation in builder.knowledge if relation == 'HasProperty' and head in synonyms]
 
-    best_closest = None
+    best_closest = random.choice(options)
     best_score = 999999
     for modifier in modifiers:
         closest, score = most_similar(modifier, best_options, mod_pos)

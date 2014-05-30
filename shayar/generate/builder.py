@@ -476,8 +476,8 @@ def get_is_a(character_index):
     else:
         #If all chosen then use pronominal or typeof (introduce anaphora)
         #TODO: Introduce typeof or synonym
-        global subj_pronominal
-        subj_pronominal = True
+        #global subj_pronominal
+        #subj_pronominal = True
         isa = random.choice(isas)
 
     return isa
