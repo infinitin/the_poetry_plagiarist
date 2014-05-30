@@ -145,7 +145,7 @@ def build_name_phrase(name):
     lu = random.choice([lu_from_frames(frames), lu_from_id('5544')])
     valence_pattern = valence_pattern_from_id(lu.get('ID'))
     #Get an isa that has not already been chosen
-    subj = get_is_a()
+    subj = get_is_a(character_i)
 
     logging.info('Creating phrases')
     phrases = []
@@ -153,9 +153,24 @@ def build_name_phrase(name):
     for group in valence_pattern:
         phrase = None
         for valence_unit in group:
-
             pos = valence_unit.get('PT')
-            if pos.startswith('N'):
+            if pos.startswith('V'):
+                new_elem = phrase_spec.VP(get_random_word(pos))
+                if phrase:
+                    phrase.complements.append(new_elem)
+                else:
+                    phrase = new_elem
+
+            elif pos.startswith('P'):
+                n = phrase_spec.NP(get_random_word('N'))
+
+                new_elem = phrase_spec.PP(pos.partition('[')[-1].rpartition(']')[0], n)
+                if phrase:
+                    phrase.complements.append(new_elem)
+                else:
+                    phrase = new_elem
+
+            else:
                 if subj:
                     new_elem = phrase_spec.NP(subj)
                     if subj_pronominal:
@@ -167,22 +182,6 @@ def build_name_phrase(name):
                 else:
                     new_elem = phrase_spec.NP(get_random_word(pos))
 
-                if phrase:
-                    phrase.complements.append(new_elem)
-                else:
-                    phrase = new_elem
-
-            elif pos.startswith('V'):
-                new_elem = phrase_spec.VP(get_random_word(pos))
-                if phrase:
-                    phrase.complements.append(new_elem)
-                else:
-                    phrase = new_elem
-
-            elif pos.startswith('P'):
-                n = phrase_spec.NP(get_random_word('N'))
-
-                new_elem = phrase_spec.PP(pos.partition('[')[-1].rpartition(']')[0], n)
                 if phrase:
                     phrase.complements.append(new_elem)
                 else:
@@ -200,12 +199,13 @@ def build_name_phrase(name):
                 phrase = new_elem
             starters_done = True
 
-
         phrases.append(phrase)
 
     phrases = [phrase for phrase in phrases if phrase is not None]
 
-    phrases = phrases[:2] + [phrase_spec.NP(name)] + phrases[2:]
+    name_phrase = phrase_spec.NP(name)
+    name_phrase.specifier = ''
+    phrases = phrases[:2] + [name_phrase] + phrases[2:]
     if 'specifier' in phrases[0].__dict__:
         phrases[0].specifier = 'a'
 
