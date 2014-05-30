@@ -41,6 +41,7 @@ def create_poem(new_poem, template):
     #FIXME: REMOVE ABOVE LATER
 
     #builder.characters = new_poem.characters
+    builder.tense = new_poem.overall_tense
     #Send to builder
     for l in range(0, sum(new_poem.lines)):
         logging.info('Building line ' + str(l))

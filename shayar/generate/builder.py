@@ -27,6 +27,7 @@ used_relations = []
 subj_pronominal = False
 obj_pronominal = False
 dep_pronominal = False
+tense = ''
 
 
 def build_hasproperty_phrase(prop):
@@ -329,7 +330,8 @@ def create_phrases(valence_pattern, lu, subj='', obj='', dep=''):
 
             elif pos.startswith('V'):
                 new_elem = phrase_spec.VP(get_random_word(pos))
-                new_elem.tense = 'past'
+                if tense:
+                    new_elem.tense = tense
                 if phrase:
                     phrase.complements.append(new_elem)
                 else:

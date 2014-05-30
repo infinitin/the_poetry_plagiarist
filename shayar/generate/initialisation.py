@@ -11,8 +11,8 @@ def init_poem(new_poem, template):
     new_poem.perspective = select(template.perspective)
     template.perspective = [new_poem.perspective]
 
-    new_poem.tenses = select(template.overall_tense)
-    template.overall_tense = [new_poem.tenses]
+    new_poem.overall_tense = select(template.overall_tense)
+    template.overall_tense = new_poem.overall_tense
 
     new_poem.stanzas = select(template.stanzas)
     template.stanzas = [new_poem.stanzas]
