@@ -192,31 +192,14 @@ def build_name_phrase(name):
             phrases.append(phrase)
             phrase = None
             word = lu.get('name').rpartition('.')[0]
-            pos = lu.get('name').partition('.')[-1].upper()
-            if pos.startswith('N'):
-                new_elem = phrase_spec.NP(word)
-                if phrase:
-                    phrase.complements.append(new_elem)
-                else:
-                    phrase = new_elem
-
-            elif pos.startswith('V') or pos.startswith('A'):
-                new_elem = phrase_spec.VP(word)
-                new_elem.tense = 'past'
-                if phrase:
-                    phrase.complements.append(new_elem)
-                else:
-                    phrase = new_elem
-
-            elif pos.startswith('P'):
-                n = phrase_spec.NP(word)
-                new_elem = phrase_spec.PP(pos.partition('[')[-1].rpartition(']')[0], n)
-                if phrase:
-                    phrase.complements.append(new_elem)
-                else:
-                    phrase = new_elem
-
+            new_elem = phrase_spec.VP(word)
+            new_elem.tense = 'past'
+            if phrase:
+                phrase.complements.append(new_elem)
+            else:
+                phrase = new_elem
             starters_done = True
+
 
         phrases.append(phrase)
 
@@ -426,8 +409,8 @@ def make_clause(spec_phrases):
 
     if len(phrases) > 2:
         line = creation.phraseFactory.createClause(phrases[0], phrases[1], phrases[2])
-        for phrase in phrases[3:]:
-            line.addComplement(phrase)
+        #for phrase in phrases[3:]:
+            #line.addComplement(phrase)
     elif len(phrases) > 1:
         line = creation.phraseFactory.createClause(phrases[0], phrases[1])
     else:
@@ -459,7 +442,6 @@ def get_synonyms(word, pos=None, extended=False):
             synonyms.extend(wordnik_synonyms)
         except (TypeError, HTTPError):
             pass
-
 
     return synonyms
 
@@ -524,8 +506,8 @@ def get_action_theme(valence_pattern, action, obj):
     if not prep:
         return ''
 
-    #Make an API request to Google autocomplete (firefox gives fewer answers than chrome, but we only need one now)
-    url = "http://suggestqueries.google.com/complete/search?client=firefox&q="
+    #Make an API request to Google autocomplete
+    url = "http://suggestqueries.google.com/complete/search?client=chrome&q="
     if obj:
         request_url = url + ' '.join([action, obj, prep]) + ' '
     else:
@@ -540,11 +522,14 @@ def get_action_theme(valence_pattern, action, obj):
         raise Exception("You are not connected to the Internet!")
 
     suggestions = json[1]
-    if suggestions:
-        original = json[0]
-        stripped = suggestions[0].replace(original, '')
+    original = json[0]
+    for suggestion in suggestions:
+        stripped = suggestion.replace(original, '')
+        words = stripped.split()
+        if len(words) > 1:
+            continue
         return stripped
-    else:
-        return get_random_word('N')
+
+    return get_random_word('N')
 
 

@@ -16,7 +16,7 @@ import logging
 
 def fit_rhythm_pattern(phrases, pattern):
     #phrases = fit_pattern(fit_syllables(phrases, len(pattern)), pattern)
-    phrases = fit_syllables(phrases, len(pattern))
+    #phrases = fit_syllables(phrases, len(pattern))
     return [phrase for phrase in phrases if phrase is not None]
 
 
@@ -243,15 +243,11 @@ def fit_rhyme(phrases, rhyme_token):
 
     if not creation.rhyme_scheme[rhyme_token]:
         creation.rhyme_scheme[rhyme_token] = [last_word]
+        print last_word
         return phrases
 
     rhyme_word = creation.rhyme_scheme[rhyme_token][0]
-    short_rhyme_word = shorten(rhyme_word)
-
     rhymes = get_rhymes(rhyme_word)
-    if short_rhyme_word and short_rhyme_word != 'ed':
-        rhymes.extend(get_rhymes(short_rhyme_word))
-
     if rhymes:
         candidates = [entry for entry in rhymes if
                       entry['word'] not in creation.rhyme_scheme[rhyme_token] and entry['score'] >= 300]
@@ -259,26 +255,43 @@ def fit_rhyme(phrases, rhyme_token):
             candidates = [entry for entry in rhymes if
                           entry['word'] not in creation.rhyme_scheme[rhyme_token] and entry['score'] >= 250]
         if not candidates:
+            short_rhyme_word = shorten(rhyme_word)
+            if short_rhyme_word and short_rhyme_word != 'ed' and short_rhyme_word != 'tion':
+                rhymes.extend(get_rhymes(short_rhyme_word))
+            candidates = [entry for entry in rhymes if
+                          entry['word'] not in creation.rhyme_scheme[rhyme_token] and entry['score'] >= 300]
+        if not candidates:
+            candidates = [entry for entry in rhymes if
+                          entry['word'] not in creation.rhyme_scheme[rhyme_token] and entry['score'] >= 250]
+        if not candidates:
+            candidates = [entry for entry in rhymes if
+                          entry['word'] not in creation.rhyme_scheme[rhyme_token] and entry['score'] >= 200]
+        if not candidates:
             candidates = rhymes
 
         #Send to replace function
         phrases = replace(last_word, candidates, phrases)
+
         new_line = builder.make_clause(phrases)
 
         chosen = creation.realiser.realise(new_line).getRealisation().split()[-1]
         creation.rhyme_scheme[rhyme_token].append(chosen)
+        print chosen
 
     return phrases
 
 
 def shorten(word):
-    for letter in word[::-1][1:]:
-        if letter in 'aeiou':
+    found = False
+    for letter in word[::-1]:
+        if letter in 'aeiou' and found:
             vowel_index = word.rindex(letter)
             if vowel_index == 0:
                 return ''
             elif word[vowel_index - 1] not in 'aeiou':
-                return word[vowel_index:]
+                return word[vowel_index-1:]
+        elif letter not in 'aeiou':
+            found = True
     return ''
 
 
@@ -297,47 +310,42 @@ def get_rhymes(rhyme_word):
 
 
 def replace(old_word, candidates, phrases):
-    verb = ''
-    for phrase in phrases:
-        if 'verb' in phrase.__dict__.keys():
-            verb = phrase.verb
-            break
     new_phrases = []
     #Find the word among the phrases, replace with candidate with same pos
     for phrase in phrases:
         if 'noun' in phrase.__dict__.keys():
-            if phrase.noun == old_word:
+            if phrase.noun == lemma(old_word):
                 replacement = get_rhyme_word(old_word, candidates, 'N')
                 if not replacement:
-                    phrase.post_modifiers.append(phrase_spec.ADJ(get_rhyme_mod(old_word, candidates, 'A', 'N', verb)))
+                    phrase.post_modifiers.append(phrase_spec.ADJ(get_rhyme_mod(old_word, candidates, 'A', 'N')))
                 else:
                     phrase = phrase_spec.NP(replacement)
 
         if 'verb' in phrase.__dict__.keys():
-            if phrase.verb == old_word:
+            if phrase.verb == lemma(old_word):
                 replacement = get_rhyme_word(old_word, candidates, 'V')
                 if not replacement:
-                    phrase.post_modifiers.append(phrase_spec.ADJ(get_rhyme_mod(old_word, candidates, 'AVP', 'V', verb)))
+                    phrase.post_modifiers.append(phrase_spec.ADV(get_rhyme_mod(old_word, candidates, 'AVP', 'V')))
                 else:
                     phrase = phrase_spec.VP(replacement)
 
         if 'np' in phrase.__dict__.keys():
-            if phrase.np.noun == old_word:
+            if phrase.np.noun == lemma(old_word):
                 replacement = get_rhyme_word(old_word, candidates, 'N')
                 if not replacement:
                     phrase.np.post_modifiers.append(
-                        phrase_spec.ADJ(get_rhyme_mod(old_word, candidates, 'A', 'N', verb)))
+                        phrase_spec.ADJ(get_rhyme_mod(old_word, candidates, 'A', 'N')))
                 else:
                     phrase.np = phrase_spec.NP(replacement)
 
         for modifier in phrase.modifiers:
             if 'adjective' in modifier.__dict__.keys():
-                if modifier.adjective == old_word:
+                if modifier.adjective == lemma(old_word):
                     new_modifier = phrase_spec.ADJ(get_rhyme_word(old_word, candidates, 'A'))
                     modifier_index = phrase.modifiers.index(modifier)
                     phrase.modifiers[modifier_index] = new_modifier
             if 'adverb' in modifier.__dict__.keys():
-                if modifier.adverb == old_word:
+                if modifier.adverb == lemma(old_word):
                     new_modifier = phrase_spec.ADV(get_rhyme_word(old_word, candidates, 'AVP'))
                     modifier_index = phrase.modifiers.index(modifier)
                     phrase.modifiers[modifier_index] = new_modifier
@@ -350,16 +358,19 @@ def replace(old_word, candidates, phrases):
     return new_phrases
 
 
-def get_rhyme_mod(word, candidates, mod_pos, pos, verb):
+def get_rhyme_mod(word, candidates, mod_pos, pos):
     #Find the candidates in the lexicon
-    lemmas = [lemma(candidate['word']) for candidate in candidates]
-    filtered_lemmas = filter_candidates(lemmas, mod_pos)
-    options = [candidate for candidate in candidates if lemma(candidate['word']) in filtered_lemmas]
+    words = [candidate['word'] for candidate in candidates]
+    filtered = filter_candidates(words, mod_pos)
+    options = [candidate for candidate in candidates if candidate['word'] in filtered]
 
     if not options:
-        return random.choice(candidates)['word']
+        best_candidates = [candidate for candidate in candidates if candidate['score'] == candidates[0]['score']]
+        return random.choice(best_candidates)['word']
+    if len(filtered) == 1:
+        return options[0]['word']
 
-    best_options = [candidate for candidate in candidates if candidate['score'] == options[0]['score']]
+    best_options = [option for option in options if option['score'] == options[0]['score']]
 
     wpos = wordnet.NOUN
     if pos.startswith('V'):
@@ -376,16 +387,6 @@ def get_rhyme_mod(word, candidates, mod_pos, pos, verb):
             best_score = score
             best_closest = closest
 
-    verb_synonyms = builder.get_synonyms(verb, wordnet.VERB)
-    verb_modifiers = [tail for head, tail, relation in builder.knowledge if
-                      relation == 'HasProperty' and head in verb_synonyms]
-
-    for verb_modifier in verb_modifiers:
-        closest, score = most_similar(verb_modifier, best_options, 'AVP')
-        if score < best_score:
-            best_score = score
-            best_closest = closest
-
     return best_closest['word']
 
 
@@ -395,10 +396,10 @@ def get_rhyme_word(old_word, candidates, pos):
     filtered_lemmas = filter_candidates(lemmas, pos)
     options = [candidate for candidate in candidates if lemma(candidate['word']) in filtered_lemmas]
 
-    if not options or options[0]['score'] < 300:
+    if not options:
         return ''
 
-    best_options = [candidate for candidate in candidates if candidate['score'] == options[0]['score']]
+    best_options = [option for option in options if option['score'] == options[0]['score']]
 
     closest, score = most_similar(old_word, best_options, pos)
     if score > 2.5:
@@ -413,7 +414,6 @@ def most_similar(word, candidates, pos):
     best_similarity_candidate = ''
     word_synset = get_synset(word, pos)
 
-    #FIXME: This isn't so good
     if word_synset is None:
         wpos = wordnet.NOUN
         if pos.startswith('AVP'):

@@ -93,12 +93,8 @@ def filter_candidates(candidates, pos):
     options = [word.find('base').text for word in word_root.findall('word') if
                word.find('base').text in candidates and word.find('category').text == category]
 
-    if not options:
+    if not options and pos != 'A':
         options = [word.find('base').text for word in word_root.findall('word') if
                    word.find('base').text in candidates and word.find('category').text == 'A']
-
-    if not options:
-        options = [word.find('base').text for word in word_root.findall('word') if
-                   word.find('base').text in candidates]
 
     return options
