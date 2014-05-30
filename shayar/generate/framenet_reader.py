@@ -40,7 +40,12 @@ def valence_pattern_from_id(lu_id):
     #We could either look up the order in the annoSets, which would be quite accurate
     #But an easier heuristic would be to look at the GF attribute of the valenceUnit
     #Dep always comes *last*, then Obj, then we take the order it came in
-    pattern = random.choice(max_fe_group.findall(pre_tag + 'pattern'))
+    patterns = max_fe_group.findall(pre_tag + 'pattern')
+    pattern = random.choice(patterns)
+    for p in patterns:
+        if len(p.findall(pre_tag + 'valenceUnit')) <= 2:
+            pattern = p
+            break
     starters = [valenceUnit for valenceUnit in pattern.findall(pre_tag + 'valenceUnit') if
                 valenceUnit.get('GF') != 'Dep' and valenceUnit.get('GF') != 'Obj']
     objs = [valenceUnit for valenceUnit in pattern.findall(pre_tag + 'valenceUnit') if valenceUnit.get('GF') == 'Obj']

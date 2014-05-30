@@ -397,7 +397,11 @@ def create_phrases(valence_pattern, lu, subj='', obj='', dep=''):
 
         phrases.append(phrase)
 
-    return [phrase for phrase in phrases if phrase is not None]
+    all_phrases = [phrase for phrase in phrases if phrase is not None]
+    if len(all_phrases) > 3:
+        return all_phrases[:3]
+    else:
+        return all_phrases
 
 
 def make_clause(spec_phrases):
@@ -507,7 +511,7 @@ def get_action_theme(valence_pattern, action, obj):
         return ''
 
     #Make an API request to Google autocomplete
-    url = "http://suggestqueries.google.com/complete/search?client=chrome&q="
+    url = "http://suggestqueries.google.com/complete/search?client=firefox&q="
     if obj:
         request_url = url + ' '.join([action, obj, prep]) + ' '
     else:
@@ -524,6 +528,8 @@ def get_action_theme(valence_pattern, action, obj):
     suggestions = json[1]
     original = json[0]
     for suggestion in suggestions:
+        if 'www' in suggestion:
+            continue
         stripped = suggestion.replace(original, '')
         words = stripped.split()
         if len(words) > 1:

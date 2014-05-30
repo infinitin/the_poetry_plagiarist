@@ -17,6 +17,7 @@ class NP():
         self.possessive = False
         self.pronominal = False
         self.modifiers = []
+        self.pre_modifiers = []
         self.post_modifiers = []
         self.complements = []
         self.stress_patterns = get_stress_pattern([noun])[0]
@@ -30,6 +31,8 @@ class NP():
 
         for modifier in self.modifiers:
             phrase.addModifier(modifier.adjective)
+        for pre_modifier in self.pre_modifiers:
+            phrase.addPreModifier(pre_modifier.adjective)
         for post_modifier in self.post_modifiers:
             phrase.addPostModifier(post_modifier.adjective)
         for complement in self.complements:
@@ -62,6 +65,7 @@ class PP():
         self.prep = prep
         self.np = np
         self.modifiers = []
+        self.pre_modifiers = []
         self.post_modifiers = []
         self.complements = []
         self.stress_patterns = get_stress_pattern([prep])[0]
@@ -69,10 +73,13 @@ class PP():
     def translate_to_nlg(self):
         phrase = creation.phraseFactory.createPrepositionPhrase(self.prep)
         for modifier in self.modifiers:
-            self.np.modifiers.append(ADJ(modifier.adjective))
+            self.np.modifiers.append(modifier)
         self.modifiers = []
+        for pre_modifier in self.pre_modifiers:
+            self.np.pre_modifiers.append(pre_modifier)
+        self.pre_modifiers = []
         for post_modifier in self.post_modifiers:
-            phrase.addPostModifier(post_modifier.adjective)
+            self.np.post_modifiers.append(post_modifier)
         self.post_modifiers = []
         for complement in self.complements:
             self.np.complements.append(complement)
@@ -89,6 +96,7 @@ class VP():
         self.tense = ''
         self.aspect = ''
         self.modifiers = []
+        self.pre_modifiers = []
         self.post_modifiers = []
         self.complements = []
         self.stress_patterns = get_stress_pattern([verb])[0]
@@ -100,6 +108,8 @@ class VP():
 
         for modifier in self.modifiers:
             phrase.addModifier(modifier.adverb)
+        for pre_modifier in self.pre_modifiers:
+            phrase.addPreModifier(pre_modifier.adverb)
         for post_modifier in self.post_modifiers:
             phrase.addPostModifier(post_modifier.adverb)
         for complement in self.complements:

@@ -16,7 +16,7 @@ import logging
 
 def fit_rhythm_pattern(phrases, pattern):
     #phrases = fit_pattern(fit_syllables(phrases, len(pattern)), pattern)
-    #phrases = fit_syllables(phrases, len(pattern))
+    phrases = fit_syllables(phrases, len(pattern))
     return [phrase for phrase in phrases if phrase is not None]
 
 
@@ -39,18 +39,9 @@ def fit_syllables(phrases, target_num_syllables):
 
 
 def reduce_phrase(phrases, target_num_syllables, num_syllables):
+    logging.info('Reducing Phrase')
+
     try_num = 10
-    for phrase in phrases[:-1]:
-        phrase.modifiers = []
-        phrase.complements = []
-        if 'np' in phrase.__dict__.keys():
-            phrase.np.modifiers = []
-            phrase.np.complements = []
-
-    line = builder.make_clause(phrases)
-    realisation = str(creation.realiser.realise(line).getRealisation())
-    num_syllables = count_syllables([realisation])[0]
-
     total_tries = try_num * 2
     new_phrases = phrases
     line = builder.make_clause(phrases)
@@ -101,13 +92,13 @@ def reduce_phrase(phrases, target_num_syllables, num_syllables):
 
 
 def extend_phrase(phrases, target_num_syllables, num_syllables):
-    changable_phrases = phrases[:-1]
+    logging.info('Extending phrase')
     used = []
     #While less than:
     #Add adjectives and adverbs as modifiers with max missing number of syllables
     while num_syllables < target_num_syllables:
+        added_specifier = False
         if target_num_syllables == num_syllables + 1:
-            added_specifier = False
             for phrase in phrases:
                 if 'noun' in phrase.__dict__.keys():
                     if phrase.specifier is None:
@@ -121,39 +112,41 @@ def extend_phrase(phrases, target_num_syllables, num_syllables):
                         break
             if added_specifier:
                 break
+        if added_specifier:
+            break
+
+        phrase_to_change = phrases.index(random.choice(phrases))
+        pos = 'A'
+        target_pos = 'N'
+        if 'verb' in phrases[phrase_to_change].__dict__.keys():
+            target_word = phrases[phrase_to_change].verb
+            target_pos = 'V'
+            pos = 'AVP'
+        elif 'np' in phrases[phrase_to_change].__dict__.keys():
+            target_word = phrases[phrase_to_change].np.noun
         else:
-            phrase_to_change = phrases.index(random.choice(changable_phrases))
-            pos = 'A'
-            target_pos = 'N'
-            if 'verb' in phrases[phrase_to_change].__dict__.keys():
-                target_word = phrases[phrase_to_change].verb
-                target_pos = 'V'
-                pos = 'AVP'
-            elif 'np' in phrases[phrase_to_change].__dict__.keys():
-                target_word = phrases[phrase_to_change].np.noun
-            else:
-                target_word = phrases[phrase_to_change].noun
+            target_word = phrases[phrase_to_change].noun
 
-            #Need to check that it is <= the required number of syllables
-            word = ''
-            added_syllables = 0
-            tries = 10
-            while tries:
-                word = get_property(target_word, target_pos, used)
-                used.append(word)
-                added_syllables = count_syllables([word])[0]
-                if added_syllables <= (target_num_syllables - num_syllables):
-                    break
-                tries -= 1
+        #Need to check that it is <= the required number of syllables
+        word = ''
+        added_syllables = 0
+        tries = 10
+        while tries:
+            word = get_property(target_word, target_pos, used)
+            used.append(word)
+            added_syllables = count_syllables([word])[0]
+            if added_syllables <= (target_num_syllables - num_syllables):
+                break
+            tries -= 1
 
-            if pos == 'A':
-                modifier_phrase = phrase_spec.ADJ(word)
-            else:
-                modifier_phrase = phrase_spec.ADV(word)
+        if pos == 'A':
+            modifier_phrase = phrase_spec.ADJ(word)
+        else:
+            modifier_phrase = phrase_spec.ADV(word)
 
-            phrases[phrase_to_change].modifiers.append(modifier_phrase)
+        phrases[phrase_to_change].pre_modifiers.append(modifier_phrase)
 
-            num_syllables += added_syllables
+        num_syllables += added_syllables
 
     return phrases
 
