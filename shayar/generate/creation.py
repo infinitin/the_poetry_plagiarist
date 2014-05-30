@@ -4,6 +4,7 @@ import logging
 import jpype
 import builder
 from shayar.character import Character
+from framenet_reader import find_pos
 
 jpype.startJVM(jpype.getDefaultJVMPath(), "-Djava.class.path=simplenlg-v4.4.2.jar")
 
@@ -52,10 +53,11 @@ def create_poem(new_poem, template):
         # Check for a relation in order as given in google doc
         #  Need to make sure that we don't pick the same relation twice
         builder.character_i = builder.characters.index(random.choice(builder.characters))
+        #relation = random.choice(flatten(builder.characters[builder.character_i].relations.values()))
         builder.dep_pronominal = False
         builder.obj_pronominal = False
         builder.subj_pronominal = False
-        #relation = random.choice(flatten(builder.characters[builder.character_index].relations.values()))
+        prepare_ngram(template.n_grams_by_line[l])
 
         # Use all the separate builder funtions to build phrases (lines of poetry)
         #phrases = build_name_phrase('Mary')
@@ -74,3 +76,19 @@ def create_poem(new_poem, template):
 
 def shutdown_builder():
     jpype.shutdownJVM()
+
+
+def prepare_ngram(ngram):
+    grams = ngram.split()
+    for gram in grams[::-1]:
+        pos = find_pos(gram)
+        if 'adverb' in pos:
+            builder.adverb_stash.append(phrase_spec.ADV(gram))
+        elif 'adjective' in pos:
+            builder.adjective_stash.append(phrase_spec.ADJ(gram))
+        else:
+            builder.specifier_stash = ' '.join(grams[:grams.index(gram)+1])
+            break
+
+    builder.adverb_stash = builder.adverb_stash[::-1]
+    builder.adjective_stash = builder.adjective_stash[::-1]

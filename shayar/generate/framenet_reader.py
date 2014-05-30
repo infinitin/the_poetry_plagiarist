@@ -103,3 +103,7 @@ def filter_candidates(candidates, pos):
                    word.find('base').text in candidates and word.find('category').text == 'A']
 
     return options
+
+
+def find_pos(search_word):
+    return [word.find('category').text for word in word_root.findall('word') if word.find('base').text == search_word]

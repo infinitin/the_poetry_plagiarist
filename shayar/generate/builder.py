@@ -28,6 +28,9 @@ subj_pronominal = False
 obj_pronominal = False
 dep_pronominal = False
 tense = ''
+adjective_stash = []
+adverb_stash = []
+specifier_stash = []
 
 
 def build_hasproperty_phrase(prop):
@@ -323,6 +326,16 @@ def create_phrases(valence_pattern, lu, subj='', obj='', dep=''):
                 else:
                     new_elem = phrase_spec.NP(get_random_word(pos))
 
+                global specifier_stash
+                if specifier_stash:
+                    new_elem.specifier = specifier_stash
+                    specifier_stash = ''
+
+                global adjective_stash
+                if adjective_stash:
+                    new_elem.pre_modifiers = adjective_stash
+                    adjective_stash = []
+
                 if phrase:
                     phrase.complements.append(new_elem)
                 else:
@@ -336,6 +349,11 @@ def create_phrases(valence_pattern, lu, subj='', obj='', dep=''):
                     phrase.complements.append(new_elem)
                 else:
                     phrase = new_elem
+
+                global adverb_stash
+                if adverb_stash:
+                    new_elem.pre_modifiers = adverb_stash
+                    adverb_stash = []
 
             elif pos.startswith('P'):
                 if subj:
@@ -359,6 +377,14 @@ def create_phrases(valence_pattern, lu, subj='', obj='', dep=''):
                 else:
                     n = phrase_spec.NP(get_random_word(pos))
 
+                if specifier_stash:
+                    n.specifier = specifier_stash
+                    specifier_stash = ''
+
+                if adjective_stash:
+                    n.pre_modifiers = adjective_stash
+                    adjective_stash = []
+
                 new_elem = phrase_spec.PP(pos.partition('[')[-1].rpartition(']')[0], n)
                 if phrase:
                     phrase.complements.append(new_elem)
@@ -372,6 +398,15 @@ def create_phrases(valence_pattern, lu, subj='', obj='', dep=''):
             pos = lu.get('name').partition('.')[-1].upper()
             if pos.startswith('N'):
                 new_elem = phrase_spec.NP(word)
+
+                if specifier_stash:
+                    new_elem.specifier = specifier_stash
+                    specifier_stash = ''
+
+                if adjective_stash:
+                    new_elem.pre_modifiers = adjective_stash
+                    adjective_stash = []
+
                 if phrase:
                     phrase.complements.append(new_elem)
                 else:
@@ -379,6 +414,11 @@ def create_phrases(valence_pattern, lu, subj='', obj='', dep=''):
 
             elif pos.startswith('V') or pos.startswith('A'):
                 new_elem = phrase_spec.VP(word)
+
+                if adverb_stash:
+                    new_elem.pre_modifiers = adverb_stash
+                    adverb_stash = []
+
                 new_elem.tense = 'past'
                 if phrase:
                     phrase.complements.append(new_elem)
@@ -387,6 +427,15 @@ def create_phrases(valence_pattern, lu, subj='', obj='', dep=''):
 
             elif pos.startswith('P'):
                 n = phrase_spec.NP(word)
+
+                if specifier_stash:
+                    n.specifier = specifier_stash
+                    specifier_stash = ''
+
+                if adjective_stash:
+                    n.pre_modifiers = adjective_stash
+                    adjective_stash = []
+
                 new_elem = phrase_spec.PP(pos.partition('[')[-1].rpartition(']')[0], n)
                 if phrase:
                     phrase.complements.append(new_elem)

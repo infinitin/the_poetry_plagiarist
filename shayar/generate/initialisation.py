@@ -29,6 +29,10 @@ def init_poem(new_poem, template):
     #Choose the everything for the whole poem straight up. May want to make this more specific as per first line later.
     for l in range(0, sum(new_poem.lines)):
         template.stress_patterns[l] = choice(template.stress_patterns[l])
+        if l == 0:
+            template.n_grams_by_line[l] = 'there was a young'
+        else:
+            template.n_grams_by_line[l] = select_n_gram(template, l)
 
 
 def select_rl(options, max_lines):
@@ -43,17 +47,11 @@ def select_rl(options, max_lines):
 
 def select_n_gram(template, init_line_index):
     options = template.n_grams_by_line[init_line_index]
-    two_most_popular = Counter(options).most_common(2)
-    if len(two_most_popular) == 1 or (
-                    two_most_popular[0][1] >= len(options) / 2 and two_most_popular[1][1] <= two_most_popular[0][
-                1] / 3):
-        return two_most_popular[0][0]
-    else:
-        chosen_ngram = ''
-        for ngram in options:
-            chance = random()
-            if chance < ngram[1] / utils.num_poems:
-                chosen_ngram = ngram[0]
-                break
+    chosen_ngram = ''
+    for ngram in options:
+        chance = random()
+        if chance < (ngram[1] / utils.num_poems):
+            chosen_ngram = ngram[0]
+            break
 
     return chosen_ngram
