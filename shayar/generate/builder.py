@@ -160,6 +160,11 @@ def build_name_phrase(name):
             pos = valence_unit.get('PT')
             if pos.startswith('V'):
                 new_elem = phrase_spec.VP(get_random_word(pos))
+                global adverb_stash
+                if adverb_stash:
+                    new_elem.pre_modifiers = adverb_stash
+                    adverb_stash = []
+
                 if phrase:
                     phrase.complements.append(new_elem)
                 else:
@@ -167,6 +172,11 @@ def build_name_phrase(name):
 
             elif pos.startswith('P'):
                 n = phrase_spec.NP(get_random_word('N'))
+
+                global adjective_stash
+                if adjective_stash:
+                    n.pre_modifiers = adjective_stash
+                    adjective_stash = []
 
                 new_elem = phrase_spec.PP(pos.partition('[')[-1].rpartition(']')[0], n)
                 if phrase:
@@ -185,6 +195,10 @@ def build_name_phrase(name):
                     subj = ''
                 else:
                     new_elem = phrase_spec.NP(get_random_word(pos))
+
+                if adjective_stash:
+                    new_elem.pre_modifiers = adjective_stash
+                    adjective_stash = []
 
                 if phrase:
                     phrase.complements.append(new_elem)
@@ -211,7 +225,9 @@ def build_name_phrase(name):
     name_phrase.specifier = ''
     phrases = phrases[:2] + [name_phrase] + phrases[2:]
     if 'specifier' in phrases[0].__dict__:
-        phrases[0].specifier = 'a'
+        global specifier_stash
+        phrases[0].specifier = specifier_stash
+        specifier_stash = ''
 
     phrases = fit_rhythm_pattern(fit_rhyme(phrases, rhyme_token), pattern)
 
@@ -233,7 +249,21 @@ def build_location_phrase(location):
         subject_phrase.gender = characters[character_i].gender
         subj = ''
 
+        global specifier_stash
+        if specifier_stash:
+            subject_phrase.specifier = specifier_stash
+            specifier_stash = ''
+
+        global adjective_stash
+        if adjective_stash:
+            subject_phrase.pre_modifiers = adjective_stash
+            adjective_stash = []
+
         verb_phrase = phrase_spec.VP(random.choice(['come', 'originate', 'hail', 'be']))
+        global adverb_stash
+        if adverb_stash:
+            verb_phrase.pre_modifiers = adverb_stash
+            adverb_stash = []
         n = phrase_spec.NP(location)
         dep_phrase = phrase_spec.PP('from', n)
 
