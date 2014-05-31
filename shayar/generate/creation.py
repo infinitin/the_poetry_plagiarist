@@ -46,9 +46,9 @@ def create_poem(new_poem, template):
 
     #FIXME: REMOVE BELOW LATER
     test_character = Character(0, 'sg', 'm', 'a')
-    test_character.add_relation('IsA', 'medical student')
-    test_character.add_relation('Named', 'Umar')
-    test_character.add_relation('Desires', 'cereal')
+    test_character.add_relation('IsA', 'lecturer')
+    test_character.add_relation('Named', 'Tony')
+    test_character.add_relation('Desires', 'go fishing')
     builder.characters = [test_character]
     #FIXME: REMOVE ABOVE LATER
 
@@ -120,10 +120,12 @@ def get_new_content():
         words = [candidate['word'] for candidate in candidates]
         nouns = filter_candidates(words, 'N')
         adjectives = filter_candidates(words, 'A')
+        verbs = filter_candidates(words, 'V')
         options = [candidate for candidate in candidates if
-                   candidate['word'] in nouns or candidate['word'] in adjectives]
+                   candidate['word'] in nouns or candidate['word'] in adjectives or candidate['word'] in verbs]
 
         new_relation = ()
+        choice_word = ''
         while not new_relation and options:
             choice_candidate = random.choice(options)
             options.remove(choice_candidate)
@@ -131,13 +133,17 @@ def get_new_content():
 
             if choice_word in nouns:
                 new_relation = new_noun_relation(choice_word)
-            else:
+            elif choice_word in adjectives:
                 new_relation = new_adjective_relation(choice_word)
+            elif choice_word in verbs:
+                new_relation = new_verb_relation(choice_word)
 
             rhyme_scheme[builder.rhyme_token].append(choice_word)
 
         if new_relation:
             builder.rhyme_check = False
+            if choice_word in verbs:
+                builder.verb_at_end = True
             return new_relation
         else:
             return new_blank_relation()
@@ -173,6 +179,7 @@ def new_noun_relation(noun):
             action = random.choice(actions)
             builder.characters[character_index].add_relation('TakesAction', action)
             new_character = builder.create_new_character(noun, len(builder.characters))
+            new_character.add_relation(relation_type, action)
             builder.characters.append(new_character)
             return builder.characters.index(new_character), relation_type, action
         else:
@@ -185,6 +192,23 @@ def new_adjective_relation(adj):
     possible_relations = ['HasProperty']
     relation_type = random.choice(possible_relations)
     return character_index, relation_type, adj
+
+
+def new_verb_relation(noun):
+    character_index = builder.characters.index(random.choice(builder.characters))
+    relation_type = 'TakesAction'
+
+    actions = [tail for head, tail, relation in builder.knowledge if head == noun and relation == relation_type]
+    if not actions:
+        synonyms = get_synonyms(noun, wordnet.VERB, extended=True)
+        actions = [tail for head, tail, relation in builder.knowledge if head in synonyms and relation == relation_type]
+
+    if actions:
+        action = random.choice(actions)
+        builder.characters[character_index].add_relation(relation_type, action)
+        return builder.characters.index(character_index), relation_type, action
+    else:
+        return ()
 
 
 def retrieve_ordered_given_relations(num_lines, chars, rhyme_tokens):

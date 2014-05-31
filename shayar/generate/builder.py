@@ -34,6 +34,7 @@ adverb_stash = []
 specifier_stash = []
 rhyme_check = True
 last_modifier = ''
+verb_at_end = False
 
 
 def build_hasproperty_phrase(prop):
@@ -71,8 +72,22 @@ def build_takes_action_phrase(action):
         if valence_pattern[1] and valence_pattern[2]:
             dep = get_action_theme(valence_pattern, action, obj)
         phrases = create_phrases(valence_pattern, lu, subj, obj, dep)
+
+        verb_buffer = []
+        resorted_phrases = []
+        if verb_at_end:
+            for phrase in phrases:
+                if 'verb' in phrase.__dict__.keys():
+                    verb_buffer.append(phrase)
+                else:
+                    resorted_phrases.append(phrase)
+        phrases = resorted_phrases + verb_buffer
+
     except IndexError:
-        phrases = [phrase_spec.NP(subj), phrase_spec.VP(action), phrase_spec.NP(obj)]
+        if verb_at_end:
+            phrases = [phrase_spec.NP(subj), phrase_spec.NP(action), phrase_spec.VP(obj)]
+        else:
+            phrases = [phrase_spec.NP(subj), phrase_spec.VP(action), phrase_spec.NP(obj)]
 
     if rhyme_check:
         phrases = fit_rhythm_pattern(fit_rhyme(phrases, rhyme_token), pattern)
