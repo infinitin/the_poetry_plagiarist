@@ -31,6 +31,8 @@ tense = ''
 adjective_stash = []
 adverb_stash = []
 specifier_stash = []
+rhyme_check = True
+last_modifier = ''
 
 
 def build_hasproperty_phrase(prop):
@@ -44,7 +46,11 @@ def build_hasproperty_phrase(prop):
     new_elem.gender = characters[character_i].gender
     new_elem.modifiers.append(prop_elem)
     new_elem.specifier = 'a'
-    phrases = fit_rhythm_pattern(fit_rhyme([new_elem], rhyme_token), pattern)
+    if rhyme_check:
+        phrases = fit_rhythm_pattern(fit_rhyme([new_elem], rhyme_token), pattern)
+    else:
+        phrases = fit_rhythm_pattern([new_elem], pattern)
+
     return phrases
 
 
@@ -92,7 +98,11 @@ def build_takes_action_phrase(action):
     if valence_pattern[2]:
         dep = get_action_theme(valence_pattern, action, obj)
 
-    phrases = fit_rhythm_pattern(fit_rhyme(create_phrases(valence_pattern, lu, subj, obj, dep), rhyme_token), pattern)
+    if rhyme_check:
+        phrases = fit_rhythm_pattern(fit_rhyme(create_phrases(valence_pattern, lu, subj, obj, dep), rhyme_token),
+                                     pattern)
+    else:
+        phrases = fit_rhythm_pattern(create_phrases(valence_pattern, lu, subj, obj, dep), pattern)
 
     return phrases
 
@@ -139,7 +149,11 @@ def build_receives_action_phrase(action):
     if valence_pattern[2]:
         dep = get_action_theme(valence_pattern, action, obj)
 
-    phrases = fit_rhythm_pattern(fit_rhyme(create_phrases(valence_pattern, lu, subj, obj, dep), rhyme_token), pattern)
+    if rhyme_check:
+        phrases = fit_rhythm_pattern(fit_rhyme(create_phrases(valence_pattern, lu, subj, obj, dep), rhyme_token),
+                                     pattern)
+    else:
+        phrases = fit_rhythm_pattern(create_phrases(valence_pattern, lu, subj, obj, dep), pattern)
 
     return phrases
 
@@ -226,10 +240,16 @@ def build_name_phrase(name):
     phrases = phrases[:2] + [name_phrase] + phrases[2:]
     if 'specifier' in phrases[0].__dict__:
         global specifier_stash
-        phrases[0].specifier = specifier_stash
+        if specifier_stash is None or not specifier_stash:
+            phrases[0].specifier = 'a'
+        else:
+            phrases[0].specifier = specifier_stash
         specifier_stash = ''
 
-    phrases = fit_rhythm_pattern(fit_rhyme(phrases, rhyme_token), pattern)
+    if rhyme_check:
+        phrases = fit_rhythm_pattern(fit_rhyme(phrases, rhyme_token), pattern)
+    else:
+        phrases = fit_rhythm_pattern(phrases, pattern)
 
     return phrases
 
@@ -272,7 +292,10 @@ def build_location_phrase(location):
     else:
         phrases = create_phrases(valence_pattern, lu, subj=subj, dep=location)
 
-    phrases = fit_rhythm_pattern(fit_rhyme(phrases, rhyme_token), pattern)
+    if rhyme_check:
+        phrases = fit_rhythm_pattern(fit_rhyme(phrases, rhyme_token), pattern)
+    else:
+        phrases = fit_rhythm_pattern(phrases, pattern)
 
     return phrases
 
@@ -294,8 +317,11 @@ def build_desire_phrase(desire):
     valence_pattern = valence_pattern_from_id(lu.get('ID'))
     subj = get_is_a(character_i)
 
-    phrases = fit_rhythm_pattern(fit_rhyme(create_phrases(valence_pattern, lu, subj=subj, obj=desire),
-                                           rhyme_token), pattern)
+    if rhyme_check:
+        phrases = fit_rhythm_pattern(fit_rhyme(create_phrases(valence_pattern, lu, subj=subj, obj=desire),
+                                               rhyme_token), pattern)
+    else:
+        phrases = fit_rhythm_pattern(create_phrases(valence_pattern, lu, subj=subj, obj=desire), pattern)
 
     return phrases
 
@@ -373,6 +399,8 @@ def create_phrases(valence_pattern, lu, subj='', obj='', dep=''):
 
             elif pos.startswith('V'):
                 new_elem = phrase_spec.VP(get_random_word(pos))
+                if len(pos) > 2:
+                    new_elem.specifier = pos[2:]
                 if tense:
                     new_elem.tense = tense
                 if phrase:
@@ -495,7 +523,7 @@ def make_clause(spec_phrases):
     if len(phrases) > 2:
         line = creation.phraseFactory.createClause(phrases[0], phrases[1], phrases[2])
         #for phrase in phrases[3:]:
-            #line.addComplement(phrase)
+        #line.addComplement(phrase)
     elif len(phrases) > 1:
         line = creation.phraseFactory.createClause(phrases[0], phrases[1])
     else:

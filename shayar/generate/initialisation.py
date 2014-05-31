@@ -4,7 +4,6 @@ __author__ = 'Nitin'
 from utils import select
 import utils
 from random import random, choice
-from collections import Counter
 
 
 def init_poem(new_poem, template):
@@ -29,10 +28,7 @@ def init_poem(new_poem, template):
     #Choose the everything for the whole poem straight up. May want to make this more specific as per first line later.
     for l in range(0, sum(new_poem.lines)):
         template.stress_patterns[l] = choice(template.stress_patterns[l])
-        if l == 0:
-            template.n_grams_by_line[l] = 'there was a young'
-        else:
-            template.n_grams_by_line[l] = select_n_gram(template, l)
+        template.n_grams_by_line[l] = select_n_gram(template, l)
 
 
 def select_rl(options, max_lines):
