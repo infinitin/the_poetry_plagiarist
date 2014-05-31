@@ -46,9 +46,9 @@ def create_poem(new_poem, template):
 
     #FIXME: REMOVE BELOW LATER
     test_character = Character(0, 'sg', 'm', 'a')
-    test_character.add_relation('IsA', 'lecturer')
-    test_character.add_relation('Named', 'Tony')
-    test_character.add_relation('Desires', 'entertainment')
+    test_character.add_relation('IsA', 'programmer')
+    test_character.add_relation('Named', 'Mat')
+    test_character.add_relation('Desires', 'sleep')
     builder.characters = [test_character]
     #FIXME: REMOVE ABOVE LATER
 
@@ -59,7 +59,7 @@ def create_poem(new_poem, template):
 
     #Send to builder
     for l in range(0, sum(new_poem.lines)):
-        logging.info('Building line ' + str(l))
+        logging.info('Building line ' + str(l+1))
         #Set globals
         builder.pattern = template.stress_patterns[l]
         builder.rhyme_token = full_rhyme_scheme[l]
@@ -98,22 +98,22 @@ def get_new_content():
     rhymes = get_rhymes(rhyme_word)
     if rhymes:
         candidates = [entry for entry in rhymes if
-                      entry['word'] not in creation.rhyme_scheme[builder.rhyme_token] and entry['score'] >= 300]
+                      entry['word'] not in rhyme_scheme[builder.rhyme_token] and entry['score'] >= 300]
         if not candidates:
             candidates = [entry for entry in rhymes if
-                          entry['word'] not in creation.rhyme_scheme[builder.rhyme_token] and entry['score'] >= 250]
+                          entry['word'] not in rhyme_scheme[builder.rhyme_token] and entry['score'] >= 250]
         if not candidates:
             short_rhyme_word = shorten(rhyme_word)
             if short_rhyme_word and short_rhyme_word != 'ed' and short_rhyme_word != 'tion':
                 rhymes.extend(get_rhymes(short_rhyme_word))
             candidates = [entry for entry in rhymes if
-                          entry['word'] not in creation.rhyme_scheme[builder.rhyme_token] and entry['score'] >= 300]
+                          entry['word'] not in rhyme_scheme[builder.rhyme_token] and entry['score'] >= 300]
         if not candidates:
             candidates = [entry for entry in rhymes if
-                          entry['word'] not in creation.rhyme_scheme[builder.rhyme_token] and entry['score'] >= 250]
+                          entry['word'] not in rhyme_scheme[builder.rhyme_token] and entry['score'] >= 250]
         if not candidates:
             candidates = [entry for entry in rhymes if
-                          entry['word'] not in creation.rhyme_scheme[builder.rhyme_token] and entry['score'] >= 200]
+                          entry['word'] not in rhyme_scheme[builder.rhyme_token] and entry['score'] >= 200]
         if not candidates:
             candidates = rhymes
 
@@ -124,6 +124,7 @@ def get_new_content():
                    candidate['word'] in nouns or candidate['word'] in adjectives]
 
         new_relation = ()
+        choice_word = ''
         while not new_relation and options:
             choice_candidate = random.choice(options)
             options.remove(choice_candidate)
@@ -134,25 +135,27 @@ def get_new_content():
             else:
                 new_relation = new_adjective_relation(choice_word)
 
+            rhyme_scheme[builder.rhyme_token].append(choice_word)
+
         if new_relation:
             builder.rhyme_check = False
             return new_relation
         else:
-            return new_blank_relation()
+            return new_blank_relation(choice_word=choice_word)
 
     else:
         return new_blank_relation()
 
 
-def new_blank_relation():
+def new_blank_relation(choice_word=''):
     character_index = builder.characters.index(random.choice(builder.characters))
     relation_type = random.choice(relations[2:])
-    if relation_type == 'HasProperty':
-        return character_index, relation_type, get_random_word('A')
-    elif relation_type == 'Desires':
-        return character_index, relation_type, get_random_word('N')
+    if relation_type == 'Desires':
+        word = choice_word if choice_word else get_random_word('N')
+        return character_index, relation_type, word
     else:
-        return character_index, relation_type, get_random_word('A')
+        word = choice_word if choice_word else get_random_word('A')
+        return character_index, relation_type, word
 
 
 def new_noun_relation(noun):

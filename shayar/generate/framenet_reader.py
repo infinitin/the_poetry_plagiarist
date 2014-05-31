@@ -65,6 +65,16 @@ def lu_from_word(word, pos):
         return random.choice(lus)
 
 
+def strict_lu_from_word(word, pos):
+    lu_name = str(word) + '.' + str(pos)
+    lus = [lu for lu in root.findall(pre_tag + 'lu') if lu.get('name') == lu_name]
+    finished_frame_lus = [lu for lu in lus if lu.get('status') == 'Finished_Initial']
+    if finished_frame_lus:
+        return random.choice(finished_frame_lus)
+    else:
+        raise IndexError
+
+
 def lu_from_id(lu_id):
     return [lu for lu in root.findall(pre_tag + 'lu') if lu.get('ID') == lu_id][0]
 

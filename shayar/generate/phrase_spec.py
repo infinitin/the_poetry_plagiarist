@@ -37,6 +37,7 @@ class NP():
             phrase.addPostModifier(post_modifier.adjective)
         for complement in self.complements:
             phrase.addComplement(complement.translate_to_nlg())
+        self.complements = []
 
         if self.gender == 'n':
             phrase.setFeature(creation.lexical_feature.GENDER, creation.gender.NEUTER)
@@ -86,6 +87,7 @@ class PP():
         self.complements = []
 
         phrase.addComplement(self.np.translate_to_nlg())
+
         return phrase
 
 

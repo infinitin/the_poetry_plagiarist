@@ -1,5 +1,6 @@
 __author__ = 'Nitin'
-from framenet_reader import lu_from_frames, valence_pattern_from_id, lu_from_word, lu_from_id, get_random_word
+from framenet_reader import lu_from_frames, valence_pattern_from_id, lu_from_word, lu_from_id, get_random_word, \
+    strict_lu_from_word
 import random
 import phrase_spec
 from rephrase import fit_rhythm_pattern, fit_rhyme, get_synset
@@ -56,7 +57,7 @@ def build_hasproperty_phrase(prop):
 
 def build_takes_action_phrase(action):
     logging.info('Building takes action phrase: ' + str(action))
-        #Get an isa that has not already been chosen
+    #Get an isa that has not already been chosen
     subj = get_action(action, 'ReceivesAction')
     #Get an object that generally receives this action
     obj = get_is_a(character_i)
@@ -91,7 +92,7 @@ def build_receives_action_phrase(action):
 
     logging.info('Getting lu and valence pattern')
     try:
-        lu = lu_from_word(action, 'v')
+        lu = strict_lu_from_word(action, 'v')
         valence_pattern = valence_pattern_from_id(lu.get('ID'))
         #Get an object that is usually involved in this action
         dep = ''
@@ -326,17 +327,16 @@ def create_phrases(valence_pattern, lu, subj='', obj='', dep=''):
                     new_elem.gender = characters[character_i].gender
                     subj = ''
                 elif starters_done:
-                    if (not deps_done and dep) or (deps_done and not obj and dep):
-                        if dep:
-                            new_elem = phrase_spec.NP(dep)
-                            if dep_pronominal:
-                                new_elem.pronominal = True
-                            dep = ''
+                    if dep:
+                        new_elem = phrase_spec.NP(dep)
+                        if dep_pronominal:
+                            new_elem.pronominal = True
+                        dep = ''
                     elif obj:
-                            new_elem = phrase_spec.NP(obj)
-                            if obj_pronominal:
-                                new_elem.pronominal = True
-                            obj = ''
+                        new_elem = phrase_spec.NP(obj)
+                        if obj_pronominal:
+                            new_elem.pronominal = True
+                        obj = ''
                     else:
                         logging.warn('GETTING A RANDOM WORD')
                         new_elem = phrase_spec.NP(get_random_word(pos))
@@ -382,20 +382,19 @@ def create_phrases(valence_pattern, lu, subj='', obj='', dep=''):
                     n.gender = characters[character_i].gender
                     subj = ''
                 elif starters_done:
-                    if (not deps_done and dep) or (deps_done and not obj and dep):
-                        if dep:
-                            n = phrase_spec.NP(dep)
-                            if dep_pronominal:
-                                n.pronominal = True
-                            dep = ''
+                    if dep:
+                        n = phrase_spec.NP(dep)
+                        if dep_pronominal:
+                            n.pronominal = True
+                        dep = ''
                     elif obj:
-                            n = phrase_spec.NP(obj)
-                            if obj_pronominal:
-                                n.pronominal = True
-                            obj = ''
-                    else:
-                        logging.warn('GETTING A RANDOM WORD')
-                        n = phrase_spec.NP(get_random_word(pos))
+                        n = phrase_spec.NP(obj)
+                        if obj_pronominal:
+                            n.pronominal = True
+                        obj = ''
+                else:
+                    logging.warn('GETTING A RANDOM WORD')
+                    n = phrase_spec.NP(get_random_word(pos))
 
                 if specifier_stash:
                     n.specifier = specifier_stash
@@ -455,7 +454,15 @@ def make_clause(spec_phrases):
     elif len(phrases) > 1:
         line = creation.phraseFactory.createClause(phrases[0], phrases[1])
     else:
-        line = phrases[0]
+        try:
+            line = phrases[0]
+        except IndexError:
+            logging.error('OH NOES!')
+            for spec_phrase in spec_phrases:
+                for attr in spec_phrase.__dict__.keys():
+                    print attr + " : " + getattr(spec_phrase, attr)
+            raise IndexError
+
 
     return line
 

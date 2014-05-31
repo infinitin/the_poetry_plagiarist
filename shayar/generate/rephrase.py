@@ -32,8 +32,8 @@ def fit_syllables(phrases, target_num_syllables):
 
     if num_syllables < target_num_syllables:
         return extend_phrase(phrases, target_num_syllables, num_syllables)
-    elif num_syllables > target_num_syllables:
-        return reduce_phrase(phrases, target_num_syllables, num_syllables)
+    #elif num_syllables > target_num_syllables:
+    #    return reduce_phrase(phrases, target_num_syllables, num_syllables)
     else:
         return phrases
 
