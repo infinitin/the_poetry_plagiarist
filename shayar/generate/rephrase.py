@@ -115,7 +115,14 @@ def extend_phrase(phrases, target_num_syllables, num_syllables):
         if added_specifier:
             break
 
-        phrase_to_change = phrases.index(random.choice(phrases))
+        try:
+            if 'noun' in phrases[-1].__dict__.keys() and phrases[-1].noun[0].isupper():
+                phrase_to_change = phrases.index(random.choice(phrases[:-1]))
+            else:
+                phrase_to_change = phrases.index(random.choice(phrases))
+        except IndexError:
+            phrase_to_change = phrases.index(random.choice(phrases))
+
         pos = 'A'
         target_pos = 'N'
         if 'verb' in phrases[phrase_to_change].__dict__.keys():
