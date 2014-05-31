@@ -8,8 +8,12 @@ root = lu_index.getroot()
 pre_tag = '{http://framenet.icsi.berkeley.edu}'
 
 
-def lu_from_frames(frames):
+def lu_from_frames(frames, pos=''):
     all_lus = [lu for lu in root.findall(pre_tag + 'lu') if lu.get('frameName') in frames]
+
+    if pos:
+        all_lus = [lu for lu in all_lus if lu.get('name').partition('.')[2] == pos]
+
     all_finished_frame_lus = [lu for lu in all_lus if
                               lu.get('status') == 'Finished_Initial' and not '_' in lu.get('name')]
     if all_finished_frame_lus:
@@ -29,7 +33,7 @@ def valence_pattern_from_id(lu_id):
         group_realizations.extend(valence.findall(pre_tag + 'FEGroupRealization'))
 
     for group in group_realizations:
-        if group.get('total') > max_total:
+        if int(group.get('total')) > int(max_total):
             max_fe_group = group
             max_total = group.get('total')
 

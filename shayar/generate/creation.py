@@ -49,7 +49,7 @@ def create_poem(new_poem, template):
     test_character.add_relation('IsA', 'man')
     test_character.add_relation('IsA', 'flatmate')
     test_character.add_relation('Named', 'Mat')
-    test_character.add_relation('Desires', 'sleep')
+    test_character.add_relation('Desires', 'pizza')
     builder.characters = [test_character]
     #FIXME: REMOVE ABOVE LATER
 

@@ -256,16 +256,17 @@ def build_location_phrase(location):
 def build_has_phrase(possession):
     # Need to use possessive pronouns as well
     frames = ['Possession']
-    lu = lu_from_frames(frames)
+    lu = lu_from_frames(frames, pos='v')
     valence_pattern = valence_pattern_from_id(lu.get('ID'))
-    phrases = fit_rhythm_pattern(fit_rhyme(create_phrases(valence_pattern, lu, subj=possession), rhyme_token), pattern)
+    subj = get_is_a(character_i)
+    phrases = fit_rhythm_pattern(fit_rhyme(create_phrases(valence_pattern, lu, subj=subj, obj=possession), rhyme_token), pattern)
 
     return phrases
 
 
 def build_desire_phrase(desire):
     frames = ['Desiring']
-    lu = lu_from_frames(frames)
+    lu = lu_from_frames(frames, pos='v')
     valence_pattern = valence_pattern_from_id(lu.get('ID'))
     subj = get_is_a(character_i)
 
