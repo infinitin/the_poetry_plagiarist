@@ -45,11 +45,11 @@ def create_poem(new_poem, template):
         rhyme_scheme[letter] = []
 
     #FIXME: REMOVE BELOW LATER
-    test_character = Character(0, 'sg', 'f', 'a')
-    test_character.add_relation('IsA', 'woman')
-    test_character.add_relation('IsA', 'sister')
-    test_character.add_relation('Named', 'Heen')
-    test_character.add_relation('Desires', 'travel')
+    test_character = Character(0, 'sg', 'm', 'a')
+    test_character.add_relation('IsA', 'man')
+    test_character.add_relation('IsA', 'coffee drinker')
+    test_character.add_relation('Named', 'Ka ran')
+    test_character.add_relation('Desires', 'CFA pass')
     builder.characters = [test_character]
     #FIXME: REMOVE ABOVE LATER
 
@@ -125,7 +125,6 @@ def get_new_content():
                    candidate['word'] in nouns or candidate['word'] in adjectives]
 
         new_relation = ()
-        choice_word = ''
         while not new_relation and options:
             choice_candidate = random.choice(options)
             options.remove(choice_candidate)
@@ -167,8 +166,10 @@ def new_noun_relation(noun):
         return character_index, relation_type, noun
 
     else:
-        synonyms = get_synonyms(noun, wordnet.NOUN, extended=True)
-        actions = [tail for head, tail, relation in builder.knowledge if head in synonyms and relation == relation_type]
+        actions = [tail for head, tail, relation in builder.knowledge if head == noun and relation == relation_type]
+        if not actions:
+            synonyms = get_synonyms(noun, wordnet.NOUN, extended=True)
+            actions = [tail for head, tail, relation in builder.knowledge if head in synonyms and relation == relation_type]
         if actions:
             action = random.choice(actions)
             builder.characters[character_index].add_relation('TakesAction', action)
@@ -184,17 +185,7 @@ def new_adjective_relation(adj):
 
     possible_relations = ['HasProperty']
     relation_type = random.choice(possible_relations)
-
-    if relation_type == 'Desires':
-        return character_index, relation_type, 'being ' + adj
-
-    else:
-        synonyms = get_synonyms(adj, wordnet.ADJECTIVE, extended=True)
-        properties = [tail for head, tail, relation in builder.knowledge if head in synonyms and relation == relation_type]
-        if properties:
-            return character_index, relation_type, random.choice(properties)
-        else:
-            return ()
+    return character_index, relation_type, adj
 
 
 def retrieve_ordered_given_relations(num_lines, chars, rhyme_tokens):

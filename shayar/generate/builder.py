@@ -318,55 +318,17 @@ def create_phrases(valence_pattern, lu, subj='', obj='', dep=''):
         for valence_unit in group:
 
             pos = valence_unit.get('PT')
-            if pos.startswith('N'):
-                if subj:
-                    new_elem = phrase_spec.NP(subj)
-                    if subj_pronominal:
-                        new_elem.pronominal = True
-                    new_elem.animation = characters[character_i].object_state
-                    new_elem.num = characters[character_i].num
-                    new_elem.gender = characters[character_i].gender
-                    subj = ''
-                elif starters_done:
-                    if dep:
-                        new_elem = phrase_spec.NP(dep)
-                        if dep_pronominal:
-                            new_elem.pronominal = True
-                        dep = ''
-                    elif obj:
-                        new_elem = phrase_spec.NP(obj)
-                        if obj_pronominal:
-                            new_elem.pronominal = True
-                        obj = ''
-                    else:
-                        logging.warn('GETTING A RANDOM WORD')
-                        new_elem = phrase_spec.NP(get_random_word(pos))
-
-                global specifier_stash
-                if specifier_stash:
-                    new_elem.specifier = specifier_stash
-                    specifier_stash = ''
-
-                global adjective_stash
-                if adjective_stash:
-                    new_elem.pre_modifiers = adjective_stash
-                    adjective_stash = []
-
-                if phrase:
-                    phrase.complements.append(new_elem)
-                else:
-                    phrase = new_elem
-
-            elif pos.startswith('V'):
+            if pos.startswith('V'):
+                logging.warn('GETTING A RANDOM WORD')
                 new_elem = phrase_spec.VP(get_random_word(pos))
                 if len(pos) > 2:
                     new_elem.specifier = pos[2:]
                 if tense:
                     new_elem.tense = tense
-                if phrase:
-                    phrase.complements.append(new_elem)
-                else:
-                    phrase = new_elem
+                #if phrase:
+                #    phrase.complements.append(new_elem)
+                #else:
+                phrase = new_elem
 
                 global adverb_stash
                 if adverb_stash:
@@ -400,19 +362,61 @@ def create_phrases(valence_pattern, lu, subj='', obj='', dep=''):
                     logging.warn('GETTING A RANDOM WORD')
                     n = phrase_spec.NP(get_random_word(pos))
 
+                global specifier_stash
                 if specifier_stash:
                     n.specifier = specifier_stash
                     specifier_stash = ''
 
+                global adjective_stash
                 if adjective_stash:
                     n.pre_modifiers = adjective_stash
                     adjective_stash = []
 
                 new_elem = phrase_spec.PP(pos.partition('[')[-1].rpartition(']')[0], n)
-                if phrase:
-                    phrase.complements.append(new_elem)
+                #if phrase:
+                #    phrase.complements.append(new_elem)
+                #else:
+                phrase = new_elem
+
+            else:
+                if subj:
+                    new_elem = phrase_spec.NP(subj)
+                    if subj_pronominal:
+                        new_elem.pronominal = True
+                    new_elem.animation = characters[character_i].object_state
+                    new_elem.num = characters[character_i].num
+                    new_elem.gender = characters[character_i].gender
+                    subj = ''
+                elif starters_done:
+                    if dep:
+                        new_elem = phrase_spec.NP(dep)
+                        if dep_pronominal:
+                            new_elem.pronominal = True
+                        dep = ''
+                    elif obj:
+                        new_elem = phrase_spec.NP(obj)
+                        if obj_pronominal:
+                            new_elem.pronominal = True
+                        obj = ''
+                    else:
+                        logging.warn('GETTING A RANDOM WORD')
+                        new_elem = phrase_spec.NP(get_random_word(pos))
                 else:
-                    phrase = new_elem
+                    logging.warn('GETTING A RANDOM WORD')
+                    new_elem = phrase_spec.NP(get_random_word(pos))
+
+                if specifier_stash:
+                    new_elem.specifier = specifier_stash
+                    specifier_stash = ''
+
+                if adjective_stash:
+                    new_elem.pre_modifiers = adjective_stash
+                    adjective_stash = []
+
+                #if phrase:
+                #    phrase.complements.append(new_elem)
+                #else:
+                phrase = new_elem
 
         if not starters_done:
             phrases.append(phrase)
@@ -425,10 +429,10 @@ def create_phrases(valence_pattern, lu, subj='', obj='', dep=''):
                 adverb_stash = []
 
             new_elem.tense = 'present'
-            if phrase:
-                phrase.complements.append(new_elem)
-            else:
-                phrase = new_elem
+            #if phrase:
+            #    phrase.complements.append(new_elem)
+            #else:
+            phrase = new_elem
 
             starters_done = True
         elif not deps_done:
