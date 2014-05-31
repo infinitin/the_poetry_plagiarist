@@ -46,6 +46,7 @@ def build_knowledge_graph_from_collocations():
                         new_word = new_word.replace('sb','')
                         new_word = new_word.replace('sth','')
                         new_word = new_word.replace('~s','')
+                        new_word = new_word.replace('~','')
                         if '/' in new_word:
                             tokens = new_word.split()
                             before = ''
@@ -105,6 +106,7 @@ def build_verbs_knowledge_graph_from_collocations():
                         new_word = new_word.replace('sb','')
                         new_word = new_word.replace('sth','')
                         new_word = new_word.replace('~s','')
+                        new_word = new_word.replace('~','')
                         if '/' in new_word:
                             tokens = new_word.split()
                             before = ''

@@ -102,12 +102,12 @@ def extend_phrase(phrases, target_num_syllables, num_syllables):
             for phrase in phrases:
                 if 'noun' in phrase.__dict__.keys():
                     if phrase.specifier is None:
-                        phrase.specifier = 'a'
+                        phrase.specifier = 'the'
                         added_specifier = True
                         break
                 elif 'np' in phrase.__dict__.keys():
                     if phrase.np.specifier is None:
-                        phrase.np.specifier = 'a'
+                        phrase.np.specifier = 'the'
                         added_specifier = True
                         break
             if added_specifier:
