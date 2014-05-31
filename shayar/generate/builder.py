@@ -392,6 +392,9 @@ def create_phrases(valence_pattern, lu, subj='', obj='', dep=''):
                         if obj_pronominal:
                             n.pronominal = True
                         obj = ''
+                    else:
+                        logging.warn('GETTING A RANDOM WORD')
+                        n = phrase_spec.NP(get_random_word(pos))
                 else:
                     logging.warn('GETTING A RANDOM WORD')
                     n = phrase_spec.NP(get_random_word(pos))
@@ -420,7 +423,7 @@ def create_phrases(valence_pattern, lu, subj='', obj='', dep=''):
                 new_elem.pre_modifiers = adverb_stash
                 adverb_stash = []
 
-            new_elem.tense = 'past'
+            new_elem.tense = 'present'
             if phrase:
                 phrase.complements.append(new_elem)
             else:
@@ -460,9 +463,8 @@ def make_clause(spec_phrases):
             logging.error('OH NOES!')
             for spec_phrase in spec_phrases:
                 for attr in spec_phrase.__dict__.keys():
-                    print attr + " : " + getattr(spec_phrase, attr)
+                    logging.error(attr + " : " + getattr(spec_phrase, attr))
             raise IndexError
-
 
     return line
 
@@ -506,8 +508,8 @@ def get_is_a(character_index):
     else:
         #If all chosen then use pronominal or typeof (introduce anaphora)
         #TODO: Introduce typeof or synonym
-        #global subj_pronominal
-        #subj_pronominal = True
+        global subj_pronominal
+        subj_pronominal = True
         isa = random.choice(isas)
 
     return isa

@@ -46,7 +46,8 @@ def create_poem(new_poem, template):
 
     #FIXME: REMOVE BELOW LATER
     test_character = Character(0, 'sg', 'm', 'a')
-    test_character.add_relation('IsA', 'programmer')
+    test_character.add_relation('IsA', 'man')
+    test_character.add_relation('IsA', 'flatmate')
     test_character.add_relation('Named', 'Mat')
     test_character.add_relation('Desires', 'sleep')
     builder.characters = [test_character]

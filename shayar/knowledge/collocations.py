@@ -39,7 +39,9 @@ def build_knowledge_graph_from_collocations():
                     words = []
                     for word in contents:
                         new_word = word.strip()
-                        if not new_word:
+                        new_word.replace('(', '')
+                        new_word.replace(')', '')
+                        if not new_word or '.' in new_word:
                             continue
                         new_word = new_word.replace('sb','')
                         new_word = new_word.replace('sth','')
@@ -96,7 +98,9 @@ def build_verbs_knowledge_graph_from_collocations():
                     words = []
                     for word in contents:
                         new_word = word.strip()
-                        if not new_word:
+                        new_word.replace('(', '')
+                        new_word.replace(')', '')
+                        if not new_word or '.' in new_word:
                             continue
                         new_word = new_word.replace('sb','')
                         new_word = new_word.replace('sth','')
