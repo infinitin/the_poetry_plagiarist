@@ -49,6 +49,11 @@ class Character:
             'NotReceiveMessage': list(),
         }
 
+        if gender == 'm':
+            self.add_relation('IsA', 'man')
+        elif gender == 'f':
+            self.add_relation('IsA', 'woman')
+
     def __str__(self):
         return_text = "This character is represented by the text: '" + self.text + "'.\n"
         if self.personification:

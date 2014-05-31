@@ -45,7 +45,7 @@ def build_hasproperty_phrase(prop):
     new_elem.animation = characters[character_i].object_state
     new_elem.num = characters[character_i].num
     new_elem.gender = characters[character_i].gender
-    new_elem.modifiers.append(prop_elem)
+    new_elem.post_modifiers.append(prop_elem)
     new_elem.specifier = 'a'
     if rhyme_check:
         phrases = fit_rhythm_pattern(fit_rhyme([new_elem], rhyme_token), pattern)
@@ -259,7 +259,8 @@ def build_has_phrase(possession):
     lu = lu_from_frames(frames, pos='v')
     valence_pattern = valence_pattern_from_id(lu.get('ID'))
     subj = get_is_a(character_i)
-    phrases = fit_rhythm_pattern(fit_rhyme(create_phrases(valence_pattern, lu, subj=subj, obj=possession), rhyme_token), pattern)
+    phrases = fit_rhythm_pattern(fit_rhyme(create_phrases(valence_pattern, lu, subj=subj, obj=possession), rhyme_token),
+                                 pattern)
 
     return phrases
 
@@ -506,18 +507,45 @@ def get_is_a(character_index):
     #Get an isa that has not already been chosen
     char = characters[character_index]
     isas = char.type_to_list['IsA']
-    filtered_isas = [isa for isa in isas if tuple([characters[character_index], 'IsA', isa]) not in used_relations]
+    filtered_isas = [isa for isa in isas if tuple([char, 'IsA', isa]) not in used_relations]
+
     if filtered_isas:
         isa = random.choice(filtered_isas)
-        used_relations.append(tuple([characters[character_index], 'IsA', isa]))
+        used_relations.append(tuple([char, 'IsA', isa]))
+        return isa
     else:
-        #If all chosen then use pronominal or typeof (introduce anaphora)
-        #TODO: Introduce typeof or synonym
-        global subj_pronominal
-        subj_pronominal = True
-        isa = random.choice(isas)
+        #If all chosen then use pronominal or typeof (introduce anaphora and presupposition)
+        isa = get_presupposition(char, isas)
+        if isa:
+            anaphora = random.choice([0, 1])
+            if anaphora:
+                global subj_pronominal
+                subj_pronominal = True
+                return ''
+            else:
+                char.add_relation('IsA', isa)
+                used_relations.append(tuple([char, 'IsA', isa]))
+                return isa
 
-    return isa
+
+def get_presupposition(char, isas):
+    all_hypernyms = []
+
+    #Get all of the IsA relations, get direct hypernym
+    for isa in isas:
+        isa_synset = get_synset(isa.split()[0])
+        if isa_synset:
+            all_hypernyms.extend(
+                [str(hypernym).partition("'")[-1].rpartition("'")[0] for hypernym in isa_synset.hypernyms()])
+
+    all_hypernyms = [hypernym_isa for hypernym_isa in all_hypernyms if
+                     tuple([char, 'IsA', hypernym_isa]) not in used_relations]
+
+    #Add as IsA and to used_relations
+    if all_hypernyms:
+        return all_hypernyms[0]
+
+    return ''
 
 
 def get_action(action, action_relation):
