@@ -43,17 +43,19 @@ def valence_pattern_from_id(lu_id):
     #The order given in the group is not necessarily the order in the sentence
     #We could either look up the order in the annoSets, which would be quite accurate
     #But an easier heuristic would be to look at the GF attribute of the valenceUnit
-    #Dep always comes *last*, then Obj, then we take the order it came in
+    #Dep and Obj come last
     patterns = max_fe_group.findall(pre_tag + 'pattern')
-    pattern = random.choice(patterns)
-    for p in patterns:
-        if len(p.findall(pre_tag + 'valenceUnit')) <= 2:
-            pattern = p
-            break
-    starters = [valenceUnit for valenceUnit in pattern.findall(pre_tag + 'valenceUnit') if
+    best_pattern = random.choice(patterns)
+    max_total = 0
+    for pattern in patterns:
+        if len(pattern.findall(pre_tag + 'valenceUnit')) <= 2 and int(pattern.get('total')) > max_total:
+            best_pattern = pattern
+            max_total = int(pattern.get('total'))
+
+    starters = [valenceUnit for valenceUnit in best_pattern.findall(pre_tag + 'valenceUnit') if
                 valenceUnit.get('GF') != 'Dep' and valenceUnit.get('GF') != 'Obj']
-    objs = [valenceUnit for valenceUnit in pattern.findall(pre_tag + 'valenceUnit') if valenceUnit.get('GF') == 'Obj']
-    deps = [valenceUnit for valenceUnit in pattern.findall(pre_tag + 'valenceUnit') if valenceUnit.get('GF') == 'Dep']
+    deps = [valenceUnit for valenceUnit in best_pattern.findall(pre_tag + 'valenceUnit') if valenceUnit.get('GF') == 'Dep']
+    objs = [valenceUnit for valenceUnit in best_pattern.findall(pre_tag + 'valenceUnit') if valenceUnit.get('GF') == 'Obj']
 
     return [tuple(starters), tuple(deps), tuple(objs)]
 

@@ -526,6 +526,10 @@ def get_is_a(character_index):
                 char.add_relation('IsA', isa)
                 used_relations.append(tuple([char, 'IsA', isa]))
                 return isa
+        else:
+            global subj_pronominal
+            subj_pronominal = True
+            return ''
 
 
 def get_presupposition(char, isas):

@@ -132,7 +132,11 @@ def extend_phrase(phrases, target_num_syllables, num_syllables):
         added_syllables = 0
         tries = 10
         while tries:
-            word = get_property(target_word.split()[-1], target_pos, used)
+            try:
+                word = get_property(target_word.split()[-1], target_pos, used)
+            except IndexError:
+                word = get_random_word(pos)
+
             used.append(word)
             added_syllables = count_syllables([word])[0]
             if added_syllables <= (target_num_syllables - num_syllables):
