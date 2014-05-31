@@ -235,7 +235,7 @@ def fit_rhyme(phrases, rhyme_token):
     last_word = creation.realiser.realise(line).getRealisation().split()[-1]
 
     if not creation.rhyme_scheme[rhyme_token]:
-        creation.rhyme_scheme[rhyme_token] = [last_word]
+        creation.rhyme_scheme[rhyme_token] = [last_word.lower()]
         print last_word
         return phrases
 
@@ -268,7 +268,7 @@ def fit_rhyme(phrases, rhyme_token):
         new_line = builder.make_clause(phrases)
 
         chosen = creation.realiser.realise(new_line).getRealisation().split()[-1]
-        creation.rhyme_scheme[rhyme_token].append(chosen)
+        creation.rhyme_scheme[rhyme_token].append(chosen.lower())
         print chosen
 
     return phrases

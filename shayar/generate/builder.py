@@ -56,104 +56,55 @@ def build_hasproperty_phrase(prop):
 
 def build_takes_action_phrase(action):
     logging.info('Building takes action phrase: ' + str(action))
-    tried_alternatives = set()
-    alternatives = get_synonyms(action, pos=VERB)
-
-    valence_pattern = []
-    lu = None
-    logging.info('Getting lu and valence pattern')
-    while not valence_pattern:
-        lu = None
-        while lu is None:
-            try:
-                lu = lu_from_word(action, 'v')
-            except IndexError:
-                logging.info("I don't know how to use this word, looking for alternatives: " + action)
-                tried_alternatives.add(action)
-                remaining_alternatives = [word for word in alternatives if word not in tried_alternatives]
-                if remaining_alternatives:
-                    action = random.choice(remaining_alternatives)
-                else:
-                    action = get_random_word('V')
-
-        valence_pattern = valence_pattern_from_id(lu.get('ID'))
-        if not valence_pattern:
-            tried_alternatives.add(action)
-            remaining_alternatives = [word for word in alternatives if word not in tried_alternatives]
-            if remaining_alternatives:
-                action = random.choice(remaining_alternatives)
-            else:
-                action = get_random_word('V')
-
-    #Get an isa that has not already been chosen
-    subj = get_is_a(character_i)
-
+        #Get an isa that has not already been chosen
+    subj = get_action(action, 'ReceivesAction')
     #Get an object that generally receives this action
-    obj = ''
-    if valence_pattern[1]:
-        obj = get_action(action, 'ReceivesAction')
+    obj = get_is_a(character_i)
 
-    #Get an object that is usually involved in this action
-    dep = ''
-    if valence_pattern[2]:
-        dep = get_action_theme(valence_pattern, action, obj)
+    logging.info('Getting lu and valence pattern')
+    try:
+        lu = lu_from_word(action, 'v')
+        valence_pattern = valence_pattern_from_id(lu.get('ID'))
+        #Get an object that is usually involved in this action
+        dep = ''
+        if valence_pattern[2]:
+            dep = get_action_theme(valence_pattern, action, obj)
+        phrases = create_phrases(valence_pattern, lu, subj, obj, dep)
+    except IndexError:
+        phrases = [phrase_spec.NP(subj), phrase_spec.VP(action), phrase_spec.NP(obj)]
 
     if rhyme_check:
-        phrases = fit_rhythm_pattern(fit_rhyme(create_phrases(valence_pattern, lu, subj, obj, dep), rhyme_token),
-                                     pattern)
+        phrases = fit_rhythm_pattern(fit_rhyme(phrases, rhyme_token), pattern)
     else:
-        phrases = fit_rhythm_pattern(create_phrases(valence_pattern, lu, subj, obj, dep), pattern)
+        phrases = fit_rhythm_pattern(phrases, pattern)
 
     return phrases
 
 
 def build_receives_action_phrase(action):
     logging.info('Building receives action phrase: ' + str(action))
-    tried_alternatives = set()
-    alternatives = get_synonyms(action, pos=VERB)
-
-    valence_pattern = []
-    lu = None
-    logging.info('Getting lu and valence pattern')
-    while not valence_pattern:
-        lu = None
-        while lu is None:
-            try:
-                lu = lu_from_word(action, 'v')
-            except IndexError:
-                logging.info("I don't know how to use this word, looking for alternatives: " + action)
-                tried_alternatives.add(action)
-                remaining_alternatives = [word for word in alternatives if word not in tried_alternatives]
-                if remaining_alternatives:
-                    action = random.choice(remaining_alternatives)
-                else:
-                    action = get_random_word('V')
-
-        valence_pattern = valence_pattern_from_id(lu.get('ID'))
-        if not valence_pattern:
-            tried_alternatives.add(action)
-            remaining_alternatives = [word for word in alternatives if word not in tried_alternatives]
-            if remaining_alternatives:
-                action = random.choice(remaining_alternatives)
-            else:
-                action = get_random_word('V')
 
     #Get an isa that has not already been chosen
     subj = get_action(action, 'TakesAction')
-
     #Get an object that generally receives this action
     obj = get_is_a(character_i)
 
-    #Get an object that is usually involved in this action
-    dep = ''
-    if valence_pattern[2]:
-        dep = get_action_theme(valence_pattern, action, obj)
+    logging.info('Getting lu and valence pattern')
+    try:
+        lu = lu_from_word(action, 'v')
+        valence_pattern = valence_pattern_from_id(lu.get('ID'))
+        #Get an object that is usually involved in this action
+        dep = ''
+        if valence_pattern[2]:
+            dep = get_action_theme(valence_pattern, action, obj)
+        phrases = create_phrases(valence_pattern, lu, subj, obj, dep)
+    except IndexError:
+        phrases = [phrase_spec.NP(subj), phrase_spec.VP(action), phrase_spec.NP(obj)]
 
     if rhyme_check:
-        phrases = fit_rhythm_pattern(fit_rhyme(create_phrases(valence_pattern, lu, subj, obj, dep), rhyme_token),
-                                     pattern)
+        phrases = fit_rhythm_pattern(fit_rhyme(phrases, rhyme_token), pattern)
     else:
-        phrases = fit_rhythm_pattern(create_phrases(valence_pattern, lu, subj, obj, dep), pattern)
+        phrases = fit_rhythm_pattern(phrases, pattern)
 
     return phrases
 
@@ -379,6 +330,11 @@ def create_phrases(valence_pattern, lu, subj='', obj='', dep=''):
                     if obj_pronominal:
                         new_elem.pronominal = True
                     obj = ''
+                elif starters_done and objects_done and dep:
+                    new_elem = phrase_spec.NP(dep)
+                    if dep_pronominal:
+                        new_elem.pronominal = True
+                    dep = ''
                 else:
                     new_elem = phrase_spec.NP(get_random_word(pos))
 
@@ -453,52 +409,17 @@ def create_phrases(valence_pattern, lu, subj='', obj='', dep=''):
             phrases.append(phrase)
             phrase = None
             word = lu.get('name').rpartition('.')[0]
-            pos = lu.get('name').partition('.')[-1].upper()
-            if pos.startswith('N'):
-                new_elem = phrase_spec.NP(word)
+            new_elem = phrase_spec.VP(word)
 
-                if specifier_stash:
-                    new_elem.specifier = specifier_stash
-                    specifier_stash = ''
+            if adverb_stash:
+                new_elem.pre_modifiers = adverb_stash
+                adverb_stash = []
 
-                if adjective_stash:
-                    new_elem.pre_modifiers = adjective_stash
-                    adjective_stash = []
-
-                if phrase:
-                    phrase.complements.append(new_elem)
-                else:
-                    phrase = new_elem
-
-            elif pos.startswith('V') or pos.startswith('A'):
-                new_elem = phrase_spec.VP(word)
-
-                if adverb_stash:
-                    new_elem.pre_modifiers = adverb_stash
-                    adverb_stash = []
-
-                new_elem.tense = 'past'
-                if phrase:
-                    phrase.complements.append(new_elem)
-                else:
-                    phrase = new_elem
-
-            elif pos.startswith('P'):
-                n = phrase_spec.NP(word)
-
-                if specifier_stash:
-                    n.specifier = specifier_stash
-                    specifier_stash = ''
-
-                if adjective_stash:
-                    n.pre_modifiers = adjective_stash
-                    adjective_stash = []
-
-                new_elem = phrase_spec.PP(pos.partition('[')[-1].rpartition(']')[0], n)
-                if phrase:
-                    phrase.complements.append(new_elem)
-                else:
-                    phrase = new_elem
+            new_elem.tense = 'past'
+            if phrase:
+                phrase.complements.append(new_elem)
+            else:
+                phrase = new_elem
 
             starters_done = True
         elif not objects_done:

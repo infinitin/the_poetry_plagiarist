@@ -46,9 +46,9 @@ def create_poem(new_poem, template):
 
     #FIXME: REMOVE BELOW LATER
     test_character = Character(0, 'sg', 'm', 'a')
-    test_character.add_relation('IsA', 'programmer')
-    test_character.add_relation('Named', 'Mat')
-    test_character.add_relation('Desires', 'sleep')
+    test_character.add_relation('IsA', 'supervisor')
+    test_character.add_relation('Named', 'Will')
+    test_character.add_relation('Desires', 'success')
     builder.characters = [test_character]
     #FIXME: REMOVE ABOVE LATER
 
@@ -158,7 +158,7 @@ def new_blank_relation():
 def new_noun_relation(noun):
     character_index = builder.characters.index(random.choice(builder.characters))
 
-    possible_relations = ['Desires', 'ReceivesAction']
+    possible_relations = ['ReceivesAction']
     relation_type = random.choice(possible_relations)
 
     if relation_type == 'Desires':
@@ -179,7 +179,7 @@ def new_noun_relation(noun):
 def new_adjective_relation(adj):
     character_index = builder.characters.index(random.choice(builder.characters))
 
-    possible_relations = ['Desires', 'HasProperty']
+    possible_relations = ['HasProperty']
     relation_type = random.choice(possible_relations)
 
     if relation_type == 'Desires':
