@@ -67,7 +67,7 @@ def build_takes_action_phrase(action):
         valence_pattern = valence_pattern_from_id(lu.get('ID'))
         #Get an object that is usually involved in this action
         dep = ''
-        if valence_pattern[2]:
+        if valence_pattern[1] and valence_pattern[2]:
             dep = get_action_theme(valence_pattern, action, obj)
         phrases = create_phrases(valence_pattern, lu, subj, obj, dep)
     except IndexError:
@@ -95,7 +95,7 @@ def build_receives_action_phrase(action):
         valence_pattern = valence_pattern_from_id(lu.get('ID'))
         #Get an object that is usually involved in this action
         dep = ''
-        if valence_pattern[2]:
+        if valence_pattern[1] and valence_pattern[2]:
             dep = get_action_theme(valence_pattern, action, obj)
         phrases = create_phrases(valence_pattern, lu, subj, obj, dep)
     except IndexError:
@@ -310,7 +310,7 @@ def create_phrases(valence_pattern, lu, subj='', obj='', dep=''):
     logging.info('Creating phrases')
     phrases = []
     starters_done = len(valence_pattern[0]) == 0
-    objects_done = len(valence_pattern[1]) == 0
+    deps_done = len(valence_pattern[1]) == 0
     for group in valence_pattern:
         phrase = None
         for valence_unit in group:
@@ -325,18 +325,21 @@ def create_phrases(valence_pattern, lu, subj='', obj='', dep=''):
                     new_elem.num = characters[character_i].num
                     new_elem.gender = characters[character_i].gender
                     subj = ''
-                elif starters_done and not objects_done and obj:
-                    new_elem = phrase_spec.NP(obj)
-                    if obj_pronominal:
-                        new_elem.pronominal = True
-                    obj = ''
-                elif starters_done and objects_done and dep:
-                    new_elem = phrase_spec.NP(dep)
-                    if dep_pronominal:
-                        new_elem.pronominal = True
-                    dep = ''
-                else:
-                    new_elem = phrase_spec.NP(get_random_word(pos))
+                elif starters_done:
+                    if (not deps_done and dep) or (deps_done and not obj and dep):
+                        if dep:
+                            new_elem = phrase_spec.NP(dep)
+                            if dep_pronominal:
+                                new_elem.pronominal = True
+                            dep = ''
+                    elif obj:
+                            new_elem = phrase_spec.NP(obj)
+                            if obj_pronominal:
+                                new_elem.pronominal = True
+                            obj = ''
+                    else:
+                        logging.warn('GETTING A RANDOM WORD')
+                        new_elem = phrase_spec.NP(get_random_word(pos))
 
                 global specifier_stash
                 if specifier_stash:
@@ -378,18 +381,21 @@ def create_phrases(valence_pattern, lu, subj='', obj='', dep=''):
                     n.num = characters[character_i].num
                     n.gender = characters[character_i].gender
                     subj = ''
-                elif starters_done and obj:
-                    n = phrase_spec.NP(obj)
-                    if obj_pronominal:
-                        n.pronominal = True
-                    obj = ''
-                elif starters_done and objects_done and dep:
-                    n = phrase_spec.NP(dep)
-                    if dep_pronominal:
-                        n.pronominal = True
-                    dep = ''
-                else:
-                    n = phrase_spec.NP(get_random_word(pos))
+                elif starters_done:
+                    if (not deps_done and dep) or (deps_done and not obj and dep):
+                        if dep:
+                            n = phrase_spec.NP(dep)
+                            if dep_pronominal:
+                                n.pronominal = True
+                            dep = ''
+                    elif obj:
+                            n = phrase_spec.NP(obj)
+                            if obj_pronominal:
+                                n.pronominal = True
+                            obj = ''
+                    else:
+                        logging.warn('GETTING A RANDOM WORD')
+                        n = phrase_spec.NP(get_random_word(pos))
 
                 if specifier_stash:
                     n.specifier = specifier_stash
@@ -422,14 +428,15 @@ def create_phrases(valence_pattern, lu, subj='', obj='', dep=''):
                 phrase = new_elem
 
             starters_done = True
-        elif not objects_done:
-            objects_done = True
+        elif not deps_done:
+            deps_done = True
 
         phrases.append(phrase)
 
     all_phrases = [phrase for phrase in phrases if phrase is not None]
-    if len(all_phrases) > 3:
-        return all_phrases[:3]
+
+    if len(all_phrases) >= 3:
+        return all_phrases[:2] + [all_phrases[-1]]
     else:
         return all_phrases
 

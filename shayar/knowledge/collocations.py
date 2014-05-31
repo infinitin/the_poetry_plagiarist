@@ -1,7 +1,6 @@
 __author__ = 'Nitin'
 from BeautifulSoup import BeautifulSoup
 import os
-from shayar.analyse.detectors.utils import get_tokenized_words
 import logging
 
 COLLOCS_DATA_LOC = 'C:\\Python27\\collocations_data\\files\\'
@@ -33,10 +32,35 @@ def build_knowledge_graph_from_collocations():
                 bs = p.findAll('b')
                 for b in bs:
                     try:
-                        words = [word for word in get_tokenized_words(b.contents) if
-                                 word != ',' and word != '|' and word != '(' and word != ')']
-                    except TypeError:
+                        contents = b.contents[0]
+                    except IndexError:
                         continue
+                    contents = contents.replace('|', ',').split(',')
+                    words = []
+                    for word in contents:
+                        new_word = word.strip()
+                        if not new_word:
+                            continue
+                        new_word = new_word.replace('sb','')
+                        new_word = new_word.replace('sth','')
+                        new_word = new_word.replace('~s','')
+                        if '/' in new_word:
+                            tokens = new_word.split()
+                            before = ''
+                            after = ''
+                            slash_token = ''
+                            for token in tokens:
+                                if '/' in token:
+                                    slash_token = token
+                                    before = token[:token.index('/')]
+                                    after = token[token.index('/')+1:]
+                                    break
+
+                            words.append(new_word.replace(slash_token, before))
+                            words.append(new_word.replace(slash_token, after))
+                        else:
+                            words.append(new_word)
+
                     for word in words:
                         g.append(tuple([noun.partition('_')[0], word, relation]))
 
@@ -65,10 +89,35 @@ def build_verbs_knowledge_graph_from_collocations():
                 bs = p.findAll('b')
                 for b in bs:
                     try:
-                        words = [word for word in get_tokenized_words(b.contents) if
-                                 word != ',' and word != '|' and word != '(' and word != ')']
-                    except TypeError:
+                        contents = b.contents[0]
+                    except IndexError:
                         continue
+                    contents = contents.replace('|', ',').split(',')
+                    words = []
+                    for word in contents:
+                        new_word = word.strip()
+                        if not new_word:
+                            continue
+                        new_word = new_word.replace('sb','')
+                        new_word = new_word.replace('sth','')
+                        new_word = new_word.replace('~s','')
+                        if '/' in new_word:
+                            tokens = new_word.split()
+                            before = ''
+                            after = ''
+                            slash_token = ''
+                            for token in tokens:
+                                if '/' in token:
+                                    slash_token = token
+                                    before = token[:token.index('/')]
+                                    after = token[token.index('/')+1:]
+                                    break
+
+                            words.append(new_word.replace(slash_token, before))
+                            words.append(new_word.replace(slash_token, after))
+                        else:
+                            words.append(new_word)
+
                     for word in words:
                         g.append(tuple([noun.partition('_')[0], word, relation]))
 
