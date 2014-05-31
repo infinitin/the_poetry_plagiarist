@@ -133,7 +133,7 @@ def extend_phrase(phrases, target_num_syllables, num_syllables):
         tries = 10
         while tries:
             try:
-                word = get_property(target_word.split()[-1], target_pos, used)
+                word = get_property(lemma(target_word.split()[-1]), target_pos, used)
             except IndexError:
                 word = get_random_word(pos)
 
