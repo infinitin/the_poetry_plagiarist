@@ -12,7 +12,7 @@ def get_knowledge_from_collocations():
 
 def build_knowledge_graph_from_collocations():
     g = []
-    logging.info('Getting knowledge from collocations')
+    logging.info('Gathering knowledge from collocations')
     #For each file in the dictionary
     for subdir, dirs, files in os.walk(COLLOCS_DATA_LOC):
         nouns = [file_name for file_name in files if 'noun.htm' in file_name]

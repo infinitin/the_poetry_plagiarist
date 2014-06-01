@@ -4,7 +4,7 @@ import logging
 
 
 def get_knowledge_from_associations():
-    logging.info('Getting knowledge from associations')
+    logging.info('Gathering knowledge from associations')
     g = []
     data = 'C:\\Python27\\associations_data\\all.csv'
     data = CSV.load(data)

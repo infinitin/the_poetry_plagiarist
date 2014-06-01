@@ -7,7 +7,7 @@ from rephrase import fit_rhythm_pattern, fit_rhyme, get_synset
 from pattern.text.en import wordnet, VERB
 import logging
 import creation
-from shayar.knowledge.retrieval import collocations
+from shayar.knowledge.knowledge import collocations
 from character_creation import create_new_character
 from urllib2 import urlopen, URLError
 from json import loads as json_load
