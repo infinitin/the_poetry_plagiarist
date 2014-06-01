@@ -28,6 +28,11 @@ def build_knowledge_graph_from_collocations():
                     relation = 'TakesAction'
                 elif 'ADJ' in u:
                     relation = 'HasProperty'
+                elif 'NOUN' in u:
+                    relation = 'RelatedTo'
+
+                if not relation:
+                    continue
 
                 bs = p.findAll('b')
                 for b in bs:
@@ -41,12 +46,14 @@ def build_knowledge_graph_from_collocations():
                         new_word = word.strip()
                         new_word.replace('(', '')
                         new_word.replace(')', '')
-                        if not new_word or '.' in new_word:
+                        new_word.replace('sb', '')
+                        new_word.replace('sth', '')
+
+                        reject = ['.', '~', "'"]
+                        rejection = [r for r in reject if r in new_word]
+                        if rejection:
                             continue
-                        new_word = new_word.replace('sb','')
-                        new_word = new_word.replace('sth','')
-                        new_word = new_word.replace('~s','')
-                        new_word = new_word.replace('~','')
+
                         if '/' in new_word:
                             tokens = new_word.split()
                             before = ''
@@ -101,12 +108,14 @@ def build_verbs_knowledge_graph_from_collocations():
                         new_word = word.strip()
                         new_word.replace('(', '')
                         new_word.replace(')', '')
-                        if not new_word or '.' in new_word:
+                        new_word.replace('sb', '')
+                        new_word.replace('sth', '')
+
+                        reject = ['.', '~', "'"]
+                        rejection = [r for r in reject if r in new_word]
+                        if rejection:
                             continue
-                        new_word = new_word.replace('sb','')
-                        new_word = new_word.replace('sth','')
-                        new_word = new_word.replace('~s','')
-                        new_word = new_word.replace('~','')
+
                         if '/' in new_word:
                             tokens = new_word.split()
                             before = ''
