@@ -6,12 +6,12 @@ import logging
 COLLOCS_DATA_LOC = 'C:\\Python27\\collocations_data\\files\\'
 
 
-def get_knowledge_from_collocations():
-    return build_knowledge_graph_from_collocations() + build_verbs_knowledge_graph_from_collocations()
+def get_knowledge_from_collocations(g):
+    build_knowledge_graph_from_collocations(g)
+    build_verbs_knowledge_graph_from_collocations(g)
 
 
-def build_knowledge_graph_from_collocations():
-    g = []
+def build_knowledge_graph_from_collocations(g):
     logging.info('Gathering knowledge from collocations')
     #For each file in the dictionary
     for subdir, dirs, files in os.walk(COLLOCS_DATA_LOC):
@@ -84,11 +84,8 @@ def build_knowledge_graph_from_collocations():
                         elif relation == 'RelatedTo':
                             g.append(tuple([noun.partition('_')[0] + '.n', word + '.n', relation]))
 
-    return g
 
-
-def build_verbs_knowledge_graph_from_collocations():
-    g = []
+def build_verbs_knowledge_graph_from_collocations(g):
     logging.info('Parsing')
     #For each file in the dictionary
     for subdir, dirs, files in os.walk(COLLOCS_DATA_LOC):
@@ -102,7 +99,6 @@ def build_verbs_knowledge_graph_from_collocations():
                 if not u:
                     continue
                 u = u[0].text
-                relation = ''
                 if 'ADV' in u:
                     relation = 'HasProperty'
                 else:
@@ -148,5 +144,3 @@ def build_verbs_knowledge_graph_from_collocations():
 
                     for word in words:
                         g.append(tuple([verb.partition('_')[0] + '.v', word + '.adv', relation]))
-
-    return g

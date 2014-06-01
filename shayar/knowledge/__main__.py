@@ -8,11 +8,10 @@ import logging
 logging.basicConfig(level=logging.INFO)
 logging.getLogger(__name__)
 
-knowledge = get_knowledge_from_collocations() + \
-            get_knowledge_from_associations() + \
-            get_knowledge_from_pattern_common_sense()
-
-#clean(knowledge)
+knowledge = []
+get_knowledge_from_collocations(knowledge)
+get_knowledge_from_associations(knowledge)
+get_knowledge_from_pattern_common_sense(knowledge)
 
 logging.info('Memorising...')
 ds = Datasheet()

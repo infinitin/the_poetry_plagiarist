@@ -3,9 +3,8 @@ from pattern.db import CSV
 import logging
 
 
-def get_knowledge_from_associations():
+def get_knowledge_from_associations(g):
     logging.info('Gathering knowledge from associations')
-    g = []
     data = 'C:\\Python27\\associations_data\\all.csv'
     data = CSV.load(data)
     adjectives = ['A', 'ADJ', 'AJ']
@@ -29,5 +28,3 @@ def get_knowledge_from_associations():
 
         if pos1 not in adverbs and pos2 not in adverbs:
             g.append(tuple([concept1 + '.' + pos1[0].lower(), concept2 + pos2[0].lower(), 'RelatedTo']))
-
-    return g
