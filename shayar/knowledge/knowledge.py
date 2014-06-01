@@ -11,7 +11,6 @@ def retrieve():
     data = 'knowledge.csv'
     data = CSV.load(data)
     for concept1, concept2, relation in data:
-        graph.add_edge(
-            concept1,
-            concept2,
-              type = relation)
+        graph.add_edge(concept1, concept2, type=relation)
+        if 'Related' in relation:
+            graph.add_edge(concept2, concept1, type=relation)

@@ -9,6 +9,8 @@ def get_knowledge_from_pattern_common_sense(g):
     data = 'C:\\Python27\\Lib\\site-packages\\pattern\\graph\\commonsense.csv'
     data = CSV.load(data)
     for concept1, relation, concept2, context, weight in data:
+        if '.' in concept1 or '.' in concept2:
+            continue
         if relation == 'is-a':
             g.append(tuple([concept1+'.n', concept2+'.n', 'IsA']))
         elif relation == 'is-part-of':

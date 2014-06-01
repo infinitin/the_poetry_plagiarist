@@ -6,19 +6,33 @@ import logging
 
 def get_knowledge_from_wordnet(g):
     logging.info('Gathering knowledge from wordnet')
-    concepts = set([head for head, tail, relation in g] + [tail for head, tail, relation in g])
+    concepts = set([head for head, tail, relation in g if head.endswith('.n')] + [tail for head, tail, relation in g if
+                                                                                  tail.endswith('.n')])
     for concept in concepts:
+        print concept
         word, pos = concept.split('.')
         if pos != 'n':
             continue
 
-        synset = get_synset(word. wordnet.NOUN)
+        try:
+            synset = get_synset(word.split()[-1], wordnet.NOUN)
+        except IndexError:
+            continue
         if synset is None:
             continue
 
         hypernyms = ([str(hypernym).partition("'")[-1].rpartition("'")[0] for hypernym in synset.hypernyms()])
         for hypernym in hypernyms:
-            g.append(tuple([word, hypernym, 'IsA']))
+            g.append(tuple([concept, hypernym + '.n', 'IsA']))
+
+        meronyms = ([str(meronym).partition("'")[-1].rpartition("'")[0] for meronym in synset.meronyms()])
+        for meronym in meronyms:
+            g.append(tuple([concept, meronym + '.n', 'PartOf']))
+
+        holonyms = ([str(holonym).partition("'")[-1].rpartition("'")[0] for holonym in synset.holonyms()])
+        for holonym in holonyms:
+            if holonym + '.n' not in concepts:
+                g.append(tuple([holonym + '.n', concept, 'IsA']))
 
 
 def get_synset(word, wpos):
@@ -26,15 +40,6 @@ def get_synset(word, wpos):
     try:
         synset = wordnet.synsets(singularize(lemmatise(word)), wpos)[0]
     except IndexError:
-        try:
-            synset = wordnet.synsets(lemmatise(word), wpos)[0]
-        except IndexError:
-            try:
-                synset = wordnet.synsets(singularize(word), wpos)[0]
-            except IndexError:
-                try:
-                    synset = wordnet.synsets(word, wpos)[0]
-                except IndexError:
-                    pass
+        pass
 
     return synset

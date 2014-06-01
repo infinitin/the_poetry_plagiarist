@@ -9,11 +9,18 @@ import logging
 logging.basicConfig(level=logging.INFO)
 logging.getLogger(__name__)
 
+g = []
+get_knowledge_from_collocations(g)
+get_knowledge_from_associations(g)
+get_knowledge_from_pattern_common_sense(g)
+
+g = [tuple([head.strip(), tail.strip(), relation]) for head, tail, relation in g if '.' in head and '.' in tail]
+#get_knowledge_from_wordnet(g)
+
 knowledge = []
-get_knowledge_from_collocations(knowledge)
-get_knowledge_from_associations(knowledge)
-get_knowledge_from_pattern_common_sense(knowledge)
-get_knowledge_from_wordnet(knowledge)
+for speck in g:
+    if speck not in knowledge:
+        knowledge.append(speck)
 
 logging.info('Memorising...')
 ds = Datasheet()

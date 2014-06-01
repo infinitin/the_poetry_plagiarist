@@ -85,7 +85,6 @@ def build_knowledge_graph_from_collocations(g):
 
 
 def build_verbs_knowledge_graph_from_collocations(g):
-    logging.info('Parsing')
     #For each file in the dictionary
     for subdir, dirs, files in os.walk(COLLOCS_DATA_LOC):
         verbs = [file_name for file_name in files if 'verb.htm' in file_name]
