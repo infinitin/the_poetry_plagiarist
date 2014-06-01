@@ -1,9 +1,9 @@
 __author__ = 'Nitin'
-import xml.etree.ElementTree as ET
+import xml.etree.ElementTree as Et
 import random
 
 FRAMENET_DATA_LOC = 'C:\\Python27\\framenet_data\\'
-lu_index = ET.parse(FRAMENET_DATA_LOC + 'luIndex.xml')
+lu_index = Et.parse(FRAMENET_DATA_LOC + 'luIndex.xml')
 root = lu_index.getroot()
 pre_tag = '{http://framenet.icsi.berkeley.edu}'
 
@@ -23,7 +23,7 @@ def lu_from_frames(frames, pos=''):
 
 
 def valence_pattern_from_id(lu_id):
-    lu_entry = ET.parse(FRAMENET_DATA_LOC + 'lu\\lu' + lu_id + '.xml')
+    lu_entry = Et.parse(FRAMENET_DATA_LOC + 'lu\\lu' + lu_id + '.xml')
     lu = lu_entry.getroot()
 
     max_fe_group = None
@@ -54,8 +54,10 @@ def valence_pattern_from_id(lu_id):
 
     starters = [valenceUnit for valenceUnit in best_pattern.findall(pre_tag + 'valenceUnit') if
                 valenceUnit.get('GF') != 'Dep' and valenceUnit.get('GF') != 'Obj']
-    deps = [valenceUnit for valenceUnit in best_pattern.findall(pre_tag + 'valenceUnit') if valenceUnit.get('GF') == 'Dep']
-    objs = [valenceUnit for valenceUnit in best_pattern.findall(pre_tag + 'valenceUnit') if valenceUnit.get('GF') == 'Obj']
+    deps = [valenceUnit for valenceUnit in best_pattern.findall(pre_tag + 'valenceUnit') if
+            valenceUnit.get('GF') == 'Dep']
+    objs = [valenceUnit for valenceUnit in best_pattern.findall(pre_tag + 'valenceUnit') if
+            valenceUnit.get('GF') == 'Obj']
 
     if len(starters) + len(deps) + len(objs) > 2:
         starters = [starter for starter in starters if starter.get('GF') != '--']
@@ -95,7 +97,7 @@ def lu_from_id(lu_id):
     return [lu for lu in root.findall(pre_tag + 'lu') if lu.get('ID') == lu_id][0]
 
 
-simplenlg_lexicon = ET.parse('default-lexicon.xml')
+simplenlg_lexicon = Et.parse('default-lexicon.xml')
 word_root = simplenlg_lexicon.getroot()
 
 

@@ -6,7 +6,7 @@ import logging
 graph = Graph()
 
 
-def retrieve():
+def retrieve_knowledge():
     logging.info('Retrieving knowledge')
     data = 'knowledge.csv'
     data = CSV.load(data)
