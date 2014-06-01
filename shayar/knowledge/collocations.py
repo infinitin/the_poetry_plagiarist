@@ -17,7 +17,6 @@ def build_knowledge_graph_from_collocations(g):
     for subdir, dirs, files in os.walk(COLLOCS_DATA_LOC):
         nouns = [file_name for file_name in files if 'noun.htm' in file_name]
         for noun in nouns:
-            logging.info('Parsing ' + str(noun))
             root = BeautifulSoup(open(COLLOCS_DATA_LOC + noun))
             ps = root('p')
             for p in ps:
@@ -91,7 +90,6 @@ def build_verbs_knowledge_graph_from_collocations(g):
     for subdir, dirs, files in os.walk(COLLOCS_DATA_LOC):
         verbs = [file_name for file_name in files if 'verb.htm' in file_name]
         for verb in verbs:
-            logging.info('Parsing ' + str(verb))
             root = BeautifulSoup(open(COLLOCS_DATA_LOC + verb))
             ps = root('p')
             for p in ps:
