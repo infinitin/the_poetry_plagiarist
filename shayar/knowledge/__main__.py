@@ -14,7 +14,7 @@ get_knowledge_from_collocations(g)
 get_knowledge_from_associations(g)
 get_knowledge_from_pattern_common_sense(g)
 
-g = [tuple([head.strip(), tail.strip(), relation]) for head, tail, relation in g if '.' in head and '.' in tail]
+g = [tuple([head.strip(), tail.strip(), relation]) for head, tail, relation in g if '.' in head and '.' in tail and '/' not in head and '/' not in tail and '(' not in head and '(' not in tail and ')' not in head and ')' not in tail]
 #get_knowledge_from_wordnet(g)
 
 knowledge = []
