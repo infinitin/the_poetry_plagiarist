@@ -60,9 +60,9 @@ def build_hasproperty_phrase(prop):
 def build_takes_action_phrase(action):
     logging.info('Building takes action phrase: ' + str(action))
     #Get an isa that has not already been chosen
-    subj = get_action(action, 'ReceivesAction')
+    obj = get_action(action, 'ReceivesAction')
     #Get an object that generally receives this action
-    obj = get_is_a(character_i)
+    subj = get_is_a(character_i)
 
     logging.info('Getting lu and valence pattern')
     try:
@@ -214,7 +214,7 @@ def build_name_phrase(name):
 
     name_phrase = phrase_spec.NP(name)
     name_phrase.specifier = ''
-    phrases = phrases[:2] + [name_phrase] + phrases[2:]
+    phrases = phrases[:2] + [name_phrase]
     if 'specifier' in phrases[0].__dict__:
         global specifier_stash
         if specifier_stash is None or not specifier_stash:
@@ -300,7 +300,10 @@ def build_has_phrase(possession):
 
 def build_desire_phrase(desire):
     frames = ['Desiring']
-    lu = lu_from_frames(frames, pos='v')
+    lu = None
+    while lu is None or lu.get('ID') == '6425' or lu.get('ID') == '6593':
+        lu = lu_from_frames(frames, pos='v')
+
     valence_pattern = valence_pattern_from_id(lu.get('ID'))
     subj = get_is_a(character_i)
 

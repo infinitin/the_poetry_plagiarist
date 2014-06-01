@@ -57,6 +57,16 @@ def valence_pattern_from_id(lu_id):
     deps = [valenceUnit for valenceUnit in best_pattern.findall(pre_tag + 'valenceUnit') if valenceUnit.get('GF') == 'Dep']
     objs = [valenceUnit for valenceUnit in best_pattern.findall(pre_tag + 'valenceUnit') if valenceUnit.get('GF') == 'Obj']
 
+    if len(starters) + len(deps) + len(objs) > 2:
+        starters = [starter for starter in starters if starter.get('GF') != '--']
+        deps = [dep for dep in deps if dep.get('GF') != '--']
+        objs = [obj for obj in objs if obj.get('GF') != '--']
+
+        if len(starters) + len(deps) + len(objs) > 2:
+            starters = [starters[0]] if starters else []
+            deps = [deps[0]] if deps else []
+            objs = [objs[0]] if objs else []
+
     return [tuple(starters), tuple(deps), tuple(objs)]
 
 
