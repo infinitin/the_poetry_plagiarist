@@ -1,6 +1,7 @@
 __author__ = 'Nitin'
 import xml.etree.ElementTree as Et
 import random
+import logging
 
 FRAMENET_DATA_LOC = 'C:\\Python27\\framenet_data\\'
 lu_index = Et.parse(FRAMENET_DATA_LOC + 'luIndex.xml')
@@ -103,6 +104,7 @@ word_root = simplenlg_lexicon.getroot()
 
 #We would like to look up framenet in the future, but for now we look up the default lexicon for simplenlg
 def get_random_word(pos):
+    logging.warn('Getting a RANDOM word')
     category = 'noun'
     if pos.startswith('V'):
         category = 'verb'

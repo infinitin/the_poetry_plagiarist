@@ -6,7 +6,7 @@ import builder
 from shayar.character import Character
 from framenet_reader import find_pos
 from rephrase import get_rhymes, shorten, filter_candidates
-from shayar.knowledge.knowledge import retrieve_knowledge
+from shayar.knowledge.knowledge import get_receives_action
 
 jpype.startJVM(jpype.getDefaultJVMPath(), "-Djava.class.path=simplenlg-v4.4.2.jar")
 
@@ -40,11 +40,9 @@ relation_functions = {'Named': build_name_phrase,
 relations = ['Named', 'NotNamed', 'AtLocation', 'NotAtLocation', 'HasProperty', 'NotHasProperty', 'HasA', 'NotHasA',
              'Desires', 'NotDesires', 'TakesAction', 'NotTakesAction', 'ReceivesAction', 'NotReceivesAction']
 
-knowledge = retrieve_knowledge()
-
 
 def create_poem(new_poem, template):
-    logging.info('Retrieveing knowledge graph')
+    logging.info('Retrieveing knowledge.graph graph')
     full_rhyme_scheme = template.rhyme_schemes[0]
     logging.info('Setting up rhyme scheme map')
     for letter in full_rhyme_scheme:
@@ -52,9 +50,9 @@ def create_poem(new_poem, template):
 
     #FIXME: REMOVE BELOW LATER
     test_character = Character(0, 'sg', 'm', 'a')
-    test_character.add_relation('IsA', 'lecturer')
-    test_character.add_relation('Named', 'Tony')
-    test_character.add_relation('Desires', 'go fishing')
+    test_character.add_relation('IsA', 'gamer')
+    test_character.add_relation('Named', 'Rohith')
+    test_character.add_relation('Desires', 'KFC chicken')
     builder.characters = [test_character]
     #FIXME: REMOVE ABOVE LATER
 
@@ -178,24 +176,18 @@ def new_noun_relation(noun, template):
     possible_relations = ['Desires', 'HasA', 'ReceivesAction', 'NotDesires', 'NotHasA', 'NotReceivesAction']
     relation_type = choose_relation(possible_relations, template)
 
-    if relation_type == 'Desires' or relation_type == 'HasA':
+    if 'Desires' in relation_type or 'HasA' in relation_type:
         return character_index, relation_type, noun
 
     else:
-        actions = [tail for head, tail, relation in builder.knowledge if head == noun and relation == relation_type]
-        if not actions:
-            synonyms = get_synonyms(noun, wordnet.NOUN, extended=True)
-            actions = [tail for head, tail, relation in builder.knowledge if
-                       head in synonyms and relation == relation_type]
-        if actions:
-            action = random.choice(actions)
-            builder.characters[character_index].add_relation('TakesAction', action)
-            new_character = builder.create_new_character(noun, len(builder.characters))
-            new_character.add_relation(relation_type, action)
-            builder.characters.append(new_character)
-            return builder.characters.index(new_character), relation_type, action
-        else:
-            return ()
+        action = get_receives_action(noun)
+
+        builder.characters[character_index].add_relation('TakesAction', action)
+        new_character = builder.create_new_character(noun, len(builder.characters))
+        new_character.add_relation(relation_type, action)
+        builder.characters.append(new_character)
+
+        return builder.characters.index(new_character), relation_type, action
 
 
 def new_adjective_relation(adj, template):
@@ -211,17 +203,7 @@ def new_verb_relation(verb, template):
     possible_relations = ['TakesAction', 'NotTakesAction']
     relation_type = choose_relation(possible_relations, template)
 
-    actions = [tail for head, tail, relation in builder.knowledge if head == verb and relation == relation_type]
-    if not actions:
-        synonyms = get_synonyms(verb, wordnet.VERB, extended=True)
-        actions = [tail for head, tail, relation in builder.knowledge if head in synonyms and relation == relation_type]
-
-    if actions:
-        action = random.choice(actions)
-        builder.characters[character_index].add_relation(relation_type, action)
-        return builder.characters.index(character_index), relation_type, action
-    else:
-        return ()
+    return builder.characters.index(character_index), relation_type, verb
 
 
 def choose_relation(possible_relations, template):

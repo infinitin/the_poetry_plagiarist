@@ -9,8 +9,8 @@ import creation
 import builder
 from urllib2 import urlopen, URLError
 from json import loads as json_load
-from pattern.text.en import wordnet, singularize
-from pattern.text.en import lemma as lemmatise
+from pattern.text.en import wordnet
+from shayar.knowledge.knowledge import get_property, most_similar, get_synonyms
 import logging
 import sys
 
@@ -379,17 +379,19 @@ def get_rhyme_mod(word, candidates, mod_pos, pos):
         return options[0]['word']
 
     best_options = [option['word'] for option in options if option['score'] == options[0]['score']]
+    if len(best_options) == 1:
+        return best_options[0]
 
-    wpos = wordnet.NOUN
-    if pos.startswith('V'):
-        wpos = wordnet.VERB
+    #wpos = wordnet.NOUN
+    #if pos.startswith('V'):
+    #    wpos = wordnet.VERB
 
-    synonyms = builder.get_synonyms(word, wpos)
-    modifiers = [tail for head, tail, relation in builder.knowledge if relation == 'HasProperty' and head in synonyms]
+    #Which modifier is most similar to those that are used to describe any of these words (synonyms)
+    #synonyms = get_synonyms(word, wpos)
+    #modifiers = [tail for head, tail, relation in builder.knowledge if relation == 'HasProperty' and head in synonyms]
+    #best_closest = most_similar_pair(modifiers, best_options, mod_pos)
 
-    best_closest = most_similar_pair(modifiers, best_options, mod_pos)
-
-    return best_closest
+    return random.choice(best_options)
 
 
 def get_rhyme_word(old_word, candidates, pos):
@@ -421,104 +423,3 @@ def most_similar_pair(options, candidates, pos):
             best_closest = closest
 
     return best_closest
-
-
-#Find the most conceptually similar words from a list of candidates
-def most_similar(word, candidates, pos):
-    best_similarity_score = sys.maxint
-    best_similarity_candidate = ''
-    word_synset = get_synset(word, pos)
-
-    if word_synset is None:
-        wpos = wordnet.NOUN
-        if pos.startswith('AVP'):
-            wpos = wordnet.ADVERB
-        elif pos.startswith('A'):
-            wpos = wordnet.ADJECTIVE
-        elif pos.startswith('V'):
-            wpos = wordnet.VERB
-        synonyms = builder.get_synonyms(word, wpos, True)
-        for candidate in candidates:
-            if candidate in synonyms:
-                return candidate, 2
-
-        return random.choice(candidates), best_similarity_score
-
-    for candidate in candidates:
-        candidate_synset = get_synset(candidate, pos)
-        if candidate_synset is None:
-            continue
-        similarity = wordnet.similarity(word_synset, candidate_synset)
-        if similarity < best_similarity_score:
-            best_similarity_score = similarity
-            best_similarity_candidate = candidate
-
-    if best_similarity_candidate:
-        return best_similarity_candidate, best_similarity_score
-    else:
-        return random.choice(candidates), best_similarity_score
-
-
-def get_synset(word, pos=''):
-    wpos = wordnet.NOUN
-    if pos.startswith('V'):
-        wpos = wordnet.VERB
-    elif pos.startswith('AVP'):
-        wpos = wordnet.ADVERB
-    elif pos.startswith('A'):
-        wpos = wordnet.ADJECTIVE
-
-    synset = None
-    try:
-        if pos:
-            synset = wordnet.synsets(singularize(lemmatise(word)), wpos)[0]
-        else:
-            synset = wordnet.synsets(singularize(lemmatise(word)))[0]
-    except IndexError:
-        try:
-            if pos:
-                synset = wordnet.synsets(lemmatise(word), wpos)[0]
-            else:
-                synset = wordnet.synsets(lemmatise(word))[0]
-        except IndexError:
-            try:
-                if pos:
-                    synset = wordnet.synsets(singularize(word), wpos)[0]
-                else:
-                    synset = wordnet.synsets(singularize(word))[0]
-            except IndexError:
-                try:
-                    if pos:
-                        synset = wordnet.synsets(word, wpos)[0]
-                    else:
-                        synset = wordnet.synsets(word)[0]
-                except IndexError:
-                    pass
-
-    if pos and synset is None:
-        return get_synset(word)
-
-    return synset
-
-
-def get_property(target_word, pos, used):
-    options = [tail for head, tail, relation in builder.knowledge if
-               relation == 'HasProperty' and head == target_word and tail not in used]
-    if options:
-        return random.choice(options)
-
-    if pos.startswith('v'):
-        wpos = wordnet.VERB
-    else:
-        wpos = wordnet.NOUN
-    synonyms = builder.get_synonyms(target_word, wpos)
-    for synonym in synonyms:
-        options = [tail for head, tail, relation in builder.knowledge if
-                   relation == 'HasProperty' and head == synonym and tail not in used]
-        if options:
-            return random.choice(options)
-
-    if pos.startswith('v'):
-        return get_random_word('AVP')
-
-    return get_random_word('A')

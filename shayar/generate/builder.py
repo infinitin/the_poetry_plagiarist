@@ -3,20 +3,11 @@ from framenet_reader import lu_from_frames, valence_pattern_from_id, lu_from_wor
     strict_lu_from_word
 import random
 import phrase_spec
-from rephrase import fit_rhythm_pattern, fit_rhyme, get_synset
-from pattern.text.en import VERB
+from rephrase import fit_rhythm_pattern, fit_rhyme
 import logging
 import creation
 from character_creation import create_new_character
-from urllib2 import urlopen, URLError
-from json import loads as json_load
-from wordnik import swagger, WordApi
-from urllib2 import HTTPError
-
-apiUrl = 'http://api.wordnik.com/v4'
-apiKey = 'd2194ae1a0c4be586853d0828d10f77db48039209ef684218'
-client = swagger.ApiClient(apiKey, apiUrl)
-wordApi = WordApi.WordApi(client)
+from shayar.knowledge.knowledge import get_action_theme, get_synset, get_action_taker_receiver
 
 pattern = ''
 rhyme_token = ''
@@ -476,33 +467,6 @@ def make_clause(spec_phrases):
     return line
 
 
-def get_synonyms(word, pos=None, extended=False):
-    if extended:
-        logging.info('Getting extended synonyms for ' + word)
-    else:
-        logging.info('Getting synonyms for ' + word)
-    synonyms = []
-
-    if pos is not None:
-        synset = get_synset(word, pos=pos)
-    else:
-        synset = get_synset(word)
-
-    if synset:
-        synonyms.extend(synset.synonyms)
-        synonyms.extend([str(holonym).partition("'")[-1].rpartition("'")[0] for holonym in synset.holonyms()])
-        synonyms.extend([str(hypernym).partition("'")[-1].rpartition("'")[0] for hypernym in synset.hypernyms()])
-
-    if extended:
-        try:
-            wordnik_synonyms = wordApi.getRelatedWords(word, relationshipTypes='synonym')[0].words
-            synonyms.extend(wordnik_synonyms)
-        except (TypeError, HTTPError):
-            pass
-
-    return synonyms
-
-
 def get_is_a(character_index):
     logging.info('Getting IsA for character ' + str(character_index))
     #Get an isa that has not already been chosen
@@ -552,7 +516,6 @@ def get_presupposition(char, isas):
     return ''
 
 
-#FIXME: It's a graph now btw, not just tuples lol
 def get_action(action, action_relation):
     logging.info('Getting ' + action_relation + ' parameters for ' + action)
     #Look through the other characters, finding a receives action for the given verb
@@ -560,65 +523,11 @@ def get_action(action, action_relation):
         if action in character.type_to_list[action_relation]:
             return get_is_a(character_index=characters.index(character))
 
-    #Otherwise, add a new character that *would* receive such an action
-    all_candidates = [tuple([head, tail, relation]) for head, tail, relation in creation.knowledge if
-                      relation == action_relation]
-    if all_candidates:
-        candidates = [head for head, tail, relation in creation.knowledge if
-                      relation == action_relation and tail == action]
-        if not candidates:
-            action_synonyms = get_synonyms(action, VERB, True)
-            candidates = [head for head, tail, relation in creation.knowledge if
-                          relation == action_relation and tail in action_synonyms]
-            if not candidates:
-                candidates = [head for head, tail, relation in all_candidates]
-    else:
-        return get_random_word('N')
-
-    noun = random.choice(candidates)
+    #Otherwise, add a new character that *would* take/receive such an action
+    noun = get_action_taker_receiver(action, action_relation)
+    
     new_character = create_new_character(noun, len(characters))
     new_character.add_relation(action_relation, action)
     characters.append(new_character)
 
     return noun
-
-
-def get_action_theme(valence_pattern, action, obj):
-    logging.info('Getting action theme for ' + action + ' ' + obj)
-    prep = ''
-    for group in valence_pattern:
-        for valence_unit in group:
-            pos = valence_unit.get('PT')
-            if pos.startswith('P'):
-                prep = pos.partition('[')[-1].rpartition(']')[0]
-
-    if not prep:
-        return ''
-
-    #Make an API request to Google autocomplete
-    url = "http://suggestqueries.google.com/complete/search?client=firefox&q="
-    if obj:
-        request_url = url + ' '.join([action, obj, prep]) + ' '
-    else:
-        request_url = url + ' '.join([action, prep]) + ' '
-    request_url = request_url.replace(' ', '%20')
-
-    try:
-        socket = urlopen(request_url)
-        json = json_load(socket.read())
-        socket.close()
-    except URLError:
-        raise Exception("You are not connected to the Internet!")
-
-    suggestions = json[1]
-    original = json[0]
-    for suggestion in suggestions:
-        if 'www' in suggestion:
-            continue
-        stripped = suggestion.replace(original, '')
-        words = stripped.split()
-        if len(words) > 1:
-            continue
-        return stripped
-
-    return get_random_word('N')

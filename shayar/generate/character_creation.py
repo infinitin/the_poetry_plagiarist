@@ -1,6 +1,6 @@
 __author__ = 'Nitin'
 from shayar.character import Character
-from rephrase import get_synset
+from shayar.knowledge.knowledge import get_synset
 from shayar.analyse.detectors.context.character_builder import determine_gender, determine_object_state
 
 
