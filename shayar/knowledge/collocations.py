@@ -6,9 +6,13 @@ import logging
 COLLOCS_DATA_LOC = 'C:\\Python27\\collocations_data\\files\\'
 
 
+def get_knowledge_from_collocations():
+    return build_knowledge_graph_from_collocations() + build_verbs_knowledge_graph_from_collocations()
+
+
 def build_knowledge_graph_from_collocations():
     g = []
-    logging.info('Parsing')
+    logging.info('Getting knowledge from collocations')
     #For each file in the dictionary
     for subdir, dirs, files in os.walk(COLLOCS_DATA_LOC):
         nouns = [file_name for file_name in files if 'noun.htm' in file_name]
@@ -63,16 +67,22 @@ def build_knowledge_graph_from_collocations():
                                 if '/' in token:
                                     slash_token = token
                                     before = token[:token.index('/')]
-                                    after = token[token.index('/')+1:]
+                                    after = token[token.index('/') + 1:]
                                     break
 
                             words.append(new_word.replace(slash_token, before))
                             words.append(new_word.replace(slash_token, after))
                         else:
+                            new_word.replace('  ', ' ')
                             words.append(new_word)
 
                     for word in words:
-                        g.append(tuple([noun.partition('_')[0], word, relation]))
+                        if relation == 'ReceivesAction' or relation == 'TakesAction':
+                            g.append(tuple([noun.partition('_')[0] + '.n', word + '.v', relation]))
+                        elif relation == 'HasProperty':
+                            g.append(tuple([noun.partition('_')[0] + '.n', word + '.a', relation]))
+                        elif relation == 'RelatedTo':
+                            g.append(tuple([noun.partition('_')[0] + '.n', word + '.n', relation]))
 
     return g
 
@@ -82,10 +92,10 @@ def build_verbs_knowledge_graph_from_collocations():
     logging.info('Parsing')
     #For each file in the dictionary
     for subdir, dirs, files in os.walk(COLLOCS_DATA_LOC):
-        nouns = [file_name for file_name in files if 'verb.htm' in file_name]
-        for noun in nouns:
-            logging.info('Parsing ' + str(noun))
-            root = BeautifulSoup(open(COLLOCS_DATA_LOC + noun))
+        verbs = [file_name for file_name in files if 'verb.htm' in file_name]
+        for verb in verbs:
+            logging.info('Parsing ' + str(verb))
+            root = BeautifulSoup(open(COLLOCS_DATA_LOC + verb))
             ps = root('p')
             for p in ps:
                 u = p.findAll('u')
@@ -95,6 +105,8 @@ def build_verbs_knowledge_graph_from_collocations():
                 relation = ''
                 if 'ADV' in u:
                     relation = 'HasProperty'
+                else:
+                    continue
 
                 bs = p.findAll('b')
                 for b in bs:
@@ -125,15 +137,16 @@ def build_verbs_knowledge_graph_from_collocations():
                                 if '/' in token:
                                     slash_token = token
                                     before = token[:token.index('/')]
-                                    after = token[token.index('/')+1:]
+                                    after = token[token.index('/') + 1:]
                                     break
 
                             words.append(new_word.replace(slash_token, before))
                             words.append(new_word.replace(slash_token, after))
                         else:
+                            new_word.replace('  ', ' ')
                             words.append(new_word)
 
                     for word in words:
-                        g.append(tuple([noun.partition('_')[0], word, relation]))
+                        g.append(tuple([verb.partition('_')[0] + '.v', word + '.adv', relation]))
 
     return g
