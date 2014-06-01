@@ -444,7 +444,7 @@ def create_phrases(valence_pattern, lu, subj='', obj='', dep=''):
                 new_elem.pre_modifiers = adverb_stash
                 adverb_stash = []
 
-            new_elem.tense = 'present'
+            new_elem.tense = tense
             #if phrase:
             #    phrase.complements.append(new_elem)
             #else:
@@ -531,10 +531,10 @@ def get_is_a(character_index):
     else:
         #If all chosen then use pronominal or typeof (introduce anaphora and presupposition)
         isa = get_presupposition(char, isas)
+        global subj_pronominal
         if isa:
             anaphora = random.choice([0, 1])
             if anaphora:
-                global subj_pronominal
                 subj_pronominal = True
                 return ''
             else:
@@ -542,7 +542,6 @@ def get_is_a(character_index):
                 used_relations.append(tuple([char, 'IsA', isa]))
                 return isa
         else:
-            global subj_pronominal
             subj_pronominal = True
             return ''
 

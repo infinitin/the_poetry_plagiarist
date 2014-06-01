@@ -12,6 +12,7 @@ from json import loads as json_load
 from pattern.text.en import wordnet, singularize
 from pattern.text.en import lemma as lemmatise
 import logging
+import sys
 
 
 def fit_rhythm_pattern(phrases, pattern):
@@ -115,14 +116,17 @@ def extend_phrase(phrases, target_num_syllables, num_syllables):
         if added_specifier:
             break
 
-        try:
-            if 'noun' in phrases[-1].__dict__.keys() and phrases[-1].noun[0].isupper():
-                phrase_to_change = phrases.index(random.choice(phrases[:-1]))
-            else:
-                phrase_to_change = phrases.index(random.choice(phrases))
-        except IndexError:
-            phrase_to_change = phrases.index(random.choice(phrases))
+        changeable_phrases = []
+        for phrase in phrases:
+            try:
+                if 'noun' in phrase.__dict__.keys() and phrase.noun[0].isupper():
+                    continue
+                else:
+                    changeable_phrases.append(phrase)
+            except IndexError:
+                changeable_phrases.append(phrase)
 
+        phrase_to_change = phrases.index(random.choice(changeable_phrases))
         pos = 'A'
         target_pos = 'N'
         if 'verb' in phrases[phrase_to_change].__dict__.keys():
@@ -374,7 +378,7 @@ def get_rhyme_mod(word, candidates, mod_pos, pos):
     if len(filtered) == 1:
         return options[0]['word']
 
-    best_options = [option for option in options if option['score'] == options[0]['score']]
+    best_options = [option['word'] for option in options if option['score'] == options[0]['score']]
 
     wpos = wordnet.NOUN
     if pos.startswith('V'):
@@ -383,15 +387,9 @@ def get_rhyme_mod(word, candidates, mod_pos, pos):
     synonyms = builder.get_synonyms(word, wpos)
     modifiers = [tail for head, tail, relation in builder.knowledge if relation == 'HasProperty' and head in synonyms]
 
-    best_closest = random.choice(options)
-    best_score = 999999
-    for modifier in modifiers:
-        closest, score = most_similar(modifier, best_options, mod_pos)
-        if score < best_score:
-            best_score = score
-            best_closest = closest
+    best_closest = most_similar_pair(modifiers, best_options, mod_pos)
 
-    return best_closest['word']
+    return best_closest
 
 
 def get_rhyme_word(old_word, candidates, pos):
@@ -403,18 +401,31 @@ def get_rhyme_word(old_word, candidates, pos):
     if not options:
         return ''
 
-    best_options = [option for option in options if option['score'] == options[0]['score']]
+    best_options = [option['word'] for option in options if option['score'] == options[0]['score']]
 
     closest, score = most_similar(old_word, best_options, pos)
     if score > 2.5:
         return ''
 
-    return closest['word']
+    return closest
+
+
+#Return the word in candidates that is closest to an option compared to any other candidate-option pair
+def most_similar_pair(options, candidates, pos):
+    best_closest = random.choice(candidates)
+    best_score = sys.maxint
+    for option in options:
+        closest, score = most_similar(option, candidates, pos)
+        if score < best_score:
+            best_score = score
+            best_closest = closest
+
+    return best_closest
 
 
 #Find the most conceptually similar words from a list of candidates
 def most_similar(word, candidates, pos):
-    best_similarity_score = 999999
+    best_similarity_score = sys.maxint
     best_similarity_candidate = ''
     word_synset = get_synset(word, pos)
 
@@ -428,13 +439,13 @@ def most_similar(word, candidates, pos):
             wpos = wordnet.VERB
         synonyms = builder.get_synonyms(word, wpos, True)
         for candidate in candidates:
-            if candidate['word'] in synonyms:
+            if candidate in synonyms:
                 return candidate, 2
 
         return random.choice(candidates), best_similarity_score
 
     for candidate in candidates:
-        candidate_synset = get_synset(candidate['word'], pos)
+        candidate_synset = get_synset(candidate, pos)
         if candidate_synset is None:
             continue
         similarity = wordnet.similarity(word_synset, candidate_synset)
