@@ -495,7 +495,7 @@ def get_synset(word, pos=''):
                 except IndexError:
                     pass
 
-    if pos:
+    if pos and synset is None:
         return get_synset(word)
 
     return synset

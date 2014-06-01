@@ -9,7 +9,6 @@ def get_knowledge_from_wordnet(g):
     concepts = set([head for head, tail, relation in g if head.endswith('.n')] + [tail for head, tail, relation in g if
                                                                                   tail.endswith('.n')])
     for concept in concepts:
-        print concept
         word, pos = concept.split('.')
         if pos != 'n':
             continue
