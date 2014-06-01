@@ -69,7 +69,7 @@ def create_poem(new_poem, template):
 
         relation = content[l]
         if not relation:
-            relation = get_new_content()
+            relation = get_new_content(template)
 
         if relation[1].startswith('Not'):
             builder.negated = True
@@ -98,9 +98,9 @@ def create_poem(new_poem, template):
     new_poem.characters = builder.characters
 
 
-def get_new_content():
+def get_new_content(template):
     if not rhyme_scheme[builder.rhyme_token]:
-        return new_blank_relation()
+        return new_blank_relation(template)
 
     rhyme_word = rhyme_scheme[builder.rhyme_token][0]
     rhymes = get_rhymes(rhyme_word)
@@ -140,11 +140,11 @@ def get_new_content():
             choice_word = choice_candidate['word']
 
             if choice_word in nouns:
-                new_relation = new_noun_relation(choice_word)
+                new_relation = new_noun_relation(choice_word, template)
             elif choice_word in adjectives:
-                new_relation = new_adjective_relation(choice_word)
+                new_relation = new_adjective_relation(choice_word, template)
             elif choice_word in verbs:
-                new_relation = new_verb_relation(choice_word)
+                new_relation = new_verb_relation(choice_word, template)
 
             rhyme_scheme[builder.rhyme_token].append(choice_word)
 
@@ -154,26 +154,26 @@ def get_new_content():
                 builder.verb_at_end = True
             return new_relation
         else:
-            return new_blank_relation()
+            return new_blank_relation(template)
 
     else:
-        return new_blank_relation()
+        return new_blank_relation(template)
 
 
-def new_blank_relation():
+def new_blank_relation(template):
     character_index = builder.characters.index(random.choice(builder.characters))
-    relation_type = random.choice(relations[2:])
-    if relation_type == 'Desires':
+    relation_type = choose_relation(relations[4:], template)
+    if relation_type == 'Desires' or relation_type == 'NotDesires':
         return character_index, relation_type, get_random_word('N')
     else:
         return character_index, relation_type, get_random_word('A')
 
 
-def new_noun_relation(noun):
+def new_noun_relation(noun, template):
     character_index = builder.characters.index(random.choice(builder.characters))
 
-    possible_relations = ['Desires', 'HasA', 'ReceivesAction']
-    relation_type = random.choice(possible_relations)
+    possible_relations = ['Desires', 'HasA', 'ReceivesAction', 'NotDesires', 'NotHasA', 'NotReceivesAction']
+    relation_type = choose_relation(possible_relations, template)
 
     if relation_type == 'Desires' or relation_type == 'HasA':
         return character_index, relation_type, noun
@@ -194,21 +194,22 @@ def new_noun_relation(noun):
             return ()
 
 
-def new_adjective_relation(adj):
+def new_adjective_relation(adj, template):
     character_index = builder.characters.index(random.choice(builder.characters))
 
-    possible_relations = ['HasProperty']
-    relation_type = random.choice(possible_relations)
+    possible_relations = ['HasProperty', 'NotHasProperty']
+    relation_type = choose_relation(possible_relations, template)
     return character_index, relation_type, adj
 
 
-def new_verb_relation(noun):
+def new_verb_relation(verb, template):
     character_index = builder.characters.index(random.choice(builder.characters))
-    relation_type = 'TakesAction'
+    possible_relations = ['TakesAction', 'NotTakesAction']
+    relation_type = choose_relation(possible_relations, template)
 
-    actions = [tail for head, tail, relation in builder.knowledge if head == noun and relation == relation_type]
+    actions = [tail for head, tail, relation in builder.knowledge if head == verb and relation == relation_type]
     if not actions:
-        synonyms = get_synonyms(noun, wordnet.VERB, extended=True)
+        synonyms = get_synonyms(verb, wordnet.VERB, extended=True)
         actions = [tail for head, tail, relation in builder.knowledge if head in synonyms and relation == relation_type]
 
     if actions:
@@ -217,6 +218,14 @@ def new_verb_relation(noun):
         return builder.characters.index(character_index), relation_type, action
     else:
         return ()
+
+
+def choose_relation(possible_relations, template):
+    weighted_relations = []
+    for relation in possible_relations:
+        count = template.character_relations[relation]
+        weighted_relations.extend([relation]*count)
+    return random.choice(weighted_relations)
 
 
 def retrieve_ordered_given_relations(num_lines, chars, rhyme_tokens):
