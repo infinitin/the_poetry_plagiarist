@@ -4,10 +4,9 @@ from framenet_reader import lu_from_frames, valence_pattern_from_id, lu_from_wor
 import random
 import phrase_spec
 from rephrase import fit_rhythm_pattern, fit_rhyme, get_synset
-from pattern.text.en import wordnet, VERB
+from pattern.text.en import VERB
 import logging
 import creation
-from shayar.knowledge.knowledge import collocations
 from character_creation import create_new_character
 from urllib2 import urlopen, URLError
 from json import loads as json_load
@@ -19,7 +18,6 @@ apiKey = 'd2194ae1a0c4be586853d0828d10f77db48039209ef684218'
 client = swagger.ApiClient(apiKey, apiUrl)
 wordApi = WordApi.WordApi(client)
 
-knowledge = collocations()
 pattern = ''
 rhyme_token = ''
 characters = []
@@ -244,7 +242,6 @@ def build_location_phrase(location):
         subject_phrase.animation = characters[character_i].object_state
         subject_phrase.num = characters[character_i].num
         subject_phrase.gender = characters[character_i].gender
-        subj = ''
 
         global specifier_stash
         if specifier_stash:
@@ -286,7 +283,8 @@ def build_has_phrase(possession):
     subj = get_is_a(character_i)
     if lu.get('ID') == '2492':
         global negated
-        phrases = [phrase_spec.PP('to', phrase_spec.NP(subj)), phrase_spec.VP(lu.get('name').partition('.')[0], negated),
+        phrases = [phrase_spec.PP('to', phrase_spec.NP(subj)),
+                   phrase_spec.VP(lu.get('name').partition('.')[0], negated),
                    phrase_spec.NP(possession)]
         negated = False
     else:
@@ -312,35 +310,6 @@ def build_desire_phrase(desire):
                                                rhyme_token), pattern)
     else:
         phrases = fit_rhythm_pattern(create_phrases(valence_pattern, lu, subj=subj, obj=desire), pattern)
-
-    return phrases
-
-
-#FIXME: This is pretty bad
-def build_capable_phrase():
-    frames = ['Capability']
-    lu = lu_from_frames(frames)
-    valence_pattern = valence_pattern_from_id(lu.get('ID'))
-    print_nlg_statement(valence_pattern, lu)
-
-
-#FIXME: This is pretty bad too
-def build_partof_phrase():
-    frames = ['Part_inner_outer', 'Part_ordered_segments', 'Part_piece', 'Part_whole', 'Inclusion']
-    lu = lu_from_frames(frames)
-    valence_pattern = valence_pattern_from_id(lu.get('ID'))
-    print_nlg_statement(valence_pattern, lu)
-
-
-#FIXME: This isn't great either
-def build_send_message_phrase(message):
-    frames = ['Communication', 'Telling', 'Statement', 'Chatting']
-    lu = lu_from_frames(frames)
-    valence_pattern = valence_pattern_from_id(lu.get('ID'))
-    #Get an isa that has not already been chosen
-    subj = get_is_a()
-    phrases = fit_rhyme(fit_rhythm_pattern(create_phrases(valence_pattern, lu, subj=subj, obj=message), pattern),
-                        rhyme_token, pattern)
 
     return phrases
 
@@ -452,14 +421,10 @@ def create_phrases(valence_pattern, lu, subj='', obj='', dep=''):
                     new_elem.pre_modifiers = adjective_stash
                     adjective_stash = []
 
-                #if phrase:
-                #    phrase.complements.append(new_elem)
-                #else:
                 phrase = new_elem
 
         if not starters_done:
             phrases.append(phrase)
-            phrase = None
             word = lu.get('name').rpartition('.')[0]
             new_elem = phrase_spec.VP(word, negated)
             negated = False
@@ -469,9 +434,6 @@ def create_phrases(valence_pattern, lu, subj='', obj='', dep=''):
                 adverb_stash = []
 
             new_elem.tense = tense
-            #if phrase:
-            #    phrase.complements.append(new_elem)
-            #else:
             phrase = new_elem
 
             starters_done = True
@@ -590,6 +552,7 @@ def get_presupposition(char, isas):
     return ''
 
 
+#FIXME: It's a graph now btw, not just tuples lol
 def get_action(action, action_relation):
     logging.info('Getting ' + action_relation + ' parameters for ' + action)
     #Look through the other characters, finding a receives action for the given verb
@@ -598,13 +561,14 @@ def get_action(action, action_relation):
             return get_is_a(character_index=characters.index(character))
 
     #Otherwise, add a new character that *would* receive such an action
-    all_candidates = [tuple([head, tail, relation]) for head, tail, relation in knowledge if
+    all_candidates = [tuple([head, tail, relation]) for head, tail, relation in creation.knowledge if
                       relation == action_relation]
     if all_candidates:
-        candidates = [head for head, tail, relation in knowledge if relation == action_relation and tail == action]
+        candidates = [head for head, tail, relation in creation.knowledge if
+                      relation == action_relation and tail == action]
         if not candidates:
             action_synonyms = get_synonyms(action, VERB, True)
-            candidates = [head for head, tail, relation in knowledge if
+            candidates = [head for head, tail, relation in creation.knowledge if
                           relation == action_relation and tail in action_synonyms]
             if not candidates:
                 candidates = [head for head, tail, relation in all_candidates]
@@ -658,5 +622,3 @@ def get_action_theme(valence_pattern, action, obj):
         return stripped
 
     return get_random_word('N')
-
-

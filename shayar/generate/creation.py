@@ -6,6 +6,7 @@ import builder
 from shayar.character import Character
 from framenet_reader import find_pos
 from rephrase import get_rhymes, shorten, filter_candidates
+from shayar.knowledge.knowledge import retrieve_knowledge
 
 jpype.startJVM(jpype.getDefaultJVMPath(), "-Djava.class.path=simplenlg-v4.4.2.jar")
 
@@ -39,8 +40,11 @@ relation_functions = {'Named': build_name_phrase,
 relations = ['Named', 'NotNamed', 'AtLocation', 'NotAtLocation', 'HasProperty', 'NotHasProperty', 'HasA', 'NotHasA',
              'Desires', 'NotDesires', 'TakesAction', 'NotTakesAction', 'ReceivesAction', 'NotReceivesAction']
 
+knowledge = retrieve_knowledge()
+
 
 def create_poem(new_poem, template):
+    logging.info('Retrieveing knowledge graph')
     full_rhyme_scheme = template.rhyme_schemes[0]
     logging.info('Setting up rhyme scheme map')
     for letter in full_rhyme_scheme:
@@ -61,7 +65,7 @@ def create_poem(new_poem, template):
 
     #Send to builder
     for l in range(0, sum(new_poem.lines)):
-        logging.info('Building line ' + str(l+1))
+        logging.info('Building line ' + str(l + 1))
         #Set globals
         builder.pattern = template.stress_patterns[l]
         builder.rhyme_token = full_rhyme_scheme[l]
@@ -181,7 +185,8 @@ def new_noun_relation(noun, template):
         actions = [tail for head, tail, relation in builder.knowledge if head == noun and relation == relation_type]
         if not actions:
             synonyms = get_synonyms(noun, wordnet.NOUN, extended=True)
-            actions = [tail for head, tail, relation in builder.knowledge if head in synonyms and relation == relation_type]
+            actions = [tail for head, tail, relation in builder.knowledge if
+                       head in synonyms and relation == relation_type]
         if actions:
             action = random.choice(actions)
             builder.characters[character_index].add_relation('TakesAction', action)
@@ -223,7 +228,7 @@ def choose_relation(possible_relations, template):
     weighted_relations = []
     for relation in possible_relations:
         count = template.character_relations[relation]
-        weighted_relations.extend([relation]*count)
+        weighted_relations.extend([relation] * count)
     return random.choice(weighted_relations)
 
 

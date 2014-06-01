@@ -7,11 +7,9 @@ import cPickle
 import json
 from initialisation import init_poem
 from cyber_poem import CyberPoem
-from shayar.generalise.utils import retrieve_all_poems, apply_settings
+from shayar.generalise.utils import retrieve_all_poems
 import utils
 from creation import create_poem
-from shayar.generalise.aggregators import rhythm, rhyme
-from collections import Counter
 from creation import shutdown_builder
 
 import logging
@@ -39,9 +37,8 @@ poems = retrieve_all_poems(collection)
 utils.num_poems = len(poems)
 
 #Init poem
-logging.info('Creating poem')
-new_poem = CyberPoem()
 logging.info('Initialising poem')
+new_poem = CyberPoem()
 init_poem(new_poem, template)
 
 #Build all the lines. May want to do first line, then some aggregation, then subsequent lines later on
