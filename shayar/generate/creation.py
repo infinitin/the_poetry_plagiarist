@@ -31,11 +31,13 @@ rhyme_scheme = {}
 relation_functions = {'Named': build_name_phrase,
                       'AtLocation': build_location_phrase,
                       'HasProperty': build_hasproperty_phrase,
+                      'HasA': build_has_phrase,
                       'Desires': build_desire_phrase,
                       'TakesAction': build_takes_action_phrase,
                       'ReceivesAction': build_receives_action_phrase}
 
-relations = ['Named', 'AtLocation', 'HasProperty', 'Desires', 'TakesAction', 'ReceivesAction']
+relations = ['Named', 'NotNamed', 'AtLocation', 'NotAtLocation', 'HasProperty', 'NotHasProperty', 'HasA', 'NotHasA',
+             'Desires', 'NotDesires', 'TakesAction', 'NotTakesAction', 'ReceivesAction', 'NotReceivesAction']
 
 
 def create_poem(new_poem, template):
@@ -69,6 +71,12 @@ def create_poem(new_poem, template):
         if not relation:
             relation = get_new_content()
 
+        if relation[1].startswith('Not'):
+            builder.negated = True
+            relation = relation[0], relation[1][3:], relation[2]
+        else:
+            builder.negated = False
+
         builder.character_i = relation[0]
         builder.dep_pronominal = False
         builder.obj_pronominal = False
@@ -84,7 +92,7 @@ def create_poem(new_poem, template):
         #phrases = build_desire_phrase(desire)
         #phrases = build_takes_action_phrase(str(get_random_word('V')))
         #phrases = build_receives_action_phrase(str(get_random_word('V')))
-
+        #phrases = build_has_phrase('pony')
         new_poem.phrases.append(phrases)
 
     new_poem.characters = builder.characters
@@ -164,10 +172,10 @@ def new_blank_relation():
 def new_noun_relation(noun):
     character_index = builder.characters.index(random.choice(builder.characters))
 
-    possible_relations = ['ReceivesAction']
+    possible_relations = ['Desires', 'HasA', 'ReceivesAction']
     relation_type = random.choice(possible_relations)
 
-    if relation_type == 'Desires':
+    if relation_type == 'Desires' or relation_type == 'HasA':
         return character_index, relation_type, noun
 
     else:
@@ -226,7 +234,7 @@ def retrieve_ordered_given_relations(num_lines, chars, rhyme_tokens):
             content[rhyme_tokens.index(token)] = inspiration[current_inspiration]
             current_inspiration += 1
     else:
-        content = inspiration[:5]
+        content = inspiration[:num_lines]
         for i in range(num_lines - len(content)):
             content.append(tuple())
 

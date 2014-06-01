@@ -92,9 +92,9 @@ class PP():
 
 
 class VP():
-    def __init__(self, verb):
+    def __init__(self, verb, negated=False):
         self.verb = verb
-        self.negated = False
+        self.negated = negated
         self.tense = ''
         self.aspect = ''
         self.modifiers = []

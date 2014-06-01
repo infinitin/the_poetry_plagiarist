@@ -35,6 +35,7 @@ specifier_stash = []
 rhyme_check = True
 last_modifier = ''
 verb_at_end = False
+negated = False
 
 
 def build_hasproperty_phrase(prop):
@@ -84,10 +85,12 @@ def build_takes_action_phrase(action):
         phrases = resorted_phrases + verb_buffer
 
     except IndexError:
+        global negated
         if verb_at_end:
-            phrases = [phrase_spec.NP(subj), phrase_spec.NP(action), phrase_spec.VP(obj)]
+            phrases = [phrase_spec.NP(subj), phrase_spec.NP(action), phrase_spec.VP(obj, negated)]
         else:
-            phrases = [phrase_spec.NP(subj), phrase_spec.VP(action), phrase_spec.NP(obj)]
+            phrases = [phrase_spec.NP(subj), phrase_spec.VP(action, negated), phrase_spec.NP(obj)]
+        negated = False
 
     if rhyme_check:
         phrases = fit_rhythm_pattern(fit_rhyme(phrases, rhyme_token), pattern)
@@ -115,7 +118,9 @@ def build_receives_action_phrase(action):
             dep = get_action_theme(valence_pattern, action, obj)
         phrases = create_phrases(valence_pattern, lu, subj, obj, dep)
     except IndexError:
-        phrases = [phrase_spec.NP(subj), phrase_spec.VP(action), phrase_spec.NP(obj)]
+        global negated
+        phrases = [phrase_spec.NP(subj), phrase_spec.VP(action, negated), phrase_spec.NP(obj)]
+        negated = False
 
     if rhyme_check:
         phrases = fit_rhythm_pattern(fit_rhyme(phrases, rhyme_token), pattern)
@@ -140,7 +145,11 @@ def build_name_phrase(name):
         for valence_unit in group:
             pos = valence_unit.get('PT')
             if pos.startswith('V'):
-                new_elem = phrase_spec.VP(get_random_word(pos))
+                logging.warn('RANDOM WORD')
+                global negated
+                new_elem = phrase_spec.VP(get_random_word(pos), negated)
+                negated = False
+                new_elem.tense = 'past'
                 global adverb_stash
                 if adverb_stash:
                     new_elem.pre_modifiers = adverb_stash
@@ -190,7 +199,8 @@ def build_name_phrase(name):
             phrases.append(phrase)
             phrase = None
             word = lu.get('name').rpartition('.')[0]
-            new_elem = phrase_spec.VP(word)
+            new_elem = phrase_spec.VP(word, negated)
+            negated = False
             new_elem.tense = 'past'
             if phrase:
                 phrase.complements.append(new_elem)
@@ -246,7 +256,9 @@ def build_location_phrase(location):
             subject_phrase.pre_modifiers = adjective_stash
             adjective_stash = []
 
-        verb_phrase = phrase_spec.VP(random.choice(['come', 'originate', 'hail', 'be']))
+        global negated
+        verb_phrase = phrase_spec.VP(random.choice(['come', 'originate', 'hail', 'be']), negated)
+        negated = False
         global adverb_stash
         if adverb_stash:
             verb_phrase.pre_modifiers = adverb_stash
@@ -267,15 +279,21 @@ def build_location_phrase(location):
     return phrases
 
 
-#FIXME: Make sure that you check the pos of the 'has' word - sometimes noun, sometimes verb
 def build_has_phrase(possession):
     # Need to use possessive pronouns as well
     frames = ['Possession']
     lu = lu_from_frames(frames, pos='v')
-    valence_pattern = valence_pattern_from_id(lu.get('ID'))
     subj = get_is_a(character_i)
-    phrases = fit_rhythm_pattern(fit_rhyme(create_phrases(valence_pattern, lu, subj=subj, obj=possession), rhyme_token),
-                                 pattern)
+    if lu.get('ID') == '2492':
+        global negated
+        phrases = [phrase_spec.PP('to', phrase_spec.NP(subj)), phrase_spec.VP(lu.get('name').partition('.')[0], negated),
+                   phrase_spec.NP(possession)]
+        negated = False
+    else:
+        valence_pattern = valence_pattern_from_id(lu.get('ID'))
+        phrases = create_phrases(valence_pattern, lu, subj=subj, obj=possession)
+
+    phrases = fit_rhythm_pattern(fit_rhyme(phrases, rhyme_token), pattern)
 
     return phrases
 
@@ -336,7 +354,9 @@ def create_phrases(valence_pattern, lu, subj='', obj='', dep=''):
             pos = valence_unit.get('PT')
             if pos.startswith('V'):
                 logging.warn('GETTING A RANDOM WORD')
-                new_elem = phrase_spec.VP(get_random_word(pos))
+                global negated
+                new_elem = phrase_spec.VP(get_random_word(pos), negated)
+                negated = False
                 if len(pos) > 2:
                     new_elem.specifier = pos[2:]
                 if tense:
@@ -438,7 +458,8 @@ def create_phrases(valence_pattern, lu, subj='', obj='', dep=''):
             phrases.append(phrase)
             phrase = None
             word = lu.get('name').rpartition('.')[0]
-            new_elem = phrase_spec.VP(word)
+            new_elem = phrase_spec.VP(word, negated)
+            negated = False
 
             if adverb_stash:
                 new_elem.pre_modifiers = adverb_stash
