@@ -164,10 +164,12 @@ def build_name_phrase(name):
                     phrase = new_elem
 
             else:
+                global subj_pronominal
                 if subj or subj_pronominal:
                     new_elem = phrase_spec.NP(subj)
                     if subj_pronominal:
                         new_elem.pronominal = True
+                        subj_pronominal = False
                     new_elem.animation = characters[character_i].object_state
                     new_elem.num = characters[character_i].num
                     new_elem.gender = characters[character_i].gender
@@ -228,8 +230,10 @@ def build_location_phrase(location):
     subj = get_is_a(character_i)
     if lu.get('ID') == '16669':
         subject_phrase = phrase_spec.NP(subj)
+        global subj_pronominal
         if subj_pronominal:
             subject_phrase.pronominal = True
+            subj_pronominal = False
         subject_phrase.animation = characters[character_i].object_state
         subject_phrase.num = characters[character_i].num
         subject_phrase.gender = characters[character_i].gender
@@ -297,10 +301,10 @@ def build_desire_phrase(desire):
     subj = get_is_a(character_i)
 
     if rhyme_check:
-        phrases = fit_rhythm_pattern(fit_rhyme(create_phrases(valence_pattern, lu, subj=subj, obj=desire),
+        phrases = fit_rhythm_pattern(fit_rhyme(create_phrases(valence_pattern, lu, subj=subj, obj=desire, dep=desire),
                                                rhyme_token), pattern)
     else:
-        phrases = fit_rhythm_pattern(create_phrases(valence_pattern, lu, subj=subj, obj=desire), pattern)
+        phrases = fit_rhythm_pattern(create_phrases(valence_pattern, lu, subj=subj, obj=desire, dep=desire), pattern)
 
     return phrases
 
@@ -335,10 +339,12 @@ def create_phrases(valence_pattern, lu, subj='', obj='', dep=''):
                     adverb_stash = []
 
             elif pos.startswith('P'):
+                global subj_pronominal
                 if subj or subj_pronominal:
                     n = phrase_spec.NP(subj)
                     if subj_pronominal:
                         n.pronominal = True
+                        subj_pronominal = False
                     n.animation = characters[character_i].object_state
                     n.num = characters[character_i].num
                     n.gender = characters[character_i].gender
@@ -382,6 +388,7 @@ def create_phrases(valence_pattern, lu, subj='', obj='', dep=''):
                     new_elem = phrase_spec.NP(subj)
                     if subj_pronominal:
                         new_elem.pronominal = True
+                        subj_pronominal = False
                     new_elem.animation = characters[character_i].object_state
                     new_elem.num = characters[character_i].num
                     new_elem.gender = characters[character_i].gender

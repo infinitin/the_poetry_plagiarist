@@ -60,23 +60,23 @@ def get_action_taker_receiver(action, action_relation):
     target_node = get_node(action, 'v')
     if target_node is not None:
         nouns = [n.id.split('.')[0] for n in field(target_node, relation=action_relation)]
-        return random.choice(nouns)
-
-    else:
-        logging.info(action + '.v is not in the graph')
-        synonyms = get_synonyms(action, wordnet.VERB)
-        synonym_nodes = remove_none([get_node(synonym, 'v') for synonym in synonyms])
-        if not synonym_nodes:
-            logging.info('No nodes: ' + str(synonyms))
-            return get_random_word('N')
-
-        for synonym_node in synonym_nodes:
-            nouns.extend([n.id.split('.')[0] for n in field(synonym_node, relation=action_relation)])
-
         if nouns:
             return random.choice(nouns)
-        else:
-            return get_random_word('N')
+
+    logging.info(action + '.v is not in the graph')
+    synonyms = get_synonyms(action, wordnet.VERB)
+    synonym_nodes = remove_none([get_node(synonym, 'v') for synonym in synonyms])
+    if not synonym_nodes:
+        logging.info('No nodes: ' + str(synonyms))
+        return get_random_word('N')
+
+    for synonym_node in synonym_nodes:
+        nouns.extend([n.id.split('.')[0] for n in field(synonym_node, relation=action_relation)])
+
+    if nouns:
+        return random.choice(nouns)
+    else:
+        return get_random_word('N')
 
 
 def get_property(target_word, pos, used):
@@ -252,7 +252,10 @@ def most_similar(word, candidates, pos):
         candidate_synset = get_synset(candidate, pos)
         if candidate_synset is None:
             continue
-        similarity = wordnet.similarity(word_synset, candidate_synset)
+        try:
+            similarity = wordnet.similarity(word_synset, candidate_synset)
+        except AttributeError:
+            continue
         if similarity < best_similarity_score:
             best_similarity_score = similarity
             best_similarity_candidate = candidate
