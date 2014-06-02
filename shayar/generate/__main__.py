@@ -11,6 +11,7 @@ from shayar.generalise.utils import retrieve_all_poems
 import utils
 from creation import create_poem
 from creation import shutdown_builder
+from shayar.knowledge.knowledge import retrieve_knowledge
 
 import logging
 logging.basicConfig(level=logging.INFO)
@@ -43,6 +44,7 @@ init_poem(new_poem, template)
 
 #Build all the lines. May want to do first line, then some aggregation, then subsequent lines later on
 logging.info('Creating poem')
+retrieve_knowledge()
 create_poem(new_poem, template)
 
 #Realise poem into the CyberPoem.poem attribute and return to user

@@ -219,7 +219,7 @@ def halo(node, relation='', depth=1, fringe=0):
 
 def retrieve_knowledge():
     logging.info('Retrieving knowledge')
-    data = 'knowledge.csv'
+    data = 'C:\\Users\\Lenovo\\PycharmProjects\\the_poetry_plagiarist\\shayar\\knowledge\\knowledge.csv'
     data = CSV.load(data)
     for concept1, concept2, relation in data:
         graph.add_edge(concept1, concept2, type=relation)
