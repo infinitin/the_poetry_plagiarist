@@ -1,6 +1,6 @@
 __author__ = 'Nitin'
 from pattern.db import CSV
-from pattern.graph import Graph
+from pattern.graph import Graph, heappop, heappush, adjacency
 from pattern.text.en import wordnet, singularize
 from pattern.text.en import lemma as lemmatise
 from wordnik import swagger, WordApi
@@ -37,19 +37,17 @@ def closest_matching(candidate_nodes, context_nodes):
         return set(candidate_nodes)
 
     h = lambda id1, id2: 1 - int('RelatedTo' in graph.edge(id1, id2).type)
-    shortest_path_length = sys.maxint
+    shortest_path_length = 10
     closest_candidate_nodes = set()
     for context_node in context_nodes:
         for candidate_node in candidate_nodes:
             logging.info('Similarity between ' + candidate_node.id + ' ' + context_node.id)
-            spl = graph.shortest_path(candidate_node, context_node, heuristic=h)
+            spl = dijkstra_depth_limited_shortest_path(graph, candidate_node.id, context_node.id, depth=shortest_path_length)
             if spl is None:
                 continue
             if len(spl) < shortest_path_length:
                 closest_candidate_nodes = {candidate_node}
-                shortest_path_length = len(spl) - 1
-                if shortest_path_length == 1:
-                    return closest_candidate_nodes
+                shortest_path_length = len(spl)
             elif len(spl) == shortest_path_length:
                 closest_candidate_nodes.add(candidate_node)
 
@@ -272,9 +270,9 @@ def retrieve_knowledge():
     data = 'C:\\Users\\Lenovo\\PycharmProjects\\the_poetry_plagiarist\\shayar\\knowledge\\knowledge.csv'
     data = CSV.load(data)
     for concept1, concept2, relation in data:
-        graph.add_edge(concept1, concept2, type=relation)
+        graph.add_edge(concept1, concept2, weight=1.0, type=relation)
         if 'Related' in relation:
-            graph.add_edge(concept2, concept1, type=relation)
+            graph.add_edge(concept2, concept1, weight=1.0, type=relation)
 
 
 #Find the most conceptually similar words from a list of candidates
@@ -364,3 +362,25 @@ def get_pos(word):
         if node is not None:
             return p
     return ''
+
+
+def dijkstra_depth_limited_shortest_path(graph, id1, id2, heuristic=None, directed=False, depth=None):
+    def flatten(list):
+        # Flattens a linked list of the form [0,[1,[2,[]]]]
+        while len(list) > 0:
+            yield list[0]; list=list[1]
+    G = adjacency(graph, directed=directed, heuristic=heuristic)
+    q = [(0, id1, ())] # Heap of (cost, path_head, path_rest).
+    visited = set()    # Visited nodes.
+    while True:
+        (cost1, n1, path) = heappop(q)
+        if n1 not in visited:
+            visited.add(n1)
+        if n1 == id2:
+            return list(flatten(path))[::-1] + [n1]
+        if cost1 >= depth:
+            return None
+        path = (n1, path)
+        for (n2, cost2) in G[n1].iteritems():
+            if n2 not in visited:
+                heappush(q, (cost1 + cost2, n2, path))

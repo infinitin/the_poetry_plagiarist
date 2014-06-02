@@ -51,8 +51,8 @@ def create_poem(new_poem, template):
 
     #FIXME: REMOVE BELOW LATER
     test_character = Character(0, 'sg', 'm', 'a')
-    test_character.add_relation('Named', 'Mat')
-    test_character.add_relation('Desires', 'pizza')
+    test_character.add_relation('Named', 'Tony')
+    #test_character.add_relation('Desires', 'success')
     builder.characters = [test_character]
     #FIXME: REMOVE ABOVE LATER
 
@@ -154,9 +154,7 @@ def get_new_content(template):
         while not new_relation and option_nodes:
             choice_candidates = closest_matching(option_nodes, builder.context_nodes)
             if not choice_candidates:
-                for choice_candidate in choice_candidates:
-                    option_nodes.remove(choice_candidate)
-                continue
+                break
             choice_candidate = random.choice(list(choice_candidates))
             choice_word = options[option_nodes.index(choice_candidate)][0]['word']
             option_nodes.remove(choice_candidate)
@@ -249,6 +247,8 @@ def retrieve_ordered_given_relations(num_lines, chars, rhyme_tokens):
         for token in set(rhyme_tokens):
             content[rhyme_tokens.index(token)] = inspiration[current_inspiration]
             current_inspiration += 1
+            if current_inspiration >= len(inspiration):
+                break
     else:
         content = inspiration[:num_lines]
         for i in range(num_lines - len(content)):
