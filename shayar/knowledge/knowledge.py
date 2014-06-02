@@ -30,29 +30,71 @@ w = {
 }
 
 
+def closest_matching(candidate_nodes, context_nodes):
+    candidate_nodes = remove_none(candidate_nodes)
+    context_nodes = remove_none(context_nodes)
+    if len(candidate_nodes) <= 1 or not context_nodes:
+        return set(candidate_nodes)
+
+    h = lambda id1, id2: 1 - int('RelatedTo' in graph.edge(id1, id2).type)
+    shortest_path_length = sys.maxint
+    closest_candidate_nodes = set()
+    for context_node in context_nodes:
+        for candidate_node in candidate_nodes:
+            logging.info('Similarity between ' + candidate_node.id + ' ' + context_node.id)
+            spl = graph.shortest_path(candidate_node, context_node, heuristic=h)
+            if spl is None:
+                continue
+            if len(spl) < shortest_path_length:
+                closest_candidate_nodes = {candidate_node}
+                shortest_path_length = len(spl) - 1
+                if shortest_path_length == 1:
+                    return closest_candidate_nodes
+            elif len(spl) == shortest_path_length:
+                closest_candidate_nodes.add(candidate_node)
+
+    if not closest_candidate_nodes:
+        return set(candidate_nodes)
+
+    return closest_candidate_nodes
+
+
+def new_concepts(context_nodes):
+    new_concept_nodes = set()
+    for context_node in context_nodes:
+        new_concept_nodes.add(halo(context_node))
+        new_concept_nodes.add(field(context_node))
+
+    return new_concept_nodes
+
+
+def get_all_nodes(l):
+    return remove_none([get_node(word, pos) for word, pos in l])
+
+
 #Given a noun, give me an action that it receives
 def get_receives_action(noun):
     nouns = []
     target_node = get_node(noun, 'n')
     if target_node is not None:
         nouns = [n.id.split('.')[0] for n in halo(target_node, relation='ReceivesAction')]
-        return random.choice(nouns)
-
-    else:
-        logging.info(noun + '.n is not in the graph')
-        synonyms = get_synonyms(noun, wordnet.NOUN)
-        synonym_nodes = remove_none([get_node(synonym, 'n') for synonym in synonyms])
-        if not synonym_nodes:
-            logging.info('No nodes: ' + str(synonyms))
-            return get_random_word('V')
-
-        for synonym_node in synonym_nodes:
-            nouns.extend([n.id.split('.')[0] for n in halo(synonym_node, relation='ReceivesAction')])
-
         if nouns:
             return random.choice(nouns)
-        else:
-            return get_random_word('V')
+
+    logging.info(noun + '.n is not in the graph')
+    synonyms = get_synonyms(noun, wordnet.NOUN)
+    synonym_nodes = remove_none([get_node(synonym, 'n') for synonym in synonyms])
+    if not synonym_nodes:
+        logging.info('No nodes: ' + str(synonyms))
+        return get_random_word('V')
+
+    for synonym_node in synonym_nodes:
+        nouns.extend([n.id.split('.')[0] for n in halo(synonym_node, relation='ReceivesAction')])
+
+    if nouns:
+        return random.choice(nouns)
+    else:
+        return get_random_word('V')
 
 
 def get_action_taker_receiver(action, action_relation):
@@ -187,7 +229,7 @@ def get_hypernyms(isa):
 
 def get_node(word, pos):
     try:
-        return graph.node(word + '.' + pos.lower())
+        return graph.node(lemmatise(word) + '.' + pos.lower())
     except KeyError:
         return None
 
@@ -196,10 +238,14 @@ def remove_none(xs):
     return [x for x in xs if x is not None]
 
 
-def field(node, relation, depth=1, fringe=0):
+def field(node, relation='', depth=1, fringe=0):
     def traversable(node, edge):
         return edge.node2 == node and edge.type == relation
-    g = node.graph.copy(nodes=node.flatten(depth, traversable))
+
+    if relation:
+        g = node.graph.copy(nodes=node.flatten(depth, traversable))
+    else:
+        g = node.graph.copy(nodes=node.flatten(depth))
     g = g.fringe(depth=fringe)
     g = [node.graph[n.id] for n in g if n != node]
     return g
@@ -211,7 +257,11 @@ def halo(node, relation='', depth=1, fringe=0):
 
     def traversable(node, edge):
         return edge.node1 == node and edge.type == relation
-    g = node.graph.copy(nodes=node.flatten(depth, traversable))
+
+    if relation:
+        g = node.graph.copy(nodes=node.flatten(depth, traversable))
+    else:
+        g = node.graph.copy(nodes=node.flatten(depth))
     g = g.fringe(depth=fringe)
     g = [node.graph[n.id] for n in g if n != node]
     return g

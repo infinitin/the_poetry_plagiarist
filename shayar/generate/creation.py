@@ -6,7 +6,8 @@ import builder
 from shayar.character import Character
 from framenet_reader import find_pos
 from rephrase import get_rhymes, shorten, filter_candidates
-from shayar.knowledge.knowledge import get_receives_action
+from shayar.knowledge.knowledge import get_receives_action, get_node, closest_matching, new_concepts
+from pattern.text.en import lemma
 
 jpype.startJVM(jpype.getDefaultJVMPath(), "-Djava.class.path=simplenlg-v4.4.2.jar")
 
@@ -50,9 +51,8 @@ def create_poem(new_poem, template):
 
     #FIXME: REMOVE BELOW LATER
     test_character = Character(0, 'sg', 'm', 'a')
-    test_character.add_relation('IsA', 'gamer')
-    test_character.add_relation('Named', 'Rohith')
-    test_character.add_relation('Desires', 'KFC chicken')
+    test_character.add_relation('Named', 'Mat')
+    test_character.add_relation('Desires', 'pizza')
     builder.characters = [test_character]
     #FIXME: REMOVE ABOVE LATER
 
@@ -71,6 +71,13 @@ def create_poem(new_poem, template):
 
         relation = content[l]
         if not relation:
+            if l == 0:
+                builder.context_nodes = [(), ()]
+            elif l == sum(new_poem.lines)-1:
+                builder.context_nodes = get_context_nodes((), new_poem.phrases[l-1])
+            else:
+                builder.context_nodes = get_context_nodes(content[l+1], new_poem.phrases[l-1])
+
             relation = get_new_content(template)
 
         if relation[1].startswith('Not'):
@@ -130,15 +137,29 @@ def get_new_content(template):
         nouns = filter_candidates(words, 'N')
         adjectives = filter_candidates(words, 'A')
         verbs = filter_candidates(words, 'V')
-        options = [candidate for candidate in candidates if
-                   candidate['word'] in nouns or candidate['word'] in adjectives or candidate['word'] in verbs]
+        options = []
+        for candidate in candidates:
+            if candidate['word'] in nouns:
+                option = candidate, 'n'
+            elif candidate['word'] in verbs:
+                option = candidate, 'v'
+            else:
+                option = candidate, 'a'
+            options.append(option)
+
+        option_nodes = [get_node(candidate['word'], pos) for candidate, pos in options]
 
         new_relation = ()
         choice_word = ''
-        while not new_relation and options:
-            choice_candidate = random.choice(options)
-            options.remove(choice_candidate)
-            choice_word = choice_candidate['word']
+        while not new_relation and option_nodes:
+            choice_candidates = closest_matching(option_nodes, builder.context_nodes)
+            if not choice_candidates:
+                for choice_candidate in choice_candidates:
+                    option_nodes.remove(choice_candidate)
+                continue
+            choice_candidate = random.choice(list(choice_candidates))
+            choice_word = options[option_nodes.index(choice_candidate)][0]['word']
+            option_nodes.remove(choice_candidate)
 
             if choice_word in nouns:
                 new_relation = new_noun_relation(choice_word, template)
@@ -203,7 +224,7 @@ def new_verb_relation(verb, template):
     possible_relations = ['TakesAction', 'NotTakesAction']
     relation_type = choose_relation(possible_relations, template)
 
-    return builder.characters.index(character_index), relation_type, verb
+    return character_index, relation_type, verb
 
 
 def choose_relation(possible_relations, template):
@@ -250,6 +271,50 @@ def prepare_ngram(ngram):
 
     builder.adverb_stash = builder.adverb_stash[::-1]
     builder.adjective_stash = builder.adjective_stash[::-1]
+
+
+def get_context_nodes(content, phrases):
+    nodes = []
+    node_ps = ['a', 'adv', 'n', 'v']
+    if content:
+        c_isas = builder.characters[content[0]].type_to_list['IsA']
+        for isa in c_isas:
+            nodes.append(get_node(isa, 'n'))
+        if content[1] == 'HasProperty':
+            nodes.append(get_node(content[2].split()[0], 'a'))
+        elif 'Action' in content[1]:
+            nodes.append(get_node(content[2].split()[0], 'v'))
+        else:
+            for p in node_ps:
+                nodes.append(get_node(content[2].split()[0], p))
+
+    for phrase in phrases:
+        try:
+            if 'noun' in phrase.__dict__.keys():
+                nodes.append(get_node(phrase.noun.split()[0], 'n'))
+                for modifier in phrase.modifiers+phrase.post_modifiers+phrase.pre_modifiers:
+                    nodes.append(get_node(modifier.adjective.split()[0], 'a'))
+            elif 'verb' in phrase.__dict__.keys():
+                nodes.append(get_node(phrase.verb.split()[0], 'v'))
+                for modifier in phrase.modifiers+phrase.post_modifiers+phrase.pre_modifiers:
+                    nodes.append(get_node(modifier.adverb.split()[0], 'adv'))
+            elif 'np' in phrase.__dict__.keys():
+                nodes.append(get_node(phrase.np.noun.split()[0], 'n'))
+                for modifier in phrase.np.modifiers+phrase.np.post_modifiers+phrase.np.pre_modifiers:
+                    nodes.append(get_node(modifier.adjective.split()[0], 'a'))
+        except IndexError:
+            continue
+
+    nodes = [node for node in nodes if node is not None]
+
+    if not nodes:
+        nodes = get_content_from_template()
+
+    return [node for node in nodes if node is not None]
+
+
+def get_content_from_template():
+    return []
 
 
 def shutdown_builder():

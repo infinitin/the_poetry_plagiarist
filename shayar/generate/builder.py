@@ -25,6 +25,7 @@ rhyme_check = True
 last_modifier = ''
 verb_at_end = False
 negated = False
+context_nodes = []
 
 
 def build_hasproperty_phrase(prop):
