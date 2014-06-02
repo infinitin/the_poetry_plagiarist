@@ -355,3 +355,12 @@ def get_action_theme(valence_pattern, action, obj):
         return stripped
 
     return get_random_word('N')
+
+
+def get_pos(word):
+    ps = ['v', 'n', 'a', 'adv']
+    for p in ps:
+        node = get_node(word, p)
+        if node is not None:
+            return p
+    return ''

@@ -125,17 +125,17 @@ class VP():
             phrase.setFeature(creation.feature.TENSE, creation.tense.FUTURE)
 
         if self.aspect == 'perfect':
-            phrase.setFeature(creation.feature.PERFECT, True)
-            phrase.setFeature(creation.feature.PASSIVE, False)
-            phrase.setFeature(creation.feature.PROGRESSIVE, False)
+            phrase.setFeature(creation.feature.PERFECT, jpype.JBoolean(True))
+            phrase.setFeature(creation.feature.PASSIVE, jpype.JBoolean(False))
+            phrase.setFeature(creation.feature.PROGRESSIVE, jpype.JBoolean(False))
         elif self.aspect == 'passive':
-            phrase.setFeature(creation.feature.PASSIVE, True)
-            phrase.setFeature(creation.feature.PERFECT, False)
-            phrase.setFeature(creation.feature.PROGRESSIVE, False)
+            phrase.setFeature(creation.feature.PASSIVE, jpype.JBoolean(True))
+            phrase.setFeature(creation.feature.PERFECT, jpype.JBoolean(False))
+            phrase.setFeature(creation.feature.PROGRESSIVE, jpype.JBoolean(False))
         elif self.aspect == 'progressive':
-            phrase.setFeature(creation.feature.PROGRESSIVE, True)
-            phrase.setFeature(creation.feature.PERFECT, False)
-            phrase.setFeature(creation.feature.PASSIVE, False)
+            phrase.setFeature(creation.feature.PROGRESSIVE, jpype.JBoolean(True))
+            phrase.setFeature(creation.feature.PERFECT, jpype.JBoolean(False))
+            phrase.setFeature(creation.feature.PASSIVE, jpype.JBoolean(False))
 
         return phrase
 

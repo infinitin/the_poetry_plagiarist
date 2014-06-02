@@ -7,7 +7,7 @@ from rephrase import fit_rhythm_pattern, fit_rhyme
 import logging
 import creation
 from character_creation import create_new_character
-from shayar.knowledge.knowledge import get_action_theme, get_hypernyms, get_action_taker_receiver
+from shayar.knowledge.knowledge import get_action_theme, get_hypernyms, get_action_taker_receiver, get_pos
 
 pattern = ''
 rhyme_token = ''
@@ -293,19 +293,30 @@ def build_has_phrase(possession):
 
 
 def build_desire_phrase(desire):
-    frames = ['Desiring']
-    lu = None
-    while lu is None or lu.get('ID') == '6425' or lu.get('ID') == '6593':
-        lu = lu_from_frames(frames, pos='v')
+    desire_noun_object = ['ache for', 'covet', 'crave', 'desire', 'fancy', 'feel like', 'hanker after', 'hope for', 'hunger for', 'long for', 'lust for', 'lust after', 'pine for', 'thirst for', 'want', 'wish for', 'yearn for']
+    desire_verb_object = ['ache to', 'fancy', 'feel like', 'hope to', 'long to', 'want to', 'wish to', 'yearn to']
 
-    valence_pattern = valence_pattern_from_id(lu.get('ID'))
-    subj = get_is_a(character_i)
+    subj = phrase_spec.NP(get_is_a(character_i))
+    if subj_pronominal:
+        subj.pronominal = True
+    subj.animation = characters[character_i].object_state
+    subj.num = characters[character_i].num
+    subj.gender = characters[character_i].gender
+
+    pos = get_pos(desire.split()[0])
+    if pos == 'v':
+        action = phrase_spec.VP(random.choice(desire_verb_object))
+    else:
+        action = phrase_spec.VP(random.choice(desire_noun_object))
+    if action.verb.startswith('ache'):
+        action.aspect = 'progressive'
+
+    obj = phrase_spec.NP(desire)
 
     if rhyme_check:
-        phrases = fit_rhythm_pattern(fit_rhyme(create_phrases(valence_pattern, lu, subj=subj, obj=desire, dep=desire),
-                                               rhyme_token), pattern)
+        phrases = fit_rhythm_pattern(fit_rhyme([subj, action, obj], rhyme_token), pattern)
     else:
-        phrases = fit_rhythm_pattern(create_phrases(valence_pattern, lu, subj=subj, obj=desire, dep=desire), pattern)
+        phrases = fit_rhythm_pattern([subj, action, obj], pattern)
 
     return phrases
 
@@ -502,6 +513,8 @@ def get_is_a(character_index, anaphora=-1):
                 used_relations.append(tuple([char, 'IsA', isa]))
                 return isa
         else:
+            if not anaphora:
+                return get_random_word('N')
             subj_pronominal = True
             return ''
 
