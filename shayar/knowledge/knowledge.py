@@ -170,6 +170,21 @@ def get_synset(word, pos=''):
     return synset
 
 
+def get_hypernyms(isa):
+    hypernyms = []
+    ps = ['n', 'v', 'a', 'adv']
+    for p in ps:
+        target_node = get_node(isa, p)
+        if target_node is not None:
+            hypernyms.extend([n.id.split('.')[0] for n in halo(target_node, relation='HasProperty')])
+
+    isa_synset = get_synset(isa.split()[0])
+    if isa_synset:
+        hypernyms.extend([str(hypernym).partition("'")[-1].rpartition("'")[0] for hypernym in isa_synset.hypernyms()])
+
+    return hypernyms
+
+
 def get_node(word, pos):
     try:
         return graph.node(word + '.' + pos.lower())

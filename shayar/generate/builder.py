@@ -7,7 +7,7 @@ from rephrase import fit_rhythm_pattern, fit_rhyme
 import logging
 import creation
 from character_creation import create_new_character
-from shayar.knowledge.knowledge import get_action_theme, get_synset, get_action_taker_receiver
+from shayar.knowledge.knowledge import get_action_theme, get_hypernyms, get_action_taker_receiver
 
 pattern = ''
 rhyme_token = ''
@@ -501,10 +501,7 @@ def get_presupposition(char, isas):
 
     #Get all of the IsA relations, get direct hypernym
     for isa in isas:
-        isa_synset = get_synset(isa.split()[0])
-        if isa_synset:
-            all_hypernyms.extend(
-                [str(hypernym).partition("'")[-1].rpartition("'")[0] for hypernym in isa_synset.hypernyms()])
+        all_hypernyms.extend(get_hypernyms(isa.split()[0]))
 
     all_hypernyms = [hypernym_isa for hypernym_isa in all_hypernyms if
                      tuple([char, 'IsA', hypernym_isa]) not in used_relations]
