@@ -164,7 +164,7 @@ def build_name_phrase(name):
                     phrase = new_elem
 
             else:
-                if subj:
+                if subj or subj_pronominal:
                     new_elem = phrase_spec.NP(subj)
                     if subj_pronominal:
                         new_elem.pronominal = True
@@ -335,7 +335,7 @@ def create_phrases(valence_pattern, lu, subj='', obj='', dep=''):
                     adverb_stash = []
 
             elif pos.startswith('P'):
-                if subj:
+                if subj or subj_pronominal:
                     n = phrase_spec.NP(subj)
                     if subj_pronominal:
                         n.pronominal = True
@@ -378,7 +378,7 @@ def create_phrases(valence_pattern, lu, subj='', obj='', dep=''):
                 phrase = new_elem
 
             else:
-                if subj:
+                if subj or subj_pronominal:
                     new_elem = phrase_spec.NP(subj)
                     if subj_pronominal:
                         new_elem.pronominal = True
@@ -398,10 +398,8 @@ def create_phrases(valence_pattern, lu, subj='', obj='', dep=''):
                             new_elem.pronominal = True
                         obj = ''
                     else:
-                        logging.warn('GETTING A RANDOM WORD')
                         new_elem = phrase_spec.NP(get_random_word(pos))
                 else:
-                    logging.warn('GETTING A RANDOM WORD')
                     new_elem = phrase_spec.NP(get_random_word(pos))
 
                 if specifier_stash:
