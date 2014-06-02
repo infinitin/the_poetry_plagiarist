@@ -326,7 +326,10 @@ def create_phrases(valence_pattern, lu, subj='', obj='', dep=''):
                 new_elem = phrase_spec.VP(get_random_word(pos), negated)
                 negated = False
                 if len(pos) > 2:
-                    new_elem.specifier = pos[2:]
+                    if pos[2:] == 'to':
+                        new_elem.specifier = pos[2:]
+                    elif pos[2:] == 'ing':
+                        new_elem.aspect = 'progressive'
                 if tense:
                     new_elem.tense = tense
                 #if phrase:
