@@ -32,7 +32,7 @@ def build_hasproperty_phrase(prop):
     logging.info('Building has property phrase')
     #a p1, p2, p3 Y
     prop_elem = phrase_spec.ADJ(prop)
-    subj = get_is_a(character_i)
+    subj = get_is_a(character_i, anaphora=0)
     new_elem = phrase_spec.NP(subj)
     new_elem.animation = characters[character_i].object_state
     new_elem.num = characters[character_i].num
@@ -473,7 +473,7 @@ def make_clause(spec_phrases):
     return line
 
 
-def get_is_a(character_index):
+def get_is_a(character_index, anaphora=-1):
     logging.info('Getting IsA for character ' + str(character_index))
     #Get an isa that has not already been chosen
     char = characters[character_index]
@@ -489,7 +489,8 @@ def get_is_a(character_index):
         isa = get_presupposition(char, isas)
         global subj_pronominal
         if isa:
-            anaphora = random.choice([0, 1])
+            if anaphora < 0:
+                anaphora = random.choice([0, 1])
             if anaphora:
                 subj_pronominal = True
                 return ''
