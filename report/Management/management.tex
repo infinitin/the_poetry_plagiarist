@@ -5,6 +5,101 @@
     \graphicspath{{Management/ManagementFigs/EPS/}{Management/ManagementFigs/}}
 \fi
 
+The final stage of development entails automatically generating new, novel and creative poetry by utilising the information gathered in the previous analysis and interpretation sections.
+
+\section{Approach}
+Most previous attempts at automatic poetry generation, including ones mentioned in Section \ref{sec:related_work}, prioritise adherence to poetic features and structure above all else. This is done with the justification that:
+\begin{itemize}
+\item{poetry rarely follows syntactical rules of English grammar.}
+\item{readers of poems, as humans, are extremely apt at finding subtle meaning in language, even if it was not intended by the author.}
+\end{itemize}
+
+However, grammatical rules in poetry are broken for some poetic purpose like matching a rhyme scheme or rhythm pattern. They are therefore broken with precision and intention, not arbitrarily or randomly.
+
+Furthermore, we discussed in Section \ref{sec:semantics} that even grammatically correct sentences can be completely nonsensical. We require understanding of the semantic relationships between words to be able to write with intention and in a way that can be understood by the reader.
+
+As discussed in Section \ref{sec:purpose}, the purpose of poetry is to deliver a specific, intentional message. This cannot be done without control over language both syntactically and semantically.
+
+On a separate note, this implementation should be able to produce any type of poem accurately to the information gathered in the analysis and interpretation. We cannot make any assumptions on the length of the lines, the existence of rhyme or the topics covered by the poems.
+
+Therefore, our approach will be \textbf{content first}. We aim to produce poetry that follow syntax and semantics as far as possible and only make specific exceptions for the sake of poetic features.
+
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\section{Phrase Building}
+
+
+
+\subsection{Phrase Types}
+
+\subsection{Generation Engine}
+
+\subsubsection{Persona Creation and Management}
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+\section{Semantic Network of Common Sense}
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+\section{Poem Initialisation}
+
+\subsection{Overall Structure}
+Our new poem first needs to be initialised with values of features that span across the entire poem, namely:
+\begin{itemize}
+\item{Number of stanzas}
+\item{Number of lines per stanza}
+\item{Number and locations of repeated lines}
+\item{Tense}
+\item{Perspective}
+\item{Rhyme Scheme}
+\end{itemize}
+
+All of these can be retrieved directly from the template developed in the previous chapter. The template is made up of probability distributions for the various values a feature can take on, so by default we get the value by sampling this distribution. 
+
+However, if one result is clearly more probably than the rest, we want to treat it as unambiguous. For example, more than half of the rhyme schemes found for limericks were AABBA, as pictured in figure \ref{fig:rhyme-scheme-chart}. Each of the other values are some slight variation on AABBA (e.g. AABCA, ABCCB etc.) and occur less than a ninth of the time at maximum.
+
+To generalise this, we take the rule that if the any feature has a single value in its probability distribution that occurs more than half of the time and the next highest value is less than a third of that value, we treat it as unambiguous and \textit{always} apply it to the initial structure of this type of poem.
+
+
+\subsection{Inspiration}
+The poetry generation process can be seeded \textit{inspiration}, which come in the form of words or relations. Inspiration can come from the user, or the program can come up with it itself.
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+\section{Incremental Growth}
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+\section{Rephrase for Poetic Features}
+
+\subsection{Rhyme}
+
+
+\subsection{Rhythm}
+
+\subsubsection{Syllabic}
+\paragraph{Extending}
+\paragraph{Reducing}
+
+\subsubsection{Accentual}
+
+
+\subsection{Sound Patterns}
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+\section{Presupposition and Anaphora}
+
+\subsection{Semantic Types}
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 % ------------------------------------------------------------------------
 

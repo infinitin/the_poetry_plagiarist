@@ -158,28 +158,72 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {4.5}Concurrency and Performance}{74}{section.4.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {5}Evaluation Plan}{75}{chapter.5}
+\contentsline {chapter}{\numberline {5}Poem Generation - Structure}{75}{chapter.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.1}Comparison of Analysis Results to Theory}{75}{section.5.1}
+\contentsline {section}{\numberline {5.1}Approach}{75}{section.5.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.2}Turing-style Tests}{76}{section.5.2}
+\contentsline {section}{\numberline {5.2}Phrase Building}{75}{section.5.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.3}FACE Descriptive Model}{77}{section.5.3}
+\contentsline {section}{\numberline {5.3}Overall Structure}{75}{section.5.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.4}IDEA Descriptive Model}{77}{section.5.4}
+\contentsline {subsection}{\numberline {5.3.1}Phrase Types}{76}{subsection.5.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Appendix A}{79}{appendix*.44}
+\contentsline {subsection}{\numberline {5.3.2}Generation Engine}{76}{subsection.5.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.1}Dry Run of Generation Phase with Commentary}{79}{section.Alph0.1}
+\contentsline {subsubsection}{\numberline {5.3.2.1}Persona Creation and Control}{76}{subsubsection.5.3.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.2}CMU Pronunciation Dictionary ARPABET Phoneme Set}{83}{section.Alph0.2}
+\contentsline {section}{\numberline {5.4}Rephrase for Poetic Features}{76}{section.5.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.3}Penn Treebank Tagset}{83}{section.Alph0.3}
+\contentsline {subsection}{\numberline {5.4.1}Rhyme}{76}{subsection.5.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.4}Testing Specifications}{83}{section.Alph0.4}
+\contentsline {subsection}{\numberline {5.4.2}Rhythm}{76}{subsection.5.4.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.5}FrameNet Frames to ConceptNet Relations}{83}{section.Alph0.5}
+\contentsline {subsubsection}{\numberline {5.4.2.1}Syllabic}{76}{subsubsection.5.4.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.6}List of collapsable dependencies}{86}{section.Alph0.6}
+\contentsline {paragraph}{\numberline {5.4.2.1.1}Extending}{76}{paragraph.5.4.2.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.7}Onomatopoeia Types to ConceptNet Relations}{87}{section.Alph0.7}
+\contentsline {paragraph}{\numberline {5.4.2.1.2}Reducing}{76}{paragraph.5.4.2.1.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {5.4.2.2}Accentual}{76}{subsubsection.5.4.2.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.4.3}Sound Patterns}{76}{subsection.5.4.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {6}Poem Generation - Word Choice}{77}{chapter.6}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6.1}Semantic Network of Common Sense}{77}{section.6.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6.2}Phrase Extension}{77}{section.6.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6.3}Creating a New Phrase}{77}{section.6.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6.4}Creating a New Poem}{77}{section.6.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6.5}Presupposition and Anaphora}{77}{section.6.5}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6.6}Semantic Types}{77}{section.6.6}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {7}Evaluation Plan}{78}{chapter.7}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {7.1}Comparison of Analysis Results to Theory}{78}{section.7.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {7.2}Turing-style Tests}{79}{section.7.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {7.3}FACE Descriptive Model}{80}{section.7.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {7.4}IDEA Descriptive Model}{80}{section.7.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{Appendix A}{82}{appendix*.44}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {A.1}Dry Run of Generation Phase with Commentary}{82}{section.Alph0.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {A.2}CMU Pronunciation Dictionary ARPABET Phoneme Set}{86}{section.Alph0.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {A.3}Penn Treebank Tagset}{86}{section.Alph0.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {A.4}Testing Specifications}{86}{section.Alph0.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {A.5}FrameNet Frames to ConceptNet Relations}{86}{section.Alph0.5}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {A.6}List of collapsable dependencies}{89}{section.Alph0.6}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {A.7}Onomatopoeia Types to ConceptNet Relations}{90}{section.Alph0.7}
