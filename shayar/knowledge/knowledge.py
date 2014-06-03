@@ -36,7 +36,6 @@ def closest_matching(candidate_nodes, context_nodes):
     if len(candidate_nodes) <= 1 or not context_nodes:
         return set(candidate_nodes)
 
-    h = lambda id1, id2: 1 - int('RelatedTo' in graph.edge(id1, id2).type)
     shortest_path_length = 10
     closest_candidate_nodes = set()
     for context_node in context_nodes:
@@ -216,7 +215,7 @@ def get_hypernyms(isa):
     for p in ps:
         target_node = get_node(isa, p)
         if target_node is not None:
-            hypernyms.extend([n.id.split('.')[0] for n in halo(target_node, relation='HasProperty')])
+            hypernyms.extend([n.id.split('.')[0] for n in halo(target_node, relation='IsA')])
 
     isa_synset = get_synset(isa.split()[0])
     if isa_synset:

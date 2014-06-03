@@ -10,7 +10,7 @@ import builder
 from urllib2 import urlopen, URLError
 from json import loads as json_load
 from pattern.text.en import wordnet
-from shayar.knowledge.knowledge import get_property, most_similar, get_synonyms
+from shayar.knowledge.knowledge import get_property, most_similar, get_synonyms, get_node, closest_matching
 import logging
 import sys
 
@@ -349,36 +349,72 @@ def replace(old_word, candidates, phrases):
         for pre_modifier in phrase.pre_modifiers:
             if 'adjective' in pre_modifier.__dict__.keys():
                 if pre_modifier.adjective == lemma(old_word):
-                    new_pre_modifier = phrase_spec.ADJ(get_rhyme_word(old_word, candidates, 'A'))
+                    option_nodes = [get_node(candidate['word'], 'a') for candidate in candidates]
+                    replacement_nodes = list(closest_matching([get_node(old_word, 'a')], option_nodes))
+                    if replacement_nodes:
+                        replacement = random.choice(replacement_nodes).id.split()[0]
+                    else:
+                        replacement = random.choice(candidates)['word']
+                    new_pre_modifier = phrase_spec.ADJ(replacement)
                     pre_modifier_index = phrase.pre_modifiers.index(pre_modifier)
                     phrase.pre_modifiers[pre_modifier_index] = new_pre_modifier
             if 'adverb' in pre_modifier.__dict__.keys():
                 if pre_modifier.adverb == lemma(old_word):
-                    new_pre_modifier = phrase_spec.ADV(get_rhyme_word(old_word, candidates, 'AVP'))
+                    option_nodes = [get_node(candidate['word'], 'adv') for candidate in candidates]
+                    replacement_nodes = list(closest_matching([get_node(old_word, 'adv')], option_nodes))
+                    if replacement_nodes:
+                        replacement = random.choice(replacement_nodes).id.split()[0]
+                    else:
+                        replacement = random.choice(candidates)['word']
+                    new_pre_modifier = phrase_spec.ADJ(replacement)
                     pre_modifier_index = phrase.pre_modifiers.index(pre_modifier)
                     phrase.pre_modifiers[pre_modifier_index] = new_pre_modifier
                     
         for modifier in phrase.modifiers:
             if 'adjective' in modifier.__dict__.keys():
                 if modifier.adjective == lemma(old_word):
-                    new_modifier = phrase_spec.ADJ(get_rhyme_word(old_word, candidates, 'A'))
+                    option_nodes = [get_node(candidate['word'], 'a') for candidate in candidates]
+                    replacement_nodes = list(closest_matching([get_node(old_word, 'a')], option_nodes))
+                    if replacement_nodes:
+                        replacement = random.choice(replacement_nodes).id.split()[0]
+                    else:
+                        replacement = random.choice(candidates)['word']
+                    new_modifier = phrase_spec.ADJ(replacement)
                     modifier_index = phrase.modifiers.index(modifier)
                     phrase.modifiers[modifier_index] = new_modifier
             if 'adverb' in modifier.__dict__.keys():
                 if modifier.adverb == lemma(old_word):
-                    new_modifier = phrase_spec.ADV(get_rhyme_word(old_word, candidates, 'AVP'))
+                    option_nodes = [get_node(candidate['word'], 'adv') for candidate in candidates]
+                    replacement_nodes = list(closest_matching([get_node(old_word, 'adv')], option_nodes))
+                    if replacement_nodes:
+                        replacement = random.choice(replacement_nodes).id.split()[0]
+                    else:
+                        replacement = random.choice(candidates)['word']
+                    new_modifier = phrase_spec.ADJ(replacement)
                     modifier_index = phrase.modifiers.index(modifier)
                     phrase.modifiers[modifier_index] = new_modifier
                     
         for post_modifier in phrase.post_modifiers:
             if 'adjective' in post_modifier.__dict__.keys():
                 if post_modifier.adjective == lemma(old_word):
-                    new_post_modifier = phrase_spec.ADJ(get_rhyme_word(old_word, candidates, 'A'))
+                    option_nodes = [get_node(candidate['word'], 'a') for candidate in candidates]
+                    replacement_nodes = list(closest_matching([get_node(old_word, 'a')], option_nodes))
+                    if replacement_nodes:
+                        replacement = random.choice(replacement_nodes).id.split()[0]
+                    else:
+                        replacement = random.choice(candidates)['word']
+                    new_post_modifier = phrase_spec.ADJ(replacement)
                     post_modifier_index = phrase.post_modifiers.index(post_modifier)
                     phrase.post_modifiers[post_modifier_index] = new_post_modifier
             if 'adverb' in post_modifier.__dict__.keys():
                 if post_modifier.adverb == lemma(old_word):
-                    new_post_modifier = phrase_spec.ADV(get_rhyme_word(old_word, candidates, 'AVP'))
+                    option_nodes = [get_node(candidate['word'], 'adv') for candidate in candidates]
+                    replacement_nodes = list(closest_matching([get_node(old_word, 'adv')], option_nodes))
+                    if replacement_nodes:
+                        replacement = random.choice(replacement_nodes).id.split()[0]
+                    else:
+                        replacement = random.choice(candidates)['word']
+                    new_post_modifier = phrase_spec.ADJ(replacement)
                     post_modifier_index = phrase.post_modifiers.index(post_modifier)
                     phrase.post_modifiers[post_modifier_index] = new_post_modifier
 
