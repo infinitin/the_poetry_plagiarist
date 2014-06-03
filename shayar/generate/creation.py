@@ -6,7 +6,7 @@ import builder
 from shayar.character import Character
 from framenet_reader import find_pos
 from rephrase import get_rhymes, shorten, filter_candidates
-from shayar.knowledge.knowledge import get_receives_action, get_node, closest_matching, new_concepts
+from shayar.knowledge.knowledge import get_receives_action, get_node, closest_matching, new_concepts, get_synset
 from pattern.text.en import lemma
 
 jpype.startJVM(jpype.getDefaultJVMPath(), "-Djava.class.path=simplenlg-v4.4.2.jar")
@@ -73,11 +73,11 @@ def create_poem(new_poem, template):
         relation = content[l]
         if not relation:
             if l == 0:
-                builder.context_nodes = [(), ()]
+                builder.context_nodes = get_context_nodes((), (), template)
             elif l == sum(new_poem.lines)-1:
-                builder.context_nodes = get_context_nodes((), new_poem.phrases[l-1])
+                builder.context_nodes = get_context_nodes((), new_poem.phrases[l-1], template)
             else:
-                builder.context_nodes = get_context_nodes(content[l+1], new_poem.phrases[l-1])
+                builder.context_nodes = get_context_nodes(content[l+1], new_poem.phrases[l-1], template)
 
             relation = get_new_content(template)
 
@@ -175,13 +175,14 @@ def get_new_content(template):
                 builder.verb_at_end = True
             return new_relation
         else:
-            return new_blank_relation(template)
+            return new_blank_relation(template, rhymes=rhymes)
 
     else:
         return new_blank_relation(template)
 
 
-def new_blank_relation(template):
+def new_blank_relation(template, rhymes=None):
+    if not rhymes: rhymes = []
     character_index = builder.characters.index(random.choice(builder.characters))
     relation_type = choose_relation(relations[4:], template)
     if relation_type == 'Desires' or relation_type == 'NotDesires':
@@ -274,7 +275,7 @@ def prepare_ngram(ngram):
     builder.adjective_stash = builder.adjective_stash[::-1]
 
 
-def get_context_nodes(content, phrases):
+def get_context_nodes(content, phrases, template):
     nodes = []
     node_ps = ['a', 'adv', 'n', 'v']
     if content:
@@ -309,13 +310,21 @@ def get_context_nodes(content, phrases):
     nodes = [node for node in nodes if node is not None]
 
     if not nodes:
-        nodes = get_content_from_template()
+        nodes = get_content_from_template(template)
 
     return [node for node in nodes if node is not None]
 
 
-def get_content_from_template():
-    return []
+def get_content_from_template(template):
+    hypernyms = []
+    for hypernym, count in template.hypernym_ancestors:
+        hypernyms.extend([hypernym]*count)
+
+    hypernym_synset = get_synset(random.choice(hypernyms))
+    holonym_nodes = [get_node(str(holonym).partition("'")[-1].rpartition("'")[0], 'n')
+                        for holonym in hypernym_synset.holonyms(recursive=True)]
+
+    return random.sample(set(holonym_nodes), 3)
 
 
 def shutdown_builder():
