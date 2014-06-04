@@ -1,4 +1,4 @@
-\chapter{Poem Generation}
+\chapter{Poetry Generation}
 \ifpdf
     \graphicspath{{Management/ManagementFigs/PNG/}{Management/ManagementFigs/PDF/}{Management/ManagementFigs/}}
 \else
@@ -26,20 +26,116 @@ Therefore, our approach will be \textbf{content first}. We aim to produce poetry
 
 
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-\section{Phrase Building}
+\section{Generating Simple Sentences}
+We attempted to recognise the existence of ConceptNet-style relations during the analysis phase. Our interpretation of the results generalises the use of these relations, so it is natural that we use them to guide generation. For example if we intend to write a poem describing a woman named Mary who wants a monkey, we would start with the persona relation hubs in Figure BLAH below.
+
+1-Named->Mary
+1-IsA->woman
+1-TA->chase
+2-IsA->monkey
+2-RA->chase
+
+These relations outline the context of the poem. In lieu with our \textit{content first} approach, we begin by directly translating these relations into syntactically correct natural language \textit{clauses}, which can be organised into lines in a poem. We make use of two tools to do this; \textbf{SimpleNLG}[REF] and \textbf{FrameNet}[REF].
+
+\subsection{SimpleNLG}
+SimpleNLG is a Java library that provides useful functionality for natural language generation using the ideas of Reiter and Dale described in Section \ref{sec:bg-nlg}. In particular, it enables us to build \textit{phrases} for nouns, verbs, prepositions, adjectives and adverbs that can be enriched with grammatical metadata such as tense, aspect and perspective (for verbs), as well as plurality, gender and animation for nouns.
+
+These phrases can then be put together into \textit{clauses} that define the roles of each phrase in the desired sentence, for example by specifying the subject and object noun phrases. It then \textit{realises} a grammatically correct natural language sentence taking all of the provided information into account.
+
+We choose to use SimpleNLG because, as its name suggests, it is very simple to use. It provides an almost bespoke interface into the features of the sentence that we picked out in the analysis stage, allowing us to apply the results directly to our new poems. Despite it being a Java library we are able to execute it and access its objects from Python via JPype[REF], a tool for running Java libraries accessing the Java Virtual Machine from Python.
+
+\subsection{FrameNet}
+
+As described in Section \ref{sec:semantics}, we can use FrameNet to \textit{constrain} the building of clauses around individual words. We used it when deriving relations with SEMAFOR in Section BLAH by checking for the existence of certain frames. Now we reverse the process; use selected frames that correspond to particular relations to guide the type and roles of phrases during generation.
+
+Take the Desire relation for example. The frame in FrameNet that would correspond to this is the Desiring frame, which has a list of words, referred to as \textit{lexical units} or \textit{LUs} - that are used in statements that indicate desire, e.g. want, lust, yearn etc. Each of these LUs come with their own \textit{lexical entries}, which describe the frame elements and importantly \textit{Valence patterns}. These define the types of phrases that can be built around a particular LU.
+
+Take the \textit{yearn} LU. It's Valence Patterns are shown in Table BLAH:
+
+Table: https://framenet2.icsi.berkeley.edu/fnReports/data/lu/lu6599.xml?mode=lexentry
+
+They are grouped by the permutation of frame elements, e.g. Event+Experiencer vs Experiencer+Focal\_participant. Each group comes with one or more Valence Patterns that indicate the type of phrase (NP means noun phrase, VP means verb phrase etc.), as well as the role in the clause - Ext (Subject), Obj (Object) and Dep (Dependency or Indirect Object).
+
+\subsection{Translating Relations into Clauses}
+
+The general translation process can be seen in Figure/Algorithm BLAH.
+
+Figure:relation -> Get corresponding Frame -> Look up LU -> Select a Valence Pattern -> Order Phrases - > Fill in Gaps
+
+Suppose we take the first relation in Figure BLAH above. We have a character whose ID is 1 and has the name 'Mary'. The corresponding frame for the 'Named' relation is \textit{Referring\_by\_name}. 
+
+However, it is not quite a perfect match because we want a verbs only, whereas this frame includes LUs of other parts of speech as well. Each LU gives indication of its part-of-speech (POS) so we can filter by that. 
+
+Another complication is that the verb 'to name' does not exist in the FrameNet lexicon at all. The closest match is the adjective 'named' found in the \textit{Being\_named} frame. So we need to be able to look up this LU manually as well.
+
+Yet another issue is that not all of these LUs come with full and accurate Valence patterns. FrameNet is an ongoing project with more data being added continuously, but we do not want to use a word that does not have an accurate set of Valence patterns. Thankfully, the status of every LU is provided, so we only look up those that have the \textit{Finished\_Initial} annotation.
+
+It is important to note that all relation translations may have their own set of similar caveats that are to be considered on a case by case basis to improve the quality of lines generated.
+
+Back to our example, after all filtering we are left with two LUs: \textit{call.v} and \textit{named.a} where the string after the full stop in the LU indicates the word POS. We choose one randomly with equal weights. We use \textit{call.v} for this example.
+
+Figure: https://framenet2.icsi.berkeley.edu/fnReports/data/lu/lu11210.xml?mode=lexentry
+
+This LU has three groups of Valence patterns, as can been seen in Figure BLAH. Each group of patterns has an \textit{TOTAL} count, indicating the occurrence frequency of this pattern in their annotated corpus. We assume that these are representative for our purpose and choose the group with the highest total occurrences.
+
+Each pattern within a group also includes an occurrence count. However, the phrases produced by the system would be predictable and mundane if we always choose the most popular again. Instead we select randomly, weighted for occurrence scores. Let our selected Valence pattern be the third one from the top in Figure BLAH.
+
+We then order the phrases according to how they would appear in a sentence using Algorithm Blah.
+
+[Algorithm BLAH for sorting]
+
+The Valence pattern does not include the LU itself so we add as a verb phrase immediately after the subject.
+
+Finally we fill in the gaps by adding randomly selected words of the correct POS to each phrase. We will discuss careful word selection in Sections \ref{sec:common-sense}, \ref{sec:new-lines} and \ref{sec:persona}
+
+%While the TakesAction and ReceivesAction phrases enable the system to use any verb in its lexicon, having specific builder algorithms for as many relations as possible will greatly increase the quality and variation of the systems language capabilities.
 
 
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-\subsection{Phrase Types}
+\section{Rephrase for Poetic Features}
 
-\subsection{Generation Engine}
+\subsection{Rhyme}
 
-\subsubsection{Persona Creation and Management}
+
+\subsection{Rhythm}
+
+\subsubsection{Syllabic}
+\paragraph{Extending}
+\paragraph{Reducing}
+
+\subsubsection{Accentual}
+
+
+\subsection{Sound Patterns}
 
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 \section{Semantic Network of Common Sense}
+\label{sec:common-sense}
+
+
+\subsection{Concepts}
+\subsection{Edges}
+\subsubsection{Concept Halo}
+\subsubsection{Concept Field}
+
+
+\subsection{Sources}
+\subsubsection{Collocations}
+\subsubsection{Associations}
+\subsubsection{Tom De Smedt}
+\subsubsection{WordNet}
+\subsubsection{Google Search Suggestions}
+
+
+\subsection{Concept Similarity}
+\subsubsection{Depth Limited Shortest Path}
+\subsubsection{Similes}
+\subsubsection{Metaphors}
+\subsubsection{Personification}
 
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -72,31 +168,26 @@ The poetry generation process can be seeded \textit{inspiration}, which come in 
 
 \section{Incremental Growth}
 
-%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-\section{Rephrase for Poetic Features}
-
-\subsection{Rhyme}
+\subsection{Applying Inspiration}
 
 
-\subsection{Rhythm}
-
-\subsubsection{Syllabic}
-\paragraph{Extending}
-\paragraph{Reducing}
-
-\subsubsection{Accentual}
-
-
-\subsection{Sound Patterns}
+\subsection{Creating New Lines}
+\label{sec:new-lines}
+\subsubsection{Keeping in Context}
+\subsubsection{Blank Lines}
+\subsubsection{Rhyming Lines}
 
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-\section{Presupposition and Anaphora}
+\section{Persona Creation and Management}
+\label{sec:persona}
 
 \subsection{Semantic Types}
+
+\subsection{Presupposition}
+
+\subsection{Anaphora}
 
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

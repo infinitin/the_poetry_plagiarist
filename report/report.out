@@ -76,38 +76,59 @@
 \BOOKMARK [2][]{subsection.4.3.4}{4.3.4 Filter Below Threshold}{section.4.3}% 76
 \BOOKMARK [1][]{section.4.4}{4.4 Testing and Validation by Inspection}{chapter.4}% 77
 \BOOKMARK [1][]{section.4.5}{4.5 Concurrency and Performance}{chapter.4}% 78
-\BOOKMARK [0][]{chapter.5}{5 Poem Generation - Structure}{}% 79
+\BOOKMARK [0][]{chapter.5}{5 Poetry Generation}{}% 79
 \BOOKMARK [1][]{section.5.1}{5.1 Approach}{chapter.5}% 80
-\BOOKMARK [1][]{section.5.2}{5.2 Phrase Building}{chapter.5}% 81
-\BOOKMARK [1][]{section.5.3}{5.3 Overall Structure}{chapter.5}% 82
-\BOOKMARK [2][]{subsection.5.3.1}{5.3.1 Phrase Types}{section.5.3}% 83
-\BOOKMARK [2][]{subsection.5.3.2}{5.3.2 Generation Engine}{section.5.3}% 84
-\BOOKMARK [3][]{subsubsection.5.3.2.1}{5.3.2.1 Persona Creation and Control}{subsection.5.3.2}% 85
-\BOOKMARK [1][]{section.5.4}{5.4 Rephrase for Poetic Features}{chapter.5}% 86
-\BOOKMARK [2][]{subsection.5.4.1}{5.4.1 Rhyme}{section.5.4}% 87
-\BOOKMARK [2][]{subsection.5.4.2}{5.4.2 Rhythm}{section.5.4}% 88
-\BOOKMARK [3][]{subsubsection.5.4.2.1}{5.4.2.1 Syllabic}{subsection.5.4.2}% 89
-\BOOKMARK [4][]{paragraph.5.4.2.1.1}{5.4.2.1.1 Extending}{subsubsection.5.4.2.1}% 90
-\BOOKMARK [4][]{paragraph.5.4.2.1.2}{5.4.2.1.2 Reducing}{subsubsection.5.4.2.1}% 91
-\BOOKMARK [3][]{subsubsection.5.4.2.2}{5.4.2.2 Accentual}{subsection.5.4.2}% 92
-\BOOKMARK [2][]{subsection.5.4.3}{5.4.3 Sound Patterns}{section.5.4}% 93
-\BOOKMARK [0][]{chapter.6}{6 Poem Generation - Word Choice}{}% 94
-\BOOKMARK [1][]{section.6.1}{6.1 Semantic Network of Common Sense}{chapter.6}% 95
-\BOOKMARK [1][]{section.6.2}{6.2 Phrase Extension}{chapter.6}% 96
-\BOOKMARK [1][]{section.6.3}{6.3 Creating a New Phrase}{chapter.6}% 97
-\BOOKMARK [1][]{section.6.4}{6.4 Creating a New Poem}{chapter.6}% 98
-\BOOKMARK [1][]{section.6.5}{6.5 Presupposition and Anaphora}{chapter.6}% 99
-\BOOKMARK [1][]{section.6.6}{6.6 Semantic Types}{chapter.6}% 100
-\BOOKMARK [0][]{chapter.7}{7 Evaluation Plan}{}% 101
-\BOOKMARK [1][]{section.7.1}{7.1 Comparison of Analysis Results to Theory}{chapter.7}% 102
-\BOOKMARK [1][]{section.7.2}{7.2 Turing-style Tests}{chapter.7}% 103
-\BOOKMARK [1][]{section.7.3}{7.3 FACE Descriptive Model}{chapter.7}% 104
-\BOOKMARK [1][]{section.7.4}{7.4 IDEA Descriptive Model}{chapter.7}% 105
-\BOOKMARK [0][]{appendix*.44}{Appendix A}{}% 106
-\BOOKMARK [1][]{section.Alph0.1}{A.1 Dry Run of Generation Phase with Commentary}{appendix*.44}% 107
-\BOOKMARK [1][]{section.Alph0.2}{A.2 CMU Pronunciation Dictionary ARPABET Phoneme Set}{appendix*.44}% 108
-\BOOKMARK [1][]{section.Alph0.3}{A.3 Penn Treebank Tagset}{appendix*.44}% 109
-\BOOKMARK [1][]{section.Alph0.4}{A.4 Testing Specifications}{appendix*.44}% 110
-\BOOKMARK [1][]{section.Alph0.5}{A.5 FrameNet Frames to ConceptNet Relations}{appendix*.44}% 111
-\BOOKMARK [1][]{section.Alph0.6}{A.6 List of collapsable dependencies}{appendix*.44}% 112
-\BOOKMARK [1][]{section.Alph0.7}{A.7 Onomatopoeia Types to ConceptNet Relations}{appendix*.44}% 113
+\BOOKMARK [1][]{section.5.2}{5.2 Generating Simple Sentences}{chapter.5}% 81
+\BOOKMARK [2][]{subsection.5.2.1}{5.2.1 SimpleNLG}{section.5.2}% 82
+\BOOKMARK [2][]{subsection.5.2.2}{5.2.2 FrameNet}{section.5.2}% 83
+\BOOKMARK [2][]{subsection.5.2.3}{5.2.3 Translating Relations into Clauses}{section.5.2}% 84
+\BOOKMARK [1][]{section.5.3}{5.3 Rephrase for Poetic Features}{chapter.5}% 85
+\BOOKMARK [2][]{subsection.5.3.1}{5.3.1 Rhyme}{section.5.3}% 86
+\BOOKMARK [2][]{subsection.5.3.2}{5.3.2 Rhythm}{section.5.3}% 87
+\BOOKMARK [3][]{subsubsection.5.3.2.1}{5.3.2.1 Syllabic}{subsection.5.3.2}% 88
+\BOOKMARK [4][]{paragraph.5.3.2.1.1}{5.3.2.1.1 Extending}{subsubsection.5.3.2.1}% 89
+\BOOKMARK [4][]{paragraph.5.3.2.1.2}{5.3.2.1.2 Reducing}{subsubsection.5.3.2.1}% 90
+\BOOKMARK [3][]{subsubsection.5.3.2.2}{5.3.2.2 Accentual}{subsection.5.3.2}% 91
+\BOOKMARK [2][]{subsection.5.3.3}{5.3.3 Sound Patterns}{section.5.3}% 92
+\BOOKMARK [1][]{section.5.4}{5.4 Semantic Network of Common Sense}{chapter.5}% 93
+\BOOKMARK [2][]{subsection.5.4.1}{5.4.1 Concepts}{section.5.4}% 94
+\BOOKMARK [2][]{subsection.5.4.2}{5.4.2 Edges}{section.5.4}% 95
+\BOOKMARK [3][]{subsubsection.5.4.2.1}{5.4.2.1 Concept Halo}{subsection.5.4.2}% 96
+\BOOKMARK [3][]{subsubsection.5.4.2.2}{5.4.2.2 Concept Field}{subsection.5.4.2}% 97
+\BOOKMARK [2][]{subsection.5.4.3}{5.4.3 Sources}{section.5.4}% 98
+\BOOKMARK [3][]{subsubsection.5.4.3.1}{5.4.3.1 Collocations}{subsection.5.4.3}% 99
+\BOOKMARK [3][]{subsubsection.5.4.3.2}{5.4.3.2 Associations}{subsection.5.4.3}% 100
+\BOOKMARK [3][]{subsubsection.5.4.3.3}{5.4.3.3 Tom De Smedt}{subsection.5.4.3}% 101
+\BOOKMARK [3][]{subsubsection.5.4.3.4}{5.4.3.4 WordNet}{subsection.5.4.3}% 102
+\BOOKMARK [3][]{subsubsection.5.4.3.5}{5.4.3.5 Google Search Suggestions}{subsection.5.4.3}% 103
+\BOOKMARK [2][]{subsection.5.4.4}{5.4.4 Concept Similarity}{section.5.4}% 104
+\BOOKMARK [3][]{subsubsection.5.4.4.1}{5.4.4.1 Depth Limited Shortest Path}{subsection.5.4.4}% 105
+\BOOKMARK [3][]{subsubsection.5.4.4.2}{5.4.4.2 Similes}{subsection.5.4.4}% 106
+\BOOKMARK [3][]{subsubsection.5.4.4.3}{5.4.4.3 Metaphors}{subsection.5.4.4}% 107
+\BOOKMARK [3][]{subsubsection.5.4.4.4}{5.4.4.4 Personification}{subsection.5.4.4}% 108
+\BOOKMARK [1][]{section.5.5}{5.5 Poem Initialisation}{chapter.5}% 109
+\BOOKMARK [2][]{subsection.5.5.1}{5.5.1 Overall Structure}{section.5.5}% 110
+\BOOKMARK [2][]{subsection.5.5.2}{5.5.2 Inspiration}{section.5.5}% 111
+\BOOKMARK [1][]{section.5.6}{5.6 Incremental Growth}{chapter.5}% 112
+\BOOKMARK [2][]{subsection.5.6.1}{5.6.1 Applying Inspiration}{section.5.6}% 113
+\BOOKMARK [2][]{subsection.5.6.2}{5.6.2 Creating New Lines}{section.5.6}% 114
+\BOOKMARK [3][]{subsubsection.5.6.2.1}{5.6.2.1 Keeping in Context}{subsection.5.6.2}% 115
+\BOOKMARK [3][]{subsubsection.5.6.2.2}{5.6.2.2 Blank Lines}{subsection.5.6.2}% 116
+\BOOKMARK [3][]{subsubsection.5.6.2.3}{5.6.2.3 Rhyming Lines}{subsection.5.6.2}% 117
+\BOOKMARK [1][]{section.5.7}{5.7 Persona Creation and Management}{chapter.5}% 118
+\BOOKMARK [2][]{subsection.5.7.1}{5.7.1 Semantic Types}{section.5.7}% 119
+\BOOKMARK [2][]{subsection.5.7.2}{5.7.2 Presupposition}{section.5.7}% 120
+\BOOKMARK [2][]{subsection.5.7.3}{5.7.3 Anaphora}{section.5.7}% 121
+\BOOKMARK [0][]{chapter.6}{6 Evaluation Plan}{}% 122
+\BOOKMARK [1][]{section.6.1}{6.1 Comparison of Analysis Results to Theory}{chapter.6}% 123
+\BOOKMARK [1][]{section.6.2}{6.2 Turing-style Tests}{chapter.6}% 124
+\BOOKMARK [1][]{section.6.3}{6.3 FACE Descriptive Model}{chapter.6}% 125
+\BOOKMARK [1][]{section.6.4}{6.4 IDEA Descriptive Model}{chapter.6}% 126
+\BOOKMARK [0][]{appendix*.44}{Appendix A}{}% 127
+\BOOKMARK [1][]{section.Alph0.1}{A.1 Dry Run of Generation Phase with Commentary}{appendix*.44}% 128
+\BOOKMARK [1][]{section.Alph0.2}{A.2 CMU Pronunciation Dictionary ARPABET Phoneme Set}{appendix*.44}% 129
+\BOOKMARK [1][]{section.Alph0.3}{A.3 Penn Treebank Tagset}{appendix*.44}% 130
+\BOOKMARK [1][]{section.Alph0.4}{A.4 Testing Specifications}{appendix*.44}% 131
+\BOOKMARK [1][]{section.Alph0.5}{A.5 FrameNet Frames to ConceptNet Relations}{appendix*.44}% 132
+\BOOKMARK [1][]{section.Alph0.6}{A.6 List of collapsable dependencies}{appendix*.44}% 133
+\BOOKMARK [1][]{section.Alph0.7}{A.7 Onomatopoeia Types to ConceptNet Relations}{appendix*.44}% 134
