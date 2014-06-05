@@ -129,6 +129,8 @@ The Concept Halo and Field work in the same way as described in Section BLAHINTH
 \subsection{Sources}
 There are various sources for semantic relationships between words. Some are more applicable to our use case given the nature of relations that we desire and the quality of the source.
 
+There are many sources that we have not used only due to the scope of this project. We discuss them in Section BLAHINTHEEVAL.
+
 \subsubsection{Collocations}
 The Oxford Collocations Dictionary[ref] is a high-quality source of word combinations. For any given word, it provides the set of words and POS commonly occur in relation to it.
 
@@ -141,37 +143,88 @@ The University of South Florida Free Associated Norms[ref] provides associations
 
 The POS of each word is provided but no direction in the association can be determined. Therefore, we may be able to assume that a noun has the property of an associated adjective and that an adjective is a property of associated nouns. However, we cannot assume the whether a noun takes or receives the action of an associated verb. Therefore we use the more general 'RelatedTo' relationship instead.
 
-\subsubsection{NodeBox}
+\subsubsection{NodeBox Perception}
+The NodeBox Perception model includes the data used in De Smedt's attempt to model common sense as a network, as discussed in Section BLAHINTHEBG. There is plenty of overlap in the types of semantic relations used in Perception as we will be using for this project, including 'is-a' (IsA), 'is-property-of' (reversed HasProperty), 'is-part-of' (PartOf) and 'is-related-to' (RelatedTo). We generalise all other relations to our \textit{RelatedTo} relation.
+
+This data was manually entered into the system and continues to be used for research, which means that it is a high-quality source of data.
+
 \subsubsection{WordNet}
+WordNet is a widely used, high quality lexical database that provides data on hypernymy (IsA relations) and meronymy (PartOf relations). However, since WordNet is very large and already has fast and simple interfaces from Python, we do not merge it with our Knowledge graph at this point. While it may prove useful to consolidate all data in a single graph in the future, it is not necessary at this stage as we can still benefit fully from its data.
+
+
 \subsubsection{Google Search Suggestions}
-\subsubsection{ConceptNet}
-\subsubsection{The User}
+Tony Veale's attempt at modelling metaphors[ref] introduced a clever use of Google's search suggestions as a method of tapping in to endings of a sentence. While we currently do not preprocess relations in the way he did to produce Metaphor Magnet, we do use a similar method to help complete sentences, particularly those with indirect objects. 
+
+For example, we would be able to produce a sentence like 'Mary hit the nail with' but be unable to complete the sentence due to a lack of information of indirect objects. However, Google suggestions auto-complete 'hit the nail with' with 'hammer' as one might expect. 
+
+This is the least dependable source of information that we use, so we only use it for that specific case and do not add any to our knowledge network.
 
 
 \subsection{Concept Similarity}
-\subsubsection{Depth Limited Shortest Path}
-\subsubsection{Similes}
-\subsubsection{Metaphors}
-\subsubsection{Personification}
+
+
+\subsubsection{Associative Similarity}
+Associative similarity between concepts is represented by the length of the shortest past between them in our network. We use Dijkstra's Algorithm[ref] as the basis of finding the shortest path.
+
+Associative similarity helps us choose the best replacement word from a list of candidates. This is very useful when rephrasing to match rhyme and rhythm and will be explained in greater detail in Section \ref{sec:rephrase}. 
+
+It can also help us choose applicable words to start new lines of poetry that stay within context of words used in surrounding lines. This is explained in Section \ref{sec:inc-growth}.
+
+In both of these cases, we are finding the \textit{most} similar concept from a list of candidates of unknown length. This can quickly increase both space and memory complexity without any pruning. We therefore alter Dijkstra's Algorithm to have a limited depth. This way, if we know the shortest path to one of the candidates is $x$, we can abort any further searches that go beyond length $x$ for the shortest path.
+
+
+\subsubsection{Symbolic Similarity}
+Symbolic similarity can be attained through inductive reasoning and substitution by concepts that have a very similar concept halo and field up to a certain depth. Simply put, we can find similarity with the 'Duck Test'; if it looks like a duck, swims like a duck and quacks like a duck, it probably is a duck. Object-oriented programmers can relate this idea to the Liskov substitution principle[ref].
+
+Symbolic similarity has many use cases, including the new method of anaphora resolution proposed in Section BLAHINANALYSIS of the Analysis phase. For this phase, it enables us to implement the following poetic features:
+\begin{description}
+\item[Similes] \hfill \\ We can describe a property or an action of a persona in our poem by comparing the persona to an concept in our knowledge network that (stereotypically) has that property or takes/receives that action. \hfill \\ The relation \textit{1-TA$\rightarrow$run quickly} can be built into the phrase 'runs like a cheetah' by recognising that cheetahs are stereotypically quick runners.
+\item[Metaphors] \hfill \\ Similarly to Similes, we can find concepts in our network that share a number of semantic relations with the persona we are trying to describe. \hfill \\ Any persona with relations \textit{1-TakesAction$\rightarrow$crawl}, \textit{1-HasProperty$\rightarrow$social}, \textit{1-HasProperty$\rightarrow$small} is analogous to an insect because it's concept in the graph shares those relations.
+\item[Personification] \hfill \\ If we are given an inanimate object as a persona, we can describe it as if it were sentient by looking giving it relations that belong to a sentient being. \hfill \\ A car could be personified by giving it all the relations that a lion has in our concept network, to produce sentences like \textit{'The car roared'}.
+\item[Irony] \hfill \\ Our knowledge network is made up of semantic attributes that are expected for each concept. Irony can be attained by producing lines of poetry that describe a concept doing the opposite of the concepts given in our graph.
+\end{description} 
 
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 \section{Persona Creation and Management}
 \label{sec:persona}
+\subsection{Referencing Specific Persona}
+When we convert the relation \textit{1-Named$\rightarrow$Mary} in Figure BLAH to a phrase, we need to refer to the persona using IsA relations. So when we build the clause with the verb 'named' and object 'Mary', we will look up the persona that this relation was taken from and find an IsA relation. In this example, we will find woman, and when we add the determiner 'a', we get the clause \textit{'a woman named Mary'}.
+
+Now when we convert the \textit{1-TA$\rightarrow$chase} relation, we follow a similar process of finding a way to reference character 1, with the inclusion of the name of the persona (if available) as another candidate for the reference. This will give us either \textit{'The woman chases'} or \textit{'Mary chases'}.
+
+\subsection{Adding New Persona}
+Now since the verb 'chase' is \textit{transitive}, i.e. it requires a subject \textbf{and} an object, we need a persona that receives the action 'chase'. If we look through the relations of the other known persona, we will find the relation \textit{2-RA$\rightarrow$chase} and we use \textit{2-IsA$\rightarrow$monkey} to derive the corresponding reference to that character. So we can complete the sentence by adding \textit{'monkey'} to the end, giving us either \textit{'The woman chases a monkey'} or \textit{'Mary chases a monkey'}.
+
+Suppose we could not find a corresponding ReceivesAction relation for 'chase' in any of the current persona. We must then find a concept in our knowledge network that receives the action 'chase'. We do this by looking at the concept field of the \textit{'chase.v'} concept in our knowledge graph for only the edges with type ReceivesAction. This gives us the required list of concepts from which to select the object of the clause. We use concept similarity to find the most applicable object given the current context of the poem; a process to be described in detail in Section \ref{sec:new-lines}, but for now let's assume that we use the concept \textit{'thief.n'}.
+
+When we add a new noun to the poem, we need to create a new persona object for it so that we can refer back to it later. The new character is instantiated with an IsA relation to its noun word, i.e. \textit{thief}. Its plurality, gender and animation are all derived from the word itself using the process described in Section BLAHINTHEANALYSIS.
+
+\subsection{Anaphora and Presupposition}
+So far we are only able to refer to persona by Named or IsA relations that are already part of the persona's relations. This leads to to combinations of clauses such as \textit{'A woman named Mary. Mary chased the monkey.'}, which is completely \textit{un}natural language.
+
+The natural way to phrase it would be \textit{'A woman named Mary. She chased the monkey.'}. In this case, the introduction of the pronoun 'she' is a contextual reference back to the aforementioned persona. We discussed the resolution of such anaphora in Section BLAHINTHEANALYSIS.
+
+Another option for variety in reference is to use \textit{presuppositions}; implicit assumptions about context. This can give us clause combinations such as \textit{'A woman named Mary. She chased the monkey. The animal stole her banana'}. Here we refer back to the monkey persona by looking for a hypernyms in WordNet and IsA relations in our knowledge network for the concept \textit{'monkey.n'}. The implicit assumption made is that monkeys are animals, so the reader would understand the reference.
+
+A more advanced method of presupposition introduction would be to look at stereotypical recipients (concept field) of the concept \textit{'chase.v'} in our knowledge network. This may give us the clause combination \textit{'A woman named Mary. She chased the monkey. The thief stole her banana'}. In this case, we are making an implicit assumption that the monkey is a thief because, according to our knowledge network, thieves stereotypically get chased. This assumption gets added to the context and can be used to develop the story, a process described in Section \ref{sec:inc-growth}.
 
 \subsection{Semantic Types}
+Suppose we had the relations \textit{2-RA$\rightarrow$chase} and \textit{2-IsA$\rightarrow$monkey} but with no corresponding TakesAction relation in any other known persona. We would need either need to create a new persona to be the subject of the clause or we would choose an already existing persona to be the subject.
 
-\subsection{Presupposition}
+In the former case we can simply look up our knowledge network in the same way we did when finding the object of the sentence. However, if we run across this case often (which we might, see Section \ref{sec:new-lines}), we could end up introducing a new persona every line which can lead to a much less cohesive poem. So we would like to use the latter case and look at reusing persona that we already know about.
 
-\subsection{Anaphora}
+There's a trap here though. What if the only other persona we knew of was an inanimate object like a plate? Or a non-object like evolution? To say \textit{'A plate chases the monkey'} or \textit{'Evolution chases the monkey'} makes no sense. Unless we are using personification, we would want a sentient being to be the subject of the 'chase' action.
+
+Thankfully, FrameNet provides \textit{semantic types} with every frame element of a frame. This indicates the required animation of any noun in all Valence patterns of the LU. We also store the animation of every persona in the system upon creation, so we can refer to this when deciding if a persona is a relevant match with a particular semantic type. If no existing persona are applicable, we can revert back to finding one from our knowledge network.
 
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 \section{Poem Initialisation}
 
-Before we start building any poem, we need to construct the basic structure for the desired form of poetry. We also want to be able to take some \textit{"inspiration"} to initialise the content that can either be sampled from the system's knowledge network (see Section \ref{sec:common-sense}) or from the user.
+Before we start building any poem, we need to construct the basic structure for the desired form of poetry. We also want to be able to take some \textit{inspiration} to initialise the content that can either be sampled from the knowledge network or from the user.
 
 \subsection{Overall Structure}
 Our new poem first needs to be initialised with values of features that span across the entire poem, namely:
@@ -192,15 +245,19 @@ To generalise this, we take the rule that if the any feature has a single value 
 
 
 \subsection{Inspiration}
-The poetry generation process can be seeded \textit{inspiration}, which can be in the form of words or relations. Inspiration can come from the user, or the program can come up with it itself.
+The poetry generation process can be seeded \textit{inspiration}, which can be in the form of words or relations. Inspiration can come from the user, or the program can come up with it itself. Inspiration from the user is input manually into the system.
+
+When the program derives its own inspiration, it looks to the common hypernym ancestors of previous poems found in section BLAHINTHEINTERPRETATION. It chooses a random hypernym and recursively looks for all holonyms in WordNet recursively, out of which one will be randomly selected. A persona is then created and used as the single source of inspiration for the rest of the poem. Section \ref{sec:apply-inspr} explains how.
+ 
 
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 \section{Incremental Growth}
+\label{sec:inc-growth}
 
 \subsection{Applying Inspiration}
-
+\label{sec:apply-inspr}
 
 \subsection{Creating New Lines}
 \label{sec:new-lines}
@@ -212,6 +269,7 @@ The poetry generation process can be seeded \textit{inspiration}, which can be i
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 \section{Rephrase for Poetic Features}
+\label{sec:rephrase}
 
 \subsection{Rhyme}
 
