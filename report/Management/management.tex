@@ -5,7 +5,7 @@
     \graphicspath{{Management/ManagementFigs/EPS/}{Management/ManagementFigs/}}
 \fi
 
-The final stage of development entails automatically generating new, novel and creative poetry by utilising the information gathered in the previous analysis and interpretation sections.
+The final stage of development entails generating new, novel and creative poetry by utilising the information gathered in the previous analysis and interpretation sections.
 
 \section{Approach}
 Most previous attempts at automatic poetry generation, including ones mentioned in Section \ref{sec:related_work}, prioritise adherence to poetic features and structure above all else. This is done with the justification that:
@@ -86,7 +86,7 @@ We then order the phrases according to how they would appear in a sentence using
 
 The Valence pattern does not include the LU itself so we add as a verb phrase immediately after the subject.
 
-Finally we fill in the gaps by adding randomly selected words of the correct POS to each phrase. We will discuss careful word selection in Sections \ref{sec:common-sense}, \ref{sec:new-lines} and \ref{sec:persona}
+Finally we fill in the gaps by adding carefully selected words to each phrase. We discuss word selection in Sections \ref{sec:common-sense}, \ref{sec:persona} and \ref{sec:new-lines}.
 
 %While the TakesAction and ReceivesAction phrases enable the system to use any verb in its lexicon, having specific builder algorithms for as many relations as possible will greatly increase the quality and variation of the systems language capabilities.
 
@@ -94,41 +94,58 @@ Finally we fill in the gaps by adding randomly selected words of the correct POS
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-\section{Rephrase for Poetic Features}
-
-\subsection{Rhyme}
-
-
-\subsection{Rhythm}
-
-\subsubsection{Syllabic}
-\paragraph{Extending}
-\paragraph{Reducing}
-
-\subsubsection{Accentual}
-
-
-\subsection{Sound Patterns}
-
-%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 \section{Semantic Network of Common Sense}
 \label{sec:common-sense}
+We talked about the idea of modelling the mind as a search space by connecting related \textit{concepts} together in a network in Section BLAHINTHEBG. We gathered inspiration from ConceptNet and discussed Tom De Smedt's attempt to model creativity with such a construct in Sections BLAHINTHEBG and BLAHINTHEBG.
+
+We aim to replicate such a construct bespoke to our purposes, outlined in this section.
+
+\subsection{The Network}
+The primary purpose of our network is to help us build clauses out of one or two words. For this, we require our semantic network to give indications of \textbf{actions} that nouns take and receive, as well as properties they have.
+
+The secondary purpose of the network is to provide associative data so to maintain a cohesive topic flow through the poem, rather than jumping between a variety of topics. 
+
+\subsubsection{Nodes}
+As with previous attempts, the nodes of the network are the concepts represented by words. However, we enrich these nodes with the POS of the word so to disambiguate between different meanings (e.g. \textit{bear} the noun and \textit{bear} the verb).
+
+\subsubsection{Edges}
+The edges of the network indicate the relationship between concepts. The edges are directed and any that can be reversed are done so manually when they are added to the graph. The types of edges are:
+\begin{description}
+\item[HasProperty] \hfill \\ Stereotypical descriptions of the head of the relation. \hfill \\ doctor.n - HasProperty $\rightarrow$ smart.a \hfill \\ run.v - HasProperty $\rightarrow$ quickly.adv
+\item[IsA] \hfill \\ Taxonomy of the head of the relation (Hypernymy). \hfill \\ E.g. banana.n - IsA $\rightarrow$ fruit.n
+\item[PartOf] \hfill \\ The head of the relation typically a constituent or member of the tail.  \hfill \\ finger.n - PartOf $\rightarrow$ hand.n
+\item[TakesAction] \hfill \\The head of the relation typically performs the action in the tail. \hfill \\ lion.n - TakesAction $\rightarrow$ roar.v
+\item[ReceivesAction] \hfill \\The head of the relation typically has the action in the tail done unto it. \hfill \\ book.n - ReceivesAction $\rightarrow$ read.v
+\item[RelatedTo] \hfill \\ General, non-specific, reversible association \hfill \\ fat.a - ReceivesAction - eat.v \hfill \\ eat.v - ReceivesAction - pizza.n
+\end{description}
+
+All edges are of equal weight. However, there is potential for prioritising certain types of relations or between concepts. For example, we could weight scientific words higher than regular ones to make the program lean towards a more advanced vocabulary.
 
 
-\subsection{Concepts}
-\subsection{Edges}
-\subsubsection{Concept Halo}
-\subsubsection{Concept Field}
+\subsubsection{Concept Halos and Fields}
 
+The Concept Halo and Field work in the same way as described in Section BLAHINTHEBG. We use them to fill in the gaps in the sentence with intelligent word selection. For example, if we are given a verb, we can lookup the Concept Field for that verb looking only at TakesAction and ReceivesAction edges to find possible subjects and objects for the verb respectfully. Similarly, we can find modifiers for verbs and nouns by looking up HasProperty edges their respective Concept Halos.
 
 \subsection{Sources}
+There are various sources for semantic relationships between words. Some are more applicable to our use case given the nature of relations that we desire and the quality of the source.
+
 \subsubsection{Collocations}
+The Oxford Collocations Dictionary[ref] is a high-quality source of word combinations. For any given word, it provides the set of words and POS commonly occur in relation to it.
+
+The dictionary entry for \textit{custard} can be seen in Figure BLAH. It gives common adjectives that are used to describe custard, which can clearly be converted into HasProperty Relations. It also shows that custard receives the action of being made, poured and strained, while it takes the actions of thickening and setting. Further, it is closely related to powder and pie.
+
+We can extract relations directly by parsing this dictionary, which is freely available online in compressed HTML format. As the dictionary is developed by Oxford and is used by students of English, its entries are very high quality and dependable.
+
 \subsubsection{Associations}
-\subsubsection{Tom De Smedt}
+The University of South Florida Free Associated Norms[ref] provides associations collected directly from human participants. It is used by the Department of Psychology, and is therefore another high quality source of associated words that can be depended on for quality as it was collected in a scientifically sound manner.
+
+The POS of each word is provided but no direction in the association can be determined. Therefore, we may be able to assume that a noun has the property of an associated adjective and that an adjective is a property of associated nouns. However, we cannot assume the whether a noun takes or receives the action of an associated verb. Therefore we use the more general 'RelatedTo' relationship instead.
+
+\subsubsection{NodeBox}
 \subsubsection{WordNet}
 \subsubsection{Google Search Suggestions}
+\subsubsection{ConceptNet}
+\subsubsection{The User}
 
 
 \subsection{Concept Similarity}
@@ -140,7 +157,21 @@ Finally we fill in the gaps by adding randomly selected words of the correct POS
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+\section{Persona Creation and Management}
+\label{sec:persona}
+
+\subsection{Semantic Types}
+
+\subsection{Presupposition}
+
+\subsection{Anaphora}
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 \section{Poem Initialisation}
+
+Before we start building any poem, we need to construct the basic structure for the desired form of poetry. We also want to be able to take some \textit{"inspiration"} to initialise the content that can either be sampled from the system's knowledge network (see Section \ref{sec:common-sense}) or from the user.
 
 \subsection{Overall Structure}
 Our new poem first needs to be initialised with values of features that span across the entire poem, namely:
@@ -161,7 +192,7 @@ To generalise this, we take the rule that if the any feature has a single value 
 
 
 \subsection{Inspiration}
-The poetry generation process can be seeded \textit{inspiration}, which come in the form of words or relations. Inspiration can come from the user, or the program can come up with it itself.
+The poetry generation process can be seeded \textit{inspiration}, which can be in the form of words or relations. Inspiration can come from the user, or the program can come up with it itself.
 
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -180,14 +211,21 @@ The poetry generation process can be seeded \textit{inspiration}, which come in 
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-\section{Persona Creation and Management}
-\label{sec:persona}
+\section{Rephrase for Poetic Features}
 
-\subsection{Semantic Types}
+\subsection{Rhyme}
 
-\subsection{Presupposition}
 
-\subsection{Anaphora}
+\subsection{Rhythm}
+
+\subsubsection{Syllabic}
+\paragraph{Extending}
+\paragraph{Reducing}
+
+\subsubsection{Accentual}
+
+
+\subsection{Sound Patterns}
 
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
