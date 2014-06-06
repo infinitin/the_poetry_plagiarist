@@ -95,39 +95,41 @@
 \BOOKMARK [3][]{subsubsection.5.3.2.5}{5.3.2.5 Google Search Suggestions}{subsection.5.3.2}% 95
 \BOOKMARK [2][]{subsection.5.3.3}{5.3.3 Concept Similarity}{section.5.3}% 96
 \BOOKMARK [3][]{subsubsection.5.3.3.1}{5.3.3.1 Associative Similarity}{subsection.5.3.3}% 97
-\BOOKMARK [3][]{subsubsection.5.3.3.2}{5.3.3.2 Symbolic Similarity}{subsection.5.3.3}% 98
-\BOOKMARK [1][]{section.5.4}{5.4 Persona Creation and Management}{chapter.5}% 99
-\BOOKMARK [2][]{subsection.5.4.1}{5.4.1 Referencing Specific Persona}{section.5.4}% 100
-\BOOKMARK [2][]{subsection.5.4.2}{5.4.2 Adding New Persona}{section.5.4}% 101
-\BOOKMARK [2][]{subsection.5.4.3}{5.4.3 Anaphora and Presupposition}{section.5.4}% 102
-\BOOKMARK [2][]{subsection.5.4.4}{5.4.4 Semantic Types}{section.5.4}% 103
-\BOOKMARK [1][]{section.5.5}{5.5 Poem Initialisation}{chapter.5}% 104
-\BOOKMARK [2][]{subsection.5.5.1}{5.5.1 Overall Structure}{section.5.5}% 105
-\BOOKMARK [2][]{subsection.5.5.2}{5.5.2 Inspiration}{section.5.5}% 106
-\BOOKMARK [1][]{section.5.6}{5.6 Incremental Growth}{chapter.5}% 107
-\BOOKMARK [2][]{subsection.5.6.1}{5.6.1 Applying Inspiration}{section.5.6}% 108
-\BOOKMARK [2][]{subsection.5.6.2}{5.6.2 Creating New Lines}{section.5.6}% 109
-\BOOKMARK [3][]{subsubsection.5.6.2.1}{5.6.2.1 Keeping in Context}{subsection.5.6.2}% 110
-\BOOKMARK [3][]{subsubsection.5.6.2.2}{5.6.2.2 Blank Lines}{subsection.5.6.2}% 111
-\BOOKMARK [3][]{subsubsection.5.6.2.3}{5.6.2.3 Rhyming Lines}{subsection.5.6.2}% 112
-\BOOKMARK [1][]{section.5.7}{5.7 Rephrase for Poetic Features}{chapter.5}% 113
-\BOOKMARK [2][]{subsection.5.7.1}{5.7.1 Rhyme}{section.5.7}% 114
-\BOOKMARK [2][]{subsection.5.7.2}{5.7.2 Rhythm}{section.5.7}% 115
-\BOOKMARK [3][]{subsubsection.5.7.2.1}{5.7.2.1 Syllabic}{subsection.5.7.2}% 116
-\BOOKMARK [4][]{paragraph.5.7.2.1.1}{5.7.2.1.1 Extending}{subsubsection.5.7.2.1}% 117
-\BOOKMARK [4][]{paragraph.5.7.2.1.2}{5.7.2.1.2 Reducing}{subsubsection.5.7.2.1}% 118
-\BOOKMARK [3][]{subsubsection.5.7.2.2}{5.7.2.2 Accentual}{subsection.5.7.2}% 119
-\BOOKMARK [2][]{subsection.5.7.3}{5.7.3 Sound Patterns}{section.5.7}% 120
-\BOOKMARK [0][]{chapter.6}{6 Evaluation Plan}{}% 121
-\BOOKMARK [1][]{section.6.1}{6.1 Comparison of Analysis Results to Theory}{chapter.6}% 122
-\BOOKMARK [1][]{section.6.2}{6.2 Turing-style Tests}{chapter.6}% 123
-\BOOKMARK [1][]{section.6.3}{6.3 FACE Descriptive Model}{chapter.6}% 124
-\BOOKMARK [1][]{section.6.4}{6.4 IDEA Descriptive Model}{chapter.6}% 125
-\BOOKMARK [0][]{appendix*.44}{Appendix A}{}% 126
-\BOOKMARK [1][]{section.Alph0.1}{A.1 Dry Run of Generation Phase with Commentary}{appendix*.44}% 127
-\BOOKMARK [1][]{section.Alph0.2}{A.2 CMU Pronunciation Dictionary ARPABET Phoneme Set}{appendix*.44}% 128
-\BOOKMARK [1][]{section.Alph0.3}{A.3 Penn Treebank Tagset}{appendix*.44}% 129
-\BOOKMARK [1][]{section.Alph0.4}{A.4 Testing Specifications}{appendix*.44}% 130
-\BOOKMARK [1][]{section.Alph0.5}{A.5 FrameNet Frames to ConceptNet Relations}{appendix*.44}% 131
-\BOOKMARK [1][]{section.Alph0.6}{A.6 List of collapsable dependencies}{appendix*.44}% 132
-\BOOKMARK [1][]{section.Alph0.7}{A.7 Onomatopoeia Types to ConceptNet Relations}{appendix*.44}% 133
+\BOOKMARK [3][]{subsubsection.5.3.3.2}{5.3.3.2 Similarity Paths}{subsection.5.3.3}% 98
+\BOOKMARK [3][]{subsubsection.5.3.3.3}{5.3.3.3 Symbolic Similarity}{subsection.5.3.3}% 99
+\BOOKMARK [1][]{section.5.4}{5.4 Persona Creation and Management}{chapter.5}% 100
+\BOOKMARK [2][]{subsection.5.4.1}{5.4.1 Referencing Specific Persona}{section.5.4}% 101
+\BOOKMARK [2][]{subsection.5.4.2}{5.4.2 Adding New Persona}{section.5.4}% 102
+\BOOKMARK [2][]{subsection.5.4.3}{5.4.3 Anaphora and Presupposition}{section.5.4}% 103
+\BOOKMARK [2][]{subsection.5.4.4}{5.4.4 Semantic Types}{section.5.4}% 104
+\BOOKMARK [1][]{section.5.5}{5.5 Poem Initialisation}{chapter.5}% 105
+\BOOKMARK [2][]{subsection.5.5.1}{5.5.1 Overall Structure}{section.5.5}% 106
+\BOOKMARK [2][]{subsection.5.5.2}{5.5.2 Inspiration}{section.5.5}% 107
+\BOOKMARK [1][]{section.5.6}{5.6 Incremental Growth}{chapter.5}% 108
+\BOOKMARK [2][]{subsection.5.6.1}{5.6.1 Applying Inspiration}{section.5.6}% 109
+\BOOKMARK [2][]{subsection.5.6.2}{5.6.2 Creating New Lines}{section.5.6}% 110
+\BOOKMARK [3][]{subsubsection.5.6.2.1}{5.6.2.1 Rhyming Lines}{subsection.5.6.2}% 111
+\BOOKMARK [3][]{subsubsection.5.6.2.2}{5.6.2.2 Blank Lines}{subsection.5.6.2}% 112
+\BOOKMARK [2][]{subsection.5.6.3}{5.6.3 Keeping in Context}{section.5.6}% 113
+\BOOKMARK [1][]{section.5.7}{5.7 Rephrase for Poetic Features}{chapter.5}% 114
+\BOOKMARK [2][]{subsection.5.7.1}{5.7.1 Rhyme}{section.5.7}% 115
+\BOOKMARK [3][]{subsubsection.5.7.1.1}{5.7.1.1 Finding Rhyming Words}{subsection.5.7.1}% 116
+\BOOKMARK [3][]{subsubsection.5.7.1.2}{5.7.1.2 Guaranteeing Rhyme}{subsection.5.7.1}% 117
+\BOOKMARK [2][]{subsection.5.7.2}{5.7.2 Rhythm}{section.5.7}% 118
+\BOOKMARK [3][]{subsubsection.5.7.2.1}{5.7.2.1 Syllabic}{subsection.5.7.2}% 119
+\BOOKMARK [4][]{paragraph.5.7.2.1.1}{5.7.2.1.1 Extending}{subsubsection.5.7.2.1}% 120
+\BOOKMARK [4][]{paragraph.5.7.2.1.2}{5.7.2.1.2 Reducing}{subsubsection.5.7.2.1}% 121
+\BOOKMARK [3][]{subsubsection.5.7.2.2}{5.7.2.2 Accentual}{subsection.5.7.2}% 122
+\BOOKMARK [0][]{chapter.6}{6 Evaluation Plan}{}% 123
+\BOOKMARK [1][]{section.6.1}{6.1 Comparison of Analysis Results to Theory}{chapter.6}% 124
+\BOOKMARK [1][]{section.6.2}{6.2 Turing-style Tests}{chapter.6}% 125
+\BOOKMARK [1][]{section.6.3}{6.3 FACE Descriptive Model}{chapter.6}% 126
+\BOOKMARK [1][]{section.6.4}{6.4 IDEA Descriptive Model}{chapter.6}% 127
+\BOOKMARK [0][]{appendix*.44}{Appendix A}{}% 128
+\BOOKMARK [1][]{section.Alph0.1}{A.1 Dry Run of Generation Phase with Commentary}{appendix*.44}% 129
+\BOOKMARK [1][]{section.Alph0.2}{A.2 CMU Pronunciation Dictionary ARPABET Phoneme Set}{appendix*.44}% 130
+\BOOKMARK [1][]{section.Alph0.3}{A.3 Penn Treebank Tagset}{appendix*.44}% 131
+\BOOKMARK [1][]{section.Alph0.4}{A.4 Testing Specifications}{appendix*.44}% 132
+\BOOKMARK [1][]{section.Alph0.5}{A.5 FrameNet Frames to ConceptNet Relations}{appendix*.44}% 133
+\BOOKMARK [1][]{section.Alph0.6}{A.6 List of collapsable dependencies}{appendix*.44}% 134
+\BOOKMARK [1][]{section.Alph0.7}{A.7 Onomatopoeia Types to ConceptNet Relations}{appendix*.44}% 135

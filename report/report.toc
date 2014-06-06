@@ -196,7 +196,9 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {5.3.3.1}Associative Similarity}{83}{subsubsection.5.3.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {5.3.3.2}Symbolic Similarity}{84}{subsubsection.5.3.3.2}
+\contentsline {subsubsection}{\numberline {5.3.3.2}Similarity Paths}{84}{subsubsection.5.3.3.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {5.3.3.3}Symbolic Similarity}{84}{subsubsection.5.3.3.3}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {5.4}Persona Creation and Management}{85}{section.5.4}
 \defcounter {refsection}{0}\relax 
@@ -206,64 +208,66 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {5.4.3}Anaphora and Presupposition}{86}{subsection.5.4.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.4.4}Semantic Types}{86}{subsection.5.4.4}
+\contentsline {subsection}{\numberline {5.4.4}Semantic Types}{87}{subsection.5.4.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.5}Poem Initialisation}{87}{section.5.5}
+\contentsline {section}{\numberline {5.5}Poem Initialisation}{88}{section.5.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.5.1}Overall Structure}{87}{subsection.5.5.1}
+\contentsline {subsection}{\numberline {5.5.1}Overall Structure}{88}{subsection.5.5.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.5.2}Inspiration}{88}{subsection.5.5.2}
+\contentsline {subsection}{\numberline {5.5.2}Inspiration}{89}{subsection.5.5.2}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {5.6}Incremental Growth}{89}{section.5.6}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {5.6.1}Applying Inspiration}{89}{subsection.5.6.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.6.2}Creating New Lines}{89}{subsection.5.6.2}
+\contentsline {subsection}{\numberline {5.6.2}Creating New Lines}{90}{subsection.5.6.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {5.6.2.1}Keeping in Context}{89}{subsubsection.5.6.2.1}
+\contentsline {subsubsection}{\numberline {5.6.2.1}Rhyming Lines}{90}{subsubsection.5.6.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {5.6.2.2}Blank Lines}{89}{subsubsection.5.6.2.2}
+\contentsline {subsubsection}{\numberline {5.6.2.2}Blank Lines}{91}{subsubsection.5.6.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {5.6.2.3}Rhyming Lines}{89}{subsubsection.5.6.2.3}
+\contentsline {subsection}{\numberline {5.6.3}Keeping in Context}{91}{subsection.5.6.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.7}Rephrase for Poetic Features}{89}{section.5.7}
+\contentsline {section}{\numberline {5.7}Rephrase for Poetic Features}{92}{section.5.7}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.7.1}Rhyme}{89}{subsection.5.7.1}
+\contentsline {subsection}{\numberline {5.7.1}Rhyme}{92}{subsection.5.7.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.7.2}Rhythm}{89}{subsection.5.7.2}
+\contentsline {subsubsection}{\numberline {5.7.1.1}Finding Rhyming Words}{92}{subsubsection.5.7.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {5.7.2.1}Syllabic}{89}{subsubsection.5.7.2.1}
+\contentsline {subsubsection}{\numberline {5.7.1.2}Guaranteeing Rhyme}{93}{subsubsection.5.7.1.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{\numberline {5.7.2.1.1}Extending}{89}{paragraph.5.7.2.1.1}
+\contentsline {subsection}{\numberline {5.7.2}Rhythm}{94}{subsection.5.7.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{\numberline {5.7.2.1.2}Reducing}{89}{paragraph.5.7.2.1.2}
+\contentsline {subsubsection}{\numberline {5.7.2.1}Syllabic}{94}{subsubsection.5.7.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {5.7.2.2}Accentual}{89}{subsubsection.5.7.2.2}
+\contentsline {paragraph}{\numberline {5.7.2.1.1}Extending}{94}{paragraph.5.7.2.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.7.3}Sound Patterns}{89}{subsection.5.7.3}
+\contentsline {paragraph}{\numberline {5.7.2.1.2}Reducing}{95}{paragraph.5.7.2.1.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {6}Evaluation Plan}{90}{chapter.6}
+\contentsline {subsubsection}{\numberline {5.7.2.2}Accentual}{95}{subsubsection.5.7.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.1}Comparison of Analysis Results to Theory}{90}{section.6.1}
+\contentsline {chapter}{\numberline {6}Evaluation Plan}{97}{chapter.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.2}Turing-style Tests}{91}{section.6.2}
+\contentsline {section}{\numberline {6.1}Comparison of Analysis Results to Theory}{97}{section.6.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.3}FACE Descriptive Model}{92}{section.6.3}
+\contentsline {section}{\numberline {6.2}Turing-style Tests}{98}{section.6.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.4}IDEA Descriptive Model}{92}{section.6.4}
+\contentsline {section}{\numberline {6.3}FACE Descriptive Model}{99}{section.6.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Appendix A}{94}{appendix*.44}
+\contentsline {section}{\numberline {6.4}IDEA Descriptive Model}{99}{section.6.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.1}Dry Run of Generation Phase with Commentary}{94}{section.Alph0.1}
+\contentsline {chapter}{Appendix A}{101}{appendix*.44}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.2}CMU Pronunciation Dictionary ARPABET Phoneme Set}{98}{section.Alph0.2}
+\contentsline {section}{\numberline {A.1}Dry Run of Generation Phase with Commentary}{101}{section.Alph0.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.3}Penn Treebank Tagset}{98}{section.Alph0.3}
+\contentsline {section}{\numberline {A.2}CMU Pronunciation Dictionary ARPABET Phoneme Set}{105}{section.Alph0.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.4}Testing Specifications}{98}{section.Alph0.4}
+\contentsline {section}{\numberline {A.3}Penn Treebank Tagset}{105}{section.Alph0.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.5}FrameNet Frames to ConceptNet Relations}{98}{section.Alph0.5}
+\contentsline {section}{\numberline {A.4}Testing Specifications}{105}{section.Alph0.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.6}List of collapsable dependencies}{101}{section.Alph0.6}
+\contentsline {section}{\numberline {A.5}FrameNet Frames to ConceptNet Relations}{105}{section.Alph0.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.7}Onomatopoeia Types to ConceptNet Relations}{102}{section.Alph0.7}
+\contentsline {section}{\numberline {A.6}List of collapsable dependencies}{108}{section.Alph0.6}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {A.7}Onomatopoeia Types to ConceptNet Relations}{109}{section.Alph0.7}

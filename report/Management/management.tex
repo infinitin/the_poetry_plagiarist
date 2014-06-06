@@ -27,6 +27,7 @@ Therefore, our approach will be \textbf{content first}. We aim to produce poetry
 
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 \section{Generating Simple Sentences}
+\label{sec:build}
 We attempted to recognise the existence of ConceptNet-style relations during the analysis phase. Our interpretation of the results generalises the use of these relations, so it is natural that we use them to guide generation. For example if we intend to write a poem describing a woman named Mary who wants a monkey, we would start with the persona relation hubs in Figure BLAH below.
 
 1-Named->Mary
@@ -161,9 +162,10 @@ This is the least dependable source of information that we use, so we only use i
 
 
 \subsection{Concept Similarity}
-
+Similarity between concepts in the knowledge network is the primary method of guiding word choice throughout the poem. We deal with two main types of similarity; associative and symbolic.
 
 \subsubsection{Associative Similarity}
+\label{sec:assoc-sim}
 Associative similarity between concepts is represented by the length of the shortest past between them in our network. We use Dijkstra's Algorithm[ref] as the basis of finding the shortest path.
 
 Associative similarity helps us choose the best replacement word from a list of candidates. This is very useful when rephrasing to match rhyme and rhythm and will be explained in greater detail in Section \ref{sec:rephrase}. 
@@ -171,6 +173,11 @@ Associative similarity helps us choose the best replacement word from a list of 
 It can also help us choose applicable words to start new lines of poetry that stay within context of words used in surrounding lines. This is explained in Section \ref{sec:inc-growth}.
 
 In both of these cases, we are finding the \textit{most} similar concept from a list of candidates of unknown length. This can quickly increase both space and memory complexity without any pruning. We therefore alter Dijkstra's Algorithm to have a limited depth. This way, if we know the shortest path to one of the candidates is $x$, we can abort any further searches that go beyond length $x$ for the shortest path.
+
+\subsubsection{Similarity Paths}
+Paths from one concept do more than show the extent of the relationship - it also shows intermediary concepts taken to get from one to the other. This can be a powerful way of joining two concepts together that may not be on consecutive lines.
+
+For example, suppose the first line of a poem mentions the concept \textit{'man.n'} and the third line \textit{'myth.n'} (Section \ref{sec:apply-inspr} explains how this could happen). The path in the knowledge network between these two concepts goes via the concept \textit{'mystery.n'}.
 
 
 \subsubsection{Symbolic Similarity}
@@ -211,6 +218,7 @@ Another option for variety in reference is to use \textit{presuppositions}; impl
 A more advanced method of presupposition introduction would be to look at stereotypical recipients (concept field) of the concept \textit{'chase.v'} in our knowledge network. This may give us the clause combination \textit{'A woman named Mary. She chased the monkey. The thief stole her banana'}. In this case, we are making an implicit assumption that the monkey is a thief because, according to our knowledge network, thieves stereotypically get chased. This assumption gets added to the context and can be used to develop the story, a process described in Section \ref{sec:inc-growth}.
 
 \subsection{Semantic Types}
+\label{sec:sem-type} 
 Suppose we had the relations \textit{2-RA$\rightarrow$chase} and \textit{2-IsA$\rightarrow$monkey} but with no corresponding TakesAction relation in any other known persona. We would need either need to create a new persona to be the subject of the clause or we would choose an already existing persona to be the subject.
 
 In the former case we can simply look up our knowledge network in the same way we did when finding the object of the sentence. However, if we run across this case often (which we might, see Section \ref{sec:new-lines}), we could end up introducing a new persona every line which can lead to a much less cohesive poem. So we would like to use the latter case and look at reusing persona that we already know about.
@@ -248,22 +256,59 @@ To generalise this, we take the rule that if the any feature has a single value 
 The poetry generation process can be seeded \textit{inspiration}, which can be in the form of words or relations. Inspiration can come from the user, or the program can come up with it itself. Inspiration from the user is input manually into the system.
 
 When the program derives its own inspiration, it looks to the common hypernym ancestors of previous poems found in section BLAHINTHEINTERPRETATION. It chooses a random hypernym and recursively looks for all holonyms in WordNet recursively, out of which one will be randomly selected. A persona is then created and used as the single source of inspiration for the rest of the poem. Section \ref{sec:apply-inspr} explains how.
- 
 
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 \section{Incremental Growth}
 \label{sec:inc-growth}
+To ensure some level of cohesion between lines in the poem, we will build line by line, choosing contextually relevant words and relations on the fly. 
 
 \subsection{Applying Inspiration}
 \label{sec:apply-inspr}
+As we know, new lines are created by taking a relation from a persona and building it using the process described in Section \ref{sec:build}. If these relations are provided in the inspiration, we first allocate them to lines in the poem based on two factors; relation type and rhyme scheme.
+
+The template derived from the previous parts of the implementation tracks relation usage by line. We use this to decide the order that relations should appear. For example, the Named relation is most likely to appear in the first than any other line in a limerick, as shown in Figure BLAH. Therefore, if any Named relations exist among any persona, that relation comes first.
+
+Rephrasing statements occurs when we need to adhere to a poetic feature such as rhyme or rhythm, a process described in Section \ref{sec:rephrase}. However, we want to stay as true to the initial inspiration as possible so we want to avoid rephrasing any clauses built from relations provided by the user whenever we can.
+
+Therefore we apply the simple heuristic that relations provided by the user should fall on the first line that introduces a new rhyme token. These lines automatically bypass rephrasing for rhyme adherence. Naturally, this is only possible when the number of provided relations is less than or equal to the number of rhyme tokens so it is not always possible, but it provides the user with a useful guide on how many relations to input.
+
+This ability to allocate relations to certain lines also provides flexibility of control for the user. If they \textit{want} a relation to mark the ending of the poem, they can configure it to do so.
+
+Once relations have been allocated to lines we can begin composing lines in natural language.
 
 \subsection{Creating New Lines}
 \label{sec:new-lines}
-\subsubsection{Keeping in Context}
-\subsubsection{Blank Lines}
+New lines are created by taking a relation from a persona and building it using the process described in Section \ref{sec:build}. Even though inspiration may not be distributed consecutively through the poem, we always start with the first line and build linearly down to the last line.
+
+Suppose we are building limericks with an \textit{AABBA} rhyme scheme and that we are provided with one relation by the user, providing content for line 1 only. Line 1 would be built first without any rephrasing for rhyme. The process of building the rest of the lines are dependant on whether or not they should rhyme with a previous one.
+
 \subsubsection{Rhyming Lines}
+When the second line starts being built, we recognise that it is has not been allocated any relation so we must create one. We also know that it needs to rhyme with the first line so we can avoid rephrasing again by seeding the line with a word that rhymes, and then building the rest of the line backwards from it.
+
+The process of finding rhyming words is outlined in Section \ref{sec:rhymebrain}. We select one within context (as described in \ref{sec:context}), and build a relation according to its POS to guarantee that it ends up at the end of the clause once it is built.
+
+For example, if the rhyming word is an adjective we cannot build a TakesAction phrase from it because those phrases end in either a noun or a verb when created. We could rephrase for rhyme later but that would go against our 'context first' approach. The possible actions for each POS of the chosen rhyming word is as follows:
+\begin{description}
+\item[Noun]
+\item[Verb]
+\item[Adjective]
+\item[Adverb]
+\end{description}
+
+Once a relation created of the chosen type and with the chosen rhyme word, it is added to the most applicable persona based on semantic type and associative similarity (see Sections \ref{sec:sem-type} and \ref{sec:assoc-sim}). This process is followed when building the fourth and fifth line of our limerick as well.
+
+\subsubsection{Blank Lines}
+The third line has no allocated relation and is the start of a new rhyme token. In this case we can add any relation or word we want as long as it stays within context(Section \ref{sec:context}).
+
+We therefore choose any word that is associatively similar to those in context and then  build a relation based on its POS as in the previous section.
+
+\subsection{Keeping in Context}
+\label{sec:context}
+We choose words based on context to achieve coherent topic flow throughout the poem. In our implementation, we define context as \textbf{the concepts mentioned in immediately surrounding lines}, i.e. the context of line 2 is determined by the words used in line 1 and the head and tail of the relation that is expected to be translated in line 3. 
+
+Whenever there is a choice between using any set of candidate concepts, we choose the one that is most associatively similar (as defined is \ref{sec:assoc-sim}) to the set of context concepts. For example, if we had the concepts \textit{'man.n'} and \textit{'pizza.n'} in our set of context concepts and \textit{'fat.a'} and \textit{'cat.n'} as our candidate concepts, we would choose to use \textit{'fat.a'} because it is more associatively similar to \textit{'man.n'} and \textit{'pizza.n'}.
 
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -271,19 +316,86 @@ When the program derives its own inspiration, it looks to the common hypernym an
 \section{Rephrase for Poetic Features}
 \label{sec:rephrase}
 
+In lieu with our \textit{content first} approach, we want to avoid rephrasing as much as possible. However, a poem is not a poem unless it adheres to rules of poeticness such as rhyme and rhythm. Therefore, rephrasing a clause will still happen frequently. The challenge is in keeping the phrase as true to the original as possible. 
+
+The main two cases where rephrasing is required is to match with rhyme and rhythm. We will look at the full tactics of each.
+
 \subsection{Rhyme}
+Rhyme is a very powerful poetic tool that comes naturally to many human authors. If a poem doesn't rhyme when it is supposed to, it is a big give-away that it may not have been created by a human at all. So while we will try to stay true to the original, it is vital that the poem rhymes when it is supposed to at any cost.
+
+\subsubsection{Finding Rhyming Words}
+\label{sec:rhymebrain}
+Rhyming words are retrieved from the RhymeBrain API[ref]. This tool accepts \textit{any target string of letters} (not just words from a dictionary) and finds rhyming words. This works well with our high priority for strong rhyme because it rarely fails to give back rhyming words and tends to return more possibilities than alternatives like Wordnik[ref]. It also means that even the most obscure names or other words input from the user can be used effectively by the system.
+
+Results from the API also come with a score, allowing us to balance strength of rhyme with applicability to content. For example, if we are looking to rhyme with the target word \textit{'address'}, we get the results shown in Table BLAH.
+
+%Table BLAH: http://rhymebrain.com/talk?function=getRhymes&lang=en&word=address
+
+\textit{'Misaddress'} is the only word with the top rhyme score. However, if \textit{'access'} is highly applicable in context, we may choose that instead despite the lower score. We do not consider any words lower than a score of 200.
+
+The main drawback of the RhymeBrain API is that it tries to find rhyming words with very strict rhyme; at least as many syllables as the target string with exactly matching emphasis. This is why \textbf{\textit{'dress'}} and \textit{'im\textbf{press}'} are not suggested as candidate rhymes for \textit{'\textbf{add}ress'}.
+
+To counter this, we try to find the rhymes of a suffix of the target string that most probably only contains the last syllable. To do this, we convert the word into its pronunciations as in Section BLAHINTHEANALYSIS. We then find the first consonant phoneme from the right with a vowel phoneme to its left. We then search for the probable letters in the original string corresponding to that consonant phoneme and take the suffix from that letter onwards.
+
+For example, the word \textit{'address'} has the pronunciations \textit{['AH0', 'D', 'R', 'EH1', 'S']} and \textit{['AE1', 'D', 'R', 'EH2', 'S']}. In both cases, we select the 'R' phoneme and match it up to the 'r' in 'address', giving us the suffix 'ress'. The results for words rhyming with 'ress' are shown in Table BLAH.
+
+%Table BLAH: http://rhymebrain.com/talk?function=getRhymes&lang=en&word=ress
+
+This gives us many words that rhyme with 'address', including \textit{'dress'} and \textit{'impress'}.
+
+\subsubsection{Guaranteeing Rhyme}
+
+The general tactic is to only replace words with synonyms or very close associative similarity. For example, I could exchange the word 'horse' with 'pony' if I needed to rhyme with 'Tony'. 
+
+If that is not possible, we look to \textit{extend} the clause by adding applicable adjectives or adverbs to the end of the sentence. SimpleNLG enables us to do this by adding \textit{post modifiers} to noun and verb phrases. These are words that will appear immediately after the parent phrase.
+
+We first find the final word in the phrase of the clause that is being rephrased. If it is a noun, we filter out any non-adjective candidate rhymes. Similarly, if it is a verb we filter out non-adverbs. We then look up the concept halo for the target word, looking only at 'HasProperty' edges. This gives us a list of words that are commonly used to describe the target word. We then compare this list to the candidate rhyming words, find the most associatively similar pair and add it as a post modifier to the phrase of the target word.
+
+This process guarantees that the final word in the clause will have the necessary rhyme when realised, but also keeps the added or replaced word very close to the original statement.
 
 
 \subsection{Rhythm}
+Rhythm is much less stringent than rhyme because most words can be mispronounced without changing their meaning. For example, in the fifth line of Shakespeare's Sonnet 116 he pronounces the monosyllabic word \textit{'fixed'} as \textit{'fix\textbf{ed}'}, essentially adding a syllable and changing the stress.
+
+Therefore, we stick to our \textit{content first} approach and only try to find a best match for rhythm without compromising content. 
 
 \subsubsection{Syllabic}
+Syllabic rhythm, as described in Section BLAHINTHEBG, defines the number of syllables each line should have. After we have created phrases for the line and matched any rhyme scheme correctly, we can extend or reduce the syllable length of the line to match syllabic rhythm.
+
 \paragraph{Extending}
+If the number of syllables in the line is fewer than the required amount, we must add syllables to the line. The simplest way to do this is to add more modifiers.
+
+We randomly choose a phrase from those that make up the line. We then look up the knowledge network for modifiers by looking the target word's concept halo for the 'HasProperty' relation. We randomly select one and add it as a modifier to the phrase of the target word as long as does not add more syllables than required to make up the shortage.
+
+We repeat this process, expanding the depth of the halo to incorporate more words when necessary, until we have exactly the right number of syllables.
+
+SimpleNLG chooses where the modifier should appear in the sentence unless explicitly told to where to put them. This can be done by adding it as a \textit{pre-modifier} to the phrase, enforcing the word to appear \textit{before} the target word, or a \textit{post-modifier} to enforce appearance after the target word as discussed earlier.
+
+To ensure that we do not tamper with the rhyming word, we explicitly instruct are only allowed to ever add pre-modifiers to the phrase of the rhyming word.
+
 \paragraph{Reducing}
+Occasionally the syllabic length of the line exceeds the required number of syllables. In this case, replacement of words is our only option. We utilise our knowledge graph to find replacements  with close associative similarity, but there is still a risk of losing coherence. We never replace the rhyming word.
+
+The process involves finding the longest word in the sentence and replacing it with the most applicable word with fewer syllables. We repeat until we either have exactly the right number of syllables or if we overshoot and have too few, we using the extending process to get it back up to the exact required amount.
 
 \subsubsection{Accentual}
+Any poem with accentual rhythm has, by definition, syllabic rhythm. Therefore we rephrase to match syllabic rhythm first before we fit to accentual rhythm. That way we know that we have exactly the right number of syllables at the beginning of the rephrasing process.
 
+Let's take \textit{'Woman chased the hairy monkey'} as our line and '01001001' as our required stress pattern. If we put one on top of the other as in Figure BLAH, we can pair up each word with its required pattern.
 
-\subsection{Sound Patterns}
+Start from the rightmost word, 'monkey'. Since we do not want to tamper with rhyme, we disregard this pattern-word pair. Moving along to the left we get the word 'hairy', which has the required pattern of '10'. This matches with the actual stress pattern for 'hairy', so nothing needs to be done and move along again. The same happens for the words 'the' and 'chased' because they are both monosyllabic and can be either stressed or unstressed.
+
+Finally. the word 'woman' is paired with the stress pattern '01'. We have a mismatch because, according to the CMU Pronunciation Dictionary, the stress pattern for 'woman' is '10'. We need to replace the word.
+
+There are three approaches to this problem:
+\begin{enumerate}
+\item{The simple and naive method would be to choose any random word that fits the required pattern, but that contradicts the \textit{content first} approach.} 
+\item{We could only look at synonyms and hypernyms/IsA relations and replace with any that have the required pattern, but there is a risk that none of them do, in which case we do not replace the word at all, keeping the incorrect pattern.} 
+\item{The final approach involves indexing all words in the knowledge network by possible stress patterns. We select the most associatively similar word from the values of the required stress pattern. However, this again leads to the possibility of finding a poor replacement word in terms of preserving the integrity of the content.}
+\end{enumerate}
+
+We choose to use the second method given our priorities for this project. In our example we would replace the word with 'adult' as it is a hypernym of woman.
+
 
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
