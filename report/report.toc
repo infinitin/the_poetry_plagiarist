@@ -26,248 +26,246 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {2.1.2.3}Sound Devices}{9}{subsubsection.2.1.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.1.2.4}Structure}{10}{subsubsection.2.1.2.4}
+\contentsline {subsubsection}{\numberline {2.1.2.4}Structure}{9}{subsubsection.2.1.2.4}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {2.1.2.5}Symbolism and Imagery}{11}{subsubsection.2.1.2.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.1.2.6}Pragmatics and Personification}{12}{subsubsection.2.1.2.6}
+\contentsline {subsubsection}{\numberline {2.1.2.6}Context and Personification}{11}{subsubsection.2.1.2.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.1.2.7}Theme}{13}{subsubsection.2.1.2.7}
+\contentsline {subsection}{\numberline {2.1.3}Classification of Poetry}{12}{subsection.2.1.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.1.3}Classification of Poetry}{13}{subsection.2.1.3}
+\contentsline {subsubsection}{\numberline {2.1.3.1}Categories}{12}{subsubsection.2.1.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.1.3.1}Categories}{13}{subsubsection.2.1.3.1}
+\contentsline {subsubsection}{\numberline {2.1.3.2}Popular Types}{13}{subsubsection.2.1.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {2.1.3.2}Popular Types}{14}{subsubsection.2.1.3.2}
+\contentsline {section}{\numberline {2.2}Lessons from Related Work}{14}{section.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.2}Lessons from Related Work}{15}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}Actively Gather Inspiration}{14}{subsection.2.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.2.1}Actively Gather Inspiration}{15}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.2}Constrain to Improve Creativity}{14}{subsection.2.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.2.2}Constrain to Improve Creativity}{16}{subsection.2.2.2}
+\contentsline {subsection}{\numberline {2.2.3}Learn from Experience}{16}{subsection.2.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.2.3}Learn from Experience}{17}{subsection.2.2.3}
+\contentsline {subsection}{\numberline {2.2.4}Choose Words Carefully}{17}{subsection.2.2.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.2.4}Choose Words Carefully}{18}{subsection.2.2.4}
+\contentsline {subsection}{\numberline {2.2.5}Derive Insight from Worldly Knowledge}{17}{subsection.2.2.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.2.5}Derive Insight from Worldly Knowledge}{19}{subsection.2.2.5}
+\contentsline {subsection}{\numberline {2.2.6}Dare to be Different}{18}{subsection.2.2.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.2.6}Dare to be Different}{20}{subsection.2.2.6}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.3}Brief Overview of Computational Creativity}{20}{section.2.3}
+\contentsline {section}{\numberline {2.3}Brief Overview of Computational Creativity}{19}{section.2.3}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {2.4}Brief Overview of Computational Linguistics}{21}{section.2.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.4.1}Words}{22}{subsection.2.4.1}
+\contentsline {subsection}{\numberline {2.4.1}Words}{21}{subsection.2.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.4.2}Syntax}{23}{subsection.2.4.2}
+\contentsline {subsection}{\numberline {2.4.2}Syntax}{22}{subsection.2.4.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.4.3}Semantics and Pragmatics}{24}{subsection.2.4.3}
+\contentsline {subsection}{\numberline {2.4.3}Semantics and Pragmatics}{23}{subsection.2.4.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.4.4}Discourse Representation Theory}{27}{subsection.2.4.4}
+\contentsline {subsection}{\numberline {2.4.4}Discourse Representation Theory}{26}{subsection.2.4.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.4.5}Anaphora Resolution and Presupposition Projection}{28}{subsection.2.4.5}
+\contentsline {subsection}{\numberline {2.4.5}Anaphora Resolution and Presupposition Projection}{27}{subsection.2.4.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.4.6}Natural Language Generation}{28}{subsection.2.4.6}
+\contentsline {subsection}{\numberline {2.4.6}Natural Language Generation}{27}{subsection.2.4.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {3}Poem Analysis}{30}{chapter.3}
+\contentsline {chapter}{\numberline {3}Poem Analysis}{29}{chapter.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.1}Obtaining Phonetic Structure}{31}{section.3.1}
+\contentsline {section}{\numberline {3.1}Obtaining Phonetic Structure}{30}{section.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.2}Rhyme}{32}{section.3.2}
+\contentsline {section}{\numberline {3.2}Rhyme}{31}{section.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.2.1}Obtaining the Rhyme Phoneme Pattern}{33}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.1}Obtaining the Rhyme Phoneme Pattern}{32}{subsection.3.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.2.2}Building and Normalising the Rhyme Scheme}{34}{subsection.3.2.2}
+\contentsline {subsection}{\numberline {3.2.2}Building and Normalising the Rhyme Scheme}{33}{subsection.3.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.3}Rhythm}{34}{section.3.3}
+\contentsline {section}{\numberline {3.3}Rhythm}{33}{section.3.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.3.1}Detecting Syllabic Rhythm}{34}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.1}Detecting Syllabic Rhythm}{33}{subsection.3.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.3.2}Detecting Quantitative and Accentual Rhythm}{35}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {3.3.2}Detecting Quantitative and Accentual Rhythm}{34}{subsection.3.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.4}Sound Devices}{36}{section.3.4}
+\contentsline {section}{\numberline {3.4}Sound Devices}{35}{section.3.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.5}Form}{37}{section.3.5}
+\contentsline {section}{\numberline {3.5}Form}{36}{section.3.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.5.1}Structure and Repetition}{37}{subsection.3.5.1}
+\contentsline {subsection}{\numberline {3.5.1}Structure and Repetition}{36}{subsection.3.5.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.5.2}Point of View}{38}{subsection.3.5.2}
+\contentsline {subsection}{\numberline {3.5.2}Point of View}{37}{subsection.3.5.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.5.3}Tense}{38}{subsection.3.5.3}
+\contentsline {subsection}{\numberline {3.5.3}Tense}{37}{subsection.3.5.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.6}Characters and Context}{38}{section.3.6}
+\contentsline {section}{\numberline {3.6}Characters and Context}{37}{section.3.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.6.1}ConceptNet Relations}{39}{subsection.3.6.1}
+\contentsline {subsection}{\numberline {3.6.1}ConceptNet Relations}{38}{subsection.3.6.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.6.2}Semantic Labelling using Noah's ARK}{42}{subsection.3.6.2}
+\contentsline {subsection}{\numberline {3.6.2}Semantic Labelling using Noah's ARK}{41}{subsection.3.6.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.6.2.1}FrameNet Semantic Role Labelling using SEMAFOR}{42}{subsubsection.3.6.2.1}
+\contentsline {subsubsection}{\numberline {3.6.2.1}FrameNet Semantic Role Labelling using SEMAFOR}{41}{subsubsection.3.6.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.6.2.2}Semantic Dependency Relations using TurboParser}{44}{subsubsection.3.6.2.2}
+\contentsline {subsubsection}{\numberline {3.6.2.2}Semantic Dependency Relations using TurboParser}{43}{subsubsection.3.6.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.6.3}Extracting and Binding Relations to Characters}{45}{subsection.3.6.3}
+\contentsline {subsection}{\numberline {3.6.3}Extracting and Binding Relations to Characters}{44}{subsection.3.6.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.6.3.1}Obtaining the Semantic Dependency Relations and Frame-Semantic Parse from Noah's ARK}{46}{subsubsection.3.6.3.1}
+\contentsline {subsubsection}{\numberline {3.6.3.1}Obtaining the Semantic Dependency Relations and Frame-Semantic Parse from Noah's ARK}{45}{subsubsection.3.6.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.6.3.2}Collapsing Loose Leaves of the Semantic Dependency Relations}{49}{subsubsection.3.6.3.2}
+\contentsline {subsubsection}{\numberline {3.6.3.2}Collapsing Loose Leaves of the Semantic Dependency Relations}{48}{subsubsection.3.6.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.6.3.3}Finding and Creating Characters}{51}{subsubsection.3.6.3.3}
+\contentsline {subsubsection}{\numberline {3.6.3.3}Finding and Creating Characters}{50}{subsubsection.3.6.3.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.6.3.4}Extracting Candidate Relations from the Frame-Semantic Parse}{52}{subsubsection.3.6.3.4}
+\contentsline {subsubsection}{\numberline {3.6.3.4}Extracting Candidate Relations from the Frame-Semantic Parse}{51}{subsubsection.3.6.3.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.6.3.5}Obtaining the Associated Dependency Relations for each Persona}{53}{subsubsection.3.6.3.5}
+\contentsline {subsubsection}{\numberline {3.6.3.5}Obtaining the Associated Dependency Relations for each Persona}{52}{subsubsection.3.6.3.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.6.3.6}Binding ConceptNet Relations to Characters}{57}{subsubsection.3.6.3.6}
+\contentsline {subsubsection}{\numberline {3.6.3.6}Binding ConceptNet Relations to Characters}{56}{subsubsection.3.6.3.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.6.4}Anaphora Resolution}{58}{subsection.3.6.4}
+\contentsline {subsection}{\numberline {3.6.4}Anaphora Resolution}{57}{subsection.3.6.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.6.5}Peeks at Future Development of Pragmatic Language Analysis}{58}{subsection.3.6.5}
+\contentsline {subsection}{\numberline {3.6.5}Peeks at Future Development of Pragmatic Language Analysis}{57}{subsection.3.6.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.7}Symbolism and Imagery}{58}{section.3.7}
+\contentsline {section}{\numberline {3.7}Symbolism and Imagery}{57}{section.3.7}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.7.1}Personification}{59}{subsection.3.7.1}
+\contentsline {subsection}{\numberline {3.7.1}Personification}{58}{subsection.3.7.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.7.2}Onomatopoeia}{59}{subsection.3.7.2}
+\contentsline {subsection}{\numberline {3.7.2}Onomatopoeia}{58}{subsection.3.7.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.7.3}Simile}{60}{subsection.3.7.3}
+\contentsline {subsection}{\numberline {3.7.3}Simile}{59}{subsection.3.7.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {4}Analysis Interpretation}{65}{chapter.4}
+\contentsline {chapter}{\numberline {4}Analysis Interpretation}{64}{chapter.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.1}Balancing Priorities and Trade-offs}{65}{section.4.1}
+\contentsline {section}{\numberline {4.1}Balancing Priorities and Trade-offs}{64}{section.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1.1}The Corpus}{65}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.1}The Corpus}{64}{subsection.4.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1.2}Subcategories of Collections}{66}{subsection.4.1.2}
+\contentsline {subsection}{\numberline {4.1.2}Subcategories of Collections}{65}{subsection.4.1.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1.3}Novel and Creative Generation}{66}{subsection.4.1.3}
+\contentsline {subsection}{\numberline {4.1.3}Novel and Creative Generation}{65}{subsection.4.1.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.2}A Stochastic Approach}{67}{section.4.2}
+\contentsline {section}{\numberline {4.2}A Stochastic Approach}{66}{section.4.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.3}Algorithms}{68}{section.4.3}
+\contentsline {section}{\numberline {4.3}Algorithms}{67}{section.4.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.3.1}List Comprehension}{68}{subsection.4.3.1}
+\contentsline {subsection}{\numberline {4.3.1}List Comprehension}{67}{subsection.4.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.3.2}Line by Line}{68}{subsection.4.3.2}
+\contentsline {subsection}{\numberline {4.3.2}Line by Line}{67}{subsection.4.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.3.3}Pick the Most Popular}{69}{subsection.4.3.3}
+\contentsline {subsection}{\numberline {4.3.3}Pick the Most Popular}{68}{subsection.4.3.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.3.4}Filter Below Threshold}{71}{subsection.4.3.4}
+\contentsline {subsection}{\numberline {4.3.4}Filter Below Threshold}{70}{subsection.4.3.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.4}Testing and Validation by Inspection}{71}{section.4.4}
+\contentsline {section}{\numberline {4.4}Testing and Validation by Inspection}{70}{section.4.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.5}Concurrency and Performance}{74}{section.4.5}
+\contentsline {section}{\numberline {4.5}Concurrency and Performance}{73}{section.4.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {5}Poetry Generation}{75}{chapter.5}
+\contentsline {chapter}{\numberline {5}Poetry Generation}{74}{chapter.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.1}Approach}{75}{section.5.1}
+\contentsline {section}{\numberline {5.1}Approach}{74}{section.5.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.2}Generating Simple Sentences}{76}{section.5.2}
+\contentsline {section}{\numberline {5.2}Generating Simple Sentences}{75}{section.5.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.2.1}SimpleNLG}{76}{subsection.5.2.1}
+\contentsline {subsection}{\numberline {5.2.1}SimpleNLG}{75}{subsection.5.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.2.2}FrameNet}{77}{subsection.5.2.2}
+\contentsline {subsection}{\numberline {5.2.2}FrameNet}{76}{subsection.5.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.2.3}Translating Relations into Clauses}{77}{subsection.5.2.3}
+\contentsline {subsection}{\numberline {5.2.3}Translating Relations into Clauses}{76}{subsection.5.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.3}Semantic Network of Common Sense}{79}{section.5.3}
+\contentsline {section}{\numberline {5.3}Semantic Network of Common Sense}{78}{section.5.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.3.1}The Network}{79}{subsection.5.3.1}
+\contentsline {subsection}{\numberline {5.3.1}The Network}{78}{subsection.5.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {5.3.1.1}Nodes}{79}{subsubsection.5.3.1.1}
+\contentsline {subsubsection}{\numberline {5.3.1.1}Nodes}{78}{subsubsection.5.3.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {5.3.1.2}Edges}{80}{subsubsection.5.3.1.2}
+\contentsline {subsubsection}{\numberline {5.3.1.2}Edges}{79}{subsubsection.5.3.1.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {5.3.1.3}Concept Halos and Fields}{81}{subsubsection.5.3.1.3}
+\contentsline {subsubsection}{\numberline {5.3.1.3}Concept Halos and Fields}{80}{subsubsection.5.3.1.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.3.2}Sources}{81}{subsection.5.3.2}
+\contentsline {subsection}{\numberline {5.3.2}Sources}{80}{subsection.5.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {5.3.2.1}Collocations}{81}{subsubsection.5.3.2.1}
+\contentsline {subsubsection}{\numberline {5.3.2.1}Collocations}{80}{subsubsection.5.3.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {5.3.2.2}Associations}{82}{subsubsection.5.3.2.2}
+\contentsline {subsubsection}{\numberline {5.3.2.2}Associations}{81}{subsubsection.5.3.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {5.3.2.3}NodeBox Perception}{82}{subsubsection.5.3.2.3}
+\contentsline {subsubsection}{\numberline {5.3.2.3}NodeBox Perception}{81}{subsubsection.5.3.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {5.3.2.4}WordNet}{82}{subsubsection.5.3.2.4}
+\contentsline {subsubsection}{\numberline {5.3.2.4}WordNet}{81}{subsubsection.5.3.2.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {5.3.2.5}Google Search Suggestions}{83}{subsubsection.5.3.2.5}
+\contentsline {subsubsection}{\numberline {5.3.2.5}Google Search Suggestions}{82}{subsubsection.5.3.2.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.3.3}Concept Similarity}{83}{subsection.5.3.3}
+\contentsline {subsection}{\numberline {5.3.3}Concept Similarity}{82}{subsection.5.3.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {5.3.3.1}Associative Similarity}{83}{subsubsection.5.3.3.1}
+\contentsline {subsubsection}{\numberline {5.3.3.1}Associative Similarity}{82}{subsubsection.5.3.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {5.3.3.2}Similarity Paths}{84}{subsubsection.5.3.3.2}
+\contentsline {subsubsection}{\numberline {5.3.3.2}Similarity Paths}{83}{subsubsection.5.3.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {5.3.3.3}Symbolic Similarity}{84}{subsubsection.5.3.3.3}
+\contentsline {subsubsection}{\numberline {5.3.3.3}Symbolic Similarity}{83}{subsubsection.5.3.3.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.4}Persona Creation and Management}{85}{section.5.4}
+\contentsline {section}{\numberline {5.4}Persona Creation and Management}{84}{section.5.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.4.1}Referencing Specific Persona}{85}{subsection.5.4.1}
+\contentsline {subsection}{\numberline {5.4.1}Referencing Specific Persona}{84}{subsection.5.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.4.2}Adding New Persona}{85}{subsection.5.4.2}
+\contentsline {subsection}{\numberline {5.4.2}Adding New Persona}{84}{subsection.5.4.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.4.3}Anaphora and Presupposition}{86}{subsection.5.4.3}
+\contentsline {subsection}{\numberline {5.4.3}Anaphora and Presupposition}{85}{subsection.5.4.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.4.4}Semantic Types}{87}{subsection.5.4.4}
+\contentsline {subsection}{\numberline {5.4.4}Semantic Types}{86}{subsection.5.4.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.5}Poem Initialisation}{88}{section.5.5}
+\contentsline {section}{\numberline {5.5}Poem Initialisation}{87}{section.5.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.5.1}Overall Structure}{88}{subsection.5.5.1}
+\contentsline {subsection}{\numberline {5.5.1}Overall Structure}{87}{subsection.5.5.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.5.2}Inspiration}{89}{subsection.5.5.2}
+\contentsline {subsection}{\numberline {5.5.2}Inspiration}{88}{subsection.5.5.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.6}Incremental Growth}{89}{section.5.6}
+\contentsline {section}{\numberline {5.6}Incremental Growth}{88}{section.5.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.6.1}Applying Inspiration}{89}{subsection.5.6.1}
+\contentsline {subsection}{\numberline {5.6.1}Applying Inspiration}{88}{subsection.5.6.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.6.2}Creating New Lines}{90}{subsection.5.6.2}
+\contentsline {subsection}{\numberline {5.6.2}Creating New Lines}{89}{subsection.5.6.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {5.6.2.1}Rhyming Lines}{90}{subsubsection.5.6.2.1}
+\contentsline {subsubsection}{\numberline {5.6.2.1}Rhyming Lines}{89}{subsubsection.5.6.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {5.6.2.2}Blank Lines}{91}{subsubsection.5.6.2.2}
+\contentsline {subsubsection}{\numberline {5.6.2.2}Blank Lines}{90}{subsubsection.5.6.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.6.3}Keeping in Context}{91}{subsection.5.6.3}
+\contentsline {subsection}{\numberline {5.6.3}Keeping in Context}{90}{subsection.5.6.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.7}Rephrase for Poetic Features}{92}{section.5.7}
+\contentsline {section}{\numberline {5.7}Rephrase for Poetic Features}{91}{section.5.7}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.7.1}Rhyme}{92}{subsection.5.7.1}
+\contentsline {subsection}{\numberline {5.7.1}Rhyme}{91}{subsection.5.7.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {5.7.1.1}Finding Rhyming Words}{92}{subsubsection.5.7.1.1}
+\contentsline {subsubsection}{\numberline {5.7.1.1}Finding Rhyming Words}{91}{subsubsection.5.7.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {5.7.1.2}Guaranteeing Rhyme}{93}{subsubsection.5.7.1.2}
+\contentsline {subsubsection}{\numberline {5.7.1.2}Guaranteeing Rhyme}{92}{subsubsection.5.7.1.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.7.2}Rhythm}{94}{subsection.5.7.2}
+\contentsline {subsection}{\numberline {5.7.2}Rhythm}{93}{subsection.5.7.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {5.7.2.1}Syllabic}{94}{subsubsection.5.7.2.1}
+\contentsline {subsubsection}{\numberline {5.7.2.1}Syllabic}{93}{subsubsection.5.7.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{\numberline {5.7.2.1.1}Extending}{94}{paragraph.5.7.2.1.1}
+\contentsline {paragraph}{\numberline {5.7.2.1.1}Extending}{93}{paragraph.5.7.2.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{\numberline {5.7.2.1.2}Reducing}{95}{paragraph.5.7.2.1.2}
+\contentsline {paragraph}{\numberline {5.7.2.1.2}Reducing}{94}{paragraph.5.7.2.1.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {5.7.2.2}Accentual}{95}{subsubsection.5.7.2.2}
+\contentsline {subsubsection}{\numberline {5.7.2.2}Accentual}{94}{subsubsection.5.7.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {6}Evaluation Plan}{97}{chapter.6}
+\contentsline {chapter}{\numberline {6}Evaluation Plan}{96}{chapter.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.1}Comparison of Analysis Results to Theory}{97}{section.6.1}
+\contentsline {section}{\numberline {6.1}Comparison of Analysis Results to Theory}{96}{section.6.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.2}Turing-style Tests}{98}{section.6.2}
+\contentsline {section}{\numberline {6.2}Turing-style Tests}{97}{section.6.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.3}FACE Descriptive Model}{99}{section.6.3}
+\contentsline {section}{\numberline {6.3}FACE Descriptive Model}{98}{section.6.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.4}IDEA Descriptive Model}{99}{section.6.4}
+\contentsline {section}{\numberline {6.4}IDEA Descriptive Model}{98}{section.6.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Appendix A}{101}{appendix*.44}
+\contentsline {chapter}{Appendix A}{100}{appendix*.44}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.1}Dry Run of Generation Phase with Commentary}{101}{section.Alph0.1}
+\contentsline {section}{\numberline {A.1}Dry Run of Generation Phase with Commentary}{100}{section.Alph0.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.2}CMU Pronunciation Dictionary ARPABET Phoneme Set}{105}{section.Alph0.2}
+\contentsline {section}{\numberline {A.2}CMU Pronunciation Dictionary ARPABET Phoneme Set}{104}{section.Alph0.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.3}Penn Treebank Tagset}{105}{section.Alph0.3}
+\contentsline {section}{\numberline {A.3}Penn Treebank Tagset}{104}{section.Alph0.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.4}Testing Specifications}{105}{section.Alph0.4}
+\contentsline {section}{\numberline {A.4}Testing Specifications}{104}{section.Alph0.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.5}FrameNet Frames to ConceptNet Relations}{105}{section.Alph0.5}
+\contentsline {section}{\numberline {A.5}FrameNet Frames to ConceptNet Relations}{104}{section.Alph0.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.6}List of collapsable dependencies}{108}{section.Alph0.6}
+\contentsline {section}{\numberline {A.6}List of collapsable dependencies}{107}{section.Alph0.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.7}Onomatopoeia Types to ConceptNet Relations}{109}{section.Alph0.7}
+\contentsline {section}{\numberline {A.7}Onomatopoeia Types to ConceptNet Relations}{108}{section.Alph0.7}
