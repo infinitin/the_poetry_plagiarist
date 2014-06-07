@@ -318,28 +318,6 @@ Noah's ARK is an informal research group run by Noah Smith at Carnegie Mellon Un
 \subsubsection{FrameNet Semantic Role Labelling using SEMAFOR}
 \label{sec:sema}
 
-Semantic Role Labelling (SRL) is best described with an example. Take the sentence:
-{\centering\textit{"The shopkeeper told the customer to have a nice day"}}
-We wish to recognise the verb \textit{'to tell'} as the coordinating word (called the \textbf{target}), \textit{'the shopkeeper'} as the speaker, \textit{'have a nice day'} as the message and \textit{'the customer'} as the addressee. This output from SEMAFOR can be seen clearly in Figure \ref{fig:shopkeeper-frames}, along with other potential labels. 
-
-\begin{figure}[h!]
-\centering
-\includegraphics[width=140mm]{shopkeeper-frames}
-\caption{SEMAFOR frame-semantic parse for the shopkeeper example}
-\label{fig:shopkeeper-frames}
-\end{figure}
-
-This can be quite flexible as it is independent of the syntactic structure of the sentence and does require grammatical correctness. The SRL for the \textit{"Yoda-speak"} equivalent will remain the same, as shown in Figure \ref{fig:shopkeeper-frames-yoda}.
-
-\begin{figure}[h!]
-\centering
-\includegraphics[width=140mm]{shopkeeper-frames-yoda}
-\caption{SEMAFOR frame-semantic parse for a grammatically incorrect sentence.}
-\label{fig:shopkeeper-frames-yoda}
-\end{figure}
-
-These labels are retrieved through the SEMAFOR tool, which was trained on FrameNet data to determine the frame-semantic structure of the text. FrameNet\cite{baker1998berkeley} is a lexical database of \textit{semantic frames}, which describe the meaning of a word based on the words that typically participate with it, known as \textit{frame elements}.
-
 We can use these to derive the ConceptNet relations by looking for the occurrence of frames, and elements thereof, that correspond to the ConceptNet relation. The manually chosen list of frames and elements that translate directly into a particular ConceptNet relation is given in the Appendix, section \ref{sec:fntocn}.
 
 Each list may not be exhaustive for its corresponding ConceptNet relation and there are some relations that will not be picked up by this method.
@@ -348,9 +326,7 @@ Each list may not be exhaustive for its corresponding ConceptNet relation and th
 \subsubsection{Semantic Dependency Relations using TurboParser}
 \label{sec:turbo}
 
-The Stanford Dependencies\cite{de2008stanford} is another representation based around the relationships between words. All dependency relations are strictly binary and come in various types depending on the participants, called the \textit{governor} and the \textit{dependent}.
-
-The semantic dependency tree for the previous shopkeeper example can be seen in Figure \ref{fig:shopkeeper-deps}.
+The semantic dependency tree, based on the Stanford Dependencies as discussed in Section \ref{sec:stanford-deps}, for the previous shopkeeper example can be seen in Figure \ref{fig:shopkeeper-deps}.
 
 \begin{figure}[h!]
 \centering

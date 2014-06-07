@@ -118,6 +118,24 @@
       \field{year}{2012}
       \field{pages}{3196\bibrangedash 3200}
     \endentry
+    \entry{bateman1997enabling}{article}{}
+      \name{labelname}{1}{}{%
+        {{hash=b42b1b72decd6ae5b439886b0a00c6d4}{Bateman}{B\bibinitperiod}{John\bibnamedelima A}{J\bibinitperiod\bibinitdelim A\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{1}{}{%
+        {{hash=b42b1b72decd6ae5b439886b0a00c6d4}{Bateman}{B\bibinitperiod}{John\bibnamedelima A}{J\bibinitperiod\bibinitdelim A\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{b42b1b72decd6ae5b439886b0a00c6d4}
+      \strng{fullhash}{b42b1b72decd6ae5b439886b0a00c6d4}
+      \field{sortinit}{B}
+      \field{labeltitle}{Enabling technology for multilingual natural language generation: the KPML development environment}
+      \field{journaltitle}{Natural Language Engineering}
+      \field{number}{1}
+      \field{title}{Enabling technology for multilingual natural language generation: the KPML development environment}
+      \field{volume}{3}
+      \field{year}{1997}
+      \field{pages}{15\bibrangedash 55}
+    \endentry
     \entry{mitkov2003oxford}{book}{}
       \name{labelname}{2}{}{%
         {{hash=b1ec06c667c5c36b5a575172c1849e1a}{Bateman}{B\bibinitperiod}{John}{J\bibinitperiod}{}{}{}{}}%
@@ -467,6 +485,43 @@
       \field{booktitle}{LREC}
       \field{title}{The Automatic Content Extraction (ACE) Program-Tasks, Data, and Evaluation.}
       \field{year}{2004}
+    \endentry
+    \entry{elhadad1989fuf}{article}{}
+      \name{labelname}{1}{}{%
+        {{hash=a57bab6baa0b17487ba8fa598acfd1c1}{Elhadad}{E\bibinitperiod}{Michael}{M\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{1}{}{%
+        {{hash=a57bab6baa0b17487ba8fa598acfd1c1}{Elhadad}{E\bibinitperiod}{Michael}{M\bibinitperiod}{}{}{}{}}%
+      }
+      \list{publisher}{1}{%
+        {Citeseer}%
+      }
+      \strng{namehash}{a57bab6baa0b17487ba8fa598acfd1c1}
+      \strng{fullhash}{a57bab6baa0b17487ba8fa598acfd1c1}
+      \field{sortinit}{E}
+      \field{labeltitle}{FUF: The universal unifier user manual}
+      \field{title}{FUF: The universal unifier user manual}
+      \field{year}{1989}
+    \endentry
+    \entry{elhadad1996overview}{article}{}
+      \name{labelname}{2}{}{%
+        {{hash=a57bab6baa0b17487ba8fa598acfd1c1}{Elhadad}{E\bibinitperiod}{Michael}{M\bibinitperiod}{}{}{}{}}%
+        {{hash=d9c0eef11636421563b553fa89940709}{Robin}{R\bibinitperiod}{Jacques}{J\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{2}{}{%
+        {{hash=a57bab6baa0b17487ba8fa598acfd1c1}{Elhadad}{E\bibinitperiod}{Michael}{M\bibinitperiod}{}{}{}{}}%
+        {{hash=d9c0eef11636421563b553fa89940709}{Robin}{R\bibinitperiod}{Jacques}{J\bibinitperiod}{}{}{}{}}%
+      }
+      \list{publisher}{2}{%
+        {Technical report, Dept of Mathematics}%
+        {Computer Science, Ben Gurion University}%
+      }
+      \strng{namehash}{f40468d44d7188d61bd18beddba0b5df}
+      \strng{fullhash}{f40468d44d7188d61bd18beddba0b5df}
+      \field{sortinit}{E}
+      \field{labeltitle}{An overview of SURGE: A reusable comprehensive syntactic realization component}
+      \field{title}{An overview of SURGE: A reusable comprehensive syntactic realization component}
+      \field{year}{1996}
     \endentry
     \entry{gardent2007symbolic}{inproceedings}{}
       \true{morelabelname}

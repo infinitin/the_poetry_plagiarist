@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2014.1.22)  7 JUN 2014 02:16
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2014.1.22)  8 JUN 2014 00:35
 entering extended mode
 **report.tex
 (C:\Users\Lenovo\PycharmProjects\the_poetry_plagiarist\report\report.tex
@@ -1617,7 +1617,7 @@ LaTeX Info: Redefining \nameref on input line 84.
 (C:\Users\Lenovo\PycharmProjects\the_poetry_plagiarist\report\report.out)
 \@outlinefile=\write6
 
-<ThesisFigs/logo.jpg, id=546, 564.60938pt x 148.30406pt>
+<ThesisFigs/logo.jpg, id=562, 564.60938pt x 148.30406pt>
 File: ThesisFigs/logo.jpg Graphic file (type jpg)
 
 <use ThesisFigs/logo.jpg>
@@ -1673,7 +1673,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[14] <Design/DesignFigs/Constraint.jpg, id=804, 644.4075pt x 225.84375pt>
+[14] <Design/DesignFigs/Constraint.jpg, id=824, 644.4075pt x 225.84375pt>
 File: Design/DesignFigs/Constraint.jpg Graphic file (type jpg)
 
 <use Design/DesignFigs/Constraint.jpg>
@@ -1689,7 +1689,7 @@ Figs/Constraint.jpg>]
 LaTeX Font Info:    Font shape `OMS/cmr/m/it' in size <12> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 344.
  [16]
-<Design/DesignFigs/lion.jpg, id=821, 368.1253pt x 487.06969pt>
+<Design/DesignFigs/lion.jpg, id=841, 368.1253pt x 487.06969pt>
 File: Design/DesignFigs/lion.jpg Graphic file (type jpg)
 
 <use Design/DesignFigs/lion.jpg>
@@ -1704,212 +1704,229 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [17] [18 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Design/D
 esignFigs/lion.jpg>] [19]
-<Design/DesignFigs/Chair.jpg, id=856, 501.875pt x 432.61626pt>
+<Design/DesignFigs/Chair.jpg, id=876, 501.875pt x 432.61626pt>
 File: Design/DesignFigs/Chair.jpg Graphic file (type jpg)
 
 <use Design/DesignFigs/Chair.jpg>
 Package pdftex.def Info: Design/DesignFigs/Chair.jpg used on input line 426.
 (pdftex.def)             Requested size: 284.52756pt x 245.27359pt.
- [20 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Design/Desig
-nFigs/Chair.jpg>] [21]
-<Design/DesignFigs/Treebank.png, id=879, 401.5pt x 329.23pt>
+
+
+Package hyperref Warning: Difference (2) between bookmark levels is greater 
+(hyperref)                than one, level fixed on input line 433.
+
+[20 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Design/Design
+Figs/Chair.jpg>]
+
+Package hyperref Warning: Difference (2) between bookmark levels is greater 
+(hyperref)                than one, level fixed on input line 451.
+
+[21] [22] [23] <Design/DesignFigs/Treebank.png, id=911, 401.5pt x 329.23pt>
 File: Design/DesignFigs/Treebank.png Graphic file (type png)
 
 <use Design/DesignFigs/Treebank.png>
-Package pdftex.def Info: Design/DesignFigs/Treebank.png used on input line 474.
+Package pdftex.def Info: Design/DesignFigs/Treebank.png used on input line 501.
 
-(pdftex.def)             Requested size: 284.52756pt x 233.32791pt.
+(pdftex.def)             Requested size: 170.71652pt x 139.98871pt.
+ [24 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Design/Desig
+nFigs/Treebank.png (PNG copy)>]
+Overfull \hbox (66.97795pt too wide) in paragraph at lines 532--534
+\OT1/cmr/m/n/12 domain-specific or lin-guis-tic knowl-edge. Ta-ble BLAH: http:/
+/www.slideshare.net/kancho/anaphora-
+ []
+
+[25]
+LaTeX Font Info:    Try loading font information for OMS+cmtt on input line 540
+.
+LaTeX Font Info:    No file OMScmtt.fd. on input line 540.
+
+
+LaTeX Font Warning: Font shape `OMS/cmtt/m/n' undefined
+(Font)              using `OMS/cmsy/m/n' instead
+(Font)              for symbol `textbraceleft' on input line 540.
+
+[26] <Design/DesignFigs/Groningen.jpg, id=943, 446.41782pt x 166.37157pt>
+File: Design/DesignFigs/Groningen.jpg Graphic file (type jpg)
+
+<use Design/DesignFigs/Groningen.jpg>
+Package pdftex.def Info: Design/DesignFigs/Groningen.jpg used on input line 561
+.
+(pdftex.def)             Requested size: 355.65944pt x 132.54907pt.
+
+<Design/DesignFigs/shopkeeper-frames.png, id=945, 1206.00563pt x 328.22626pt>
+File: Design/DesignFigs/shopkeeper-frames.png Graphic file (type png)
+
+<use Design/DesignFigs/shopkeeper-frames.png>
+Package pdftex.def Info: Design/DesignFigs/shopkeeper-frames.png used on input 
+line 580.
+(pdftex.def)             Requested size: 398.33858pt x 108.41016pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[22] [23 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Design/D
-esignFigs/Treebank.png (PNG copy)>]
-<Design/DesignFigs/Groningen.jpg, id=898, 446.41782pt x 166.37157pt>
-File: Design/DesignFigs/Groningen.jpg Graphic file (type jpg)
-
-<use Design/DesignFigs/Groningen.jpg>
-Package pdftex.def Info: Design/DesignFigs/Groningen.jpg used on input line 494
-.
-(pdftex.def)             Requested size: 355.65944pt x 132.54907pt.
- [24 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Design/Desig
-nFigs/Groningen.jpg>] [25]
-LaTeX Font Info:    Try loading font information for OML+cmr on input line 540.
-
-
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\omlcmr.fd"
-File: omlcmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <12> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 540.
- [26]
-<Design/DesignFigs/NLG.png, id=949, 225.09094pt x 723.45282pt>
+[27 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Design/Design
+Figs/Groningen.jpg>]
+<Design/DesignFigs/shopkeeper-frames-yoda.png, id=953, 1228.59pt x 330.48468pt>
+File: Design/DesignFigs/shopkeeper-frames-yoda.png Graphic file (type png)
+<use Design/DesignFigs/shopkeeper-frames-yoda.png>
+Package pdftex.def Info: Design/DesignFigs/shopkeeper-frames-yoda.png used on i
+nput line 589.
+(pdftex.def)             Requested size: 398.33858pt x 107.14906pt.
+ [28 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Design/Desig
+nFigs/shopkeeper-frames.png> <C:/Users/Lenovo/PycharmProjects/the_poetry_plagia
+rist/report/Design/DesignFigs/shopkeeper-frames-yoda.png>] [29]
+<Design/DesignFigs/NLG.png, id=990, 225.09094pt x 723.45282pt>
 File: Design/DesignFigs/NLG.png Graphic file (type png)
 
 <use Design/DesignFigs/NLG.png>
-Package pdftex.def Info: Design/DesignFigs/NLG.png used on input line 559.
+Package pdftex.def Info: Design/DesignFigs/NLG.png used on input line 625.
 (pdftex.def)             Requested size: 85.35826pt x 274.3409pt.
- [27 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Design/Desig
-nFigs/NLG.png>]) [28]
+ [30 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Design/Desig
+nFigs/NLG.png>]) [31]
 (C:\Users\Lenovo\PycharmProjects\the_poetry_plagiarist\report\Theory/theory.tex
 Chapter 3.
-[29
+[32
 
 
 
-] [30] [31] [32] [33] [34] [35] [36] [37] [38] [39] [40] [41]
-<Theory/TheoryFigs/shopkeeper-frames.png, id=1069, 1206.00563pt x 328.22626pt>
-File: Theory/TheoryFigs/shopkeeper-frames.png Graphic file (type png)
-
-<use Theory/TheoryFigs/shopkeeper-frames.png>
-Package pdftex.def Info: Theory/TheoryFigs/shopkeeper-frames.png used on input 
-line 327.
-(pdftex.def)             Requested size: 398.33858pt x 108.41016pt.
-
-<Theory/TheoryFigs/shopkeeper-frames-yoda.png, id=1071, 1228.59pt x 330.48468pt
->
-File: Theory/TheoryFigs/shopkeeper-frames-yoda.png Graphic file (type png)
- <use Theory/TheoryFigs/shopkeeper-frames-yoda.png>
-Package pdftex.def Info: Theory/TheoryFigs/shopkeeper-frames-yoda.png used on i
-nput line 336.
-(pdftex.def)             Requested size: 398.33858pt x 107.14906pt.
- [42 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Theory/Theor
-yFigs/shopkeeper-frames.png> <C:/Users/Lenovo/PycharmProjects/the_poetry_plagia
-rist/report/Theory/TheoryFigs/shopkeeper-frames-yoda.png>]
-<Theory/TheoryFigs/shopkeeper-deps.png, id=1082, 1241.38782pt x 165.61874pt>
+] [33] [34] [35] [36] [37] [38] [39] [40] [41] [42] [43] [44]
+<Theory/TheoryFigs/shopkeeper-deps.png, id=1115, 1241.38782pt x 165.61874pt>
 File: Theory/TheoryFigs/shopkeeper-deps.png Graphic file (type png)
 
 <use Theory/TheoryFigs/shopkeeper-deps.png>
 Package pdftex.def Info: Theory/TheoryFigs/shopkeeper-deps.png used on input li
-ne 357.
+ne 333.
 (pdftex.def)             Requested size: 398.33858pt x 53.14311pt.
- [43 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Theory/Theor
+ [45 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Theory/Theor
 yFigs/shopkeeper-deps.png>]
-Overfull \hbox (0.64717pt too wide) in paragraph at lines 572--573
+Overfull \hbox (0.64717pt too wide) in paragraph at lines 548--549
 [][] 
  []
 
 
-Overfull \hbox (0.64717pt too wide) in paragraph at lines 593--594
+Overfull \hbox (0.64717pt too wide) in paragraph at lines 569--570
 [][] 
- []
-
-[44] [45]
-Overfull \hbox (20.11543pt too wide) in paragraph at lines 628--642
- [][] 
  []
 
 [46] [47]
-<Theory/TheoryFigs/cat-deps1.png, id=1121, 1425.07407pt x 166.37157pt>
+Overfull \hbox (20.11543pt too wide) in paragraph at lines 604--618
+ [][] 
+ []
+
+[48] <Theory/TheoryFigs/cat-deps1.png, id=1148, 1425.07407pt x 166.37157pt>
 File: Theory/TheoryFigs/cat-deps1.png Graphic file (type png)
 
 <use Theory/TheoryFigs/cat-deps1.png>
-Package pdftex.def Info: Theory/TheoryFigs/cat-deps1.png used on input line 683
+Package pdftex.def Info: Theory/TheoryFigs/cat-deps1.png used on input line 659
 .
 (pdftex.def)             Requested size: 398.33858pt x 46.50247pt.
 
-<Theory/TheoryFigs/cat-deps2.png, id=1122, 1090.82532pt x 153.57375pt>
+<Theory/TheoryFigs/cat-deps2.png, id=1149, 1090.82532pt x 153.57375pt>
 File: Theory/TheoryFigs/cat-deps2.png Graphic file (type png)
 
 <use Theory/TheoryFigs/cat-deps2.png>
-Package pdftex.def Info: Theory/TheoryFigs/cat-deps2.png used on input line 690
+Package pdftex.def Info: Theory/TheoryFigs/cat-deps2.png used on input line 666
 .
 (pdftex.def)             Requested size: 398.33858pt x 56.08089pt.
- [48 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Theory/Theor
-yFigs/cat-deps1.png> <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/rep
-ort/Theory/TheoryFigs/cat-deps2.png>]
-<Theory/TheoryFigs/cat-deps1-collapsed-a.png, id=1133, 724.95844pt x 88.07906pt
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[49 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Theory/Theory
+Figs/cat-deps1.png>] [50 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist
+/report/Theory/TheoryFigs/cat-deps2.png>]
+<Theory/TheoryFigs/cat-deps1-collapsed-a.png, id=1165, 724.95844pt x 88.07906pt
 >
 File: Theory/TheoryFigs/cat-deps1-collapsed-a.png Graphic file (type png)
  <use Theory/TheoryFigs/cat-deps1-collapsed-a.png>
 Package pdftex.def Info: Theory/TheoryFigs/cat-deps1-collapsed-a.png used on in
-put line 723.
+put line 699.
 (pdftex.def)             Requested size: 398.33858pt x 48.39658pt.
 
-Overfull \hbox (1.42534pt too wide) in paragraph at lines 723--724
+Overfull \hbox (1.42534pt too wide) in paragraph at lines 699--700
  [][] 
  []
 
 
-<Theory/TheoryFigs/cat-deps1-collapsed-b.png, id=1135, 724.95844pt x 93.34875pt
+<Theory/TheoryFigs/cat-deps1-collapsed-b.png, id=1167, 724.95844pt x 93.34875pt
 >
 File: Theory/TheoryFigs/cat-deps1-collapsed-b.png Graphic file (type png)
  <use Theory/TheoryFigs/cat-deps1-collapsed-b.png>
 Package pdftex.def Info: Theory/TheoryFigs/cat-deps1-collapsed-b.png used on in
-put line 728.
+put line 704.
 (pdftex.def)             Requested size: 398.33858pt x 51.2921pt.
 
-Overfull \hbox (1.42534pt too wide) in paragraph at lines 728--729
+Overfull \hbox (1.42534pt too wide) in paragraph at lines 704--705
  [][] 
  []
 
 
-<Theory/TheoryFigs/cat-deps1-collapsed-c.png, id=1136, 724.95844pt x 97.86563pt
+<Theory/TheoryFigs/cat-deps1-collapsed-c.png, id=1168, 724.95844pt x 97.86563pt
 >
 File: Theory/TheoryFigs/cat-deps1-collapsed-c.png Graphic file (type png)
  <use Theory/TheoryFigs/cat-deps1-collapsed-c.png>
 Package pdftex.def Info: Theory/TheoryFigs/cat-deps1-collapsed-c.png used on in
-put line 733.
+put line 709.
 (pdftex.def)             Requested size: 398.33858pt x 53.77399pt.
 
-Overfull \hbox (1.42534pt too wide) in paragraph at lines 733--734
+Overfull \hbox (1.42534pt too wide) in paragraph at lines 709--710
  [][] 
  []
 
 
-<Theory/TheoryFigs/cat-deps1-collapsed-d.png, id=1137, 723.45282pt x 94.10156pt
+<Theory/TheoryFigs/cat-deps1-collapsed-d.png, id=1169, 723.45282pt x 94.10156pt
 >
 File: Theory/TheoryFigs/cat-deps1-collapsed-d.png Graphic file (type png)
  <use Theory/TheoryFigs/cat-deps1-collapsed-d.png>
 Package pdftex.def Info: Theory/TheoryFigs/cat-deps1-collapsed-d.png used on in
-put line 738.
+put line 714.
 (pdftex.def)             Requested size: 398.33858pt x 51.81345pt.
 
-Overfull \hbox (1.42534pt too wide) in paragraph at lines 738--739
+Overfull \hbox (1.42534pt too wide) in paragraph at lines 714--715
  [][] 
  []
 
 
-<Theory/TheoryFigs/cat-deps1-collapsed-e.png, id=1138, 724.95844pt x 92.59593pt
+<Theory/TheoryFigs/cat-deps1-collapsed-e.png, id=1170, 724.95844pt x 92.59593pt
 >
 File: Theory/TheoryFigs/cat-deps1-collapsed-e.png Graphic file (type png)
  <use Theory/TheoryFigs/cat-deps1-collapsed-e.png>
 Package pdftex.def Info: Theory/TheoryFigs/cat-deps1-collapsed-e.png used on in
-put line 743.
+put line 719.
 (pdftex.def)             Requested size: 398.33858pt x 50.87845pt.
 
-Overfull \hbox (1.42534pt too wide) in paragraph at lines 743--744
+Overfull \hbox (1.42534pt too wide) in paragraph at lines 719--720
  [][] 
  []
 
 
-<Theory/TheoryFigs/cat-deps1-collapsed-f.png, id=1139, 724.95844pt x 92.59593pt
+<Theory/TheoryFigs/cat-deps1-collapsed-f.png, id=1171, 724.95844pt x 92.59593pt
 >
 File: Theory/TheoryFigs/cat-deps1-collapsed-f.png Graphic file (type png)
  <use Theory/TheoryFigs/cat-deps1-collapsed-f.png>
 Package pdftex.def Info: Theory/TheoryFigs/cat-deps1-collapsed-f.png used on in
-put line 748.
+put line 724.
 (pdftex.def)             Requested size: 398.33858pt x 50.87845pt.
 
-Overfull \hbox (1.42534pt too wide) in paragraph at lines 748--749
+Overfull \hbox (1.42534pt too wide) in paragraph at lines 724--725
  [][] 
  []
 
 
-<Theory/TheoryFigs/cat-deps1-collapsed-g.png, id=1140, 724.20563pt x 101.62968p
+<Theory/TheoryFigs/cat-deps1-collapsed-g.png, id=1172, 724.20563pt x 101.62968p
 t>
 File: Theory/TheoryFigs/cat-deps1-collapsed-g.png Graphic file (type png)
  <use Theory/TheoryFigs/cat-deps1-collapsed-g.png>
 Package pdftex.def Info: Theory/TheoryFigs/cat-deps1-collapsed-g.png used on in
-put line 753.
+put line 729.
 (pdftex.def)             Requested size: 398.33858pt x 55.90114pt.
 
-Overfull \hbox (1.42534pt too wide) in paragraph at lines 753--754
+Overfull \hbox (1.42534pt too wide) in paragraph at lines 729--730
  [][] 
  []
 
 
-LaTeX Warning: Float too large for page by 5.56395pt on input line 759.
+LaTeX Warning: Float too large for page by 5.56395pt on input line 735.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
@@ -1917,105 +1934,110 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 File: Theory/TheoryFigs/cat-deps1-collapsed-g.png Graphic file (type png)
 <use Theory/TheoryFigs/cat-deps1-collapsed-g.png>
 Package pdftex.def Info: Theory/TheoryFigs/cat-deps1-collapsed-g.png used on in
-put line 767.
+put line 743.
 (pdftex.def)             Requested size: 398.33858pt x 55.90114pt.
 
-Overfull \hbox (1.42534pt too wide) in paragraph at lines 767--768
+Overfull \hbox (1.42534pt too wide) in paragraph at lines 743--744
  [][] 
  []
 
-<Theory/TheoryFigs/cat-deps2-collapsed.png, id=1142, 955.57pt x 134.5025pt>
+<Theory/TheoryFigs/cat-deps2-collapsed.png, id=1174, 955.57pt x 134.5025pt>
 File: Theory/TheoryFigs/cat-deps2-collapsed.png Graphic file (type png)
 
 <use Theory/TheoryFigs/cat-deps2-collapsed.png>
 Package pdftex.def Info: Theory/TheoryFigs/cat-deps2-collapsed.png used on inpu
-t line 773.
+t line 749.
 (pdftex.def)             Requested size: 398.33858pt x 56.06787pt.
 
-Overfull \hbox (1.42534pt too wide) in paragraph at lines 773--774
+Overfull \hbox (1.42534pt too wide) in paragraph at lines 749--750
  [][] 
  []
 
-[49 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Theory/Theory
+[51 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Theory/Theory
 Figs/cat-deps1-collapsed-g.png> <C:/Users/Lenovo/PycharmProjects/the_poetry_pla
 giarist/report/Theory/TheoryFigs/cat-deps2-collapsed.png>]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[50] <Theory/TheoryFigs/cat1-fn-cn-a.png, id=1166, 949.29657pt x 223.58531pt>
+[52] <Theory/TheoryFigs/cat1-fn-cn-a.png, id=1197, 949.29657pt x 223.58531pt>
 File: Theory/TheoryFigs/cat1-fn-cn-a.png Graphic file (type png)
 
 <use Theory/TheoryFigs/cat1-fn-cn-a.png>
 Package pdftex.def Info: Theory/TheoryFigs/cat1-fn-cn-a.png used on input line 
-863.
+839.
 (pdftex.def)             Requested size: 398.33858pt x 93.81989pt.
 
-Overfull \hbox (1.42534pt too wide) in paragraph at lines 863--864
+Overfull \hbox (1.42534pt too wide) in paragraph at lines 839--840
  [][] 
  []
 
-<Theory/TheoryFigs/cat1-fn-cn-b.png, id=1167, 949.29657pt x 228.855pt>
+<Theory/TheoryFigs/cat1-fn-cn-b.png, id=1198, 949.29657pt x 228.855pt>
 File: Theory/TheoryFigs/cat1-fn-cn-b.png Graphic file (type png)
 
 <use Theory/TheoryFigs/cat1-fn-cn-b.png>
 Package pdftex.def Info: Theory/TheoryFigs/cat1-fn-cn-b.png used on input line 
-868.
+844.
 (pdftex.def)             Requested size: 398.33858pt x 96.03113pt.
 
-Overfull \hbox (1.42534pt too wide) in paragraph at lines 868--869
+Overfull \hbox (1.42534pt too wide) in paragraph at lines 844--845
  [][] 
  []
 
-<Theory/TheoryFigs/cat1-fn-cn-c.png, id=1168, 949.29657pt x 60.97781pt>
+<Theory/TheoryFigs/cat1-fn-cn-c.png, id=1199, 949.29657pt x 60.97781pt>
 File: Theory/TheoryFigs/cat1-fn-cn-c.png Graphic file (type png)
 
 <use Theory/TheoryFigs/cat1-fn-cn-c.png>
 Package pdftex.def Info: Theory/TheoryFigs/cat1-fn-cn-c.png used on input line 
-873.
+849.
 (pdftex.def)             Requested size: 398.33858pt x 25.58723pt.
 
-Overfull \hbox (1.42534pt too wide) in paragraph at lines 873--874
+Overfull \hbox (1.42534pt too wide) in paragraph at lines 849--850
  [][] 
  []
 
-<Theory/TheoryFigs/cat1-fn-cn-d.png, id=1169, 949.29657pt x 92.59593pt>
+<Theory/TheoryFigs/cat1-fn-cn-d.png, id=1200, 949.29657pt x 92.59593pt>
 File: Theory/TheoryFigs/cat1-fn-cn-d.png Graphic file (type png)
 
 <use Theory/TheoryFigs/cat1-fn-cn-d.png>
 Package pdftex.def Info: Theory/TheoryFigs/cat1-fn-cn-d.png used on input line 
-878.
+854.
 (pdftex.def)             Requested size: 398.33858pt x 38.85469pt.
 
-Overfull \hbox (1.42534pt too wide) in paragraph at lines 878--879
+Overfull \hbox (1.42534pt too wide) in paragraph at lines 854--855
  [][] 
  []
 
-[51] [52 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Theory/T
+[53] [54 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Theory/T
 heoryFigs/cat1-fn-cn-a.png> <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiar
 ist/report/Theory/TheoryFigs/cat1-fn-cn-b.png> <C:/Users/Lenovo/PycharmProjects
 /the_poetry_plagiarist/report/Theory/TheoryFigs/cat1-fn-cn-c.png> <C:/Users/Len
 ovo/PycharmProjects/the_poetry_plagiarist/report/Theory/TheoryFigs/cat1-fn-cn-d
-.png>] [53] [54] [55] [56]
+.png>] [55] [56] [57] [58]
 
-LaTeX Warning: Reference `fig:cat-bind' on page 57 undefined on input line 1097
+LaTeX Warning: Reference `fig:cat-bind' on page 59 undefined on input line 1073
 .
 
 
-LaTeX Warning: Reference `fig:persona-binded' on page 57 undefined on input lin
-e 1097.
+LaTeX Warning: Reference `fig:persona-binded' on page 59 undefined on input lin
+e 1073.
 
 
-Overfull \hbox (27.16216pt too wide) in paragraph at lines 1127--1128
+Overfull \hbox (27.16216pt too wide) in paragraph at lines 1103--1104
  [][] 
  []
 
 
-Overfull \hbox (27.16216pt too wide) in paragraph at lines 1153--1154
+Overfull \hbox (27.16216pt too wide) in paragraph at lines 1129--1130
  [][] 
  []
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+Overfull \hbox (16.72208pt too wide) in paragraph at lines 1161--1162
+ [][] 
+ []
 
 
 Overfull \hbox (16.72208pt too wide) in paragraph at lines 1185--1186
@@ -2028,12 +2050,7 @@ Overfull \hbox (16.72208pt too wide) in paragraph at lines 1209--1210
  []
 
 
-Overfull \hbox (16.72208pt too wide) in paragraph at lines 1233--1234
- [][] 
- []
-
-
-Overfull \hbox (9.43898pt too wide) in paragraph at lines 1255--1256
+Overfull \hbox (9.43898pt too wide) in paragraph at lines 1231--1232
  [][] 
  []
 
@@ -2043,7 +2060,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[57] [58]) [59] [60 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/repo
+[59] [60]) [61] [62 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/repo
 rt/Theory/TheoryFigs/cat-deps1-collapsed-a.png> <C:/Users/Lenovo/PycharmProject
 s/the_poetry_plagiarist/report/Theory/TheoryFigs/cat-deps1-collapsed-b.png> <C:
 /Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Theory/TheoryFigs/ca
@@ -2051,21 +2068,26 @@ t-deps1-collapsed-c.png> <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist
 /report/Theory/TheoryFigs/cat-deps1-collapsed-d.png> <C:/Users/Lenovo/PycharmPr
 ojects/the_poetry_plagiarist/report/Theory/TheoryFigs/cat-deps1-collapsed-e.png
 > <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Theory/TheoryFi
-gs/cat-deps1-collapsed-f.png>] [61] [62] [63]
+gs/cat-deps1-collapsed-f.png>] [63] [64] [65]
 (C:\Users\Lenovo\PycharmProjects\the_poetry_plagiarist\report\Implementation/im
 plementation.tex
 Chapter 4.
-[64
+[66
 
 
 
-] [65] [66] [67]
+] [67] [68] [69]
 Overfull \hbox (59.91734pt too wide) in paragraph at lines 108--109
 \OT1/cmr/m/it/12 3. re-turn [Count(stress[]pattern[]single[]line) for stress[]p
 attern[]single[]line in stress[]patterns[]all[]lines] 
  []
 
-[68]
+[70]
+LaTeX Font Info:    Try loading font information for OML+cmr on input line 134.
+
+ ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\omlcmr.fd"
+File: omlcmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
 LaTeX Font Info:    Font shape `OML/cmr/m/it' in size <12> not available
 (Font)              Font shape `OML/cmm/m/it' tried instead on input line 134.
 
@@ -2074,8 +2096,8 @@ Overfull \hbox (103.41747pt too wide) in paragraph at lines 154--155
 ]possible[]rhyme[]schemes.count(rhyme[]scheme) 
  []
 
-[69] [70]
-<Implementation/ImplementationFigs/RhymeSchemes.png, id=1298, 567.3195pt x 422.
+[71] [72]
+<Implementation/ImplementationFigs/RhymeSchemes.png, id=1329, 567.3195pt x 422.
 7795pt>
 File: Implementation/ImplementationFigs/RhymeSchemes.png Graphic file (type png
 )
@@ -2084,7 +2106,7 @@ Package pdftex.def Info: Implementation/ImplementationFigs/RhymeSchemes.png use
 d on input line 187.
 (pdftex.def)             Requested size: 178.60974pt x 133.10527pt.
 
-<Implementation/ImplementationFigs/StanzaLines.png, id=1299, 567.3195pt x 422.7
+<Implementation/ImplementationFigs/StanzaLines.png, id=1330, 567.3195pt x 422.7
 795pt>
 File: Implementation/ImplementationFigs/StanzaLines.png Graphic file (type png)
 
@@ -2093,7 +2115,7 @@ Package pdftex.def Info: Implementation/ImplementationFigs/StanzaLines.png used
  on input line 194.
 (pdftex.def)             Requested size: 178.60974pt x 133.10527pt.
 
-<Implementation/ImplementationFigs/PersonaTypes.png, id=1300, 567.3195pt x 422.
+<Implementation/ImplementationFigs/PersonaTypes.png, id=1331, 567.3195pt x 422.
 7795pt>
 File: Implementation/ImplementationFigs/PersonaTypes.png Graphic file (type png
 )
@@ -2102,7 +2124,7 @@ Package pdftex.def Info: Implementation/ImplementationFigs/PersonaTypes.png use
 d on input line 204.
 (pdftex.def)             Requested size: 178.60974pt x 133.10527pt.
 
-<Implementation/ImplementationFigs/PersonaAnimation.png, id=1301, 567.3195pt x 
+<Implementation/ImplementationFigs/PersonaAnimation.png, id=1332, 567.3195pt x 
 422.7795pt>
 File: Implementation/ImplementationFigs/PersonaAnimation.png Graphic file (type
  png)
@@ -2111,7 +2133,7 @@ Package pdftex.def Info: Implementation/ImplementationFigs/PersonaAnimation.png
  used on input line 210.
 (pdftex.def)             Requested size: 178.60974pt x 133.10527pt.
 
-<Implementation/ImplementationFigs/PersonaRelation.png, id=1302, 567.3195pt x 4
+<Implementation/ImplementationFigs/PersonaRelation.png, id=1333, 567.3195pt x 4
 22.7795pt>
 File: Implementation/ImplementationFigs/PersonaRelation.png Graphic file (type 
 png)
@@ -2120,7 +2142,7 @@ Package pdftex.def Info: Implementation/ImplementationFigs/PersonaRelation.png
 used on input line 221.
 (pdftex.def)             Requested size: 178.60974pt x 133.10527pt.
 
-<Implementation/ImplementationFigs/Line1NGrams.png, id=1303, 567.3195pt x 422.7
+<Implementation/ImplementationFigs/Line1NGrams.png, id=1334, 567.3195pt x 422.7
 795pt>
 File: Implementation/ImplementationFigs/Line1NGrams.png Graphic file (type png)
 
@@ -2129,7 +2151,7 @@ Package pdftex.def Info: Implementation/ImplementationFigs/Line1NGrams.png used
  on input line 228.
 (pdftex.def)             Requested size: 178.60974pt x 133.10527pt.
 
-<Implementation/ImplementationFigs/DistinctSentences.png, id=1304, 567.3195pt x
+<Implementation/ImplementationFigs/DistinctSentences.png, id=1335, 567.3195pt x
  422.7795pt>
 File: Implementation/ImplementationFigs/DistinctSentences.png Graphic file (typ
 e png)
@@ -2138,7 +2160,7 @@ Package pdftex.def Info: Implementation/ImplementationFigs/DistinctSentences.pn
 g used on input line 239.
 (pdftex.def)             Requested size: 178.60974pt x 133.10527pt.
 
-<Implementation/ImplementationFigs/OverallTense.png, id=1305, 567.3195pt x 422.
+<Implementation/ImplementationFigs/OverallTense.png, id=1336, 567.3195pt x 422.
 7795pt>
 File: Implementation/ImplementationFigs/OverallTense.png Graphic file (type png
 )
@@ -2146,44 +2168,44 @@ File: Implementation/ImplementationFigs/OverallTense.png Graphic file (type png
 Package pdftex.def Info: Implementation/ImplementationFigs/OverallTense.png use
 d on input line 246.
 (pdftex.def)             Requested size: 178.60974pt x 133.10527pt.
- [71 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Implementati
+ [73 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Implementati
 on/ImplementationFigs/RhymeSchemes.png> <C:/Users/Lenovo/PycharmProjects/the_po
 etry_plagiarist/report/Implementation/ImplementationFigs/StanzaLines.png> <C:/U
 sers/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Implementation/Impleme
 ntationFigs/PersonaTypes.png> <C:/Users/Lenovo/PycharmProjects/the_poetry_plagi
-arist/report/Implementation/ImplementationFigs/PersonaAnimation.png>] [72 <C:/U
+arist/report/Implementation/ImplementationFigs/PersonaAnimation.png>] [74 <C:/U
 sers/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Implementation/Impleme
 ntationFigs/PersonaRelation.png> <C:/Users/Lenovo/PycharmProjects/the_poetry_pl
 agiarist/report/Implementation/ImplementationFigs/Line1NGrams.png> <C:/Users/Le
 novo/PycharmProjects/the_poetry_plagiarist/report/Implementation/Implementation
 Figs/DistinctSentences.png> <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiar
-ist/report/Implementation/ImplementationFigs/OverallTense.png>]) [73]
+ist/report/Implementation/ImplementationFigs/OverallTense.png>]) [75]
 (C:\Users\Lenovo\PycharmProjects\the_poetry_plagiarist\report\Management/manage
 ment.tex
 Chapter 5.
-[74
+[76
 
 
 
-] [75] [76] [77] [78] [79] [80] [81] [82]
-Overfull \hbox (76.53201pt too wide) in paragraph at lines 189--190
+] [77] [78] [79] [80] [81] [82] [83] [84]
+Overfull \hbox (76.53201pt too wide) in paragraph at lines 186--187
 \OT1/cmr/m/n/12 Any per-sona with re-la-tions \OT1/cmr/m/it/12 1-TakesAction$\O
-MS/cmsy/m/n/12 !$\OT1/cmr/m/it/12 crawl\OT1/cmr/m/n/12 , \OT1/cmr/m/it/12 1-Has
-Property$\OMS/cmsy/m/n/12 !$\OT1/cmr/m/it/12 social\OT1/cmr/m/n/12 , \OT1/cmr/m
-/it/12 1-HasProperty$\OMS/cmsy/m/n/12 !$\OT1/cmr/m/it/12 small
+MS/cmtt/m/n/12 !$\OT1/cmr/m/it/12 crawl\OT1/cmr/m/n/12 , \OT1/cmr/m/it/12 1-Has
+Property$\OMS/cmtt/m/n/12 !$\OT1/cmr/m/it/12 social\OT1/cmr/m/n/12 , \OT1/cmr/m
+/it/12 1-HasProperty$\OMS/cmtt/m/n/12 !$\OT1/cmr/m/it/12 small
  []
 
-[83] [84] [85] [86] [87] [88] [89] [90] [91] [92] [93] [94]) [95]
+[85] [86] [87] [88] [89] [90] [91] [92] [93] [94] [95] [96]) [97]
 (C:\Users\Lenovo\PycharmProjects\the_poetry_plagiarist\report\Evaluation/evalua
 tion.tex
 Chapter 6.
-[96
+[98
 
 
 
-] [97] [98]) [99]
+] [99] [100]) [101]
 (C:\Users\Lenovo\PycharmProjects\the_poetry_plagiarist\report\Appendix1/appendi
-x1.tex [100
+x1.tex [102
 
 
 
@@ -2193,29 +2215,29 @@ Overfull \hbox (56.91786pt too wide) in paragraph at lines 60--60
  |[]\OT1/cmr/bx/n/17.28 CMU Pro-nun-ci-a-tion Dic-tio-nary ARPA-BET Phoneme
  []
 
-[101] [102] [103]
+[103] [104] [105]
 
 Package Fancyhdr Warning: \headheight is too small (23.69576pt): 
  Make it at least 27.08337pt.
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[104]
+[106]
 Overfull \hbox (28.65047pt too wide) in paragraph at lines 212--221
 [][] 
  []
 
-[105] [106]
+[107] [108]
 Overfull \hbox (253.53154pt too wide) in paragraph at lines 311--324
 [][] 
  []
 
-[107] [108]) [109] [110
+[109] [110]) [111] [112
 
 
-] [111] [112] [113]
+] [113] [114] [115]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 150.
- [114]
+ [116]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 150.
 
 (C:\Users\Lenovo\PycharmProjects\the_poetry_plagiarist\report\report.aux
@@ -2235,15 +2257,12 @@ tion.aux)
 x1.aux))
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 150.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 150.
+Package rerunfilecheck Info: File `report.out' has not changed.
+(rerunfilecheck)             Checksum: D7B09665323260BC42AB7BF35054275A;11525.
 
 
-Package rerunfilecheck Warning: File `report.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-Package rerunfilecheck Info: Checksums for `report.out':
-(rerunfilecheck)             Before: 31F4D1639ECECC01457840BF70CAFCD0;11087
-(rerunfilecheck)             After:  4D565710DD01692F5D4EFE5DDDA98B71;11006.
 
 LaTeX Warning: There were undefined references.
 
@@ -2253,35 +2272,32 @@ LaTeX Warning: There were multiply-defined labels.
 Package logreq Info: Writing requests to 'report.run.xml'.
  ) 
 Here is how much of TeX's memory you used:
- 35631 strings out of 493921
- 759778 string characters out of 3144873
- 1262207 words of memory out of 3000000
- 37790 multiletter control sequences out of 15000+200000
+ 35655 strings out of 493921
+ 760279 string characters out of 3144873
+ 1262453 words of memory out of 3000000
+ 37803 multiletter control sequences out of 15000+200000
  13484 words of font info for 49 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
  74i,34n,76p,894b,3559s stack positions out of 5000i,500n,10000p,200000b,50000s
-pdfTeX warning (dest): name{subsubsection.2.1.2.7} has been referenced but do
-es not exist, replaced by a fixed one
-
-<C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C
-:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><C
-:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:
-/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/P
-rogram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Prog
-ram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program
- Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Fi
-les (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files
- (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program Files (x
-86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files (x86)/
-MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmss10.pfb><C:/Program Files (x86)/Mi
-KTeX 2.9/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><C:/Program Files (x86)/Mi
-KTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/MiKT
-eX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Program Files (x86)/MiKTeX
- 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Program Files (x86)/MiKTeX 2
-.9/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on report.pdf (120 pages, 1580615 bytes).
+<C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
+<C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbxti10.pfb>
+<C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><
+C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:
+/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Pr
+ogram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Progr
+am Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program 
+Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Fil
+es (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program Files 
+(x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files (x86
+)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmss10.pfb><C:/Program Files (x86)/
+MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><C:/Program Files (x86)/
+MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/Mi
+KTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Program Files (x86)/MiKT
+eX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Program Files (x86)/MiKTeX
+ 2.9/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on report.pdf (122 pages, 1612060 bytes).
 PDF statistics:
- 1692 PDF objects out of 1728 (max. 8388607)
- 379 named destinations out of 1000 (max. 500000)
- 1253 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1727 PDF objects out of 1728 (max. 8388607)
+ 388 named destinations out of 1000 (max. 500000)
+ 1285 words of extra memory for PDF output out of 10000 (max. 10000000)
 

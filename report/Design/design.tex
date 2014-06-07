@@ -430,6 +430,33 @@ Successes of Computational Creativity:
 %https://www.cs.helsinki.fi/webfm_send/571
 %http://computationalcreativity.net/iccc2014/wp-content/uploads/2013/09/ComputationalCreativity.pdf
 
+\subsubsection{Semantic Networks of Common Sense}
+\label{sec:common-sense-bg}
+Boden proposes that th mind can be modelled as a search space[ref] of \textit{concepts} and relations between them. In our case, these concepts are represented by words or phrases that have literal and symbolic meaning. The number of concepts in the space and how words relate to each other are determined by knowledge and experience.
+
+Tom De Smedt uses this idea to model creativity[ref]. He proposes a network with concepts at the nodes and relations between them, perhaps of a specific type, are the edges.
+
+If we think of a \textit{cat} as a concept, it would be directly related to other concepts such as \textit{dog} and \textit{mouse}. These are \textit{mundane} associations between concepts.
+
+Concepts are defined in this network by looking at the outgoing neighbours of its node. This is called the concept \textit{halo}. Conversely, the \textit{field} of a concept acts as a classification by finding all neighbours that relate to it, rather than from it. A possible halo and field of the concepts \textit{cat} and \textit{furry} respectfully are shown in Figure BLAH.
+
+FIGURE BLAH. 
+
+If we were to look at \textit{paths} in the network, we can realise relationships between concepts that are less mundane, and therefore more creative.
+
+For example, we may travel along the path \textit{cat $\rightarrow$ meow $\rightarrow$ loud $\rightarrow$ fire alarm} to create an analogy between the cats and fire alarms.
+
+Since this knowledge is modelled as a graph, we are able to use standard graph algorithms such as Dijkstra's shortest path[ref] to find similarity between concepts.
+
+\paragraph{ConceptNet}
+ConceptNet\cite{liu2004conceptnet} is an attempt to build a single source of \textit{'things computers should know about the world'} using the idea of a semantic network of concepts.
+
+It gathers its knowledge from an array of sources but large amounts come from Wikipedia. Edges represent \textit{relations} between concepts and come in various types, as shown in Table BLAH.
+
+Table BLAH: https://github.com/commonsense/conceptnet5/wiki/Relations
+
+It also provides functional interfaces such as finding the closest concept to a given number of concepts and similarity between concepts.
+
 \section{Brief Overview of Computational Linguistics}
 Computational Linguistics is a wide area of research, covering Speech Recognition, Natural Language Processing and Generation and with overlaps in several other areas such as Machine Learning and Knowledge Representation. In fact, Daniel Jurafsky and James H. Martin needed almost a thousand pages to cover the foundations of this area\cite{jurafsky2000speech}.
 
@@ -455,13 +482,13 @@ Morphology of words is the study of putting words together with \textit{morpheme
 
 The CLiPS Pattern library has a number of tools for morphology of words. It provides a method of changing a word into its first, second or third person version, pluralisation and finding superlatives.\cite{de2012pattern}
 
-SimpleNLG
-
 %http://delivery.acm.org/10.1145/980000/972475/p313-marcus.pdf?ip=82.31.135.169&id=972475&acc=OPEN&key=BF13D071DEA4D3F3B0AA4BA89B4BCA5B&CFID=397642531&CFTOKEN=69509660&__acm__=1390858444_560bb7766479576772371b53b664bc15
 
 \subsection{Syntax}
 \label{sec:syntax}
 Syntax is the glue that binds words together. It gives us an understanding of the grammatical relationship between words and guides the building of phrases and sentences.
+
+\subsubsection{The Penn Treebank Tagset}
 
 Core to this area of research is \textit{part-of-speech (POS)} analysis, which provides a model for grouping words together correctly, taking into account how words depend on each other. The big success story in this area is The Penn Treebank Tagset, an enormous corpus of annotated POS information \cite{marcus1993building}. The full tagset is given in Table \ref{tab:penn} in the Appendix. This accelerated progress of research in the area, as the paper had expected. 
 
@@ -471,7 +498,7 @@ For example, the phrase \textit{John loves Mary} would be represented as in Figu
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=100mm]{Treebank}
+\includegraphics[width=60mm]{Treebank}
 \caption{Parse tree of \textit{'John loves Mary'}}
 \label{fig:parse}
 \end{figure}
@@ -479,15 +506,55 @@ For example, the phrase \textit{John loves Mary} would be represented as in Figu
 Python's Natural Language Toolkit (NLTK)\cite{bird2009natural} is a suite of text processing libraries, corpora and lexical resources that is heavily used in this project, particularly for syntactical purposes. It will allow us to use The Penn Treebank tags as well as produce our own grammar and parser that can be used to parse most poetry. This is a challenge because we cannot expect poetry to follow grammatical rules as strictly as discourse. However, the pay-off will be that we can model the context of the poem, leading to better analysis of semantics and pragmatics of poetry.
 %http://www.postgradolinguistica.ucv.cl/dev/documentos/49,578,Noam%20Chomsky%20-%20Syntactic%20Structure.pdf
 
-\subsection{Semantics and Pragmatics}
+\subsubsection{Stanford Dependencies}
+\label{sec:stanford-deps}
+The Stanford Dependencies\cite{de2008stanford} is another representation based around the relationships between words. All dependency relations are strictly binary and come in various types depending on the participants, called the \textit{governor} and the \textit{dependent}.
+
+It aims to make extraction of textual relationships more approachable to those without linguistic expertise by using more colloquial relationships, such as subjects and objects of a sentence. We represent the dependencies of a sentence as directed graphs with words at the nodes and the dependency relations as the edges between them, as in Figure BLAH below.
+
+Figure BLAH: http://nlp.stanford.edu/software/stanford-dependencies.shtml
+
+TurboParser[http://www.ark.cs.cmu.edu/TurboParser/] is an example of a parser based on the Standford Dependencies.
+
+
+\subsection{Semantics}
 \label{sec:semantics}
-Chomsky used the famous example \textit{'Colourless green ideas sleep furiously'} to show that a valid grammatical syntax can be completely nonsensical\cite{chomsky2002syntactic}. This illustrates the importance of the study of semantics, the meaning of words and phrases, as well as pragmatics, the way context affects semantics. Suppose the context around Chomsky's example was a person with old (black-and-white, colourless) ideas of making money (green) that he wants to bring back (was put to sleep, but not peacefully), then this line would make some sense in a poetic way.
+Noam Chomsky used the famous example \textit{'Colourless green ideas sleep furiously'} to show that a valid grammatical syntax can be completely nonsensical\cite{chomsky2002syntactic}. This illustrates the importance of the study of semantics; the meaning of words and phrases, as well as pragmatics; the way context affects semantics. Suppose the context around Chomsky's example was a person with old (black-and-white, colourless) ideas of making money (green) that he wants to bring back (was put to sleep, but not peacefully), then this line would make some sense in a poetic way.
 
-This is yet another major challenge for poetry generation. Poems are concise but have many layers of meaning that are subtle even to human readers and that only the best of poets can fully control. The different categories of poems each have their own pragmatics and there is always a fundamental message and purpose supporting these layers meaning. Veale argues that 'poetic licence' is not a licence but a contract that allows a speaker to take liberties in language in exchange for real insight\cite{veale2013less}. We must be careful not to abuse this by slewing unrelated words together and expecting the reader to do the work of finding meaning and context.
+We first introduce the concepts of \textit{anaphora} and \textit{presuppostions} and techniques for resolving them. We then move on to discussing two current methods of understanding semantics in natural language; Discourse Representation Theory and Semantic Role Labelling.
 
-Various methods of understanding semantics in natural language have been proposed. A very popular one is First Order Logic. In particular, Hans Kamp proposes Discourse Representation Theory (DRT) as a way of modelling language in such a way. We use this theory in this project and will go into more depth in the next section.
+\subsubsection{Anaphora Resolution and Presupposition Projection}
+\label{sec:arback}
+In linguistics, \textit{anaphora} is the technique of using words that are used to refer to another object within a specific context. For example, the sentences \textit{'Joe put on a coat because he felt cold'} and \textit{'Because he felt cold, Joe put on a coat'} are both anaphoric, with \textit{'he'} being the anaphor that refers to 'Joe', who in the earlier sentence is referred to as the \textit{antecedent} and in the latter as the \textit{postcedent} because of the relative ordering of the word and its anaphor.
 
-Johan Bos and his team have begun the Groningen Meaning Bank (GMB) project\cite{BasileBosEvangVenhuizen2012LREC}, a large semantically annotated corpus in lieu of The Penn Treebank, in the attempt to bring the same success and acceleration to this sub-field of research. They use DRT as the backbone to an assembly of third-party tools to annotate semantics, as can be seen in Figure \ref{fig:gmb}.
+Presupposition is a similar technique, except that it works on implicit assumptions about the context. For example, the sentence \textit{'The cat chased the mouse, but it managed to evade the feline.'} uses the assumption that the cat is a feline. It then projects this as a presupposition to avoid re-using the same word or introducing anaphora, while still indicating to the same object. This is a very useful linguistic technique, especially when used to make temporal inferences. The sentence \textit{'Joe stopped playing the piano'} has the implicit assumption that Joe once played the piano.
+
+Resolving anaphora and presupposition in text is an ongoing research area in Computational Linguistics. Various tools have been developed using a variety of techniques as shown in Table BLAH. It is worth noting that existing solutions are generally do not use domain-specific or linguistic knowledge.
+Table BLAH: http://www.slideshare.net/kancho/anaphora-resolution
+
+\subsubsection{Discourse Representation Theory}
+\label{sec:drt}
+Discourse Representation Theory (DRT)\cite{kamp1993discourse} is a framework for investigating semantics of natural language proposed by Hans Kamp. Abstract mental representations of DRT are Discourse Representation Structures (DRSs), which are designed to combine meaning across sentences and cope with anaphora (e.g. using pronouns in place of nouns, see Section \ref{sec:arback}). 
+
+Using Kamp's example, if we take the sentence \textit{A farmer owns a donkey} and convert it into a DRS, we get the following notation:\\
+\texttt{\{[x,y: farmer(x), donkey(y), own(x,y)]\}}
+
+If we then say \textit{He beats it.}, it will produce:\\
+\texttt{\{[x,y,z,w: farmer(x), donkey(y), own(x,y), PRO(z), PRO(w), beat(z,w)]\}}
+
+We can then use anaphora resolution on this DRS to produce:\\
+\texttt{\{[x,y: farmer(x), donkey(y), own(x,y), beat(x,y)]\}}
+
+We can see that this is similar to the notation used by Manurung in MCGONNAGAL, described in section \ref{sec:mcg}.
+
+This method has evolved over the years to take tense and aspect into account, providing temporal reasoning in natural language sentences. Accuracy of anaphora and presupposition (e.g. saying 'animal' instead of 'cat', see Section \ref{sec:arback}) resolution has improved with the use of the third-party tools in combination with the ideas of Blackburn and Bos\cite{blackburn2008computational}.
+
+Extending this example, we may wish to model the sentence \textit{Every farmer who owns a donkey beats it.}. DRT provides an elegant solution for this using first order logic style 'for all':\\
+\texttt{\{[x][y][farmer(x), donkey(y), own(x,y) $\rightarrow$ beat(x,y)]\}}
+
+This allows us to provide background knowledge to the system and make inferences on it. As a result of its usefulness in many applications, NLTK has included DRS manipulation and anaphora resolution into its core semantics package.
+
+Johan Bos and his team have begun the Groningen Meaning Bank (GMB) project\cite{BasileBosEvangVenhuizen2012LREC}, a large semantically annotated corpus in lieu of The Penn Treebank, in the attempt to bring the same success and acceleration to this sub-field of research. They use DRT as the backbone to an assembly of third-party tools to annotate semantics, as can be seen in Figure \ref{fig:gmb}. However, the GMB project is still in early stages and has only annotated open license news articles up until now, which is not a suitable corpus for many use-cases, including poetry generation.
 
 \begin{figure}[h!]
 \centering
@@ -495,12 +562,47 @@ Johan Bos and his team have begun the Groningen Meaning Bank (GMB) project\cite{
 \caption{Semantic structure of the sentence \textit{Smoking causes diseases.}}
 \label{fig:gmb}
 \end{figure}
+%http://www.let.rug.nl/bos/pubs/BasileBosEvangVenhuizen2012LREC.pdf
+%http://aclweb.org/anthology/W/W11/W11-2819.pdf
+%http://www.let.rug.nl/bos/pubs/BasileBosEvangVenhuizen2012LREC.pdf
 
-However, the GMB project is still in early stages and has only annotated open license news articles up until now, which is not a suitable corpus for poetry generation. However, we will support the coordination of third-party tools and will consider using the following to boost the semantic and pragmatic skill of our poetry generator, particularly with regards to the problem of producing vivid imagery and pragmatic parsing.
+DRT in general is very effective when dealing with rule-based knowledge bases, in lieu of declarative logic programming. Its proficiency at anaphora and presupposition resolution and handling "donkey phrases" make it applicable to question-answer systems, where usefulness comes in determining truth or falsity of sentences.
+
+However, it may not be an effective model for semantic relations that require classification of different types of phrases and the roles of words in a sentence. It also requires a very comprehensive and flexible grammar to be able to convert a large variety of English sentences into Discourse Representation Structures, especially if the sentences may not have perfect grammar as in poetry. For this, we use a method called Semantic Role Labelling.
+
+\subsubsection{Semantic Role Labelling}
+Semantic Role Labelling (SRL) is best described with an example. Take the sentence:
+{\centering\textit{"The shopkeeper told the customer to have a nice day"}}
+We wish to recognise the verb \textit{'to tell'} as the coordinating word (called the \textbf{target}), \textit{'the shopkeeper'} as the speaker, \textit{'have a nice day'} as the message and \textit{'the customer'} as the addressee. This output can be seen clearly in Figure \ref{fig:shopkeeper-frames}, along with other potential labels. 
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=140mm]{shopkeeper-frames}
+\caption{SEMAFOR frame-semantic parse for the shopkeeper example}
+\label{fig:shopkeeper-frames}
+\end{figure}
+
+This can be quite flexible as it can adapt to the syntactic structure of the sentence and does require absolute grammatical correctness. The SRL for the \textit{"Yoda-speak"} equivalent will remain the same, as shown in Figure \ref{fig:shopkeeper-frames-yoda}.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=140mm]{shopkeeper-frames-yoda}
+\caption{SEMAFOR frame-semantic parse for a grammatically incorrect sentence.}
+\label{fig:shopkeeper-frames-yoda}
+\end{figure}
+
+These examples are retrieved through the SEMAFOR tool[ref],  which is one of a number of available SRLs[http://www.kenvanharen.com/2012/11/comparison-of-semantic-role-labelers.html]. SEMAFOR was trained on FrameNet data (see \ref{sec:common-sense-bg}) to determine the frame-semantic structure of the text.
+
+While SRL may not be able to handle "donkey phrases" and does not inherently resolve anaphora or presuppositions, it is a much more effective method of extracting roles and relationships between words. The biggest benefit is that it is not entirely dependent on perfect grammar, which will be very useful in poetry analysis.
+
+
+\subsubsection{Sources of Semantic Information}
+There are various sources of different types of semantic information that are used to improve the quality of computational semantic understanding. A small subset of these are listed below.
+
 \begin{itemize}
 \item{\textit{WordNet}: a lexical database that provides hierarchical, conceptual-semantic and lexical relations of 155,287 English words.\cite{miller1995wordnet}}
 \item{\textit{VerbNet}: a lexical database that groups verbs by semantic and syntactic linking behaviour.\cite{schuler2005verbnet}}
-\item{\textit{FrameNet}: a lexicon with framing semantics to define and constrain the building of clauses around individual words.\cite{baker1998berkeley}}
+\item{\textit{FrameNet}: a lexicon with framing semantics to define and constrain the building of clauses around individual words.FrameNet\cite{baker1998berkeley} is a lexical database of \textit{semantic frames}, which describe the meaning of a word based on the words that typically participate with it, known as \textit{frame elements}.\cite{baker1998berkeley}}
 \item{\textit{ACE}: a classification of names, places and other proper nouns for Named Entity Recognition.\cite{doddington2004automatic}}
 \item{\textit{PropBank}: an annotated corpus a million words defining and providing argument role labels for verbs\cite{kingsbury2002treebank}}
 \item{\textit{NomBank}: similar to PropBank, but for nouns instead of verbs.\cite{meyers2004nombank}}
@@ -509,50 +611,14 @@ However, the GMB project is still in early stages and has only annotated open li
 \item{\textit{Oxford Collocations Dictionary}: a source of word pairings and phrases that occur with greater than chance probability\cite{crowther2003oxford}}
 \item{\textit{University of South Florida Free Association Norms}, a database of various types of word associations\cite{nelson2004university}}
 \item{\textit{LinguaTools DISCO}: a tool to derive semantic similarity between words based on statistical analysis of large text collections\cite{kolb2008disco}}
-\item{\textit{ConceptNet 5}: a semantic general knowledge network\cite{liu2004conceptnet}}
 \item{\textit{Written Sound}: a dictionary of onomatopoeia to their meanings and associated objects\cite{onomat}}
 \end{itemize}
 
 Not all of these tools will be used in this project due to the limited scope. The selected few will be justified in the implementation section with regards to meeting the objectives of this paper. Others will be suggested for future extensions to this project.
 
-%http://www.let.rug.nl/bos/pubs/BasileBosEvangVenhuizen2012LREC.pdf
-
-\subsection{Discourse Representation Theory}
-\label{sec:drt}
-Discourse Representation Theory (DRT)\cite{kamp1993discourse} is a framework for investigating semantics of natural language. DRT is becoming the accepted theory of meaning representation\cite{BasileBosEvangVenhuizen2012LREC}\cite{blackburn2008computational} and is fundamental to the task of semantic modelling of natural language.
-
-Abstract mental representations of DRT are Discourse Representation Structures (DRSs). It is designed to be able to combine meaning across sentences and cope with anaphora (e.g. pronouns in place of nouns). 
-
-Using Kamp's example, if we take the sentence \textit{A farmer owns a donkey} and convert it into a DRS, we get the following notation:\\
-\textit\{[x,y: farmer(x), donkey(y), own(x,y)]\}
-
-If we then say \textit{He beats it.}, it will produce:\\
-\textit\{[x,y,z,w: farmer(x), donkey(y), own(x,y), PRO(z), PRO(w), beat(z,w)]\}.
-
-We can then use anaphora resolution on this DRS to produce:\\
-\textit\{[x,y: farmer(x), donkey(y), own(x,y), beat(x,y)]\}
-
-We can see that this is similar to the notation used by Manurung in MCGONNAGAL, described in section \ref{sec:mcg}.
-
-This method has evolved over the years to take tense and aspect into account, providing temporal reasoning in natural language sentences. Accuracy of anaphora and presupposition (e.g. saying 'animal' instead of 'cat') resolution has improved with the use of the third party tools mentioned earlier in combination with the ideas of Blackburn and Bos\cite{blackburn2008computational}.
-
-Extending this example, we may wish to model the sentence \textit{Every farmer who owns a donkey beats it.}. DRT provides an elegant solution for this using first order logic style 'for all':\\
-\textit\{[x][y][farmer(x), donkey(y), own(x,y) -\textgreater beat(x,y)]\}
-
-This allows us to provide background knowledge to the system and make inferences on it. As a result of its usefulness in many applications, NLTK has included DRS manipulation and anaphora resolution into its core 'sem' package. 
-
-In poetry, like any text, we can use this to analyse the semantics and pragmatics of the storyline. Furthermore, we hypothesis that it can be used to model each poetry type since they each have their own forms and purposes, and provide coherency to the story when generating text.
-%http://aclweb.org/anthology/W/W11/W11-2819.pdf
-%http://www.let.rug.nl/bos/pubs/BasileBosEvangVenhuizen2012LREC.pdf
-
-\subsection{Anaphora Resolution and Presupposition Projection}
-\label{sec:arback}
-
-Need some stuff here. Probably remove the DRT section as well.
-
 \subsection{Natural Language Generation}
 \label{sec:bg-nlg}
-Natural Language Generation is the term for putting some non-linguistic form of content into understandable text in a human language. Reiter and Dale give the framework\cite{reiter2000building} illustrated in figure \ref{fig:nlg} for the process of generating natural language.
+Natural Language Generation is the term for putting some non-linguistic form of content into understandable text in a human language. Reiter and Dale give the framework\cite{reiter2000building} illustrated in Figure \ref{fig:nlg} for the process of generating natural language.
 
 \begin{figure}[h!]
 \centering
@@ -569,18 +635,14 @@ A similar model was propsed by Bateman and Zock\cite{mitkov2003oxford}, which in
 \item{\textit{Physical Presentation:} Final articulated text is presented.}
 \end{enumerate}
 
-These are theories upon which natural language generation tools, such as simpleNLG\cite{gatt2009simplenlg}, have been designed. There are others, such as grammar generation implemented by NLTK (similar to the one used in MCGONNAGAL) or the constraint programming technique used by Toivanen et al. explained in section \ref{sec:con}, but we find that this process is not granular enough, jumping from the goal to the surface text without enough consideration for the individual words used.
+SimpleNLG\cite{gatt2009simplenlg} is a Java library that provides useful functionality for natural language generation using the ideas of Reiter and Dale. In particular, it enables us to build \textit{phrases} for nouns, verbs, prepositions, adjectives and adverbs that can be enriched with grammatical metadata such as tense, aspect and perspective (for verbs), as well as plurality, gender and animation for nouns.
 
-The inputs into this system can vary. One popular problem is raw numerical data into a textual summary. In our case, however, we look at symbolic representations of content in the form of a DRS. Basile and Bos argue that DRSs are appropriate for all stages of the Bateman and Zock example\cite{basile2011towards}. Gardent and Kow have also proposed a symbolic approach to the Surface Realisation phase, working from first-order logic as the input form\cite{gardent2007symbolic}.
+These phrases can then be put together into \textit{clauses} that define the roles of each phrase in the desired sentence, for example by specifying the subject and object noun phrases. It then \textit{realises} a grammatically correct natural language sentence taking all of the provided information into account.
 
-In this paper, we will look at using DRSs to guide the content, i.e. the Macro Planning stage. However, we feel it is restrictive to use it for Micro Planning, since it gives no scope the use of symbolic imagery, or Surface Realisation, as it forces grammatical perfection.
+There are others, such as grammar generation implemented by NLTK (similar to the one used in MCGONNAGAL) or the constraint programming technique used by Toivanen et al. explained in section \ref{sec:con}. However, we find that this process is not granular enough, jumping from the goal to the surface text without enough consideration for the individual words used.
 
-%http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.111.9651&rep=rep1&type=pdf
-%http://acl.ldc.upenn.edu/P/P07/P07-1042.pdf
+More elaborate tools exist, such as KPML\cite{bateman1997enabling} and FUF\cite{elhadad1989fuf}/SURGE\cite{elhadad1996overview}, that have greater grammatical coverage than SimpleNLG. However, they are either no longer maintained or too complex for our purposes.
 
-%\subsection{Summarisation}
-%http://acl.ldc.upenn.edu/eacl2006/main/papers/22_2_careniningpauls_201.pdf
-%http://delivery.acm.org/10.1145/1620000/1610199/p25-marsi.pdf?ip=82.31.135.169&id=1610199&acc=OPEN&key=BF13D071DEA4D3F3B0AA4BA89B4BCA5B&CFID=397642531&CFTOKEN=69509660&__acm__=1390863805_45be3d0b76b231e221c184d5df6cdb59
 
 % ------------------------------------------------------------------------
 

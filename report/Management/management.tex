@@ -18,6 +18,8 @@ However, grammatical rules in poetry are broken for some poetic purpose like mat
 
 Furthermore, we discussed in Section \ref{sec:semantics} that even grammatically correct sentences can be completely nonsensical. We require understanding of the semantic relationships between words to be able to write with intention and in a way that can be understood by the reader.
 
+Poems are concise but have many layers of meaning that are subtle even to human readers and that only the best of poets can fully control. The different categories of poems each have their own pragmatics and there is always a fundamental message and purpose supporting these layers meaning. Veale argues that 'poetic licence' is not a licence but a contract that allows a speaker to take liberties in language in exchange for real insight\cite{veale2013less}. We must be careful not to abuse this by slewing unrelated words together and expecting the reader to do the work of finding meaning and context.
+
 As discussed in Section \ref{sec:purpose}, the purpose of poetry is to deliver a specific, intentional message. This cannot be done without control over language both syntactically and semantically.
 
 On a separate note, this implementation should be able to produce any type of poem accurately to the information gathered in the analysis and interpretation. We cannot make any assumptions on the length of the lines, the existence of rhyme or the topics covered by the poems.
@@ -37,11 +39,6 @@ We attempted to recognise the existence of ConceptNet-style relations during the
 2-RA->chase
 
 These relations outline the context of the poem. In lieu with our \textit{content first} approach, we begin by directly translating these relations into syntactically correct natural language \textit{clauses}, which can be organised into lines in a poem. We make use of two tools to do this; \textbf{SimpleNLG}[REF] and \textbf{FrameNet}[REF].
-
-\subsection{SimpleNLG}
-SimpleNLG is a Java library that provides useful functionality for natural language generation using the ideas of Reiter and Dale described in Section \ref{sec:bg-nlg}. In particular, it enables us to build \textit{phrases} for nouns, verbs, prepositions, adjectives and adverbs that can be enriched with grammatical metadata such as tense, aspect and perspective (for verbs), as well as plurality, gender and animation for nouns.
-
-These phrases can then be put together into \textit{clauses} that define the roles of each phrase in the desired sentence, for example by specifying the subject and object noun phrases. It then \textit{realises} a grammatically correct natural language sentence taking all of the provided information into account.
 
 We choose to use SimpleNLG because, as its name suggests, it is very simple to use. It provides an almost bespoke interface into the features of the sentence that we picked out in the analysis stage, allowing us to apply the results directly to our new poems. Despite it being a Java library we are able to execute it and access its objects from Python via JPype[REF], a tool for running Java libraries accessing the Java Virtual Machine from Python.
 
