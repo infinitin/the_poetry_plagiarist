@@ -449,6 +449,7 @@ For example, we may travel along the path \textit{cat $\rightarrow$ meow $\right
 Since this knowledge is modelled as a graph, we are able to use standard graph algorithms such as Dijkstra's shortest path[ref] to find similarity between concepts.
 
 \paragraph{ConceptNet}
+\label{sec:conceptnet}
 ConceptNet\cite{liu2004conceptnet} is an attempt to build a single source of \textit{'things computers should know about the world'} using the idea of a semantic network of concepts.
 
 It gathers its knowledge from an array of sources but large amounts come from Wikipedia. Edges represent \textit{relations} between concepts and come in various types, as shown in Table BLAH.
@@ -510,11 +511,16 @@ Python's Natural Language Toolkit (NLTK)\cite{bird2009natural} is a suite of tex
 \label{sec:stanford-deps}
 The Stanford Dependencies\cite{de2008stanford} is another representation based around the relationships between words. All dependency relations are strictly binary and come in various types depending on the participants, called the \textit{governor} and the \textit{dependent}.
 
-It aims to make extraction of textual relationships more approachable to those without linguistic expertise by using more colloquial relationships, such as subjects and objects of a sentence. We represent the dependencies of a sentence as directed graphs with words at the nodes and the dependency relations as the edges between them, as in Figure BLAH below.
+It aims to make extraction of textual relationships more approachable to those without linguistic expertise by using more colloquial relationships, such as subjects and objects of a sentence. We represent the dependencies of a sentence as directed graphs with words at the nodes and the dependency relations as the edges between them. Figure \ref{fig:shopkeeper-deps} shows this for the sentence \textit{'The shopkeeper told the customer to have a nice day'}
 
-Figure BLAH: http://nlp.stanford.edu/software/stanford-dependencies.shtml
+\begin{figure}[h!]
+\centering
+\includegraphics[width=140mm]{shopkeeper-deps}
+\caption{TurboParser Semantic Dependency parse for the shopkeeper example.}
+\label{fig:shopkeeper-deps}
+\end{figure}
 
-TurboParser[http://www.ark.cs.cmu.edu/TurboParser/] is an example of a parser based on the Standford Dependencies.
+This was parsed using TurboParser\cite{turboparser}.
 
 
 \subsection{Semantics}
@@ -593,28 +599,115 @@ This can be quite flexible as it can adapt to the syntactic structure of the sen
 
 These examples are retrieved through the SEMAFOR tool[ref],  which is one of a number of available SRLs[http://www.kenvanharen.com/2012/11/comparison-of-semantic-role-labelers.html]. SEMAFOR was trained on FrameNet data (see \ref{sec:common-sense-bg}) to determine the frame-semantic structure of the text.
 
+\paragraph{FrameNet}
+
 While SRL may not be able to handle "donkey phrases" and does not inherently resolve anaphora or presuppositions, it is a much more effective method of extracting roles and relationships between words. The biggest benefit is that it is not entirely dependent on perfect grammar, which will be very useful in poetry analysis.
 
 
-\subsubsection{Sources of Semantic Information}
-There are various sources of different types of semantic information that are used to improve the quality of computational semantic understanding. A small subset of these are listed below.
+\subsubsection{Semantic Knowledge Resources}
+There are various sources of different types of semantic information that are used to improve the quality of computational semantic understanding. Here we discuss those that are use heavily in this project and could potentially be used in the future.
 
-\begin{itemize}
-\item{\textit{WordNet}: a lexical database that provides hierarchical, conceptual-semantic and lexical relations of 155,287 English words.\cite{miller1995wordnet}}
-\item{\textit{VerbNet}: a lexical database that groups verbs by semantic and syntactic linking behaviour.\cite{schuler2005verbnet}}
-\item{\textit{FrameNet}: a lexicon with framing semantics to define and constrain the building of clauses around individual words.FrameNet\cite{baker1998berkeley} is a lexical database of \textit{semantic frames}, which describe the meaning of a word based on the words that typically participate with it, known as \textit{frame elements}.\cite{baker1998berkeley}}
-\item{\textit{ACE}: a classification of names, places and other proper nouns for Named Entity Recognition.\cite{doddington2004automatic}}
-\item{\textit{PropBank}: an annotated corpus a million words defining and providing argument role labels for verbs\cite{kingsbury2002treebank}}
-\item{\textit{NomBank}: similar to PropBank, but for nouns instead of verbs.\cite{meyers2004nombank}}
-\item{\textit{Wordnik}: a multi-faceted dictionary and semantic language database collected from a variety of sources\cite{wordnik}}
-\item{\textit{Metaphor Magnet}: a web application that maps commonplace metaphors in everyday texts\cite{vealespecifying}}
-\item{\textit{Oxford Collocations Dictionary}: a source of word pairings and phrases that occur with greater than chance probability\cite{crowther2003oxford}}
-\item{\textit{University of South Florida Free Association Norms}, a database of various types of word associations\cite{nelson2004university}}
-\item{\textit{LinguaTools DISCO}: a tool to derive semantic similarity between words based on statistical analysis of large text collections\cite{kolb2008disco}}
-\item{\textit{Written Sound}: a dictionary of onomatopoeia to their meanings and associated objects\cite{onomat}}
-\end{itemize}
+\paragraph{WordNet}
+WordNet is a widely used, high quality lexical database that provides hierarchical, conceptual-semantic and lexical relations of 155,287 English words\cite{miller1995wordnet}. 
 
-Not all of these tools will be used in this project due to the limited scope. The selected few will be justified in the implementation section with regards to meeting the objectives of this paper. Others will be suggested for future extensions to this project.
+\textit{Synsets} in WordNet are sets of cognitive synonyms, e.g. \textit{car} and \textit{automobile} are in the same synset, but not \textit{cable car}. The noun \textit{bear} and it's verbal namesake are in separate synsets, aiding in word sense disambiguation.
+
+A \textit{hypernym} of a synset is a \textbf{type-of} relation. For example, the synset \textit{mammal} is a hypernym of \textit{cat} because cats are types of mammals. Similarly, \textit{animal} is also a hypernym of \textit{cat}, as well as being a hypernym of \textit{mammal}. The \textit{direct hypernym} of a synset is the synset directly above it in the hypernym tree; \textit{feline} in the case of the cat. The \textit{inherited hypernym} of a word refers to any word that appears in its \textit{hypernym tree} as seen in Figure \ref{fig:hypernym-tree-cat}. 
+
+\begin{figure}[h!]
+\centering
+\tikzstyle{every node}=[anchor=west]
+\begin{tikzpicture}[%
+  grow via three points={one child at (0.2,-0.5) and %
+  two children at (0.5,-0.7) and (0.5,-1.4)},%
+  edge from parent path={(\tikzparentnode.south)%
+  |- (\tikzchildnode.west)}]
+\node {cat}
+    child { node {feline}
+       child {node {carnivore}
+       	child {node {placental}
+       	 child {node {mammal}
+       	  child {node {vertebrate}
+       	   child {node {chordate}
+       		child {node {animal}
+       		 child {node {organism}
+       		  child {node {living thing}
+       		   child {node {whole}
+       			child {node {object}
+       			 child {node {physical entity}
+       			  child {node {entity}
+          }}}}}}}}}}}}};
+\end{tikzpicture}
+\caption{Full inherited hypernym tree for 'cat' synset according to WordNet}
+\label{fig:hypernym-tree-cat}
+\end{figure}
+
+A \textit{meronym} of a synset is a \textbf{part-of} relation. It denotes member constituents of other synsets. For example, the \textit{wheel} synset is a meronym of \textit{car}.
+
+
+\paragraph{FrameNet}
+FrameNet\cite{baker1998berkeley} is a lexicon with framing semantics to \textit{define and constrain} the building of clauses around individual words. It describes the meaning of a word based on the words that typically participate with it, known as \textit{frame elements} or \textit{FEs}.
+
+Take the Desiring frame for example, which has a list of words, referred to as \textit{lexical units} or \textit{LUs} - that are used in statements that indicate desire, e.g. want, lust, yearn etc. Each of these LUs come with their own \textit{lexical entries} that describe the FEs and \textit{Valence patterns}. These define the types of phrases that can be built around a particular LU.
+
+Take the \textit{yearn} LU. It's FEs and Valence Patterns are shown in Table BLAH:
+
+Table: https://framenet2.icsi.berkeley.edu/fnReports/data/lu/lu6599.xml?mode=lexentry
+
+Valence patterns are grouped by the permutation of FEs, e.g. \textit{Event} and \textit{Experiencer}, or \textit{Experiencer} and \textit{Focal\_participant}. Each group comes with one or more Valence Patterns that indicate the type of phrase (NP means noun phrase, VP means verb phrase etc.), as well as the role in the clause - Ext (Subject), Obj (Object) and Dep (Dependency or Indirect Object).
+
+FrameNet also provides \textit{semantic types} with every FE of a frame. This indicates the required animation of any noun in all Valence patterns of the LU. For example, the \textit{Experiencer} FE is a \textit{Sentient} semantic type, while the \textit{Event} FE has the \textit{State\_of\_affairs} semantic type.
+
+\paragraph{Oxford Collocations Dictionary}
+The Oxford Collocations Dictionary\cite{crowther2003oxford} is a source of word combinations. For any given word, it provides the set of words and POS commonly occur in relation to it.
+
+The dictionary entry for \textit{custard} can be seen in Figure BLAH. It gives common adjectives that are used to describe custard and shows that it receives the action of being made, poured and strained, and it takes the actions of thickening and setting. Furthermore, it is closely related to powder and pie.
+
+
+\paragraph{Associations}
+The University of South Florida Free Associated Norms\cite{nelson2004university} provides associations collected directly from human participants. It is used by the Department of Psychology, and is therefore another high quality source of associated words that can be depended on for quality as it was collected in a scientifically sound manner.
+
+
+\paragraph{NodeBox Perception}
+The NodeBox Perception model includes the data used in De Smedt's attempt to model common sense as a network, as discussed in Section \ref{sec:common-sense-bg}. This data was manually entered into the system and continues to be used for research, which means that it is a dependable source of data. 
+
+\paragraph{Google Search Suggestions}
+Tony Veale's attempt at modelling metaphors\cite{vealespecifying} introduced a clever use of Google's search suggestions as a method of finding associations between words and ultimately build Metaphor Magnet. While we may not use Metaphor Magnet, we take inspiration from his use of Google's search suggestions.
+
+This is the least dependable source of information that we use because it is dependant on search suggestions rather than structured sentences. Therefore we will use this method with caution.
+
+\paragraph{Noah's ARK Informal Research}
+Noah's ARK is an informal research group run by Noah Smith at Carnegie Mellon University\cite{ark} whose research focuses on problems of \textit{ambiguity} and \textit{uncertainty} in natural language processing. They provide online API access to two tools for linguistic structure analysis:
+\begin{enumerate}
+\item{\textbf{SEMAFOR}\cite{chen2010semafor} for SRL using FrameNet.}
+\item{\textbf{TurboParser}\cite{turboparser} for Standford Dependency parsing.}
+\end{enumerate}   
+
+SEMAFOR is particularly resource heavy, requiring a minimum of 8 gigabytes of random access memory. However, the request response from the online API is fairly quick - typically 1.24 seconds for simple sentences and 1.61 seconds for complex ones, tested using the specifications in Appendix \ref{sec:specs}.
+
+Noah's ARK request response is in JSON format and includes data from both SEMAFOR and TurboParser. TurboParser returns the Semantic Dependency Parse in CoNLL data format, whose structure can be seen in Table \ref{tab:CoNLL}. 
+
+\begin{table}
+\centering
+    \begin{tabular}{|l|l|l|}
+    \hline
+    Field Number & Field Name & Description                                                \\ \hline
+    1            & ID         & Token counter, starting at 1 for each new sentence.        \\
+    2            & FORM       & Word text form or punctuation symbol                       \\
+    3            & LEMMA      & Lemma or stem of FORM                                      \\
+    4            & CPOSTAG    & Coarse-grained part-of-speech tag                          \\
+    5            & POSTAG     & Fine-grained part-of-speech tag                            \\
+    6            & FEATS      & Unordered set of syntactic and/or morphological features   \\
+    7            & HEAD       & ID of the parent of the current token ('0' if root)        \\
+    8            & DEPREL     & Dependency relation to the HEAD                            \\
+    9            & PHEAD      & Projective head of current token                           \\
+    10           & PDEPREL    & Dependency relation to the PHEAD                           \\ \hline
+    \end{tabular}
+\caption{The CoNLL data format output by TurboParser.}
+\label{tab:CoNLL}
+\end{table}
+
+%----------------------------------------\
 
 \subsection{Natural Language Generation}
 \label{sec:bg-nlg}

@@ -42,19 +42,10 @@ These relations outline the context of the poem. In lieu with our \textit{conten
 
 We choose to use SimpleNLG because, as its name suggests, it is very simple to use. It provides an almost bespoke interface into the features of the sentence that we picked out in the analysis stage, allowing us to apply the results directly to our new poems. Despite it being a Java library we are able to execute it and access its objects from Python via JPype[REF], a tool for running Java libraries accessing the Java Virtual Machine from Python.
 
-\subsection{FrameNet}
-
-As described in Section \ref{sec:semantics}, we can use FrameNet to \textit{constrain} the building of clauses around individual words. We used it when deriving relations with SEMAFOR in Section BLAH by checking for the existence of certain frames. Now we reverse the process; use selected frames that correspond to particular relations to guide the type and roles of phrases during generation.
-
-Take the Desire relation for example. The frame in FrameNet that would correspond to this is the Desiring frame, which has a list of words, referred to as \textit{lexical units} or \textit{LUs} - that are used in statements that indicate desire, e.g. want, lust, yearn etc. Each of these LUs come with their own \textit{lexical entries}, which describe the frame elements and importantly \textit{Valence patterns}. These define the types of phrases that can be built around a particular LU.
-
-Take the \textit{yearn} LU. It's Valence Patterns are shown in Table BLAH:
-
-Table: https://framenet2.icsi.berkeley.edu/fnReports/data/lu/lu6599.xml?mode=lexentry
-
-They are grouped by the permutation of frame elements, e.g. Event+Experiencer vs Experiencer+Focal\_participant. Each group comes with one or more Valence Patterns that indicate the type of phrase (NP means noun phrase, VP means verb phrase etc.), as well as the role in the clause - Ext (Subject), Obj (Object) and Dep (Dependency or Indirect Object).
-
 \subsection{Translating Relations into Clauses}
+We used FrameNet when deriving relations with SEMAFOR in Section BLAH by checking for the existence of certain frames. Now we reverse the process; use selected frames that correspond to particular relations to guide the type and roles of phrases during generation.
+
+Take the Desire relation for example. The frame in FrameNet that would correspond to this is the Desiring frame
 
 The general translation process can be seen in Figure/Algorithm BLAH.
 
@@ -147,7 +138,7 @@ The NodeBox Perception model includes the data used in De Smedt's attempt to mod
 This data was manually entered into the system and continues to be used for research, which means that it is a high-quality source of data.
 
 \subsubsection{WordNet}
-WordNet is a widely used, high quality lexical database that provides data on hypernymy (IsA relations) and meronymy (PartOf relations). However, since WordNet is very large and already has fast and simple interfaces from Python, we do not merge it with our Knowledge graph at this point. While it may prove useful to consolidate all data in a single graph in the future, it is not necessary at this stage as we can still benefit fully from its data.
+Since WordNet is very large and already has fast and simple interfaces from Python, we do not merge its meronym (PartOf), hypernym and holonym (IsA) relations with our knowledge graph at this point. While it may prove useful to consolidate all data in a single graph in the future, it is not necessary at this stage as we can still benefit fully from its data without doing so.
 
 
 \subsubsection{Google Search Suggestions}
@@ -328,7 +319,7 @@ Results from the API also come with a score, allowing us to balance strength of 
 
 %Table BLAH: http://rhymebrain.com/talk?function=getRhymes&lang=en&word=address
 
-\textit{'Misaddress'} is the only word with the top rhyme score. However, if \textit{'access'} is highly applicable in context, we may choose that instead despite the lower score. We do not consider any words lower than a score of 200.
+\textit{'Misaddress'} is the only word with the top rhyme score from RhymeBrain. However, if \textit{'access'} is highly applicable in context, we may choose that instead despite the lower score. We do not consider any words lower than a score of 200.
 
 The main drawback of the RhymeBrain API is that it tries to find rhyming words with very strict rhyme; at least as many syllables as the target string with exactly matching emphasis. This is why \textbf{\textit{'dress'}} and \textit{'im\textbf{press}'} are not suggested as candidate rhymes for \textit{'\textbf{add}ress'}.
 
