@@ -4,6 +4,23 @@
 \else
     \graphicspath{{Evaluation/EvaluationFigs/EPS/}{Evaluation/EvaluationFigs/}}
 \fi
+Anaphora stuff:
+This project does not delve deeply enough into this approach to fully test and evaluate it as it is outside the scope of this project. However, it is a new approach with potential that may be worth investigating further.
+
+\section{Concurrency and Performance of Interpretation}
+\label{sec:interpret-perf}
+
+Since poems are analysed and features are aggregated \textit{in isolation}, there is plenty of scope for concurrency.
+
+For the poem analysis, a thread pool managed the concurrent execution of 10 workers, each analysing one poem. Trial and error showed 10 to be the optimal number of worker threads. Large resources such as the CMU Pronouncing Dictionary and WordNet were created once and shared amongst the threads.
+
+Under this set up with machine specifications as given in the Appendix section \ref{sec:specs}, 450 limericks were analysed in an average of 2 hours and 14 minutes.
+
+This was sufficiently fast for this corpus and since this is data is pre-processed and stored. However, using Python's Pool Executor library rather than the Threading module enables us to move over to processes instead of threads with minimal effort if we need multi-core parallelism. It should be noted that this might be slower due to larger overhead and the need for large resources to be created in multiple locations since memory cannot be shared.
+
+The generalisation process was actually fastest without the overhead of constructing the thread pool. With a thread pool of any number of workers, the average processing time is above 42 seconds for the results of the 450 analysed limericks. Without threading, the process took 40.1 seconds on average.
+
+This generalisation process is fast enough for it to be done over again with different given values as discussed in Section \ref{sec:approach} earlier in the chapter. This is will be very important in getting precise guidance during the generalisation phase. 
 
 We will employ four methods of evaluating this project.
 \section{Comparison of Analysis  Results to Theory}

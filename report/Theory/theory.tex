@@ -1236,18 +1236,117 @@ We can see this entire process being applied step-by-step to the 'cat' persona i
 \label{fig:all-binded}
 \end{figure}
 
-\subsection{Anaphora Resolution}
-\label{sec:ar}
-We can now clearly see the anaphora problem as described in section \ref{sec:characters}. We must match up the \textit{'a cat'} character and \textit{'he'} character, and the \textit{'they'} character with the \textit{'a lot of mice'} character. 
+\subsection{Context-Aware Anaphora and Presupposition Resolution}
+\label{sec:ar} \label{sec:common-sense}
+We can now clearly see the anaphora problem as described in Section \ref{sec:characters}. We must match up the \textit{'a cat'} character and \textit{'he'} character, and the \textit{'they'} character with the \textit{'a lot of mice'} character. 
 
-In this particular example, we can simply match the plurals and singulars together. However, we may not always be so lucky. We may also run into a situation where the cat could be referred to as \textit{'the feline'} instead of \textit{'he'}.
+In this particular example, we can simply match the plurals and singulars together. However, we may not always be so lucky as we can run into a situation where the cat could be referred to as \textit{'the feline'} instead of \textit{'he'}, for example.
 
-Section \ref{sec:arback} gives an overview of the state of the art solutions. Our solution is also pretty darn simple at the moment, so I am going to wait to see if I can do some of the more complicated things and then write this section up.
+Section \ref{sec:arback} gives an overview of the state of the art solutions and notes that none of them use domain-specific knowledge. Our solution relies on \textbf{common sense} knowledge (which is domain-specific relative to our universe) as well as a deeper contextual awareness.
 
-\subsubsection{Context-Aware Anaphora and Presupposition Resolution}
+We model common sense similarly to the semantic networks in Section \ref{sec:sem-net}. 
 
-If I get time...
+\subsubsection{The Network}
+The primary purpose of our network is to help us build clauses out of one or two words. For this, we require our semantic network to give indications of \textbf{actions} that nouns take and receive, as well as properties they have.
 
+The secondary purpose of the network is to provide associative data so to maintain a cohesive topic flow through the poem, rather than jumping between a variety of topics. 
+
+\paragraph{Nodes}
+As with previous attempts, the nodes of the network are the concepts represented by words. However, we enrich these nodes with the POS of the word so to disambiguate between different meanings (e.g. \textit{bear} the noun and \textit{bear} the verb).
+
+\paragraph{Edges}
+The edges of the network indicate the relationship between concepts. The edges are directed and any that can be reversed are done so manually when they are added to the graph. The types of edges are:
+\begin{description}
+\item[HasProperty] \hfill \\ Stereotypical descriptions of the head of the relation. \hfill \\ doctor.n - HasProperty $\rightarrow$ smart.a \hfill \\ run.v - HasProperty $\rightarrow$ quickly.adv
+\item[IsA] \hfill \\ Taxonomy of the head of the relation (Hypernymy). \hfill \\ E.g. banana.n - IsA $\rightarrow$ fruit.n
+\item[PartOf] \hfill \\ The head of the relation typically a constituent or member of the tail.  \hfill \\ finger.n - PartOf $\rightarrow$ hand.n
+\item[TakesAction] \hfill \\The head of the relation typically performs the action in the tail. \hfill \\ lion.n - TakesAction $\rightarrow$ roar.v
+\item[ReceivesAction] \hfill \\The head of the relation typically has the action in the tail done unto it. \hfill \\ book.n - ReceivesAction $\rightarrow$ read.v
+\item[RelatedTo] \hfill \\ General, non-specific, reversible association \hfill \\ fat.a - ReceivesAction - eat.v \hfill \\ eat.v - ReceivesAction - pizza.n
+\end{description}
+
+All edges are of equal weight. However, there is potential for prioritising certain types of relations or between concepts. For example, we could weight scientific words higher than regular ones to make the program lean towards a more advanced vocabulary.
+
+
+\paragraph{Concept Halos and Fields}
+
+The Concept Halo and Field work in the same way as described in Section BLAHINTHEBG. We use them to fill in the gaps in the sentence with intelligent word selection. For example, if we are given a verb, we can lookup the Concept Field for that verb looking only at TakesAction and ReceivesAction edges to find possible subjects and objects for the verb respectfully. Similarly, we can find modifiers for verbs and nouns by looking up HasProperty edges their respective Concept Halos.
+
+\subsubsection{Sources}
+There are various sources for semantic relationships between words. Some are more applicable to our use case given the nature of relations that we desire and the quality of the source.
+
+There are many sources that we have not used only due to the scope of this project. We discuss them in Section BLAHINTHEEVAL.
+
+\paragraph{Collocations}
+The Oxford Collocations Dictionary[ref] is a high-quality source of word combinations. For any given word, it provides the set of words and POS commonly occur in relation to it.
+
+The dictionary entry for \textit{custard} can be seen in Figure BLAH. It gives common adjectives that are used to describe custard, which can clearly be converted into HasProperty Relations. It also shows that custard receives the action of being made, poured and strained, while it takes the actions of thickening and setting. Further, it is closely related to powder and pie.
+
+We can extract relations directly by parsing this dictionary, which is freely available online in compressed HTML format. As the dictionary is developed by Oxford and is used by students of English, its entries are very high quality and dependable.
+
+\paragraph{Associations}
+The University of South Florida Free Associated Norms[ref] provides associations collected directly from human participants. It is used by the Department of Psychology, and is therefore another high quality source of associated words that can be depended on for quality as it was collected in a scientifically sound manner.
+
+The POS of each word is provided but no direction in the association can be determined. Therefore, we may be able to assume that a noun has the property of an associated adjective and that an adjective is a property of associated nouns. However, we cannot assume the whether a noun takes or receives the action of an associated verb. Therefore we use the more general 'RelatedTo' relationship instead.
+
+\paragraph{NodeBox Perception}
+The NodeBox Perception model includes the data used in De Smedt's attempt to model common sense as a network, as discussed in Section BLAHINTHEBG. There is plenty of overlap in the types of semantic relations used in Perception as we will be using for this project, including 'is-a' (IsA), 'is-property-of' (reversed HasProperty), 'is-part-of' (PartOf) and 'is-related-to' (RelatedTo). We generalise all other relations to our \textit{RelatedTo} relation.
+
+This data was manually entered into the system and continues to be used for research, which means that it is a high-quality source of data.
+
+\paragraph{WordNet}
+Since WordNet is very large and already has fast and simple interfaces from Python, we do not merge its meronym (PartOf), hypernym and holonym (IsA) relations with our knowledge graph at this point. While it may prove useful to consolidate all data in a single graph in the future, it is not necessary at this stage as we can still benefit fully from its data without doing so.
+
+
+\paragraph{Google Search Suggestions}
+Tony Veale's attempt at modelling metaphors[ref] introduced a clever use of Google's search suggestions as a method of tapping in to endings of a sentence. While we currently do not preprocess relations in the way he did to produce Metaphor Magnet, we do use a similar method to help complete sentences, particularly those with indirect objects. 
+
+For example, we would be able to produce a sentence like 'Mary hit the nail with' but be unable to complete the sentence due to a lack of information of indirect objects. However, Google suggestions auto-complete 'hit the nail with' with 'hammer' as one might expect. 
+
+This is the least dependable source of information that we use, so we only use it for that specific case and do not add any to our knowledge network.
+
+
+\subsubsection{Concept Similarity}
+Similarity between concepts in the knowledge network is the primary method of guiding word choice throughout the poem. We deal with two main types of similarity; associative and symbolic.
+
+\paragraph{Associative Similarity}
+\label{sec:assoc-sim}
+Associative similarity between concepts is represented by the length of the shortest past between them in our network. We use Dijkstra's Algorithm[ref] as the basis of finding the shortest path.
+
+Associative similarity helps us choose the best replacement word from a list of candidates. This is very useful when rephrasing to match rhyme and rhythm and will be explained in greater detail in Section \ref{sec:rephrase}. 
+
+It can also help us choose applicable words to start new lines of poetry that stay within context of words used in surrounding lines. This is explained in Section \ref{sec:inc-growth}.
+
+In both of these cases, we are finding the \textit{most} similar concept from a list of candidates of unknown length. This can quickly increase both space and memory complexity without any pruning. We therefore alter Dijkstra's Algorithm to have a limited depth. This way, if we know the shortest path to one of the candidates is $x$, we can abort any further searches that go beyond length $x$ for the shortest path.
+
+\paragraph{Similarity Paths}
+Paths from one concept do more than show the extent of the relationship - it also shows intermediary concepts taken to get from one to the other. This can be a powerful way of joining two concepts together that may not be on consecutive lines.
+
+For example, suppose the first line of a poem mentions the concept \textit{'man.n'} and the third line \textit{'myth.n'} (Section \ref{sec:apply-inspr} explains how this could happen). The path in the knowledge network between these two concepts goes via the concept \textit{'mystery.n'}.
+
+
+\paragraph{Symbolic Similarity}
+Symbolic similarity can be attained through inductive reasoning and substitution by concepts that have a very similar concept halo and field up to a certain depth. Simply put, we can find similarity with the 'Duck Test'; if it looks like a duck, swims like a duck and quacks like a duck, it probably is a duck. Object-oriented programmers can relate this idea to the Liskov substitution principle[ref].
+
+Symbolic similarity has many use cases, including the new method of anaphora resolution proposed in Section BLAHINANALYSIS of the Analysis phase. For this phase, it enables us to implement the following poetic features:
+\begin{description}
+\item[Similes] \hfill \\ We can describe a property or an action of a persona in our poem by comparing the persona to an concept in our knowledge network that (stereotypically) has that property or takes/receives that action. \hfill \\ The relation \textit{1-TA$\rightarrow$run quickly} can be built into the phrase 'runs like a cheetah' by recognising that cheetahs are stereotypically quick runners.
+\item[Metaphors] \hfill \\ Similarly to Similes, we can find concepts in our network that share a number of semantic relations with the persona we are trying to describe. \hfill \\ Any persona with relations \textit{1-TakesAction$\rightarrow$crawl}, \textit{1-HasProperty$\rightarrow$social}, \textit{1-HasProperty$\rightarrow$small} is analogous to an insect because it's concept in the graph shares those relations.
+\item[Personification] \hfill \\ If we are given an inanimate object as a persona, we can describe it as if it were sentient by looking giving it relations that belong to a sentient being. \hfill \\ A car could be personified by giving it all the relations that a lion has in our concept network, to produce sentences like \textit{'The car roared'}.
+\item[Irony] \hfill \\ Our knowledge network is made up of semantic attributes that are expected for each concept. Irony can be attained by producing lines of poetry that describe a concept doing the opposite of the concepts given in our graph.
+\end{description} 
+
+
+\subsection{Inferring Properties and Capabilities}
+
+Combining the semantic network with our ability to identify persona and relations in text, we can make inferences on the properties and capabilities of the persona to resolve anaphora and presuppositions.
+
+Suppose we take the cat poem in Figure \ref{fig:cat}, but the word \textit{'he'} is replaced with \textit{'the feline'}. Since they are represented by different nouns, we would not initially recognise that \textit{'cat'} and \textit{'feline'} refer to the same persona. Once all the persona were found, if we compared each pair using our knowledge network, we would find the relation \textit{'cat.n'-IsA$\rightarrow$'feline.n'}. We can therefore infer with some confidence that the persona represented by the words \textit{'cat'} and \textit{'feline'} are one and the same.
+
+Take another example sentence:\\
+\textit{There was a cat with a flea on his back. It chased the mouse.}
+
+In this situation, it is ambiguous whether \textit{'It'} refers to the cat or the flea because they are both singular, animated and neutral gender. However, our semantic network of common sense would be able to reveal that \textit{'It'} probably refers to the cat since it is common sense that cats take the action of chasing mice.
 
 \section{Symbolism and Imagery}
 
