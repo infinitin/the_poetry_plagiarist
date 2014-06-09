@@ -1,11 +1,11 @@
-\chapter{Poetry Generation}
+\chapter{Generation}
 \ifpdf
     \graphicspath{{Management/ManagementFigs/PNG/}{Management/ManagementFigs/PDF/}{Management/ManagementFigs/}}
 \else
     \graphicspath{{Management/ManagementFigs/EPS/}{Management/ManagementFigs/}}
 \fi
 
-The final stage of development entails generating new, novel and creative poetry by utilising the information gathered in the previous analysis and interpretation sections.
+The final stage of development involves generating new, novel and creative poetry by utilising the information gathered in the previous analysis and interpretation sections.
 
 \section{Approach}
 Most previous attempts at automatic poetry generation, including ones mentioned in Section \ref{sec:related_work}, prioritise adherence to poetic features and structure above all else. This is done with the justification that:
@@ -14,54 +14,58 @@ Most previous attempts at automatic poetry generation, including ones mentioned 
 \item{readers of poems, as humans, are extremely apt at finding subtle meaning in language, even if it was not intended by the author.}
 \end{itemize}
 
-However, grammatical rules in poetry are broken for some poetic purpose like matching a rhyme scheme or rhythm pattern. They are therefore broken with precision and intention, not arbitrarily or randomly.
+Veale argues that 'poetic licence' is not a licence but a contract that allows a speaker to take liberties in language in exchange for real insight\cite{veale2013less}. We are in support of Veale's argument that grammatical rules in poetry are only broken for \textit{some purpose} like matching a rhyme scheme or rhythm pattern. They are broken with precision and intention, not arbitrarily or randomly.
 
-Furthermore, we discussed in Section \ref{sec:semantics} that even grammatically correct sentences can be completely nonsensical. We require understanding of the semantic relationships between words to be able to write with intention and in a way that can be understood by the reader.
-
-Poems are concise but have many layers of meaning that are subtle even to human readers and that only the best of poets can fully control. The different categories of poems each have their own pragmatics and there is always a fundamental message and purpose supporting these layers meaning. Veale argues that 'poetic licence' is not a licence but a contract that allows a speaker to take liberties in language in exchange for real insight\cite{veale2013less}. We must be careful not to abuse this by slewing unrelated words together and expecting the reader to do the work of finding meaning and context.
-
-As discussed in Section \ref{sec:purpose}, the purpose of poetry is to deliver a specific, intentional message. This cannot be done without control over language both syntactically and semantically.
-
-On a separate note, this implementation should be able to produce any type of poem accurately to the information gathered in the analysis and interpretation. We cannot make any assumptions on the length of the lines, the existence of rhyme or the topics covered by the poems.
+Furthermore, we discussed in Section \ref{sec:semantics} that even grammatically correct sentences can be completely nonsensical. We require understanding of the semantic relationships between words to be able to write with intention and in a way that can be understood by the reader. As discussed in Section \ref{sec:purpose}, the purpose of poetry is to deliver a specific, intentional message. This cannot be done without control over language both syntactically and semantically.
 
 Therefore, our approach will be \textbf{content first}. We aim to produce poetry that follow syntax and semantics as far as possible and only make specific exceptions for the sake of poetic features.
+
+Finally, this implementation should be able to produce any type of poem in accordance with the information gathered in the analysis and interpretation. We cannot make any assumptions on the length of the lines, the existence of rhyme or the topics covered by the poems.
 
 
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 \section{Generating Simple Sentences}
 \label{sec:build}
-We attempted to recognise the existence of ConceptNet-style relations during the analysis phase. Our interpretation of the results generalises the use of these relations, so it is natural that we use them to guide generation. For example if we intend to write a poem describing a woman named Mary who wants a monkey, we would start with the persona relation hubs in Figure BLAH below.
+We attempted to recognise the existence of semantic relations during the analysis phase. Our interpretation of the results generalises the use of these relations with the intention of guiding the generation process. If we intend to write a poem describing a woman named Mary who wants a monkey, we would start with the persona relation hubs in Figure BLAH below.
 
-1-Named->Mary
-1-IsA->woman
-1-TA->chase
-2-IsA->monkey
-2-RA->chase
+1-Named$\rightarrow$Mary\\
+1-IsA$\rightarrow$woman\\
+1-TA$\rightarrow$chase\\
+2-IsA$\rightarrow$monkey\\
+2-RA$\rightarrow$chase\\
 
-These relations outline the context of the poem. In lieu with our \textit{content first} approach, we begin by directly translating these relations into syntactically correct natural language \textit{clauses}, which can be organised into lines in a poem. We make use of two tools to do this; \textbf{SimpleNLG}[REF] and \textbf{FrameNet}[REF].
+These relations outline the context of the poem. In lieu with our \textit{content first} approach, we begin by directly translating these relations into syntactically correct natural language \textit{clauses}, which can be organised into lines in a poem. We make use of two tools to do this; \textbf{SimpleNLG} (Section \ref{sec:bg-nlg}) and \textbf{FrameNet} (Section \ref{sec:fn}).
 
-We choose to use SimpleNLG because, as its name suggests, it is very simple to use. It provides an almost bespoke interface into the features of the sentence that we picked out in the analysis stage, allowing us to apply the results directly to our new poems. Despite it being a Java library we are able to execute it and access its objects from Python via JPype[REF], a tool for running Java libraries accessing the Java Virtual Machine from Python.
+We choose to use SimpleNLG because it provides an almost bespoke interface into the features of the sentence that we picked out in the analysis stage, allowing us to apply the results directly to our new poems.
+
+These features include:
+\begin{itemize}
+\item{Tense}
+\item{Aspect}
+\item{Perspective}
+\item{Negation}
+\item{Animation, Gender, Plurality}
+\item{Determiners}
+\end{itemize}
 
 \subsection{Translating Relations into Clauses}
-We used FrameNet when deriving relations with SEMAFOR in Section BLAH by checking for the existence of certain frames. Now we reverse the process; use selected frames that correspond to particular relations to guide the type and roles of phrases during generation.
+We used FrameNet when deriving relations with SEMAFOR in Section \ref{sec:chars} by checking for the existence of certain frames. Now we reverse the process; use selected frames that correspond to particular relations to define the type and roles of phrases during generation.
 
-Take the Desire relation for example. The frame in FrameNet that would correspond to this is the Desiring frame
+Take the Desire relation for example. The corresponding frame in FrameNet would be \textit{Desiring}. The general translation process can be seen in Figure/Algorithm BLAH.
 
-The general translation process can be seen in Figure/Algorithm BLAH.
-
-Figure:relation -> Get corresponding Frame -> Look up LU -> Select a Valence Pattern -> Order Phrases - > Fill in Gaps
+Figure:relation $\rightarrow$ Get corresponding Frame $\rightarrow$ Look up LU $\rightarrow$ Select a Valence Pattern $\rightarrow$ Order Phrases $\rightarrow$ Fill in Gaps
 
 Suppose we take the first relation in Figure BLAH above. We have a character whose ID is 1 and has the name 'Mary'. The corresponding frame for the 'Named' relation is \textit{Referring\_by\_name}. 
 
-However, it is not quite a perfect match because we want a verbs only, whereas this frame includes LUs of other parts of speech as well. Each LU gives indication of its part-of-speech (POS) so we can filter by that. 
+However, it is not quite a perfect match because we only want verbs, whereas this frame includes Lexical Units (LUs) of other parts of speech as well. Each LU gives indication of its part-of-speech (POS) so we can filter by that. 
 
 Another complication is that the verb 'to name' does not exist in the FrameNet lexicon at all. The closest match is the adjective 'named' found in the \textit{Being\_named} frame. So we need to be able to look up this LU manually as well.
 
-Yet another issue is that not all of these LUs come with full and accurate Valence patterns. FrameNet is an ongoing project with more data being added continuously, but we do not want to use a word that does not have an accurate set of Valence patterns. Thankfully, the status of every LU is provided, so we only look up those that have the \textit{Finished\_Initial} annotation.
+Yet another issue is that not all of these LUs come with full and accurate Valence patterns. FrameNet is an ongoing project with more data being added continuously so we do not want to use a word that does not have an accurate set of Valence patterns. Thankfully, the status of every LU is provided, so we only look up those that have the \textit{Finished\_Initial} annotation.
 
-It is important to note that all relation translations may have their own set of similar caveats that are to be considered on a case by case basis to improve the quality of lines generated.
+It is important to note that all relation translations may have their own set of similar caveats that are to be considered on a case by case basis to improve the quality of lines generated. Furthermore, while the TakesAction and ReceivesAction phrases enable us to use any verb in the FrameNet lexicon, having specific builder algorithms for as many relations as possible will greatly increase the quality and variation of language capabilities.
 
-Back to our example, after all filtering we are left with two LUs: \textit{call.v} and \textit{named.a} where the string after the full stop in the LU indicates the word POS. We choose one randomly with equal weights. We use \textit{call.v} for this example.
+Back to our example, after dealing with all issues we are left with two LUs; \textit{call.v} and \textit{named.a}, where the string after the full stop in the LU indicates the word's POS. We choose one randomly with equal weights. We use \textit{call.v} for this example.
 
 Figure: https://framenet2.icsi.berkeley.edu/fnReports/data/lu/lu11210.xml?mode=lexentry
 
@@ -73,30 +77,28 @@ We then order the phrases according to how they would appear in a sentence using
 
 [Algorithm BLAH for sorting]
 
-The Valence pattern does not include the LU itself so we add as a verb phrase immediately after the subject.
+The Valence pattern does not include the LU itself so we add it as a verb phrase immediately after the subject.
 
-Finally we fill in the gaps by adding carefully selected words to each phrase. We discuss word selection in Sections \ref{sec:common-sense}, \ref{sec:persona} and \ref{sec:new-lines}.
-
-%While the TakesAction and ReceivesAction phrases enable the system to use any verb in its lexicon, having specific builder algorithms for as many relations as possible will greatly increase the quality and variation of the systems language capabilities.
+Finally, we fill in the gaps by adding carefully selected words to each phrase. We discuss word selection in Sections  \ref{sec:persona} and \ref{sec:new-lines}.
 
 \section{Persona Creation and Management}
 \label{sec:persona}
 \subsection{Referencing Specific Persona}
-When we convert the relation \textit{1-Named$\rightarrow$Mary} in Figure BLAH to a phrase, we need to refer to the persona using IsA relations. So when we build the clause with the verb 'named' and object 'Mary', we will look up the persona that this relation was taken from and find an IsA relation. In this example, we will find woman, and when we add the determiner 'a', we get the clause \textit{'a woman named Mary'}.
+When we convert the relation \textit{1-Named$\rightarrow$Mary} in Figure BLAH to a phrase, we need to refer to the persona using \textit{IsA} relations. The clause will be built with the verb 'named' and object 'Mary', and we look up the persona that this relation was taken from and find an \textit{IsA} relation to use as the subject. In this example, we will find \textit{'woman'} and when we add the determiner \textit{'a'}, we get the clause \textit{'a woman named Mary'}.
 
-Now when we convert the \textit{1-TA$\rightarrow$chase} relation, we follow a similar process of finding a way to reference character 1, with the inclusion of the name of the persona (if available) as another candidate for the reference. This will give us either \textit{'The woman chases'} or \textit{'Mary chases'}.
+We follow a similar process when converting the \textit{1-TA$\rightarrow$chase} relation. The only difference is now that we can use the name of the persona as another candidate for the subject. This will give us either \textit{'The woman chases'} or \textit{'Mary chases'}.
 
 \subsection{Adding New Persona}
-Now since the verb 'chase' is \textit{transitive}, i.e. it requires a subject \textbf{and} an object, we need a persona that receives the action 'chase'. If we look through the relations of the other known persona, we will find the relation \textit{2-RA$\rightarrow$chase} and we use \textit{2-IsA$\rightarrow$monkey} to derive the corresponding reference to that character. So we can complete the sentence by adding \textit{'monkey'} to the end, giving us either \textit{'The woman chases a monkey'} or \textit{'Mary chases a monkey'}.
+The verb 'chase' is \textit{transitive}, i.e. it requires a subject \textbf{and} an object, so we need a persona that receives the action 'chase'. If we look through the relations of the other known persona, we will find the relation \textit{2-RA$\rightarrow$chase} and we use \textit{2-IsA$\rightarrow$monkey} to derive the corresponding reference to that character. We complete the sentence by adding \textit{'monkey'} to the end, giving us either \textit{'The woman chases a monkey'} or \textit{'Mary chases a monkey'}.
 
-Suppose we could not find a corresponding ReceivesAction relation for 'chase' in any of the current persona. We must then find a concept in our knowledge network that receives the action 'chase'. We do this by looking at the concept field of the \textit{'chase.v'} concept in our knowledge graph for only the edges with type ReceivesAction. This gives us the required list of concepts from which to select the object of the clause. We use concept similarity to find the most applicable object given the current context of the poem; a process to be described in detail in Section \ref{sec:new-lines}, but for now let's assume that we use the concept \textit{'thief.n'}.
+Suppose we could not find a corresponding ReceivesAction relation for 'chase' in any of the current set of persona. We must then find a concept in our knowledge network that receives the action 'chase' to use as the object of the clause. We do this by looking at the concept field of the \textit{'chase.v'} concept in our knowledge graph for only the edges with type ReceivesAction. This gives us the required list of concepts from which to select the object of the clause. We use concept similarity to find the most applicable object given the current context of the poem; a process to be described in detail in Section \ref{sec:new-lines}, but for now let's assume that we use the concept \textit{'thief.n'}.
 
-When we add a new noun to the poem, we need to create a new persona object for it so that we can refer back to it later. The new character is instantiated with an IsA relation to its noun word, i.e. \textit{thief}. Its plurality, gender and animation are all derived from the word itself using the process described in Section BLAHINTHEANALYSIS.
+When we add a new noun to the poem, we need to create a new persona object so that we can refer back to it later. The new character is instantiated with an IsA relation to its noun word, i.e. \textit{thief}. Its plurality, gender and animation are all derived from the word itself using the process described in Section \ref{sec:characters}.
 
 \subsection{Anaphora and Presupposition}
-So far we are only able to refer to persona by Named or IsA relations that are already part of the persona's relations. This leads to to combinations of clauses such as \textit{'A woman named Mary. Mary chased the monkey.'}, which is completely \textit{un}natural language.
+So far we are only able to refer to persona by \textit{Named} or \textit{IsA} relations that are already part of the persona's hub. This leads to to combinations of clauses such as \textit{'There was a woman named Mary. Mary chased the monkey'}, which is not natural speech.
 
-The natural way to phrase it would be \textit{'A woman named Mary. She chased the monkey.'}. In this case, the introduction of the pronoun 'she' is a contextual reference back to the aforementioned persona. We discussed the resolution of such anaphora in Section BLAHINTHEANALYSIS.
+The natural way to phrase it could be \textit{'There was a woman named Mary. She chased the monkey'}. In this case, the introduction of the pronoun 'she' is a contextual reference back to the aforementioned persona. This is introduction of anaphora, described in Section \ref{sec:arback}.
 
 Another option for variety in reference is to use \textit{presuppositions}; implicit assumptions about context. This can give us clause combinations such as \textit{'A woman named Mary. She chased the monkey. The animal stole her banana'}. Here we refer back to the monkey persona by looking for a hypernyms in WordNet and IsA relations in our knowledge network for the concept \textit{'monkey.n'}. The implicit assumption made is that monkeys are animals, so the reader would understand the reference.
 
@@ -104,13 +106,13 @@ A more advanced method of presupposition introduction would be to look at stereo
 
 \subsection{Semantic Types}
 \label{sec:sem-type} 
-Suppose we had the relations \textit{2-RA$\rightarrow$chase} and \textit{2-IsA$\rightarrow$monkey} but with no corresponding TakesAction relation in any other known persona. We would need either need to create a new persona to be the subject of the clause or we would choose an already existing persona to be the subject.
+Suppose we had the relations \textit{2-RA$\rightarrow$chase} and \textit{2-IsA$\rightarrow$monkey} but with no corresponding TakesAction relation in any other known persona. We would either need to create a new persona to be the subject of the clause or choose an already existing persona to be the subject.
 
-In the former case we can simply look up our knowledge network in the same way we did when finding the object of the sentence. However, if we run across this case often (which we might, see Section \ref{sec:new-lines}), we could end up introducing a new persona every line which can lead to a much less cohesive poem. So we would like to use the latter case and look at reusing persona that we already know about.
+In the former case we can simply look up our knowledge network in the same way we did when finding the object of the sentence. However, if we run across this case often (which we might, see Section \ref{sec:new-lines}), we could end up introducing a new persona every line, which can lead to a less cohesive poem. The latter case is preferable because we want to reuse persona that already exist.
 
-There's a trap here though. What if the only other persona we knew of was an inanimate object like a plate? Or a non-object like evolution? To say \textit{'A plate chases the monkey'} or \textit{'Evolution chases the monkey'} makes no sense. Unless we are using personification, we would want a sentient being to be the subject of the 'chase' action.
+There's a trap here though. What if the only other persona was an inanimate object like \textit{a plate}? Or a non-object like \textit{evolution}? To say \textit{'A plate chases the monkey'} or \textit{'Evolution chases the monkey'} makes no sense. Unless we are using personification, we would want a sentient being to be the subject of the 'chase' action.
 
-Thankfully, FrameNet provides \textit{semantic types} with every frame element of a frame. This indicates the required animation of any noun in all Valence patterns of the LU. We also store the animation of every persona in the system upon creation, so we can refer to this when deciding if a persona is a relevant match with a particular semantic type. If no existing persona are applicable, we can revert back to finding one from our knowledge network.
+This is where we use the semantic types provided in FrameNet, as discussed in Section \ref{sec:fn}. They indicate the required animation of any noun in all Valence patterns of the LU. We also store the animation of every persona in the system upon creation so that we can refer to it when deciding if a persona is a relevant match with a particular semantic type. If no existing persona are applicable, we can revert back to finding one from our knowledge network.
 
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -132,15 +134,15 @@ Our new poem first needs to be initialised with values of features that span acr
 
 All of these can be retrieved directly from the template developed in the previous chapter. The template is made up of probability distributions for the various values a feature can take on, so by default we get the value by sampling this distribution. 
 
-However, if one result is clearly more probably than the rest, we want to treat it as unambiguous. For example, more than half of the rhyme schemes found for limericks were AABBA, as pictured in figure \ref{fig:rhyme-scheme-chart}. Each of the other values are some slight variation on AABBA (e.g. AABCA, ABCCB etc.) and occur less than a ninth of the time at maximum.
+If one result is clearly more probably than the rest, we want to treat it as unambiguous. For example, more than half of the rhyme schemes found for limericks were AABBA, as pictured in figure \ref{fig:rhyme-scheme-chart}. Each of the other values are some slight variation on AABBA (e.g. AABCA, ABCCB etc.) and occur less than a ninth of the AABBA frequency.
 
-To generalise this, we take the rule that if the any feature has a single value in its probability distribution that occurs more than half of the time and the next highest value is less than a third of that value, we treat it as unambiguous and \textit{always} apply it to the initial structure of this type of poem.
+To generalise this, we use the rule that if the any feature has a single value in its probability distribution that occurs more than half of the time and the next highest value is less than a third of that value, we treat it as unambiguous and \textit{always} apply it to the initial structure of this type of poem.
 
 
 \subsection{Inspiration}
-The poetry generation process can be seeded \textit{inspiration}, which can be in the form of words or relations. Inspiration can come from the user, or the program can come up with it itself. Inspiration from the user is input manually into the system.
+The poetry generation process can be seeded with \textit{inspiration}, which can be in the form of words or relations. Inspiration can come from the user, or the program can come up with it itself. Inspiration from the user is input manually into the system.
 
-When the program derives its own inspiration, it looks to the common hypernym ancestors of previous poems found in section BLAHINTHEINTERPRETATION. It chooses a random hypernym and recursively looks for all holonyms in WordNet recursively, out of which one will be randomly selected. A persona is then created and used as the single source of inspiration for the rest of the poem. Section \ref{sec:apply-inspr} explains how.
+When the program derives its own inspiration, it looks to the common hypernym ancestors of previous poems. It chooses a random hypernym and recursively looks for all holonyms in WordNet, out of which one will be randomly selected. A persona is then created and used as the single source of inspiration for the rest of the poem. Section \ref{sec:apply-inspr} explains how.
 
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -153,11 +155,15 @@ To ensure some level of cohesion between lines in the poem, we will build line b
 \label{sec:apply-inspr}
 As we know, new lines are created by taking a relation from a persona and building it using the process described in Section \ref{sec:build}. If these relations are provided in the inspiration, we first allocate them to lines in the poem based on two factors; relation type and rhyme scheme.
 
+\subsubsection{Relation Ordering by Type}
+
 The template derived from the previous parts of the implementation tracks relation usage by line. We use this to decide the order that relations should appear. For example, the Named relation is most likely to appear in the first than any other line in a limerick, as shown in Figure BLAH. Therefore, if any Named relations exist among any persona, that relation comes first.
 
-Rephrasing statements occurs when we need to adhere to a poetic feature such as rhyme or rhythm, a process described in Section \ref{sec:rephrase}. However, we want to stay as true to the initial inspiration as possible so we want to avoid rephrasing any clauses built from relations provided by the user whenever we can.
+\subsubsection{Allocating Relations by Rhyme Scheme}
 
-Therefore we apply the simple heuristic that relations provided by the user should fall on the first line that introduces a new rhyme token. These lines automatically bypass rephrasing for rhyme adherence. Naturally, this is only possible when the number of provided relations is less than or equal to the number of rhyme tokens so it is not always possible, but it provides the user with a useful guide on how many relations to input.
+Rephrasing statements occurs when we need to adhere to a poetic feature such as rhyme or rhythm, a process described in Section \ref{sec:rephrase}. However, we want to stay as true to the initial inspiration as possible so we avoid rephrasing any clauses built from relations provided by the user whenever we can.
+
+Therefore, we apply the simple heuristic that relations provided by the user should be allocated to lines that introduce a new rhyme token. These lines automatically bypass rephrasing for rhyme adherence. Naturally, this is only possible when the number of provided relations is less than or equal to the number of rhyme tokens so it is not always possible, but it provides the user with a useful guide on how many relations to input.
 
 This ability to allocate relations to certain lines also provides flexibility of control for the user. If they \textit{want} a relation to mark the ending of the poem, they can configure it to do so.
 
@@ -167,14 +173,14 @@ Once relations have been allocated to lines we can begin composing lines in natu
 \label{sec:new-lines}
 New lines are created by taking a relation from a persona and building it using the process described in Section \ref{sec:build}. Even though inspiration may not be distributed consecutively through the poem, we always start with the first line and build linearly down to the last line.
 
-Suppose we are building limericks with an \textit{AABBA} rhyme scheme and that we are provided with one relation by the user, providing content for line 1 only. Line 1 would be built first without any rephrasing for rhyme. The process of building the rest of the lines are dependant on whether or not they should rhyme with a previous one.
+Suppose we are building limericks with an \textit{AABBA} rhyme scheme and that we are provided with one relation by the user, only providing content for the first line. That line would be built first without any rephrasing for rhyme. The process of building the rest of the lines are dependant on whether or not they should rhyme with a previous one.
 
 \subsubsection{Rhyming Lines}
 When the second line starts being built, we recognise that it is has not been allocated any relation so we must create one. We also know that it needs to rhyme with the first line so we can avoid rephrasing again by seeding the line with a word that rhymes, and then building the rest of the line backwards from it.
 
 The process of finding rhyming words is outlined in Section \ref{sec:rhymebrain}. We select one within context (as described in \ref{sec:context}), and build a relation according to its POS to guarantee that it ends up at the end of the clause once it is built.
 
-For example, if the rhyming word is an adjective we cannot build a TakesAction phrase from it because those phrases end in either a noun or a verb when created. We could rephrase for rhyme later but that would go against our 'context first' approach. The possible actions for each POS of the chosen rhyming word is as follows:
+For example, if the rhyming word is an adjective we cannot build a TakesAction phrase from it because those phrases end in either a noun or a verb when created. We could rephrase for rhyme later but that would go against our 'context first' approach. The possible relations for each POS of the chosen rhyming word is as follows:
 \begin{description}
 \item[Noun]
 \item[Verb]
@@ -182,10 +188,10 @@ For example, if the rhyming word is an adjective we cannot build a TakesAction p
 \item[Adverb]
 \end{description}
 
-Once a relation created of the chosen type and with the chosen rhyme word, it is added to the most applicable persona based on semantic type and associative similarity (see Sections \ref{sec:sem-type} and \ref{sec:assoc-sim}). This process is followed when building the fourth and fifth line of our limerick as well.
+Once a relation of the chosen type and with the chosen rhyme word has been created, it is added to the most applicable persona based on semantic type and associative similarity (see Sections \ref{sec:sem-type} and \ref{sec:assoc-sim}). This process is followed when building the fourth and fifth line of our limerick as well.
 
 \subsubsection{Blank Lines}
-The third line has no allocated relation and is the start of a new rhyme token. In this case we can add any relation or word we want as long as it stays within context(Section \ref{sec:context}).
+The third line has no allocated relation and is the start of a new rhyme token. In this case we add any relation or word we want as long as it stays within context (Section \ref{sec:context}).
 
 We therefore choose any word that is associatively similar to those in context and then  build a relation based on its POS as in the previous section.
 
@@ -193,7 +199,7 @@ We therefore choose any word that is associatively similar to those in context a
 \label{sec:context}
 We choose words based on context to achieve coherent topic flow throughout the poem. In our implementation, we define context as \textbf{the concepts mentioned in immediately surrounding lines}, i.e. the context of line 2 is determined by the words used in line 1 and the head and tail of the relation that is expected to be translated in line 3. 
 
-Whenever there is a choice between using any set of candidate concepts, we choose the one that is most associatively similar (as defined is \ref{sec:assoc-sim}) to the set of context concepts. For example, if we had the concepts \textit{'man.n'} and \textit{'pizza.n'} in our set of context concepts and \textit{'fat.a'} and \textit{'cat.n'} as our candidate concepts, we would choose to use \textit{'fat.a'} because it is more associatively similar to \textit{'man.n'} and \textit{'pizza.n'}.
+Whenever there is a choice between using any set of candidate concepts, we choose the one that is most associatively similar to the set of context concepts. For example, if we had the concepts \textit{'man.n'} and \textit{'pizza.n'} in our set of context concepts and \textit{'fat.a'} and \textit{'cat.n'} as our candidate concepts, we would choose to use \textit{'fat.a'} because it is more associatively similar to \textit{'man.n'} and \textit{'pizza.n'} than \textit{'cat.n'}.
 
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -210,7 +216,7 @@ Rhyme is a very powerful poetic tool that comes naturally to many human authors.
 
 \subsubsection{Finding Rhyming Words}
 \label{sec:rhymebrain}
-Rhyming words are retrieved from the RhymeBrain API[ref]. This tool accepts \textit{any target string of letters} (not just words from a dictionary) and finds rhyming words. This works well with our high priority for strong rhyme because it rarely fails to give back rhyming words and tends to return more possibilities than alternatives like Wordnik[ref]. It also means that even the most obscure names or other words input from the user can be used effectively by the system.
+Rhyming words are retrieved from the RhymeBrain API\cite{rhymebrain}. This tool accepts \textit{any target string of letters} (not just words from a dictionary) and finds rhyming words. This works well with our high priority for strong rhyme because it rarely fails to give back rhyming words and tends to return more possibilities than alternatives like Wordnik\cite{wordnik}. It also means that even the most obscure names words input from the user can be used effectively.
 
 Results from the API also come with a score, allowing us to balance strength of rhyme with applicability to content. For example, if we are looking to rhyme with the target word \textit{'address'}, we get the results shown in Table BLAH.
 
@@ -220,13 +226,13 @@ Results from the API also come with a score, allowing us to balance strength of 
 
 The main drawback of the RhymeBrain API is that it tries to find rhyming words with very strict rhyme; at least as many syllables as the target string with exactly matching emphasis. This is why \textbf{\textit{'dress'}} and \textit{'im\textbf{press}'} are not suggested as candidate rhymes for \textit{'\textbf{add}ress'}.
 
-To counter this, we try to find the rhymes of a suffix of the target string that most probably only contains the last syllable. To do this, we convert the word into its pronunciations as in Section BLAHINTHEANALYSIS. We then find the first consonant phoneme from the right with a vowel phoneme to its left. We then search for the probable letters in the original string corresponding to that consonant phoneme and take the suffix from that letter onwards.
+To counter this, we try to find the rhymes of a suffix of the target string that most probably only contains the last syllable. To do this, we convert the word into its pronunciations as in Section \ref{sec:phonetic}. We then find the first consonant phoneme from the right with a vowel phoneme to its left. We then search for the probable letters in the original string corresponding to that consonant phoneme and take the suffix from that letter onwards.
 
-For example, the word \textit{'address'} has the pronunciations \textit{['AH0', 'D', 'R', 'EH1', 'S']} and \textit{['AE1', 'D', 'R', 'EH2', 'S']}. In both cases, we select the 'R' phoneme and match it up to the 'r' in 'address', giving us the suffix 'ress'. The results for words rhyming with 'ress' are shown in Table BLAH.
+For example, the word \textit{'address'} has the pronunciations \textit{[AH0 D R EH1 S]} and \textit{[AE1 D R EH2 S]}. In both cases, we select the 'R' phoneme and match it up to the 'r' in 'address', giving us the suffix 'ress'. The results for words rhyming with 'ress' are shown in Table BLAH.
 
 %Table BLAH: http://rhymebrain.com/talk?function=getRhymes&lang=en&word=ress
 
-This gives us many words that rhyme with 'address', including \textit{'dress'} and \textit{'impress'}.
+This gives us many more words that rhyme with 'address', including \textit{'dress'} and \textit{'impress'}.
 
 \subsubsection{Guaranteeing Rhyme}
 
@@ -234,29 +240,29 @@ The general tactic is to only replace words with synonyms or very close associat
 
 If that is not possible, we look to \textit{extend} the clause by adding applicable adjectives or adverbs to the end of the sentence. SimpleNLG enables us to do this by adding \textit{post modifiers} to noun and verb phrases. These are words that will appear immediately after the parent phrase.
 
-We first find the final word in the phrase of the clause that is being rephrased. If it is a noun, we filter out any non-adjective candidate rhymes. Similarly, if it is a verb we filter out non-adverbs. We then look up the concept halo for the target word, looking only at 'HasProperty' edges. This gives us a list of words that are commonly used to describe the target word. We then compare this list to the candidate rhyming words, find the most associatively similar pair and add it as a post modifier to the phrase of the target word.
+We first find the final (target) word in the phrase of the clause that is being rephrased. If it is a noun, we filter out any non-adjective candidate rhymes. Similarly, if it is a verb we filter out non-adverbs. We then look up the concept halo for the target word, looking only at 'HasProperty' edges. This gives us a list of words that are commonly used to describe the target word. We then compare this list to the candidate rhyming words, find the most associatively similar pair and add it as a post modifier to the phrase of the target word.
 
-This process guarantees that the final word in the clause will have the necessary rhyme when realised, but also keeps the added or replaced word very close to the original statement.
+This process guarantees that the final word in the clause will have the necessary rhyme when realised, but also keeps the added or replaced word in very close context to the original statement.
 
 
 \subsection{Rhythm}
-Rhythm is much less stringent than rhyme because most words can be mispronounced without changing their meaning. For example, in the fifth line of Shakespeare's Sonnet 116 he pronounces the monosyllabic word \textit{'fixed'} as \textit{'fix\textbf{ed}'}, essentially adding a syllable and changing the stress.
+Rhythm is much less stringent than rhyme because most words can be mispronounced without changing their meaning. For example, in the fifth line of Shakespeare's Sonnet 116 he pronounces the monosyllabic word \textit{'fixed'} as \textit{'fix-\textbf{ed}'}, essentially adding a syllable and changing the stress.
 
-Therefore, we stick to our \textit{content first} approach and only try to find a best match for rhythm without compromising content. 
+Given this flexibility, we stick to our \textit{content first} approach and only try to find a best match for rhythm without compromising content. 
 
 \subsubsection{Syllabic}
-Syllabic rhythm, as described in Section BLAHINTHEBG, defines the number of syllables each line should have. After we have created phrases for the line and matched any rhyme scheme correctly, we can extend or reduce the syllable length of the line to match syllabic rhythm.
+Syllabic rhythm, as described in Section \ref{sec:rhythm}, defines the number of syllables each line should contain. After we have created phrases for the line and matched any rhyme scheme correctly, we can extend or reduce the syllable length of the line to match syllabic rhythm.
 
 \paragraph{Extending}
 If the number of syllables in the line is fewer than the required amount, we must add syllables to the line. The simplest way to do this is to add more modifiers.
 
-We randomly choose a phrase from those that make up the line. We then look up the knowledge network for modifiers by looking the target word's concept halo for the 'HasProperty' relation. We randomly select one and add it as a modifier to the phrase of the target word as long as does not add more syllables than required to make up the shortage.
+We randomly choose a phrase from those that make up the line. We then look up the knowledge network for modifiers by looking the target word's concept halo for the \textit{HasProperty} relation. We randomly select one and add it as a modifier to the phrase of the target word as long as does not add more syllables than required to make up the deficit.
 
-We repeat this process, expanding the depth of the halo to incorporate more words when necessary, until we have exactly the right number of syllables.
+We repeat this process, expanding the depth of the halo to incorporate more words when necessary, until we have \textit{exactly} the right number of syllables.
 
-SimpleNLG chooses where the modifier should appear in the sentence unless explicitly told to where to put them. This can be done by adding it as a \textit{pre-modifier} to the phrase, enforcing the word to appear \textit{before} the target word, or a \textit{post-modifier} to enforce appearance after the target word as discussed earlier.
+SimpleNLG chooses where the modifier should appear in the sentence unless explicitly told to where to put them. This can be done by adding it as a \textit{pre-modifier} to the phrase, enforcing the word to appear \textit{before} the target word, or a \textit{post-modifier} to enforce appearance after the target word.
 
-To ensure that we do not tamper with the rhyming word, we explicitly instruct are only allowed to ever add pre-modifiers to the phrase of the rhyming word.
+To ensure that we do not tamper with the rhyming word, we explicitly instruct to only ever add pre-modifiers to the phrase of the rhyming word.
 
 \paragraph{Reducing}
 Occasionally the syllabic length of the line exceeds the required number of syllables. In this case, replacement of words is our only option. We utilise our knowledge graph to find replacements  with close associative similarity, but there is still a risk of losing coherence. We never replace the rhyming word.
@@ -264,18 +270,18 @@ Occasionally the syllabic length of the line exceeds the required number of syll
 The process involves finding the longest word in the sentence and replacing it with the most applicable word with fewer syllables. We repeat until we either have exactly the right number of syllables or if we overshoot and have too few, we using the extending process to get it back up to the exact required amount.
 
 \subsubsection{Accentual}
-Any poem with accentual rhythm has, by definition, syllabic rhythm. Therefore we rephrase to match syllabic rhythm first before we fit to accentual rhythm. That way we know that we have exactly the right number of syllables at the beginning of the rephrasing process.
+Any poem with accentual rhythm has, by definition, syllabic rhythm. Therefore we rephrase to match syllabic rhythm before we fit to accentual rhythm. That way we know that we have exactly the right number of syllables at the beginning of the rephrasing process.
 
 Let's take \textit{'Woman chased the hairy monkey'} as our line and '01001001' as our required stress pattern. If we put one on top of the other as in Figure BLAH, we can pair up each word with its required pattern.
 
-Start from the rightmost word, 'monkey'. Since we do not want to tamper with rhyme, we disregard this pattern-word pair. Moving along to the left we get the word 'hairy', which has the required pattern of '10'. This matches with the actual stress pattern for 'hairy', so nothing needs to be done and move along again. The same happens for the words 'the' and 'chased' because they are both monosyllabic and can be either stressed or unstressed.
+Start from the rightmost word; \textit{'monkey'}. Since we do not want to tamper with rhyme, we disregard this pattern-word pair. Moving along to the left we get the word 'hairy', which has the required pattern of '10'. This matches with the actual stress pattern for 'hairy', so nothing needs to be done and move along again. The same happens for the words 'the' and 'chased' because they are both monosyllabic and can be either stressed or unstressed.
 
-Finally. the word 'woman' is paired with the stress pattern '01'. We have a mismatch because, according to the CMU Pronunciation Dictionary, the stress pattern for 'woman' is '10'. We need to replace the word.
+Finally, the word 'woman' is paired with the stress pattern '01'. We have a mismatch because, according to the CMU Pronunciation Dictionary, the stress pattern for 'woman' is '10'. We need to replace the word.
 
 There are three approaches to this problem:
 \begin{enumerate}
 \item{The simple and naive method would be to choose any random word that fits the required pattern, but that contradicts the \textit{content first} approach.} 
-\item{We could only look at synonyms and hypernyms/IsA relations and replace with any that have the required pattern, but there is a risk that none of them do, in which case we do not replace the word at all, keeping the incorrect pattern.} 
+\item{We could only look at synonyms and hypernyms/\textit{IsA} relations and replace with any that have the required pattern, but there is a risk that none of them do, in which case we do not replace the word at all, keeping the incorrect pattern.} 
 \item{The final approach involves indexing all words in the knowledge network by possible stress patterns. We select the most associatively similar word from the values of the required stress pattern. However, this again leads to the possibility of finding a poor replacement word in terms of preserving the integrity of the content.}
 \end{enumerate}
 

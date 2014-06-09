@@ -1,14 +1,14 @@
 [0] Config.pm:387> INFO - This is Biber 1.6
 [0] Config.pm:390> INFO - Logfile is 'report.blg'
 [96] biber-MSWIN:215> INFO - === %a %b %e, %Y, %H:%M:%S
-[96] Biber.pm:325> INFO - Reading 'report.bcf'
-[184] Biber.pm:600> INFO - Using all citekeys in bib section 0
-[211] Biber.pm:2995> INFO - Processing section 0
-[255] Biber.pm:3129> INFO - Looking for bibtex format file 'References/poetry_references.bib' for section 0
-[262] bibtex.pm:898> INFO - Decoding LaTeX character macros into UTF-8
-[270] bibtex.pm:775> INFO - Found BibTeX data source 'References/poetry_references.bib'
-[759] Biber.pm:2881> INFO - Overriding locale 'English_United States.1252' default tailoring 'variable = shifted' with 'variable = non-ignorable'
-[759] Biber.pm:2887> INFO - Sorting 'entry' list 'nty' keys
-[760] Biber.pm:2891> INFO - No sort tailoring available for locale 'English_United States.1252'
-[1258] bbl.pm:472> INFO - Writing 'report.bbl' with encoding 'UTF-8'
-[1270] bbl.pm:545> INFO - Output to report.bbl
+[99] Biber.pm:325> INFO - Reading 'report.bcf'
+[190] Biber.pm:600> INFO - Using all citekeys in bib section 0
+[217] Biber.pm:2995> INFO - Processing section 0
+[264] Biber.pm:3129> INFO - Looking for bibtex format file 'References/poetry_references.bib' for section 0
+[271] bibtex.pm:898> INFO - Decoding LaTeX character macros into UTF-8
+[280] bibtex.pm:775> INFO - Found BibTeX data source 'References/poetry_references.bib'
+[795] Biber.pm:2881> INFO - Overriding locale 'English_United States.1252' default tailoring 'variable = shifted' with 'variable = non-ignorable'
+[795] Biber.pm:2887> INFO - Sorting 'entry' list 'nty' keys
+[796] Biber.pm:2891> INFO - No sort tailoring available for locale 'English_United States.1252'
+[1321] bbl.pm:472> INFO - Writing 'report.bbl' with encoding 'UTF-8'
+[1333] bbl.pm:545> INFO - Output to report.bbl

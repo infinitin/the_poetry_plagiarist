@@ -43,6 +43,12 @@
       \verb http://www.ark.cs.cmu.edu/
       \endverb
     \endentry
+    \entry{rhymebrain}{online}{}
+      \field{sortinit}{0}
+      \verb{url}
+      \verb http://rhymebrain.com/api.html
+      \endverb
+    \endentry
     \entry{turboparser}{online}{}
       \field{sortinit}{0}
       \verb{url}
