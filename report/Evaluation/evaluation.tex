@@ -1,49 +1,68 @@
-\chapter{Evaluation Plan}
+\chapter{Evaluation}
 \ifpdf
     \graphicspath{{Evaluation/EvaluationFigs/PNG/}{Evaluation/EvaluationFigs/PDF/}{Evaluation/EvaluationFigs/}}
 \else
     \graphicspath{{Evaluation/EvaluationFigs/EPS/}{Evaluation/EvaluationFigs/}}
 \fi
+
+We evaluate this program by looking at the results of analysing 450 limericks, 718 haiku and all 154 of Shakespeare's Sonnets. We evaluate the quality of poems produced for these three types by looking at quality of English, exhibition of poetic features and creativity. 
+
+These three types of poetry cover a large range of poetry techniques that this system is required to read and reproduce. The varying lengths of the poem also provide insight into the changes in performance and quality with poem size.
+
+\section{Comparison of Analysis Results to Literary Theory}
+A major goal of this project is to show that the structure and content of types of poetry can be derived by analysing corpuses of collections. We would like to investigate how our results matches up with those documented in literary theory, as described by Young Writers[ref], a poetry and creative writing resource for UK schools.
+
+\subsection{Limericks}
+
+
+\subsection{Haiku}
+
+\subsection{Shakespearean Sonnets}
+Large number of unknown words (can we get a number?). This makes it extremely slow because we find the closest word by spelling. As we know this does not always work for English, so this can be improved by using the state transducer model. Will also significantly speed up processing because we are not wasting time looking up the closest matching word, which is probably the slowest thing and why non-shakes ones go a lot faster.
+
+\subsection{Non-Shakespearean Sonnets}
+
+\subsection{Summary}
+Our results show that there is no need to hard code rules of poetry for most cases. Rhythm and rhyme tend to match up with theory despite the limitations of the CMUPD and the lack of quality in our corpuses.
+
+Content understanding looks promising but still needs lots of work. There is currently no NE Recognition, a rather big omission but easily fixed.
+
 Anaphora stuff:
-This project does not delve deeply enough into this approach to fully test and evaluate it as it is outside the scope of this project. However, it is a new approach with potential that may be worth investigating further.
+This project does not delve deeply enough into this approach to fully test and evaluate it as it is outside the scope of this project. However, it is a new approach with potential that may be worth investigating further. 
 
-\section{Concurrency and Performance of Interpretation}
-\label{sec:interpret-perf}
 
-Since poems are analysed and features are aggregated \textit{in isolation}, there is plenty of scope for concurrency.
+\section{Quality of English}
+Our approach to generation is \textbf{context first}, which requires a large vocabulary and control over grammar.
+\subsection{Vocabulary}
+The vocabulary of the system is dispersed among the third party and internal sources used.
+WordNet: 155,000
+CMUPD: 133,000
+FrameNet: Blah
+Knowledge Network: Blah
+SimpleNLG Lexicon: Blah
 
-For the poem analysis, a thread pool managed the concurrent execution of 10 workers, each analysing one poem. Trial and error showed 10 to be the optimal number of worker threads. Large resources such as the CMU Pronouncing Dictionary and WordNet were created once and shared amongst the threads.
+Only x words are shared among all of these sources. Altogether, the number of unique words is y. The Oxford Enlgish Dictionary has z words so there is still much room for improvement. We have no scientific or colloquial vocabulary. 
 
-Under this set up with machine specifications as given in the Appendix section \ref{sec:specs}, 450 limericks were analysed in an average of 2 hours and 14 minutes.
+The average vocabulary of native English speakers is 20,000-35,000[http://www.economist.com/blogs/johnson/2013/05/vocabulary-size], so in that sense we are very good. However, the amount of the vocabulary that is actually used is somewhat limited by the fact that we translate a relation (of which there are relatively few) to phrases. Selection from FrameNet is somewhat limited and not hugely dependable for many words. We use the general takes and receives action relations, but quality will significantly improve if we get more relations like desires, usedfor etc.
 
-This was sufficiently fast for this corpus and since this is data is pre-processed and stored. However, using Python's Pool Executor library rather than the Threading module enables us to move over to processes instead of threads with minimal effort if we need multi-core parallelism. It should be noted that this might be slower due to larger overhead and the need for large resources to be created in multiple locations since memory cannot be shared.
+\subsection{Grammar}
+This means that the quality of English should be rather high. We can check this by running the output through an over-the-counter grammar checker. We find that some percentage of lines do not fail the grammar checker, assuming a full stop at the end of every line.
 
-The generalisation process was actually fastest without the overhead of constructing the thread pool. With a thread pool of any number of workers, the average processing time is above 42 seconds for the results of the 450 analysed limericks. Without threading, the process took 40.1 seconds on average.
+FrameNet does not have all the answers.
 
-This generalisation process is fast enough for it to be done over again with different given values as discussed in Section \ref{sec:approach} earlier in the chapter. This is will be very important in getting precise guidance during the generalisation phase. 
+Could take advantage of knowledge of length of syllables to determine the grammatical structure (e.g. intransitive verbs for short sentences).
 
-We will employ four methods of evaluating this project.
-\section{Comparison of Analysis  Results to Theory}
-The Analysis and Abstraction phases attempt to discover the common features of any type of poetry. Current theory of these common features have been derived and documented by poets through their own analysis. We wish to investigate whether this system is able to find everything documented that has been documented by poets. It is likely that the system could only find a subset but it will be interesting to see which points were missed. A full comparison will be made and explanation for any missing features will be attempted, as well as possible algorithms to detect them that could have been implemented. 
+Enjambent fails.
 
-A particularly interesting result would be if the system manages to find a common feature of a type of poetry that poets have not yet found. If even one case of this occurs then this would make a strong case for the ability of computers to understand, interpret and find patterns in natural language. Further investigation would surely be warranted into how much a computer system would be able to find that human readers have overlooked.
+\section{Exhibition of Poetic Features}
+Probabilistic. Rhyme and syllabic rythm are followed most of the time. However, by nature of the results being somewhat ambiguous, the results vary naturally.
 
-Note that this section does not expect the system to infer the effects of any of the poetry features on the reader, just simply detect the use of the features.
+Accentual rhythm is a best fit and is not as important as content. If we analyse the poem back using the analysis stage, we find that everything except this matches up with some permutation of the probability distribution, but not necessarily one specific instance. This is good because it means that we are getting \textit{close} to other previous poems, but not directly copying the grammatical structure like in that constraint programming one.
 
-\section{Turing-style Tests}
-The simplest way to check the quality of poems produced would be to show people a poem either generated by this system or written by a human without telling them and asking them to determine whether the author was man or machine.
-
-However, this is highly dependent on the reader's fluency of English, understanding of poetry and imagination. A poor English speaker with little to no understanding of poetry and with a far reaching imagination could easily be fooled into thinking that a piece of text was written by a human rather than a computer.
-
-Therefore, we propose a survey that asks for these three measures to be told truthfully. It then randomly shows a poem and asks whether it was written by a human or computer. This way, we can get a demographic of those who are fooled and those who are not so that we can see at what level of poetry literacy this system is.
-
-Further, we plan to approach real poets from literary institutions and university departments and ask them to do this survey in person. If they incorrectly believe even one poem to be written by a human and not a computer, then this project is a definite success. For the cases where this does not arise, having an in-person survey will enable us to ask for feedback on what gave us away, which can be used to improve the system and future attempts at poetry generation.
-
-However, Pease and Colton\cite{pease2011impact} make several arguments that Turing-style tests are not appropriate for poetry generation. We believe that it has its place because ultimately this project is for user consumption as well as research and experimentation. Furthermore, poems attempt to create an emotional connection with the reader, something that cannot be determined other than with a human reader.
-
-Having said that, Colton, Charnley and Pease\cite{colton2011computational} described the FACE and IDEA Descriptive Models for evaluating computational creativity projects. We believe these models provide a useful evaluation methodology alongside Turing-style tests and so are just as much part of the evaluation of this system as described in Section \ref{sec:face} and \ref{sec:idea}. It will also be interesting to evaluate them as an evaluation method as they have only just been proposed.
-
-\section{FACE Descriptive Model}
+\section{Creativity}
+Are the poems creative?
+\subsection{FACE and IDEA Descriptive Models}
+\subsubsection{FACE Descriptive Model}
 \label{sec:face}
 A full FACE model has four symptoms: examples, concepts, aesthetics and framing information.
 
@@ -57,7 +76,7 @@ A full FACE model has four symptoms: examples, concepts, aesthetics and framing 
 
 Therefore, we can see that this system should fully abide by the FACE Descriptive Model. We will evaluate the results mathematically as per Colton, Charnley and Pease.
 
-\section{IDEA Descriptive Model}
+\subsubsection{IDEA Descriptive Model}
 \label{sec:idea}
 A full IDEA model has six stages to which the software can reach. We want our software to be in the, fourth or \emph{Discovery stage}.
 
@@ -71,6 +90,54 @@ A full IDEA model has six stages to which the software can reach. We want our so
 \end{itemize}
 
 Therefore, we can see that this system should reach the desired \emph{Discovery stage} of the IDEA Descriptive Model. We will evaluate the results mathematically as per Colton, Charnley and Pease.
+
+\subsection{Knowledge and Word Selection}
+220,000 specks of knowledge vs 10,000 for Metaphor magnet, 9,000 for Perception.
+Quality of sources is high quality, so knowledge is dependable.
+Other sources include:
+blah
+blah
+blah
+
+So we are still limited on understanding of some words and could improve further.
+
+Many specks use the most general \textit{RelatedTo} relation, which is only really useful for cohesiveness throughout the poem and do not help building the poems. Let's have a distribution...
+
+Does it come up with new stuff each time? With the same input, how many words are reused in each poem? Is there too much weighting to the quality of the knowledge?
+
+Google Suggestions is poor, should avoid using that
+
+\section{Turing-style Tests}
+Can they fool a human?
+Is it something that people can use?
+Limericks: Blah
+Sonnets: Blah
+Haiku: Blah
+
+\section{Usability}
+Participants of the turing test asked if this could become an app. The range of phrases is still low, but it is large enough to provide such an opportunity. 
+
+\section{Performance}
+
+450 Limericks: 8040, 10 threads
+154 Sonnets: 12004, one thread to avoid memory error
+718 Haikus: 2808, 12 threads
+
+
+\subsection{Concurrency and Performance of Interpretation}
+\label{sec:interpret-perf}
+
+Since poems are analysed and features are aggregated \textit{in isolation}, there is plenty of scope for concurrency.
+
+For the poem analysis, a thread pool managed the concurrent execution of 10 workers, each analysing one poem. Trial and error showed 10 to be the optimal number of worker threads. Large resources such as the CMU Pronouncing Dictionary and WordNet were created once and shared amongst the threads.
+
+Under this set up with machine specifications as given in the Appendix section \ref{sec:specs}, 450 limericks were analysed in an average of 2 hours and 14 minutes.
+
+This was sufficiently fast for this corpus and since this is data is pre-processed and stored. However, using Python's Pool Executor library rather than the Threading module enables us to move over to processes instead of threads with minimal effort if we need multi-core parallelism. It should be noted that this might be slower due to larger overhead and the need for large resources to be created in multiple locations since memory cannot be shared.
+
+The generalisation process was actually fastest without the overhead of constructing the thread pool. With a thread pool of any number of workers, the average processing time is above 42 seconds for the results of the 450 analysed limericks. Without threading, the process took 40.1 seconds on average.
+
+This generalisation process is fast enough for it to be done over again with different given values as discussed in Section \ref{sec:approach} earlier in the chapter. This is will be very important in getting precise guidance during the generalisation phase.
 
 % ------------------------------------------------------------------------
 
