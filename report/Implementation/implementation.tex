@@ -19,7 +19,7 @@ The corpus is a large collection of poems. We may assume that each poem is alrea
 
 Poems are most easily obtained from anthologies. This works very well with our assumptions as the data is already labelled with the type of poem, but we know nothing else about the content.
 
-Another way to gather poems is by looking for those freely available on the Internet. However, the corpus obtained from an Internet search will likely be of lower quality than directly from a published anthology. For example, we may get the limerick in Figure \ref{fig:awkward-limerick}, which is clearly very awkward. We can immediately see that it does not follow the typical \textit{'AABBA'} rhyme scheme, and even more so that it doesn't have a fifth line!
+Another way to gather poems is by looking for those freely available on the Internet. However, the corpus obtained from an Internet search will likely be of lower quality than directly from a published anthology. For example, we may get the limerick in Figure \ref{fig:awkward-limerick}, which is clearly very awkward. We can immediately see that it does not follow the typical \textit{AABBA} rhyme scheme, and even more so that it doesn't have a fifth line!
 
 \begin{figure}[h!]
 \centering
@@ -77,12 +77,12 @@ All features can be aggregated using some variant of one of four algorithms, wit
 \subsection{List Comprehension}
 \label{sec:listcomp}
 
-The simplest of the four algorithms utilises Python's built in functional programming feature; list comprehensions. In a single line of code we put all of the results for a particular feature from all poems in the collection into one big list. Algorithm BLAH shows the code for aggregating the number of stanzas.
+The simplest of the four algorithms utilises Python's built in functional programming feature; list comprehensions. In a single line of code we put all of the results for a particular feature from all poems in the collection into one big list. The following algorithm shows the code for aggregating the number of stanzas.
 
-\textit{
-1. num\_stanzas = [poem.n\_stanzas for poem in poems]\\
-2. return Count(num\_stanzas)
-}
+\begin{verbatim}
+1. num_stanzas = [poem.n_stanzas for poem in poems]
+2. return Count(num_stanzas)
+\end{verbatim}
 
 The second line gets the frequency distribution of this list, which can easily be turned into a probability distribution as required.
 
@@ -97,13 +97,15 @@ Suppose we have three poems in the corpus altogether. Then we have three tuples 
 
 If we are looking generalise the results on a line by line basis, we want to \textbf{transpose} the data to group each line together and put them in a list with the format \texttt{[(x$_1$, y$_1$, z$_1$), (x$_2$, y$_2$, z$_2$), ... ,(x$_n$, y$_n$, z$_n$)]}.
 
-Once this is done, we can apply the list comprehension algorithm described in Section \ref{sec:listcomp} to each tuple in the list. Algorithm BLAH outlines this full process with the stress pattern example.
+Once this is done, we can apply the list comprehension algorithm described in Section \ref{sec:listcomp} to each tuple in the list. The following algorithm outlines this full process with the stress pattern example.
 
-\textit{
-1. stress\_patterns = [poem.stress\_patterns for poem in poems]\\
-2. stress\_patterns\_all\_lines = transpose(stress\_patterns)\\
-3. return [Count(stress\_pattern\_single\_line) for stress\_pattern\_single\_line in stress\_patterns\_all\_lines]\\
+\begin{verbatim}
+1. stress_patterns = [poem.stress_patterns for poem in poems]
+2. stress_patterns_all_lines = transpose(stress_patterns)
+3. return [Count(stress_pattern_single_line) for stress_pattern_single_line in stress_patterns_all_lines]
 }
+\end{verbatim}
+
 \subsection{Pick the Most Popular}
 
 The analysis of a single poem often has some ambiguities. For example, the rhyme scheme for a collection can never be decided by looking at just one poem because words can be pronounced in more than one way. The limerick in Figure \ref{fig:ambiguous-rhyme} could either be \textit{AABBA} or \textit{AABBC} because \textit{invited} can be pronounced as \textit{[IH N V AY T \textbf{AH} D]} or \textit{[IH0 N V AY T \textbf{IH}, D]} according to the CMU pronunciation dictionary.
@@ -135,21 +137,21 @@ We illustrate what we want to happen by taking four cases:
 
 An iterative implementation makes this process simple. We first find the most popular rhyme scheme among all poems in a set and save its frequency. We then remove all poems that contain the most popular rhyme scheme from the set and repeat on the remaining poems until there are no more poems in the set. 
 
-Algorithm BLAH shows the pseudo-code for this implementation.
+The pseudo-code for this implementation is:
 
-\textit{
- 1. rhyme\_scheme\_counts = \{\}\\
- 2. possible\_rhyme\_scheme\_lists = [poem.rhyme\_schemes for poem in poems]\\
- 3. all\_possible\_rhyme\_schemes = flatten(possible\_rhyme\_schemes)\\
- 4. most\_popular\_rhyme\_schemes = most\_common(all\_possible\_rhyme\_schemes)\\
- 5. for each rhyme\_scheme in most\_popular\_rhyme\_schemes\\
- 6. 		rhyme\_scheme\_counts[most\_popular\_rhyme\_scheme)] = all\_possible\_rhyme\_schemes.count(rhyme\_scheme)\\
- 7. for each possible\_rhyme\_scheme\_list in possible\_rhyme\_scheme\_lists\\
- 8.		if possible\_rhyme\_scheme\_list contains any of  most\_popular\_rhyme\_schemes\\
- 9.			remove possible\_rhyme\_scheme\_list from possible\_rhyme\_scheme\_lists\\
-10. if possible\_rhyme\_scheme\_lists is not empty, go to 3.\\
-11. return rhyme\_scheme\_counts\\
-}
+\begin{verbatim}
+ 1. rhyme_scheme_counts = {}
+ 2. possible_rhyme_scheme_lists = [poem.rhyme_schemes for poem in poems]
+ 3. all_possible_rhyme_schemes = flatten(possible_rhyme_schemes)	
+ 4. most_popular_rhyme_schemes = most_common(all_possible_rhyme_schemes)
+ 5. for each rhyme_scheme in most_popular_rhyme_schemes
+ 6.   rhyme_scheme_counts[most_popular_rhyme_scheme)] = all_possible_rhyme_schemes.count(rhyme_scheme)
+ 7. for each possible_rhyme_scheme_list in possible_rhyme_scheme_lists
+ 8.	  if possible_rhyme_scheme_list contains any of  most_popular_rhyme_schemes
+ 9.		  remove possible_rhyme_scheme_list from possible_rhyme_scheme_lists
+10. if possible_rhyme_scheme_lists is not empty, go to 3.
+11. return rhyme_scheme_counts
+\end{verbatim}
 
 \subsection{Filter Below Threshold}
 

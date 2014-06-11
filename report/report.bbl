@@ -399,6 +399,26 @@
       \field{title}{Stanford typed dependencies manual}
       \field{year}{2008}
     \endentry
+    \entry{creativitynetwork}{thesis}{}
+      \name{labelname}{1}{}{%
+        {{hash=228232ebcc92016d11200def64fb561b}{De\bibnamedelima Smedt}{D\bibinitperiod\bibinitdelim S\bibinitperiod}{Tom}{T\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{1}{}{%
+        {{hash=228232ebcc92016d11200def64fb561b}{De\bibnamedelima Smedt}{D\bibinitperiod\bibinitdelim S\bibinitperiod}{Tom}{T\bibinitperiod}{}{}{}{}}%
+      }
+      \list{institution}{1}{%
+        {University of Antwerp}%
+      }
+      \strng{namehash}{228232ebcc92016d11200def64fb561b}
+      \strng{fullhash}{228232ebcc92016d11200def64fb561b}
+      \field{sortinit}{D}
+      \field{labeltitle}{Modeling Creativity: Case Studies in Python}
+      \field{isbn}{978-90-5718-260-0}
+      \field{title}{Modeling Creativity: Case Studies in Python}
+      \field{type}{PhD dissertation}
+      \field{year}{2013}
+      \field{pages}{78\bibrangedash 96}
+    \endentry
     \entry{de2012pattern}{article}{}
       \name{labelname}{2}{}{%
         {{hash=228232ebcc92016d11200def64fb561b}{De\bibnamedelima Smedt}{D\bibinitperiod\bibinitdelim S\bibinitperiod}{Tom}{T\bibinitperiod}{}{}{}{}}%
@@ -440,6 +460,27 @@
       \field{volume}{21}
       \field{year}{2011}
       \field{pages}{13\bibrangedash 14}
+    \endentry
+    \entry{dijkstra1959note}{article}{}
+      \name{labelname}{1}{}{%
+        {{hash=17d4868e45fe2015e56c9da6909f2761}{Dijkstra}{D\bibinitperiod}{Edsger\bibnamedelima W}{E\bibinitperiod\bibinitdelim W\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{1}{}{%
+        {{hash=17d4868e45fe2015e56c9da6909f2761}{Dijkstra}{D\bibinitperiod}{Edsger\bibnamedelima W}{E\bibinitperiod\bibinitdelim W\bibinitperiod}{}{}{}{}}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{17d4868e45fe2015e56c9da6909f2761}
+      \strng{fullhash}{17d4868e45fe2015e56c9da6909f2761}
+      \field{sortinit}{D}
+      \field{labeltitle}{A note on two problems in connexion with graphs}
+      \field{journaltitle}{Numerische mathematik}
+      \field{number}{1}
+      \field{title}{A note on two problems in connexion with graphs}
+      \field{volume}{1}
+      \field{year}{1959}
+      \field{pages}{269\bibrangedash 271}
     \endentry
     \entry{dobrivsek2010towards}{inproceedings}{}
       \name{labelname}{3}{}{%
@@ -748,6 +789,23 @@
       \field{volume}{19}
       \field{year}{1993}
       \field{pages}{313\bibrangedash 330}
+    \endentry
+    \entry{martin2003agile}{book}{}
+      \name{labelname}{1}{}{%
+        {{hash=4b8949c6443f8223e7eb8536ccdf3810}{Martin}{M\bibinitperiod}{Robert\bibnamedelima Cecil}{R\bibinitperiod\bibinitdelim C\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{1}{}{%
+        {{hash=4b8949c6443f8223e7eb8536ccdf3810}{Martin}{M\bibinitperiod}{Robert\bibnamedelima Cecil}{R\bibinitperiod\bibinitdelim C\bibinitperiod}{}{}{}{}}%
+      }
+      \list{publisher}{1}{%
+        {Prentice Hall PTR}%
+      }
+      \strng{namehash}{4b8949c6443f8223e7eb8536ccdf3810}
+      \strng{fullhash}{4b8949c6443f8223e7eb8536ccdf3810}
+      \field{sortinit}{M}
+      \field{labeltitle}{Agile software development: principles, patterns, and practices}
+      \field{title}{Agile software development: principles, patterns, and practices}
+      \field{year}{2003}
     \endentry
     \entry{meyers2004nombank}{inproceedings}{}
       \name{labelname}{7}{}{%

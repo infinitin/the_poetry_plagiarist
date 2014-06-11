@@ -21,6 +21,28 @@ Google Ngrams
 \textit{DBPedia}
 \end{itemize}
 
+\subsection{Context-Aware Anaphora and Presupposition Resolution}
+\label{sec:ca-ar}
+We can now clearly see the anaphora problem as described in Section \ref{sec:characters}. We must match up the \textit{'a cat'} character and \textit{'he'} character, and the \textit{'they'} character with the \textit{'a lot of mice'} character. 
+
+In this particular example, we can simply match the plurals and singulars together. However, we may not always be so lucky as we can run into a situation where the cat could be referred to as \textit{'the feline'} instead of \textit{'he'}, for example.
+
+Section \ref{sec:arback} gives an overview of the state of the art solutions and notes that none of them use domain-specific knowledge. Our solution relies on \textbf{common sense} knowledge (which is domain-specific relative to our universe) as well as a deeper contextual awareness.
+
+We model common sense similarly to the semantic networks in Section \ref{sec:sem-net}.  
+
+
+\subsection{Inferring Properties and Capabilities}
+
+Combining the semantic network with our ability to identify persona and relations in text, we can make inferences on the properties and capabilities of the persona to resolve anaphora and presuppositions.
+
+Suppose we take the cat poem in Figure \ref{fig:cat}, but the word \textit{'he'} is replaced with \textit{'the feline'}. Since they are represented by different nouns, we would not initially recognise that \textit{'cat'} and \textit{'feline'} refer to the same persona. Once all the persona were found, if we compared each pair using our knowledge network, we would find the relation \textit{'cat.n'-IsA$\rightarrow$'feline.n'}. We can therefore infer with some confidence that the persona represented by the words \textit{'cat'} and \textit{'feline'} are one and the same.
+
+Take another example sentence:\\
+\textit{There was a cat with a flea on his back. It chased the mouse.}
+
+In this situation, it is ambiguous whether \textit{'It'} refers to the cat or the flea because they are both singular, animated and neutral gender. However, our semantic network of common sense would be able to reveal that \textit{'It'} probably refers to the cat since it is common sense that cats take the action of chasing mice.
+
 %%% ----------------------------------------------------------------------
 
 % ------------------------------------------------------------------------

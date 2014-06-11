@@ -432,29 +432,88 @@ Successes of Computational Creativity:
 
 \subsubsection{Semantic Networks of Common Sense}
 \label{sec:common-sense-bg}
-Boden proposes that th mind can be modelled as a search space[ref] of \textit{concepts} and relations between them. In our case, these concepts are represented by words or phrases that have literal and symbolic meaning. The number of concepts in the space and how words relate to each other are determined by knowledge and experience.
 
-Tom De Smedt uses this idea to model creativity[ref]. He proposes a network with concepts at the nodes and relations between them, perhaps of a specific type, are the edges.
+Tom De Smedt uses the idea that the mind can be modelled as a search space of \textit{concepts} and relations between them. to model creativity\cite{creativitynetwork}. He proposes a network with concepts at the nodes and relations between them, perhaps of a specific type, are the edges.
+
+In our case, these concepts are represented by words or phrases that have literal and symbolic meaning. The number of concepts in the space and how words relate to each other are determined by knowledge and experience.
 
 If we think of a \textit{cat} as a concept, it would be directly related to other concepts such as \textit{dog} and \textit{mouse}. These are \textit{mundane} associations between concepts.
 
-Concepts are defined in this network by looking at the outgoing neighbours of its node. This is called the concept \textit{halo}. Conversely, the \textit{field} of a concept acts as a classification by finding all neighbours that relate to it, rather than from it. A possible halo and field of the concepts \textit{cat} and \textit{furry} respectfully are shown in Figure BLAH.
+Concepts are defined in this network by looking at the outgoing neighbours of its node. This is called the concept \textit{halo}. Conversely, the \textit{field} of a concept acts as a classification by finding all neighbours that relate to it, rather than from it. A subgraph of the halo and field of the concepts \textit{cat} and \textit{feed.v} respectfully are shown in Figure \ref{fig:concept-halo-field}.
 
-FIGURE BLAH. 
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.9\textwidth}
+	\centering
+    \begin{tikzpicture}[->, node distance=4cm,main node/.style={circle, draw, font=\sffamily\bfseries}]
+        \tikzstyle{every node}=[font=\small]
+        
+          \node[main node] (1) [] {cat.n};
+          \node[] (3) [above of=1]{nap.n};
+          \node[] (4) [right of=1] {alley.a};
+          \node[] (5) [below of=1] {purr.v};
+          \node[] (6) [left of=1] {stroke.v};
+          \node[] (7) [above right of=1] {feed.v};
+          \node[] (8) [below right of=1] {stalk.v};
+          \node[] (9) [below left of=1] {feral.a};
+          \node[] (10) [above left of=1] {litter.n};
+
+          \path[every node/.style={font=\sffamily\small}]
+            (1) edge node [above right] {RelatedTo} (3)
+               	edge node [above] {HasProperty} (4)
+               	edge node [below right] {TakesAction} (5)
+               	edge node [above] {ReceivesAction} (6)
+                edge node [right] {ReceivesAction} (7)
+                edge node [right] {TakesAction} (8)
+                edge node [left] {HasProperty} (9)
+                edge node [left] {RelatedTo} (10);
+              
+        \end{tikzpicture}
+    \caption{Concept halo for \textit{'cat.n'}}
+\end{subfigure}
+\begin{subfigure}[t]{0.9\textwidth}
+	\centering
+   \begin{tikzpicture}[<-, node distance=4cm,main node/.style={circle, draw, font=\sffamily\bfseries}]
+           \tikzstyle{every node}=[font=\small]
+           
+             \node[main node] (1) [] {feed.v};
+             \node[] (3) [above of=1]{cat.n};
+             \node[] (4) [right of=1] {baby.n};
+             \node[] (5) [below of=1] {dog.n};
+             \node[] (6) [left of=1] {duck.n};
+             \node[] (7) [above right of=1] {ego.n};
+             \node[] (8) [below right of=1] {family.n};
+             \node[] (9) [below left of=1] {spoon.n};
+             \node[] (10) [above left of=1] {mother.n};
+   
+             \path[every node/.style={font=\sffamily\small}]
+               (1) edge node [above right] {ReceivesAction} (3)
+                  	edge node [above] {ReceivesAction} (4)
+                  	edge node [below right] {ReceivesAction} (5)
+                  	edge node [above] {ReceivesAction} (6)
+                   edge node [right] {ReceivesAction} (7)
+                   edge node [right] {ReceivesAction} (8)
+                   edge node [left] {RelatedTo} (9)
+                   edge node [left] {TakesAction} (10);
+                 
+           \end{tikzpicture}
+    \caption{Concept field for \textit{'feed.v'}}
+\end{subfigure}
+\caption{Example concept halo and field}
+\label{fig:concept-halo-field}
+\end{figure}
 
 If we were to look at \textit{paths} in the network, we can realise relationships between concepts that are less mundane, and therefore more creative.
 
 For example, we may travel along the path \textit{cat $\rightarrow$ meow $\rightarrow$ loud $\rightarrow$ fire alarm} to create an analogy between the cats and fire alarms.
 
-Since this knowledge is modelled as a graph, we are able to use standard graph algorithms such as Dijkstra's shortest path[ref] to find similarity between concepts.
+Since this knowledge is modelled as a graph, we are able to use standard graph algorithms such as Dijkstra's shortest path\cite{dijkstra1959note} to find similarity between concepts.
 
 \paragraph{ConceptNet}
 \label{sec:conceptnet}
 ConceptNet\cite{liu2004conceptnet} is an attempt to build a single source of \textit{'things computers should know about the world'} using the idea of a semantic network of concepts.
 
-It gathers its knowledge from an array of sources but large amounts come from Wikipedia. Edges represent \textit{relations} between concepts and come in various types, as shown in Table BLAH.
-
-Table BLAH: https://github.com/commonsense/conceptnet5/wiki/Relations
+It gathers its knowledge from an array of sources but large amounts come from Wikipedia. Edges represent \textit{relations} between concepts and come in various types including:
 
 It also provides functional interfaces such as finding the closest concept to a given number of concepts and similarity between concepts.
 
@@ -535,8 +594,7 @@ In linguistics, \textit{anaphora} is the technique of using words that are used 
 
 Presupposition is a similar technique, except that it works on implicit assumptions about the context. For example, the sentence \textit{'The cat chased the mouse, but it managed to evade the feline.'} uses the assumption that the cat is a feline. It then projects this as a presupposition to avoid re-using the same word or introducing anaphora, while still indicating to the same object. This is a very useful linguistic technique, especially when used to make temporal inferences. The sentence \textit{'Joe stopped playing the piano'} has the implicit assumption that Joe once played the piano.
 
-Resolving anaphora and presupposition in text is an ongoing research area in Computational Linguistics. Various tools have been developed using a variety of techniques as shown in Table BLAH. It is worth noting that existing solutions are generally do not use domain-specific or linguistic knowledge.
-Table BLAH: http://www.slideshare.net/kancho/anaphora-resolution
+Resolving anaphora and presupposition in text is an ongoing research area in Computational Linguistics. Various tools have been developed using a variety of techniques that are not discussed here. It is worth noting, though, that existing solutions generally do not use domain-specific or linguistic knowledge.
 
 \subsubsection{Discourse Representation Theory}
 \label{sec:drt}
@@ -607,6 +665,7 @@ While SRL may not be able to handle "donkey phrases" and does not inherently res
 There are various sources of different types of semantic information that are used to improve the quality of computational semantic understanding. Here we discuss those that are use heavily in this project and could potentially be used in the future.
 
 \paragraph{WordNet}
+\label{sec:wn}
 WordNet is a widely used, high quality lexical database that provides hierarchical, conceptual-semantic and lexical relations of 155,287 English words\cite{miller1995wordnet}. 
 
 \textit{Synsets} in WordNet are sets of cognitive synonyms, e.g. \textit{car} and \textit{automobile} are in the same synset, but not \textit{cable car}. The noun \textit{bear} and it's verbal namesake are in separate synsets, aiding in word sense disambiguation.
@@ -650,28 +709,72 @@ FrameNet\cite{baker1998berkeley} is a lexicon with framing semantics to \textit{
 
 Take the Desiring frame for example, which has a list of words, referred to as \textit{lexical units} or \textit{LUs} - that are used in statements that indicate desire, e.g. want, lust, yearn etc. Each of these LUs come with their own \textit{lexical entries} that describe the FEs and \textit{Valence patterns}. These define the types of phrases that can be built around a particular LU.
 
-Take the \textit{yearn} LU. It's FEs and Valence Patterns are shown in Table BLAH:
+Take the \textit{yearn} LU. It's FEs and Valence Patterns are shown in Tables \ref{fig:yearn-fe} and \ref{fig:yearn-vp}.
 
-Table: https://framenet2.icsi.berkeley.edu/fnReports/data/lu/lu6599.xml?mode=lexentry
+\begin{table}
+    \begin{tabular}{|l|l|l|}
+    \hline
+    Frame Element      & Number Annotated & Realisation(s)                                                       \\ \hline
+    Duration           & 1                & PP[for].Dep(1)                                                       \\ \hline
+    Event              & 16               & VPto.Dep(9)\\AVP.Dep(1)\\PP[for].Dep(6)                              \\ \hline
+    Experiencer        & 29               & NP.Ext(29)                                                           \\ \hline
+    Focal\_participant & 13               & PP[after].Dep (3)\\PP[for].Dep (9)\\PP[of].Dep (2)\\PP[over].Dep (1) \\ \hline
+    Time               & 1                & NP.Dep (1)                                                           \\ \hline
+    \end{tabular}
+    \caption{Frame elements for \textit{yearn} lexical unit}
+    \label{fig:yearn-fe}
+\end{table}
+
+\begin{table}
+    \begin{tabular}{|l|l|l|l|l|}
+    \hline
+    Number Annotated & Pattern 1    & Pattern 2          & Pattern 3          & Pattern 4   \\ \hline
+    1 TOTAL          & Duration     & Event              & Experiencer        & Experiencer \\
+    1                & PP[for]\\Dep & VPto\\Dep          & NP\\Ext            & NP\\Ext     \\ \hline
+    15 TOTAL         & Event        & Experiencer        & ~                  & ~           \\
+    1                & AVP\\Dep     & NP\\Ext            & ~                  & ~           \\
+    6                & PP[for]\\Dep & NP\\Ext            & ~                  & ~           \\
+    8                & VPto\\Dep    & NP\\Ext            & ~                  & ~           \\ \hline
+    10 TOTAL         & Experiencer  & Focal\_participant & ~                  & ~           \\
+    3                & NP\\Ext      & PP[after]\\Dep     & ~                  & ~           \\
+    7                & NP\\Ext      & PP[for]\\Dep       & ~                  & ~           \\ \hline
+    2 TOTAL          & Experiencer  & Focal\_participant & Focal\_participant & ~           \\
+    2                & NP\\Ext      & PP[for]\\Dep       & PP[of]\\Dep        & ~           \\ \hline
+    1 TOTAL          & Experiencer  & Focal\_participant & Time               & ~           \\
+    1                & NP\\Ext      & PP[over]\\Dep      & NP\\Dep            & ~           \\ \hline
+    \end{tabular}
+    \caption{Valence patterns for \textit{yearn} lexical unit}
+    \label{fig:yearn-vp}
+\end{table}
 
 Valence patterns are grouped by the permutation of FEs, e.g. \textit{Event} and \textit{Experiencer}, or \textit{Experiencer} and \textit{Focal\_participant}. Each group comes with one or more Valence Patterns that indicate the type of phrase (NP means noun phrase, VP means verb phrase etc.), as well as the role in the clause - Ext (Subject), Obj (Object) and Dep (Dependency or Indirect Object).
 
 FrameNet also provides \textit{semantic types} with every FE of a frame. This indicates the required animation of any noun in all Valence patterns of the LU. For example, the \textit{Experiencer} FE is a \textit{Sentient} semantic type, while the \textit{Event} FE has the \textit{State\_of\_affairs} semantic type.
 
 \paragraph{Oxford Collocations Dictionary}
+\label{sec:ox-colloc}
 The Oxford Collocations Dictionary\cite{crowther2003oxford} is a source of word combinations. For any given word, it provides the set of words and POS commonly occur in relation to it.
 
-The dictionary entry for \textit{custard} can be seen in Figure BLAH. It gives common adjectives that are used to describe custard and shows that it receives the action of being made, poured and strained, and it takes the actions of thickening and setting. Furthermore, it is closely related to powder and pie.
+The dictionary entry for \textit{custard} can be seen in Figure \ref{fig:custard-collocs}. It gives common adjectives that are used to describe custard and the verbs that use custard as the subject or object. It also shows that we can make more complex nouns by appending the words \textit{powder} and \textit{pie}.
 
+\begin{figure}[h!]
+\centering
+\includegraphics[width=140mm]{custard-collocs}
+\caption{Oxford Collocations Dictionary entry for \textit{'custard'}}
+\label{fig:custard-collocs}
+\end{figure}
 
 \paragraph{Associations}
+\label{sec:fl-assoc}
 The University of South Florida Free Associated Norms\cite{nelson2004university} provides associations collected directly from human participants. It is used by the Department of Psychology, and is therefore another high quality source of associated words that can be depended on for quality as it was collected in a scientifically sound manner.
 
 
 \paragraph{NodeBox Perception}
+\label{sec:nb-percep}
 The NodeBox Perception model includes the data used in De Smedt's attempt to model common sense as a network, as discussed in Section \ref{sec:common-sense-bg}. This data was manually entered into the system and continues to be used for research, which means that it is a dependable source of data. 
 
 \paragraph{Google Search Suggestions}
+\label{sec:goog-sugg}
 Tony Veale's attempt at modelling metaphors\cite{vealespecifying} introduced a clever use of Google's search suggestions as a method of finding associations between words and ultimately build Metaphor Magnet. While we may not use Metaphor Magnet, we take inspiration from his use of Google's search suggestions.
 
 This is the least dependable source of information that we use because it is dependant on search suggestions rather than structured sentences. Therefore we will use this method with caution.

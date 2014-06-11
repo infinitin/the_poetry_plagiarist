@@ -57,90 +57,92 @@
 \BOOKMARK [2][]{subsection.3.5.1}{3.5.1 Structure and Repetition}{section.3.5}% 57
 \BOOKMARK [2][]{subsection.3.5.2}{3.5.2 Point of View}{section.3.5}% 58
 \BOOKMARK [2][]{subsection.3.5.3}{3.5.3 Tense}{section.3.5}% 59
-\BOOKMARK [1][]{section.3.6}{3.6 Characters and Context}{chapter.3}% 60
-\BOOKMARK [2][]{subsection.3.6.1}{3.6.1 Semantic Relations}{section.3.6}% 61
-\BOOKMARK [2][]{subsection.3.6.2}{3.6.2 Semantic Labelling using Noah's ARK}{section.3.6}% 62
-\BOOKMARK [3][]{subsubsection.3.6.2.1}{3.6.2.1 FrameNet Semantic Role Labelling using SEMAFOR}{subsection.3.6.2}% 63
-\BOOKMARK [3][]{subsubsection.3.6.2.2}{3.6.2.2 Semantic Dependency Relations using TurboParser}{subsection.3.6.2}% 64
-\BOOKMARK [2][]{subsection.3.6.3}{3.6.3 Extracting and Binding Relations to Characters}{section.3.6}% 65
-\BOOKMARK [3][]{subsubsection.3.6.3.1}{3.6.3.1 Obtaining the Semantic Dependency Relations and Frame-Semantic Parse from Noah's ARK}{subsection.3.6.3}% 66
-\BOOKMARK [3][]{subsubsection.3.6.3.2}{3.6.3.2 Collapsing Loose Leaves of Dependency Relations}{subsection.3.6.3}% 67
-\BOOKMARK [3][]{subsubsection.3.6.3.3}{3.6.3.3 Finding and Creating Characters}{subsection.3.6.3}% 68
-\BOOKMARK [3][]{subsubsection.3.6.3.4}{3.6.3.4 Extracting Candidate Relations from the Frame-Semantic Parse}{subsection.3.6.3}% 69
-\BOOKMARK [3][]{subsubsection.3.6.3.5}{3.6.3.5 Obtaining the Associated Dependency Relations for each Persona}{subsection.3.6.3}% 70
-\BOOKMARK [3][]{subsubsection.3.6.3.6}{3.6.3.6 Binding ConceptNet Relations to Characters}{subsection.3.6.3}% 71
-\BOOKMARK [2][]{subsection.3.6.4}{3.6.4 Context-Aware Anaphora and Presupposition Resolution}{section.3.6}% 72
-\BOOKMARK [3][]{subsubsection.3.6.4.1}{3.6.4.1 The Network}{subsection.3.6.4}% 73
-\BOOKMARK [4][]{paragraph.3.6.4.1.1}{3.6.4.1.1 Nodes}{subsubsection.3.6.4.1}% 74
-\BOOKMARK [4][]{paragraph.3.6.4.1.2}{3.6.4.1.2 Edges}{subsubsection.3.6.4.1}% 75
-\BOOKMARK [4][]{paragraph.3.6.4.1.3}{3.6.4.1.3 Concept Halos and Fields}{subsubsection.3.6.4.1}% 76
-\BOOKMARK [3][]{subsubsection.3.6.4.2}{3.6.4.2 Sources}{subsection.3.6.4}% 77
-\BOOKMARK [4][]{paragraph.3.6.4.2.1}{3.6.4.2.1 Collocations}{subsubsection.3.6.4.2}% 78
-\BOOKMARK [4][]{paragraph.3.6.4.2.2}{3.6.4.2.2 Associations}{subsubsection.3.6.4.2}% 79
-\BOOKMARK [4][]{paragraph.3.6.4.2.3}{3.6.4.2.3 NodeBox Perception}{subsubsection.3.6.4.2}% 80
-\BOOKMARK [4][]{paragraph.3.6.4.2.4}{3.6.4.2.4 WordNet}{subsubsection.3.6.4.2}% 81
-\BOOKMARK [4][]{paragraph.3.6.4.2.5}{3.6.4.2.5 Google Search Suggestions}{subsubsection.3.6.4.2}% 82
-\BOOKMARK [3][]{subsubsection.3.6.4.3}{3.6.4.3 Concept Similarity}{subsection.3.6.4}% 83
-\BOOKMARK [4][]{paragraph.3.6.4.3.1}{3.6.4.3.1 Associative Similarity}{subsubsection.3.6.4.3}% 84
-\BOOKMARK [4][]{paragraph.3.6.4.3.2}{3.6.4.3.2 Similarity Paths}{subsubsection.3.6.4.3}% 85
-\BOOKMARK [4][]{paragraph.3.6.4.3.3}{3.6.4.3.3 Symbolic Similarity}{subsubsection.3.6.4.3}% 86
-\BOOKMARK [2][]{subsection.3.6.5}{3.6.5 Inferring Properties and Capabilities}{section.3.6}% 87
-\BOOKMARK [1][]{section.3.7}{3.7 Symbolism and Imagery}{chapter.3}% 88
-\BOOKMARK [2][]{subsection.3.7.1}{3.7.1 Personification}{section.3.7}% 89
-\BOOKMARK [2][]{subsection.3.7.2}{3.7.2 Onomatopoeia}{section.3.7}% 90
-\BOOKMARK [2][]{subsection.3.7.3}{3.7.3 Simile}{section.3.7}% 91
-\BOOKMARK [0][]{chapter.4}{4 Analysis Interpretation}{}% 92
-\BOOKMARK [1][]{section.4.1}{4.1 Approach}{chapter.4}% 93
-\BOOKMARK [2][]{subsection.4.1.1}{4.1.1 The Corpus}{section.4.1}% 94
-\BOOKMARK [2][]{subsection.4.1.2}{4.1.2 Subcategories of Collections}{section.4.1}% 95
-\BOOKMARK [2][]{subsection.4.1.3}{4.1.3 Novel and Creative Generation}{section.4.1}% 96
-\BOOKMARK [1][]{section.4.2}{4.2 A Stochastic Approach}{chapter.4}% 97
-\BOOKMARK [1][]{section.4.3}{4.3 Algorithms}{chapter.4}% 98
-\BOOKMARK [2][]{subsection.4.3.1}{4.3.1 List Comprehension}{section.4.3}% 99
-\BOOKMARK [2][]{subsection.4.3.2}{4.3.2 Line by Line}{section.4.3}% 100
-\BOOKMARK [2][]{subsection.4.3.3}{4.3.3 Pick the Most Popular}{section.4.3}% 101
-\BOOKMARK [2][]{subsection.4.3.4}{4.3.4 Filter Below Threshold}{section.4.3}% 102
-\BOOKMARK [1][]{section.4.4}{4.4 Testing and Validation by Inspection}{chapter.4}% 103
-\BOOKMARK [0][]{chapter.5}{5 Generation}{}% 104
-\BOOKMARK [1][]{section.5.1}{5.1 Approach}{chapter.5}% 105
-\BOOKMARK [1][]{section.5.2}{5.2 Generating Simple Sentences}{chapter.5}% 106
-\BOOKMARK [2][]{subsection.5.2.1}{5.2.1 Translating Relations into Clauses}{section.5.2}% 107
-\BOOKMARK [1][]{section.5.3}{5.3 Persona Creation and Management}{chapter.5}% 108
-\BOOKMARK [2][]{subsection.5.3.1}{5.3.1 Referencing Specific Persona}{section.5.3}% 109
-\BOOKMARK [2][]{subsection.5.3.2}{5.3.2 Adding New Persona}{section.5.3}% 110
-\BOOKMARK [2][]{subsection.5.3.3}{5.3.3 Anaphora and Presupposition}{section.5.3}% 111
-\BOOKMARK [2][]{subsection.5.3.4}{5.3.4 Semantic Types}{section.5.3}% 112
-\BOOKMARK [1][]{section.5.4}{5.4 Poem Initialisation}{chapter.5}% 113
-\BOOKMARK [2][]{subsection.5.4.1}{5.4.1 Overall Structure}{section.5.4}% 114
-\BOOKMARK [2][]{subsection.5.4.2}{5.4.2 Inspiration}{section.5.4}% 115
-\BOOKMARK [1][]{section.5.5}{5.5 Incremental Growth}{chapter.5}% 116
-\BOOKMARK [2][]{subsection.5.5.1}{5.5.1 Applying Inspiration}{section.5.5}% 117
-\BOOKMARK [3][]{subsubsection.5.5.1.1}{5.5.1.1 Relation Ordering by Type}{subsection.5.5.1}% 118
-\BOOKMARK [3][]{subsubsection.5.5.1.2}{5.5.1.2 Allocating Relations by Rhyme Scheme}{subsection.5.5.1}% 119
-\BOOKMARK [2][]{subsection.5.5.2}{5.5.2 Creating New Lines}{section.5.5}% 120
-\BOOKMARK [3][]{subsubsection.5.5.2.1}{5.5.2.1 Rhyming Lines}{subsection.5.5.2}% 121
-\BOOKMARK [3][]{subsubsection.5.5.2.2}{5.5.2.2 Blank Lines}{subsection.5.5.2}% 122
-\BOOKMARK [2][]{subsection.5.5.3}{5.5.3 Keeping in Context}{section.5.5}% 123
-\BOOKMARK [1][]{section.5.6}{5.6 Rephrase for Poetic Features}{chapter.5}% 124
-\BOOKMARK [2][]{subsection.5.6.1}{5.6.1 Rhyme}{section.5.6}% 125
-\BOOKMARK [3][]{subsubsection.5.6.1.1}{5.6.1.1 Finding Rhyming Words}{subsection.5.6.1}% 126
-\BOOKMARK [3][]{subsubsection.5.6.1.2}{5.6.1.2 Guaranteeing Rhyme}{subsection.5.6.1}% 127
-\BOOKMARK [2][]{subsection.5.6.2}{5.6.2 Rhythm}{section.5.6}% 128
-\BOOKMARK [3][]{subsubsection.5.6.2.1}{5.6.2.1 Syllabic}{subsection.5.6.2}% 129
-\BOOKMARK [4][]{paragraph.5.6.2.1.1}{5.6.2.1.1 Extending}{subsubsection.5.6.2.1}% 130
-\BOOKMARK [4][]{paragraph.5.6.2.1.2}{5.6.2.1.2 Reducing}{subsubsection.5.6.2.1}% 131
-\BOOKMARK [3][]{subsubsection.5.6.2.2}{5.6.2.2 Accentual}{subsection.5.6.2}% 132
-\BOOKMARK [0][]{chapter.6}{6 Evaluation Plan}{}% 133
-\BOOKMARK [1][]{section.6.1}{6.1 Concurrency and Performance of Interpretation}{chapter.6}% 134
-\BOOKMARK [1][]{section.6.2}{6.2 Comparison of Analysis Results to Theory}{chapter.6}% 135
-\BOOKMARK [1][]{section.6.3}{6.3 Turing-style Tests}{chapter.6}% 136
-\BOOKMARK [1][]{section.6.4}{6.4 FACE Descriptive Model}{chapter.6}% 137
-\BOOKMARK [1][]{section.6.5}{6.5 IDEA Descriptive Model}{chapter.6}% 138
-\BOOKMARK [0][]{appendix*.47}{Appendix A}{}% 139
-\BOOKMARK [1][]{section.Alph0.1}{A.1 Dry Run of Generation Phase with Commentary}{appendix*.47}% 140
-\BOOKMARK [1][]{section.Alph0.2}{A.2 CMU Pronunciation Dictionary ARPABET Phoneme Set}{appendix*.47}% 141
-\BOOKMARK [1][]{section.Alph0.3}{A.3 Penn Treebank Tagset}{appendix*.47}% 142
-\BOOKMARK [1][]{section.Alph0.4}{A.4 Testing Specifications}{appendix*.47}% 143
-\BOOKMARK [1][]{section.Alph0.5}{A.5 FrameNet Frames to ConceptNet Relations}{appendix*.47}% 144
-\BOOKMARK [1][]{section.Alph0.6}{A.6 List of collapsable dependencies}{appendix*.47}% 145
-\BOOKMARK [1][]{section.Alph0.7}{A.7 Onomatopoeia Types to ConceptNet Relations}{appendix*.47}% 146
+\BOOKMARK [2][]{subsection.3.5.4}{3.5.4 N-Grams}{section.3.5}% 60
+\BOOKMARK [2][]{subsection.3.5.5}{3.5.5 Topics}{section.3.5}% 61
+\BOOKMARK [1][]{section.3.6}{3.6 Characters and Context}{chapter.3}% 62
+\BOOKMARK [2][]{subsection.3.6.1}{3.6.1 Semantic Relations}{section.3.6}% 63
+\BOOKMARK [2][]{subsection.3.6.2}{3.6.2 Semantic Labelling using Noah's ARK}{section.3.6}% 64
+\BOOKMARK [3][]{subsubsection.3.6.2.1}{3.6.2.1 FrameNet Semantic Role Labelling using SEMAFOR}{subsection.3.6.2}% 65
+\BOOKMARK [3][]{subsubsection.3.6.2.2}{3.6.2.2 Semantic Dependency Relations using TurboParser}{subsection.3.6.2}% 66
+\BOOKMARK [2][]{subsection.3.6.3}{3.6.3 Extracting and Binding Relations to Characters}{section.3.6}% 67
+\BOOKMARK [3][]{subsubsection.3.6.3.1}{3.6.3.1 Obtaining the Semantic Dependency Relations and Frame-Semantic Parse from Noah's ARK}{subsection.3.6.3}% 68
+\BOOKMARK [3][]{subsubsection.3.6.3.2}{3.6.3.2 Collapsing Loose Leaves of Dependency Relations}{subsection.3.6.3}% 69
+\BOOKMARK [3][]{subsubsection.3.6.3.3}{3.6.3.3 Finding and Creating Characters}{subsection.3.6.3}% 70
+\BOOKMARK [3][]{subsubsection.3.6.3.4}{3.6.3.4 Extracting Candidate Relations from the Frame-Semantic Parse}{subsection.3.6.3}% 71
+\BOOKMARK [3][]{subsubsection.3.6.3.5}{3.6.3.5 Obtaining the Associated Dependency Relations for each Persona}{subsection.3.6.3}% 72
+\BOOKMARK [3][]{subsubsection.3.6.3.6}{3.6.3.6 Binding ConceptNet Relations to Characters}{subsection.3.6.3}% 73
+\BOOKMARK [3][]{subsubsection.3.6.3.7}{3.6.3.7 Anaphora and Presupposition Resolution}{subsection.3.6.3}% 74
+\BOOKMARK [1][]{section.3.7}{3.7 Symbolism and Imagery}{chapter.3}% 75
+\BOOKMARK [2][]{subsection.3.7.1}{3.7.1 Personification}{section.3.7}% 76
+\BOOKMARK [2][]{subsection.3.7.2}{3.7.2 Onomatopoeia}{section.3.7}% 77
+\BOOKMARK [2][]{subsection.3.7.3}{3.7.3 Simile}{section.3.7}% 78
+\BOOKMARK [0][]{chapter.4}{4 Analysis Interpretation}{}% 79
+\BOOKMARK [1][]{section.4.1}{4.1 Approach}{chapter.4}% 80
+\BOOKMARK [2][]{subsection.4.1.1}{4.1.1 The Corpus}{section.4.1}% 81
+\BOOKMARK [2][]{subsection.4.1.2}{4.1.2 Subcategories of Collections}{section.4.1}% 82
+\BOOKMARK [2][]{subsection.4.1.3}{4.1.3 Novel and Creative Generation}{section.4.1}% 83
+\BOOKMARK [1][]{section.4.2}{4.2 A Stochastic Approach}{chapter.4}% 84
+\BOOKMARK [1][]{section.4.3}{4.3 Algorithms}{chapter.4}% 85
+\BOOKMARK [2][]{subsection.4.3.1}{4.3.1 List Comprehension}{section.4.3}% 86
+\BOOKMARK [2][]{subsection.4.3.2}{4.3.2 Line by Line}{section.4.3}% 87
+\BOOKMARK [2][]{subsection.4.3.3}{4.3.3 Pick the Most Popular}{section.4.3}% 88
+\BOOKMARK [2][]{subsection.4.3.4}{4.3.4 Filter Below Threshold}{section.4.3}% 89
+\BOOKMARK [1][]{section.4.4}{4.4 Testing and Validation by Inspection}{chapter.4}% 90
+\BOOKMARK [0][]{chapter.5}{5 Generation}{}% 91
+\BOOKMARK [1][]{section.5.1}{5.1 Approach}{chapter.5}% 92
+\BOOKMARK [1][]{section.5.2}{5.2 Generating Simple Sentences}{chapter.5}% 93
+\BOOKMARK [2][]{subsection.5.2.1}{5.2.1 Translating Relations into Clauses}{section.5.2}% 94
+\BOOKMARK [2][]{subsection.5.2.2}{5.2.2 Semantic Network of Common Sense}{section.5.2}% 95
+\BOOKMARK [3][]{subsubsection.5.2.2.1}{5.2.2.1 The Network}{subsection.5.2.2}% 96
+\BOOKMARK [4][]{paragraph.5.2.2.1.1}{5.2.2.1.1 Nodes}{subsubsection.5.2.2.1}% 97
+\BOOKMARK [4][]{paragraph.5.2.2.1.2}{5.2.2.1.2 Edges}{subsubsection.5.2.2.1}% 98
+\BOOKMARK [4][]{paragraph.5.2.2.1.3}{5.2.2.1.3 Concept Halos and Fields}{subsubsection.5.2.2.1}% 99
+\BOOKMARK [3][]{subsubsection.5.2.2.2}{5.2.2.2 Sources}{subsection.5.2.2}% 100
+\BOOKMARK [4][]{paragraph.5.2.2.2.1}{5.2.2.2.1 Collocations}{subsubsection.5.2.2.2}% 101
+\BOOKMARK [4][]{paragraph.5.2.2.2.2}{5.2.2.2.2 Associations}{subsubsection.5.2.2.2}% 102
+\BOOKMARK [4][]{paragraph.5.2.2.2.3}{5.2.2.2.3 NodeBox Perception}{subsubsection.5.2.2.2}% 103
+\BOOKMARK [4][]{paragraph.5.2.2.2.4}{5.2.2.2.4 WordNet}{subsubsection.5.2.2.2}% 104
+\BOOKMARK [4][]{paragraph.5.2.2.2.5}{5.2.2.2.5 Google Search Suggestions}{subsubsection.5.2.2.2}% 105
+\BOOKMARK [3][]{subsubsection.5.2.2.3}{5.2.2.3 Concept Similarity}{subsection.5.2.2}% 106
+\BOOKMARK [4][]{paragraph.5.2.2.3.1}{5.2.2.3.1 Associative Similarity}{subsubsection.5.2.2.3}% 107
+\BOOKMARK [4][]{paragraph.5.2.2.3.2}{5.2.2.3.2 Similarity Paths}{subsubsection.5.2.2.3}% 108
+\BOOKMARK [4][]{paragraph.5.2.2.3.3}{5.2.2.3.3 Symbolic Similarity}{subsubsection.5.2.2.3}% 109
+\BOOKMARK [1][]{section.5.3}{5.3 Persona Creation and Management}{chapter.5}% 110
+\BOOKMARK [2][]{subsection.5.3.1}{5.3.1 Referencing Specific Persona}{section.5.3}% 111
+\BOOKMARK [2][]{subsection.5.3.2}{5.3.2 Adding New Persona}{section.5.3}% 112
+\BOOKMARK [2][]{subsection.5.3.3}{5.3.3 Anaphora and Presupposition}{section.5.3}% 113
+\BOOKMARK [2][]{subsection.5.3.4}{5.3.4 Semantic Types}{section.5.3}% 114
+\BOOKMARK [1][]{section.5.4}{5.4 Poem Initialisation}{chapter.5}% 115
+\BOOKMARK [2][]{subsection.5.4.1}{5.4.1 Overall Structure}{section.5.4}% 116
+\BOOKMARK [2][]{subsection.5.4.2}{5.4.2 Inspiration}{section.5.4}% 117
+\BOOKMARK [1][]{section.5.5}{5.5 Incremental Growth}{chapter.5}% 118
+\BOOKMARK [2][]{subsection.5.5.1}{5.5.1 Applying Inspiration}{section.5.5}% 119
+\BOOKMARK [3][]{subsubsection.5.5.1.1}{5.5.1.1 Relation Ordering by Type}{subsection.5.5.1}% 120
+\BOOKMARK [3][]{subsubsection.5.5.1.2}{5.5.1.2 Allocating Relations by Rhyme Scheme}{subsection.5.5.1}% 121
+\BOOKMARK [2][]{subsection.5.5.2}{5.5.2 Creating New Lines}{section.5.5}% 122
+\BOOKMARK [3][]{subsubsection.5.5.2.1}{5.5.2.1 Rhyming Lines}{subsection.5.5.2}% 123
+\BOOKMARK [3][]{subsubsection.5.5.2.2}{5.5.2.2 Blank Lines}{subsection.5.5.2}% 124
+\BOOKMARK [2][]{subsection.5.5.3}{5.5.3 Keeping in Context}{section.5.5}% 125
+\BOOKMARK [1][]{section.5.6}{5.6 Rephrase for Poetic Features}{chapter.5}% 126
+\BOOKMARK [2][]{subsection.5.6.1}{5.6.1 Rhyme}{section.5.6}% 127
+\BOOKMARK [3][]{subsubsection.5.6.1.1}{5.6.1.1 Finding Rhyming Words}{subsection.5.6.1}% 128
+\BOOKMARK [3][]{subsubsection.5.6.1.2}{5.6.1.2 Guaranteeing Rhyme}{subsection.5.6.1}% 129
+\BOOKMARK [2][]{subsection.5.6.2}{5.6.2 Rhythm}{section.5.6}% 130
+\BOOKMARK [3][]{subsubsection.5.6.2.1}{5.6.2.1 Syllabic}{subsection.5.6.2}% 131
+\BOOKMARK [4][]{paragraph.5.6.2.1.1}{5.6.2.1.1 Extending}{subsubsection.5.6.2.1}% 132
+\BOOKMARK [4][]{paragraph.5.6.2.1.2}{5.6.2.1.2 Reducing}{subsubsection.5.6.2.1}% 133
+\BOOKMARK [3][]{subsubsection.5.6.2.2}{5.6.2.2 Accentual}{subsection.5.6.2}% 134
+\BOOKMARK [0][]{chapter.6}{6 Evaluation Plan}{}% 135
+\BOOKMARK [1][]{section.6.1}{6.1 Concurrency and Performance of Interpretation}{chapter.6}% 136
+\BOOKMARK [1][]{section.6.2}{6.2 Comparison of Analysis Results to Theory}{chapter.6}% 137
+\BOOKMARK [1][]{section.6.3}{6.3 Turing-style Tests}{chapter.6}% 138
+\BOOKMARK [1][]{section.6.4}{6.4 FACE Descriptive Model}{chapter.6}% 139
+\BOOKMARK [1][]{section.6.5}{6.5 IDEA Descriptive Model}{chapter.6}% 140
+\BOOKMARK [0][]{appendix*.52}{Appendix A}{}% 141
+\BOOKMARK [1][]{section.Alph0.1}{A.1 Dry Run of Generation Phase with Commentary}{appendix*.52}% 142
+\BOOKMARK [1][]{section.Alph0.2}{A.2 CMU Pronunciation Dictionary ARPABET Phoneme Set}{appendix*.52}% 143
+\BOOKMARK [1][]{section.Alph0.3}{A.3 Penn Treebank Tagset}{appendix*.52}% 144
+\BOOKMARK [1][]{section.Alph0.4}{A.4 Testing Specifications}{appendix*.52}% 145
+\BOOKMARK [1][]{section.Alph0.5}{A.5 FrameNet Frames to ConceptNet Relations}{appendix*.52}% 146
+\BOOKMARK [1][]{section.Alph0.6}{A.6 List of collapsable dependencies}{appendix*.52}% 147
+\BOOKMARK [1][]{section.Alph0.7}{A.7 Onomatopoeia Types to ConceptNet Relations}{appendix*.52}% 148

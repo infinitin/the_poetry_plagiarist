@@ -51,11 +51,16 @@ These features include:
 \subsection{Translating Relations into Clauses}
 We used FrameNet when deriving relations with SEMAFOR in Section \ref{sec:chars} by checking for the existence of certain frames. Now we reverse the process; use selected frames that correspond to particular relations to define the type and roles of phrases during generation.
 
-Take the Desire relation for example. The corresponding frame in FrameNet would be \textit{Desiring}. The general translation process can be seen in Figure/Algorithm BLAH.
+Take the Desire relation for example. The corresponding frame in FrameNet would be \textit{Desiring}. The general translation process follows this algorithm:
 
-Figure:relation $\rightarrow$ Get corresponding Frame $\rightarrow$ Look up LU $\rightarrow$ Select a Valence Pattern $\rightarrow$ Order Phrases $\rightarrow$ Fill in Gaps
+\begin{verbatim}
+1 look up LUs from given Frames/IDs/Word
+2 select a Valence Pattern
+3 order phrases in Valence Pattern so that subjects come first, then the target, then the dependencies and objects
+4 fill in the phrases with relevant words
+\end{verbatim}
 
-Suppose we take the first relation in Figure BLAH above. We have a character whose ID is 1 and has the name 'Mary'. The corresponding frame for the 'Named' relation is \textit{Referring\_by\_name}. 
+Suppose we take the \textit{1-Named$\rightarrow$Mary} relation in Figure BLAH above. We have a character whose ID is 1 and has the name 'Mary'. The corresponding frame for the 'Named' relation is \textit{Referring\_by\_name}. 
 
 However, it is not quite a perfect match because we only want verbs, whereas this frame includes Lexical Units (LUs) of other parts of speech as well. Each LU gives indication of its part-of-speech (POS) so we can filter by that. 
 
@@ -67,19 +72,122 @@ It is important to note that all relation translations may have their own set of
 
 Back to our example, after dealing with all issues we are left with two LUs; \textit{call.v} and \textit{named.a}, where the string after the full stop in the LU indicates the word's POS. We choose one randomly with equal weights. We use \textit{call.v} for this example.
 
-Figure: https://framenet2.icsi.berkeley.edu/fnReports/data/lu/lu11210.xml?mode=lexentry
+FIGURE: https://framenet2.icsi.berkeley.edu/fnReports/data/lu/lu11210.xml?mode=lexentry
 
 This LU has three groups of Valence patterns, as can been seen in Figure BLAH. Each group of patterns has an \textit{TOTAL} count, indicating the occurrence frequency of this pattern in their annotated corpus. We assume that these are representative for our purpose and choose the group with the highest total occurrences.
 
 Each pattern within a group also includes an occurrence count. However, the phrases produced by the system would be predictable and mundane if we always choose the most popular again. Instead we select randomly, weighted for occurrence scores. Let our selected Valence pattern be the third one from the top in Figure BLAH.
 
-We then order the phrases according to how they would appear in a sentence using Algorithm Blah.
-
-[Algorithm BLAH for sorting]
+We then order the phrases according to how they would appear in a sentence; subjects first (\textit{Ext}), then the target word, followed by the dependencies (\textit{Dep}) and objects (\textit{Obj}).
 
 The Valence pattern does not include the LU itself so we add it as a verb phrase immediately after the subject.
 
 Finally, we fill in the gaps by adding carefully selected words to each phrase. We discuss word selection in Sections  \ref{sec:persona} and \ref{sec:new-lines}.
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\subsection{Semantic Network of Common Sense}
+\label{sec:common-sense}
+We discussed the idea of modelling the mind as a search space by connecting related concepts together in a network in Section \ref{sec:common-sense-bg}. We gathered inspiration from ConceptNet and discussed Tom De Smedt's attempt to model creativity with such a construct.
+ 
+We aim to replicate the experiment bespoke to our purposes, outlined in this section.
+ 
+\subsubsection{The Network}
+The primary purpose of our network is to help us build clauses out of one or two words. For this, we require our semantic network to give indications of \textbf{actions} that nouns take and receive, as well as \textbf{properties} they have.
+
+The secondary purpose of the network is to provide associative data so to maintain a cohesive topic flow through the poem, rather than jumping between a variety of topics. 
+
+\paragraph{Nodes}
+As with previous attempts, the nodes of the network are the \textit{concepts}, represented by words. We take a step further by enriching these nodes with the POS of the word so to disambiguate between different meanings (e.g. \textit{bear} the noun and \textit{bear} the verb).
+
+\paragraph{Edges}
+The edges of the network indicate the relationship between concepts. They are \textit{directed} in our graph. The types of edges are:
+\begin{description}
+\item[HasProperty] \hfill \\ Stereotypical descriptions of the head of the relation. \hfill \\ doctor.n - HasProperty $\rightarrow$ smart.a \hfill \\ run.v - HasProperty $\rightarrow$ quickly.adv
+\item[IsA] \hfill \\ Taxonomy of the head of the relation (hypernymy). \hfill \\ E.g. banana.n - IsA $\rightarrow$ fruit.n
+\item[PartOf] \hfill \\ The head of the relation is typically a constituent or member of the tail.  \hfill \\ finger.n - PartOf $\rightarrow$ hand.n
+\item[TakesAction] \hfill \\The head of the relation typically performs the action in the tail. \hfill \\ lion.n - TakesAction $\rightarrow$ roar.v
+\item[ReceivesAction] \hfill \\The head of the relation typically has the action in the tail done unto it. \hfill \\ book.n - ReceivesAction $\rightarrow$ read.v
+\item[RelatedTo] \hfill \\ Any non-specific, reversible association. \hfill \\ fat.a - RelatedTo $\rightarrow$ eat.v \hfill \\ eat.v - RelatedTo $\rightarrow$ food.n \hfill \\ food.n $\rightarrow$ RelatedTo
+\end{description}
+
+All edges are of equal weight at this stage. There is potential for prioritising certain types of relations or concepts to bias the vocabulary. For example, we could weight scientific words higher than regular ones to make the program lean towards a more advanced vocabulary.
+
+
+\paragraph{Concept Halos and Fields}
+
+The Concept Halo and Field work in the same way as described in Section  \ref{sec:common-sense-bg}. We use them to fill in the gaps in the sentence with intelligent word selection. For example, if we are given a verb, we can lookup the concept field for that verb looking only at TakesAction and ReceivesAction edges to find possible subjects and objects for the verb. Similarly, we can find modifiers for verbs and nouns by looking up HasProperty edges their respective concept halos.
+
+\subsubsection{Sources}
+There are various sources for semantic relationships between words. Some are more applicable to our use case given the nature of relations that we desire and the quality of the source.
+
+\paragraph{Collocations}
+The Oxford Collocations Dictionary, as described in Section \ref{sec:ox-colloc}, provides the set of words and POS commonly occur in relation to any given word.
+
+The dictionary entry for \textit{custard} can be seen in Figure \ref{fig:custard-collocs-2}. It gives common adjectives that are used to describe custard, which can be converted into \textit{HasProperty} relations. It also shows that custard receives the action of being made, poured and strained, while it takes the actions of thickening and setting. Furthermore, we can infer that it is closely related to \textit{powder} and \textit{pie}.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=140mm]{custard-collocs}
+\caption{Oxford Collocations Dictionary entry for \textit{'custard'}}
+\label{fig:custard-collocs-2}
+\end{figure}
+
+We can extract relations directly by parsing this dictionary, which is freely available in compressed HTML format. As the dictionary is developed by Oxford and is used by students of English, its entries are very high quality and dependable.
+
+\paragraph{Associations}
+We discussed The University of South Florida Free Associated Norms in Section \ref{sec:fl-assoc}, which provides general associations between words. It continues to be used for research and is therefore another source that can be depended on for quality as it was collected in a scientifically sound manner.
+
+The POS of each word is provided but no direction in the association can be determined. Therefore, we may be able to assume that a noun has the property of an associated adjective and that an adjective is a property of associated nouns. However, we cannot assume the whether a noun takes or receives the action of an associated verb. Therefore we use the more general \textit{RelatedTo} relationship instead.
+
+\paragraph{NodeBox Perception}
+The NodeBox Perception model, as discussed in section \ref{sec:nb-percep}, has plenty of overlap in the types of semantic relations used in Perception as we will be using for this project, including 'is-a' (\textit{IsA}), 'is-property-of' (reversed HasProperty), 'is-part-of' (\textit{PartOf}) and 'is-related-to' (\textit{RelatedTo}). We generalise all other relations to our \textit{RelatedTo} relation.
+
+This data was manually entered into the system and continues to be used for research, which means that it is a high-quality source of data.
+
+\paragraph{WordNet}
+\ref{sec:wn}
+As mentioned in Section, WordNet is very large and already has fast and simple interfaces from Python, so we do not merge its meronym (\textit{PartOf}), hypernym and holonym (\textit{IsA}) relations with our knowledge graph at this point. While it may prove useful to consolidate all data in a single graph in the future, it is not necessary at this stage as we can still benefit fully from its data without doing so.
+
+\paragraph{Google Search Suggestions}
+While we currently do not preprocess relations in the way Veale did to produce Metaphor Magnet (see Section \ref{sec:goog-sugg}), we do use a similar method to help complete sentences, particularly those with indirect objects. 
+
+For example, we would be able to produce a sentence like \textit{'Mary hit the nail with'} but be unable to complete the sentence due to a lack of information of indirect objects. However, Google suggestions auto-complete \textit{'hit the nail with'} with \textit{'hammer'}, as one might expect. 
+
+This is the least dependable source of information that we use, so we only use it for that specific case and do not add any to our knowledge network.
+
+
+\subsubsection{Concept Similarity}
+Similarity between concepts in the knowledge network is the primary method of guiding word choice throughout the poem. We deal with two main types of similarity; associative and symbolic.
+
+\paragraph{Associative Similarity}
+\label{sec:assoc-sim}
+Associative similarity between concepts is represented by the length of the shortest past between them in our network. We use Dijkstra's Algorithm\cite{dijkstra1959note} as the underlying implementation of our shortest path algorithm.
+
+Associative similarity helps us choose the best replacement word from a list of candidates. This is very useful when rephrasing to match rhyme and rhythm and will be explained in greater detail in Section \ref{sec:rephrase}. 
+
+It can also help us choose applicable words to start new lines of poetry that stay within context (see Section \ref{sec:inc-growth}).
+
+In both of these cases, we are finding the \textit{most} similar concept from a list of candidates of unknown length. The brute force implementation can quickly increase both space and memory complexity. To fix this, we alter Dijkstra's Algorithm to have a limited search depth. This way, if we know the shortest path to one of the candidates is $x$, we can abort any further searches that go beyond length $x$ for the shortest path.
+
+\paragraph{Similarity Paths}
+Paths from one concept do more than show the extent of the relationship - they also show intermediary concepts taken to get from one to the other. This can be a powerful way of joining two concepts together that may not be on consecutive lines.
+
+For example, suppose the first line of a poem mentions the concept \textit{'man.n'} and the third line \textit{'myth.n'} (Section \ref{sec:apply-inspr} explains how this scenario might arise). The path in the knowledge network between these two concepts goes via the concept \textit{'mystery.n'}, which we can use to seed the second line creating a smooth topic flow through the poem.
+
+
+\paragraph{Symbolic Similarity}
+Symbolic similarity can be attained through inductive reasoning and substitution by concepts that have a very similar concept halo and field up to a certain depth. Simply put, we can find similarity with the \textit{Duck Test}: if it looks like a duck, swims like a duck and quacks like a duck, it probably is a duck. Object-oriented programmers can relate this idea to the Liskov substitution principle.
+
+Symbolic similarity has many use cases, including the new method of anaphora resolution to be proposed for future work. For this phase, it enables us to implement the following poetic features:
+\begin{description}
+\item[Similes] \hfill \\ We can describe a property or an action of a persona in our poem by comparing the persona to an concept in our knowledge network that (stereotypically) has that property or takes/receives that action. \hfill \\ The relation \textit{1- TakesAction $\rightarrow$ run quickly} can be built into the phrase 'runs like a cheetah' by recognising that cheetahs are stereotypically quick runners.
+\item[Metaphors] \hfill \\ Similarly to Similes, we can find concepts in our network that share a number of semantic relations with the persona we are trying to describe. \hfill \\ Any persona with relations \textit{1 - TakesAction $\rightarrow$ crawl}, \textit{1 - HasProperty $\rightarrow$ social} and \textit{1 - HasProperty $\rightarrow$ small} is analogous to an insect because its concept in the graph shares those relations.
+\item[Personification] \hfill \\ If we are given an inanimate object as a persona, we can describe it as if it were sentient by looking giving it relations that belong to a sentient being. \hfill \\ A car could be personified by giving it all the relations that a lion has in our concept network, to produce sentences like \textit{'The car roared'}.
+\item[Irony] \hfill \\ Our knowledge network is made up of semantic attributes that are expected for each concept. Irony can be attained by producing lines of poetry that describe a concept doing the opposite of the concepts given in our graph.
+\end{description}
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 \section{Persona Creation and Management}
 \label{sec:persona}
@@ -134,7 +242,7 @@ Our new poem first needs to be initialised with values of features that span acr
 
 All of these can be retrieved directly from the template developed in the previous chapter. The template is made up of probability distributions for the various values a feature can take on, so by default we get the value by sampling this distribution. 
 
-If one result is clearly more probably than the rest, we want to treat it as unambiguous. For example, more than half of the rhyme schemes found for limericks were AABBA, as pictured in figure \ref{fig:rhyme-scheme-chart}. Each of the other values are some slight variation on AABBA (e.g. AABCA, ABCCB etc.) and occur less than a ninth of the AABBA frequency.
+If one result is clearly more probably than the rest, we want to treat it as unambiguous. For example, more than half of the rhyme schemes found for limericks were \textit{AABBA}, as pictured in figure \ref{fig:rhyme-scheme-chart}. Each of the other values are some slight variation on \textit{AABBA} (e.g. \textit{AABCA}, \textit{ABCCB} etc.) and occur less than a ninth of the \textit{AABBA} frequency.
 
 To generalise this, we use the rule that if the any feature has a single value in its probability distribution that occurs more than half of the time and the next highest value is less than a third of that value, we treat it as unambiguous and \textit{always} apply it to the initial structure of this type of poem.
 
@@ -180,13 +288,7 @@ When the second line starts being built, we recognise that it is has not been al
 
 The process of finding rhyming words is outlined in Section \ref{sec:rhymebrain}. We select one within context (as described in \ref{sec:context}), and build a relation according to its POS to guarantee that it ends up at the end of the clause once it is built.
 
-For example, if the rhyming word is an adjective we cannot build a TakesAction phrase from it because those phrases end in either a noun or a verb when created. We could rephrase for rhyme later but that would go against our 'context first' approach. The possible relations for each POS of the chosen rhyming word is as follows:
-\begin{description}
-\item[Noun]
-\item[Verb]
-\item[Adjective]
-\item[Adverb]
-\end{description}
+For example, if the rhyming word is an adjective we cannot build a TakesAction phrase from it because those phrases end in either a noun or a verb when created. We could rephrase for rhyme later but that would go against our 'context first' approach.
 
 Once a relation of the chosen type and with the chosen rhyme word has been created, it is added to the most applicable persona based on semantic type and associative similarity (see Sections \ref{sec:sem-type} and \ref{sec:assoc-sim}). This process is followed when building the fourth and fifth line of our limerick as well.
 
