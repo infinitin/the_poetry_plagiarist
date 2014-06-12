@@ -85,7 +85,7 @@ Unfortunately, the CMUPD only has about 133,000 words. This means that we are oc
 
 Python \textit{difflib}\cite{difflib} provides a function to find the closest matches of a word to a list of words, based on the Ratcliff/Obershelp pattern recognition algorithm. The complexity of this algorithm is quadratic in the worst and average case, linear in the best case. 
 
-The behaviour is based on  how many subsequences the words have in common. Since we are only dealing with single words at a time, we have a higher chance of the best case. On average it takes 0.81 seconds to look up a 4-letter word and 1.09 seconds to look up a 10-letter word using machine specifications given in Appendix \ref{sec:specs}, which is fast enough given that this is a pre-processing phase, not a time-sensitive one.
+The behaviour is based on  how many subsequences the words have in common. Since we are only dealing with single words at a time, we have a higher chance of the best case.
 
 We could use a variety of other techniques to get around this problem other than string matching:
 \begin{itemize}

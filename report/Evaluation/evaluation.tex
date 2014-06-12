@@ -165,7 +165,7 @@ If analyse some sonnets by eye for this specific aspect, we can find examples wh
 \item[Sonnet CXLIX: ] \textit{But, love, hate on, for now I know thy mind;}
 \end{description}
 
-Of the rest of the sonnets where the meter is more ambiguous, we argue that stressing the first syllable is more natural when spoken out loud.
+Of the rest of the sonnets where the meter is more ambiguous, but we use the unambiguous ones to guide how the ambiguous ones should be interpreted. We also argue that stressing the first syllable is more natural when spoken out loud.
 
 Given the evidence and motivations explained above, we claim that it was Shakespeare's intention to start the 13th line of his sonnets with a stressed syllable, which means that it is \textbf{not iambic pentameter}, contrary to current literacy theory.
 
@@ -173,11 +173,39 @@ Given the evidence and motivations explained above, we claim that it was Shakesp
 Most sonnets are written in first or second person as seen in Figure BLAH and almost all are written in the present tense, shown in Figure BLAH.
 \end{description}
 
+\subsection{Concurrency and Performance}
+\label{sec:interpret-perf}
+The timing of the analysis and interpretation is shown in Table \ref{ana-agg-speed} using machine specifications given in Appendix \ref{sec:specs}.
+
+\begin{table}
+    \begin{tabular}{|l|l|l|l|}
+    \hline
+    Poem Type & Corpus size & Analysis(s) & Aggregation(s) \\ \hline
+    Limerick  & 450         & 8040        & 40.1           \\ \hline
+    Haiku     & 718         & 2808        & 45.7           \\ \hline
+    Sonnet    & 154         & 12004       & 51.7           \\ \hline
+    \end{tabular}
+    \label{ana-agg-speed}
+\end{table}
+
+We can see that the length of the poem has more impact on performance than the size of the corpus. The unusual words used in Shakespearean sonnets that would not have been in the CMU Pronunciation Dictionary would have also contributed to the slow speed of analysis. This is because we find the most similar word that is in the dictionary as described in Section \ref{sec:phonetic}. On average, it takes 0.81 seconds to look up a 4-letter word and 1.09 seconds to look up a 10-letter word.
+
+This is promising because there are various ways the analysis process could be optimised. This includes storing frequency distributions of features (e.g. rhyme schemes and rhythm patterns) rather than the raw values. Since performance was not a priority for this project, little thought was given to optimisation, so there will be many opportunities to optimise using basic techniques.
+
+Since poems are analysed and features are aggregated \textit{in isolation}, there is plenty of scope for concurrency.
+
+For the poem analysis, a thread pool managed the concurrent execution of 10 workers, each analysing one poem. Trial and error showed 10 to be the optimal number of worker threads for limericks and 12 for Haiku. Large resources such as the CMU Pronouncing Dictionary and WordNet were created once and shared amongst the threads. Due to the aforementioned memory issues with sonnets, analysis was done serially, which could have further contributed to the discrepancy in speed.
+
+This was sufficiently fast for this corpus and since this is data is pre-processed and stored. However, using Python's Pool Executor library rather than the Threading module enables us to move over to processes instead of threads with minimal effort if we need multi-core parallelism. It should be noted that this might be slower due to larger overhead and the need for large resources to be created in multiple locations since memory cannot be shared.
+
+The generalisation process was actually fastest without the overhead of constructing the thread pool. With a thread pool of any number of workers, the average processing time is above 42 seconds for the results of the 450 analysed limericks. Without threading, the process took 40.1 seconds on average.
+
+This generalisation process is fast enough for it to be done over again with different given values as discussed in Section \ref{sec:approach} earlier in the chapter. This is will be very important in getting precise guidance during the generalisation phase.
 
 \subsection{Summary}
-Overall, our results show that the system's general interpretation of poetic structure and content matches with literary theory despite a relatively low quality corpus. This shows that there is no need to hard-code any rules of poetry, as was done in previous attempts (Section BLAH).
+Overall, our results show that on many occasions the system's interpretation of poetic structure and content matches with literary theory despite a relatively low quality corpus. This shows that there is no need to hard-code any rules of poetry, as was done in previous attempts (Section BLAH).
 
-In fact, we have even found two cases where our program is contrary to literacy theory that may be true findings, not errors. It is exciting to see computerised poetry analysis become involved in evolution and understanding of a literary art such as poetry.
+In fact, we have even found two cases where our program is contrary to literacy theory that may be true findings, not errors. It is exciting to see computerised poetry analysis become involved in furthering our understanding of a literary art such as poetry.
 
 The major shortcomings of the current implementation are:
 \begin{itemize}
@@ -188,16 +216,11 @@ The major shortcomings of the current implementation are:
 \item{Using our own algorithms for anaphora resolution and presupposition projection, despite it being a prelude to the new proposed method in Section BLAH, is not affective at the moment, so we end up finding more characters than expected.}
 \end{itemize}
 
-Content understanding looks promising but still needs lots of work. There is currently no NE Recognition, a rather big omission but easily fixed.
 
-Large number of unknown words (can we get a number?). This makes it extremely slow because we find the closest word by spelling. As we know this does not always work for English, so this can be improved by using the state transducer model. Will also significantly speed up processing because we are not wasting time looking up the closest matching word, which is probably the slowest thing and why non-shakes ones go a lot faster.
-
-Anaphora stuff:
-This project does not delve deeply enough into this approach to fully test and evaluate it as it is outside the scope of this project. However, it is a new approach with potential that may be worth investigating further. 
+\section{Analysis of Generated Poetry}
 
 
-
-\section{Turing-style Tests}
+\subsection{Turing-style Tests}
 Can they fool a human?
 Is it something that people can use?
 Limericks: Blah
@@ -205,9 +228,9 @@ Sonnets: Blah
 Haiku: Blah
 
 
-\section{Quality of English}
-Our approach to generation is \textbf{context first}, which requires a large vocabulary and control over grammar.
-\subsection{Vocabulary and Word Selection}
+\subsection{Quality of English}
+Our approach to generation is \textbf{context first}, which requires a large vocabulary and good control over grammar.
+\subsubsection{Vocabulary and Word Selection}
 The vocabulary of the system is dispersed among the third party and internal sources used.
 WordNet: 155,000
 CMUPD: 133,000
@@ -217,9 +240,11 @@ SimpleNLG Lexicon: Blah
 
 Only x words are shared among all of these sources. Altogether, the number of unique words is y. The Oxford Enlgish Dictionary has z words so there is still much room for improvement. We have no scientific or colloquial vocabulary. 
 
-The average vocabulary of native English speakers is 20,000-35,000[http://www.economist.com/blogs/johnson/2013/05/vocabulary-size], so in that sense we are very good. However, the amount of the vocabulary that is actually used is somewhat limited by the fact that we translate a relation (of which there are relatively few) to phrases. Selection from FrameNet is somewhat limited and not hugely dependable for many words. We use the general takes and receives action relations, but quality will significantly improve if we get more relations like desires, usedfor etc.
+The average vocabulary of native English speakers is 20,000-35,000[http://www.economist.com/blogs/johnson/2013/05/vocabulary-size], so in that sense we are very good.
 
-\subsection{Grammar}
+\subsubsection{Grammar}
+However, the amount of the vocabulary that is actually used is somewhat limited by the fact that we translate a relation (of which there are relatively few) to phrases. Selection from FrameNet is somewhat limited and not hugely dependable for many words. We use the general takes and receives action relations, but quality will significantly improve if we get more relations like desires, usedfor etc.
+
 This means that the quality of English should be rather high. We can check this by running the output through an over-the-counter grammar checker. We find that some percentage of lines do not fail the grammar checker, assuming a full stop at the end of every line.
 
 FrameNet does not have all the answers.
@@ -228,15 +253,15 @@ Could take advantage of knowledge of length of syllables to determine the gramma
 
 Enjambent fails.
 
-\section{Exhibition of Poetic Features}
+\subsection{Exhibition of Poetic Features}
 Probabilistic. Rhyme and syllabic rythm are followed most of the time. However, by nature of the results being somewhat ambiguous, the results vary naturally.
 
 Accentual rhythm is a best fit and is not as important as content. If we analyse the poem back using the analysis stage, we find that everything except this matches up with some permutation of the probability distribution, but not necessarily one specific instance. This is good because it means that we are getting \textit{close} to other previous poems, but not directly copying the grammatical structure like in that constraint programming one.
 
-\section{Creativity}
+\subsection{Creativity}
 Are the poems creative?
-\subsection{FACE and IDEA Descriptive Models}
-\subsubsection{FACE Descriptive Model}
+\subsubsection{FACE and IDEA Descriptive Models}
+\paragraph{FACE Descriptive Model}
 \label{sec:face}
 A full FACE model has four symptoms: examples, concepts, aesthetics and framing information.
 
@@ -250,7 +275,7 @@ A full FACE model has four symptoms: examples, concepts, aesthetics and framing 
 
 Therefore, we can see that this system should fully abide by the FACE Descriptive Model. We will evaluate the results mathematically as per Colton, Charnley and Pease.
 
-\subsubsection{IDEA Descriptive Model}
+\paragraph{IDEA Descriptive Model}
 \label{sec:idea}
 A full IDEA model has six stages to which the software can reach. We want our software to be in the, fourth or \emph{Discovery stage}.
 
@@ -265,7 +290,7 @@ A full IDEA model has six stages to which the software can reach. We want our so
 
 Therefore, we can see that this system should reach the desired \emph{Discovery stage} of the IDEA Descriptive Model. We will evaluate the results mathematically as per Colton, Charnley and Pease.
 
-\subsection{Knowledge}
+\subsubsection{Knowledge}
 220,000 specks of knowledge vs 10,000 for Metaphor magnet, 9,000 for Perception.
 Quality of sources is high quality, so knowledge is dependable.
 Other sources include:
@@ -281,27 +306,10 @@ Does it come up with new stuff each time? With the same input, how many words ar
 
 Google Suggestions is poor, should avoid using that
 
-\section{Performance}
+\subsection{Performance}
+Put everything in the graph instead of processing each corresponding node of a list of given words.
 
-450 Limericks: 8040, 10 threads
-154 Sonnets: 12004, one thread to avoid memory error
-718 Haikus: 2808, 12 threads
-
-
-\subsection{Concurrency and Performance of Interpretation}
-\label{sec:interpret-perf}
-
-Since poems are analysed and features are aggregated \textit{in isolation}, there is plenty of scope for concurrency.
-
-For the poem analysis, a thread pool managed the concurrent execution of 10 workers, each analysing one poem. Trial and error showed 10 to be the optimal number of worker threads. Large resources such as the CMU Pronouncing Dictionary and WordNet were created once and shared amongst the threads.
-
-Under this set up with machine specifications as given in the Appendix section \ref{sec:specs}, 450 limericks were analysed in an average of 2 hours and 14 minutes for the whole corpus.
-
-This was sufficiently fast for this corpus and since this is data is pre-processed and stored. However, using Python's Pool Executor library rather than the Threading module enables us to move over to processes instead of threads with minimal effort if we need multi-core parallelism. It should be noted that this might be slower due to larger overhead and the need for large resources to be created in multiple locations since memory cannot be shared.
-
-The generalisation process was actually fastest without the overhead of constructing the thread pool. With a thread pool of any number of workers, the average processing time is above 42 seconds for the results of the 450 analysed limericks. Without threading, the process took 40.1 seconds on average.
-
-This generalisation process is fast enough for it to be done over again with different given values as discussed in Section \ref{sec:approach} earlier in the chapter. This is will be very important in getting precise guidance during the generalisation phase.
+Process nodes with greater centrality to reach optimal score faster.
 
 % ------------------------------------------------------------------------
 
