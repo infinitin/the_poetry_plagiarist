@@ -65,35 +65,40 @@ def collapse_loose_leaves(dependencies):
     for leaf in leaves:
         curr_leaf = leaf
         deprel = curr_leaf['DEPREL']
-        while deprel in collapsable_branches:
-            if deprel == 'prep' and not curr_leaf['FORM'].startswith('of'):
-                break
-
-            #Get the parent (long way so that we can change dependencies directly by reference)
-            for dep in dependencies:
-                if dep['ID'] == curr_leaf['HEAD']:
-                    parent = dep
+        try:
+            while deprel in collapsable_branches:
+                if deprel == 'prep' and not curr_leaf['FORM'].startswith('of'):
                     break
 
-            #Pass the form on to the parent to append unless it is a cop dependency
-            if not deprel == 'cop':
-                if int(parent['ID']) < int(curr_leaf['ID']):
-                    parent['FORM'] += ' ' + curr_leaf['FORM']
-                else:
-                    parent['FORM'] = curr_leaf['FORM'] + ' ' + parent['FORM']
+                #Get the parent (long way so that we can change dependencies directly by reference)
+                for dep in dependencies:
+                    if dep['ID'] == curr_leaf['HEAD']:
+                        parent = dep
+                        break
 
-            #Preserve this postag by changing the parent's
-            if (curr_leaf['POSTAG'].startswith('J') and parent['POSTAG'].startswith('V') and deprel == 'dep') or \
-                            deprel == 'pobj' or deprel == 'acomp' or deprel == 'prep':
-                parent['CPOSTAG'] = curr_leaf['CPOSTAG']
-                parent['POSTAG'] = curr_leaf['POSTAG']
+                #Pass the form on to the parent to append unless it is a cop dependency
+                if not deprel == 'cop':
+                    if int(parent['ID']) < int(curr_leaf['ID']):
+                        parent['FORM'] += ' ' + curr_leaf['FORM']
+                    else:
+                        parent['FORM'] = curr_leaf['FORM'] + ' ' + parent['FORM']
 
-            #delete this from dependencies
-            dependencies.remove(curr_leaf)
-            #change deprel to the parent deprel
-            deprel = parent['DEPREL']
-            curr_leaf = parent
+                #Preserve this postag by changing the parent's
+                if (curr_leaf['POSTAG'].startswith('J') and parent['POSTAG'].startswith('V') and deprel == 'dep') or \
+                                deprel == 'pobj' or deprel == 'acomp' or deprel == 'prep':
+                    parent['CPOSTAG'] = curr_leaf['CPOSTAG']
+                    parent['POSTAG'] = curr_leaf['POSTAG']
 
+                #delete this from dependencies
+                try:
+                    dependencies.remove(curr_leaf)
+                except ValueError:
+                    pass
+                #change deprel to the parent deprel
+                deprel = parent['DEPREL']
+                curr_leaf = parent
+        except MemoryError:
+            continue
     return dependencies
 
 

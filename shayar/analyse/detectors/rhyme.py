@@ -71,7 +71,11 @@ def __get_rhyme_scheme(words):
         rhyme_tokens = list(set(rhyme_tokens))
         rhyme_scheme.append(rhyme_tokens)
 
-    all_possibilities = list(product(*rhyme_scheme))
+    try:
+        all_possibilities = list(product(*rhyme_scheme))
+    except MemoryError:
+        return []
+
     normalized_rhyme_schemes = [__normalize_rhyme_scheme(possibility)for possibility in all_possibilities]
     return [tuple(x) for x in set(tuple(x) for x in normalized_rhyme_schemes)]
 

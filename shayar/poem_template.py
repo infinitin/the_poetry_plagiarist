@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 
 import numpy as np
 from collections import Counter
+import logging
 
 global pp
 
@@ -241,7 +242,7 @@ def plot_bar_simple(x, y, x_axis, y_axis, x_ticks, title):
 
     plt.tight_layout()
 
-    pp.savefig(bbox_inches='tight')
+    plt.savefig(title+'.png', bbox_inches='tight')
     plt.close()
 
 
@@ -265,16 +266,19 @@ def plot_bar_stacked(x, ys, x_axis, y_axis, x_ticks, title):
 
     plt.tight_layout()
 
-    pp.savefig(bbox_inches='tight')
+    plt.savefig(title+'.png', bbox_inches='tight')
     plt.close()
 
 
 def simple_plotter(attribute, x_axis, y_axis, title, use_x=False):
-    counts = Counter(attribute).most_common()
-    x = tuple(np.arange(len(counts)))
-    x_ticks = x if use_x else tuple([num for num, count in counts])
-    y = tuple([count for num, count in counts])
-    plot_bar_simple(x, y, x_axis, y_axis, x_ticks, title)
+    try:
+        counts = Counter(attribute).most_common()
+        x = tuple(np.arange(len(counts)))
+        x_ticks = x if use_x else tuple([num for num, count in counts])
+        y = tuple([count for num, count in counts])
+        plot_bar_simple(x, y, x_axis, y_axis, x_ticks, title)
+    except TypeError:
+        logging.error('Failed to plot ' + title)
 
 
 

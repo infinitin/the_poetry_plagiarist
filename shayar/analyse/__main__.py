@@ -80,7 +80,7 @@ import time
 start = time.time()
 poems = []
 logging.info('Grabbing poems')
-with open('limericks.txt', 'r') as f:
+with open('haikus.txt', 'r') as f:
     buffer = []
     for line in f:
         if '~' in line:
@@ -95,26 +95,17 @@ with open('limericks.txt', 'r') as f:
         else:
             buffer.append(line)
 
-#for filename in os.listdir(os.getcwd()):
-#    if filename.endswith('.txt'):
-#        f = open(filename)
-#        poems.append(Poem(map(str.strip, f.readlines())))
-#        f.close()
-
-collection = 'limericks'
+collection = 'haikus'
 #logging.info('Setting up cmudict and other tools')
 set_up_globals()
 
-with futures.ThreadPoolExecutor(max_workers=10) as executor:
+with futures.ThreadPoolExecutor(max_workers=12) as executor:
     future_to_poem = {executor.submit(analyse_poem, p): p for p in poems}
 
 executor.shutdown()
 
-
-
-
 #threads = []
-#for p in poems[:10]:
+#for p in [poems[58]]:
 #    thread = Thread(target=analyse_poem, args=(p,))
 #    thread.start()
 #    threads.append(thread)

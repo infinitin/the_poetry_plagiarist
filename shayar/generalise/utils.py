@@ -37,4 +37,7 @@ def retrieve_all_poems(collection):
     f = open(os.path.abspath(os.path.join(os.path.dirname(__file__), '..\\analyse', collection + '.poems')), 'rb')
     poems = cPickle.load(f)
     f.close()
+    f = open(os.path.abspath(os.path.join(os.path.dirname(__file__), '..\\analyse', 'sonnets2' + '.poems')), 'rb')
+    poems.extend(cPickle.load(f))
+    f.close()
     return poems
