@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2014.1.22)  11 JUN 2014 01:24
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2014.1.22)  12 JUN 2014 01:48
 entering extended mode
 **report.tex
 (C:\Users\Lenovo\PycharmProjects\the_poetry_plagiarist\report\report.tex
@@ -1611,7 +1611,7 @@ LaTeX Info: Redefining \nameref on input line 84.
 (C:\Users\Lenovo\PycharmProjects\the_poetry_plagiarist\report\report.out)
 \@outlinefile=\write6
 
-<ThesisFigs/logo.jpg, id=598, 564.60938pt x 148.30406pt>
+<ThesisFigs/logo.jpg, id=658, 564.60938pt x 148.30406pt>
 File: ThesisFigs/logo.jpg Graphic file (type jpg)
 
 <use ThesisFigs/logo.jpg>
@@ -1636,7 +1636,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ] [2]
 [3] [4])
 \tf@toc=\write7
- [5]
+ [5] [6]
 (C:\Users\Lenovo\PycharmProjects\the_poetry_plagiarist\report\Introduction/intr
 oduction.tex
 Chapter 1.
@@ -1667,7 +1667,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[14] <Design/DesignFigs/Constraint.jpg, id=869, 644.4075pt x 225.84375pt>
+[14] <Design/DesignFigs/Constraint.jpg, id=948, 644.4075pt x 225.84375pt>
 File: Design/DesignFigs/Constraint.jpg Graphic file (type jpg)
 
 <use Design/DesignFigs/Constraint.jpg>
@@ -1683,7 +1683,7 @@ Figs/Constraint.jpg>]
 LaTeX Font Info:    Font shape `OMS/cmr/m/it' in size <12> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 344.
  [16]
-<Design/DesignFigs/lion.jpg, id=886, 368.1253pt x 487.06969pt>
+<Design/DesignFigs/lion.jpg, id=965, 368.1253pt x 487.06969pt>
 File: Design/DesignFigs/lion.jpg Graphic file (type jpg)
 
 <use Design/DesignFigs/lion.jpg>
@@ -1698,7 +1698,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [17] [18 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Design/D
 esignFigs/lion.jpg>] [19]
-<Design/DesignFigs/Chair.jpg, id=921, 501.875pt x 432.61626pt>
+<Design/DesignFigs/Chair.jpg, id=1000, 501.875pt x 432.61626pt>
 File: Design/DesignFigs/Chair.jpg Graphic file (type jpg)
 
 <use Design/DesignFigs/Chair.jpg>
@@ -1715,7 +1715,7 @@ Figs/Chair.jpg>] [21] [22]
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
 (hyperref)                than one, level fixed on input line 512.
 
-[23] [24] <Design/DesignFigs/Treebank.png, id=969, 401.5pt x 329.23pt>
+[23] [24] <Design/DesignFigs/Treebank.png, id=1049, 401.5pt x 329.23pt>
 File: Design/DesignFigs/Treebank.png Graphic file (type png)
 
 <use Design/DesignFigs/Treebank.png>
@@ -1724,7 +1724,7 @@ Package pdftex.def Info: Design/DesignFigs/Treebank.png used on input line 561.
 (pdftex.def)             Requested size: 170.71652pt x 139.98871pt.
  [25 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Design/Desig
 nFigs/Treebank.png (PNG copy)>]
-<Design/DesignFigs/shopkeeper-deps.png, id=982, 1241.38782pt x 165.61874pt>
+<Design/DesignFigs/shopkeeper-deps.png, id=1061, 1241.38782pt x 165.61874pt>
 File: Design/DesignFigs/shopkeeper-deps.png Graphic file (type png)
 
 <use Design/DesignFigs/shopkeeper-deps.png>
@@ -1742,7 +1742,7 @@ LaTeX Font Warning: Font shape `OMS/cmtt/m/n' undefined
 (Font)              using `OMS/cmsy/m/n' instead
 (Font)              for symbol `textbraceleft' on input line 604.
 
-[27] <Design/DesignFigs/Groningen.jpg, id=1005, 446.41782pt x 166.37157pt>
+[27] <Design/DesignFigs/Groningen.jpg, id=1084, 446.41782pt x 166.37157pt>
 File: Design/DesignFigs/Groningen.jpg Graphic file (type jpg)
 
 <use Design/DesignFigs/Groningen.jpg>
@@ -1751,7 +1751,7 @@ Package pdftex.def Info: Design/DesignFigs/Groningen.jpg used on input line 625
 (pdftex.def)             Requested size: 355.65944pt x 132.54907pt.
  [28 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Design/Desig
 nFigs/Groningen.jpg>]
-<Design/DesignFigs/shopkeeper-frames.png, id=1014, 1206.00563pt x 328.22626pt>
+<Design/DesignFigs/shopkeeper-frames.png, id=1093, 1206.00563pt x 328.22626pt>
 File: Design/DesignFigs/shopkeeper-frames.png Graphic file (type png)
 
 <use Design/DesignFigs/shopkeeper-frames.png>
@@ -1759,7 +1759,7 @@ Package pdftex.def Info: Design/DesignFigs/shopkeeper-frames.png used on input
 line 644.
 (pdftex.def)             Requested size: 398.33858pt x 108.41016pt.
 
-<Design/DesignFigs/shopkeeper-frames-yoda.png, id=1016, 1228.59pt x 330.48468pt
+<Design/DesignFigs/shopkeeper-frames-yoda.png, id=1095, 1228.59pt x 330.48468pt
 >
 File: Design/DesignFigs/shopkeeper-frames-yoda.png Graphic file (type png)
  <use Design/DesignFigs/shopkeeper-frames-yoda.png>
@@ -1778,7 +1778,7 @@ Overfull \hbox (16.47714pt too wide) in paragraph at lines 729--746
  []
 
 [31] [32]
-<Design/DesignFigs/custard-collocs.png, id=1049, 1145.78062pt x 406.51875pt>
+<Design/DesignFigs/custard-collocs.png, id=1128, 1145.78062pt x 406.51875pt>
 File: Design/DesignFigs/custard-collocs.png Graphic file (type png)
 
 <use Design/DesignFigs/custard-collocs.png>
@@ -1791,7 +1791,7 @@ Overfull \hbox (20.11543pt too wide) in paragraph at lines 795--809
  [][] 
  []
 
-<Design/DesignFigs/NLG.png, id=1067, 225.09094pt x 723.45282pt>
+<Design/DesignFigs/NLG.png, id=1146, 225.09094pt x 723.45282pt>
 File: Design/DesignFigs/NLG.png Graphic file (type png)
 
 <use Design/DesignFigs/NLG.png>
@@ -1822,41 +1822,41 @@ Overfull \hbox (65.33253pt too wide) in paragraph at lines 126--126
  []
 
 [40] [41] [42] [43] [44] [45] [46] [47] [48] [49] [50]
-Overfull \hbox (0.64717pt too wide) in paragraph at lines 542--543
+Overfull \hbox (0.64717pt too wide) in paragraph at lines 546--547
 [][] 
  []
 
 
-Overfull \hbox (0.64717pt too wide) in paragraph at lines 563--564
+Overfull \hbox (0.64717pt too wide) in paragraph at lines 567--568
 [][] 
  []
 
 [51]
-Overfull \hbox (145.60757pt too wide) in paragraph at lines 588--588
+Overfull \hbox (145.60757pt too wide) in paragraph at lines 592--592
 []\OT1/cmtt/m/n/12 9         if the dependent is involved in a candidate relati
 on from the frame-semantic parse:\\[] 
  []
 
 
-Overfull \hbox (133.25757pt too wide) in paragraph at lines 588--588
+Overfull \hbox (133.25757pt too wide) in paragraph at lines 592--592
 []\OT1/cmtt/m/n/12 12          use the heuristics for dependency relations to f
 ind possible semantic relations\\[] 
  []
 
 [52] [53]
-<Theory/TheoryFigs/cat-deps1.png, id=1221, 1425.07407pt x 166.37157pt>
+<Theory/TheoryFigs/cat-deps1.png, id=1300, 1425.07407pt x 166.37157pt>
 File: Theory/TheoryFigs/cat-deps1.png Graphic file (type png)
 
 <use Theory/TheoryFigs/cat-deps1.png>
-Package pdftex.def Info: Theory/TheoryFigs/cat-deps1.png used on input line 629
+Package pdftex.def Info: Theory/TheoryFigs/cat-deps1.png used on input line 633
 .
 (pdftex.def)             Requested size: 398.33858pt x 46.50247pt.
 
-<Theory/TheoryFigs/cat-deps2.png, id=1222, 1090.82532pt x 153.57375pt>
+<Theory/TheoryFigs/cat-deps2.png, id=1301, 1090.82532pt x 153.57375pt>
 File: Theory/TheoryFigs/cat-deps2.png Graphic file (type png)
 
 <use Theory/TheoryFigs/cat-deps2.png>
-Package pdftex.def Info: Theory/TheoryFigs/cat-deps2.png used on input line 636
+Package pdftex.def Info: Theory/TheoryFigs/cat-deps2.png used on input line 640
 .
 (pdftex.def)             Requested size: 398.33858pt x 56.08089pt.
 
@@ -1865,105 +1865,105 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [54 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Theory/Theory
 Figs/cat-deps1.png>]
-Overfull \hbox (114.73256pt too wide) in paragraph at lines 663--663
+Overfull \hbox (114.73256pt too wide) in paragraph at lines 667--667
 []\OT1/cmtt/m/n/12 3   if the dependency relation of this leaf (i.e. from its p
 arent to it) is collapsable:\\[] 
  []
 
 [55 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Theory/Theory
 Figs/cat-deps2.png>]
-<Theory/TheoryFigs/cat-deps1-collapsed-a.png, id=1238, 724.95844pt x 88.07906pt
+<Theory/TheoryFigs/cat-deps1-collapsed-a.png, id=1317, 724.95844pt x 88.07906pt
 >
 File: Theory/TheoryFigs/cat-deps1-collapsed-a.png Graphic file (type png)
  <use Theory/TheoryFigs/cat-deps1-collapsed-a.png>
 Package pdftex.def Info: Theory/TheoryFigs/cat-deps1-collapsed-a.png used on in
-put line 671.
+put line 675.
 (pdftex.def)             Requested size: 398.33858pt x 48.39658pt.
 
-Overfull \hbox (1.42534pt too wide) in paragraph at lines 671--672
+Overfull \hbox (1.42534pt too wide) in paragraph at lines 675--676
  [][] 
  []
 
 
-<Theory/TheoryFigs/cat-deps1-collapsed-b.png, id=1240, 724.95844pt x 93.34875pt
+<Theory/TheoryFigs/cat-deps1-collapsed-b.png, id=1319, 724.95844pt x 93.34875pt
 >
 File: Theory/TheoryFigs/cat-deps1-collapsed-b.png Graphic file (type png)
  <use Theory/TheoryFigs/cat-deps1-collapsed-b.png>
 Package pdftex.def Info: Theory/TheoryFigs/cat-deps1-collapsed-b.png used on in
-put line 676.
+put line 680.
 (pdftex.def)             Requested size: 398.33858pt x 51.2921pt.
 
-Overfull \hbox (1.42534pt too wide) in paragraph at lines 676--677
+Overfull \hbox (1.42534pt too wide) in paragraph at lines 680--681
  [][] 
  []
 
 
-<Theory/TheoryFigs/cat-deps1-collapsed-c.png, id=1241, 724.95844pt x 97.86563pt
+<Theory/TheoryFigs/cat-deps1-collapsed-c.png, id=1320, 724.95844pt x 97.86563pt
 >
 File: Theory/TheoryFigs/cat-deps1-collapsed-c.png Graphic file (type png)
  <use Theory/TheoryFigs/cat-deps1-collapsed-c.png>
 Package pdftex.def Info: Theory/TheoryFigs/cat-deps1-collapsed-c.png used on in
-put line 681.
+put line 685.
 (pdftex.def)             Requested size: 398.33858pt x 53.77399pt.
 
-Overfull \hbox (1.42534pt too wide) in paragraph at lines 681--682
+Overfull \hbox (1.42534pt too wide) in paragraph at lines 685--686
  [][] 
  []
 
 
-<Theory/TheoryFigs/cat-deps1-collapsed-d.png, id=1242, 723.45282pt x 94.10156pt
+<Theory/TheoryFigs/cat-deps1-collapsed-d.png, id=1321, 723.45282pt x 94.10156pt
 >
 File: Theory/TheoryFigs/cat-deps1-collapsed-d.png Graphic file (type png)
  <use Theory/TheoryFigs/cat-deps1-collapsed-d.png>
 Package pdftex.def Info: Theory/TheoryFigs/cat-deps1-collapsed-d.png used on in
-put line 686.
+put line 690.
 (pdftex.def)             Requested size: 398.33858pt x 51.81345pt.
 
-Overfull \hbox (1.42534pt too wide) in paragraph at lines 686--687
+Overfull \hbox (1.42534pt too wide) in paragraph at lines 690--691
  [][] 
  []
 
 
-<Theory/TheoryFigs/cat-deps1-collapsed-e.png, id=1243, 724.95844pt x 92.59593pt
+<Theory/TheoryFigs/cat-deps1-collapsed-e.png, id=1322, 724.95844pt x 92.59593pt
 >
 File: Theory/TheoryFigs/cat-deps1-collapsed-e.png Graphic file (type png)
  <use Theory/TheoryFigs/cat-deps1-collapsed-e.png>
 Package pdftex.def Info: Theory/TheoryFigs/cat-deps1-collapsed-e.png used on in
-put line 691.
+put line 695.
 (pdftex.def)             Requested size: 398.33858pt x 50.87845pt.
 
-Overfull \hbox (1.42534pt too wide) in paragraph at lines 691--692
+Overfull \hbox (1.42534pt too wide) in paragraph at lines 695--696
  [][] 
  []
 
 
-<Theory/TheoryFigs/cat-deps1-collapsed-f.png, id=1244, 724.95844pt x 92.59593pt
+<Theory/TheoryFigs/cat-deps1-collapsed-f.png, id=1323, 724.95844pt x 92.59593pt
 >
 File: Theory/TheoryFigs/cat-deps1-collapsed-f.png Graphic file (type png)
  <use Theory/TheoryFigs/cat-deps1-collapsed-f.png>
 Package pdftex.def Info: Theory/TheoryFigs/cat-deps1-collapsed-f.png used on in
-put line 696.
+put line 700.
 (pdftex.def)             Requested size: 398.33858pt x 50.87845pt.
 
-Overfull \hbox (1.42534pt too wide) in paragraph at lines 696--697
+Overfull \hbox (1.42534pt too wide) in paragraph at lines 700--701
  [][] 
  []
 
 
-<Theory/TheoryFigs/cat-deps1-collapsed-g.png, id=1245, 724.20563pt x 101.62968p
+<Theory/TheoryFigs/cat-deps1-collapsed-g.png, id=1324, 724.20563pt x 101.62968p
 t>
 File: Theory/TheoryFigs/cat-deps1-collapsed-g.png Graphic file (type png)
  <use Theory/TheoryFigs/cat-deps1-collapsed-g.png>
 Package pdftex.def Info: Theory/TheoryFigs/cat-deps1-collapsed-g.png used on in
-put line 701.
+put line 705.
 (pdftex.def)             Requested size: 398.33858pt x 55.90114pt.
 
-Overfull \hbox (1.42534pt too wide) in paragraph at lines 701--702
+Overfull \hbox (1.42534pt too wide) in paragraph at lines 705--706
  [][] 
  []
 
 
-LaTeX Warning: Float too large for page by 5.56395pt on input line 707.
+LaTeX Warning: Float too large for page by 5.56395pt on input line 711.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
@@ -1971,87 +1971,87 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 File: Theory/TheoryFigs/cat-deps1-collapsed-g.png Graphic file (type png)
 <use Theory/TheoryFigs/cat-deps1-collapsed-g.png>
 Package pdftex.def Info: Theory/TheoryFigs/cat-deps1-collapsed-g.png used on in
-put line 715.
+put line 719.
 (pdftex.def)             Requested size: 398.33858pt x 55.90114pt.
 
-Overfull \hbox (1.42534pt too wide) in paragraph at lines 715--716
+Overfull \hbox (1.42534pt too wide) in paragraph at lines 719--720
  [][] 
  []
 
-<Theory/TheoryFigs/cat-deps2-collapsed.png, id=1247, 955.57pt x 134.5025pt>
+<Theory/TheoryFigs/cat-deps2-collapsed.png, id=1326, 955.57pt x 134.5025pt>
 File: Theory/TheoryFigs/cat-deps2-collapsed.png Graphic file (type png)
 
 <use Theory/TheoryFigs/cat-deps2-collapsed.png>
 Package pdftex.def Info: Theory/TheoryFigs/cat-deps2-collapsed.png used on inpu
-t line 721.
+t line 725.
 (pdftex.def)             Requested size: 398.33858pt x 56.06787pt.
 
-Overfull \hbox (1.42534pt too wide) in paragraph at lines 721--722
+Overfull \hbox (1.42534pt too wide) in paragraph at lines 725--726
  [][] 
  []
 
 
-LaTeX Warning: Reference `sec:ar' on page 56 undefined on input line 734.
+LaTeX Warning: Reference `sec:ar' on page 56 undefined on input line 738.
 
 [56 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Theory/Theory
 Figs/cat-deps1-collapsed-g.png> <C:/Users/Lenovo/PycharmProjects/the_poetry_pla
 giarist/report/Theory/TheoryFigs/cat-deps2-collapsed.png>]
-Overfull \hbox (65.33253pt too wide) in paragraph at lines 770--770
+Overfull \hbox (65.33253pt too wide) in paragraph at lines 774--774
 []\OT1/cmtt/m/n/12 6       if we cannot find all the elements we are looking fo
 r, we leave it blank\\[] 
  []
 
 
-Overfull \hbox (170.30759pt too wide) in paragraph at lines 770--770
+Overfull \hbox (170.30759pt too wide) in paragraph at lines 774--774
 []\OT1/cmtt/m/n/12 7     add mapping from the text of the target to the newly b
 uilt relation so we can find it later\\[] 
  []
 
-[57] <Theory/TheoryFigs/cat1-fn-cn-a.png, id=1269, 949.29657pt x 223.58531pt>
+[57] <Theory/TheoryFigs/cat1-fn-cn-a.png, id=1348, 949.29657pt x 223.58531pt>
 File: Theory/TheoryFigs/cat1-fn-cn-a.png Graphic file (type png)
 
 <use Theory/TheoryFigs/cat1-fn-cn-a.png>
 Package pdftex.def Info: Theory/TheoryFigs/cat1-fn-cn-a.png used on input line 
-778.
+782.
 (pdftex.def)             Requested size: 398.33858pt x 93.81989pt.
 
-Overfull \hbox (1.42534pt too wide) in paragraph at lines 778--779
+Overfull \hbox (1.42534pt too wide) in paragraph at lines 782--783
  [][] 
  []
 
-<Theory/TheoryFigs/cat1-fn-cn-b.png, id=1270, 949.29657pt x 228.855pt>
+<Theory/TheoryFigs/cat1-fn-cn-b.png, id=1349, 949.29657pt x 228.855pt>
 File: Theory/TheoryFigs/cat1-fn-cn-b.png Graphic file (type png)
 
 <use Theory/TheoryFigs/cat1-fn-cn-b.png>
 Package pdftex.def Info: Theory/TheoryFigs/cat1-fn-cn-b.png used on input line 
-783.
+787.
 (pdftex.def)             Requested size: 398.33858pt x 96.03113pt.
 
-Overfull \hbox (1.42534pt too wide) in paragraph at lines 783--784
+Overfull \hbox (1.42534pt too wide) in paragraph at lines 787--788
  [][] 
  []
 
-<Theory/TheoryFigs/cat1-fn-cn-c.png, id=1271, 949.29657pt x 60.97781pt>
+<Theory/TheoryFigs/cat1-fn-cn-c.png, id=1350, 949.29657pt x 60.97781pt>
 File: Theory/TheoryFigs/cat1-fn-cn-c.png Graphic file (type png)
 
 <use Theory/TheoryFigs/cat1-fn-cn-c.png>
 Package pdftex.def Info: Theory/TheoryFigs/cat1-fn-cn-c.png used on input line 
-788.
+792.
 (pdftex.def)             Requested size: 398.33858pt x 25.58723pt.
 
-Overfull \hbox (1.42534pt too wide) in paragraph at lines 788--789
+Overfull \hbox (1.42534pt too wide) in paragraph at lines 792--793
  [][] 
  []
 
-<Theory/TheoryFigs/cat1-fn-cn-d.png, id=1272, 949.29657pt x 92.59593pt>
+<Theory/TheoryFigs/cat1-fn-cn-d.png, id=1351, 949.29657pt x 92.59593pt>
 File: Theory/TheoryFigs/cat1-fn-cn-d.png Graphic file (type png)
 
 <use Theory/TheoryFigs/cat1-fn-cn-d.png>
 Package pdftex.def Info: Theory/TheoryFigs/cat1-fn-cn-d.png used on input line 
-793.
+797.
 (pdftex.def)             Requested size: 398.33858pt x 38.85469pt.
 
-Overfull \hbox (1.42534pt too wide) in paragraph at lines 793--794
+Overfull \hbox (1.42534pt too wide) in paragraph at lines 797--798
  [][] 
  []
 
@@ -2062,15 +2062,15 @@ poetry_plagiarist/report/Theory/TheoryFigs/cat1-fn-cn-c.png> <C:/Users/Lenovo/P
 ycharmProjects/the_poetry_plagiarist/report/Theory/TheoryFigs/cat1-fn-cn-d.png>
 ] [59] [60] [61]
 
-LaTeX Warning: Reference `sec:ar' on page 62 undefined on input line 1008.
+LaTeX Warning: Reference `sec:ar' on page 62 undefined on input line 1012.
 
 [62]
-Overfull \hbox (27.16216pt too wide) in paragraph at lines 1042--1043
+Overfull \hbox (27.16216pt too wide) in paragraph at lines 1046--1047
  [][] 
  []
 
 
-Overfull \hbox (27.16216pt too wide) in paragraph at lines 1068--1069
+Overfull \hbox (27.16216pt too wide) in paragraph at lines 1072--1073
  [][] 
  []
 
@@ -2078,22 +2078,22 @@ Overfull \hbox (27.16216pt too wide) in paragraph at lines 1068--1069
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
-Overfull \hbox (16.72208pt too wide) in paragraph at lines 1100--1101
+Overfull \hbox (16.72208pt too wide) in paragraph at lines 1104--1105
  [][] 
  []
 
 
-Overfull \hbox (16.72208pt too wide) in paragraph at lines 1124--1125
+Overfull \hbox (16.72208pt too wide) in paragraph at lines 1128--1129
  [][] 
  []
 
 
-Overfull \hbox (16.72208pt too wide) in paragraph at lines 1148--1149
+Overfull \hbox (16.72208pt too wide) in paragraph at lines 1152--1153
  [][] 
  []
 
 
-Overfull \hbox (9.43898pt too wide) in paragraph at lines 1170--1171
+Overfull \hbox (9.43898pt too wide) in paragraph at lines 1174--1175
  [][] 
  []
 
@@ -2140,7 +2140,7 @@ possible_rhyme_schemes.count(rhyme_scheme)[]
  []
 
 [74] [75]
-<Implementation/ImplementationFigs/StanzaLines.png, id=1391, 567.3195pt x 422.7
+<Implementation/ImplementationFigs/StanzaLines.png, id=1470, 567.3195pt x 422.7
 795pt>
 File: Implementation/ImplementationFigs/StanzaLines.png Graphic file (type png)
 
@@ -2149,7 +2149,7 @@ Package pdftex.def Info: Implementation/ImplementationFigs/StanzaLines.png used
  on input line 185.
 (pdftex.def)             Requested size: 332.93234pt x 248.10426pt.
 
-<Implementation/ImplementationFigs/RhymeSchemes.png, id=1392, 567.3195pt x 422.
+<Implementation/ImplementationFigs/RhymeSchemes.png, id=1471, 567.3195pt x 422.
 7795pt>
 File: Implementation/ImplementationFigs/RhymeSchemes.png Graphic file (type png
 )
@@ -2158,7 +2158,7 @@ Package pdftex.def Info: Implementation/ImplementationFigs/RhymeSchemes.png use
 d on input line 192.
 (pdftex.def)             Requested size: 332.93234pt x 248.10426pt.
 
-<Implementation/ImplementationFigs/PersonaTypes.png, id=1393, 567.3195pt x 422.
+<Implementation/ImplementationFigs/PersonaTypes.png, id=1472, 567.3195pt x 422.
 7795pt>
 File: Implementation/ImplementationFigs/PersonaTypes.png Graphic file (type png
 )
@@ -2167,7 +2167,7 @@ Package pdftex.def Info: Implementation/ImplementationFigs/PersonaTypes.png use
 d on input line 201.
 (pdftex.def)             Requested size: 332.93234pt x 248.10426pt.
 
-<Implementation/ImplementationFigs/PersonaAnimation.png, id=1394, 567.3195pt x 
+<Implementation/ImplementationFigs/PersonaAnimation.png, id=1473, 567.3195pt x 
 422.7795pt>
 File: Implementation/ImplementationFigs/PersonaAnimation.png Graphic file (type
  png)
@@ -2176,7 +2176,7 @@ Package pdftex.def Info: Implementation/ImplementationFigs/PersonaAnimation.png
  used on input line 207.
 (pdftex.def)             Requested size: 332.93234pt x 248.10426pt.
 
-<Implementation/ImplementationFigs/PersonaRelation.png, id=1395, 567.3195pt x 4
+<Implementation/ImplementationFigs/PersonaRelation.png, id=1474, 567.3195pt x 4
 22.7795pt>
 File: Implementation/ImplementationFigs/PersonaRelation.png Graphic file (type 
 png)
@@ -2185,7 +2185,7 @@ Package pdftex.def Info: Implementation/ImplementationFigs/PersonaRelation.png
 used on input line 216.
 (pdftex.def)             Requested size: 332.93234pt x 248.10426pt.
 
-<Implementation/ImplementationFigs/Line1NGrams.png, id=1396, 567.3195pt x 422.7
+<Implementation/ImplementationFigs/Line1NGrams.png, id=1475, 567.3195pt x 422.7
 795pt>
 File: Implementation/ImplementationFigs/Line1NGrams.png Graphic file (type png)
 
@@ -2194,7 +2194,7 @@ Package pdftex.def Info: Implementation/ImplementationFigs/Line1NGrams.png used
  on input line 223.
 (pdftex.def)             Requested size: 332.93234pt x 248.10426pt.
 
-<Implementation/ImplementationFigs/DistinctSentences.png, id=1397, 567.3195pt x
+<Implementation/ImplementationFigs/DistinctSentences.png, id=1476, 567.3195pt x
  422.7795pt>
 File: Implementation/ImplementationFigs/DistinctSentences.png Graphic file (typ
 e png)
@@ -2203,7 +2203,7 @@ Package pdftex.def Info: Implementation/ImplementationFigs/DistinctSentences.pn
 g used on input line 230.
 (pdftex.def)             Requested size: 332.93234pt x 248.10426pt.
 
-<Implementation/ImplementationFigs/OverallTense.png, id=1398, 567.3195pt x 422.
+<Implementation/ImplementationFigs/OverallTense.png, id=1477, 567.3195pt x 422.
 7795pt>
 File: Implementation/ImplementationFigs/OverallTense.png Graphic file (type png
 )
@@ -2238,7 +2238,7 @@ st, then the target, then the dependencies and objects[]
  []
 
 [83] [84] [85] [86]
-<Management/ManagementFigs/custard-collocs.png, id=1473, 1145.78062pt x 406.518
+<Management/ManagementFigs/custard-collocs.png, id=1552, 1145.78062pt x 406.518
 75pt>
 File: Management/ManagementFigs/custard-collocs.png Graphic file (type png)
  <use Management/ManagementFigs/custard-collocs.png>
@@ -2256,9 +2256,38 @@ Chapter 6.
 
 
 
-] [103] [104] [105]) [106]
+]
+
+Package Fancyhdr Warning: \headheight is too small (23.69576pt): 
+ Make it at least 27.08337pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[103] [104]
+
+LaTeX Warning: Reference `sec:book' on page 105 undefined on input line 69.
+
+
+Overfull \hbox (112.5761pt too wide) in paragraph at lines 73--78
+\OT1/cmr/m/n/12 their ex-am-ples use six syl-la-bles. http://www.gigglepoetry.c
+om/poetryclassdetail.aspx?LessonPlanID=2
+ []
+
+
+Overfull \hbox (159.59688pt too wide) in paragraph at lines 73--78
+\OT1/cmr/m/n/12 writing-now.com/how-to-write-a-limerick.html http://www.poetryt
+eachers.com/poetclass/lessons/limerick.html
+ []
+
+[105] [106] [107] [108] [109] [110]
+Overfull \hbox (227.71146pt too wide) in paragraph at lines 220--221
+[]\OT1/cmr/m/n/12 The av-er-age vo-cab-u-lary of na-tive En-glish speak-ers is 
+20,000-35,000[http://www.economist.com/blogs/johnson/2013/05/vocabulary-
+ []
+
+[111] [112] [113] [114]) [115]
 (C:\Users\Lenovo\PycharmProjects\the_poetry_plagiarist\report\Appendix1/appendi
-x1.tex [107
+x1.tex [116
 
 
 
@@ -2268,29 +2297,26 @@ Overfull \hbox (56.91786pt too wide) in paragraph at lines 60--60
  |[]\OT1/cmr/bx/n/17.28 CMU Pro-nun-ci-a-tion Dic-tio-nary ARPA-BET Phoneme
  []
 
-[108] [109] [110]
-
-Package Fancyhdr Warning: \headheight is too small (23.69576pt): 
- Make it at least 27.08337pt.
- We now make it that large for the rest of the document.
- This may cause the page layout to be inconsistent, however.
-
-[111]
+[117] [118] [119] [120]
 Overfull \hbox (28.65047pt too wide) in paragraph at lines 212--221
 [][] 
  []
 
-[112] [113]
+[121] [122]
 Overfull \hbox (253.53154pt too wide) in paragraph at lines 311--324
 [][] 
  []
 
-[114] [115]) [116] [117
+[123] [124]
+
+LaTeX Warning: Reference `sec:book' on page 125 undefined on input line 391.
+
+[125]) [126] [127
 
 
-] [118] [119] [120] [121]
+] [128] [129] [130] [131]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 150.
- [122]
+ [132]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 150.
 
 (C:\Users\Lenovo\PycharmProjects\the_poetry_plagiarist\report\report.aux
@@ -2311,7 +2337,7 @@ x1.aux))
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 150.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 150.
 Package rerunfilecheck Info: File `report.out' has not changed.
-(rerunfilecheck)             Checksum: 08DBCD4E242AA34DD2CE61ECF090A6BE;12450.
+(rerunfilecheck)             Checksum: 9F0F627EFC4F3983201E41D3E09305C9;13652.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
@@ -2322,10 +2348,10 @@ LaTeX Warning: There were undefined references.
 Package logreq Info: Writing requests to 'report.run.xml'.
  ) 
 Here is how much of TeX's memory you used:
- 35741 strings out of 493921
- 762094 string characters out of 3144873
- 1260745 words of memory out of 3000000
- 37856 multiletter control sequences out of 15000+200000
+ 35783 strings out of 493921
+ 762717 string characters out of 3144873
+ 1259799 words of memory out of 3000000
+ 37872 multiletter control sequences out of 15000+200000
  13484 words of font info for 49 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
  74i,34n,76p,894b,3559s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -2345,9 +2371,9 @@ MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/Mi
 KTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Program Files (x86)/MiKT
 eX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Program Files (x86)/MiKTeX
  2.9/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on report.pdf (128 pages, 1669027 bytes).
+Output written on report.pdf (139 pages, 1704131 bytes).
 PDF statistics:
- 1838 PDF objects out of 2073 (max. 8388607)
- 417 named destinations out of 1000 (max. 500000)
- 1367 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1961 PDF objects out of 2073 (max. 8388607)
+ 443 named destinations out of 1000 (max. 500000)
+ 1487 words of extra memory for PDF output out of 10000 (max. 10000000)
 

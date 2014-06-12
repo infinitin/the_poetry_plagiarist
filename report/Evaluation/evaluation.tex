@@ -13,7 +13,7 @@ A major goal of this project is to show that the structure and content of types 
 \subsection{Limericks}
 
 \begin{description}
-\item[One stanza, five lines]  \hfill \\
+\item[One stanza, five lines, no repetition]  \hfill \\
 All of the poems in our corpus follow this rule, as seen in Figure BLAH.
 
 
@@ -79,38 +79,122 @@ http://freespace.virgin.net/merrick.sheldon/limerickrules.htm
 Nowhere is it mentioned that the rhythm should be 101001. The five sources above teach the rhythm of limericks, but their teachings vary and the examples they use often do not match up with the theory that they give, but in most cases do match with the 101001 candidate.
 
 We therefore, conclude that more investigation needs to be done to decide what is the \textit{actual} expected rhythm of the third and fourth line or limericks, and we further propose that based on our analysis it should be 101001.
+
+\item[Other Noteworthy Results]  \hfill \\
+Figure BLAH shows that limericks are usually written in past tense and occasionally in present tense.
+
+A very large proportion are written in third person, as seen in Figure BLAH.
+
 \end{description}
 
 
 \subsection{Haiku}
 
 \begin{description}
-\item[One stanza, three lines]  \hfill \\
-\item[Topic is usually nature or similar]  \hfill \\
+\item[One stanza, three lines, no repetition]  \hfill \\
+All of the poems in our corpus follow this rule, as seen in Figure BLAH.
+
+\item[Topic ranges widely, \textit{nature} is very common]  \hfill \\
+Figure BLAH shows that there is indeed a wide range of topics including halogen (light), living thing, natural object, cognition, chemical element, organism, body part, atmospheric phenomenon, weather and natural phenomenon; all of which elude to nature. 
+
+Figure BLAH also shows that it generally talks about non-objects, i.e. nouns that do not cast a shadow. This includes nature and weather to back up the earlier graph.
+
 \item[5-7-5 syllabic rhythm]  \hfill \\
+Figures BLAH through BLAH show the syllabic rhythm of each line. It is clear that 5-7-5 is a most popular and is taken as unambiguous.
+
 \item[No rhyme scheme]  \hfill \\
+Figure BLAH shows that haiku is most likely to not have any specific rhyme scheme (\textit{ABC}). The candidate rhyme schemes occur with low frequency, so the lack of rhyme scheme is treated as unambiguous and any rhyme only occurs by chance.
+
 \item[No specific meter]  \hfill \\
+Figures BLAH through BLAH show the stress patterns for haiku. The graphs give a large number of options, but do match the Zipf law, suggesting that the most probable stress pattern is intentional. Given that poets are taught to write haikus without considering meter, we suspect that this may be a coincidence.
+
+\item[Other Noteworthy Results]  \hfill \\
+Conversely to limericks, Figure BLAH shows that limericks are usually written in the present tense and occasionally in past tense.
+
+As with limericks, most haiku are written in third person, as seen in Figure BLAH.
+
 \end{description}
 
 \subsection{Shakespearean Sonnets}
 
 \begin{description}
-\item[One stanza, fourteen lines]  \hfill \\
+\item[One stanza, fourteen lines, no repetition]  \hfill \\
+All of the poems in our corpus follow this rule, as seen in Figure BLAH.
+
 \item[Topic is usually of thought, emotion and ideas]  \hfill \\
+This is evident from Figure BLAH, which shows the topics covered are related to thought, emotion and ideas. In particular, psychological feature, cognition, emotion, feeling, relation, state and communication.
+
+Figure BLAH supports this, showing that often non-objects were discussed more than animate and inanimate objects. Such non-objects include though, emotion and ideas.
+
+Figure BLAH also shows that Shakespeare mentioned words such as \textit{'love'}, \textit{'beauty'}, \textit{'fair'} and \textit{'think'} a significant number of times across his sonnets.
+
 \item[\textit{ABABCDCDEFEFGG} rhyme scheme]  \hfill \\
+Figure BLAH shows that the most probable rhyme scheme is as expected. However, because of the Shakesperean vocabulary that is not in the CMU Pronunciation Dictionary and the length of the poem, it often failed to complete analysis for certain poems if there were too many possible permutations (see Section BLAH). 
+
+This exposes a limitation on this system that each extra line of the poem potentially increases the number of rhyme permutations exponentially, risking memory errors. A simple solution to this would be to leave the rhyme schemes in their unzipped form as in Figure BLAH and counting the frequency of possible permutations iteratively.
+
 \item[Iambic pentameter for every line]  \hfill \\
+Figures BLAH through BLAH show that each line is unambiguously iambic pentameter (0101010101) \textbf{except} for the 13th line, which is unambiguously iambic pentameter except that the starting syllable is stressed.
+
+This is a very exciting result because it is unlikely to be caused a limitation of the CMU Pronunciation Dictionary or our implementation because this discrepancy is so consistent and specific. This is also the \textit{"perfect"} corpus, containing all 154 of Shakespeare's original sonnets that are definitely the defining poems of Shakesperean sonnets.
+
+Most research says that every line of every Shakespearean Sonnet is iambic pentameter. No research could be found to support the stressing of the first syllable of the 13th line, however, we propose that it is a significant result and not a coincidence.
+
+Firstly, iambic pentameter is not even a possibility in our analysis. Secondly, the thirteenth line of the poem is the start of the \textit{'heroic couplet'}, marking a change in the previous quatrains and signalling the impending end of the sonnet. Therefore, there is a motivation to break the monotony and add the extra stress, acting as the start of a strong conclusion.
+
+If analyse some sonnets by eye for this specific aspect, we can find examples where the first syllable \textbf{cannot} be unstressed, either due to the starting word needing two stressed syllables or use of punctuation (particularly exclamation marks) following the first syllable.
+
+\begin{description}
+\item[Sonnet I: ] \textit{Pity the world, or else this glutton be,}
+\item[Sonnet XIII: ] \textit{O, none but unthrifts! Dear my love, you know}
+\item[Sonnet XIX: ] \textit{Yet, do thy worst, old Time: despite thy wrong,}
+\item[Sonnet XXIII: ] \textit{O, learn to read what silent love hath writ:}
+\item[Sonnet XXVII: ] \textit{Lo! thus, by day my limbs, by night my mind,}
+\item[Sonnet XXXIV: ] \textit{Ah! but those tears are pearl which thy love sheds,}
+\item[Sonnet XXXVII: ] \textit{Look, what is best, that best I wish in thee:}
+\item[Sonnet XLVII: ] \textit{Or, if they sleep, thy picture in my sight}
+\item[Sonnet LII: ] \textit{Blessed are you, whose worthiness gives scope,}
+\item[Sonnet LV: ] \textit{So, till the judgment that yourself arise,}
+\item[Sonnet LIX: ] \textit{O, sure I am, the wits of former days}
+\item[Sonnet LXV: ] \textit{O, none, unless this miracle have might,}
+\item[Sonnet LXVII: ] \textit{O! him she stores, to show what wealth she had}
+\item[Sonnet XCI: ] \textit{Wretched in this alone, that thou mayst take}
+\item[Sonnet XCVII: ] \textit{Or, if they sing, 'tis with so dull a cheer}
+\item[Sonnet CV: ] \textit{'Fair, kind, and true,' have often lived alone,}
+\item[Sonnet CXXV: ] \textit{Hence, thou suborn'd informer! a true soul}
+\item[Sonnet CXLIX: ] \textit{But, love, hate on, for now I know thy mind;}
 \end{description}
 
-Large number of unknown words (can we get a number?). This makes it extremely slow because we find the closest word by spelling. As we know this does not always work for English, so this can be improved by using the state transducer model. Will also significantly speed up processing because we are not wasting time looking up the closest matching word, which is probably the slowest thing and why non-shakes ones go a lot faster.
+Of the rest of the sonnets where the meter is more ambiguous, we argue that stressing the first syllable is more natural when spoken out loud.
+
+Given the evidence and motivations explained above, we claim that it was Shakespeare's intention to start the 13th line of his sonnets with a stressed syllable, which means that it is \textbf{not iambic pentameter}, contrary to current literacy theory.
+
+\item[Other Noteworthy Results]  \hfill \\
+Most sonnets are written in first or second person as seen in Figure BLAH and almost all are written in the present tense, shown in Figure BLAH.
+\end{description}
 
 
 \subsection{Summary}
-Our results show that there is no need to hard code rules of poetry for most cases. Rhythm and rhyme tend to match up with theory despite the limitations of the CMUPD and the lack of quality in our corpuses.
+Overall, our results show that the system's general interpretation of poetic structure and content matches with literary theory despite a relatively low quality corpus. This shows that there is no need to hard-code any rules of poetry, as was done in previous attempts (Section BLAH).
+
+In fact, we have even found two cases where our program is contrary to literacy theory that may be true findings, not errors. It is exciting to see computerised poetry analysis become involved in evolution and understanding of a literary art such as poetry.
+
+The major shortcomings of the current implementation are:
+\begin{itemize}
+\item{The omission of any Named Entity Recognition limits not only the general contextual understanding of the poem, but also the specific recognition of names and places.}
+\item{Our attempt to patch up the limitations of the CMU Pronunciation Dictionary by finding the closest matching word (see Section BLAH) is not as reliable as expected and should be replaced with a state transducer model implementation.}
+\item{The memory and time complexity rises exponentially with the length of the poem with the current implementation. As seen with the sonnets compared to the haiku and limericks, the quality of analysis falls as the poems get longer.}
+\item{The sentiment of the poem has not been considered at all in this project. However, it is important to note, for example, that limericks are humorous.}
+\item{Using our own algorithms for anaphora resolution and presupposition projection, despite it being a prelude to the new proposed method in Section BLAH, is not affective at the moment, so we end up finding more characters than expected.}
+\end{itemize}
 
 Content understanding looks promising but still needs lots of work. There is currently no NE Recognition, a rather big omission but easily fixed.
 
+Large number of unknown words (can we get a number?). This makes it extremely slow because we find the closest word by spelling. As we know this does not always work for English, so this can be improved by using the state transducer model. Will also significantly speed up processing because we are not wasting time looking up the closest matching word, which is probably the slowest thing and why non-shakes ones go a lot faster.
+
 Anaphora stuff:
 This project does not delve deeply enough into this approach to fully test and evaluate it as it is outside the scope of this project. However, it is a new approach with potential that may be worth investigating further. 
+
 
 
 \section{Turing-style Tests}
