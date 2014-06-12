@@ -6,7 +6,7 @@ import builder
 from shayar.character import Character
 from framenet_reader import find_pos
 from rephrase import get_rhymes, shorten, filter_candidates
-from shayar.knowledge.knowledge import get_receives_action, get_node, closest_matching, new_concepts, get_synset
+from shayar.knowledge.knowledge import get_receives_action, get_node, closest_matching, halo, field, get_synset, remove_none
 from pattern.text.en import lemma
 
 jpype.startJVM(jpype.getDefaultJVMPath(), "-Djava.class.path=simplenlg-v4.4.2.jar")
@@ -33,6 +33,7 @@ rhyme_scheme = {}
 relation_functions = {'Named': build_name_phrase,
                       'AtLocation': build_location_phrase,
                       'HasProperty': build_hasproperty_phrase,
+                      'Simile': build_simile_phrase,
                       'HasA': build_has_phrase,
                       'Desires': build_desire_phrase,
                       'TakesAction': build_takes_action_phrase,
@@ -51,9 +52,10 @@ def create_poem(new_poem, template):
 
     #FIXME: REMOVE BELOW LATER
     test_character = Character(0, 'sg', 'm', 'a')
-    test_character.add_relation('Named', 'Spiderman')
-    #test_character.add_relation('Desires', 'cheese')
-    test_character.add_relation('HasProperty', 'Hero')
+    test_character.add_relation('Named', 'Giuliano')
+    #test_character.add_relation('AtLocation', 'Italy')
+    test_character.add_relation('Desires', 'cheese')
+    test_character.add_relation('Simile', 'Italian')
     builder.characters = [test_character]
     #FIXME: REMOVE ABOVE LATER
 
@@ -69,16 +71,10 @@ def create_poem(new_poem, template):
         builder.pattern = template.stress_patterns[l]
         builder.rhyme_token = full_rhyme_scheme[l]
         builder.rhyme_check = True
+        builder.context_nodes = get_context(content, new_poem.phrases, template)
 
         relation = content[l]
         if not relation:
-            if l == 0:
-                builder.context_nodes = get_context_nodes((), (), template)
-            elif l == sum(new_poem.lines)-1:
-                builder.context_nodes = get_context_nodes((), new_poem.phrases[l-1], template)
-            else:
-                builder.context_nodes = get_context_nodes(content[l+1], new_poem.phrases[l-1], template)
-
             relation = get_new_content(template)
 
         if relation[1].startswith('Not'):
@@ -148,7 +144,7 @@ def get_new_content(template):
                 option = candidate, 'a'
             options.append(option)
 
-        option_nodes = [get_node(candidate['word'], pos) for candidate, pos in options]
+        option_nodes = remove_none([get_node(candidate['word'], pos) for candidate, pos in options])
 
         new_relation = ()
         choice_word = ''
@@ -162,33 +158,47 @@ def get_new_content(template):
 
             if choice_word in nouns:
                 new_relation = new_noun_relation(choice_word, template)
-            elif choice_word in adjectives:
-                new_relation = new_adjective_relation(choice_word, template)
             elif choice_word in verbs:
                 new_relation = new_verb_relation(choice_word, template)
-
-            rhyme_scheme[builder.rhyme_token].append(choice_word)
+            else:
+                new_relation = []
 
         if new_relation:
             builder.rhyme_check = False
+            rhyme_scheme[builder.rhyme_token].append(choice_word)
             if choice_word in verbs:
                 builder.verb_at_end = True
             return new_relation
         else:
-            return new_blank_relation(template, rhymes=rhymes)
+            return new_blank_relation(template)
 
     else:
         return new_blank_relation(template)
 
 
-def new_blank_relation(template, rhymes=None):
-    if not rhymes: rhymes = []
-    character_index = builder.characters.index(random.choice(builder.characters))
-    relation_type = choose_relation(relations[4:], template)
-    if relation_type == 'Desires' or relation_type == 'NotDesires':
-        return character_index, relation_type, get_random_word('N')
+def new_blank_relation(template):
+    surrounding = []
+    for node in builder.context_nodes:
+        surrounding.extend(halo(node))
+        surrounding.extend(field(node))
+
+    choice_word, choice_pos = random.choice(surrounding).id.split('.')
+    if choice_pos == 'n':
+        new_relation = new_noun_relation(choice_word, template)
+    elif choice_pos == 'v':
+        new_relation = new_verb_relation(choice_word, template)
     else:
-        return character_index, relation_type, get_random_word('A')
+        character_index = builder.characters.index(random.choice(builder.characters))
+        new_relation = character_index, 'Simile', choice_word
+
+    if not new_relation:
+        character_index = builder.characters.index(random.choice(builder.characters))
+        relation_type = choose_relation(relations[4:], template)
+
+        return character_index, relation_type, choice_word
+
+    return new_relation
+
 
 
 def new_noun_relation(noun, template):
@@ -275,6 +285,23 @@ def prepare_ngram(ngram):
     builder.adjective_stash = builder.adjective_stash[::-1]
 
 
+def get_context(contents, phrases, template):
+    context_nodes = []
+    for content in contents:
+        context_nodes.extend(get_context_nodes(content, (), template))
+    for phrase in phrases:
+        context_nodes.extend(get_context_nodes((), phrase, template))
+
+    if not context_nodes:
+        context_nodes = get_content_from_template(template)
+    else:
+        context_node_ids = list(set([node.id for node in context_nodes]))
+        split_context_node_ids = [id.split('.') for id in context_node_ids]
+        context_nodes = [get_node(word, pos) for word, pos in split_context_node_ids]
+
+    return context_nodes
+
+
 def get_context_nodes(content, phrases, template):
     nodes = []
     node_ps = ['a', 'adv', 'n', 'v']
@@ -282,6 +309,7 @@ def get_context_nodes(content, phrases, template):
         c_isas = builder.characters[content[0]].type_to_list['IsA']
         for isa in c_isas:
             nodes.append(get_node(isa, 'n'))
+
         if content[1] == 'HasProperty':
             nodes.append(get_node(content[2].split()[0], 'a'))
         elif 'Action' in content[1]:
@@ -307,11 +335,6 @@ def get_context_nodes(content, phrases, template):
         except IndexError:
             continue
 
-    nodes = [node for node in nodes if node is not None]
-
-    if not nodes:
-        nodes = get_content_from_template(template)
-
     return [node for node in nodes if node is not None]
 
 
@@ -322,7 +345,7 @@ def get_content_from_template(template):
 
     hypernym_synset = get_synset(random.choice(hypernyms))
     holonym_nodes = [get_node(str(holonym).partition("'")[-1].rpartition("'")[0], 'n')
-                        for holonym in hypernym_synset.holonyms(recursive=True)]
+                        for holonym in hypernym_synset.hyponyms(recursive=True)]
 
     return random.sample(set(holonym_nodes), 3)
 

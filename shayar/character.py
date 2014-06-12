@@ -92,6 +92,8 @@ class Character:
         return return_text
 
     def add_relation(self, relation_type, text):
+        if relation_type == 'Simile':
+            relation_type = 'HasProperty'
         relation_list = self.type_to_list[relation_type]
         if text not in relation_list:
             relation_list.append(text)

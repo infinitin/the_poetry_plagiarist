@@ -25,6 +25,7 @@ w = {
     'N': wordnet.NOUN,
     'NN': wordnet.NOUN,
     'A': wordnet.ADJECTIVE,
+    'JJ': wordnet.ADJECTIVE,
     'ADV': wordnet.ADVERB,
     'AVP': wordnet.ADVERB
 }
@@ -146,6 +147,29 @@ def get_property(target_word, pos, used):
                 return get_random_word('AVP')
             else:
                 return get_random_word('A')
+
+
+def get_nouns(prop):
+    nouns = []
+    target_node = get_node(prop, 'a')
+    if target_node is not None:
+        nouns = [n.id.split('.')[0] for n in field(target_node, relation='HasProperty')]
+        return random.choice(nouns)
+    else:
+        logging.info(prop + '.a is not in the graph')
+        synonyms = get_synonyms(prop, wordnet.ADJECTIVE)
+        synonym_nodes = remove_none([get_node(synonym, 'a') for synonym in synonyms])
+        if not synonym_nodes:
+            logging.info('No nodes: ' + str(synonyms))
+            return get_random_word('N')
+
+        for synonym_node in synonym_nodes:
+            nouns.extend([n.id.split('.')[0] for n in field(synonym_node, relation='HasProperty')])
+
+        if nouns:
+            return random.choice(nouns)
+        else:
+            return get_random_word('N')
 
 
 def get_synonyms(word, pos=None, extended=False):

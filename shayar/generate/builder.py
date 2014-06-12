@@ -7,7 +7,7 @@ from rephrase import fit_rhythm_pattern, fit_rhyme
 import logging
 import creation
 from character_creation import create_new_character
-from shayar.knowledge.knowledge import get_action_theme, get_hypernyms, get_action_taker_receiver, get_pos
+from shayar.knowledge.knowledge import get_action_theme, get_hypernyms, get_action_taker_receiver, get_pos, get_nouns
 
 pattern = ''
 rhyme_token = ''
@@ -26,6 +26,33 @@ last_modifier = ''
 verb_at_end = False
 negated = False
 context_nodes = []
+
+
+def build_simile_phrase(prop):
+    logging.info('Building simile phrase')
+    be_elem = phrase_spec.VP('be')
+    subj = get_is_a(character_i, anaphora=0)
+    new_elem = phrase_spec.NP(subj)
+    new_elem.animation = characters[character_i].object_state
+    new_elem.num = characters[character_i].num
+    new_elem.gender = characters[character_i].gender
+
+    simile = get_nouns(prop)
+    simile_elem = phrase_spec.NP(simile.split('.')[0])
+    phrase_type = random.choice([0, 1])
+    if phrase_type:
+        simile_elem.pre_modifiers.append(phrase_spec.ADJ(prop + ' like a'))
+    else:
+        simile_elem.pre_modifiers.append(phrase_spec.ADJ('as ' + prop + ' as a'))
+
+    phrases = [new_elem, be_elem, simile_elem]
+
+    if rhyme_check:
+        phrases = fit_rhythm_pattern(fit_rhyme(phrases, rhyme_token), pattern)
+    else:
+        phrases = fit_rhythm_pattern(phrases, pattern)
+
+    return phrases
 
 
 def build_hasproperty_phrase(prop):
@@ -72,7 +99,7 @@ def build_takes_action_phrase(action):
                     verb_buffer.append(phrase)
                 else:
                     resorted_phrases.append(phrase)
-        phrases = resorted_phrases + verb_buffer
+            phrases = resorted_phrases + verb_buffer
 
     except IndexError:
         global negated
@@ -537,7 +564,7 @@ def get_presupposition(char, isas):
 
 
 def get_action(action, action_relation):
-    logging.info('Getting ' + action_relation + ' parameters for ' + action)
+    logging.info('Getting ' + str(action_relation) + ' parameters for ' + str(action))
     #Look through the other characters, finding a receives action for the given verb
     for character in characters:
         if action in character.type_to_list[action_relation]:

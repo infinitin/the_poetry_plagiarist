@@ -6,16 +6,21 @@ from shayar.analyse.detectors.context.character_builder import determine_gender,
 
 def create_new_character(noun, character_id):
     synset = get_synset(noun, pos='N')
-    hyps = set()
-    for h in synset.hypernyms(recursive=True):
-        try:
-            hyps.add(h.gloss)
-        except ValueError:
-            continue
+    if not synset:
+        animation = ''
+        gender = ''
+    else:
+        hyps = set()
+        for h in synset.hypernyms(recursive=True):
+            try:
+                hyps.add(h)
+            except ValueError:
+                continue
 
-    hyps.add(synset.gloss)
-    animation = determine_object_state(hyps)
-    gender = determine_gender(hyps, animation)
+        hyps.add(synset)
+        animation = determine_object_state(hyps)
+        gender = determine_gender(hyps, animation)
+
     new_character = Character(character_id, 'sg', gender, animation)
     new_character.add_relation('IsA', noun)
 

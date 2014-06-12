@@ -10,7 +10,7 @@ import builder
 from urllib2 import urlopen, URLError
 from json import loads as json_load
 from pattern.text.en import wordnet
-from shayar.knowledge.knowledge import get_property, most_similar, get_synonyms, get_node, closest_matching
+from shayar.knowledge.knowledge import get_property, most_similar, get_synonyms, get_node, closest_matching, halo
 import logging
 import sys
 
@@ -297,7 +297,7 @@ def shorten(word):
             if vowel_index == 0:
                 return ''
             elif word[vowel_index - 1] not in 'aeiou':
-                return word[vowel_index-1:]
+                return word[vowel_index - 1:]
         elif letter not in 'aeiou':
             found = True
     return ''
@@ -369,7 +369,7 @@ def replace(old_word, candidates, phrases):
                     new_pre_modifier = phrase_spec.ADJ(replacement)
                     pre_modifier_index = phrase.pre_modifiers.index(pre_modifier)
                     phrase.pre_modifiers[pre_modifier_index] = new_pre_modifier
-                    
+
         for modifier in phrase.modifiers:
             if 'adjective' in modifier.__dict__.keys():
                 if modifier.adjective == lemma(old_word):
@@ -393,7 +393,7 @@ def replace(old_word, candidates, phrases):
                     new_modifier = phrase_spec.ADJ(replacement)
                     modifier_index = phrase.modifiers.index(modifier)
                     phrase.modifiers[modifier_index] = new_modifier
-                    
+
         for post_modifier in phrase.post_modifiers:
             if 'adjective' in post_modifier.__dict__.keys():
                 if post_modifier.adjective == lemma(old_word):
@@ -432,26 +432,36 @@ def get_rhyme_mod(word, candidates, mod_pos, pos):
     filtered = filter_candidates(words, mod_pos)
     options = [candidate for candidate in candidates if candidate['word'] in filtered]
 
-    if not options:
-        best_candidates = [candidate for candidate in candidates if candidate['score'] == candidates[0]['score']]
-        return random.choice(best_candidates)['word']
     if len(filtered) == 1:
         return options[0]['word']
 
-    best_options = [option['word'] for option in options if option['score'] == options[0]['score']]
-    if len(best_options) == 1:
-        return best_options[0]
+    if not options:
+        best_options = [candidate['word'] for candidate in candidates if candidate['score'] == candidates[0]['score']]
+    else:
+        best_options = [option['word'] for option in options if option['score'] == options[0]['score']]
 
-    #wpos = wordnet.NOUN
-    #if pos.startswith('V'):
-    #    wpos = wordnet.VERB
+    if len(best_options) == 1:
+        return best_options
+
+    wpos = wordnet.NOUN
+    if pos.startswith('V'):
+        wpos = wordnet.VERB
 
     #Which modifier is most similar to those that are used to describe any of these words (synonyms)
-    #synonyms = get_synonyms(word, wpos)
-    #modifiers = [tail for head, tail, relation in builder.knowledge if relation == 'HasProperty' and head in synonyms]
-    #best_closest = most_similar_pair(modifiers, best_options, mod_pos)
+    synonyms = get_synonyms(word, wpos)
+    properties = []
+    for target_word in synonyms:
+        target_node = get_node(target_word, pos.lower())
+        if target_node is not None:
+            properties.extend(halo(target_node, relation='HasProperty'))
 
-    return random.choice(best_options)
+    closest = closest_matching([get_node(option, mod_pos.lower()) for option in best_options], properties)
+    if closest:
+        best_closest = random.choice(list(closest)).id.split('.')[0]
+    else:
+        best_closest = random.choice(best_options)
+
+    return best_closest
 
 
 def get_rhyme_word(old_word, candidates, pos):

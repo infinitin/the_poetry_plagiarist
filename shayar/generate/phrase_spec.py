@@ -115,7 +115,7 @@ class VP():
         for post_modifier in self.post_modifiers:
             phrase.addPostModifier(post_modifier.adverb)
         for complement in self.complements:
-            phrase.addComplement(complement.translate_to_nlg())
+            phrase.addComplement(complement)
 
         if self.tense == 'past':
             phrase.setFeature(creation.feature.TENSE, creation.tense.PAST)
