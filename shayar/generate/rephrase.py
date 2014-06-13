@@ -441,7 +441,7 @@ def get_rhyme_mod(word, candidates, mod_pos, pos):
         best_options = [option['word'] for option in options if option['score'] == options[0]['score']]
 
     if len(best_options) == 1:
-        return best_options
+        return best_options[0]
 
     wpos = wordnet.NOUN
     if pos.startswith('V'):

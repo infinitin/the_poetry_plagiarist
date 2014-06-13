@@ -6,7 +6,8 @@ import builder
 from shayar.character import Character
 from framenet_reader import find_pos
 from rephrase import get_rhymes, shorten, filter_candidates
-from shayar.knowledge.knowledge import get_receives_action, get_node, closest_matching, halo, field, get_synset, remove_none
+from shayar.knowledge.knowledge import get_receives_action, get_node, closest_matching, halo, field, get_synset, \
+    remove_none
 from pattern.text.en import lemma
 
 jpype.startJVM(jpype.getDefaultJVMPath(), "-Djava.class.path=simplenlg-v4.4.2.jar")
@@ -52,10 +53,10 @@ def create_poem(new_poem, template):
 
     #FIXME: REMOVE BELOW LATER
     test_character = Character(0, 'sg', 'm', 'a')
-    test_character.add_relation('Named', 'Giuliano')
-    #test_character.add_relation('AtLocation', 'Italy')
-    test_character.add_relation('Desires', 'cheese')
-    test_character.add_relation('Simile', 'Italian')
+    #test_character.add_relation('Named', 'Einstein')
+    #test_character.add_relation('AtLocation', 'France')
+    #test_character.add_relation('Desires', 'cheese')
+    test_character.add_relation('Simile', 'Indian')
     builder.characters = [test_character]
     #FIXME: REMOVE ABOVE LATER
 
@@ -176,6 +177,17 @@ def get_new_content(template):
         return new_blank_relation(template)
 
 
+def get_character_index():
+    if builder.characters:
+        character_index = builder.characters.index(random.choice(builder.characters))
+    else:
+        character_index = 0
+        new_char = create_new_character(builder.context_nodes[0].id.split('.')[0], character_index)
+        builder.characters.append(new_char)
+
+    return character_index
+
+
 def new_blank_relation(template):
     surrounding = []
     for node in builder.context_nodes:
@@ -188,11 +200,11 @@ def new_blank_relation(template):
     elif choice_pos == 'v':
         new_relation = new_verb_relation(choice_word, template)
     else:
-        character_index = builder.characters.index(random.choice(builder.characters))
+        character_index = get_character_index()
         new_relation = character_index, 'Simile', choice_word
 
     if not new_relation:
-        character_index = builder.characters.index(random.choice(builder.characters))
+        character_index = get_character_index()
         relation_type = choose_relation(relations[4:], template)
 
         return character_index, relation_type, choice_word
@@ -200,9 +212,8 @@ def new_blank_relation(template):
     return new_relation
 
 
-
 def new_noun_relation(noun, template):
-    character_index = builder.characters.index(random.choice(builder.characters))
+    character_index = get_character_index()
 
     possible_relations = ['Desires', 'HasA', 'ReceivesAction', 'NotDesires', 'NotHasA', 'NotReceivesAction']
     relation_type = choose_relation(possible_relations, template)
@@ -222,7 +233,7 @@ def new_noun_relation(noun, template):
 
 
 def new_adjective_relation(adj, template):
-    character_index = builder.characters.index(random.choice(builder.characters))
+    character_index = get_character_index()
 
     possible_relations = ['HasProperty', 'NotHasProperty']
     relation_type = choose_relation(possible_relations, template)
@@ -230,7 +241,7 @@ def new_adjective_relation(adj, template):
 
 
 def new_verb_relation(verb, template):
-    character_index = builder.characters.index(random.choice(builder.characters))
+    character_index = get_character_index()
     possible_relations = ['TakesAction', 'NotTakesAction']
     relation_type = choose_relation(possible_relations, template)
 
@@ -251,9 +262,11 @@ def retrieve_ordered_given_relations(num_lines, chars, rhyme_tokens):
     for relation in relations:
         for character in chars:
             for tail in character.type_to_list[relation]:
+                if relation == 'HasProperty':
+                    relation = 'Simile'
                 inspiration.append(tuple([chars.index(character), relation, tail]))
 
-    if len(inspiration) <= num_rhyme_tokens:
+    if 0 < len(inspiration) <= num_rhyme_tokens:
         content = [() for i in range(num_lines)]
         current_inspiration = 0
         for token in set(rhyme_tokens):
@@ -322,15 +335,15 @@ def get_context_nodes(content, phrases, template):
         try:
             if 'noun' in phrase.__dict__.keys():
                 nodes.append(get_node(phrase.noun.split()[0], 'n'))
-                for modifier in phrase.modifiers+phrase.post_modifiers+phrase.pre_modifiers:
+                for modifier in phrase.modifiers + phrase.post_modifiers + phrase.pre_modifiers:
                     nodes.append(get_node(modifier.adjective.split()[0], 'a'))
             elif 'verb' in phrase.__dict__.keys():
                 nodes.append(get_node(phrase.verb.split()[0], 'v'))
-                for modifier in phrase.modifiers+phrase.post_modifiers+phrase.pre_modifiers:
+                for modifier in phrase.modifiers + phrase.post_modifiers + phrase.pre_modifiers:
                     nodes.append(get_node(modifier.adverb.split()[0], 'adv'))
             elif 'np' in phrase.__dict__.keys():
                 nodes.append(get_node(phrase.np.noun.split()[0], 'n'))
-                for modifier in phrase.np.modifiers+phrase.np.post_modifiers+phrase.np.pre_modifiers:
+                for modifier in phrase.np.modifiers + phrase.np.post_modifiers + phrase.np.pre_modifiers:
                     nodes.append(get_node(modifier.adjective.split()[0], 'a'))
         except IndexError:
             continue
@@ -339,15 +352,16 @@ def get_context_nodes(content, phrases, template):
 
 
 def get_content_from_template(template):
+    logging.info('Getting content from template')
     hypernyms = []
     for hypernym, count in template.hypernym_ancestors:
-        hypernyms.extend([hypernym]*count)
+        hypernyms.extend([hypernym] * count)
 
     hypernym_synset = get_synset(random.choice(hypernyms))
-    holonym_nodes = [get_node(str(holonym).partition("'")[-1].rpartition("'")[0], 'n')
-                        for holonym in hypernym_synset.hyponyms(recursive=True)]
+    hyponym_nodes = [get_node(str(hyponym).partition("'")[-1].rpartition("'")[0], 'n')
+                                 for hyponym in hypernym_synset.hyponyms(recursive=True)]
 
-    return random.sample(set(holonym_nodes), 3)
+    return [random.choice(remove_none(hyponym_nodes))]
 
 
 def shutdown_builder():
