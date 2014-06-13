@@ -230,6 +230,7 @@ This is where we use the semantic types provided in FrameNet, as discussed in Se
 Before we start building any poem, we need to construct the basic structure for the desired form of poetry. We also want to be able to take some \textit{inspiration} to initialise the content that can either be sampled from the knowledge network or from the user.
 
 \subsection{Overall Structure}
+\label{sec:overall-struct}
 Our new poem first needs to be initialised with values of features that span across the entire poem, namely:
 \begin{itemize}
 \item{Number of stanzas}
@@ -244,7 +245,7 @@ All of these can be retrieved directly from the template developed in the previo
 
 If one result is clearly more probably than the rest, we want to treat it as unambiguous. For example, more than half of the rhyme schemes found for limericks were \textit{AABBA}, as pictured in figure \ref{fig:rhyme-scheme-chart}. Each of the other values are some slight variation on \textit{AABBA} (e.g. \textit{AABCA}, \textit{ABCCB} etc.) and occur less than a ninth of the \textit{AABBA} frequency.
 
-To generalise this, we use the rule that if the any feature has a single value in its probability distribution that occurs more than half of the time and the next highest value is less than a third of that value, we treat it as unambiguous and \textit{always} apply it to the initial structure of this type of poem.
+To generalise this, we try to match the frequency to Zipf's law - the most probable possibility has twice the probability of the second most probable, thrice the probability of the third most probable etc.[newman2005power]. We add the base threshold that the most probable possibility must be at least 50\%. If any feature follows this rule and Zipf's law, we treat the most probable value as unambiguous and \textit{always} apply it to the initial structure of this type of poem.
 
 
 \subsection{Inspiration}

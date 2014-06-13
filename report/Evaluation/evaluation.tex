@@ -14,15 +14,56 @@ A major goal of this project is to show that the structure and content of types 
 
 \begin{description}
 \item[One stanza, five lines, no repetition]  \hfill \\
-All of the poems in our corpus follow this rule, as seen in Figure BLAH.
+All of the poems in our corpus follow this rule, as seen in Figure \ref{fig:lim1}.
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.3\textwidth}
+	\centering
+    \includegraphics[width=50mm]{lim-stanza}
+    \caption{Just one stanza}
+    \label{fig:lim-stanza}
+\end{subfigure}
+\begin{subfigure}[t]{0.3\textwidth}
+	\centering
+    \includegraphics[width=50mm]{lim-lines}
+    \caption{Always five lines}
+    \label{fig:lim-lines}
+\end{subfigure}
+\begin{subfigure}[t]{0.3\textwidth}
+	\centering
+    \includegraphics[width=50mm]{lim-rep-lines}
+    \caption{No lines are repeated}
+    \label{fig:lim-rep-lines}
+\end{subfigure}
+\caption{One stanza, five lines, no repetition.}
+\label{fig:lim1}
+\end{figure}
 
 
 \item[Usually begins with \textit{'There was a...'} and ends with a name, person or place]  \hfill \\
-Figure BLAH shows the N-Grams for line 1. We can see that \textit{'There be a'}, the lemmatised version of \textit{'There was a'} is used with significant frequency. We can also see in Figure BLAH that limericks largely talk about animate objects (such as people) or non-objects (such as places). Furthermore, Figure BLAH shows that the probability of a \textit{Named} or \textit{AtLocation} relation is higher in the first line than any other line.
+Figure BLAH shows the N-Grams for line 1. We can see that \textit{'There be a young'}, the lemmatised version of \textit{'There was a'} with the added \textit{'young'} adjective is used with significant frequency (any substring is also considered a significantly frequent n-gram). We can also see in Figure \ref{fig:lim-grams1} that limericks largely talk about animate objects (such as people) or non-objects (such as places). Furthermore, Figure \ref{fig:lim-anim} shows that the probability of a \textit{Named} or \textit{AtLocation} relation is higher in the first line than any other line.
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.9\textwidth}
+	\centering
+    \includegraphics[width=140mm]{lim-stanza}
+    \caption{N-grams for the first line of a limerick}
+    \label{fig:lim-grams1}
+\end{subfigure}
+\begin{subfigure}[t]{0.9\textwidth}
+	\centering
+    \includegraphics[width=140mm]{lim-lines}
+    \caption{Animation of nouns in limericks}
+    \label{fig:lim-anim}
+\end{subfigure}
+\caption{One stanza, five lines, no repetition.}
+\label{fig:lim2}
+\end{figure}
 
 Overall, our results supports the theory. However, since the analysis omits Named Entity Recognition, we are unable to specifically say whether or not it was a person or a place.
 
-Furthermore, our results only show that x poems have this n-gram, which is only X\% of the corpus. We suspect this discrepancy comes from the popularity of Edward Lear poems, of which most start with \textit{'There was a...'}, but poems by other authors do not generally use this as a rule. This comes down to the contents of the corpus. Since it was a collection of previously unseen poems from various sources across the Internet, we do not know the proportion of Edward Lear poems in the corpus before analysis (as required to avoid biasing the corpus as mentioned in Section BLAH). If the poem had a higher proportion of Edward Lear limericks, the frequency of this property would probably increase. However, since we are analysing limericks in general, our result may be representative.
+Furthermore, our results only show that 52 poems have this n-gram, which is only 11.6\% of the corpus. We suspect this discrepancy comes from the popularity of Edward Lear poems, of which most start with \textit{'There was a...'}, but poems by other authors do not generally use this as a rule. This comes down to the contents of the corpus. Since it was a collection of previously unseen poems from various sources across the Internet, we do not know the proportion of Edward Lear poems in the corpus before analysis (as required to avoid biasing the corpus as mentioned in Section \ref{sec:corpus}). If the poem had a higher proportion of Edward Lear limericks, the frequency of this property would probably increase. However, since we are analysing limericks in general, our result may be representative.
 
 \item[Last line is farfetched or unusual]  \hfill \\
 We have no way of determining this from our analysis or results because the social context of the poem was never considered. As a result this feature will only occur by chance, not intention.
@@ -31,24 +72,73 @@ We have no way of determining this from our analysis or results because the soci
 As above.
 
 \item[\textit{AABBA} rhyme scheme]  \hfill \\
-Our results show that this is by far the most probable rhyme scheme, as seen in Figure BLAH. The other possibilities are close variations of \textit{AABBA}, eluding to the limitations of the CMU Pronunciation Dictionary and our method of handling words unknown to it, as described in Section BLAH. The results may yet improve if we were to build a state transducer model to predict the most likely rhythm pattern for words that are not in the dictionary.
+Our results show that this is by far the most probable rhyme scheme, as seen in Figure \ref{fig:lim-rhyme}. The other possibilities are close variations of \textit{AABBA}, eluding to the limitations of the CMU Pronunciation Dictionary and our method of handling words unknown to it, as described in Section \ref{sec:phonetic}. The results may yet improve if we were to build a state transducer model to predict the most likely rhythm pattern for words that are not in the dictionary.
 
-Despite those shortcomings the results follow the ZipF law as discussed in Section BLAH, which means that we can treat the top result as unambiguous. Therefore, all limericks generated by the system will aim to have the \textit{AABBA} rhyme scheme.
+\begin{figure}[H]
+\centering
+\includegraphics[width=140mm]{lim-rhyme}
+\caption{\textit{AABBA} is the most probable rhyme scheme by far}
+\label{fig:lim-rhyme}
+\end{figure}
+
+Despite those shortcomings the results follow Zipf's law as discussed in Section \ref{sec:overall-struct}, which means that we can treat the top result as unambiguous. Therefore, all limericks generated by the system will aim to have the \textit{AABBA} rhyme scheme.
 
 \item[Lines 1, 2 and 5 have 01001001 meter, while lines 3 and 4 have 01001 meter]  \hfill \\
-Figures BLAH through BLAH show the stress patterns of lines 1, 2 and 5.
+Figures \ref{fig:lim-stress1} through \ref{fig:lim-stress5} show the stress patterns of lines 1, 2 and 5.
 
-The most popular rhyme scheme in line 1 is the expected one. However, it does not follow the ZipF law because the second option - the expected pattern with an appended unstressed syllable - is not significantly less probable.
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.5\textwidth}
+	\centering
+    \includegraphics[width=70mm]{lim-stress1}
+    \caption{Line 1}
+    \label{fig:lim-stress1}
+\end{subfigure}
+\begin{subfigure}[t]{0.5\textwidth}
+	\centering
+    \includegraphics[width=70mm]{lim-stress2}
+    \caption{Line 2}
+    \label{fig:lim-stress2}
+\end{subfigure}
+\begin{subfigure}[t]{0.9\textwidth}
+	\centering
+    \includegraphics[width=70mm]{lim-stress5}
+    \caption{Line 5}
+    \label{fig:lim-stress5}
+\end{subfigure}
+\caption{Stress patterns for lines 1, 2 and 5}
+\label{fig:lim3}
+\end{figure}
+
+The most popular rhyme scheme in line 1 is the expected one. However, it does not follow Zipf's law because the second option - the expected pattern with an appended unstressed syllable - is not significantly less probable.
 
 The results for the second line are worse because the expected pattern is only third most probable. The others are variations on the expected pattern - first prefixed with a stressed syllable and then appended with an unstressed syllable. However, given the relative proportions of these three, it is not unlikely that the expected pattern will be selected.
 
-The analysis of the fifth line is the worst. Not only is the expected pattern the third most popular, the graph follows the ZipF law, which means that the first, incorrect pattern (expected pattern prefixed with a stressed syllable) will be treated as unambiguous.
+The analysis of the fifth line is the worst. Not only is the expected pattern the third most popular, the graph follows Zipf's law, which means that the first, incorrect pattern (expected pattern prefixed with a stressed syllable) will be treated as unambiguous.
 
 In all cases, the most probable patterns include the expected one or variations thereof. This is likely caused by the limitations of the CMU Pronunciation Dictionary again. We do not suspect it is our methodology because we try to accommodate for as many rhythm possibilities during analysis and we make no claims or filters along the way. 
 
 Since our generation phase tries for a best fit rather than strictly the same pattern, this is not a damaging result in that respect.
 
-Figures BLAH and BLAH show the stress patterns of lines 3 and 4. 
+Figures \ref{fig:lim-stress3} and \ref{fig:lim-stress4} show the stress patterns of lines 3 and 4. 
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.5\textwidth}
+	\centering
+    \includegraphics[width=70mm]{lim-stress3}
+    \caption{Line 3}
+    \label{fig:lim-stress3}
+\end{subfigure}
+\begin{subfigure}[t]{0.5\textwidth}
+	\centering
+    \includegraphics[width=70mm]{lim-stress4}
+    \caption{Line 4}
+    \label{fig:lim-stress4}
+\end{subfigure}
+\caption{Stress patterns for lines 3 and 4}
+\label{fig:lim4}
+\end{figure}
 
 In both of these lines, the expected pattern is the third most popular and the most popular is the expected pattern prefixed with a stressed syllable. The most interesting thing is the relative proportions - both times the 101001 pattern would be treated as unambiguous. The reasoning for this comes down to three possibilities:
 \begin{itemize}
@@ -64,19 +154,13 @@ The third is a possibility. The corpus of poems was collected from various sourc
 
 The fourth possibility requires further investigation into high quality limericks written by well known authors and more sources for the rhythm of limericks. Poets.org credits Edward Lear's \textit{Book of Nonsense}[ref] as the defining anthology for modern limericks.
 
-The first 10 poems of that very book are shown in Appendix BLAH. If we analyse them by eye, the third line has six syllables 5 times and the fourth line has six syllables 8 times. From this we can assume that the expected rhythm of 01001 is actually not that common.
+The first 10 poems of that very book are shown in Appendix \ref{sec:lear}. If we analyse them by eye, the third line has six syllables 5 times and the fourth line has six syllables 8 times. From this we can assume that the expected rhythm of 01001 is actually not that common.
 
 The Book of Limericks (Wordsword Reference) is a published anthology of over 1,800 limericks. This book was not used to build the corpus so it is unlikely that any of them would have been part of the original analysis. We select the first 10 from this analogy, as seen in Appendix \ref{sec:book}, and perform the same analysis by eye. In this case, the third line has six syllables 8 times and the fourth line has six syllables all 10 times.
 
 This suggests that the standard is in fact to have six syllables, so the expected rhythm of 01001 is not correct. Therefore, we look to other sources of literary theory in case this has been pointed out.
 
-http://www.poetry4kids.com/blog/lessons/how-to-write-a-limerick/ has 01001 and their examples use six syllables.
-http://www.gigglepoetry.com/poetryclassdetail.aspx?LessonPlanID=2 claims the fourth line is 001001, but their example is five syllables.
-http://www.creative-writing-now.com/how-to-write-a-limerick.html
-http://www.poetryteachers.com/poetclass/lessons/limerick.html
-http://freespace.virgin.net/merrick.sheldon/limerickrules.htm
-
-Nowhere is it mentioned that the rhythm should be 101001. The five sources above teach the rhythm of limericks, but their teachings vary and the examples they use often do not match up with the theory that they give, but in most cases do match with the 101001 candidate.
+Nowhere is it mentioned that the rhythm should be 101001. The five sources in Appendix \ref{sec:app-source} teach the rhythm of limericks, but their teachings vary and the examples they use often do not match up with the theory that they give, but in most cases do match with the 101001 candidate.
 
 We therefore, conclude that more investigation needs to be done to decide what is the \textit{actual} expected rhythm of the third and fourth line or limericks, and we further propose that based on our analysis it should be 101001.
 
@@ -106,7 +190,7 @@ Figures BLAH through BLAH show the syllabic rhythm of each line. It is clear tha
 Figure BLAH shows that haiku is most likely to not have any specific rhyme scheme (\textit{ABC}). The candidate rhyme schemes occur with low frequency, so the lack of rhyme scheme is treated as unambiguous and any rhyme only occurs by chance.
 
 \item[No specific meter]  \hfill \\
-Figures BLAH through BLAH show the stress patterns for haiku. The graphs give a large number of options, but do match the Zipf law, suggesting that the most probable stress pattern is intentional. Given that poets are taught to write haikus without considering meter, we suspect that this may be a coincidence.
+Figures BLAH through BLAH show the stress patterns for haiku. The graphs give a large number of options, but do match Zipf's law, suggesting that the most probable stress pattern is intentional. Given that poets are taught to write haikus without considering meter, we suspect that this may be a coincidence.
 
 \item[Other Noteworthy Results]  \hfill \\
 Conversely to limericks, Figure BLAH shows that limericks are usually written in the present tense and occasionally in past tense.
@@ -229,9 +313,9 @@ Haiku: Blah
 
 
 \subsection{Quality of English}
-Our approach to generation is \textbf{context first}, which requires a large vocabulary and good control over grammar.
+
 \subsubsection{Vocabulary and Word Selection}
-The vocabulary of the system is dispersed among the third party and internal sources used.
+The vocabulary of the system is dispersed among the third-party and internal sources used.
 WordNet: 155,000
 CMUPD: 133,000
 FrameNet: Blah
