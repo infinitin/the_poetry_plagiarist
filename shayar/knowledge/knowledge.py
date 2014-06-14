@@ -11,6 +11,7 @@ from urllib2 import urlopen, URLError
 from json import loads as json_load
 from shayar.generate.framenet_reader import get_random_word
 import sys
+import time
 
 apiUrl = 'http://api.wordnik.com/v4'
 apiKey = 'd2194ae1a0c4be586853d0828d10f77db48039209ef684218'
@@ -42,9 +43,11 @@ def closest_matching(candidate_nodes, context_nodes):
     for context_node in context_nodes:
         for candidate_node in candidate_nodes:
             logging.info('Similarity between ' + candidate_node.id + ' ' + context_node.id)
+            start = time.time()
             spl = dijkstra_depth_limited_shortest_path(graph, candidate_node.id, context_node.id, depth=shortest_path_length)
             if spl is None:
                 continue
+            print 'Depth: ' + str(len(spl)-1) + ', Time: ' + str(time.time() - start)
             if len(spl) < shortest_path_length:
                 closest_candidate_nodes = {candidate_node}
                 shortest_path_length = len(spl)
@@ -401,7 +404,7 @@ def dijkstra_depth_limited_shortest_path(graph, id1, id2, heuristic=None, direct
             visited.add(n1)
         if n1 == id2:
             return list(flatten(path))[::-1] + [n1]
-        if cost1 >= depth:
+        if len(list(flatten(path))[::-1] + [n1]) > depth:
             return None
         path = (n1, path)
         for (n2, cost2) in G[n1].iteritems():

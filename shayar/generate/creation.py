@@ -54,10 +54,10 @@ def create_poem(new_poem, template):
     #FIXME: REMOVE BELOW LATER
     test_character = Character(0, 'sg', 'm', 'a')
     #test_character.add_relation('IsA', 'A level')
-    test_character.add_relation('Named', 'Ed')
+    test_character.add_relation('Named', 'Guiliano')
     #test_character.add_relation('AtLocation', 'Mexico')
-    test_character.add_relation('Desires', 'compose music')
-    #test_character.add_relation('Simile', 'Indian')
+    test_character.add_relation('TakesAction', 'calculate')
+    test_character.add_relation('Desires', 'cheese')
     builder.characters = [test_character]
     #FIXME: REMOVE ABOVE LATER
 
