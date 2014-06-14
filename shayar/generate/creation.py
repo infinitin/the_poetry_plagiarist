@@ -53,10 +53,11 @@ def create_poem(new_poem, template):
 
     #FIXME: REMOVE BELOW LATER
     test_character = Character(0, 'sg', 'm', 'a')
-    #test_character.add_relation('Named', 'Einstein')
-    #test_character.add_relation('AtLocation', 'France')
-    #test_character.add_relation('Desires', 'cheese')
-    test_character.add_relation('Simile', 'Indian')
+    #test_character.add_relation('IsA', 'A level')
+    test_character.add_relation('Named', 'Ed')
+    #test_character.add_relation('AtLocation', 'Mexico')
+    test_character.add_relation('Desires', 'compose music')
+    #test_character.add_relation('Simile', 'Indian')
     builder.characters = [test_character]
     #FIXME: REMOVE ABOVE LATER
 
@@ -72,10 +73,16 @@ def create_poem(new_poem, template):
         builder.pattern = template.stress_patterns[l]
         builder.rhyme_token = full_rhyme_scheme[l]
         builder.rhyme_check = True
-        builder.context_nodes = get_context(content, new_poem.phrases, template)
 
         relation = content[l]
         if not relation:
+            if l == 0:
+                builder.context_nodes = get_context_nodes((), (), template)
+            elif l == sum(new_poem.lines)-1:
+                builder.context_nodes = get_context_nodes((), new_poem.phrases[l-1], template)
+            else:
+                builder.context_nodes = get_context_nodes(content[l+1], new_poem.phrases[l-1], template)
+
             relation = get_new_content(template)
 
         if relation[1].startswith('Not'):
@@ -312,7 +319,7 @@ def get_context(contents, phrases, template):
         split_context_node_ids = [id.split('.') for id in context_node_ids]
         context_nodes = [get_node(word, pos) for word, pos in split_context_node_ids]
 
-    return context_nodes
+    return context_nodes[:3]
 
 
 def get_context_nodes(content, phrases, template):

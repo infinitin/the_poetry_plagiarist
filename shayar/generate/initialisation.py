@@ -32,6 +32,7 @@ def init_poem(new_poem, template):
 
 
 def select_rl(options, max_lines):
+    return []
     filtered_rl = []
     for repeated_lines in options:
         if repeated_lines:

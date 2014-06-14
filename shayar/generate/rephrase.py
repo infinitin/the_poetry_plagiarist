@@ -41,39 +41,46 @@ def fit_syllables(phrases, target_num_syllables):
 
 def reduce_phrase(phrases, target_num_syllables, num_syllables):
     logging.info('Reducing Phrase')
+    for phrase in phrases[:-1]:
+        phrase.modifiers = []
+        phrase.post_modifiers = []
+        phrase.pre_modifiers = []
+        phrase.complements = []
 
-    try_num = 10
-    total_tries = try_num * 2
-    new_phrases = phrases
     line = builder.make_clause(phrases)
     realisation = str(creation.realiser.realise(line).getRealisation())
+    num_syllables = count_syllables([realisation])[0]
+
+    try_num = 3
+    total_tries = try_num
+    new_phrases = phrases
     while target_num_syllables < num_syllables and total_tries:
         phrases = new_phrases
         new_phrases = []
-        split_realisation = [[word] for word in realisation.split()]
-        syllables_for_each_word = zip(realisation.split(), count_syllables(split_realisation))
-        longest_word = max(syllables_for_each_word, key=itemgetter(1))
+        #split_realisation = [[word] for word in realisation.split()]
+        #syllables_for_each_word = zip(realisation.split(), count_syllables(split_realisation))
+        #longest_word = max(syllables_for_each_word, key=itemgetter(1))
         for phrase in phrases[:-1]:
             if 'noun' in phrase.__dict__.keys():
-                if phrase.noun == lemma(longest_word[0]):
-                    tries = try_num
-                    while phrase.stress_patterns and len(phrase.stress_patterns[0]) >= longest_word[1] and tries:
-                        phrase = phrase_spec.NP(get_random_word('N'))
-                        tries -= 1
+                synonyms = get_synonyms(phrase.noun, 'N', True)
+                for synonym in synonyms:
+                    if count_syllables(synonym) < count_syllables(phrase.noun):
+                        phrase = phrase_spec.NP(synonym)
+                        break
 
             elif 'verb' in phrase.__dict__.keys():
-                if phrase.verb == lemma(longest_word[0]):
-                    tries = try_num
-                    while phrase.stress_patterns and len(phrase.stress_patterns[0]) >= longest_word[1] and tries:
-                        phrase = phrase_spec.VP(get_random_word('V'))
-                        tries -= 1
+                synonyms = get_synonyms(phrase.verb, 'V', True)
+                for synonym in synonyms:
+                    if count_syllables(synonym) < count_syllables(phrase.verb):
+                        phrase = phrase_spec.NP(synonym)
+                        break
 
             elif 'np' in phrase.__dict__.keys():
-                if phrase.np.noun == lemma(longest_word[0]):
-                    tries = try_num
-                    while phrase.stress_patterns and len(phrase.np.stress_patterns[0]) >= longest_word[1] and tries:
-                        phrase.np = phrase_spec.NP(get_random_word('N'))
-                        tries -= 1
+                synonyms = get_synonyms(phrase.noun, 'N', True)
+                for synonym in synonyms:
+                    if count_syllables(synonym) < count_syllables(phrase.np.noun):
+                        phrase.np = phrase_spec.NP(synonym)
+                        break
 
             new_phrases.append(phrase)
 
@@ -86,10 +93,13 @@ def reduce_phrase(phrases, target_num_syllables, num_syllables):
     if not new_phrases:
         new_phrases = phrases
 
-    if num_syllables < target_num_syllables:
-        return extend_phrase(new_phrases, target_num_syllables, num_syllables)
-    else:
-        return new_phrases
+    if num_syllables > target_num_syllables:
+        new_phrases = [new_phrases[-1]]
+        line = builder.make_clause(new_phrases)
+        realisation = str(creation.realiser.realise(line).getRealisation())
+        num_syllables = count_syllables([realisation])[0]
+
+    return extend_phrase(new_phrases, target_num_syllables, num_syllables)
 
 
 def extend_phrase(phrases, target_num_syllables, num_syllables):

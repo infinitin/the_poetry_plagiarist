@@ -23,7 +23,7 @@ from aggregators.semantics import agg_hypernym_ancestors, agg_modality_by_line, 
     agg_subjectivity_by_line, agg_mood_by_line
 
 #Needs to be exactly as poem_template for this to work
-json_input = '{"collection": "sonnets1", "plot": true, "persist": true}'
+json_input = '{"collection": "haikus", "plot": true, "persist": true}'
 settings = json.loads(json_input)
 
 aggregators = [agg_n_stanzas, agg_lines_per_stanza, agg_repeated_line_locations, agg_n_repeated_lines,
