@@ -41,7 +41,7 @@ All of the poems in our corpus follow this rule, as seen in Figure \ref{fig:lim1
 
 
 \item[Usually begins with \textit{'There was a...'} and ends with a name, person or place]  \hfill \\
-Figure BLAH shows the N-Grams for line 1. We can see that \textit{'There be a young'}, the lemmatised version of \textit{'There was a'} with the added \textit{'young'} adjective is used with significant frequency (any substring is also considered a significantly frequent n-gram). We can also see in Figure \ref{fig:lim-grams1} that limericks largely talk about animate objects (such as people) or non-objects (such as places). Furthermore, Figure \ref{fig:lim-anim} shows that the probability of a \textit{Named} or \textit{AtLocation} relation is higher in the first line than any other line.
+Figure \ref{fig:lim-grams1} shows the N-Grams for line 1. We can see that \textit{'There be a young'}, the lemmatised version of \textit{'There was a'} with the added \textit{'young'} adjective is used with significant frequency (any substring is also considered a significantly frequent n-gram). We can also see in Figure \ref{fig:lim-anim} that limericks largely talk about animate objects (such as people) or non-objects (such as places). Furthermore, Figure BLAH shows that the probability of a \textit{Named} or \textit{AtLocation} relation is higher in the first line than any other line, and Figure \ref{fig:lim-types} confirms that the type of persona are people, organisms and animals.
 
 \begin{figure}[H]
 \centering
@@ -57,7 +57,13 @@ Figure BLAH shows the N-Grams for line 1. We can see that \textit{'There be a yo
     \caption{Animation of nouns in limericks}
     \label{fig:lim-anim}
 \end{subfigure}
-\caption{One stanza, five lines, no repetition.}
+\begin{subfigure}[t]{0.9\textwidth}
+	\centering
+    \includegraphics[width=140mm]{lim-types}
+    \caption{Animation of nouns in limericks}
+    \label{fig:lim-types}
+\end{subfigure}
+\caption{Limericks talk about sentient objects and places}
 \label{fig:lim2}
 \end{figure}
 
@@ -165,9 +171,27 @@ Nowhere is it mentioned that the rhythm should be 101001. The five sources in Ap
 We therefore, conclude that more investigation needs to be done to decide what is the \textit{actual} expected rhythm of the third and fourth line or limericks, and we further propose that based on our analysis it should be 101001.
 
 \item[Other Noteworthy Results]  \hfill \\
-Figure BLAH shows that limericks are usually written in past tense and occasionally in present tense.
+Figure \ref{fig:lim-tense} shows that limericks are usually written in past tense and occasionally in present tense.
 
-A very large proportion are written in third person, as seen in Figure BLAH.
+A very large proportion are written in third person, as seen in Figure \ref{fig:lim-persp}.
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.5\textwidth}
+	\centering
+    \includegraphics[width=70mm]{lim-tense}
+    \caption{Probability distribution of overall poem tense}
+    \label{fig:lim-tense}
+\end{subfigure}
+\begin{subfigure}[t]{0.5\textwidth}
+	\centering
+    \includegraphics[width=70mm]{lim-persp}
+    \caption{Probability distribution perspective across poem}
+    \label{fig:lim-persp}
+\end{subfigure}
+\caption{Stress patterns for lines 3 and 4}
+\label{fig:lim5}
+\end{figure}
 
 \end{description}
 
@@ -176,26 +200,114 @@ A very large proportion are written in third person, as seen in Figure BLAH.
 
 \begin{description}
 \item[One stanza, three lines, no repetition]  \hfill \\
-All of the poems in our corpus follow this rule, as seen in Figure BLAH.
+All of the poems in our corpus follow this rule, as seen in Figure \ref{fig:haik1}.
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.3\textwidth}
+	\centering
+    \includegraphics[width=50mm]{haik-stanza}
+    \caption{Just one stanza}
+    \label{fig:haik-stanza}
+\end{subfigure}
+\begin{subfigure}[t]{0.3\textwidth}
+	\centering
+    \includegraphics[width=50mm]{haik-lines}
+    \caption{Always five lines}
+    \label{fig:haik-lines}
+\end{subfigure}
+\begin{subfigure}[t]{0.3\textwidth}
+	\centering
+    \includegraphics[width=50mm]{haik-rep-lines}
+    \caption{Negligible number of lines are repeated}
+    \label{fig:haik-rep-lines}
+\end{subfigure}
+\caption{One stanza, three lines, no repetition.}
+\label{fig:haik1}
+\end{figure}
 
 \item[Topic ranges widely, \textit{nature} is very common]  \hfill \\
-Figure BLAH shows that there is indeed a wide range of topics including halogen (light), living thing, natural object, cognition, chemical element, organism, body part, atmospheric phenomenon, weather and natural phenomenon; all of which elude to nature. 
+Figure \ref{fig:haik-types} shows that there is indeed a wide range of topics including halogen (light), living thing, natural object, cognition, chemical element, organism, body part, atmospheric phenomenon, weather and natural phenomenon; all of which elude to nature. 
 
-Figure BLAH also shows that it generally talks about non-objects, i.e. nouns that do not cast a shadow. This includes nature and weather to back up the earlier graph.
+Figure \ref{fig:haik-anim} also shows that it generally talks about non-objects, i.e. nouns that do not cast a shadow. This includes nature and weather to back up the earlier graph.
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.9\textwidth}
+	\centering
+    \includegraphics[width=140mm]{haik-types}
+    \caption{Animation of nouns in haiku}
+    \label{fig:haik-types}
+\end{subfigure}
+\begin{subfigure}[t]{0.9\textwidth}
+	\centering
+    \includegraphics[width=140mm]{haik-lines}
+    \caption{Animation of nouns in haiku}
+    \label{fig:haik-anim}
+\end{subfigure}
+\caption{Haiku talk about non-objects such as nature and weather}
+\label{fig:haik2}
+\end{figure}
 
 \item[5-7-5 syllabic rhythm]  \hfill \\
-Figures BLAH through BLAH show the syllabic rhythm of each line. It is clear that 5-7-5 is a most popular and is taken as unambiguous.
+Figures \ref{fig:haik-syll1} through \ref{fig:haik-syll3} show the syllabic rhythm of each line. It is clear that 5-7-5 is a most popular and is taken as unambiguous.
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.5\textwidth}
+	\centering
+    \includegraphics[width=70mm]{haik-syll1}
+    \caption{Line 1}
+    \label{fig:haik-syll1}
+\end{subfigure}
+\begin{subfigure}[t]{0.5\textwidth}
+	\centering
+    \includegraphics[width=70mm]{haik-syll2}
+    \caption{Line 2}
+    \label{fig:haik-syll2}
+\end{subfigure}
+\begin{subfigure}[t]{0.9\textwidth}
+	\centering
+    %\includegraphics[width=70mm]{haik-syll3}
+    \caption{Line 3}
+    \label{fig:haik-syll3}
+\end{subfigure}
+\caption{Syllable counts for each line}
+\label{fig:haik3}
+\end{figure}
 
 \item[No rhyme scheme]  \hfill \\
 Figure BLAH shows that haiku is most likely to not have any specific rhyme scheme (\textit{ABC}). The candidate rhyme schemes occur with low frequency, so the lack of rhyme scheme is treated as unambiguous and any rhyme only occurs by chance.
 
-\item[No specific meter]  \hfill \\
-Figures BLAH through BLAH show the stress patterns for haiku. The graphs give a large number of options, but do match Zipf's law, suggesting that the most probable stress pattern is intentional. Given that poets are taught to write haikus without considering meter, we suspect that this may be a coincidence.
+\begin{figure}[H]
+\centering
+\includegraphics[width=140mm]{haik-rhyme}
+\caption{\textit{ABC} implies no rhyme scheme}
+\label{fig:haik-rhyme}
+\end{figure}
 
 \item[Other Noteworthy Results]  \hfill \\
-Conversely to limericks, Figure BLAH shows that limericks are usually written in the present tense and occasionally in past tense.
+Conversely to limericks, Figure \ref{fig:haik-tense} shows that limericks are usually written in the present tense and occasionally in past tense.
 
-As with limericks, most haiku are written in third person, as seen in Figure BLAH.
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.5\textwidth}
+	\centering
+    \includegraphics[width=70mm]{haik-tense}
+    \caption{Probability distribution of overall poem tense}
+    \label{fig:haik-tense}
+\end{subfigure}
+\begin{subfigure}[t]{0.5\textwidth}
+	\centering
+    \includegraphics[width=70mm]{haik-persp}
+    \caption{Probability distribution perspective across poem}
+    \label{fig:haik-persp}
+\end{subfigure}
+\caption{Stress patterns for lines 3 and 4}
+\label{fig:haik5}
+\end{figure}
+
+As with limericks, most haiku are written in third person, as seen in Figure \ref{fig:haik-persp}.
 
 \end{description}
 
@@ -203,22 +315,74 @@ As with limericks, most haiku are written in third person, as seen in Figure BLA
 
 \begin{description}
 \item[One stanza, fourteen lines, no repetition]  \hfill \\
-All of the poems in our corpus follow this rule, as seen in Figure BLAH.
+All of the poems in our corpus follow this rule, as seen in Figure \ref{fig:son1}.
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.3\textwidth}
+	\centering
+    \includegraphics[width=50mm]{son-stanza}
+    \caption{Just one stanza}
+    \label{fig:son-stanza}
+\end{subfigure}
+\begin{subfigure}[t]{0.3\textwidth}
+	\centering
+    \includegraphics[width=50mm]{son-lines}
+    \caption{Always five lines}
+    \label{fig:son-lines}
+\end{subfigure}
+\begin{subfigure}[t]{0.3\textwidth}
+	\centering
+    \includegraphics[width=50mm]{son-rep-lines}
+    \caption{No lines are repeated}
+    \label{fig:son-rep-lines}
+\end{subfigure}
+\caption{One stanza, five lines, no repetition.}
+\label{fig:son1}
+\end{figure}
 
 \item[Topic is usually of thought, emotion and ideas]  \hfill \\
-This is evident from Figure BLAH, which shows the topics covered are related to thought, emotion and ideas. In particular, psychological feature, cognition, emotion, feeling, relation, state and communication.
+This is evident from Figure \ref{fig:son-types}, which shows the topics covered are related to thought, emotion and ideas. In particular, psychological feature, cognition, emotion, feeling, relation, state and communication.
 
-Figure BLAH supports this, showing that often non-objects were discussed more than animate and inanimate objects. Such non-objects include though, emotion and ideas.
+\begin{figure}[H]
+\centering
+\includegraphics[width=140mm]{son-types}
+\caption{Topics covered in sonnets}
+\label{fig:son-types}
+\end{figure}
 
-Figure BLAH also shows that Shakespeare mentioned words such as \textit{'love'}, \textit{'beauty'}, \textit{'fair'} and \textit{'think'} a significant number of times across his sonnets.
+Figure \ref{fig:son-anim} supports this, showing that often non-objects were discussed more than animate and inanimate objects. Such non-objects include though, emotion and ideas.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=140mm]{son-anim}
+\caption{Types of persona in sonnets are non-objects}
+\label{fig:son-anim}
+\end{figure}
+
+Figure \ref{fig:son-grams} also shows that Shakespeare mentioned words such as \textit{'love'}, \textit{'beauty'}, \textit{'fair'} and \textit{'think'} a significant number of times across his sonnets.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=140mm]{son-grams}
+\caption{Words used in sonnets with significant frequency}
+\label{fig:son-grams}
+\end{figure}
 
 \item[\textit{ABABCDCDEFEFGG} rhyme scheme]  \hfill \\
-Figure BLAH shows that the most probable rhyme scheme is as expected. However, because of the Shakesperean vocabulary that is not in the CMU Pronunciation Dictionary and the length of the poem, it often failed to complete analysis for certain poems if there were too many possible permutations (see Section BLAH). 
+Figure \ref{fig:son-rhyme} shows that the most probable rhyme scheme is as expected. However, because of the Shakesperean vocabulary that is not in the CMU Pronunciation Dictionary and the length of the poem, it often failed to complete analysis for certain poems if there were too many possible permutations (see Section BLAHINTHEANALYSIS). 
 
-This exposes a limitation on this system that each extra line of the poem potentially increases the number of rhyme permutations exponentially, risking memory errors. A simple solution to this would be to leave the rhyme schemes in their unzipped form as in Figure BLAH and counting the frequency of possible permutations iteratively.
+\begin{figure}[H]
+\centering
+\includegraphics[width=140mm]{son-rhyme}
+\caption{Possible rhyme schemes for the Shakespearean sonnet}
+\label{fig:son-rhyme}
+\end{figure}
+
+This exposes a limitation on this system that each extra line of the poem potentially increases the number of rhyme permutations exponentially, risking memory errors. A simple solution to this would be to leave the rhyme schemes in their unzipped form as in Figure BLAHINTHEANALYSIS and counting the frequency of possible permutations iteratively.
 
 \item[Iambic pentameter for every line]  \hfill \\
-Figures BLAH through BLAH show that each line is unambiguously iambic pentameter (0101010101) \textbf{except} for the 13th line, which is unambiguously iambic pentameter except that the starting syllable is stressed.
+Figures \ref{fig:son-stress1} through \ref{fig:son-stress14} show that each line is unambiguously iambic pentameter (0101010101) \textbf{except} for the 13th line, which is unambiguously iambic pentameter except that the starting syllable is stressed.
 
 This is a very exciting result because it is unlikely to be caused a limitation of the CMU Pronunciation Dictionary or our implementation because this discrepancy is so consistent and specific. This is also the \textit{"perfect"} corpus, containing all 154 of Shakespeare's original sonnets that are definitely the defining poems of Shakesperean sonnets.
 
@@ -253,8 +417,126 @@ Of the rest of the sonnets where the meter is more ambiguous, but we use the una
 
 Given the evidence and motivations explained above, we claim that it was Shakespeare's intention to start the 13th line of his sonnets with a stressed syllable, which means that it is \textbf{not iambic pentameter}, contrary to current literacy theory.
 
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.5\textwidth}
+	\centering
+    \includegraphics[width=70mm]{son-stress1}
+    \caption{Just one stanza}
+    \label{fig:son-stress1}
+\end{subfigure}
+\begin{subfigure}[t]{0.5\textwidth}
+	\centering
+    \includegraphics[width=70mm]{son-stress2}
+    \caption{Always five lines}
+    \label{fig:son-stress2}
+\end{subfigure}
+\begin{subfigure}[t]{0.5\textwidth}
+	\centering
+    \includegraphics[width=70mm]{son-stress3}
+    \caption{No lines are repeated}
+    \label{fig:son-stress3}
+\end{subfigure}
+\begin{subfigure}[t]{0.5\textwidth}
+	\centering
+    \includegraphics[width=70mm]{son-stress4}
+    \caption{Just one stanza}
+    \label{fig:son-stress4}
+\end{subfigure}
+\begin{subfigure}[t]{0.5\textwidth}
+	\centering
+    \includegraphics[width=70mm]{son-stress5}
+    \caption{Always five lines}
+    \label{fig:son-stress5}
+\end{subfigure}
+\begin{subfigure}[t]{0.5\textwidth}
+	\centering
+    \includegraphics[width=70mm]{son-stress6}
+    \caption{No lines are repeated}
+    \label{fig:son-stress6}
+\end{subfigure}
+\begin{subfigure}[t]{0.5\textwidth}
+	\centering
+    \includegraphics[width=70mm]{son-stress7}
+    \caption{No lines are repeated}
+    \label{fig:son-stress7}
+\end{subfigure}
+\begin{subfigure}[t]{0.5\textwidth}
+	\centering
+    \includegraphics[width=70mm]{son-stress8}
+    \caption{Just one stanza}
+    \label{fig:son-stress8}
+\end{subfigure}
+\begin{subfigure}[t]{0.5\textwidth}
+	\centering
+    \includegraphics[width=70mm]{son-stress9}
+    \caption{Always five lines}
+    \label{fig:son-stress9}
+\end{subfigure}
+\begin{subfigure}[t]{0.5\textwidth}
+	\centering
+    \includegraphics[width=70mm]{son-stress10}
+    \caption{No lines are repeated}
+    \label{fig:son-stress10}
+\end{subfigure}
+\begin{subfigure}[t]{0.5\textwidth}
+	\centering
+    \includegraphics[width=70mm]{son-stress11}
+    \caption{Just one stanza}
+    \label{fig:son-stress11}
+\end{subfigure}
+\begin{subfigure}[t]{0.5\textwidth}
+	\centering
+    \includegraphics[width=70mm]{son-stress12}
+    \caption{Always five lines}
+    \label{fig:son-stress12}
+\end{subfigure}
+\begin{subfigure}[t]{0.5\textwidth}
+	\centering
+    \includegraphics[width=70mm]{son-stress13}
+    \caption{No lines are repeated}
+    \label{fig:son-stress13}
+\end{subfigure}
+\begin{subfigure}[t]{0.5\textwidth}
+	\centering
+    \includegraphics[width=70mm]{son-stress14}
+    \caption{No lines are repeated}
+    \label{fig:son-stress14}
+\end{subfigure}
+\caption{Sonnet stress patterns for each line}
+\label{fig:son4}
+\end{figure}
+
 \item[Other Noteworthy Results]  \hfill \\
-Most sonnets are written in first or second person as seen in Figure BLAH and almost all are written in the present tense, shown in Figure BLAH.
+Most sonnets are written in first or second person as seen in Figure \ref{fig:son-persp} and almost all are written in the present tense, shown in Figure \ref{fig:son-tense}.
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.5\textwidth}
+	\centering
+    \includegraphics[width=70mm]{son-tense}
+    \caption{Probability distribution of overall poem tense}
+    \label{fig:son-tense}
+\end{subfigure}
+\begin{subfigure}[t]{0.5\textwidth}
+	\centering
+    \includegraphics[width=70mm]{son-persp}
+    \caption{Probability distribution perspective across poem}
+    \label{fig:son-persp}
+\end{subfigure}
+\caption{Stress patterns for lines 3 and 4}
+\label{fig:son5}
+\end{figure}
+
+It's also worth noting that similes are used in almost every other sonnet, evident from Figure \ref{fig:son-simile}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=140mm]{son-simile}
+\caption{Words used in sonnets with significant frequency}
+\label{fig:son-simile}
+\end{figure}
+
 \end{description}
 
 \subsection{Concurrency and Performance}
@@ -294,10 +576,10 @@ In fact, we have even found two cases where our program is contrary to literacy 
 The major shortcomings of the current implementation are:
 \begin{itemize}
 \item{The omission of any Named Entity Recognition limits not only the general contextual understanding of the poem, but also the specific recognition of names and places.}
-\item{Our attempt to patch up the limitations of the CMU Pronunciation Dictionary by finding the closest matching word (see Section BLAH) is not as reliable as expected and should be replaced with a state transducer model implementation.}
+\item{Our attempt to patch up the limitations of the CMU Pronunciation Dictionary by finding the closest matching word (see Section \ref{sec:phonetic}) is not as reliable as expected and should be replaced with a state transducer model implementation.}
 \item{The memory and time complexity rises exponentially with the length of the poem with the current implementation. As seen with the sonnets compared to the haiku and limericks, the quality of analysis falls as the poems get longer.}
 \item{The sentiment of the poem has not been considered at all in this project. However, it is important to note, for example, that limericks are humorous.}
-\item{Using our own algorithms for anaphora resolution and presupposition projection, despite it being a prelude to the new proposed method in Section BLAH, is not affective at the moment, so we end up finding more characters than expected.}
+\item{Using our own algorithms for anaphora resolution and presupposition projection, despite it being a prelude to the new proposed method in Section BLAH, is not effective at the moment, so we end up finding more characters than expected.}
 \end{itemize}
 
 

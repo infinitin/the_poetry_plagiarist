@@ -26,13 +26,49 @@ Finally, this implementation should be able to produce any type of poem in accor
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 \section{Generating Simple Sentences}
 \label{sec:build}
-We attempted to recognise the existence of semantic relations during the analysis phase. Our interpretation of the results generalises the use of these relations with the intention of guiding the generation process. If we intend to write a poem describing a woman named Mary who wants a monkey, we would start with the persona relation hubs in Figure BLAH below.
-
-1-Named$\rightarrow$Mary\\
-1-IsA$\rightarrow$woman\\
-1-TA$\rightarrow$chase\\
-2-IsA$\rightarrow$monkey\\
-2-RA$\rightarrow$chase\\
+We attempted to recognise the existence of semantic relations during the analysis phase. Our interpretation of the results generalises the use of these relations with the intention of guiding the generation process. If we intend to write a poem describing a woman named Mary who wants a monkey, we would start with the persona relation hubs in Figure \ref{fig:starting}.
+\begin{figure}[h!]
+\centering
+\begin{subfigure}[t]{0.45\textwidth}
+	\centering
+    \begin{tikzpicture}[->, node distance=2cm,main node/.style={circle, draw, font=\sffamily\bfseries}]
+        \tikzstyle{every node}=[font=\small]
+        
+          \node[main node] (1) [] {1};
+          \node[] (3) [above of=1]{Mary};
+          \node[] (4) [below right of=1] {woman};
+          \node[] (5) [below left of=1] {chase};
+          
+        
+          \path[every node/.style={font=\sffamily\small}]
+            (1) edge node [right] {Named} (3)
+               	edge node [right] {IsA} (4)
+               	edge node [left] {TakesAction} (5);
+              
+        \end{tikzpicture}
+    \caption{First persona}
+\end{subfigure}
+~
+\begin{subfigure}[t]{0.45\textwidth}
+	\centering
+    \begin{tikzpicture}[->, node distance=2cm,main node/.style={circle, draw, font=\sffamily\bfseries}]
+        \tikzstyle{every node}=[font=\small]
+        
+          \node[main node] (1) [] {2};
+          \node[] (3) [above right of=1]{monkey};
+          \node[] (4) [below left of=1] {chase};
+          
+        
+          \path[every node/.style={font=\sffamily\small}]
+            (1) edge node [below right] {IsA} (3)
+               	edge node [above left] {ReceivesAction} (4);
+              
+        \end{tikzpicture}
+    \caption{Second Persona}
+\end{subfigure}
+\caption{Starting relations for generation}
+\label{fig:starting}
+\end{figure}
 
 These relations outline the context of the poem. In lieu with our \textit{content first} approach, we begin by directly translating these relations into syntactically correct natural language \textit{clauses}, which can be organised into lines in a poem. We make use of two tools to do this; \textbf{SimpleNLG} (Section \ref{sec:bg-nlg}) and \textbf{FrameNet} (Section \ref{sec:fn}).
 
@@ -72,9 +108,31 @@ It is important to note that all relation translations may have their own set of
 
 Back to our example, after dealing with all issues we are left with two LUs; \textit{call.v} and \textit{named.a}, where the string after the full stop in the LU indicates the word's POS. We choose one randomly with equal weights. We use \textit{call.v} for this example.
 
-FIGURE: https://framenet2.icsi.berkeley.edu/fnReports/data/lu/lu11210.xml?mode=lexentry
+\begin{table}
+    \begin{tabular}{|llll|}
+    \hline
+    Number Annotated & Pattern part 1 & Pattern part 1 & Pattern part 1 \\ \hline
+    19 TOTAL         & Entity         & Name           & ~              \\
+    (1)              & CNI,--        & NP,Obj        & ~              \\
+    (1)              & NP,Ext        & AVP,Dep       & ~              \\
+    (11)             & NP,Ext        & NP,Dep        & ~              \\
+    (6)              & NP,Ext        & NP,Obj        & ~              \\ \hline
+    16 TOTAL         & Entity         & Name           & Speaker        \\
+    (1)              & NP,Ext        & NP,Dep        & CNI,--        \\
+    (1)              & NP,Ext        & NP,Obj        & CNI,--        \\
+    (1)              & NP,Ext        & PP[by],Dep    & CNI,--        \\
+    (5)              & NP,Obj        & NP,Dep        & NP,Ext        \\
+    (1)              & NP,Obj        & PP[by],Dep    & CNI,--        \\
+    (5)              & NP,Obj        & PP[by],Dep    & NP,Ext        \\
+    (2)              & NP,Obj        & QUO,Dep       & NP,Ext        \\ \hline
+    1 TOTAL          & Name           & Name           & ~              \\
+    (1)              & NP,Dep        & NP,Ext        & ~              \\ \hline
+    \end{tabular}
+\caption{Valence patterns for the \textit{call.v} LU}
+\label{tab:call-val}
+\end{table}
 
-This LU has three groups of Valence patterns, as can been seen in Figure BLAH. Each group of patterns has an \textit{TOTAL} count, indicating the occurrence frequency of this pattern in their annotated corpus. We assume that these are representative for our purpose and choose the group with the highest total occurrences.
+This LU has three groups of Valence patterns, as can been seen in Table \ref{tab:call-val}. Each group of patterns has an \textit{TOTAL} count, indicating the occurrence frequency of this pattern in their annotated corpus. We assume that these are representative for our purpose and choose the group with the highest total occurrences.
 
 Each pattern within a group also includes an occurrence count. However, the phrases produced by the system would be predictable and mundane if we always choose the most popular again. Instead we select randomly, weighted for occurrence scores. Let our selected Valence pattern be the third one from the top in Figure BLAH.
 
@@ -321,9 +379,23 @@ Rhyme is a very powerful poetic tool that comes naturally to many human authors.
 \label{sec:rhymebrain}
 Rhyming words are retrieved from the RhymeBrain API\cite{rhymebrain}. This tool accepts \textit{any target string of letters} (not just words from a dictionary) and finds rhyming words. This works well with our high priority for strong rhyme because it rarely fails to give back rhyming words and tends to return more possibilities than alternatives like Wordnik\cite{wordnik}. It also means that even the most obscure names words input from the user can be used effectively.
 
-Results from the API also come with a score, allowing us to balance strength of rhyme with applicability to content. For example, if we are looking to rhyme with the target word \textit{'address'}, we get the results shown in Table BLAH.
+Results from the API also come with a score, allowing us to balance strength of rhyme with applicability to content. For example, if we are looking to rhyme with the target word \textit{'address'}, we get the results shown in Table \ref{tab:address-rb}.
 
-%Table BLAH: http://rhymebrain.com/talk?function=getRhymes&lang=en&word=address
+\begin{table}
+    \begin{tabular}{|l|l|l|}
+    \hline
+    Word       & Rhyme Score & Syllables \\ \hline
+    misaddress & 300         & 3         \\ \hline
+    access     & 228         & 2         \\ \hline
+    assets     & 228         & 2         \\ \hline
+    abscess    & 228         & 2         \\ \hline
+    annex      & 228         & 2         \\ \hline
+    annexe     & 228         & 2         \\ \hline
+    mantes     & 228         & 2         \\ \hline
+    \end{tabular}
+\caption{First 8 RhymeBrain results for \textit{'address'}}
+\label{tab:address-rb}
+\end{table}
 
 \textit{'Misaddress'} is the only word with the top rhyme score from RhymeBrain. However, if \textit{'access'} is highly applicable in context, we may choose that instead despite the lower score. We do not consider any words lower than a score of 200.
 
@@ -331,9 +403,23 @@ The main drawback of the RhymeBrain API is that it tries to find rhyming words w
 
 To counter this, we try to find the rhymes of a suffix of the target string that most probably only contains the last syllable. To do this, we convert the word into its pronunciations as in Section \ref{sec:phonetic}. We then find the first consonant phoneme from the right with a vowel phoneme to its left. We then search for the probable letters in the original string corresponding to that consonant phoneme and take the suffix from that letter onwards.
 
-For example, the word \textit{'address'} has the pronunciations \textit{[AH0 D R EH1 S]} and \textit{[AE1 D R EH2 S]}. In both cases, we select the 'R' phoneme and match it up to the 'r' in 'address', giving us the suffix 'ress'. The results for words rhyming with 'ress' are shown in Table BLAH.
+For example, the word \textit{'address'} has the pronunciations \textit{[AH0 D R EH1 S]} and \textit{[AE1 D R EH2 S]}. In both cases, we select the 'R' phoneme and match it up to the 'r' in 'address', giving us the suffix 'ress'. The results for words rhyming with 'ress' are shown in Table \ref{tab:ress-rb}.
 
-%Table BLAH: http://rhymebrain.com/talk?function=getRhymes&lang=en&word=ress
+\begin{table}
+    \begin{tabular}{|l|l|l|}
+    \hline
+    Word  & Rhyme Score & Syllables \\ \hline
+    less  & 300         & 1         \\ \hline
+    yes   & 300         & 1         \\ \hline
+    dress & 300         & 1         \\ \hline
+    guess & 300         & 1         \\ \hline
+    bless & 300         & 1         \\ \hline
+    mess  & 300         & 1         \\ \hline
+    chess & 300         & 1         \\ \hline
+    \end{tabular}
+\caption{First 8 RhymeBrain results for \textit{'ress'}}
+\label{tab:ress-rb}
+\end{table}
 
 This gives us many more words that rhyme with 'address', including \textit{'dress'} and \textit{'impress'}.
 
@@ -375,7 +461,17 @@ The process involves finding the longest word in the sentence and replacing it w
 \subsubsection{Accentual}
 Any poem with accentual rhythm has, by definition, syllabic rhythm. Therefore we rephrase to match syllabic rhythm before we fit to accentual rhythm. That way we know that we have exactly the right number of syllables at the beginning of the rephrasing process.
 
-Let's take \textit{'Woman chased the hairy monkey'} as our line and '01001001' as our required stress pattern. If we put one on top of the other as in Figure BLAH, we can pair up each word with its required pattern.
+Let's take \textit{'Woman chased the hairy monkey'} as our line and '01001001' as our required stress pattern. If we put one on top of the other as in Figure \ref{tab:rs-pair}, we can pair up each word with its required pattern.
+
+\begin{table}
+\centering
+    \begin{tabular}{lllll}
+    \textbf{0....1}      & \textbf{0}        & \textbf{0}  & \textbf{1...0}   & \textbf{0.....1}     \\
+    Wo-man & chased & the & hai-ry & mon-key \\
+    \end{tabular}
+\caption{Line paired with desired rhyme scheme}
+\label{tab:rs-pair}
+\end{table}
 
 Start from the rightmost word; \textit{'monkey'}. Since we do not want to tamper with rhyme, we disregard this pattern-word pair. Moving along to the left we get the word 'hairy', which has the required pattern of '10'. This matches with the actual stress pattern for 'hairy', so nothing needs to be done and move along again. The same happens for the words 'the' and 'chased' because they are both monosyllabic and can be either stressed or unstressed.
 

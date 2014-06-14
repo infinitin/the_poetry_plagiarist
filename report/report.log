@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2014.1.22)  13 JUN 2014 02:07
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2014.1.22)  14 JUN 2014 00:57
 entering extended mode
 **report.tex
 (C:\Users\Lenovo\PycharmProjects\the_poetry_plagiarist\report\report.tex
@@ -1542,44 +1542,7 @@ plementation.aux)
 (C:\Users\Lenovo\PycharmProjects\the_poetry_plagiarist\report\Management/manage
 ment.aux)
 (C:\Users\Lenovo\PycharmProjects\the_poetry_plagiarist\report\Evaluation/evalua
-tion.aux
-
-LaTeX Warning: Label `fig:lim-grams1' multiply defined.
-
-
-LaTeX Warning: Label `fig:lim-grams1@cref' multiply defined.
-
-
-LaTeX Warning: Label `sub@fig:lim-grams1' multiply defined.
-
-
-LaTeX Warning: Label `sub@fig:lim-grams1@cref' multiply defined.
-
-
-LaTeX Warning: Label `fig:lim-anim' multiply defined.
-
-
-LaTeX Warning: Label `fig:lim-anim@cref' multiply defined.
-
-
-LaTeX Warning: Label `sub@fig:lim-anim' multiply defined.
-
-
-LaTeX Warning: Label `sub@fig:lim-anim@cref' multiply defined.
-
-
-LaTeX Warning: Label `fig:lim-anim' multiply defined.
-
-
-LaTeX Warning: Label `fig:lim-anim@cref' multiply defined.
-
-
-LaTeX Warning: Label `sub@fig:lim-anim' multiply defined.
-
-
-LaTeX Warning: Label `sub@fig:lim-anim@cref' multiply defined.
-
-)
+tion.aux)
 (C:\Users\Lenovo\PycharmProjects\the_poetry_plagiarist\report\Appendix1/appendi
 x1.aux))
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 84.
@@ -1650,7 +1613,7 @@ LaTeX Info: Redefining \nameref on input line 84.
 (C:\Users\Lenovo\PycharmProjects\the_poetry_plagiarist\report\report.out)
 \@outlinefile=\write6
 
-<ThesisFigs/logo.jpg, id=666, 564.60938pt x 148.30406pt>
+<ThesisFigs/logo.jpg, id=670, 564.60938pt x 148.30406pt>
 File: ThesisFigs/logo.jpg Graphic file (type jpg)
 
 <use ThesisFigs/logo.jpg>
@@ -1714,7 +1677,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[15] <Design/DesignFigs/Constraint.jpg, id=962, 644.4075pt x 225.84375pt>
+[15] <Design/DesignFigs/Constraint.jpg, id=967, 644.4075pt x 225.84375pt>
 File: Design/DesignFigs/Constraint.jpg Graphic file (type jpg)
 
 <use Design/DesignFigs/Constraint.jpg>
@@ -1730,7 +1693,7 @@ Figs/Constraint.jpg>]
 LaTeX Font Info:    Font shape `OMS/cmr/m/it' in size <12> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 344.
  [17]
-<Design/DesignFigs/lion.jpg, id=979, 368.1253pt x 487.06969pt>
+<Design/DesignFigs/lion.jpg, id=984, 368.1253pt x 487.06969pt>
 File: Design/DesignFigs/lion.jpg Graphic file (type jpg)
 
 <use Design/DesignFigs/lion.jpg>
@@ -1745,7 +1708,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [18] [19 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Design/D
 esignFigs/lion.jpg>] [20]
-<Design/DesignFigs/Chair.jpg, id=1014, 501.875pt x 432.61626pt>
+<Design/DesignFigs/Chair.jpg, id=1019, 501.875pt x 432.61626pt>
 File: Design/DesignFigs/Chair.jpg Graphic file (type jpg)
 
 <use Design/DesignFigs/Chair.jpg>
@@ -1762,7 +1725,7 @@ Figs/Chair.jpg>] [22] [23]
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
 (hyperref)                than one, level fixed on input line 512.
 
-[24] [25] <Design/DesignFigs/Treebank.png, id=1063, 401.5pt x 329.23pt>
+[24] [25] <Design/DesignFigs/Treebank.png, id=1068, 401.5pt x 329.23pt>
 File: Design/DesignFigs/Treebank.png Graphic file (type png)
 
 <use Design/DesignFigs/Treebank.png>
@@ -1771,7 +1734,7 @@ Package pdftex.def Info: Design/DesignFigs/Treebank.png used on input line 561.
 (pdftex.def)             Requested size: 170.71652pt x 139.98871pt.
  [26 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Design/Desig
 nFigs/Treebank.png (PNG copy)>]
-<Design/DesignFigs/shopkeeper-deps.png, id=1075, 1241.38782pt x 165.61874pt>
+<Design/DesignFigs/shopkeeper-deps.png, id=1080, 1241.38782pt x 165.61874pt>
 File: Design/DesignFigs/shopkeeper-deps.png Graphic file (type png)
 
 <use Design/DesignFigs/shopkeeper-deps.png>
@@ -1789,7 +1752,7 @@ LaTeX Font Warning: Font shape `OMS/cmtt/m/n' undefined
 (Font)              using `OMS/cmsy/m/n' instead
 (Font)              for symbol `textbraceleft' on input line 604.
 
-[28] <Design/DesignFigs/Groningen.jpg, id=1098, 446.41782pt x 166.37157pt>
+[28] <Design/DesignFigs/Groningen.jpg, id=1103, 446.41782pt x 166.37157pt>
 File: Design/DesignFigs/Groningen.jpg Graphic file (type jpg)
 
 <use Design/DesignFigs/Groningen.jpg>
@@ -1798,7 +1761,7 @@ Package pdftex.def Info: Design/DesignFigs/Groningen.jpg used on input line 625
 (pdftex.def)             Requested size: 355.65944pt x 132.54907pt.
  [29 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Design/Desig
 nFigs/Groningen.jpg>]
-<Design/DesignFigs/shopkeeper-frames.png, id=1107, 1206.00563pt x 328.22626pt>
+<Design/DesignFigs/shopkeeper-frames.png, id=1112, 1206.00563pt x 328.22626pt>
 File: Design/DesignFigs/shopkeeper-frames.png Graphic file (type png)
 
 <use Design/DesignFigs/shopkeeper-frames.png>
@@ -1806,7 +1769,7 @@ Package pdftex.def Info: Design/DesignFigs/shopkeeper-frames.png used on input
 line 644.
 (pdftex.def)             Requested size: 398.33858pt x 108.41016pt.
 
-<Design/DesignFigs/shopkeeper-frames-yoda.png, id=1109, 1228.59pt x 330.48468pt
+<Design/DesignFigs/shopkeeper-frames-yoda.png, id=1114, 1228.59pt x 330.48468pt
 >
 File: Design/DesignFigs/shopkeeper-frames-yoda.png Graphic file (type png)
  <use Design/DesignFigs/shopkeeper-frames-yoda.png>
@@ -1825,7 +1788,7 @@ Overfull \hbox (16.47714pt too wide) in paragraph at lines 729--746
  []
 
 [32] [33]
-<Design/DesignFigs/custard-collocs.png, id=1142, 1145.78062pt x 406.51875pt>
+<Design/DesignFigs/custard-collocs.png, id=1147, 1145.78062pt x 406.51875pt>
 File: Design/DesignFigs/custard-collocs.png Graphic file (type png)
 
 <use Design/DesignFigs/custard-collocs.png>
@@ -1838,7 +1801,7 @@ Overfull \hbox (20.11543pt too wide) in paragraph at lines 795--809
  [][] 
  []
 
-<Design/DesignFigs/NLG.png, id=1160, 225.09094pt x 723.45282pt>
+<Design/DesignFigs/NLG.png, id=1165, 225.09094pt x 723.45282pt>
 File: Design/DesignFigs/NLG.png Graphic file (type png)
 
 <use Design/DesignFigs/NLG.png>
@@ -1868,149 +1831,148 @@ Overfull \hbox (65.33253pt too wide) in paragraph at lines 126--126
  unzipped rhyme scheme[] 
  []
 
-[41] [42] [43] [44] [45] [46] [47] [48] [49] [50] [51]
-Overfull \hbox (0.64717pt too wide) in paragraph at lines 546--547
+[41] [42] [43] [44] [45] [46] [47] [48] [49] [50] [51] [52] [53]
+Overfull \hbox (0.64717pt too wide) in paragraph at lines 614--615
 [][] 
  []
 
 
-Overfull \hbox (0.64717pt too wide) in paragraph at lines 567--568
+Overfull \hbox (0.64717pt too wide) in paragraph at lines 635--636
 [][] 
  []
 
-[52]
-Overfull \hbox (145.60757pt too wide) in paragraph at lines 592--592
+[54] [55]
+Overfull \hbox (145.60757pt too wide) in paragraph at lines 660--660
 []\OT1/cmtt/m/n/12 9         if the dependent is involved in a candidate relati
 on from the frame-semantic parse:\\[] 
  []
 
 
-Overfull \hbox (133.25757pt too wide) in paragraph at lines 592--592
+Overfull \hbox (133.25757pt too wide) in paragraph at lines 660--660
 []\OT1/cmtt/m/n/12 12          use the heuristics for dependency relations to f
 ind possible semantic relations\\[] 
  []
 
-[53] [54]
-<Theory/TheoryFigs/cat-deps1.png, id=1314, 1425.07407pt x 166.37157pt>
+<Theory/TheoryFigs/cat-deps1.png, id=1330, 1425.07407pt x 166.37157pt>
 File: Theory/TheoryFigs/cat-deps1.png Graphic file (type png)
 
 <use Theory/TheoryFigs/cat-deps1.png>
-Package pdftex.def Info: Theory/TheoryFigs/cat-deps1.png used on input line 633
+Package pdftex.def Info: Theory/TheoryFigs/cat-deps1.png used on input line 701
 .
 (pdftex.def)             Requested size: 398.33858pt x 46.50247pt.
 
-<Theory/TheoryFigs/cat-deps2.png, id=1315, 1090.82532pt x 153.57375pt>
+<Theory/TheoryFigs/cat-deps2.png, id=1331, 1090.82532pt x 153.57375pt>
 File: Theory/TheoryFigs/cat-deps2.png Graphic file (type png)
 
 <use Theory/TheoryFigs/cat-deps2.png>
-Package pdftex.def Info: Theory/TheoryFigs/cat-deps2.png used on input line 640
+Package pdftex.def Info: Theory/TheoryFigs/cat-deps2.png used on input line 708
 .
 (pdftex.def)             Requested size: 398.33858pt x 56.08089pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[55 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Theory/Theory
-Figs/cat-deps1.png>]
-Overfull \hbox (114.73256pt too wide) in paragraph at lines 667--667
+[56 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Theory/Theory
+Figs/cat-deps1.png>] [57 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist
+/report/Theory/TheoryFigs/cat-deps2.png>]
+Overfull \hbox (114.73256pt too wide) in paragraph at lines 735--735
 []\OT1/cmtt/m/n/12 3   if the dependency relation of this leaf (i.e. from its p
 arent to it) is collapsable:\\[] 
  []
 
-[56 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Theory/Theory
-Figs/cat-deps2.png>]
-<Theory/TheoryFigs/cat-deps1-collapsed-a.png, id=1330, 724.95844pt x 88.07906pt
+
+<Theory/TheoryFigs/cat-deps1-collapsed-a.png, id=1347, 724.95844pt x 88.07906pt
 >
 File: Theory/TheoryFigs/cat-deps1-collapsed-a.png Graphic file (type png)
  <use Theory/TheoryFigs/cat-deps1-collapsed-a.png>
 Package pdftex.def Info: Theory/TheoryFigs/cat-deps1-collapsed-a.png used on in
-put line 675.
+put line 743.
 (pdftex.def)             Requested size: 398.33858pt x 48.39658pt.
 
-Overfull \hbox (1.42534pt too wide) in paragraph at lines 675--676
+Overfull \hbox (1.42534pt too wide) in paragraph at lines 743--744
  [][] 
  []
 
 
-<Theory/TheoryFigs/cat-deps1-collapsed-b.png, id=1332, 724.95844pt x 93.34875pt
+<Theory/TheoryFigs/cat-deps1-collapsed-b.png, id=1349, 724.95844pt x 93.34875pt
 >
 File: Theory/TheoryFigs/cat-deps1-collapsed-b.png Graphic file (type png)
  <use Theory/TheoryFigs/cat-deps1-collapsed-b.png>
 Package pdftex.def Info: Theory/TheoryFigs/cat-deps1-collapsed-b.png used on in
-put line 680.
+put line 748.
 (pdftex.def)             Requested size: 398.33858pt x 51.2921pt.
 
-Overfull \hbox (1.42534pt too wide) in paragraph at lines 680--681
+Overfull \hbox (1.42534pt too wide) in paragraph at lines 748--749
  [][] 
  []
 
 
-<Theory/TheoryFigs/cat-deps1-collapsed-c.png, id=1333, 724.95844pt x 97.86563pt
+<Theory/TheoryFigs/cat-deps1-collapsed-c.png, id=1350, 724.95844pt x 97.86563pt
 >
 File: Theory/TheoryFigs/cat-deps1-collapsed-c.png Graphic file (type png)
  <use Theory/TheoryFigs/cat-deps1-collapsed-c.png>
 Package pdftex.def Info: Theory/TheoryFigs/cat-deps1-collapsed-c.png used on in
-put line 685.
+put line 753.
 (pdftex.def)             Requested size: 398.33858pt x 53.77399pt.
 
-Overfull \hbox (1.42534pt too wide) in paragraph at lines 685--686
+Overfull \hbox (1.42534pt too wide) in paragraph at lines 753--754
  [][] 
  []
 
 
-<Theory/TheoryFigs/cat-deps1-collapsed-d.png, id=1334, 723.45282pt x 94.10156pt
+<Theory/TheoryFigs/cat-deps1-collapsed-d.png, id=1351, 723.45282pt x 94.10156pt
 >
 File: Theory/TheoryFigs/cat-deps1-collapsed-d.png Graphic file (type png)
  <use Theory/TheoryFigs/cat-deps1-collapsed-d.png>
 Package pdftex.def Info: Theory/TheoryFigs/cat-deps1-collapsed-d.png used on in
-put line 690.
+put line 758.
 (pdftex.def)             Requested size: 398.33858pt x 51.81345pt.
 
-Overfull \hbox (1.42534pt too wide) in paragraph at lines 690--691
+Overfull \hbox (1.42534pt too wide) in paragraph at lines 758--759
  [][] 
  []
 
 
-<Theory/TheoryFigs/cat-deps1-collapsed-e.png, id=1335, 724.95844pt x 92.59593pt
+<Theory/TheoryFigs/cat-deps1-collapsed-e.png, id=1352, 724.95844pt x 92.59593pt
 >
 File: Theory/TheoryFigs/cat-deps1-collapsed-e.png Graphic file (type png)
  <use Theory/TheoryFigs/cat-deps1-collapsed-e.png>
 Package pdftex.def Info: Theory/TheoryFigs/cat-deps1-collapsed-e.png used on in
-put line 695.
+put line 763.
 (pdftex.def)             Requested size: 398.33858pt x 50.87845pt.
 
-Overfull \hbox (1.42534pt too wide) in paragraph at lines 695--696
+Overfull \hbox (1.42534pt too wide) in paragraph at lines 763--764
  [][] 
  []
 
 
-<Theory/TheoryFigs/cat-deps1-collapsed-f.png, id=1336, 724.95844pt x 92.59593pt
+<Theory/TheoryFigs/cat-deps1-collapsed-f.png, id=1353, 724.95844pt x 92.59593pt
 >
 File: Theory/TheoryFigs/cat-deps1-collapsed-f.png Graphic file (type png)
  <use Theory/TheoryFigs/cat-deps1-collapsed-f.png>
 Package pdftex.def Info: Theory/TheoryFigs/cat-deps1-collapsed-f.png used on in
-put line 700.
+put line 768.
 (pdftex.def)             Requested size: 398.33858pt x 50.87845pt.
 
-Overfull \hbox (1.42534pt too wide) in paragraph at lines 700--701
+Overfull \hbox (1.42534pt too wide) in paragraph at lines 768--769
  [][] 
  []
 
 
-<Theory/TheoryFigs/cat-deps1-collapsed-g.png, id=1337, 724.20563pt x 101.62968p
+<Theory/TheoryFigs/cat-deps1-collapsed-g.png, id=1354, 724.20563pt x 101.62968p
 t>
 File: Theory/TheoryFigs/cat-deps1-collapsed-g.png Graphic file (type png)
  <use Theory/TheoryFigs/cat-deps1-collapsed-g.png>
 Package pdftex.def Info: Theory/TheoryFigs/cat-deps1-collapsed-g.png used on in
-put line 705.
+put line 773.
 (pdftex.def)             Requested size: 398.33858pt x 55.90114pt.
 
-Overfull \hbox (1.42534pt too wide) in paragraph at lines 705--706
+Overfull \hbox (1.42534pt too wide) in paragraph at lines 773--774
  [][] 
  []
 
 
-LaTeX Warning: Float too large for page by 5.56395pt on input line 711.
+LaTeX Warning: Float too large for page by 5.56395pt on input line 779.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
@@ -2018,129 +1980,107 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 File: Theory/TheoryFigs/cat-deps1-collapsed-g.png Graphic file (type png)
 <use Theory/TheoryFigs/cat-deps1-collapsed-g.png>
 Package pdftex.def Info: Theory/TheoryFigs/cat-deps1-collapsed-g.png used on in
-put line 719.
+put line 787.
 (pdftex.def)             Requested size: 398.33858pt x 55.90114pt.
-
-Overfull \hbox (1.42534pt too wide) in paragraph at lines 719--720
- [][] 
- []
-
-<Theory/TheoryFigs/cat-deps2-collapsed.png, id=1339, 955.57pt x 134.5025pt>
-File: Theory/TheoryFigs/cat-deps2-collapsed.png Graphic file (type png)
-
-<use Theory/TheoryFigs/cat-deps2-collapsed.png>
-Package pdftex.def Info: Theory/TheoryFigs/cat-deps2-collapsed.png used on inpu
-t line 725.
-(pdftex.def)             Requested size: 398.33858pt x 56.06787pt.
-
-Overfull \hbox (1.42534pt too wide) in paragraph at lines 725--726
- [][] 
- []
-
-
-LaTeX Warning: Reference `sec:ar' on page 57 undefined on input line 738.
-
-[57 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Theory/Theory
-Figs/cat-deps1-collapsed-g.png> <C:/Users/Lenovo/PycharmProjects/the_poetry_pla
-giarist/report/Theory/TheoryFigs/cat-deps2-collapsed.png>]
-Overfull \hbox (65.33253pt too wide) in paragraph at lines 774--774
-[]\OT1/cmtt/m/n/12 6       if we cannot find all the elements we are looking fo
-r, we leave it blank\\[] 
- []
-
-
-Overfull \hbox (170.30759pt too wide) in paragraph at lines 774--774
-[]\OT1/cmtt/m/n/12 7     add mapping from the text of the target to the newly b
-uilt relation so we can find it later\\[] 
- []
-
-[58] <Theory/TheoryFigs/cat1-fn-cn-a.png, id=1361, 949.29657pt x 223.58531pt>
-File: Theory/TheoryFigs/cat1-fn-cn-a.png Graphic file (type png)
-
-<use Theory/TheoryFigs/cat1-fn-cn-a.png>
-Package pdftex.def Info: Theory/TheoryFigs/cat1-fn-cn-a.png used on input line 
-782.
-(pdftex.def)             Requested size: 398.33858pt x 93.81989pt.
-
-Overfull \hbox (1.42534pt too wide) in paragraph at lines 782--783
- [][] 
- []
-
-<Theory/TheoryFigs/cat1-fn-cn-b.png, id=1362, 949.29657pt x 228.855pt>
-File: Theory/TheoryFigs/cat1-fn-cn-b.png Graphic file (type png)
-
-<use Theory/TheoryFigs/cat1-fn-cn-b.png>
-Package pdftex.def Info: Theory/TheoryFigs/cat1-fn-cn-b.png used on input line 
-787.
-(pdftex.def)             Requested size: 398.33858pt x 96.03113pt.
 
 Overfull \hbox (1.42534pt too wide) in paragraph at lines 787--788
  [][] 
  []
 
-<Theory/TheoryFigs/cat1-fn-cn-c.png, id=1363, 949.29657pt x 60.97781pt>
+<Theory/TheoryFigs/cat-deps2-collapsed.png, id=1356, 955.57pt x 134.5025pt>
+File: Theory/TheoryFigs/cat-deps2-collapsed.png Graphic file (type png)
+
+<use Theory/TheoryFigs/cat-deps2-collapsed.png>
+Package pdftex.def Info: Theory/TheoryFigs/cat-deps2-collapsed.png used on inpu
+t line 793.
+(pdftex.def)             Requested size: 398.33858pt x 56.06787pt.
+
+Overfull \hbox (1.42534pt too wide) in paragraph at lines 793--794
+ [][] 
+ []
+
+[58]
+
+LaTeX Warning: Reference `sec:ar' on page 59 undefined on input line 806.
+
+[59 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Theory/Theory
+Figs/cat-deps1-collapsed-g.png> <C:/Users/Lenovo/PycharmProjects/the_poetry_pla
+giarist/report/Theory/TheoryFigs/cat-deps2-collapsed.png>]
+Overfull \hbox (65.33253pt too wide) in paragraph at lines 842--842
+[]\OT1/cmtt/m/n/12 6       if we cannot find all the elements we are looking fo
+r, we leave it blank\\[] 
+ []
+
+
+Overfull \hbox (170.30759pt too wide) in paragraph at lines 842--842
+[]\OT1/cmtt/m/n/12 7     add mapping from the text of the target to the newly b
+uilt relation so we can find it later\\[] 
+ []
+
+<Theory/TheoryFigs/cat1-fn-cn-a.png, id=1378, 949.29657pt x 223.58531pt>
+File: Theory/TheoryFigs/cat1-fn-cn-a.png Graphic file (type png)
+
+<use Theory/TheoryFigs/cat1-fn-cn-a.png>
+Package pdftex.def Info: Theory/TheoryFigs/cat1-fn-cn-a.png used on input line 
+850.
+(pdftex.def)             Requested size: 398.33858pt x 93.81989pt.
+
+Overfull \hbox (1.42534pt too wide) in paragraph at lines 850--851
+ [][] 
+ []
+
+<Theory/TheoryFigs/cat1-fn-cn-b.png, id=1379, 949.29657pt x 228.855pt>
+File: Theory/TheoryFigs/cat1-fn-cn-b.png Graphic file (type png)
+
+<use Theory/TheoryFigs/cat1-fn-cn-b.png>
+Package pdftex.def Info: Theory/TheoryFigs/cat1-fn-cn-b.png used on input line 
+855.
+(pdftex.def)             Requested size: 398.33858pt x 96.03113pt.
+
+Overfull \hbox (1.42534pt too wide) in paragraph at lines 855--856
+ [][] 
+ []
+
+<Theory/TheoryFigs/cat1-fn-cn-c.png, id=1380, 949.29657pt x 60.97781pt>
 File: Theory/TheoryFigs/cat1-fn-cn-c.png Graphic file (type png)
 
 <use Theory/TheoryFigs/cat1-fn-cn-c.png>
 Package pdftex.def Info: Theory/TheoryFigs/cat1-fn-cn-c.png used on input line 
-792.
+860.
 (pdftex.def)             Requested size: 398.33858pt x 25.58723pt.
 
-Overfull \hbox (1.42534pt too wide) in paragraph at lines 792--793
+Overfull \hbox (1.42534pt too wide) in paragraph at lines 860--861
  [][] 
  []
 
-<Theory/TheoryFigs/cat1-fn-cn-d.png, id=1364, 949.29657pt x 92.59593pt>
+<Theory/TheoryFigs/cat1-fn-cn-d.png, id=1381, 949.29657pt x 92.59593pt>
 File: Theory/TheoryFigs/cat1-fn-cn-d.png Graphic file (type png)
 
 <use Theory/TheoryFigs/cat1-fn-cn-d.png>
 Package pdftex.def Info: Theory/TheoryFigs/cat1-fn-cn-d.png used on input line 
-797.
+865.
 (pdftex.def)             Requested size: 398.33858pt x 38.85469pt.
 
-Overfull \hbox (1.42534pt too wide) in paragraph at lines 797--798
+Overfull \hbox (1.42534pt too wide) in paragraph at lines 865--866
  [][] 
  []
 
-[59 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Theory/Theory
-Figs/cat1-fn-cn-a.png> <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/r
-eport/Theory/TheoryFigs/cat1-fn-cn-b.png> <C:/Users/Lenovo/PycharmProjects/the_
-poetry_plagiarist/report/Theory/TheoryFigs/cat1-fn-cn-c.png> <C:/Users/Lenovo/P
-ycharmProjects/the_poetry_plagiarist/report/Theory/TheoryFigs/cat1-fn-cn-d.png>
-] [60] [61] [62]
+[60] [61 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Theory/T
+heoryFigs/cat1-fn-cn-a.png> <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiar
+ist/report/Theory/TheoryFigs/cat1-fn-cn-b.png> <C:/Users/Lenovo/PycharmProjects
+/the_poetry_plagiarist/report/Theory/TheoryFigs/cat1-fn-cn-c.png> <C:/Users/Len
+ovo/PycharmProjects/the_poetry_plagiarist/report/Theory/TheoryFigs/cat1-fn-cn-d
+.png>] [62] [63] [64]
 
-LaTeX Warning: Reference `sec:ar' on page 63 undefined on input line 1012.
+LaTeX Warning: Reference `sec:ar' on page 65 undefined on input line 1080.
 
-[63]
-Overfull \hbox (27.16216pt too wide) in paragraph at lines 1046--1047
- [][] 
- []
-
-
-Overfull \hbox (27.16216pt too wide) in paragraph at lines 1072--1073
+[65]
+Overfull \hbox (27.16216pt too wide) in paragraph at lines 1114--1115
  [][] 
  []
 
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-Overfull \hbox (16.72208pt too wide) in paragraph at lines 1104--1105
- [][] 
- []
-
-
-Overfull \hbox (16.72208pt too wide) in paragraph at lines 1128--1129
- [][] 
- []
-
-
-Overfull \hbox (16.72208pt too wide) in paragraph at lines 1152--1153
- [][] 
- []
-
-
-Overfull \hbox (9.43898pt too wide) in paragraph at lines 1174--1175
+Overfull \hbox (27.16216pt too wide) in paragraph at lines 1140--1141
  [][] 
  []
 
@@ -2148,9 +2088,32 @@ Overfull \hbox (9.43898pt too wide) in paragraph at lines 1174--1175
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
+Overfull \hbox (16.72208pt too wide) in paragraph at lines 1172--1173
+ [][] 
+ []
+
+
+Overfull \hbox (16.72208pt too wide) in paragraph at lines 1196--1197
+ [][] 
+ []
+
+
+Overfull \hbox (16.72208pt too wide) in paragraph at lines 1220--1221
+ [][] 
+ []
+
+
+Overfull \hbox (9.43898pt too wide) in paragraph at lines 1242--1243
+ [][] 
+ []
+
+
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[64]) [65] [66 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Th
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[66]) [67] [68 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Th
 eory/TheoryFigs/cat-deps1-collapsed-a.png> <C:/Users/Lenovo/PycharmProjects/the
 _poetry_plagiarist/report/Theory/TheoryFigs/cat-deps1-collapsed-b.png> <C:/User
 s/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Theory/TheoryFigs/cat-dep
@@ -2158,21 +2121,21 @@ s1-collapsed-c.png> <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/repo
 rt/Theory/TheoryFigs/cat-deps1-collapsed-d.png> <C:/Users/Lenovo/PycharmProject
 s/the_poetry_plagiarist/report/Theory/TheoryFigs/cat-deps1-collapsed-e.png> <C:
 /Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Theory/TheoryFigs/ca
-t-deps1-collapsed-f.png>] [67] [68] [69]
+t-deps1-collapsed-f.png>] [69] [70] [71]
 (C:\Users\Lenovo\PycharmProjects\the_poetry_plagiarist\report\Implementation/im
 plementation.tex
 Chapter 5.
-[70
+[72
 
 
 
-] [71] [72] [73]
+] [73] [74] [75]
 Overfull \hbox (207.3576pt too wide) in paragraph at lines 108--108
 []\OT1/cmtt/m/n/12 3. return [Count(stress_pattern_single_line) for stress_patt
 ern_single_line in stress_patterns_all_lines][] 
  []
 
-[74]
+[76]
 LaTeX Font Info:    Try loading font information for OML+cmr on input line 135.
 
  ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\omlcmr.fd"
@@ -2186,8 +2149,8 @@ Overfull \hbox (188.8326pt too wide) in paragraph at lines 155--155
 possible_rhyme_schemes.count(rhyme_scheme)[] 
  []
 
-[75] [76]
-<Implementation/ImplementationFigs/StanzaLines.png, id=1483, 567.3195pt x 422.7
+[77] [78]
+<Implementation/ImplementationFigs/StanzaLines.png, id=1505, 567.3195pt x 422.7
 795pt>
 File: Implementation/ImplementationFigs/StanzaLines.png Graphic file (type png)
 
@@ -2196,7 +2159,7 @@ Package pdftex.def Info: Implementation/ImplementationFigs/StanzaLines.png used
  on input line 186.
 (pdftex.def)             Requested size: 332.93234pt x 248.10426pt.
 
-<Implementation/ImplementationFigs/RhymeSchemes.png, id=1484, 567.3195pt x 422.
+<Implementation/ImplementationFigs/RhymeSchemes.png, id=1506, 567.3195pt x 422.
 7795pt>
 File: Implementation/ImplementationFigs/RhymeSchemes.png Graphic file (type png
 )
@@ -2205,7 +2168,7 @@ Package pdftex.def Info: Implementation/ImplementationFigs/RhymeSchemes.png use
 d on input line 193.
 (pdftex.def)             Requested size: 332.93234pt x 248.10426pt.
 
-<Implementation/ImplementationFigs/PersonaTypes.png, id=1485, 567.3195pt x 422.
+<Implementation/ImplementationFigs/PersonaTypes.png, id=1507, 567.3195pt x 422.
 7795pt>
 File: Implementation/ImplementationFigs/PersonaTypes.png Graphic file (type png
 )
@@ -2214,7 +2177,7 @@ Package pdftex.def Info: Implementation/ImplementationFigs/PersonaTypes.png use
 d on input line 202.
 (pdftex.def)             Requested size: 332.93234pt x 248.10426pt.
 
-<Implementation/ImplementationFigs/PersonaAnimation.png, id=1486, 567.3195pt x 
+<Implementation/ImplementationFigs/PersonaAnimation.png, id=1508, 567.3195pt x 
 422.7795pt>
 File: Implementation/ImplementationFigs/PersonaAnimation.png Graphic file (type
  png)
@@ -2223,7 +2186,7 @@ Package pdftex.def Info: Implementation/ImplementationFigs/PersonaAnimation.png
  used on input line 208.
 (pdftex.def)             Requested size: 332.93234pt x 248.10426pt.
 
-<Implementation/ImplementationFigs/PersonaRelation.png, id=1487, 567.3195pt x 4
+<Implementation/ImplementationFigs/PersonaRelation.png, id=1509, 567.3195pt x 4
 22.7795pt>
 File: Implementation/ImplementationFigs/PersonaRelation.png Graphic file (type 
 png)
@@ -2232,7 +2195,7 @@ Package pdftex.def Info: Implementation/ImplementationFigs/PersonaRelation.png
 used on input line 217.
 (pdftex.def)             Requested size: 332.93234pt x 248.10426pt.
 
-<Implementation/ImplementationFigs/Line1NGrams.png, id=1488, 567.3195pt x 422.7
+<Implementation/ImplementationFigs/Line1NGrams.png, id=1510, 567.3195pt x 422.7
 795pt>
 File: Implementation/ImplementationFigs/Line1NGrams.png Graphic file (type png)
 
@@ -2241,7 +2204,7 @@ Package pdftex.def Info: Implementation/ImplementationFigs/Line1NGrams.png used
  on input line 224.
 (pdftex.def)             Requested size: 332.93234pt x 248.10426pt.
 
-<Implementation/ImplementationFigs/DistinctSentences.png, id=1489, 567.3195pt x
+<Implementation/ImplementationFigs/DistinctSentences.png, id=1511, 567.3195pt x
  422.7795pt>
 File: Implementation/ImplementationFigs/DistinctSentences.png Graphic file (typ
 e png)
@@ -2250,7 +2213,7 @@ Package pdftex.def Info: Implementation/ImplementationFigs/DistinctSentences.pn
 g used on input line 231.
 (pdftex.def)             Requested size: 332.93234pt x 248.10426pt.
 
-<Implementation/ImplementationFigs/OverallTense.png, id=1490, 567.3195pt x 422.
+<Implementation/ImplementationFigs/OverallTense.png, id=1512, 567.3195pt x 422.
 7795pt>
 File: Implementation/ImplementationFigs/OverallTense.png Graphic file (type png
 )
@@ -2258,48 +2221,48 @@ File: Implementation/ImplementationFigs/OverallTense.png Graphic file (type png
 Package pdftex.def Info: Implementation/ImplementationFigs/OverallTense.png use
 d on input line 238.
 (pdftex.def)             Requested size: 332.93234pt x 248.10426pt.
-) [77 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Implementat
-ion/ImplementationFigs/StanzaLines.png>] [78 <C:/Users/Lenovo/PycharmProjects/t
+) [79 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Implementat
+ion/ImplementationFigs/StanzaLines.png>] [80 <C:/Users/Lenovo/PycharmProjects/t
 he_poetry_plagiarist/report/Implementation/ImplementationFigs/RhymeSchemes.png>
-] [79 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Implementat
+] [81 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Implementat
 ion/ImplementationFigs/PersonaTypes.png> <C:/Users/Lenovo/PycharmProjects/the_p
 oetry_plagiarist/report/Implementation/ImplementationFigs/PersonaAnimation.png>
-] [80 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Implementat
+] [82 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Implementat
 ion/ImplementationFigs/PersonaRelation.png> <C:/Users/Lenovo/PycharmProjects/th
 e_poetry_plagiarist/report/Implementation/ImplementationFigs/Line1NGrams.png>] 
-[81 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Implementatio
+[83 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Implementatio
 n/ImplementationFigs/DistinctSentences.png> <C:/Users/Lenovo/PycharmProjects/th
 e_poetry_plagiarist/report/Implementation/ImplementationFigs/OverallTense.png>]
 
 (C:\Users\Lenovo\PycharmProjects\the_poetry_plagiarist\report\Management/manage
 ment.tex
 Chapter 6.
-[82
+[84
 
 
 
-] [83]
-Overfull \hbox (262.93263pt too wide) in paragraph at lines 61--61
+] [85]
+Overfull \hbox (262.93263pt too wide) in paragraph at lines 97--97
 []\OT1/cmtt/m/n/12 3 order phrases in Valence Pattern so that subjects come fir
 st, then the target, then the dependencies and objects[] 
  []
 
-[84] [85] [86] [87]
-<Management/ManagementFigs/custard-collocs.png, id=1565, 1145.78062pt x 406.518
+[86] [87] [88] [89]
+<Management/ManagementFigs/custard-collocs.png, id=1590, 1145.78062pt x 406.518
 75pt>
 File: Management/ManagementFigs/custard-collocs.png Graphic file (type png)
  <use Management/ManagementFigs/custard-collocs.png>
 Package pdftex.def Info: Management/ManagementFigs/custard-collocs.png used on 
-input line 131.
+input line 189.
 (pdftex.def)             Requested size: 398.33858pt x 141.32843pt.
- [88 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Management/M
-anagementFigs/custard-collocs.png>] [89] [90] [91] [92] [93] [94] [95] [96] [97
-] [98] [99] [100]
-[101]) [102]
+ [90 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Management/M
+anagementFigs/custard-collocs.png>] [91] [92] [93] [94] [95] [96] [97] [98] [99
+] [100] [101] [102]
+[103] [104]) [105]
 (C:\Users\Lenovo\PycharmProjects\the_poetry_plagiarist\report\Evaluation/evalua
 tion.tex
 Chapter 7.
-<Evaluation/EvaluationFigs/lim-stanza.png, id=1664, 567.3195pt x 422.7795pt>
+<Evaluation/EvaluationFigs/lim-stanza.png, id=1699, 567.3195pt x 422.7795pt>
 File: Evaluation/EvaluationFigs/lim-stanza.png Graphic file (type png)
 
 <use Evaluation/EvaluationFigs/lim-stanza.png>
@@ -2311,7 +2274,7 @@ Overfull \hbox (9.95712pt too wide) in paragraph at lines 22--23
  [][] 
  []
 
-<Evaluation/EvaluationFigs/lim-lines.png, id=1665, 567.3195pt x 422.7795pt>
+<Evaluation/EvaluationFigs/lim-lines.png, id=1700, 567.3195pt x 422.7795pt>
 File: Evaluation/EvaluationFigs/lim-lines.png Graphic file (type png)
 
 <use Evaluation/EvaluationFigs/lim-lines.png>
@@ -2324,7 +2287,7 @@ Overfull \hbox (9.95712pt too wide) in paragraph at lines 28--29
  []
 
 
-<Evaluation/EvaluationFigs/lim-rep-lines.png, id=1666, 567.3195pt x 422.7795pt>
+<Evaluation/EvaluationFigs/lim-rep-lines.png, id=1701, 567.3195pt x 422.7795pt>
 File: Evaluation/EvaluationFigs/lim-rep-lines.png Graphic file (type png)
 <use Evaluation/EvaluationFigs/lim-rep-lines.png>
 Package pdftex.def Info: Evaluation/EvaluationFigs/lim-rep-lines.png used on in
@@ -2335,7 +2298,7 @@ Overfull \hbox (9.95712pt too wide) in paragraph at lines 34--35
  [][] 
  []
 
-[103
+[106
 
 
 
@@ -2360,100 +2323,486 @@ Overfull \hbox (1.42534pt too wide) in paragraph at lines 56--57
  [][] 
  []
 
+<Evaluation/EvaluationFigs/lim-types.png, id=1710, 567.3195pt x 422.7795pt>
+File: Evaluation/EvaluationFigs/lim-types.png Graphic file (type png)
+
+<use Evaluation/EvaluationFigs/lim-types.png>
+Package pdftex.def Info: Evaluation/EvaluationFigs/lim-types.png used on input 
+line 62.
+(pdftex.def)             Requested size: 398.33858pt x 296.85323pt.
+
+Overfull \hbox (1.42534pt too wide) in paragraph at lines 62--63
+ [][] 
+ []
+
 
 Package Fancyhdr Warning: \headheight is too small (23.69576pt): 
  Make it at least 27.08337pt.
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[104 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Evaluation/E
+[107 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Evaluation/E
 valuationFigs/lim-stanza.png> <C:/Users/Lenovo/PycharmProjects/the_poetry_plagi
 arist/report/Evaluation/EvaluationFigs/lim-lines.png> <C:/Users/Lenovo/PycharmP
 rojects/the_poetry_plagiarist/report/Evaluation/EvaluationFigs/lim-rep-lines.pn
 g>]
-Overfull \vbox (38.13626pt too high) has occurred while \output is active []
+Overfull \vbox (355.58948pt too high) has occurred while \output is active []
 
 
-[105]
-<Evaluation/EvaluationFigs/lim-rhyme.png, id=1690, 567.3195pt x 422.7795pt>
+[108 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Evaluation/E
+valuationFigs/lim-types.png>]
+<Evaluation/EvaluationFigs/lim-rhyme.png, id=1728, 567.3195pt x 422.7795pt>
 File: Evaluation/EvaluationFigs/lim-rhyme.png Graphic file (type png)
 
 <use Evaluation/EvaluationFigs/lim-rhyme.png>
 Package pdftex.def Info: Evaluation/EvaluationFigs/lim-rhyme.png used on input 
-line 79.
+line 85.
 (pdftex.def)             Requested size: 398.33858pt x 296.85323pt.
- [106]
-<Evaluation/EvaluationFigs/lim-stress1.png, id=1697, 567.3195pt x 422.7795pt>
+ [109]
+<Evaluation/EvaluationFigs/lim-stress1.png, id=1737, 567.3195pt x 422.7795pt>
 File: Evaluation/EvaluationFigs/lim-stress1.png Graphic file (type png)
 
 <use Evaluation/EvaluationFigs/lim-stress1.png>
 Package pdftex.def Info: Evaluation/EvaluationFigs/lim-stress1.png used on inpu
-t line 93.
+t line 99.
 (pdftex.def)             Requested size: 199.16928pt x 148.4266pt.
 
-Overfull \hbox (0.71266pt too wide) in paragraph at lines 93--94
- [][] 
- []
-
-<Evaluation/EvaluationFigs/lim-stress2.png, id=1698, 567.3195pt x 422.7795pt>
+<Evaluation/EvaluationFigs/lim-stress2.png, id=1738, 567.3195pt x 422.7795pt>
 File: Evaluation/EvaluationFigs/lim-stress2.png Graphic file (type png)
 
 <use Evaluation/EvaluationFigs/lim-stress2.png>
 Package pdftex.def Info: Evaluation/EvaluationFigs/lim-stress2.png used on inpu
-t line 99.
+t line 105.
 (pdftex.def)             Requested size: 199.16928pt x 148.4266pt.
 
-Overfull \hbox (0.71266pt too wide) in paragraph at lines 99--100
- [][] 
- []
-
-<Evaluation/EvaluationFigs/lim-stress5.png, id=1699, 567.3195pt x 422.7795pt>
+<Evaluation/EvaluationFigs/lim-stress5.png, id=1739, 567.3195pt x 422.7795pt>
 File: Evaluation/EvaluationFigs/lim-stress5.png Graphic file (type png)
 
 <use Evaluation/EvaluationFigs/lim-stress5.png>
 Package pdftex.def Info: Evaluation/EvaluationFigs/lim-stress5.png used on inpu
-t line 105.
+t line 111.
 (pdftex.def)             Requested size: 199.16928pt x 148.4266pt.
- [107 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Evaluation/
+ [110 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Evaluation/
 EvaluationFigs/lim-rhyme.png>]
-[108 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Evaluation/E
+[111 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Evaluation/E
 valuationFigs/lim-stress1.png> <C:/Users/Lenovo/PycharmProjects/the_poetry_plag
 iarist/report/Evaluation/EvaluationFigs/lim-stress2.png> <C:/Users/Lenovo/Pycha
 rmProjects/the_poetry_plagiarist/report/Evaluation/EvaluationFigs/lim-stress5.p
-ng>] [109]
+ng>]
+<Evaluation/EvaluationFigs/lim-stress3.png, id=1755, 567.3195pt x 422.7795pt>
+File: Evaluation/EvaluationFigs/lim-stress3.png Graphic file (type png)
 
-LaTeX Warning: Reference `sec:book' on page 110 undefined on input line 141.
+<use Evaluation/EvaluationFigs/lim-stress3.png>
+Package pdftex.def Info: Evaluation/EvaluationFigs/lim-stress3.png used on inpu
+t line 135.
+(pdftex.def)             Requested size: 199.16928pt x 148.4266pt.
+
+<Evaluation/EvaluationFigs/lim-stress4.png, id=1756, 567.3195pt x 422.7795pt>
+File: Evaluation/EvaluationFigs/lim-stress4.png Graphic file (type png)
+
+<use Evaluation/EvaluationFigs/lim-stress4.png>
+Package pdftex.def Info: Evaluation/EvaluationFigs/lim-stress4.png used on inpu
+t line 141.
+(pdftex.def)             Requested size: 199.16928pt x 148.4266pt.
+ [112] [113 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Evalu
+ation/EvaluationFigs/lim-stress3.png> <C:/Users/Lenovo/PycharmProjects/the_poet
+ry_plagiarist/report/Evaluation/EvaluationFigs/lim-stress4.png>]
+
+LaTeX Warning: Reference `sec:lear' on page 114 undefined on input line 163.
 
 
-Overfull \hbox (112.5761pt too wide) in paragraph at lines 145--150
-\OT1/cmr/m/n/12 their ex-am-ples use six syl-la-bles. http://www.gigglepoetry.c
-om/poetryclassdetail.aspx?LessonPlanID=2
+LaTeX Warning: Reference `sec:book' on page 114 undefined on input line 165.
+
+[114]
+<Evaluation/EvaluationFigs/lim-tense.png, id=1776, 567.3195pt x 422.7795pt>
+File: Evaluation/EvaluationFigs/lim-tense.png Graphic file (type png)
+
+<use Evaluation/EvaluationFigs/lim-tense.png>
+Package pdftex.def Info: Evaluation/EvaluationFigs/lim-tense.png used on input 
+line 182.
+(pdftex.def)             Requested size: 199.16928pt x 148.4266pt.
+
+<Evaluation/EvaluationFigs/lim-persp.png, id=1777, 567.3195pt x 422.7795pt>
+File: Evaluation/EvaluationFigs/lim-persp.png Graphic file (type png)
+
+<use Evaluation/EvaluationFigs/lim-persp.png>
+Package pdftex.def Info: Evaluation/EvaluationFigs/lim-persp.png used on input 
+line 188.
+(pdftex.def)             Requested size: 199.16928pt x 148.4266pt.
+
+<Evaluation/EvaluationFigs/haik-stanza.png, id=1779, 567.3195pt x 422.7795pt>
+File: Evaluation/EvaluationFigs/haik-stanza.png Graphic file (type png)
+
+<use Evaluation/EvaluationFigs/haik-stanza.png>
+Package pdftex.def Info: Evaluation/EvaluationFigs/haik-stanza.png used on inpu
+t line 209.
+(pdftex.def)             Requested size: 142.26378pt x 106.01717pt.
+
+Overfull \hbox (9.95712pt too wide) in paragraph at lines 209--210
+ [][] 
+ []
+
+<Evaluation/EvaluationFigs/haik-lines.png, id=1780, 567.3195pt x 422.7795pt>
+File: Evaluation/EvaluationFigs/haik-lines.png Graphic file (type png)
+
+<use Evaluation/EvaluationFigs/haik-lines.png>
+Package pdftex.def Info: Evaluation/EvaluationFigs/haik-lines.png used on input
+ line 215.
+(pdftex.def)             Requested size: 142.26378pt x 106.01717pt.
+
+Overfull \hbox (9.95712pt too wide) in paragraph at lines 215--216
+ [][] 
  []
 
 
-Overfull \hbox (159.59688pt too wide) in paragraph at lines 145--150
-\OT1/cmr/m/n/12 writing-now.com/how-to-write-a-limerick.html http://www.poetryt
-eachers.com/poetclass/lessons/limerick.html
+<Evaluation/EvaluationFigs/haik-rep-lines.png, id=1781, 567.3195pt x 422.7795pt
+>
+File: Evaluation/EvaluationFigs/haik-rep-lines.png Graphic file (type png)
+ <use Evaluation/EvaluationFigs/haik-rep-lines.png>
+Package pdftex.def Info: Evaluation/EvaluationFigs/haik-rep-lines.png used on i
+nput line 221.
+(pdftex.def)             Requested size: 142.26378pt x 106.01717pt.
+
+Overfull \hbox (9.95712pt too wide) in paragraph at lines 221--222
+ [][] 
  []
 
-[110] [111] [112] [113]
+[115 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Evaluation/E
+valuationFigs/lim-tense.png> <C:/Users/Lenovo/PycharmProjects/the_poetry_plagia
+rist/report/Evaluation/EvaluationFigs/lim-persp.png>]
+<Evaluation/EvaluationFigs/haik-types.png, id=1792, 567.3195pt x 422.0568pt>
+File: Evaluation/EvaluationFigs/haik-types.png Graphic file (type png)
 
-Package caption Warning: \label without proper \caption on input line 260.
+<use Evaluation/EvaluationFigs/haik-types.png>
+Package pdftex.def Info: Evaluation/EvaluationFigs/haik-types.png used on input
+ line 238.
+(pdftex.def)             Requested size: 398.33858pt x 296.34578pt.
+
+Overfull \hbox (1.42534pt too wide) in paragraph at lines 238--239
+ [][] 
+ []
+
+File: Evaluation/EvaluationFigs/haik-lines.png Graphic file (type png)
+<use Evaluation/EvaluationFigs/haik-lines.png>
+Package pdftex.def Info: Evaluation/EvaluationFigs/haik-lines.png used on input
+ line 244.
+(pdftex.def)             Requested size: 398.33858pt x 296.85323pt.
+
+Overfull \hbox (1.42534pt too wide) in paragraph at lines 244--245
+ [][] 
+ []
+
+[116 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Evaluation/E
+valuationFigs/haik-stanza.png> <C:/Users/Lenovo/PycharmProjects/the_poetry_plag
+iarist/report/Evaluation/EvaluationFigs/haik-lines.png> <C:/Users/Lenovo/Pychar
+mProjects/the_poetry_plagiarist/report/Evaluation/EvaluationFigs/haik-rep-lines
+.png>]
+Overfull \vbox (37.62881pt too high) has occurred while \output is active []
+
+
+[117 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Evaluation/E
+valuationFigs/haik-types.png>]
+<Evaluation/EvaluationFigs/haik-syll1.png, id=1808, 567.3195pt x 422.7795pt>
+File: Evaluation/EvaluationFigs/haik-syll1.png Graphic file (type png)
+
+<use Evaluation/EvaluationFigs/haik-syll1.png>
+Package pdftex.def Info: Evaluation/EvaluationFigs/haik-syll1.png used on input
+ line 259.
+(pdftex.def)             Requested size: 199.16928pt x 148.4266pt.
+
+<Evaluation/EvaluationFigs/haik-syll2.png, id=1809, 567.3195pt x 422.7795pt>
+File: Evaluation/EvaluationFigs/haik-syll2.png Graphic file (type png)
+
+<use Evaluation/EvaluationFigs/haik-syll2.png>
+Package pdftex.def Info: Evaluation/EvaluationFigs/haik-syll2.png used on input
+ line 265.
+(pdftex.def)             Requested size: 199.16928pt x 148.4266pt.
+
+<Evaluation/EvaluationFigs/haik-rhyme.png, id=1810, 567.3195pt x 422.7795pt>
+File: Evaluation/EvaluationFigs/haik-rhyme.png Graphic file (type png)
+
+<use Evaluation/EvaluationFigs/haik-rhyme.png>
+Package pdftex.def Info: Evaluation/EvaluationFigs/haik-rhyme.png used on input
+ line 284.
+(pdftex.def)             Requested size: 398.33858pt x 296.85323pt.
+ [118 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Evaluation/
+EvaluationFigs/haik-syll1.png> <C:/Users/Lenovo/PycharmProjects/the_poetry_plag
+iarist/report/Evaluation/EvaluationFigs/haik-syll2.png>]
+<Evaluation/EvaluationFigs/haik-tense.png, id=1819, 567.3195pt x 422.7795pt>
+File: Evaluation/EvaluationFigs/haik-tense.png Graphic file (type png)
+
+<use Evaluation/EvaluationFigs/haik-tense.png>
+Package pdftex.def Info: Evaluation/EvaluationFigs/haik-tense.png used on input
+ line 296.
+(pdftex.def)             Requested size: 199.16928pt x 148.4266pt.
+
+<Evaluation/EvaluationFigs/haik-persp.png, id=1820, 567.3195pt x 422.7795pt>
+File: Evaluation/EvaluationFigs/haik-persp.png Graphic file (type png)
+
+<use Evaluation/EvaluationFigs/haik-persp.png>
+Package pdftex.def Info: Evaluation/EvaluationFigs/haik-persp.png used on input
+ line 302.
+(pdftex.def)             Requested size: 199.16928pt x 148.4266pt.
+ [119 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Evaluation/
+EvaluationFigs/haik-rhyme.png>]
+<Evaluation/EvaluationFigs/son-stanza.png, id=1830, 567.3195pt x 422.7795pt>
+File: Evaluation/EvaluationFigs/son-stanza.png Graphic file (type png)
+
+<use Evaluation/EvaluationFigs/son-stanza.png>
+Package pdftex.def Info: Evaluation/EvaluationFigs/son-stanza.png used on input
+ line 324.
+(pdftex.def)             Requested size: 142.26378pt x 106.01717pt.
+
+Overfull \hbox (9.95712pt too wide) in paragraph at lines 324--325
+ [][] 
+ []
+
+<Evaluation/EvaluationFigs/son-lines.png, id=1831, 567.3195pt x 422.7795pt>
+File: Evaluation/EvaluationFigs/son-lines.png Graphic file (type png)
+
+<use Evaluation/EvaluationFigs/son-lines.png>
+Package pdftex.def Info: Evaluation/EvaluationFigs/son-lines.png used on input 
+line 330.
+(pdftex.def)             Requested size: 142.26378pt x 106.01717pt.
+
+Overfull \hbox (9.95712pt too wide) in paragraph at lines 330--331
+ [][] 
+ []
+
+
+<Evaluation/EvaluationFigs/son-rep-lines.png, id=1832, 567.3195pt x 422.7795pt>
+File: Evaluation/EvaluationFigs/son-rep-lines.png Graphic file (type png)
+<use Evaluation/EvaluationFigs/son-rep-lines.png>
+Package pdftex.def Info: Evaluation/EvaluationFigs/son-rep-lines.png used on in
+put line 336.
+(pdftex.def)             Requested size: 142.26378pt x 106.01717pt.
+
+Overfull \hbox (9.95712pt too wide) in paragraph at lines 336--337
+ [][] 
+ []
+
+[120 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Evaluation/E
+valuationFigs/haik-tense.png> <C:/Users/Lenovo/PycharmProjects/the_poetry_plagi
+arist/report/Evaluation/EvaluationFigs/haik-persp.png>]
+<Evaluation/EvaluationFigs/son-types.png, id=1842, 567.3195pt x 422.7795pt>
+File: Evaluation/EvaluationFigs/son-types.png Graphic file (type png)
+
+<use Evaluation/EvaluationFigs/son-types.png>
+Package pdftex.def Info: Evaluation/EvaluationFigs/son-types.png used on input 
+line 349.
+(pdftex.def)             Requested size: 398.33858pt x 296.85323pt.
+ [121 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Evaluation/
+EvaluationFigs/son-stanza.png> <C:/Users/Lenovo/PycharmProjects/the_poetry_plag
+iarist/report/Evaluation/EvaluationFigs/son-lines.png> <C:/Users/Lenovo/Pycharm
+Projects/the_poetry_plagiarist/report/Evaluation/EvaluationFigs/son-rep-lines.p
+ng> <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Evaluation/Ev
+aluationFigs/son-types.png>]
+<Evaluation/EvaluationFigs/son-anim.png, id=1854, 567.3195pt x 422.7795pt>
+File: Evaluation/EvaluationFigs/son-anim.png Graphic file (type png)
+
+<use Evaluation/EvaluationFigs/son-anim.png>
+Package pdftex.def Info: Evaluation/EvaluationFigs/son-anim.png used on input l
+ine 358.
+(pdftex.def)             Requested size: 398.33858pt x 296.85323pt.
+
+<Evaluation/EvaluationFigs/son-grams.png, id=1856, 567.3195pt x 422.7795pt>
+File: Evaluation/EvaluationFigs/son-grams.png Graphic file (type png)
+
+<use Evaluation/EvaluationFigs/son-grams.png>
+Package pdftex.def Info: Evaluation/EvaluationFigs/son-grams.png used on input 
+line 367.
+(pdftex.def)             Requested size: 398.33858pt x 296.85323pt.
+ [122 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Evaluation/
+EvaluationFigs/son-anim.png>]
+<Evaluation/EvaluationFigs/son-rhyme.png, id=1864, 567.3195pt x 432.8973pt>
+File: Evaluation/EvaluationFigs/son-rhyme.png Graphic file (type png)
+
+<use Evaluation/EvaluationFigs/son-rhyme.png>
+Package pdftex.def Info: Evaluation/EvaluationFigs/son-rhyme.png used on input 
+line 377.
+(pdftex.def)             Requested size: 398.33858pt x 303.95741pt.
+ [123 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Evaluation/
+EvaluationFigs/son-grams.png>]
+[124 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Evaluation/E
+valuationFigs/son-rhyme.png>] [125]
+<Evaluation/EvaluationFigs/son-stress1.png, id=1883, 567.3195pt x 422.7795pt>
+File: Evaluation/EvaluationFigs/son-stress1.png Graphic file (type png)
+
+<use Evaluation/EvaluationFigs/son-stress1.png>
+Package pdftex.def Info: Evaluation/EvaluationFigs/son-stress1.png used on inpu
+t line 424.
+(pdftex.def)             Requested size: 199.16928pt x 148.4266pt.
+
+<Evaluation/EvaluationFigs/son-stress2.png, id=1884, 567.3195pt x 422.7795pt>
+File: Evaluation/EvaluationFigs/son-stress2.png Graphic file (type png)
+
+<use Evaluation/EvaluationFigs/son-stress2.png>
+Package pdftex.def Info: Evaluation/EvaluationFigs/son-stress2.png used on inpu
+t line 430.
+(pdftex.def)             Requested size: 199.16928pt x 148.4266pt.
+
+<Evaluation/EvaluationFigs/son-stress3.png, id=1885, 567.3195pt x 422.7795pt>
+File: Evaluation/EvaluationFigs/son-stress3.png Graphic file (type png)
+
+<use Evaluation/EvaluationFigs/son-stress3.png>
+Package pdftex.def Info: Evaluation/EvaluationFigs/son-stress3.png used on inpu
+t line 436.
+(pdftex.def)             Requested size: 199.16928pt x 148.4266pt.
+
+<Evaluation/EvaluationFigs/son-stress4.png, id=1886, 567.3195pt x 422.7795pt>
+File: Evaluation/EvaluationFigs/son-stress4.png Graphic file (type png)
+
+<use Evaluation/EvaluationFigs/son-stress4.png>
+Package pdftex.def Info: Evaluation/EvaluationFigs/son-stress4.png used on inpu
+t line 442.
+(pdftex.def)             Requested size: 199.16928pt x 148.4266pt.
+
+<Evaluation/EvaluationFigs/son-stress5.png, id=1887, 567.3195pt x 422.7795pt>
+File: Evaluation/EvaluationFigs/son-stress5.png Graphic file (type png)
+
+<use Evaluation/EvaluationFigs/son-stress5.png>
+Package pdftex.def Info: Evaluation/EvaluationFigs/son-stress5.png used on inpu
+t line 448.
+(pdftex.def)             Requested size: 199.16928pt x 148.4266pt.
+
+<Evaluation/EvaluationFigs/son-stress6.png, id=1888, 567.3195pt x 422.7795pt>
+File: Evaluation/EvaluationFigs/son-stress6.png Graphic file (type png)
+
+<use Evaluation/EvaluationFigs/son-stress6.png>
+Package pdftex.def Info: Evaluation/EvaluationFigs/son-stress6.png used on inpu
+t line 454.
+(pdftex.def)             Requested size: 199.16928pt x 148.4266pt.
+
+<Evaluation/EvaluationFigs/son-stress7.png, id=1889, 567.3195pt x 422.7795pt>
+File: Evaluation/EvaluationFigs/son-stress7.png Graphic file (type png)
+
+<use Evaluation/EvaluationFigs/son-stress7.png>
+Package pdftex.def Info: Evaluation/EvaluationFigs/son-stress7.png used on inpu
+t line 460.
+(pdftex.def)             Requested size: 199.16928pt x 148.4266pt.
+
+<Evaluation/EvaluationFigs/son-stress8.png, id=1890, 567.3195pt x 422.7795pt>
+File: Evaluation/EvaluationFigs/son-stress8.png Graphic file (type png)
+
+<use Evaluation/EvaluationFigs/son-stress8.png>
+Package pdftex.def Info: Evaluation/EvaluationFigs/son-stress8.png used on inpu
+t line 466.
+(pdftex.def)             Requested size: 199.16928pt x 148.4266pt.
+
+<Evaluation/EvaluationFigs/son-stress9.png, id=1891, 567.3195pt x 422.7795pt>
+File: Evaluation/EvaluationFigs/son-stress9.png Graphic file (type png)
+
+<use Evaluation/EvaluationFigs/son-stress9.png>
+Package pdftex.def Info: Evaluation/EvaluationFigs/son-stress9.png used on inpu
+t line 472.
+(pdftex.def)             Requested size: 199.16928pt x 148.4266pt.
+
+<Evaluation/EvaluationFigs/son-stress10.png, id=1892, 567.3195pt x 422.7795pt>
+File: Evaluation/EvaluationFigs/son-stress10.png Graphic file (type png)
+
+<use Evaluation/EvaluationFigs/son-stress10.png>
+Package pdftex.def Info: Evaluation/EvaluationFigs/son-stress10.png used on inp
+ut line 478.
+(pdftex.def)             Requested size: 199.16928pt x 148.4266pt.
+
+<Evaluation/EvaluationFigs/son-stress11.png, id=1893, 567.3195pt x 422.7795pt>
+File: Evaluation/EvaluationFigs/son-stress11.png Graphic file (type png)
+
+<use Evaluation/EvaluationFigs/son-stress11.png>
+Package pdftex.def Info: Evaluation/EvaluationFigs/son-stress11.png used on inp
+ut line 484.
+(pdftex.def)             Requested size: 199.16928pt x 148.4266pt.
+
+<Evaluation/EvaluationFigs/son-stress12.png, id=1894, 567.3195pt x 422.7795pt>
+File: Evaluation/EvaluationFigs/son-stress12.png Graphic file (type png)
+
+<use Evaluation/EvaluationFigs/son-stress12.png>
+Package pdftex.def Info: Evaluation/EvaluationFigs/son-stress12.png used on inp
+ut line 490.
+(pdftex.def)             Requested size: 199.16928pt x 148.4266pt.
+
+<Evaluation/EvaluationFigs/son-stress13.png, id=1895, 567.3195pt x 422.7795pt>
+File: Evaluation/EvaluationFigs/son-stress13.png Graphic file (type png)
+
+<use Evaluation/EvaluationFigs/son-stress13.png>
+Package pdftex.def Info: Evaluation/EvaluationFigs/son-stress13.png used on inp
+ut line 496.
+(pdftex.def)             Requested size: 199.16928pt x 148.4266pt.
+
+<Evaluation/EvaluationFigs/son-stress14.png, id=1896, 567.3195pt x 422.7795pt>
+File: Evaluation/EvaluationFigs/son-stress14.png Graphic file (type png)
+
+<use Evaluation/EvaluationFigs/son-stress14.png>
+Package pdftex.def Info: Evaluation/EvaluationFigs/son-stress14.png used on inp
+ut line 502.
+(pdftex.def)             Requested size: 199.16928pt x 148.4266pt.
+ [126]
+Overfull \vbox (1769.60217pt too high) has occurred while \output is active []
+
+
+[127 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Evaluation/E
+valuationFigs/son-stress1.png> <C:/Users/Lenovo/PycharmProjects/the_poetry_plag
+iarist/report/Evaluation/EvaluationFigs/son-stress2.png> <C:/Users/Lenovo/Pycha
+rmProjects/the_poetry_plagiarist/report/Evaluation/EvaluationFigs/son-stress3.p
+ng> <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Evaluation/Ev
+aluationFigs/son-stress4.png> <C:/Users/Lenovo/PycharmProjects/the_poetry_plagi
+arist/report/Evaluation/EvaluationFigs/son-stress5.png> <C:/Users/Lenovo/Pychar
+mProjects/the_poetry_plagiarist/report/Evaluation/EvaluationFigs/son-stress6.pn
+g> <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Evaluation/Eva
+luationFigs/son-stress7.png> <C:/Users/Lenovo/PycharmProjects/the_poetry_plagia
+rist/report/Evaluation/EvaluationFigs/son-stress8.png> <C:/Users/Lenovo/Pycharm
+Projects/the_poetry_plagiarist/report/Evaluation/EvaluationFigs/son-stress9.png
+> <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Evaluation/Eval
+uationFigs/son-stress10.png> <C:/Users/Lenovo/PycharmProjects/the_poetry_plagia
+rist/report/Evaluation/EvaluationFigs/son-stress11.png> <C:/Users/Lenovo/Pychar
+mProjects/the_poetry_plagiarist/report/Evaluation/EvaluationFigs/son-stress12.p
+ng> <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Evaluation/Ev
+aluationFigs/son-stress13.png> <C:/Users/Lenovo/PycharmProjects/the_poetry_plag
+iarist/report/Evaluation/EvaluationFigs/son-stress14.png>]
+<Evaluation/EvaluationFigs/son-tense.png, id=1922, 567.3195pt x 422.7795pt>
+File: Evaluation/EvaluationFigs/son-tense.png Graphic file (type png)
+
+<use Evaluation/EvaluationFigs/son-tense.png>
+Package pdftex.def Info: Evaluation/EvaluationFigs/son-tense.png used on input 
+line 517.
+(pdftex.def)             Requested size: 199.16928pt x 148.4266pt.
+
+<Evaluation/EvaluationFigs/son-persp.png, id=1923, 567.3195pt x 422.7795pt>
+File: Evaluation/EvaluationFigs/son-persp.png Graphic file (type png)
+
+<use Evaluation/EvaluationFigs/son-persp.png>
+Package pdftex.def Info: Evaluation/EvaluationFigs/son-persp.png used on input 
+line 523.
+(pdftex.def)             Requested size: 199.16928pt x 148.4266pt.
+
+<Evaluation/EvaluationFigs/son-simile.png, id=1925, 567.3195pt x 422.7795pt>
+File: Evaluation/EvaluationFigs/son-simile.png Graphic file (type png)
+
+<use Evaluation/EvaluationFigs/son-simile.png>
+Package pdftex.def Info: Evaluation/EvaluationFigs/son-simile.png used on input
+ line 535.
+(pdftex.def)             Requested size: 398.33858pt x 296.85323pt.
+ [128 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Evaluation/
+EvaluationFigs/son-tense.png> <C:/Users/Lenovo/PycharmProjects/the_poetry_plagi
+arist/report/Evaluation/EvaluationFigs/son-persp.png>]
+
+Package caption Warning: \label without proper \caption on input line 554.
 See the caption package documentation for explanation.
 
 
-LaTeX Warning: Reference `ana-agg-speed' on page 114 undefined on input line 25
-0.
+LaTeX Warning: Reference `ana-agg-speed' on page 129 undefined on input line 54
+4.
 
-[114] [115] [116]
-Overfull \hbox (227.71146pt too wide) in paragraph at lines 315--316
+[129 <C:/Users/Lenovo/PycharmProjects/the_poetry_plagiarist/report/Evaluation/E
+valuationFigs/son-simile.png>] [130] [131]
+Overfull \hbox (227.71146pt too wide) in paragraph at lines 609--610
 []\OT1/cmr/m/n/12 The av-er-age vo-cab-u-lary of na-tive En-glish speak-ers is 
 20,000-35,000[http://www.economist.com/blogs/johnson/2013/05/vocabulary-
  []
 
-[117] [118] [119]) [120]
+[132] [133] [134]) [135]
 (C:\Users\Lenovo\PycharmProjects\the_poetry_plagiarist\report\Appendix1/appendi
-x1.tex [121
+x1.tex [136
 
 
 
@@ -2463,26 +2812,30 @@ Overfull \hbox (56.91786pt too wide) in paragraph at lines 60--60
  |[]\OT1/cmr/bx/n/17.28 CMU Pro-nun-ci-a-tion Dic-tio-nary ARPA-BET Phoneme
  []
 
-[122] [123] [124] [125]
+[137] [138] [139] [140]
 Overfull \hbox (28.65047pt too wide) in paragraph at lines 212--221
 [][] 
  []
 
-[126] [127]
+[141] [142]
 Overfull \hbox (253.53154pt too wide) in paragraph at lines 311--324
 [][] 
  []
 
-[128] [129]
+[143] [144]
 
-LaTeX Warning: Reference `sec:book' on page 130 undefined on input line 391.
+LaTeX Warning: Reference `sec:lear' on page 145 undefined on input line 391.
 
-[130]) [131] [132
+[145] [146]
+
+LaTeX Warning: Reference `sec:book' on page 147 undefined on input line 457.
+
+[147] [148] [149]) [150] [151
 
 
-] [133] [134] [135] [136]
+] [152] [153] [154] [155]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 150.
- [137]
+ [156]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 150.
 
 (C:\Users\Lenovo\PycharmProjects\the_poetry_plagiarist\report\report.aux
@@ -2505,7 +2858,7 @@ x1.aux))
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 150.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 150.
 Package rerunfilecheck Info: File `report.out' has not changed.
-(rerunfilecheck)             Checksum: 38142F0E147D7D742955E29381B51B67;13864.
+(rerunfilecheck)             Checksum: 38FA954A31B57C77D25C7DA0D9B4DEC1;13924.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
@@ -2513,16 +2866,13 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 LaTeX Warning: There were undefined references.
 
-
-LaTeX Warning: There were multiply-defined labels.
-
 Package logreq Info: Writing requests to 'report.run.xml'.
  ) 
 Here is how much of TeX's memory you used:
- 35879 strings out of 493921
- 765652 string characters out of 3144873
- 1263811 words of memory out of 3000000
- 37937 multiletter control sequences out of 15000+200000
+ 36321 strings out of 493921
+ 777840 string characters out of 3144873
+ 1274432 words of memory out of 3000000
+ 38297 multiletter control sequences out of 15000+200000
  13484 words of font info for 49 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
  74i,34n,76p,894b,3559s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -2542,9 +2892,9 @@ MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/Mi
 KTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Program Files (x86)/MiKT
 eX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Program Files (x86)/MiKTeX
  2.9/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on report.pdf (144 pages, 1883487 bytes).
+Output written on report.pdf (163 pages, 2911692 bytes).
 PDF statistics:
- 2020 PDF objects out of 2073 (max. 8388607)
- 455 named destinations out of 1000 (max. 500000)
- 1538 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 2250 PDF objects out of 2487 (max. 8388607)
+ 499 named destinations out of 1000 (max. 500000)
+ 1736 words of extra memory for PDF output out of 10000 (max. 10000000)
 

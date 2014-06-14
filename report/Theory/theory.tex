@@ -134,21 +134,56 @@ Words rhyme when both of the following conditions are met:
 \item{the vowel sounds from the first \textit{stressed} syllable match \textbf{in order}}
 \end{itemize}
 
-The algorithm finds the first stressed syllable in lines 3 and 4. Once it is found, we iterate through the rest of the pronunciation, checking the \textit{vowel} sounds and the \textit{last} phoneme. Putting them together, in order, gives the rhyme phoneme pattern, which we can compare directly to find matching rhymes. 
+The algorithm finds the first stressed syllable in lines 3 and 4. Once it is found, we iterate through the rest of the pronunciation, checking the \textit{vowel} sounds and the \textit{last} phoneme. Putting them together, in order, gives the rhyme phoneme pattern, which we can compare directly to find matching rhymes. Examples are illustrated in Figure \ref{fig:rhyme-examples}.
 
-FOR EXAMPLE, STRATEGY AND TRAGEDY, KITE AND HEIGHT, TURTLE AND PURPLE		
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.5\textwidth}
+	\centering
+    \textit{Kite:} K \textbf{AY1 T}\\
+    \textit{Height:} H \textbf{AY1 T}
+    \caption{Kite and Height}
+    \label{fig:kite-height}
+\end{subfigure}
+
+\begin{subfigure}[t]{0.5\textwidth}
+	\centering
+    \textit{Turtle:} T \textbf{ER1} T \textbf{AH0 L}\\
+    \textit{Purple:} P \textbf{ER1} P \textbf{AH0 L}
+    \caption{Turtle and Purple}
+    \label{fig:turtle-purple}
+\end{subfigure}
+
+\begin{subfigure}[t]{0.9\textwidth}
+	\centering
+    \textit{Strategy:} S T R \textbf{AE1} T \textbf{AH0} JH \textbf{IY0}\\
+    \textit{Tragedy:} T R \textbf{AE1} JH \textbf{AH0} D \textbf{IY0} 
+    \caption{Strategy and Tragedy}
+    \label{fig:strategy-tragedy}
+\end{subfigure}
+\caption{Pairs of matching rhyme phoneme patterns}
+\label{fig:rhyme-examples}
+\end{figure}		
 
 \subsection{Building and Normalising the Rhyme Scheme}
 
 Each unique rhyme phoneme pattern is represented by a single capital letter starting with 'A'. This is the standard convention for rhyme schemes used in literary theory. 
 
-The fact that a single word may have several pronunciations creates a complication. To cope with it, we create a tuple for every possible rhyme pattern for a each word. The list of these tuples is what the algorithm refers to as the 'unzipped' rhyme scheme on line 12 and 13. Figure BLAH shows the unzipped rhyme scheme for the limerick in Figure BLAH. Note that the word \textit{'anatomical'} has two pronunciations that affect the rhyme pattern, according to the CMUPD.
+The fact that a single word may have several pronunciations creates a complication. To cope with it, we create a tuple for every possible rhyme pattern for a each word. The list of these tuples is what the algorithm refers to as the 'unzipped' rhyme scheme on line 12 and 13. Table \ref{tab:unzip-rhyme} shows the unzipped rhyme scheme for the limerick in Figure \ref{fig:limerick}. Note that the word \textit{'anatomical'} has two pronunciations that affect the rhyme pattern, according to the CMUPD.
 
-FIGURE OF THE UNZIPPED RHYME SCHEME
+\begin{table}
+\centering
+    \begin{tabular}{lllll}
+    \textbf{(A,B)}      & \textbf{(B)}        & \textbf{(C)}  & \textbf{(C)}   & \textbf{(B)}     \\
+    anatomical & economical & seen & clean & comical \\
+    \end{tabular}
+\caption{Unzipped rhyme scheme for the limerick}
+\label{tab:unzip-rhyme}
+\end{table}
 
 We then build every possible permutation of this list, which then gives us all of the possible rhyme schemes for the given words. We leave this list as it is and do not make a claim for any rhyme scheme to be more likely than any other at this stage.
 
-EXAMPLE RHYME SCHEMES OF CAT AND LIMERICK
+The only possible rhyme scheme for the cat poem is \textit{ABAB}, while the limerick could be either \textit{AABBA} or \textit{ABCCB} (equivalently, \textit{CABBA} so just the first word is ambiguous).
 
 \section{Rhythm}
 
@@ -183,7 +218,21 @@ We narrow this down by taking away any occurrences of the same stress three or m
 
 Like with rhyme, we do not make a claim for any stress pattern to be more likely than any other at this stage.
 
-FIGURE OF POSSIBLE STRESS PATTERNS FOR FIRST LINE OF CAT AND LIMERICK
+\begin{table}
+    \begin{tabular}{lllllll}
+    (1,0) & (1,0) & (1,0) & (1,0) & (1,0) & (1,0) & (1,0) \\
+    There & once  & was   & a     & big   & brown & cat   \\
+    \end{tabular}
+\caption{All permutations of stress pattern are possible for the first line of the cat poem}
+\end{table}
+
+\begin{table}
+    \begin{tabular}{lllll}
+    (1,0) & (100)    & (1,0) & (1,0)  & (00100, 10100) \\
+    The   & limerick & packs & laughs & anatomical     \\
+    \end{tabular}
+\caption{Any permutation of these stress patterns are possible for the first line of the limerick}
+\end{table}
 
 
 \section{Sound Devices}
@@ -246,13 +295,32 @@ The tense of each line can be found by analysing the verb in that sentence. CLiP
 We record the tense of each line as well as the overall tense of the poem. Each line in the cat poem in Figure \ref{fig:cat} is in past tense giving a past tense overall. The limerick in Figure \ref{fig:limerick} is in present tense overall because all but one line, is in present tense. 
 
 
-\subsection{Mood, Modality, Subjectivity, Polarity}
-
-
 \subsection{N-Grams}
+Python NLTK provides functionality for breaking up text into constituent \textit{n-grams}, consecutive words of length \texttt{n}. We cover all lengths of \texttt{n} up to the size of the each line and count the frequency of occurrence of these n-grams across all poems for each particular line. The n-grams for all \texttt{n} in the first line of the cat poem are shown below.
 
+\begin{description}
+\item[1-grams] \hfill \\
+\textit{There}, \textit{once}, \textit{was}, \textit{a}, \textit{big}, \textit{brown}, \textit{cat}
+\item[2-grams] \hfill \\
+\textit{There once}, \textit{once was}, \textit{was a}, \textit{a big}, \textit{big brown}, \textit{brown cat}
+\item[3-grams] \hfill \\
+\textit{There once was}, \textit{once was a}, \textit{was a big}, \textit{a big brown}, \textit{big brown cat}
+\item[4-grams] \hfill \\
+\textit{There once was a}, \textit{once was a big}, \textit{was a big brown}, \textit{a big brown cat}
+\item[5-grams] \hfill \\
+\textit{There once was a big}, \textit{once was a big brown}, \textit{was a big brown cat}
+\item[6-grams] \hfill \\
+\textit{There once was a big brown}, \textit{once was a big brown cat}
+\item[7-grams] \hfill \\
+\textit{There once was a big brown cat}
+\end{description}
+
+The unique n-grams with highest \texttt{n} that occur with significant frequency in a particular line across all poems are recorded. This will help us identify phrases commonly used for a single type of poetry and their location in the poem. For example, the perception that limericks starting with \textit{'There was a'}.
 
 \subsection{Topics}
+Limericks typically talk about people and places, haikus about nature and seasons, sonnets about thoughts and emotions. We need to recognise the topics that poems cover so that our poems can follow suit, especially when there is no other source of inspiration.
+
+We use the hypernym relation provided by WordNet to find the categories of the nouns used in the poem. We save the entire inherited hypernym tree (see Section \ref{sec:wn}) for each noun in each poem as a list of synsets. This list is compared with other poems in the interpretation stage, where we record the synsets that occur with significant frequency.
 
 
 \section{Characters and Context}
@@ -730,14 +798,14 @@ The final diagrams of the collapsed dependencies for the full cat poem example c
 \label{fig:cat-collapsed}
 \end{figure}
 
-\subsubsection{Finding and Creating Characters}
+\subsubsection{Finding and Creating Persona}
 \label{sec:characters} 
 
 A naive method for finding persona would be to simply extract nouns and pronouns. This would actually be sufficient for a basic level of analysis, but this does not account for anaphora and presuppositions (see Section \ref{sec:arback}). Notice that in the second half of the cat poem, the pronoun \textit{'he'} is used to refer to the 'cat' persona and \textit{'they'} to the 'a lot of mice' persona.
 
-I will not be using any out-of-the box anaphora resolution tools like the ones mentioned in \ref{sec:arback}. Instead, I will present a new potential solution in section \ref{sec:ar}.
+I will not be using any out-of-the box anaphora resolution tools like the ones mentioned in \ref{sec:arback}. Instead, I will take advantage of the persona creation to create a bespoke solution.
 
-Part of the solution requires some basic semantic information about the persona as a prerequisite. We would like to determine whether the phrase representing the character:
+The solution requires some basic semantic information about the persona. We would like to determine whether the phrase representing the character:
 
 \begin{enumerate}
 \item{is plural or singular.}
@@ -757,11 +825,17 @@ The noun case is trickier. First we need to find the \textit{synset} of the noun
 
 We can extend this practice to the final point of determining the animation of the character by checking if the \textit{'living thing'} and \textit{'physical object'} synsets are inherited hypernyms of the synset of the noun concerned.
 
+Anaphora and presuppositions can be matched with their antecedents by comparing these semantic attributes with that of potential antecedents. 
+
+For example, we know that the persona represented by \textit{'he'} must be resolved to refer to either the \textit{'a cat'} or \textit{'a lot of mice'} persona. The \textit{'he'} persona is singular, so it can only match with the \textit{'a cat'} object, and we resolve accordingly.
+
+More complex examples may need to take gender and animation into account in a similar way.
+
 
 \subsubsection{Extracting Candidate Relations from the Frame-Semantic Parse}
 \label{sec:candidate}
 
-Using the map between FrameNet frames and semantic relations mentioned in section \ref{sec:sema}, we can carry out Algorithm BLAH.
+Using the map between FrameNet frames and semantic relations mentioned in section \ref{sec:sema}, we can carry out the following algorithm.
 
 \begin{verbatim}
 1 for each frame found in the frame-semantic parse:\\
@@ -797,7 +871,7 @@ Figure \ref{fig:cat1-fn-cn} show a dry run of this algorithm using the first hal
     \includegraphics[width=140mm]{cat1-fn-cn-d}
     \caption{Create the corresponding relation and map it to the target}
 \end{subfigure}
-\caption{Execution of Algorithm BLAH on the first half of the cat poem example.}
+\caption{Execution on the first half of the cat poem example.}
 \label{fig:cat1-fn-cn}
 \end{figure}
 
@@ -1252,8 +1326,6 @@ We can see this entire process being applied step-by-step to the 'cat' persona i
 \caption{Complete bindings for all persona}
 \label{fig:all-binded}
 \end{figure}
-
-\subsubsection{Anaphora and Presupposition Resolution}
 
 
 \section{Symbolism and Imagery}
