@@ -100,7 +100,7 @@ The final option is the most viable and would be used if the generation phase de
 
 
 \section{Rhyme}
-
+\label{sec:rhyme-a}
 We want to detect end-line and internal rhyme, as described in section \ref{sec:rhyme}. We want to be able to build a normalised rhyme scheme representation for easy analysis in the abstraction phase. 
 
 First we collect the pronunciations of the words for which we wish to build a rhyme scheme. For end-line, we collect the last word of each line of the poem. For internal rhyme, we collect the all the words in a particular stanza.
@@ -1083,7 +1083,7 @@ If we cannot find a relation using either of the above methods then it is unlike
 
 In all of those steps, we need to look out for negative adverbs such as 'not', 'seldom', 'rarely' etc. which we use to negate the relation found. We also need to look out for antonyms in the target word in the frame-semantic parse. For example, the \textit{Experiencer-focus} frame helps us find \textit{Desires} and \textit{NotDesires} ConceptNet relations depending on whether the target word is synonymous with 'love' or 'hate'.
 
-To avoid the aforementioned duplication problem, we prune these hubs by working backwards through the persona (i.e. starting from the rightmost in the sentence) and removing any relations that occur in earlier persona. So in fact the \textit{'lot of mice'} persona has no relations (before anaphora resolution, see Section \ref{sec:ar}).
+To avoid the aforementioned duplication problem, we prune these hubs by working backwards through the persona (i.e. starting from the rightmost in the sentence) and removing any relations that occur in earlier persona. So in fact the \textit{'lot of mice'} persona has no relations (before anaphora resolution).
 
 The duplication is mostly due to reversing the direction on incoming dependencies (heads). This pruning method works because the head of the last persona will be lower down in the dependency tree than the head of any other persona. Duplicated relations are removed such that it is solely associated to the one it was closest to in the original tree.
 
@@ -1353,7 +1353,7 @@ Therefore, if a character that is marked as an inanimate object has any of these
 \label{sec:ono}
 Some onomatopoeia are recognised in traditional dictionaries, while some are not. There are also many variations of the same sound, e.g. 'Aah' versus 'Aaah'. New onomatopoeia can be created at any point depending on the sound the writer wants to portray. This range of variation and lack of consistency makes it difficult to detect all occurrences of onomatopoeia.
 
-WrittenSound.com is an online dictionary devoted to onomatopoeia. We use this to recognise the most common ones. A word in the poem is an onomatopoeia if the closest matching word in the dictionary, using \textit{difflib} as in Section \ref{sec:phonetic}, has a similarity score of greater than 0.9
+WrittenSound.com\cite{onomat} is an online dictionary devoted to onomatopoeia. We use this to recognise the most common ones. A word in the poem is an onomatopoeia if the closest matching word in the dictionary, using \textit{difflib} as in Section \ref{sec:phonetic}, has a similarity score of greater than 0.9
 
 We check for onomatopoeia while building semantic relations. If we detect onomatopoeia, we add the MakesSound relation to the character with respect to the onomatopoeia. For example \textit{"the window rattled"} would add the relation \textit{MakesSound $\rightarrow$ rattled} to the \textit{'window'} character object.
 

@@ -55,6 +55,24 @@
       \verb http://www.ark.cs.cmu.edu/TurboParser
       \endverb
     \endentry
+    \entry{vocab}{online}{}
+      \field{sortinit}{0}
+      \verb{url}
+      \verb http://www.economist.com/blogs/johnson/2013/05/vocabulary-size
+      \endverb
+    \endentry
+    \entry{youngwriters}{online}{}
+      \field{sortinit}{0}
+      \verb{url}
+      \verb https://www.youngwriters.co.uk/
+      \endverb
+    \endentry
+    \entry{poetsorg}{online}{}
+      \field{sortinit}{0}
+      \verb{url}
+      \verb http://www.poets.org/
+      \endverb
+    \endentry
     \entry{baker1998berkeley}{inproceedings}{}
       \name{labelname}{3}{}{%
         {{hash=a05f6dccc2782fe82991bad69864b53e}{Baker}{B\bibinitperiod}{Collin\bibnamedelima F}{C\bibinitperiod\bibinitdelim F\bibinitperiod}{}{}{}{}}%
@@ -98,31 +116,6 @@
       \field{title}{Towards generating text from discourse representation structures}
       \field{year}{2011}
       \field{pages}{145\bibrangedash 150}
-    \endentry
-    \entry{BasileBosEvangVenhuizen2012LREC}{inproceedings}{}
-      \name{labelname}{4}{}{%
-        {{hash=1ed7a3568fca65839ab7d3e2f0b1b9d0}{Basile}{B\bibinitperiod}{Valerio}{V\bibinitperiod}{}{}{}{}}%
-        {{hash=f14668cfa2a37aeebf3deffcfed09acd}{Bos}{B\bibinitperiod}{Johan}{J\bibinitperiod}{}{}{}{}}%
-        {{hash=a45b4d1927bb0ea3a040dfe5d1f0d310}{Evang}{E\bibinitperiod}{Kilian}{K\bibinitperiod}{}{}{}{}}%
-        {{hash=8ea2e9ff6a70e9095ab8eb7fcf37bebe}{Venhuizen}{V\bibinitperiod}{Noortje}{N\bibinitperiod}{}{}{}{}}%
-      }
-      \name{author}{4}{}{%
-        {{hash=1ed7a3568fca65839ab7d3e2f0b1b9d0}{Basile}{B\bibinitperiod}{Valerio}{V\bibinitperiod}{}{}{}{}}%
-        {{hash=f14668cfa2a37aeebf3deffcfed09acd}{Bos}{B\bibinitperiod}{Johan}{J\bibinitperiod}{}{}{}{}}%
-        {{hash=a45b4d1927bb0ea3a040dfe5d1f0d310}{Evang}{E\bibinitperiod}{Kilian}{K\bibinitperiod}{}{}{}{}}%
-        {{hash=8ea2e9ff6a70e9095ab8eb7fcf37bebe}{Venhuizen}{V\bibinitperiod}{Noortje}{N\bibinitperiod}{}{}{}{}}%
-      }
-      \list{location}{1}{%
-        {Istanbul, Turkey}%
-      }
-      \strng{namehash}{814979146aef37f23c0eb045a854b030}
-      \strng{fullhash}{7dacc59cce6e91feace59946ec41cbc5}
-      \field{sortinit}{B}
-      \field{labeltitle}{Developing a large semantically annotated corpus}
-      \field{booktitle}{Proceedings of the Eighth International Conference on Language Resources and Evaluation (LREC 2012)}
-      \field{title}{Developing a large semantically annotated corpus}
-      \field{year}{2012}
-      \field{pages}{3196\bibrangedash 3200}
     \endentry
     \entry{bateman1997enabling}{article}{}
       \name{labelname}{1}{}{%
@@ -570,27 +563,6 @@
       \field{title}{An overview of SURGE: A reusable comprehensive syntactic realization component}
       \field{year}{1996}
     \endentry
-    \entry{gardent2007symbolic}{inproceedings}{}
-      \true{morelabelname}
-      \name{labelname}{2}{}{%
-        {{hash=db8e678b1d356ee221a041bf4b530213}{Gardent}{G\bibinitperiod}{Claire}{C\bibinitperiod}{}{}{}{}}%
-        {{hash=47cfc61d0d7b8534f8d380f7374d4fa0}{Kow}{K\bibinitperiod}{Eric}{E\bibinitperiod}{}{}{}{}}%
-      }
-      \true{moreauthor}
-      \name{author}{2}{}{%
-        {{hash=db8e678b1d356ee221a041bf4b530213}{Gardent}{G\bibinitperiod}{Claire}{C\bibinitperiod}{}{}{}{}}%
-        {{hash=47cfc61d0d7b8534f8d380f7374d4fa0}{Kow}{K\bibinitperiod}{Eric}{E\bibinitperiod}{}{}{}{}}%
-      }
-      \strng{namehash}{4aa88e9145bf28532de42a3cc6221dad}
-      \strng{fullhash}{8a0acd1ad6a3e58d57e1f6b2b879a64b}
-      \field{sortinit}{G}
-      \field{labeltitle}{A symbolic approach to near-deterministic surface realisation using tree adjoining grammar}
-      \field{booktitle}{ACL}
-      \field{title}{A symbolic approach to near-deterministic surface realisation using tree adjoining grammar}
-      \field{volume}{7}
-      \field{year}{2007}
-      \field{pages}{328\bibrangedash 335}
-    \endentry
     \entry{gatt2009simplenlg}{inproceedings}{}
       \name{labelname}{2}{}{%
         {{hash=cdf0f2d0f15f2dbac724c6ea5270b1b6}{Gatt}{G\bibinitperiod}{Albert}{A\bibinitperiod}{}{}{}{}}%
@@ -881,24 +853,26 @@
       \field{year}{2004}
       \field{pages}{402\bibrangedash 407}
     \endentry
-    \entry{pease2011impact}{inproceedings}{}
-      \name{labelname}{2}{}{%
-        {{hash=d98a1f39fa7df83e0aa3ed6461066a3d}{Pease}{P\bibinitperiod}{Alison}{A\bibinitperiod}{}{}{}{}}%
-        {{hash=3cc72753508ea031bbab98dfcaf1d385}{Colton}{C\bibinitperiod}{Simon}{S\bibinitperiod}{}{}{}{}}%
+    \entry{newman2005power}{article}{}
+      \name{labelname}{1}{}{%
+        {{hash=af84fa9f8d84f4aa9cd268c6d380f857}{Newman}{N\bibinitperiod}{Mark\bibnamedelima EJ}{M\bibinitperiod\bibinitdelim E\bibinitperiod}{}{}{}{}}%
       }
-      \name{author}{2}{}{%
-        {{hash=d98a1f39fa7df83e0aa3ed6461066a3d}{Pease}{P\bibinitperiod}{Alison}{A\bibinitperiod}{}{}{}{}}%
-        {{hash=3cc72753508ea031bbab98dfcaf1d385}{Colton}{C\bibinitperiod}{Simon}{S\bibinitperiod}{}{}{}{}}%
+      \name{author}{1}{}{%
+        {{hash=af84fa9f8d84f4aa9cd268c6d380f857}{Newman}{N\bibinitperiod}{Mark\bibnamedelima EJ}{M\bibinitperiod\bibinitdelim E\bibinitperiod}{}{}{}{}}%
       }
-      \strng{namehash}{bd7ae3b9bccaeed86dfbe2e40ae16a15}
-      \strng{fullhash}{bd7ae3b9bccaeed86dfbe2e40ae16a15}
-      \field{sortinit}{P}
-      \field{labeltitle}{On impact and evaluation in computational creativity: A discussion of the Turing test and an alternative proposal}
-      \field{booktitle}{Proceedings of the AISB}
-      \field{title}{On impact and evaluation in computational creativity: A discussion of the Turing test and an alternative proposal}
-      \field{volume}{11}
-      \field{year}{2011}
-      \field{pages}{1\bibrangedash 8}
+      \list{publisher}{1}{%
+        {Taylor \& Francis}%
+      }
+      \strng{namehash}{af84fa9f8d84f4aa9cd268c6d380f857}
+      \strng{fullhash}{af84fa9f8d84f4aa9cd268c6d380f857}
+      \field{sortinit}{N}
+      \field{labeltitle}{Power laws, Pareto distributions and Zipf's law}
+      \field{journaltitle}{Contemporary physics}
+      \field{number}{5}
+      \field{title}{Power laws, Pareto distributions and Zipf's law}
+      \field{volume}{46}
+      \field{year}{2005}
+      \field{pages}{323\bibrangedash 351}
     \endentry
     \entry{reiter2000building}{book}{}
       \name{labelname}{2}{}{%

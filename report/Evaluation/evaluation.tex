@@ -5,10 +5,10 @@
     \graphicspath{{Evaluation/EvaluationFigs/EPS/}{Evaluation/EvaluationFigs/}}
 \fi
 
-We evaluate this program by looking at the results of analysing 450 limericks, 718 haiku and all 154 of Shakespeare's Sonnets. These three types of poetry cover a large range of techniques and are of varying lengths so we can see changes in performance and quality with poem size.
+\section{Comparison of Analysis Results to Theory}
+A major goal of this project is to show that the structure and content of types of poetry can be derived by analysing corpuses of collections. We would like to investigate how our results matches up with those documented in literary theory, as described by Young Writers\cite{youngwriters}, a poetry and creative writing resource for UK schools, and poets.org\cite{poetsorg}, supported by the Academy of American Poets.
 
-\section{Comparison of Analysis Results to Literary Theory}
-A major goal of this project is to show that the structure and content of types of poetry can be derived by analysing corpuses of collections. We would like to investigate how our results matches up with those documented in literary theory, as described by Young Writers[ref], a poetry and creative writing resource for UK schools, and poets.org[ref], supported by the Academy of American Poets.
+We evaluate the results of analysing 450 limericks, 718 haiku and all 154 of Shakespeare's sonnets. These three types of poetry cover a large range of techniques and are of varying lengths, enabling us to evaluate more completely.
 
 \subsection{Limericks}
 
@@ -41,30 +41,27 @@ All of the poems in our corpus follow this rule, as seen in Figure \ref{fig:lim1
 
 
 \item[Usually begins with \textit{'There was a...'} and ends with a name, person or place]  \hfill \\
-Figure \ref{fig:lim-grams1} shows the N-Grams for line 1. We can see that \textit{'There be a young'}, the lemmatised version of \textit{'There was a'} with the added \textit{'young'} adjective is used with significant frequency (any substring is also considered a significantly frequent n-gram). We can also see in Figure \ref{fig:lim-anim} that limericks largely talk about animate objects (such as people) or non-objects (such as places). Furthermore, Figure BLAH shows that the probability of a \textit{Named} or \textit{AtLocation} relation is higher in the first line than any other line, and Figure \ref{fig:lim-types} confirms that the type of persona are people, organisms and animals.
+Figure \ref{fig:lim-grams1} shows the N-Grams for line 1. We can see that \textit{'There be a young'}, the lemmatised version of \textit{'There was a'} with the added \textit{'young'} adjective is used with significant frequency (any substring is also considered a significantly frequent n-gram). We can also see in Figure \ref{fig:lim-anim} that limericks largely talk about animate objects (such as people) or non-objects (such as places). Furthermore, Figure \ref{fig:lim-types} confirms that the type of persona are people, organisms and animals.
 
 \begin{figure}[H]
 \centering
-\begin{subfigure}[t]{0.9\textwidth}
-	\centering
-    \includegraphics[width=140mm]{lim-stanza}
-    \caption{N-grams for the first line of a limerick}
-    \label{fig:lim-grams1}
-\end{subfigure}
-\begin{subfigure}[t]{0.9\textwidth}
-	\centering
-    \includegraphics[width=140mm]{lim-lines}
-    \caption{Animation of nouns in limericks}
-    \label{fig:lim-anim}
-\end{subfigure}
-\begin{subfigure}[t]{0.9\textwidth}
-	\centering
-    \includegraphics[width=140mm]{lim-types}
-    \caption{Animation of nouns in limericks}
-    \label{fig:lim-types}
-\end{subfigure}
-\caption{Limericks talk about sentient objects and places}
-\label{fig:lim2}
+\includegraphics[width=140mm]{lim-grams1}
+\caption{N-grams for Line 1}
+\label{fig:lim-grams1}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=120mm]{lim-anim}
+\caption{Animation of nouns}
+\label{fig:lim-anim}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=120mm]{lim-types}
+\caption{Types of persona}
+\label{fig:lim-types}
 \end{figure}
 
 Overall, our results supports the theory. However, since the analysis omits Named Entity Recognition, we are unable to specifically say whether or not it was a person or a place.
@@ -72,7 +69,7 @@ Overall, our results supports the theory. However, since the analysis omits Name
 Furthermore, our results only show that 52 poems have this n-gram, which is only 11.6\% of the corpus. We suspect this discrepancy comes from the popularity of Edward Lear poems, of which most start with \textit{'There was a...'}, but poems by other authors do not generally use this as a rule. This comes down to the contents of the corpus. Since it was a collection of previously unseen poems from various sources across the Internet, we do not know the proportion of Edward Lear poems in the corpus before analysis (as required to avoid biasing the corpus as mentioned in Section \ref{sec:corpus}). If the poem had a higher proportion of Edward Lear limericks, the frequency of this property would probably increase. However, since we are analysing limericks in general, our result may be representative.
 
 \item[Last line is farfetched or unusual]  \hfill \\
-We have no way of determining this from our analysis or results because the social context of the poem was never considered. As a result this feature will only occur by chance, not intention.
+We have no way of determining this from our analysis or results because the social context of the poem was never considered. As a result this feature will only occur by chance during generation, not intention.
 
 \item[Usually nonsense or humour]  \hfill \\
 As above.
@@ -83,32 +80,32 @@ Our results show that this is by far the most probable rhyme scheme, as seen in 
 \begin{figure}[H]
 \centering
 \includegraphics[width=140mm]{lim-rhyme}
-\caption{\textit{AABBA} is the most probable rhyme scheme by far}
+\caption{Rhyme Scheme}
 \label{fig:lim-rhyme}
 \end{figure}
 
 Despite those shortcomings the results follow Zipf's law as discussed in Section \ref{sec:overall-struct}, which means that we can treat the top result as unambiguous. Therefore, all limericks generated by the system will aim to have the \textit{AABBA} rhyme scheme.
 
 \item[Lines 1, 2 and 5 have 01001001 meter, while lines 3 and 4 have 01001 meter]  \hfill \\
-Figures \ref{fig:lim-stress1} through \ref{fig:lim-stress5} show the stress patterns of lines 1, 2 and 5.
+Figure \ref{fig:lim3} show the stress patterns of lines 1, 2 and 5.
 
 \begin{figure}[H]
 \centering
 \begin{subfigure}[t]{0.5\textwidth}
 	\centering
-    \includegraphics[width=70mm]{lim-stress1}
+    \includegraphics[width=85mm]{lim-stress1}
     \caption{Line 1}
     \label{fig:lim-stress1}
 \end{subfigure}
 \begin{subfigure}[t]{0.5\textwidth}
 	\centering
-    \includegraphics[width=70mm]{lim-stress2}
+    \includegraphics[width=85mm]{lim-stress2}
     \caption{Line 2}
     \label{fig:lim-stress2}
 \end{subfigure}
 \begin{subfigure}[t]{0.9\textwidth}
 	\centering
-    \includegraphics[width=70mm]{lim-stress5}
+    \includegraphics[width=85mm]{lim-stress5}
     \caption{Line 5}
     \label{fig:lim-stress5}
 \end{subfigure}
@@ -132,13 +129,13 @@ Figures \ref{fig:lim-stress3} and \ref{fig:lim-stress4} show the stress patterns
 \centering
 \begin{subfigure}[t]{0.5\textwidth}
 	\centering
-    \includegraphics[width=70mm]{lim-stress3}
+    \includegraphics[width=85mm]{lim-stress3}
     \caption{Line 3}
     \label{fig:lim-stress3}
 \end{subfigure}
 \begin{subfigure}[t]{0.5\textwidth}
 	\centering
-    \includegraphics[width=70mm]{lim-stress4}
+    \includegraphics[width=85mm]{lim-stress4}
     \caption{Line 4}
     \label{fig:lim-stress4}
 \end{subfigure}
@@ -154,21 +151,21 @@ In both of these lines, the expected pattern is the third most popular and the m
 \item{Limericks actually have 101001 as the expected rhythm so our sources are wrong and perhaps this was never noticed.}
 \end{itemize}
 
-The first two are unlikely because the results for lines 1, 2 and 5 as well as for other poems (see following sections) are generally as expected. If either of those were in fact the problem, we would expect many more unexpected results.
+The first two are unlikely because the results for lines 1 and 2 as well as for other poems (see following sections) are generally as expected. If either of those were in fact the problem, we would expect many more anomalous results.
 
 The third is a possibility. The corpus of poems was collected from various sources across the Internet, but some websites provided more than others. It is likely that the same author who consistently made the same mistake was published on the same website that made up a large proportion of the corpus.
 
-The fourth possibility requires further investigation into high quality limericks written by well known authors and more sources for the rhythm of limericks. Poets.org credits Edward Lear's \textit{Book of Nonsense}[ref] as the defining anthology for modern limericks.
+The fourth possibility requires further investigation into high quality limericks written by well known authors and more sources for the rhythm of limericks. Poets.org credits Edward Lear's \textit{Book of Nonsense}\cite{lear1894book} as the defining anthology for modern limericks.
 
 The first 10 poems of that very book are shown in Appendix \ref{sec:lear}. If we analyse them by eye, the third line has six syllables 5 times and the fourth line has six syllables 8 times. From this we can assume that the expected rhythm of 01001 is actually not that common.
 
-The Book of Limericks (Wordsword Reference) is a published anthology of over 1,800 limericks. This book was not used to build the corpus so it is unlikely that any of them would have been part of the original analysis. We select the first 10 from this analogy, as seen in Appendix \ref{sec:book}, and perform the same analysis by eye. In this case, the third line has six syllables 8 times and the fourth line has six syllables all 10 times.
+The Book of Limericks (Wordsword Reference)\cite{marsh1997wordsworth} is a published anthology of over 1,800 limericks. This book was not used to build the corpus so it is unlikely that any of them would have been part of the original analysis. We select the first 10 from this analogy, as seen in Appendix \ref{sec:book}, and perform the same analysis by eye. In this case, the third line has six syllables 8 times and the fourth line has six syllables all 10 times.
 
 This suggests that the standard is in fact to have six syllables, so the expected rhythm of 01001 is not correct. Therefore, we look to other sources of literary theory in case this has been pointed out.
 
-Nowhere is it mentioned that the rhythm should be 101001. The five sources in Appendix \ref{sec:app-source} teach the rhythm of limericks, but their teachings vary and the examples they use often do not match up with the theory that they give, but in most cases do match with the 101001 candidate.
+Nowhere is it mentioned that the rhythm should be 101001. The five sources in Appendix \ref{sec:app-source} teach the rhythm of limericks, but their teachings vary and the examples they use often do not match up with what they preach.
 
-We therefore, conclude that more investigation needs to be done to decide what is the \textit{actual} expected rhythm of the third and fourth line or limericks, and we further propose that based on our analysis it should be 101001.
+We therefore conclude that more investigation needs to be done to decide what is the \textit{actual} expected rhythm of the third and fourth line or limericks, and we further propose that based on our analysis it should be 101001.
 
 \item[Other Noteworthy Results]  \hfill \\
 Figure \ref{fig:lim-tense} shows that limericks are usually written in past tense and occasionally in present tense.
@@ -177,20 +174,16 @@ A very large proportion are written in third person, as seen in Figure \ref{fig:
 
 \begin{figure}[H]
 \centering
-\begin{subfigure}[t]{0.5\textwidth}
-	\centering
-    \includegraphics[width=70mm]{lim-tense}
-    \caption{Probability distribution of overall poem tense}
-    \label{fig:lim-tense}
-\end{subfigure}
-\begin{subfigure}[t]{0.5\textwidth}
-	\centering
-    \includegraphics[width=70mm]{lim-persp}
-    \caption{Probability distribution perspective across poem}
-    \label{fig:lim-persp}
-\end{subfigure}
-\caption{Stress patterns for lines 3 and 4}
-\label{fig:lim5}
+\includegraphics[width=85mm]{lim-tense}
+\caption{Probability distribution of overall poem tense}
+\label{fig:lim-tense}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=85mm]{lim-persp}
+\caption{Probability distribution perspective across poem}
+\label{fig:lim-persp}
 \end{figure}
 
 \end{description}
@@ -229,25 +222,22 @@ All of the poems in our corpus follow this rule, as seen in Figure \ref{fig:haik
 \item[Topic ranges widely, \textit{nature} is very common]  \hfill \\
 Figure \ref{fig:haik-types} shows that there is indeed a wide range of topics including halogen (light), living thing, natural object, cognition, chemical element, organism, body part, atmospheric phenomenon, weather and natural phenomenon; all of which elude to nature. 
 
-Figure \ref{fig:haik-anim} also shows that it generally talks about non-objects, i.e. nouns that do not cast a shadow. This includes nature and weather to back up the earlier graph.
+Figure \ref{fig:haik-anim} also shows that it generally talks about non-objects, i.e. nouns that do not cast a shadow. This includes nature and weather.
 
 \begin{figure}[H]
 \centering
-\begin{subfigure}[t]{0.9\textwidth}
-	\centering
-    \includegraphics[width=140mm]{haik-types}
-    \caption{Animation of nouns in haiku}
-    \label{fig:haik-types}
-\end{subfigure}
-\begin{subfigure}[t]{0.9\textwidth}
-	\centering
-    \includegraphics[width=140mm]{haik-lines}
-    \caption{Animation of nouns in haiku}
-    \label{fig:haik-anim}
-\end{subfigure}
-\caption{Haiku talk about non-objects such as nature and weather}
-\label{fig:haik2}
+\includegraphics[width=125mm]{haik-types}
+\caption{Animation of nouns in haiku}
+\label{fig:haik-types}
 \end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=125mm]{haik-anim}
+\caption{Types of persona in haiku}
+\label{fig:haik-anim}
+\end{figure}
+
 
 \item[5-7-5 syllabic rhythm]  \hfill \\
 Figures \ref{fig:haik-syll1} through \ref{fig:haik-syll3} show the syllabic rhythm of each line. It is clear that 5-7-5 is a most popular and is taken as unambiguous.
@@ -268,7 +258,7 @@ Figures \ref{fig:haik-syll1} through \ref{fig:haik-syll3} show the syllabic rhyt
 \end{subfigure}
 \begin{subfigure}[t]{0.9\textwidth}
 	\centering
-    %\includegraphics[width=70mm]{haik-syll3}
+    \includegraphics[width=70mm]{haik-syll3}
     \caption{Line 3}
     \label{fig:haik-syll3}
 \end{subfigure}
@@ -277,7 +267,7 @@ Figures \ref{fig:haik-syll1} through \ref{fig:haik-syll3} show the syllabic rhyt
 \end{figure}
 
 \item[No rhyme scheme]  \hfill \\
-Figure BLAH shows that haiku is most likely to not have any specific rhyme scheme (\textit{ABC}). The candidate rhyme schemes occur with low frequency, so the lack of rhyme scheme is treated as unambiguous and any rhyme only occurs by chance.
+Figure \ref{fig:haik-rhyme} shows that haiku is most likely to not have any specific rhyme scheme (equivalently, an \textit{ABC} rhyme scheme). The candidate rhyme schemes occur with low frequency, so the lack of rhyme scheme is treated as unambiguous and any rhyme only occurs by chance during generation.
 
 \begin{figure}[H]
 \centering
@@ -287,24 +277,20 @@ Figure BLAH shows that haiku is most likely to not have any specific rhyme schem
 \end{figure}
 
 \item[Other Noteworthy Results]  \hfill \\
-Conversely to limericks, Figure \ref{fig:haik-tense} shows that limericks are usually written in the present tense and occasionally in past tense.
+Conversely to limericks, Figure \ref{fig:haik-tense} shows that haikus are usually written in the present tense and occasionally in past tense.
 
 \begin{figure}[H]
 \centering
-\begin{subfigure}[t]{0.5\textwidth}
-	\centering
-    \includegraphics[width=70mm]{haik-tense}
-    \caption{Probability distribution of overall poem tense}
-    \label{fig:haik-tense}
-\end{subfigure}
-\begin{subfigure}[t]{0.5\textwidth}
-	\centering
-    \includegraphics[width=70mm]{haik-persp}
-    \caption{Probability distribution perspective across poem}
-    \label{fig:haik-persp}
-\end{subfigure}
-\caption{Stress patterns for lines 3 and 4}
-\label{fig:haik5}
+\includegraphics[width=85mm]{haik-tense}
+\caption{Probability distribution of overall poem tense}
+\label{fig:haik-tense}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=85mm]{haik-persp}
+\caption{Probability distribution perspective across poem}
+\label{fig:haik-persp}
 \end{figure}
 
 As with limericks, most haiku are written in third person, as seen in Figure \ref{fig:haik-persp}.
@@ -328,7 +314,7 @@ All of the poems in our corpus follow this rule, as seen in Figure \ref{fig:son1
 \begin{subfigure}[t]{0.3\textwidth}
 	\centering
     \includegraphics[width=50mm]{son-lines}
-    \caption{Always five lines}
+    \caption{Negligible number are not fourteen lines}
     \label{fig:son-lines}
 \end{subfigure}
 \begin{subfigure}[t]{0.3\textwidth}
@@ -342,7 +328,7 @@ All of the poems in our corpus follow this rule, as seen in Figure \ref{fig:son1
 \end{figure}
 
 \item[Topic is usually of thought, emotion and ideas]  \hfill \\
-This is evident from Figure \ref{fig:son-types}, which shows the topics covered are related to thought, emotion and ideas. In particular, psychological feature, cognition, emotion, feeling, relation, state and communication.
+This is evident from Figure \ref{fig:son-types}, which shows the topics covered are related to similar concepts, such as psychological feature, cognition, emotion, feeling, relation, state and communication.
 
 \begin{figure}[H]
 \centering
@@ -351,7 +337,7 @@ This is evident from Figure \ref{fig:son-types}, which shows the topics covered 
 \label{fig:son-types}
 \end{figure}
 
-Figure \ref{fig:son-anim} supports this, showing that often non-objects were discussed more than animate and inanimate objects. Such non-objects include though, emotion and ideas.
+Figure \ref{fig:son-anim} supports this, showing that non-objects were often discussed more than animate and inanimate objects.
 
 \begin{figure}[H]
 \centering
@@ -370,7 +356,7 @@ Figure \ref{fig:son-grams} also shows that Shakespeare mentioned words such as \
 \end{figure}
 
 \item[\textit{ABABCDCDEFEFGG} rhyme scheme]  \hfill \\
-Figure \ref{fig:son-rhyme} shows that the most probable rhyme scheme is as expected. However, because of the Shakesperean vocabulary that is not in the CMU Pronunciation Dictionary and the length of the poem, it often failed to complete analysis for certain poems if there were too many possible permutations (see Section BLAHINTHEANALYSIS). 
+Figure \ref{fig:son-rhyme} shows that the most probable rhyme scheme is as expected. However, because of the Shakesperean vocabulary that is not in the CMU Pronunciation Dictionary, it often failed to complete analysis for certain poems if there were too many potential permutations (see Section \ref{sec:rhyme-a}). 
 
 \begin{figure}[H]
 \centering
@@ -379,18 +365,18 @@ Figure \ref{fig:son-rhyme} shows that the most probable rhyme scheme is as expec
 \label{fig:son-rhyme}
 \end{figure}
 
-This exposes a limitation on this system that each extra line of the poem potentially increases the number of rhyme permutations exponentially, risking memory errors. A simple solution to this would be to leave the rhyme schemes in their unzipped form as in Figure BLAHINTHEANALYSIS and counting the frequency of possible permutations iteratively.
+This exposes a limitation on this system that each extra line of the poem potentially increases the number of rhyme permutations exponentially, risking incomplete analyses. A simple solution to this would be to leave the rhyme schemes in their unzipped form as in Figure \ref{tab:unzip-rhyme} and counting the frequency of possible permutations iteratively.
 
 \item[Iambic pentameter for every line]  \hfill \\
-Figures \ref{fig:son-stress1} through \ref{fig:son-stress14} show that each line is unambiguously iambic pentameter (0101010101) \textbf{except} for the 13th line, which is unambiguously iambic pentameter except that the starting syllable is stressed.
+Figure \ref{fig:son4} show that each line is unambiguously iambic pentameter (0101010101) \textbf{except} for the 13th line, which unambiguously starts with a stressed syllable instead of an unstressed one.
 
-This is a very exciting result because it is unlikely to be caused a limitation of the CMU Pronunciation Dictionary or our implementation because this discrepancy is so consistent and specific. This is also the \textit{"perfect"} corpus, containing all 154 of Shakespeare's original sonnets that are definitely the defining poems of Shakesperean sonnets.
+This is a very exciting result because it is unlikely to be caused a limitation of the CMU Pronunciation Dictionary or our implementation because this discrepancy is so consistent and specific. This is also the \textit{"perfect"} corpus, containing all 154 of Shakespeare's original sonnets.
 
-Most research says that every line of every Shakespearean Sonnet is iambic pentameter. No research could be found to support the stressing of the first syllable of the 13th line, however, we propose that it is a significant result and not a coincidence.
+Most research says that every line of every Shakespearean Sonnet is iambic pentameter. No research could be found to support the stressed first syllable of the 13th line, however, we propose that it is a significant result and not a coincidence.
 
 Firstly, iambic pentameter is not even a possibility in our analysis. Secondly, the thirteenth line of the poem is the start of the \textit{'heroic couplet'}, marking a change in the previous quatrains and signalling the impending end of the sonnet. Therefore, there is a motivation to break the monotony and add the extra stress, acting as the start of a strong conclusion.
 
-If analyse some sonnets by eye for this specific aspect, we can find examples where the first syllable \textbf{cannot} be unstressed, either due to the starting word needing two stressed syllables or use of punctuation (particularly exclamation marks) following the first syllable.
+If analyse the sonnets by eye for this specific aspect, we can find examples where the first syllable \textbf{cannot} be unstressed, either due to the starting word needing two stressed syllables or use of punctuation (particularly exclamation marks) following the first syllable.
 
 \begin{description}
 \item[Sonnet I: ] \textit{Pity the world, or else this glutton be,}
@@ -413,94 +399,108 @@ If analyse some sonnets by eye for this specific aspect, we can find examples wh
 \item[Sonnet CXLIX: ] \textit{But, love, hate on, for now I know thy mind;}
 \end{description}
 
-Of the rest of the sonnets where the meter is more ambiguous, but we use the unambiguous ones to guide how the ambiguous ones should be interpreted. We also argue that stressing the first syllable is more natural when spoken out loud.
+We use these unambiguous examples to guide how the rest of the ambiguous lines should be interpreted. We also argue that stressing the first syllable is more natural when spoken out loud in all cases.
 
 Given the evidence and motivations explained above, we claim that it was Shakespeare's intention to start the 13th line of his sonnets with a stressed syllable, which means that it is \textbf{not iambic pentameter}, contrary to current literacy theory.
 
 \begin{figure}[H]
 \centering
-\begin{subfigure}[t]{0.5\textwidth}
+\begin{subfigure}[t!]{0.45\textwidth}
 	\centering
     \includegraphics[width=70mm]{son-stress1}
-    \caption{Just one stanza}
+    \caption{Line 1 stress patterns}
     \label{fig:son-stress1}
 \end{subfigure}
-\begin{subfigure}[t]{0.5\textwidth}
+~
+\begin{subfigure}[t!]{0.45\textwidth}
 	\centering
     \includegraphics[width=70mm]{son-stress2}
-    \caption{Always five lines}
+    \caption{Line 2 stress patterns}
     \label{fig:son-stress2}
 \end{subfigure}
-\begin{subfigure}[t]{0.5\textwidth}
+\begin{subfigure}[t!]{0.45\textwidth}
 	\centering
     \includegraphics[width=70mm]{son-stress3}
-    \caption{No lines are repeated}
+    \caption{Line 3 stress patterns}
     \label{fig:son-stress3}
 \end{subfigure}
-\begin{subfigure}[t]{0.5\textwidth}
+~
+\begin{subfigure}[t!]{0.45\textwidth}
 	\centering
     \includegraphics[width=70mm]{son-stress4}
-    \caption{Just one stanza}
+    \caption{Line 4 stress patterns}
     \label{fig:son-stress4}
 \end{subfigure}
-\begin{subfigure}[t]{0.5\textwidth}
+\begin{subfigure}[t!]{0.45\textwidth}
 	\centering
     \includegraphics[width=70mm]{son-stress5}
-    \caption{Always five lines}
+    \caption{Line 5 stress patterns}
     \label{fig:son-stress5}
 \end{subfigure}
-\begin{subfigure}[t]{0.5\textwidth}
+~
+\begin{subfigure}[t!]{0.45\textwidth}
 	\centering
     \includegraphics[width=70mm]{son-stress6}
-    \caption{No lines are repeated}
+    \caption{Line 6 stress patterns}
     \label{fig:son-stress6}
 \end{subfigure}
-\begin{subfigure}[t]{0.5\textwidth}
+\begin{subfigure}[t!]{0.45\textwidth}
 	\centering
     \includegraphics[width=70mm]{son-stress7}
-    \caption{No lines are repeated}
+    \caption{Line 7 stress patterns}
     \label{fig:son-stress7}
 \end{subfigure}
-\begin{subfigure}[t]{0.5\textwidth}
+~
+\begin{subfigure}[t!]{0.45\textwidth}
 	\centering
     \includegraphics[width=70mm]{son-stress8}
-    \caption{Just one stanza}
+    \caption{Line 8 stress patterns}
     \label{fig:son-stress8}
 \end{subfigure}
-\begin{subfigure}[t]{0.5\textwidth}
+\caption{Sonnet stress patterns for each line}
+\label{fig:son4}
+\end{figure}
+
+\begin{figure}[H]
+\ContinuedFloat
+\centering
+\begin{subfigure}[t!]{0.45\textwidth}
 	\centering
     \includegraphics[width=70mm]{son-stress9}
-    \caption{Always five lines}
+    \caption{Line 9 stress patterns}
     \label{fig:son-stress9}
 \end{subfigure}
-\begin{subfigure}[t]{0.5\textwidth}
+~
+\begin{subfigure}[t!]{0.45\textwidth}
 	\centering
     \includegraphics[width=70mm]{son-stress10}
-    \caption{No lines are repeated}
+    \caption{Line 10 stress patterns}
     \label{fig:son-stress10}
 \end{subfigure}
-\begin{subfigure}[t]{0.5\textwidth}
+\begin{subfigure}[t!]{0.45\textwidth}
 	\centering
     \includegraphics[width=70mm]{son-stress11}
-    \caption{Just one stanza}
+    \caption{Line 11 stress patterns}
     \label{fig:son-stress11}
 \end{subfigure}
-\begin{subfigure}[t]{0.5\textwidth}
+~
+\begin{subfigure}[t!]{0.45\textwidth}
 	\centering
     \includegraphics[width=70mm]{son-stress12}
-    \caption{Always five lines}
+    \caption{Line 12 stress patterns}
     \label{fig:son-stress12}
 \end{subfigure}
-\begin{subfigure}[t]{0.5\textwidth}
+\begin{subfigure}[t!]{0.45\textwidth}
 	\centering
     \includegraphics[width=70mm]{son-stress13}
-    \caption{No lines are repeated}
+    \caption{Line 13 stress patterns}
     \label{fig:son-stress13}
 \end{subfigure}
-\begin{subfigure}[t]{0.5\textwidth}
+~
+\begin{subfigure}[t!]{0.45\textwidth}
 	\centering
     \includegraphics[width=70mm]{son-stress14}
-    \caption{No lines are repeated}
+    \caption{Line 14 stress patterns}
     \label{fig:son-stress14}
 \end{subfigure}
 \caption{Sonnet stress patterns for each line}
@@ -512,28 +512,24 @@ Most sonnets are written in first or second person as seen in Figure \ref{fig:so
 
 \begin{figure}[H]
 \centering
-\begin{subfigure}[t]{0.5\textwidth}
-	\centering
-    \includegraphics[width=70mm]{son-tense}
-    \caption{Probability distribution of overall poem tense}
-    \label{fig:son-tense}
-\end{subfigure}
-\begin{subfigure}[t]{0.5\textwidth}
-	\centering
-    \includegraphics[width=70mm]{son-persp}
-    \caption{Probability distribution perspective across poem}
-    \label{fig:son-persp}
-\end{subfigure}
-\caption{Stress patterns for lines 3 and 4}
-\label{fig:son5}
+\includegraphics[width=120mm]{son-tense}
+\caption{Probability distribution of overall poem tense}
+\label{fig:son-tense}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=120mm]{son-persp}
+\caption{Probability distribution perspective across poem}
+\label{fig:son-persp}
 \end{figure}
 
 It's also worth noting that similes are used in almost every other sonnet, evident from Figure \ref{fig:son-simile}.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=140mm]{son-simile}
-\caption{Words used in sonnets with significant frequency}
+\includegraphics[width=120mm]{son-simile}
+\caption{Evidence of frequent use of analogies}
 \label{fig:son-simile}
 \end{figure}
 
@@ -541,141 +537,557 @@ It's also worth noting that similes are used in almost every other sonnet, evide
 
 \subsection{Concurrency and Performance}
 \label{sec:interpret-perf}
-The timing of the analysis and interpretation is shown in Table \ref{ana-agg-speed} using machine specifications given in Appendix \ref{sec:specs}.
+The timing of the analysis and interpretation is shown in Table \ref{tab:ana-agg-speed} using machine specifications given in Appendix \ref{sec:specs}.
 
 \begin{table}
+\centering
     \begin{tabular}{|l|l|l|l|}
     \hline
-    Poem Type & Corpus size & Analysis(s) & Aggregation(s) \\ \hline
+    Poem Type & Corpus size & Analysis (s) & Aggregation (s) \\ \hline
     Limerick  & 450         & 8040        & 40.1           \\ \hline
     Haiku     & 718         & 2808        & 45.7           \\ \hline
     Sonnet    & 154         & 12004       & 51.7           \\ \hline
     \end{tabular}
-    \label{ana-agg-speed}
+\caption{Speed of analysis and aggregation by poem type}
+\label{tab:ana-agg-speed}
 \end{table}
 
 We can see that the length of the poem has more impact on performance than the size of the corpus. The unusual words used in Shakespearean sonnets that would not have been in the CMU Pronunciation Dictionary would have also contributed to the slow speed of analysis. This is because we find the most similar word that is in the dictionary as described in Section \ref{sec:phonetic}. On average, it takes 0.81 seconds to look up a 4-letter word and 1.09 seconds to look up a 10-letter word.
 
-This is promising because there are various ways the analysis process could be optimised. This includes storing frequency distributions of features (e.g. rhyme schemes and rhythm patterns) rather than the raw values. Since performance was not a priority for this project, little thought was given to optimisation, so there will be many opportunities to optimise using basic techniques.
-
 Since poems are analysed and features are aggregated \textit{in isolation}, there is plenty of scope for concurrency.
 
-For the poem analysis, a thread pool managed the concurrent execution of 10 workers, each analysing one poem. Trial and error showed 10 to be the optimal number of worker threads for limericks and 12 for Haiku. Large resources such as the CMU Pronouncing Dictionary and WordNet were created once and shared amongst the threads. Due to the aforementioned memory issues with sonnets, analysis was done serially, which could have further contributed to the discrepancy in speed.
+For the poem analysis, a thread pool managed the concurrent execution of 10 workers, each analysing one poem. Trial and error showed 10 to be the optimal number of worker threads for limericks and 12 for haiku. Large resources such as the CMU Pronouncing Dictionary and WordNet were created once and shared amongst the threads. Due to the aforementioned scaling issues with sonnets analysis was done \textit{serially}, further contributing to the discrepancy in speed.
 
-This was sufficiently fast for this corpus and since this is data is pre-processed and stored. However, using Python's Pool Executor library rather than the Threading module enables us to move over to processes instead of threads with minimal effort if we need multi-core parallelism. It should be noted that this might be slower due to larger overhead and the need for large resources to be created in multiple locations since memory cannot be shared.
+This was sufficiently fast for this corpus and since this is data is pre-processed and stored. However, we use Python's Pool Executor library rather than the Threading module, enabling us to move over to processes instead of threads with minimal effort if we need multi-core parallelism. It should be noted that this might be slower due to larger overhead and the need for large resources to be created in multiple locations since memory cannot be shared.
 
 The generalisation process was actually fastest without the overhead of constructing the thread pool. With a thread pool of any number of workers, the average processing time is above 42 seconds for the results of the 450 analysed limericks. Without threading, the process took 40.1 seconds on average.
 
-This generalisation process is fast enough for it to be done over again with different given values as discussed in Section \ref{sec:approach} earlier in the chapter. This is will be very important in getting precise guidance during the generalisation phase.
+This generalisation process is fast enough for it to be done over again with different given values as discussed in Section \ref{sec:approach}.
 
 \subsection{Summary}
-Overall, our results show that on many occasions the system's interpretation of poetic structure and content matches with literary theory despite a relatively low quality corpus. This shows that there is no need to hard-code any rules of poetry, as was done in previous attempts (Section BLAH).
+Overall, our results show that the system's interpretation of poetic structure and content matches with literary theory on many occasions, despite relatively low quality corpuses. This shows that there is no need to hard-code any rules of poetry, as was done in previous attempts.
 
 In fact, we have even found two cases where our program is contrary to literacy theory that may be true findings, not errors. It is exciting to see computerised poetry analysis become involved in furthering our understanding of a literary art such as poetry.
 
 The major shortcomings of the current implementation are:
 \begin{itemize}
-\item{The omission of any Named Entity Recognition limits not only the general contextual understanding of the poem, but also the specific recognition of names and places.}
+\item{The omission of any Named Entity Recognition limits not only the specific recognition of names and places, but also the general contextual understanding of the poem.}
 \item{Our attempt to patch up the limitations of the CMU Pronunciation Dictionary by finding the closest matching word (see Section \ref{sec:phonetic}) is not as reliable as expected and should be replaced with a state transducer model implementation.}
-\item{The memory and time complexity rises exponentially with the length of the poem with the current implementation. As seen with the sonnets compared to the haiku and limericks, the quality of analysis falls as the poems get longer.}
-\item{The sentiment of the poem has not been considered at all in this project. However, it is important to note, for example, that limericks are humorous.}
-\item{Using our own algorithms for anaphora resolution and presupposition projection, despite it being a prelude to the new proposed method in Section BLAH, is not effective at the moment, so we end up finding more characters than expected.}
+\item{The memory and time complexity rises exponentially with the length of the poem in the current implementation. As seen with the sonnets compared to the haiku and limericks, the quality of analysis falls as the poems get longer.}
+\item{The sentiment of the poem has not been considered at all in this project, but it is an important factor because, for example, limericks are meant to be humorous.}
+\item{Using our own algorithms for anaphora resolution and presupposition projection is not effective at the moment, so we end up finding more persona than expected. We propose a new method in Section \ref{sec:ca-ar} that utilises our contextual awareness and semantic understanding of persona.}
 \end{itemize}
 
 
 \section{Analysis of Generated Poetry}
 
+We evaluate the generation phase with limericks and haikus, as they are sufficient to show the positives and negatives of this project. The assessment is done on poems that were created from scratch, i.e. without inspiration from the user. This is because cohesiveness, creativity and vocabulary all naturally improve when seeded with inspiration, which is not a true test of the system.
+
+For completeness, Figures \ref{fig:inspr-lim1} through \ref{fig:inspr-lim4} are examples of limericks generated with inspiration from the user. In each of these cases, note that the persona was initiated as \textit{singular, male and animate}.
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t!]{0.4\textwidth}
+	\centering
+    \begin{tikzpicture}[->, node distance=2cm,main node/.style={circle, draw, font=\sffamily\bfseries}]
+            \tikzstyle{every node}=[font=\small]
+            
+              \node[main node] (1) [] {1};
+              \node[] (3) [above of=1]{Rohith};
+              \node[] (4) [below right of=1] {gamer};
+              \node[] (5) [below left of=1] {KFC chicken};
+              
+            
+              \path[every node/.style={font=\sffamily\small}]
+                (1) edge node [right] {Named} (3)
+                   	edge node [right] {IsA} (4)
+                   	edge node [left] {Desires} (5);
+                  
+            \end{tikzpicture}
+\end{subfigure}
+\begin{subfigure}[t!]{0.5\textwidth}
+	\centering
+    \textit{an early man allegedly named Rohith\\a gamer securely established in myth\\he aspired as KFC chicken\\he smarted with gamer thicken\\a noticeable, asleep gamer silversmith}
+\end{subfigure}
+\caption{Limerick seeded with inspiration}
+\label{fig:inspr-lim1}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t!]{0.4\textwidth}
+	\centering
+    \begin{tikzpicture}[->, node distance=2cm,main node/.style={circle, draw, font=\sffamily\bfseries}]
+            \tikzstyle{every node}=[font=\small]
+            
+              \node[main node] (1) [] {1};
+              \node[] (3) [above of=1]{Umar};
+              \node[] (4) [below right of=1] {medic};
+              \node[] (5) [below left of=1] {cereal};
+              
+            
+              \path[every node/.style={font=\sffamily\small}]
+                (1) edge node [right] {Named} (3)
+                   	edge node [right] {IsA} (4)
+                   	edge node [left] {Desires} (5);
+                  
+            \end{tikzpicture}
+\end{subfigure}
+\begin{subfigure}[t!]{0.5\textwidth}
+	\centering
+    \textit{there be a young medic named Umar\\the attractive man serves behind bar\\say he longs for cereal\\publishes material\\the successful launch washes vintage car}
+\end{subfigure}
+\caption{Limerick seeded with inspiration}
+\label{fig:inspr-lim2}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t!]{0.4\textwidth}
+	\centering
+    \begin{tikzpicture}[->, node distance=2cm,main node/.style={circle, draw, font=\sffamily\bfseries}]
+            \tikzstyle{every node}=[font=\small]
+            
+              \node[main node] (1) [] {1};
+              \node[] (3) [above of=1]{Mat};
+              \node[] (4) [below right of=1] {flatmate};
+              \node[] (5) [below left of=1] {pizza};
+              
+            
+              \path[every node/.style={font=\sffamily\small}]
+                (1) edge node [right] {Named} (3)
+                   	edge node [right] {IsA} (4)
+                   	edge node [left] {Desires} (5);
+                  
+            \end{tikzpicture}
+\end{subfigure}
+\begin{subfigure}[t!]{0.5\textwidth}
+	\centering
+    \textit{there be a young man named Mat\\long-standing flatmate trims excess fat\\he ambitions vanishes of pizza\\he enters arena\\it all but, humanely, destroys habitat}
+\end{subfigure}
+\caption{Limerick seeded with inspiration}
+\label{fig:inspr-lim3}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t!]{0.4\textwidth}
+	\centering
+    \begin{tikzpicture}[->, node distance=2cm,main node/.style={circle, draw, font=\sffamily\bfseries}]
+            \tikzstyle{every node}=[font=\small]
+            
+              \node[main node] (1) [] {1};
+              \node[] (3) [above of=1]{William};
+              \node[] (4) [below right of=1] {supervisor};
+              \node[] (5) [below left of=1] {success};
+              
+            
+              \path[every node/.style={font=\sffamily\small}]
+                (1) edge node [right] {Named} (3)
+                   	edge node [right] {IsA} (4)
+                   	edge node [left] {Desires} (5);
+                  
+            \end{tikzpicture}
+\end{subfigure}
+\begin{subfigure}[t!]{0.5\textwidth}
+	\centering
+    \textit{there was a primitive man called William\\supervisor thirsted for civilian million\\he interested in success\\a thin man concisely assess\\the father divines man vermilion}
+\end{subfigure}
+\caption{Limerick seeded with inspiration}
+\label{fig:inspr-lim4}
+\end{figure}
+
+The point about improving cohesiveness is evident from the second lines of the last two examples. Since we knew that the third line would use \textit{'pizza'} in the first of them, the rhyming word chosen for the second line was \textit{'fat'} because it is the most associatively similar. Same with \textit{'success'} and \textit{'million'}.
 
 \subsection{Turing-style Tests}
-Can they fool a human?
-Is it something that people can use?
-Limericks: Blah
-Sonnets: Blah
-Haiku: Blah
+We employ Turing-style tests to assess whether participants can tell human poems apart from ones generated by our system. Five haiku and five limericks were generated \textit{without} inspiration. They were each then shuffled together with five poems sampled from their respective corpora, which were written by humans. 
 
+The poems were put in a survey with answer options as \textit{"Human"}, \textit{"Computer"} and \textit{"Can't tell"}. We also leave space for participants to give their feedback on their decision, which is extremely valuable because it  tells us how we can improve for the future.
+
+Overall the results are promising - every poem generated by our system was thought to have been written by a human by more than 10\% of participants. 
+
+For the haiku, the worst result had 82.16\% of participants realising that it was created by a computer (Figure \ref{fig:haik-test5}). The best result had only 34.34\% realised that it was generated by a computer (Figure \ref{fig:haik-test4}). However, some of the human written poems were also mostly thought to be computer generated. This reduces the integrity of the test because it could mean that the participants were not qualified to take the test due to lack of knowledge about haiku or poor command English. Alternatively, it could be that the human-generated poems were of a relatively poor quality as they were randomly selected.
+
+The limericks results did not look as good. The worst result had 86.99\% of participants realising that it was created by a computer (Figure \ref{fig:lim-test5}). The best result had 73.17\% realised that it was generated by a computer (Figure \ref{fig:lim-test9}). The main reasons for this are that even thought the words were related, the limericks were not cohesive and did not tell a story. We discuss this further in later sections.
+
+The results of the Haiku test are shown in Figures \ref{fig:haik-test1} through \ref{fig:haik-test10} and the limerick test in Figures \ref{fig:lim-test1} through \ref{fig:lim-test10}. The correct answer is shown in \textbf{blue} on the pie charts.
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t!]{0.45\textwidth}
+	\centering
+    \textit{shape taps on window\\the brightness flares upon\\it causes concern}
+\end{subfigure}
+\begin{subfigure}[t!]{0.45\textwidth}
+	\centering
+    \includegraphics[width=70mm]{haik-test1}
+\end{subfigure}
+\caption{Haiku Turing Test Question 1}
+\label{fig:haik-test1}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t!]{0.45\textwidth}
+	\centering
+    \textit{met on September\\she melts frozen me\\like how rain soaks into sea}
+\end{subfigure}
+\begin{subfigure}[t!]{0.45\textwidth}
+	\centering
+    \includegraphics[width=70mm]{haik-test2}
+\end{subfigure}
+\caption{Haiku Turing Test Question 2}
+\label{fig:haik-test2}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t!]{0.45\textwidth}
+	\centering
+    \textit{silly confused plants\\harbinger an early spring\\fifty eighth more to come}
+\end{subfigure}
+\begin{subfigure}[t!]{0.45\textwidth}
+	\centering
+    \includegraphics[width=70mm]{haik-test3}
+\end{subfigure}
+\caption{Haiku Turing Test Question 3}
+\label{fig:haik-test3}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t!]{0.45\textwidth}
+	\centering
+    \textit{chlorine bleach critique\\element abject force out\\a military source}
+\end{subfigure}
+\begin{subfigure}[t!]{0.45\textwidth}
+	\centering
+    \includegraphics[height=55mm]{haik-test4}
+\end{subfigure}
+\caption{Haiku Turing Test Question 4}
+\label{fig:haik-test4}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t!]{0.45\textwidth}
+	\centering
+    \textit{oblong, homeless box\\the dialog like a script\\packs sound in a box}
+\end{subfigure}
+\begin{subfigure}[t!]{0.45\textwidth}
+	\centering
+    \includegraphics[height=51mm]{haik-test5}
+\end{subfigure}
+\caption{Haiku Turing Test Question 5}
+\label{fig:haik-test5}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t!]{0.45\textwidth}
+	\centering
+    \textit{summer's solstice\\the voice of the cormorant\\dreams of yesterday}
+\end{subfigure}
+\begin{subfigure}[t!]{0.45\textwidth}
+	\centering
+    \includegraphics[height=60mm]{haik-test6}
+\end{subfigure}
+\caption{Haiku Turing Test Question 6}
+\label{fig:haik-test6}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t!]{0.45\textwidth}
+	\centering
+    \textit{an education\\funding university\\a pre-school playgroup}
+\end{subfigure}
+\begin{subfigure}[t!]{0.45\textwidth}
+	\centering
+    \includegraphics[width=70mm]{haik-test7}
+\end{subfigure}
+\caption{Haiku Turing Test Question 7}
+\label{fig:haik-test7}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t!]{0.45\textwidth}
+	\centering
+    \textit{unstable condition\\political like a watershed\\state turns to ferment}
+\end{subfigure}
+\begin{subfigure}[t!]{0.45\textwidth}
+	\centering
+    \includegraphics[width=70mm]{haik-test8}
+\end{subfigure}
+\caption{Haiku Turing Test Question 8}
+\label{fig:haik-test8}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t!]{0.45\textwidth}
+	\centering
+    \textit{foaming white horses\\rolling in collapse on dunes\\look a jellyfish}
+\end{subfigure}
+\begin{subfigure}[t!]{0.45\textwidth}
+	\centering
+    \includegraphics[width=70mm]{haik-test9}
+\end{subfigure}
+\caption{Haiku Turing Test Question 9}
+\label{fig:haik-test9}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t!]{0.45\textwidth}
+	\centering
+    \textit{today was lovely\\i worked and walked carefully\\happened this lately}
+\end{subfigure}
+\begin{subfigure}[t!]{0.45\textwidth}
+	\centering
+    \includegraphics[width=70mm]{haik-test10}
+\end{subfigure}
+\caption{Haiku Turing Test Question 10}
+\label{fig:haik-test10}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t!]{0.45\textwidth}
+	\centering
+    \textit{amazingly, antelope stew\\is supposedly better for you\\than a goulash of rat\\or Hungarian cat\\but I guess that you probably gnu}
+\end{subfigure}
+\begin{subfigure}[t!]{0.45\textwidth}
+	\centering
+    \includegraphics[height=60mm]{lim-test1}
+\end{subfigure}
+\caption{Limerick Turing Test Question 1}
+\label{fig:lim-test1}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t!]{0.45\textwidth}
+	\centering
+    \textit{there was a strange man named Einstein\\the genius scientist followed the line\\central overtakes the leader\\he polishes off a reader\\a rational person imposes fine}
+\end{subfigure}
+\begin{subfigure}[t!]{0.45\textwidth}
+	\centering
+    \includegraphics[height=60mm]{lim-test2}
+\end{subfigure}
+\caption{Limerick Turing Test Question 2}
+\label{fig:lim-test2}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t!]{0.45\textwidth}
+	\centering
+    \textit{at I sighed as I hoped\\for a bike like a Harley I groped\\in my pocket for cash\\and bought something less flash\\then I sat on my moped and moped}
+\end{subfigure}
+\begin{subfigure}[t!]{0.45\textwidth}
+	\centering
+    \includegraphics[height=55mm]{lim-test3}
+\end{subfigure}
+\caption{Limerick Turing Test Question 3}
+\label{fig:lim-test3}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t!]{0.45\textwidth}
+	\centering
+    \textit{to compose a sonata today\\don't proceed in the old fashioned way\\with your toes on the keys\\bang the floor with your knees\\oh how modern critics will say}
+\end{subfigure}
+\begin{subfigure}[t!]{0.45\textwidth}
+	\centering
+    \includegraphics[height=60mm]{lim-test4}
+\end{subfigure}
+\caption{Limerick Turing Test Question 4}
+\label{fig:lim-test4}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t!]{0.45\textwidth}
+	\centering
+    \textit{the weather uproots devilwood\\evergreen roots autumn bulb wood\\it maintains stance\\has one clear-cut chance\\possibility strengthens position good}
+\end{subfigure}
+\begin{subfigure}[t!]{0.45\textwidth}
+	\centering
+    \includegraphics[height=58mm]{lim-test5}
+\end{subfigure}
+\caption{Limerick Turing Test Question 5}
+\label{fig:lim-test5}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t!]{0.45\textwidth}
+	\centering
+    \textit{there was a young person called Smarty\\who sent out his cards for a party\\so exclusive and few\\were the friends that he knew\\that no one was present but Smarty}
+\end{subfigure}
+\begin{subfigure}[t!]{0.45\textwidth}
+	\centering
+    \includegraphics[height=60mm]{lim-test6}
+\end{subfigure}
+\caption{Limerick Turing Test Question 6}
+\label{fig:lim-test6}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t!]{0.45\textwidth}
+	\centering
+    \textit{the middle-aged man from France\\while communication keeps his stance\\his position is in love\\emotion is ugly like a cancer above\\he logically does not advance}
+\end{subfigure}
+\begin{subfigure}[t!]{0.45\textwidth}
+	\centering
+    \includegraphics[height=50mm]{lim-test7}
+\end{subfigure}
+\caption{Limerick Turing Test Question 7}
+\label{fig:lim-test7}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t!]{0.45\textwidth}
+	\centering
+    \textit{the bold chlorine contaminates water\\the landscape gives short birth to daughter\\binary compounds crosses lagoon\\chemical element goes up in balloon\\derives inspiration underwater}
+\end{subfigure}
+\begin{subfigure}[t!]{0.45\textwidth}
+	\centering
+    \includegraphics[width=60mm]{lim-test8}
+\end{subfigure}
+\caption{Limerick Turing Test Question 8}
+\label{fig:lim-test8}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t!]{0.45\textwidth}
+	\centering
+    \textit{there is a young, fine man called Ricky\\he is as dark-haired as a trainer sticky\\he wants to slumber\\he gets a wrong number\\deep sleeps quite tricky}
+\end{subfigure}
+\begin{subfigure}[t!]{0.45\textwidth}
+	\centering
+    \includegraphics[width=60mm]{lim-test9}
+\end{subfigure}
+\caption{Limerick Turing Test Question 9}
+\label{fig:lim-test9}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t!]{0.45\textwidth}
+	\centering
+    \textit{a talkative tourist named Margot\\was handed a plate of escargot\\at a fancy French feast\\then her chattering ceased\\and the whole crowd soon heard her new car go}
+\end{subfigure}
+\begin{subfigure}[t!]{0.45\textwidth}
+	\centering
+    \includegraphics[width=60mm]{lim-test10}
+\end{subfigure}
+\caption{Limerick Turing Test Question 10}
+\label{fig:lim-test10}
+\end{figure}
 
 \subsection{Quality of English}
+We mentioned at the start of this paper that poetry is meant to convey a particular message. We argued that we need control over syntax and semantics of language to achieve this goal, and that it comes before attempting to use poetic features.
 
 \subsubsection{Vocabulary and Word Selection}
 The vocabulary of the system is dispersed among the third-party and internal sources used.
-WordNet: 155,000
-CMUPD: 133,000
-FrameNet: Blah
-Knowledge Network: Blah
-SimpleNLG Lexicon: Blah
+\begin{description}
+\item[WordNet] ~117,000 words
+\item[CMUPD] ~133,000 words
+\item[FrameNet] ~13,000 words
+\item[Knowledge Network] 28,802 words
+\item[SimpleNLG Lexicon]: 6317 words
+\end{description}
 
-Only x words are shared among all of these sources. Altogether, the number of unique words is y. The Oxford Enlgish Dictionary has z words so there is still much room for improvement. We have no scientific or colloquial vocabulary. 
+The most important of these are the last three in the list because they come with semantic information on the usage, inflections and associations of words. The average vocabulary of native English speakers is 20,000-35,000\cite{vocab}, so there is still plenty of room for improvement. 
 
-The average vocabulary of native English speakers is 20,000-35,000[http://www.economist.com/blogs/johnson/2013/05/vocabulary-size], so in that sense we are very good.
+It is worth noting that there is little to no scientific or colloquial vocabulary. Names of people and places in our knowledge network is also limited.
 
-\subsubsection{Grammar}
-However, the amount of the vocabulary that is actually used is somewhat limited by the fact that we translate a relation (of which there are relatively few) to phrases. Selection from FrameNet is somewhat limited and not hugely dependable for many words. We use the general takes and receives action relations, but quality will significantly improve if we get more relations like desires, usedfor etc.
+Given the limited repetition of words in the poems, this vocabulary size is sufficient. The Turing Test results did not indicate any issues with vocabulary being too basic for a human author.
 
-This means that the quality of English should be rather high. We can check this by running the output through an over-the-counter grammar checker. We find that some percentage of lines do not fail the grammar checker, assuming a full stop at the end of every line.
+\subsubsection{Grammar and Sentence Structure}
+The grammatical capabilities are mainly governed by FrameNet and SimpleNLG. FrameNet gives the instruction on how to build a sentence from a single word, while SimpleNLG can be used to follow those instructions. This approach enables us to build upwards from words to phrases to complex sentences based on first principles of structuring a sentence with subjects, actions, objects and indirect objects.
 
-FrameNet does not have all the answers.
+This gives us the ability to generate many types of sentences for any purpose. The initial structure of every line of poetry created by this system has correct grammar and is only broken for poetic license. As a result, the grammar produced by this system is of a higher quality compared to many previous works (see Section \ref{sec:related_work}) and yet is flexible enough to be unpredictable.
 
-Could take advantage of knowledge of length of syllables to determine the grammatical structure (e.g. intransitive verbs for short sentences).
+Comments on the Turing Tests did not condemn the grammar of the computer generated poetry. Some comments did admonish the grammar of human generated poetry, indicating that it was a factor that participants looked out for. One comment even said \textit{"The grammar seems too off to be poetic license."} about a human generated poem. This justifies our content-first approach.
 
-Enjambent fails.
+The amount of vocabulary used effectively is somewhat limited by the fact that we translate a relation (of which there are relatively few types) to phrases. We use the general takes and receives action relations to spread our usable vocabulary as wide as possible, but quality will significantly improve if we get more relations like in ConceptNet\cite{liu2004conceptnet}.
 
-\subsection{Exhibition of Poetic Features}
-Probabilistic. Rhyme and syllabic rythm are followed most of the time. However, by nature of the results being somewhat ambiguous, the results vary naturally.
+One major point of feedback from the Turing Tests was the inability for this system to carry out \textit{enjambment} - letting sentences overflow into multiple lines. Given our process of building from first principles, we build noun phrases and verb phrases that get \textit{realised} into a full sentence. We can simply split these phrases over multiple lines to achieve enjambment. This is particularly important for poems with very short syllable counts, such as haikus. 
 
-Accentual rhythm is a best fit and is not as important as content. If we analyse the poem back using the analysis stage, we find that everything except this matches up with some permutation of the probability distribution, but not necessarily one specific instance. This is good because it means that we are getting \textit{close} to other previous poems, but not directly copying the grammatical structure like in that constraint programming one.
 
-\subsection{Creativity}
-Are the poems creative?
-\subsubsection{FACE and IDEA Descriptive Models}
-\paragraph{FACE Descriptive Model}
-\label{sec:face}
-A full FACE model has four symptoms: examples, concepts, aesthetics and framing information.
+\subsection{Creativity and Cohesiveness}
+Poems are \textit{creative} works, which means that they should at least be \textit{non-deterministic}.
 
-\begin{itemize}
-\setlength{\itemsep}{0pt}
-\item{\emph{Examples} will be showcased by the templates generated by the Analysis and Abstraction phase.}
-\item{\emph{Concepts} are of the form of the algorithm described for the Generation phase as it takes input from the user or online, the results from the Abstraction phase and several third party libraries to output a poem.}
-\item{\emph{Aesthetics} are assessed by running the Analysis phase over the poem again. In fact, this happens several times during the creation of the poem. Any faults are reported back to the next iteration of that poem.}
-\item{\emph{Framing Information} is the poem created.}
-\end{itemize}
+We generated 100 poems where 50 were given the same \textit{word} as inspiration and 50 the same \textit{relation} as inspiration.
 
-Therefore, we can see that this system should fully abide by the FACE Descriptive Model. We will evaluate the results mathematically as per Colton, Charnley and Pease.
+Each poem was very different in the case of the single word inspiration. When given the same relation as inspiration, the first line was always a direct translation as per Section \ref{sec:build}, which means that there was \textit{some} overlap in that line, but little in the others.
 
-\paragraph{IDEA Descriptive Model}
-\label{sec:idea}
-A full IDEA model has six stages to which the software can reach. We want our software to be in the, fourth or \emph{Discovery stage}.
+Furthermore, if the tail of the given relation is a word with very few rhyming candidates then following lines may end up being similar because of lack of choices for words. However, there is enough non-determinism, thanks to a large knowledge network and the randomness introduced in the rephrasing processes, for there to be consistent variation.
 
-\begin{itemize}
-\setlength{\itemsep}{0pt}
-\item{\emph{Developmental stage}: this system has a full Abstraction phase to avoid the case that all creative acts undertaken by this system are purely based on inspiring examples. So this system will have surpassed this stage.}
-\item{\emph{Fine-tuning stage}: the Abstraction phase only looks for a limited number of overlapping features to provide the template, leading to higher level abstraction. For example, it does not use part-of-speech tags from previous examples or any low level abstractions. We believe the system should be able to surpass this level.}
-\item{\emph{Re-invention stage}: the system is able to work off a template provided by the Abstraction phase, but also able to mutate the templates and add or remove restrictions both automatically and guided by the user. Therefore, the creative acts are not restricted only to those that are known and should be able to surpass this stage as well.}
-\item{\emph{Discovery stage}: the ability to work off templates derived from Analysis and Abstraction imply that the system is able to generate works that are sufficiently similar to be assessed with current contexts. However, given the flexibility of the mutation and user-guidance ability, it can also produce works that are significantly dissimilar. We believe the system to be able to reach this stage.}
-\item{\emph{Disruption and Disorientation stages}: Since templates and constraints on the creative work that are imposed are the results of analysing and abstracting existing works, it is not the case that this system solely produces poetry that is too dissimilar to those known by theory. }
-\end{itemize}
+\subsubsection{Knowledge as Creativity}
+One philosophy of creativity is that it is an amalgamation of knowledge and experience. Our system has its semantic network of common-sense (Section \ref{sec:common-sense}) that fills this role. It has precisely 203,324 relations between 28,802 unique concepts (compared to de Smedt's Perception with ~9,000 relations across ~4,000 concepts) from high-quality and dependable sources. There are more resources, such as ConceptNet, that could be used to extend this knowledge base in the future.
 
-Therefore, we can see that this system should reach the desired \emph{Discovery stage} of the IDEA Descriptive Model. We will evaluate the results mathematically as per Colton, Charnley and Pease.
+A third of all relations are of the most general \textit{RelatedTo} type, which is only really useful for cohesiveness throughout the poem and do not help building relations between persona. More specific understanding of the relations between words will increase the variation, and therefore creativity, of the system.
 
-\subsubsection{Knowledge}
-220,000 specks of knowledge vs 10,000 for Metaphor magnet, 9,000 for Perception.
-Quality of sources is high quality, so knowledge is dependable.
-Other sources include:
-blah
-blah
-blah
 
-So we are still limited on understanding of some words and could improve further.
+\subsubsection{Cohesiveness}
+The problem of a cohesive theme is a very important one. Many decisions made by participants on the Turing test were based on the extent to which words in the poem were related to each other. The haiku in Figure \ref{fig:haik-test7} mentions words on the theme of education but are not related temporally or any other way. This haiku still fooled many, and the reason given was that they did not expect such cohesiveness from a computer. Human poems were also admonished for their lack of cohesiveness and therefore thought to be computer-generated.
 
-Many specks use the most general \textit{RelatedTo} relation, which is only really useful for cohesiveness throughout the poem and do not help building the poems. Let's have a distribution...
+Cohesiveness in this system is achieved on a word-by-word basis by finding associatively similar concepts in the knowledge graph. At the moment, the context concept nodes include those in the lines immediately surrounding the one being built. This gives a ladder effect to the cohesiveness; we can go from one topic to another but may end up far away from the original by the end of the poem. This is a big reason the limericks performed poorly compared to the haiku, according to feedback on the Turing test.
 
-Does it come up with new stuff each time? With the same input, how many words are reused in each poem? Is there too much weighting to the quality of the knowledge?
+A better strategy could be to attain a circular effect, whereby we aim to return to the original concept that we started with by the end of the poem. Or we have a star effect, where one concept anchors the entire poem. Thorough experimentation with different strategies will be required to uncover a consistently effective approach.
 
-Google Suggestions is poor, should avoid using that
+Many human poems were lauded for their story-telling; a temporally consecutive series of events. Further investigation into strategies that utilise tense and aspect together with cohesiveness may be the final piece in the puzzle for automatic generation of poetry, especially if it is able to cope with long poems that include many stanzas.
+
 
 \subsection{Performance}
-Put everything in the graph instead of processing each corresponding node of a list of given words.
+The timings taken to generate 10 haikus and 10 limericks without inspiration are seen in Table \ref{tab:gen}. On average, a limerick takes \textbf{322.75} seconds and a haiku takes \textbf{12.53} seconds to create.
 
-Process nodes with greater centrality to reach optimal score faster.
+\begin{table}
+\centering
+    \begin{tabular}{|l|l|}
+    \hline
+    Limerick & Haiku  \\ \hline
+    291.992  & 21.365 \\
+    241.588  & 12.608 \\
+    50.754   & 14.134 \\
+    863.205  & 13.066 \\
+    16.115   & 10.385 \\
+    369.568  & 9.384  \\
+    491.374  & 10.889 \\
+    584.955  & 9.145  \\
+    290.491  & 15.148 \\
+    27.447   & 9.137  \\ \hline
+    \end{tabular}
+\caption{Timings for generating 10 haikus and 10 limericks}
+\label{tab:gen}
+\end{table}
+
+\subsubsection{Delay when Finding Rhymes}
+
+It is intuitive that longer poems take more time to compose. The less obvious trend is that adherence to a rhyme scheme greatly increases processing time because choosing the most associatively similar (see Section \ref{sec:assoc-sim}) pair of words when rephrasing for rhyme, as described in Section \ref{sec:guarantee-rhyme}, causes the greatest delay.
+
+Suppose we want to choose the best word in context to rhyme with \textit{'cheese'}. The call to the RhymeBrain API\cite{rhymebrain} takes $0.599$ seconds and returns $117$ candidate rhymes. If we assume we have $10$ contextual words to compare with then we require $1170$ graph lookups. In most cases lookup converges to a maximum depth of $1$ eventually, which has an average lookup time of $0.0043$. However, there may be some lookups of maximum depth of $2$ or $3$ before converging, which have average times of $0.228$ and $1.691$ seconds respectively. 
+
+Therefore, the time to complete our \textit{'cheese'} example is at best\\ $1170*0.0043 + 0.599  = 5.63$\\ seconds but could potentially take up to roughly\\ $50*1.691 + 120*0.228 + 1000*0.0043 + 0.599  = 116.809$\\ seconds just to choose one word with machine specifications in Appendix \ref{sec:specs}.
+
+There are several ways this can be improved with threading, caching, optimising the shortest path algorithm and reducing API calls. However, this implementation is inherently long-winded because we are getting the rhyme words \textit{first}, and then finding the most contextually appropriate. 
+
+A more efficient implementation would be to store the rhyme phoneme patterns, as in Section \ref{sec:rhyme}, in each node of the knowledge network. We then start from each context node and do a breadth first search for the nearest node with the required rhyme phoneme pattern. For further optimisation, we could create a thread for each context node and perform this process concurrently.
+
+This removes the need for an API call and for the shortest path associative similarity altogether, significantly reducing time and memory complexity.
+
+\subsubsection{SimpleNLG via JPype}
+
+Another sub-optimal implementation is that the Natural Language Generation library that we use in this project is SimpleNLG, a \textit{Java} library. This is made possible by launching a JVM via JPype, which also allows us to run the library and access its objects. Naturally, it will be more efficient to use local Python implementation.
 
 % ------------------------------------------------------------------------
 

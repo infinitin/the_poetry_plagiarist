@@ -235,7 +235,7 @@ For example, suppose the first line of a poem mentions the concept \textit{'man.
 
 
 \paragraph{Symbolic Similarity}
-Symbolic similarity can be attained through inductive reasoning and substitution by concepts that have a very similar concept halo and field up to a certain depth. Simply put, we can find similarity with the \textit{Duck Test}: if it looks like a duck, swims like a duck and quacks like a duck, it probably is a duck. Object-oriented programmers can relate this idea to the Liskov substitution principle.
+Symbolic similarity can be attained through inductive reasoning and substitution by concepts that have a very similar concept halo and field up to a certain depth. Simply put, we can find similarity with the \textit{Duck Test}: if it looks like a duck, swims like a duck and quacks like a duck, it probably is a duck. Object-oriented programmers can relate this idea to the Liskov substitution principle\cite{martin2003agile}.
 
 Symbolic similarity has many use cases, including the new method of anaphora resolution to be proposed for future work. For this phase, it enables us to implement the following poetic features:
 \begin{description}
@@ -358,7 +358,7 @@ We therefore choose any word that is associatively similar to those in context a
 
 \subsection{Keeping in Context}
 \label{sec:context}
-We choose words based on context to achieve coherent topic flow throughout the poem. In our implementation, we define context as \textbf{the concepts mentioned in immediately surrounding lines}, i.e. the context of line 2 is determined by the words used in line 1 and the head and tail of the relation that is expected to be translated in line 3. 
+We choose words based on context to achieve coherent topic flow throughout the poem. In our implementation, we define context as \textbf{the concepts mentioned in the current and immediately surrounding lines}, i.e. the context of line 2 is determined by the words used in line 1, so far in line 2 and the head and tail of the relation that is expected to be translated in line 3. 
 
 Whenever there is a choice between using any set of candidate concepts, we choose the one that is most associatively similar to the set of context concepts. For example, if we had the concepts \textit{'man.n'} and \textit{'pizza.n'} in our set of context concepts and \textit{'fat.a'} and \textit{'cat.n'} as our candidate concepts, we would choose to use \textit{'fat.a'} because it is more associatively similar to \textit{'man.n'} and \textit{'pizza.n'} than \textit{'cat.n'}.
 
@@ -424,6 +424,7 @@ For example, the word \textit{'address'} has the pronunciations \textit{[AH0 D R
 This gives us many more words that rhyme with 'address', including \textit{'dress'} and \textit{'impress'}.
 
 \subsubsection{Guaranteeing Rhyme}
+\label{sec:guarantee-rhyme}
 
 The general tactic is to only replace words with synonyms or very close associative similarity. For example, I could exchange the word 'horse' with 'pony' if I needed to rhyme with 'Tony'. 
 
