@@ -1,69 +1,217 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\defcounter {refsection}{0}\relax 
 \select@language {english}
+\defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
+\defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
+\defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {2.1}{\ignorespaces A rhyming quatrain often used in teaching poetry\relax }}{6}{figure.caption.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {2.2}{\ignorespaces A humourous Haiku\relax }}{6}{figure.caption.5}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {2.3}{\ignorespaces The Guardian article used for inspiration(left) and the resulting poem(right).\relax }}{14}{figure.caption.7}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Complete poetry composition workflow.\relax }}{14}{figure.caption.8}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {2.5}{\ignorespaces The POS template used for constraint input(left) and the resulting poem(right).\relax }}{15}{figure.caption.9}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {2.6}{\ignorespaces A haiku written by Ray Kurzweil's Cybernetic Poet after reading poems by Kimberly McLauchlin and Ray Kurzweil\relax }}{15}{figure.caption.10}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Resulting MCGONNAGAL poem when seeded with a couple of lines of Hilaire Belloc.\relax }}{16}{figure.caption.11}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Semantically enriched lexical entry for \textit {lion} in MCGONNAGAL\relax }}{17}{figure.caption.12}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {2.9}{\ignorespaces 'The legalized regime of this marriage', a poetic view of marriage as a prison\relax }}{18}{figure.caption.13}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {2.10}{\ignorespaces Chair \#17 at the Performing Sciences Exhibition, La Maison Rouge, Paris, Sept 2011\relax }}{19}{figure.caption.14}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {2.11}{\ignorespaces Example concept halo and field\relax }}{21}{figure.caption.15}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {2.12}{\ignorespaces Parse tree of \textit {'John loves Mary'}\relax }}{24}{figure.caption.16}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {2.13}{\ignorespaces TurboParser Semantic Dependency parse for the shopkeeper example.\relax }}{25}{figure.caption.17}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {2.14}{\ignorespaces Semantic structure of the sentence \textit {Smoking causes diseases.}\relax }}{27}{figure.caption.18}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {2.15}{\ignorespaces SEMAFOR frame-semantic parse for the shopkeeper example\relax }}{28}{figure.caption.19}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {2.16}{\ignorespaces SEMAFOR frame-semantic parse for a grammatically incorrect sentence.\relax }}{28}{figure.caption.20}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {2.17}{\ignorespaces Full inherited hypernym tree for 'cat' synset according to WordNet\relax }}{30}{figure.caption.21}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {2.18}{\ignorespaces Oxford Collocations Dictionary entry for \textit {'custard'}\relax }}{32}{figure.caption.24}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {2.19}{\ignorespaces Reiter and Dale Natural Language Generation process\relax }}{34}{figure.caption.26}
+\defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Orbital elements visualisation\relax }}{10}{figure.caption.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {3.1}{\ignorespaces A rhyming quatrain often used in teaching poetry\relax }}{37}{figure.caption.27}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {3.2}{\ignorespaces A limerick about limericks\relax }}{37}{figure.caption.27}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {3.3}{\ignorespaces The different ways of pronouncing the first line of the cat poem\relax }}{37}{figure.caption.28}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Pairs of matching rhyme phoneme patterns\relax }}{40}{figure.caption.29}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Persona hubs diagram for shopkeeper example\relax }}{52}{figure.caption.33}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Persona hubs diagram for cat poem example\relax }}{52}{figure.caption.34}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Persona hubs diagram for limerick example\relax }}{53}{figure.caption.35}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {3.8}{\ignorespaces TurboParser Semantic Dependency parse for the first sentence of the cat poem.\relax }}{54}{figure.caption.37}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {3.9}{\ignorespaces TurboParser Semantic Dependency parse for the second sentence of the cat poem.\relax }}{55}{figure.caption.38}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {3.11}{\ignorespaces Final collapsed dependency diagrams for full cat poem example.\relax }}{57}{figure.caption.40}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {3.12}{\ignorespaces Execution on the first half of the cat poem example.\relax }}{59}{figure.caption.41}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {3.13}{\ignorespaces Initial dependency hub for the 'cat' persona.\relax }}{60}{figure.caption.42}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {3.14}{\ignorespaces All persona hubs for the first sentence of the cat example.\relax }}{61}{figure.caption.43}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {3.15}{\ignorespaces All persona hubs for the second sentence of the cat example.\relax }}{62}{figure.caption.44}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {3.10}{\ignorespaces Execution of Algorithm BLAH on the first half of the cat poem example.\relax }}{66}{figure.caption.39}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {3.16}{\ignorespaces Full binding process for the 'cat' character\relax }}{67}{figure.caption.45}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {3.16}{\ignorespaces Full binding process for the 'cat' character\relax }}{68}{figure.caption.46}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {3.17}{\ignorespaces Complete bindings for all persona\relax }}{69}{figure.caption.47}
+\defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Kepler iterative algorithm overview\relax }}{20}{figure.caption.4}
-\contentsline {figure}{\numberline {5.2}{\ignorespaces VSOP87 data set comparison\relax }}{23}{figure.caption.5}
-\contentsline {figure}{\numberline {5.3}{\ignorespaces 4x4 matrix layout\relax }}{26}{figure.caption.6}
-\contentsline {figure}{\numberline {5.4}{\ignorespaces 4x4 identity matrix\relax }}{27}{figure.caption.7}
-\contentsline {figure}{\numberline {5.5}{\ignorespaces 4x4 world matrix\relax }}{27}{figure.caption.8}
-\contentsline {figure}{\numberline {5.6}{\ignorespaces 4x4 view matrix\relax }}{28}{figure.caption.9}
-\contentsline {figure}{\numberline {5.7}{\ignorespaces 4x4 projection matrix\relax }}{28}{figure.caption.10}
-\contentsline {figure}{\numberline {5.8}{\ignorespaces Camera frustum}}{30}{figure.caption.11}
-\contentsline {figure}{\numberline {5.9}{\ignorespaces Example of partial scene graph for the app\relax }}{31}{figure.caption.12}
-\contentsline {figure}{\numberline {5.10}{\ignorespaces Camera frustum\relax }}{33}{figure.caption.13}
-\contentsline {figure}{\numberline {5.11}{\ignorespaces Performance from 20,000 to 600,000 asteroids before and after implementing VBO/IBOs on an integrated Intel HD Graphics 3000 GPU\relax }}{36}{figure.caption.14}
-\contentsline {figure}{\numberline {5.12}{\ignorespaces Star sphere shown from different views (star sizes greatly increased for clarity).\relax }}{39}{figure.caption.15}
-\contentsline {figure}{\numberline {5.13}{\ignorespaces Star sphere textured shown from different views (star sizes greatly increased for clarity).\relax }}{40}{figure.caption.16}
-\contentsline {figure}{\numberline {5.14}{\ignorespaces Star sphere final render quality with texturing, colouring and correct scaling.\relax }}{40}{figure.caption.17}
-\contentsline {figure}{\numberline {5.15}{\ignorespaces Star sphere final render quality with texturing, colouring and correct scaling.\relax }}{41}{figure.caption.18}
-\contentsline {figure}{\numberline {5.16}{\ignorespaces Geometry underlying the rendering of text\relax }}{42}{figure.caption.19}
-\contentsline {figure}{\numberline {5.17}{\ignorespaces Texture overlayed over the geometry with texture coordinates pointing to particular characters to produce the desired text output.\relax }}{42}{figure.caption.20}
-\contentsline {figure}{\numberline {5.18}{\ignorespaces Shader applied per-pixel\relax }}{44}{figure.caption.21}
-\contentsline {figure}{\numberline {5.19}{\ignorespaces Shader applied per-vertex\relax }}{44}{figure.caption.21}
-\contentsline {figure}{\numberline {5.20}{\ignorespaces Atmosphere sphere drawn over the planet sphere\relax }}{44}{figure.caption.22}
-\contentsline {figure}{\numberline {5.21}{\ignorespaces Atmosphere shader\relax }}{45}{figure.caption.23}
-\contentsline {figure}{\numberline {5.22}{\ignorespaces Corona shader\relax }}{45}{figure.caption.23}
-\contentsline {figure}{\numberline {5.23}{\ignorespaces The noise amount can be customised which allows for interesting effects.\relax }}{45}{figure.caption.24}
-\contentsline {figure}{\numberline {5.24}{\ignorespaces 20,000 asteroids\relax }}{46}{figure.caption.25}
-\contentsline {figure}{\numberline {5.25}{\ignorespaces Full 600,000 asteroids\relax }}{46}{figure.caption.25}
-\contentsline {figure}{\numberline {5.26}{\ignorespaces 20,000 asteroids rendered with a realistic texture\relax }}{46}{figure.caption.26}
-\contentsline {figure}{\numberline {5.27}{\ignorespaces Diffuse lighting on a flat surface\relax }}{47}{figure.caption.27}
-\contentsline {figure}{\numberline {5.28}{\ignorespaces Textured sphere\relax }}{48}{figure.caption.28}
-\contentsline {figure}{\numberline {5.29}{\ignorespaces Diffuse lighting added\relax }}{48}{figure.caption.28}
-\contentsline {figure}{\numberline {5.30}{\ignorespaces Day/night texture added\relax }}{49}{figure.caption.29}
-\contentsline {figure}{\numberline {5.31}{\ignorespaces Dark side of the Earth\relax }}{49}{figure.caption.29}
-\contentsline {figure}{\numberline {5.32}{\ignorespaces Earth normal map\relax }}{50}{figure.caption.30}
-\contentsline {figure}{\numberline {5.33}{\ignorespaces Dot3 bump mapping applied\relax }}{50}{figure.caption.30}
-\contentsline {figure}{\numberline {5.34}{\ignorespaces Earth specular map\relax }}{51}{figure.caption.31}
-\contentsline {figure}{\numberline {5.35}{\ignorespaces Specular highlights applied\relax }}{51}{figure.caption.31}
-\contentsline {figure}{\numberline {5.36}{\ignorespaces Heightmapping on Earth (scale has been greatly increased for clarity).\relax }}{52}{figure.caption.32}
-\contentsline {figure}{\numberline {5.37}{\ignorespaces Cloud layer added\relax }}{52}{figure.caption.33}
-\contentsline {figure}{\numberline {5.38}{\ignorespaces Atmosphere enabled\relax }}{52}{figure.caption.33}
-\contentsline {figure}{\numberline {5.39}{\ignorespaces Source texture for Saturn's Rings with transparency shown as black.\relax }}{53}{figure.caption.34}
-\contentsline {figure}{\numberline {5.40}{\ignorespaces Rings of Saturn\relax }}{54}{figure.caption.35}
-\contentsline {figure}{\numberline {5.41}{\ignorespaces Rings of Neptune\relax }}{54}{figure.caption.35}
-\contentsline {figure}{\numberline {5.42}{\ignorespaces Diagram shows the three rays cast (six here as it is done on both sides)\relax }}{55}{figure.caption.36}
-\contentsline {figure}{\numberline {5.43}{\ignorespaces Radii used in calculations\relax }}{56}{figure.caption.37}
-\contentsline {figure}{\numberline {5.44}{\ignorespaces Resulting effect\relax }}{56}{figure.caption.37}
-\contentsline {figure}{\numberline {5.45}{\ignorespaces Hyperbolic escape orbit 1\relax }}{61}{figure.caption.38}
-\contentsline {figure}{\numberline {5.46}{\ignorespaces Hyperbolic escape orbit 2\relax }}{61}{figure.caption.39}
-\contentsline {figure}{\numberline {5.47}{\ignorespaces Hyperbolic escape orbit 3\relax }}{62}{figure.caption.40}
-\contentsline {figure}{\numberline {5.48}{\ignorespaces Ship successfully enters a large elliptical orbit with high eccentricity\relax }}{62}{figure.caption.41}
-\contentsline {figure}{\numberline {5.49}{\ignorespaces Complex orbit which eventually leads to a collision with Earth\relax }}{63}{figure.caption.42}
-\contentsline {figure}{\numberline {5.50}{\ignorespaces UI elements on main screen\relax }}{64}{figure.caption.43}
-\contentsline {figure}{\numberline {5.51}{\ignorespaces Accelerator at different levels\relax }}{65}{figure.caption.44}
-\contentsline {figure}{\numberline {5.52}{\ignorespaces Hyperjump planets selector\relax }}{66}{figure.caption.45}
-\contentsline {figure}{\numberline {5.53}{\ignorespaces Hyperjump button\relax }}{66}{figure.caption.46}
-\contentsline {figure}{\numberline {5.54}{\ignorespaces Gamepad\relax }}{67}{figure.caption.47}
-\contentsline {figure}{\numberline {5.55}{\ignorespaces Calendar\relax }}{67}{figure.caption.48}
-\contentsline {figure}{\numberline {5.56}{\ignorespaces Different states for selecting modes\relax }}{68}{figure.caption.49}
-\contentsline {figure}{\numberline {5.57}{\ignorespaces Regular Android SeekBar vs modified SeekBar\relax }}{70}{figure.caption.50}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {4.1}{\ignorespaces A very awkward limerick for analysis\relax }}{71}{figure.caption.48}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {4.2}{\ignorespaces A limerick with more than one possible rhyme scheme\relax }}{74}{figure.caption.49}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Five lines long, one stanza\relax }}{77}{figure.caption.50}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {4.4}{\ignorespaces AABBA rhyme scheme by far the most common\relax }}{78}{figure.caption.51}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Limericks generally talk about people and other animate objects\relax }}{79}{figure.caption.52}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Limericks talk about who these people are, what properties they have, what they are named, where they are, their capabilities, what they do, what is done to them etc.\relax }}{80}{figure.caption.53}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {4.7}{\ignorespaces The first line often introduces the person, usually as either old or young\relax }}{80}{figure.caption.54}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Whole poem seems to be either one or two sentences. This actually tells us that full stops are not needed, but if they are used then the whole poem is generally two sentences long.\relax }}{81}{figure.caption.55}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Never in future tense, mostly in past an sometimes in present\relax }}{81}{figure.caption.56}
+\defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Starting relations for generation\relax }}{83}{figure.caption.57}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Oxford Collocations Dictionary entry for \textit {'custard'}\relax }}{88}{figure.caption.59}
+\defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {7.1}{\ignorespaces VSOP implementation performance comparison plot\relax }}{75}{figure.caption.51}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.1}{\ignorespaces One stanza, five lines, no repetition.\relax }}{105}{figure.caption.63}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.2}{\ignorespaces N-grams for Line 1\relax }}{106}{figure.caption.64}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.3}{\ignorespaces Animation of nouns\relax }}{107}{figure.caption.65}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.4}{\ignorespaces Types of persona\relax }}{107}{figure.caption.66}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.5}{\ignorespaces Rhyme Scheme\relax }}{109}{figure.caption.67}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.6}{\ignorespaces Stress patterns for lines 1, 2 and 5\relax }}{110}{figure.caption.68}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.7}{\ignorespaces Stress patterns for lines 3 and 4\relax }}{112}{figure.caption.69}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.8}{\ignorespaces Probability distribution of overall poem tense\relax }}{114}{figure.caption.70}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.9}{\ignorespaces Probability distribution perspective across poem\relax }}{114}{figure.caption.71}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.10}{\ignorespaces One stanza, three lines, no repetition.\relax }}{115}{figure.caption.72}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.11}{\ignorespaces Animation of nouns in haiku\relax }}{116}{figure.caption.73}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.12}{\ignorespaces Types of persona in haiku\relax }}{116}{figure.caption.74}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.13}{\ignorespaces Syllable counts for each line\relax }}{117}{figure.caption.75}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.14}{\ignorespaces \textit {ABC} implies no rhyme scheme\relax }}{118}{figure.caption.76}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.15}{\ignorespaces Probability distribution of overall poem tense\relax }}{119}{figure.caption.77}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.16}{\ignorespaces Probability distribution perspective across poem\relax }}{119}{figure.caption.78}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.17}{\ignorespaces One stanza, five lines, no repetition.\relax }}{120}{figure.caption.79}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.18}{\ignorespaces Topics covered in sonnets\relax }}{120}{figure.caption.80}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.19}{\ignorespaces Types of persona in sonnets are non-objects\relax }}{121}{figure.caption.81}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.20}{\ignorespaces Words used in sonnets with significant frequency\relax }}{122}{figure.caption.82}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.21}{\ignorespaces Possible rhyme schemes for the Shakespearean sonnet\relax }}{122}{figure.caption.83}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.22}{\ignorespaces Sonnet stress patterns for each line\relax }}{125}{figure.caption.84}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.22}{\ignorespaces Sonnet stress patterns for each line\relax }}{126}{figure.caption.85}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.23}{\ignorespaces Probability distribution of overall poem tense\relax }}{127}{figure.caption.86}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.24}{\ignorespaces Probability distribution perspective across poem\relax }}{127}{figure.caption.87}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.25}{\ignorespaces Evidence of frequent use of analogies\relax }}{128}{figure.caption.88}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.26}{\ignorespaces Limerick seeded with inspiration\relax }}{131}{figure.caption.90}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.27}{\ignorespaces Limerick seeded with inspiration\relax }}{131}{figure.caption.91}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.28}{\ignorespaces Limerick seeded with inspiration\relax }}{131}{figure.caption.92}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.29}{\ignorespaces Limerick seeded with inspiration\relax }}{131}{figure.caption.93}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.30}{\ignorespaces Haiku Turing Test Question 1\relax }}{133}{figure.caption.94}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.31}{\ignorespaces Haiku Turing Test Question 2\relax }}{133}{figure.caption.95}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.32}{\ignorespaces Haiku Turing Test Question 3\relax }}{133}{figure.caption.96}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.33}{\ignorespaces Haiku Turing Test Question 4\relax }}{134}{figure.caption.97}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.34}{\ignorespaces Haiku Turing Test Question 5\relax }}{134}{figure.caption.98}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.35}{\ignorespaces Haiku Turing Test Question 6\relax }}{134}{figure.caption.99}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.36}{\ignorespaces Haiku Turing Test Question 7\relax }}{135}{figure.caption.100}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.37}{\ignorespaces Haiku Turing Test Question 8\relax }}{135}{figure.caption.101}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.38}{\ignorespaces Haiku Turing Test Question 9\relax }}{135}{figure.caption.102}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.39}{\ignorespaces Haiku Turing Test Question 10\relax }}{136}{figure.caption.103}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.40}{\ignorespaces Limerick Turing Test Question 1\relax }}{136}{figure.caption.104}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.41}{\ignorespaces Limerick Turing Test Question 2\relax }}{136}{figure.caption.105}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.42}{\ignorespaces Limerick Turing Test Question 3\relax }}{137}{figure.caption.106}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.43}{\ignorespaces Limerick Turing Test Question 4\relax }}{137}{figure.caption.107}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.44}{\ignorespaces Limerick Turing Test Question 5\relax }}{137}{figure.caption.108}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.45}{\ignorespaces Limerick Turing Test Question 6\relax }}{138}{figure.caption.109}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.46}{\ignorespaces Limerick Turing Test Question 7\relax }}{138}{figure.caption.110}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.47}{\ignorespaces Limerick Turing Test Question 8\relax }}{138}{figure.caption.111}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.48}{\ignorespaces Limerick Turing Test Question 9\relax }}{139}{figure.caption.112}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6.49}{\ignorespaces Limerick Turing Test Question 10\relax }}{139}{figure.caption.113}
+\defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
+\defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }

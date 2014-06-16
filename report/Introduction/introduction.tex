@@ -5,54 +5,41 @@
 \else
     \graphicspath{{Introduction/IntroductionFigs/EPS/}{Introduction/IntroductionFigs/}}
 \fi
-\emph{"Dream in a pragmatic way." - Aldous Huxley}
+
 \section{Motivation}
+Alan Turing devised the Turing Test as a standard for a computer's ability to exhibit behaviour indistinguishable to that of a human. The original example that he used to indicate the requirements for passing the test included the following:
 
-Computational Semantics is a relatively young and fashionable topic in Computational Linguistics. It involves finding representations and algorithms that are able to cope with the \textit{meaning} of linguistic utterances.
+\textit{\textbf{Q:} Please write me a sonnet on the subject of the Forth Bridge.}\\
+\textit{\textbf{A:} Count me out on this one. I never could write poetry.}
 
-Pragmatics is an even younger discipline, concentrating on the context of those utterances. For example, the phrase \textit{"I have a green light"} may mean that I have been granted permission for something, or that I literally have a lamp with a green tint. When we as humans read or listen to any linguistic output, we build a representation of the objects, people, actions, descriptions, relationships and anything else to provide context to the experience.
+Poetry is a linguistic art form whose works convey a particular message, often using symbolism and rhetoric. Writing poetry requires precise control over syntax, in-depth understanding of semantics and the contextual awareness to retain a coherent topic flow. They are often read out loud and use a number of mnemonic techniques based on the sound of speech, such as rhyme and rhythm.  Poets break grammatical rules under a \textit{"poetic license"} if it is believed that it will help their message resonate with the listener.
 
-A similar approach is taken when writing or speaking - one has a purpose and a message that would like to be passed and the language used helps to build such context. For example, if I aim to tell you that I have a lot of tea, I could simply say so or say I am 'drowning' in tea. The latter helps you, the reader, realise that not only do I have a lot of tea but also that I cannot handle it and that I am talking about the drink rather than the leaves.
+It's not unreasonable for Turing to have been pessimistic about the possibility of computers writing poetry. However, recent advances in Computational Linguistics and Creativity have made it worth investigation. In this paper, we attempt to create a system that can automatically generate poetry that makes sense grammatically, semantically and with some level of coherence.
 
-For a computer to truly converse in a manner indistinguishable to humans, as is the aim of the elusive Turing Test, it must be able to handle pragmatics along with syntax and semantics. This requires a deep understanding of words not as a linguistic unit, but as the objects, actions and descriptions they represent. They should then be used with a purpose when generating text, as human writers and speakers do.
+Many types of poetry have spawned and evolved over millennia, each defined by the way it uses the aforementioned poetic techniques. We will not be able to write a variety of poems if we hard-code each style. Therefore, we aim that this system is able to learn the structure and typical content of classes of poems from examples and use this information to guide the generation process.
 
-Poetry is a linguistic art form designed to help convey a particular, well-defined message in a memorable and powerful way. Poets write poems that are succinct in length but dense in meaning by employing a number of techniques, such as rhyme and rhythm. 
+Poems are fundamentally \textit{creative} works, and creativity is a behaviour exhibited particularly well by humans. For computer-generated poems to truly be indistinguishable from those created by humans, we want to demonstrate some element of imagination and originality. To investigate this, certain philosophies of creativity have been broken down into logical components and implemented in code by researchers of Computational Creativity. It will be fascinating to see how they perform in practice through creation of poetry.
 
-Different types of poetry each have their own sets of constraints, features and priorities that define their best usage. For example, narrative poems convey characters, relationships and actions while descriptive ones are used to give a comprehensive linguistic illustration. Furthermore, rhythm and rhyme can be used to provide melody making it pleasant to hear and applicable to songs, but alliteration can be used to create suspense and a sense of danger.
-
-We aim to create a system that can analyse poetry and build a contextual representation of it, as well as generate poetry with an underlying purpose and message. This process will also act as a catalyst with which to develop computational semantics and pragmatics.
-
-The proposed implementation comes in three phases:
-\begin{enumerate}
-\item{First we will write the analysis module, which detects a wide range of poetic features in a single poem. It also aims to represent the context of the poem with Discourse Representation Structures (DRSs), outlined in section \ref{sec:drt}.}
-
-\item{Then we run many poems of the same type through the analysis module and abstract the common features between the given poems into a template. This includes a general structure for the DRSs of that class of poem.}
-
-\item{Finally we generate poems with a purpose as guided by the structure of the DRS. We will also utilise third-party libraries to build semantically and syntactically valid lines of poetry that also use poetic features. Poeticness and creativity is prioritised in the selection of words and phrases during the generation process. A dry run of this phase is given in the appendix.}
-\end{enumerate}
-
-
+Ultimately, poems are created to be enjoyed and to help people express themselves, while the purpose of computers is primarily to aid people in as many ways as possible. We intend that our system can be used to assist people either by creating poems for them, or as a tool for those who wish to write their own.
 
 %-----------------------------------
 
 \section{Objectives}
-The overarching primary objective of this system is \textit{pragmatic competence}. We aim to generate poetry that demonstrates some understanding of context with regards to descriptions, actions and relationships of people and objects, and with careful text and sentence planning for that context.
-
-Thereafter, we wish to create a system that:
+We wish to create a system that:
 \begin{itemize}
-\item{identifies a broad list of features in a single poem.} 
-\item{abstracts features of a given class of poems or texts that have been analysed.}
-\item{learns the features of a wide variety of different classes of poems.}
-\item{produces poems, given natural language 'seeds' of inspiration, that are:}
+\item{identifies the usage of a broad list of poetic and linguistic features in a single poem (Chapter \ref{chp:analysis}).}
+\item{learns usage patterns of these features and typical content of any class of poems from examples (Chapter \ref{chp:interpretation}).}
+\item{produces poems (Chapter \ref{chp:generation}), spontaneously or using 'seeds' of inspiration, that are:}
 	\begin{itemize}
 	\setlength{\itemsep}{0pt}
 	\item{novel,}
 	\item{syntactically valid,}
 	\item{semantically interpretable,}
-	\item{pragmatically consistent,}
-	\item{evident of a set of desired features.}
+	\item{contextually coherent,}
+	\item{evident of desire poetic techniques,}
+	\item{indicative of creativity and imagination.}
 	\end{itemize} 
-\item{is able to digress slightly from learned features in its use of poetic techniques in search of creativity.}
+\item{can be used to assist people in the creation of poems.}
 \end{itemize}
 
 %---------------------------------------------------
@@ -61,15 +48,12 @@ Thereafter, we wish to create a system that:
 This project makes contributions towards both Computational Creativity and Computational Linguistics.
 \begin{itemize}
 \item{We demonstrate the ability for computer systems to assess written natural language works in terms of its structure, common words and phrases, rhetoric and poetic features such as rhyme, rhythm and alliteration.}
-\item{We will investigate the appropriateness of Discourse Representation Theory as a semantic representation of poetry from which we can derive pragmatics in terms of characters, objects and locations, descriptions of them, relationships between them and the actions that they executed.}
-\item {We demonstrate the ability to abstract common written features out of a large number of comparable texts.}
-\item{We take in a step in the direction of using the web as a source of material and conceptual inspiration for creative acts.}
-\item{We demonstrate Discourse Representation Theory as an effective tool for guiding the macro- and micro- planning stages of natural language generation.}
-\item{We demonstrate the effectiveness of third-party libraries for the surface realisation stage of Natural Language Generation.}
-\item{We provide a tool for poetry creation from natural language seeds of inspiration.}
-\item{We investigate the applicability of the new FACE and IDEA descriptive models for evaluation.}
+\item{We validate the commonly taught expectations on structure and content of popular types of poetry.}
+\item{We will investigate the appropriateness of semantic networks of common sense as a representation of a written text's context in terms of objects and their descriptions, actions and relationships.}
+\item {We demonstrate the ability to learn usage patterns of written features from the analysis of a large number of comparable texts.}
+\item{We will investigate the appropriateness of semantic networks of common sense as a source of knowledge from which we can build sentences, retain a cohesive theme and demonstrate creativity.}
+\item{We explore the effectiveness of a content-first approach to poetry and applicability of third-party resources for Natural Language Generation.}
 \end{itemize}
-
 
 %%% ----------------------------------------------------------------------
 

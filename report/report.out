@@ -1,156 +1,156 @@
 \BOOKMARK [0][]{chapter*.1}{Abstract}{}% 1
 \BOOKMARK [0][]{chapter*.2}{Contents}{}% 2
-\BOOKMARK [0][]{chapter.1}{1 Introduction}{}% 3
-\BOOKMARK [1][]{section.1.1}{1.1 Motivation}{chapter.1}% 4
-\BOOKMARK [1][]{section.1.2}{1.2 Objectives}{chapter.1}% 5
-\BOOKMARK [1][]{section.1.3}{1.3 Contributions}{chapter.1}% 6
-\BOOKMARK [0][]{chapter.2}{2 Background}{}% 7
-\BOOKMARK [1][]{section.2.1}{2.1 Poetry Theory}{chapter.2}% 8
-\BOOKMARK [2][]{subsection.2.1.1}{2.1.1 The Purpose of Poetry}{section.2.1}% 9
-\BOOKMARK [2][]{subsection.2.1.2}{2.1.2 Features of Poetry}{section.2.1}% 10
-\BOOKMARK [3][]{subsubsection.2.1.2.1}{2.1.2.1 Rhyme}{subsection.2.1.2}% 11
-\BOOKMARK [3][]{subsubsection.2.1.2.2}{2.1.2.2 Rhythm}{subsection.2.1.2}% 12
-\BOOKMARK [3][]{subsubsection.2.1.2.3}{2.1.2.3 Sound Devices}{subsection.2.1.2}% 13
-\BOOKMARK [3][]{subsubsection.2.1.2.4}{2.1.2.4 Structure}{subsection.2.1.2}% 14
-\BOOKMARK [3][]{subsubsection.2.1.2.5}{2.1.2.5 Symbolism and Imagery}{subsection.2.1.2}% 15
-\BOOKMARK [3][]{subsubsection.2.1.2.6}{2.1.2.6 Context and Personification}{subsection.2.1.2}% 16
-\BOOKMARK [2][]{subsection.2.1.3}{2.1.3 Classification of Poetry}{section.2.1}% 17
-\BOOKMARK [3][]{subsubsection.2.1.3.1}{2.1.3.1 Categories}{subsection.2.1.3}% 18
-\BOOKMARK [3][]{subsubsection.2.1.3.2}{2.1.3.2 Popular Types}{subsection.2.1.3}% 19
-\BOOKMARK [1][]{section.2.2}{2.2 Lessons from Related Work}{chapter.2}% 20
-\BOOKMARK [2][]{subsection.2.2.1}{2.2.1 Actively Gather Inspiration}{section.2.2}% 21
-\BOOKMARK [2][]{subsection.2.2.2}{2.2.2 Constrain to Improve Creativity}{section.2.2}% 22
-\BOOKMARK [2][]{subsection.2.2.3}{2.2.3 Learn from Experience}{section.2.2}% 23
-\BOOKMARK [2][]{subsection.2.2.4}{2.2.4 Choose Words Carefully}{section.2.2}% 24
-\BOOKMARK [2][]{subsection.2.2.5}{2.2.5 Derive Insight from Worldly Knowledge}{section.2.2}% 25
-\BOOKMARK [2][]{subsection.2.2.6}{2.2.6 Dare to be Different}{section.2.2}% 26
-\BOOKMARK [1][]{section.2.3}{2.3 Brief Overview of Computational Creativity}{chapter.2}% 27
-\BOOKMARK [2][]{subsubsection.2.3.0.1}{2.3.0.1 Semantic Networks of Common Sense}{section.2.3}% 28
-\BOOKMARK [3][]{paragraph.2.3.0.1.1}{2.3.0.1.1 ConceptNet}{subsubsection.2.3.0.1}% 29
-\BOOKMARK [1][]{section.2.4}{2.4 Brief Overview of Computational Linguistics}{chapter.2}% 30
-\BOOKMARK [2][]{subsection.2.4.1}{2.4.1 Words}{section.2.4}% 31
-\BOOKMARK [2][]{subsection.2.4.2}{2.4.2 Syntax}{section.2.4}% 32
-\BOOKMARK [3][]{subsubsection.2.4.2.1}{2.4.2.1 The Penn Treebank Tagset}{subsection.2.4.2}% 33
-\BOOKMARK [3][]{subsubsection.2.4.2.2}{2.4.2.2 Stanford Dependencies}{subsection.2.4.2}% 34
-\BOOKMARK [2][]{subsection.2.4.3}{2.4.3 Semantics}{section.2.4}% 35
-\BOOKMARK [3][]{subsubsection.2.4.3.1}{2.4.3.1 Anaphora Resolution and Presupposition Projection}{subsection.2.4.3}% 36
-\BOOKMARK [3][]{subsubsection.2.4.3.2}{2.4.3.2 Discourse Representation Theory}{subsection.2.4.3}% 37
-\BOOKMARK [3][]{subsubsection.2.4.3.3}{2.4.3.3 Semantic Role Labelling}{subsection.2.4.3}% 38
-\BOOKMARK [3][]{subsubsection.2.4.3.4}{2.4.3.4 Semantic Knowledge Resources}{subsection.2.4.3}% 39
-\BOOKMARK [4][]{paragraph.2.4.3.4.1}{2.4.3.4.1 WordNet}{subsubsection.2.4.3.4}% 40
-\BOOKMARK [4][]{paragraph.2.4.3.4.2}{2.4.3.4.2 FrameNet}{subsubsection.2.4.3.4}% 41
-\BOOKMARK [4][]{paragraph.2.4.3.4.3}{2.4.3.4.3 Oxford Collocations Dictionary}{subsubsection.2.4.3.4}% 42
-\BOOKMARK [4][]{paragraph.2.4.3.4.4}{2.4.3.4.4 Associations}{subsubsection.2.4.3.4}% 43
-\BOOKMARK [4][]{paragraph.2.4.3.4.5}{2.4.3.4.5 NodeBox Perception}{subsubsection.2.4.3.4}% 44
-\BOOKMARK [4][]{paragraph.2.4.3.4.6}{2.4.3.4.6 Google Search Suggestions}{subsubsection.2.4.3.4}% 45
-\BOOKMARK [4][]{paragraph.2.4.3.4.7}{2.4.3.4.7 Noah's ARK Informal Research}{subsubsection.2.4.3.4}% 46
-\BOOKMARK [2][]{subsection.2.4.4}{2.4.4 Natural Language Generation}{section.2.4}% 47
-\BOOKMARK [0][]{chapter.3}{3 Poem Analysis}{}% 48
-\BOOKMARK [1][]{section.3.1}{3.1 Obtaining Phonetic Structure}{chapter.3}% 49
-\BOOKMARK [1][]{section.3.2}{3.2 Rhyme}{chapter.3}% 50
-\BOOKMARK [2][]{subsection.3.2.1}{3.2.1 Obtaining the Rhyme Phoneme Pattern}{section.3.2}% 51
-\BOOKMARK [2][]{subsection.3.2.2}{3.2.2 Building and Normalising the Rhyme Scheme}{section.3.2}% 52
-\BOOKMARK [1][]{section.3.3}{3.3 Rhythm}{chapter.3}% 53
-\BOOKMARK [2][]{subsection.3.3.1}{3.3.1 Detecting Syllabic Rhythm}{section.3.3}% 54
-\BOOKMARK [2][]{subsection.3.3.2}{3.3.2 Detecting Quantitative and Accentual Rhythm}{section.3.3}% 55
-\BOOKMARK [1][]{section.3.4}{3.4 Sound Devices}{chapter.3}% 56
-\BOOKMARK [1][]{section.3.5}{3.5 Form}{chapter.3}% 57
-\BOOKMARK [2][]{subsection.3.5.1}{3.5.1 Structure and Repetition}{section.3.5}% 58
-\BOOKMARK [2][]{subsection.3.5.2}{3.5.2 Point of View}{section.3.5}% 59
-\BOOKMARK [2][]{subsection.3.5.3}{3.5.3 Tense}{section.3.5}% 60
-\BOOKMARK [2][]{subsection.3.5.4}{3.5.4 N-Grams}{section.3.5}% 61
-\BOOKMARK [2][]{subsection.3.5.5}{3.5.5 Topics}{section.3.5}% 62
-\BOOKMARK [1][]{section.3.6}{3.6 Characters and Context}{chapter.3}% 63
-\BOOKMARK [2][]{subsection.3.6.1}{3.6.1 Semantic Relations}{section.3.6}% 64
-\BOOKMARK [2][]{subsection.3.6.2}{3.6.2 Semantic Labelling using Noah's ARK}{section.3.6}% 65
-\BOOKMARK [3][]{subsubsection.3.6.2.1}{3.6.2.1 FrameNet Semantic Role Labelling using SEMAFOR}{subsection.3.6.2}% 66
-\BOOKMARK [3][]{subsubsection.3.6.2.2}{3.6.2.2 Semantic Dependency Relations using TurboParser}{subsection.3.6.2}% 67
-\BOOKMARK [2][]{subsection.3.6.3}{3.6.3 Extracting and Binding Relations to Characters}{section.3.6}% 68
-\BOOKMARK [3][]{subsubsection.3.6.3.1}{3.6.3.1 Obtaining the Semantic Dependency Relations and Frame-Semantic Parse from Noah's ARK}{subsection.3.6.3}% 69
-\BOOKMARK [3][]{subsubsection.3.6.3.2}{3.6.3.2 Collapsing Loose Leaves of Dependency Relations}{subsection.3.6.3}% 70
-\BOOKMARK [3][]{subsubsection.3.6.3.3}{3.6.3.3 Finding and Creating Persona}{subsection.3.6.3}% 71
-\BOOKMARK [3][]{subsubsection.3.6.3.4}{3.6.3.4 Extracting Candidate Relations from the Frame-Semantic Parse}{subsection.3.6.3}% 72
-\BOOKMARK [3][]{subsubsection.3.6.3.5}{3.6.3.5 Obtaining the Associated Dependency Relations for each Persona}{subsection.3.6.3}% 73
-\BOOKMARK [3][]{subsubsection.3.6.3.6}{3.6.3.6 Binding ConceptNet Relations to Characters}{subsection.3.6.3}% 74
-\BOOKMARK [1][]{section.3.7}{3.7 Symbolism and Imagery}{chapter.3}% 75
-\BOOKMARK [2][]{subsection.3.7.1}{3.7.1 Personification}{section.3.7}% 76
-\BOOKMARK [2][]{subsection.3.7.2}{3.7.2 Onomatopoeia}{section.3.7}% 77
-\BOOKMARK [2][]{subsection.3.7.3}{3.7.3 Simile}{section.3.7}% 78
-\BOOKMARK [0][]{chapter.4}{4 Analysis Interpretation}{}% 79
-\BOOKMARK [1][]{section.4.1}{4.1 Approach}{chapter.4}% 80
-\BOOKMARK [2][]{subsection.4.1.1}{4.1.1 The Corpus}{section.4.1}% 81
-\BOOKMARK [2][]{subsection.4.1.2}{4.1.2 Subcategories of Collections}{section.4.1}% 82
-\BOOKMARK [2][]{subsection.4.1.3}{4.1.3 Novel and Creative Generation}{section.4.1}% 83
-\BOOKMARK [1][]{section.4.2}{4.2 A Stochastic Approach}{chapter.4}% 84
-\BOOKMARK [1][]{section.4.3}{4.3 Algorithms}{chapter.4}% 85
-\BOOKMARK [2][]{subsection.4.3.1}{4.3.1 List Comprehension}{section.4.3}% 86
-\BOOKMARK [2][]{subsection.4.3.2}{4.3.2 Line by Line}{section.4.3}% 87
-\BOOKMARK [2][]{subsection.4.3.3}{4.3.3 Pick the Most Popular}{section.4.3}% 88
-\BOOKMARK [2][]{subsection.4.3.4}{4.3.4 Filter Below Threshold}{section.4.3}% 89
-\BOOKMARK [1][]{section.4.4}{4.4 Testing and Validation by Inspection}{chapter.4}% 90
-\BOOKMARK [0][]{chapter.5}{5 Generation}{}% 91
-\BOOKMARK [1][]{section.5.1}{5.1 Approach}{chapter.5}% 92
-\BOOKMARK [1][]{section.5.2}{5.2 Generating Simple Sentences}{chapter.5}% 93
-\BOOKMARK [2][]{subsection.5.2.1}{5.2.1 Translating Relations into Clauses}{section.5.2}% 94
-\BOOKMARK [2][]{subsection.5.2.2}{5.2.2 Semantic Network of Common Sense}{section.5.2}% 95
-\BOOKMARK [3][]{subsubsection.5.2.2.1}{5.2.2.1 The Network}{subsection.5.2.2}% 96
-\BOOKMARK [4][]{paragraph.5.2.2.1.1}{5.2.2.1.1 Nodes}{subsubsection.5.2.2.1}% 97
-\BOOKMARK [4][]{paragraph.5.2.2.1.2}{5.2.2.1.2 Edges}{subsubsection.5.2.2.1}% 98
-\BOOKMARK [4][]{paragraph.5.2.2.1.3}{5.2.2.1.3 Concept Halos and Fields}{subsubsection.5.2.2.1}% 99
-\BOOKMARK [3][]{subsubsection.5.2.2.2}{5.2.2.2 Sources}{subsection.5.2.2}% 100
-\BOOKMARK [4][]{paragraph.5.2.2.2.1}{5.2.2.2.1 Collocations}{subsubsection.5.2.2.2}% 101
-\BOOKMARK [4][]{paragraph.5.2.2.2.2}{5.2.2.2.2 Associations}{subsubsection.5.2.2.2}% 102
-\BOOKMARK [4][]{paragraph.5.2.2.2.3}{5.2.2.2.3 NodeBox Perception}{subsubsection.5.2.2.2}% 103
-\BOOKMARK [4][]{paragraph.5.2.2.2.4}{5.2.2.2.4 WordNet}{subsubsection.5.2.2.2}% 104
-\BOOKMARK [4][]{paragraph.5.2.2.2.5}{5.2.2.2.5 Google Search Suggestions}{subsubsection.5.2.2.2}% 105
-\BOOKMARK [3][]{subsubsection.5.2.2.3}{5.2.2.3 Concept Similarity}{subsection.5.2.2}% 106
-\BOOKMARK [4][]{paragraph.5.2.2.3.1}{5.2.2.3.1 Associative Similarity}{subsubsection.5.2.2.3}% 107
-\BOOKMARK [4][]{paragraph.5.2.2.3.2}{5.2.2.3.2 Similarity Paths}{subsubsection.5.2.2.3}% 108
-\BOOKMARK [4][]{paragraph.5.2.2.3.3}{5.2.2.3.3 Symbolic Similarity}{subsubsection.5.2.2.3}% 109
-\BOOKMARK [1][]{section.5.3}{5.3 Persona Creation and Management}{chapter.5}% 110
-\BOOKMARK [2][]{subsection.5.3.1}{5.3.1 Referencing Specific Persona}{section.5.3}% 111
-\BOOKMARK [2][]{subsection.5.3.2}{5.3.2 Adding New Persona}{section.5.3}% 112
-\BOOKMARK [2][]{subsection.5.3.3}{5.3.3 Anaphora and Presupposition}{section.5.3}% 113
-\BOOKMARK [2][]{subsection.5.3.4}{5.3.4 Semantic Types}{section.5.3}% 114
-\BOOKMARK [1][]{section.5.4}{5.4 Poem Initialisation}{chapter.5}% 115
-\BOOKMARK [2][]{subsection.5.4.1}{5.4.1 Overall Structure}{section.5.4}% 116
-\BOOKMARK [2][]{subsection.5.4.2}{5.4.2 Inspiration}{section.5.4}% 117
-\BOOKMARK [1][]{section.5.5}{5.5 Incremental Growth}{chapter.5}% 118
-\BOOKMARK [2][]{subsection.5.5.1}{5.5.1 Applying Inspiration}{section.5.5}% 119
-\BOOKMARK [3][]{subsubsection.5.5.1.1}{5.5.1.1 Relation Ordering by Type}{subsection.5.5.1}% 120
-\BOOKMARK [3][]{subsubsection.5.5.1.2}{5.5.1.2 Allocating Relations by Rhyme Scheme}{subsection.5.5.1}% 121
-\BOOKMARK [2][]{subsection.5.5.2}{5.5.2 Creating New Lines}{section.5.5}% 122
-\BOOKMARK [3][]{subsubsection.5.5.2.1}{5.5.2.1 Rhyming Lines}{subsection.5.5.2}% 123
-\BOOKMARK [3][]{subsubsection.5.5.2.2}{5.5.2.2 Blank Lines}{subsection.5.5.2}% 124
-\BOOKMARK [2][]{subsection.5.5.3}{5.5.3 Keeping in Context}{section.5.5}% 125
-\BOOKMARK [1][]{section.5.6}{5.6 Rephrase for Poetic Features}{chapter.5}% 126
-\BOOKMARK [2][]{subsection.5.6.1}{5.6.1 Rhyme}{section.5.6}% 127
-\BOOKMARK [3][]{subsubsection.5.6.1.1}{5.6.1.1 Finding Rhyming Words}{subsection.5.6.1}% 128
-\BOOKMARK [3][]{subsubsection.5.6.1.2}{5.6.1.2 Guaranteeing Rhyme}{subsection.5.6.1}% 129
-\BOOKMARK [2][]{subsection.5.6.2}{5.6.2 Rhythm}{section.5.6}% 130
-\BOOKMARK [3][]{subsubsection.5.6.2.1}{5.6.2.1 Syllabic}{subsection.5.6.2}% 131
-\BOOKMARK [4][]{paragraph.5.6.2.1.1}{5.6.2.1.1 Extending}{subsubsection.5.6.2.1}% 132
-\BOOKMARK [4][]{paragraph.5.6.2.1.2}{5.6.2.1.2 Reducing}{subsubsection.5.6.2.1}% 133
-\BOOKMARK [3][]{subsubsection.5.6.2.2}{5.6.2.2 Accentual}{subsection.5.6.2}% 134
-\BOOKMARK [0][]{chapter.6}{6 Evaluation}{}% 135
-\BOOKMARK [1][]{section.6.1}{6.1 Comparison of Analysis Results to Theory}{chapter.6}% 136
-\BOOKMARK [2][]{subsection.6.1.1}{6.1.1 Limericks}{section.6.1}% 137
-\BOOKMARK [2][]{subsection.6.1.2}{6.1.2 Haiku}{section.6.1}% 138
-\BOOKMARK [2][]{subsection.6.1.3}{6.1.3 Shakespearean Sonnets}{section.6.1}% 139
-\BOOKMARK [2][]{subsection.6.1.4}{6.1.4 Concurrency and Performance}{section.6.1}% 140
-\BOOKMARK [2][]{subsection.6.1.5}{6.1.5 Summary}{section.6.1}% 141
-\BOOKMARK [1][]{section.6.2}{6.2 Analysis of Generated Poetry}{chapter.6}% 142
-\BOOKMARK [2][]{subsection.6.2.1}{6.2.1 Turing-style Tests}{section.6.2}% 143
-\BOOKMARK [2][]{subsection.6.2.2}{6.2.2 Quality of English}{section.6.2}% 144
-\BOOKMARK [3][]{subsubsection.6.2.2.1}{6.2.2.1 Vocabulary and Word Selection}{subsection.6.2.2}% 145
-\BOOKMARK [3][]{subsubsection.6.2.2.2}{6.2.2.2 Grammar and Sentence Structure}{subsection.6.2.2}% 146
-\BOOKMARK [2][]{subsection.6.2.3}{6.2.3 Exhibition of Poetic Features}{section.6.2}% 147
-\BOOKMARK [2][]{subsection.6.2.4}{6.2.4 Creativity and Cohesiveness}{section.6.2}% 148
-\BOOKMARK [3][]{subsubsection.6.2.4.1}{6.2.4.1 Knowledge as Creativity}{subsection.6.2.4}% 149
-\BOOKMARK [3][]{subsubsection.6.2.4.2}{6.2.4.2 Cohesiveness}{subsection.6.2.4}% 150
-\BOOKMARK [2][]{subsection.6.2.5}{6.2.5 Performance}{section.6.2}% 151
-\BOOKMARK [3][]{subsubsection.6.2.5.1}{6.2.5.1 Finding Rhymes}{subsection.6.2.5}% 152
-\BOOKMARK [3][]{subsubsection.6.2.5.2}{6.2.5.2 SimpleNLG via JPype}{subsection.6.2.5}% 153
+\BOOKMARK [0][]{chapter*.3}{List of Figures}{}% 3
+\BOOKMARK [0][]{chapter.1}{1 Introduction}{}% 4
+\BOOKMARK [1][]{section.1.1}{1.1 Motivation}{chapter.1}% 5
+\BOOKMARK [1][]{section.1.2}{1.2 Objectives}{chapter.1}% 6
+\BOOKMARK [1][]{section.1.3}{1.3 Contributions}{chapter.1}% 7
+\BOOKMARK [0][]{chapter.2}{2 Background}{}% 8
+\BOOKMARK [1][]{section.2.1}{2.1 Poetry Theory}{chapter.2}% 9
+\BOOKMARK [2][]{subsection.2.1.1}{2.1.1 The Purpose of Poetry}{section.2.1}% 10
+\BOOKMARK [2][]{subsection.2.1.2}{2.1.2 Features of Poetry}{section.2.1}% 11
+\BOOKMARK [3][]{subsubsection.2.1.2.1}{2.1.2.1 Rhyme}{subsection.2.1.2}% 12
+\BOOKMARK [3][]{subsubsection.2.1.2.2}{2.1.2.2 Rhythm}{subsection.2.1.2}% 13
+\BOOKMARK [3][]{subsubsection.2.1.2.3}{2.1.2.3 Sound Devices}{subsection.2.1.2}% 14
+\BOOKMARK [3][]{subsubsection.2.1.2.4}{2.1.2.4 Structure}{subsection.2.1.2}% 15
+\BOOKMARK [3][]{subsubsection.2.1.2.5}{2.1.2.5 Symbolism and Imagery}{subsection.2.1.2}% 16
+\BOOKMARK [3][]{subsubsection.2.1.2.6}{2.1.2.6 Context and Personification}{subsection.2.1.2}% 17
+\BOOKMARK [2][]{subsection.2.1.3}{2.1.3 Classification of Poetry}{section.2.1}% 18
+\BOOKMARK [3][]{subsubsection.2.1.3.1}{2.1.3.1 Categories}{subsection.2.1.3}% 19
+\BOOKMARK [3][]{subsubsection.2.1.3.2}{2.1.3.2 Popular Types}{subsection.2.1.3}% 20
+\BOOKMARK [1][]{section.2.2}{2.2 Lessons from Related Work}{chapter.2}% 21
+\BOOKMARK [2][]{subsection.2.2.1}{2.2.1 Actively Gather Inspiration}{section.2.2}% 22
+\BOOKMARK [2][]{subsection.2.2.2}{2.2.2 Constrain to Improve Creativity}{section.2.2}% 23
+\BOOKMARK [2][]{subsection.2.2.3}{2.2.3 Learn from Experience}{section.2.2}% 24
+\BOOKMARK [2][]{subsection.2.2.4}{2.2.4 Choose Words Carefully}{section.2.2}% 25
+\BOOKMARK [2][]{subsection.2.2.5}{2.2.5 Derive Insight from Worldly Knowledge}{section.2.2}% 26
+\BOOKMARK [2][]{subsection.2.2.6}{2.2.6 Dare to be Different}{section.2.2}% 27
+\BOOKMARK [1][]{section.2.3}{2.3 Brief Overview of Computational Creativity}{chapter.2}% 28
+\BOOKMARK [2][]{subsubsection.2.3.0.1}{2.3.0.1 Semantic Networks of Common Sense}{section.2.3}% 29
+\BOOKMARK [3][]{paragraph.2.3.0.1.1}{2.3.0.1.1 ConceptNet}{subsubsection.2.3.0.1}% 30
+\BOOKMARK [1][]{section.2.4}{2.4 Brief Overview of Computational Linguistics}{chapter.2}% 31
+\BOOKMARK [2][]{subsection.2.4.1}{2.4.1 Words}{section.2.4}% 32
+\BOOKMARK [2][]{subsection.2.4.2}{2.4.2 Syntax}{section.2.4}% 33
+\BOOKMARK [3][]{subsubsection.2.4.2.1}{2.4.2.1 The Penn Treebank Tagset}{subsection.2.4.2}% 34
+\BOOKMARK [3][]{subsubsection.2.4.2.2}{2.4.2.2 Stanford Dependencies}{subsection.2.4.2}% 35
+\BOOKMARK [2][]{subsection.2.4.3}{2.4.3 Semantics}{section.2.4}% 36
+\BOOKMARK [3][]{subsubsection.2.4.3.1}{2.4.3.1 Anaphora Resolution and Presupposition Projection}{subsection.2.4.3}% 37
+\BOOKMARK [3][]{subsubsection.2.4.3.2}{2.4.3.2 Discourse Representation Theory}{subsection.2.4.3}% 38
+\BOOKMARK [3][]{subsubsection.2.4.3.3}{2.4.3.3 Semantic Role Labelling}{subsection.2.4.3}% 39
+\BOOKMARK [3][]{subsubsection.2.4.3.4}{2.4.3.4 Semantic Knowledge Resources}{subsection.2.4.3}% 40
+\BOOKMARK [4][]{paragraph.2.4.3.4.1}{2.4.3.4.1 WordNet}{subsubsection.2.4.3.4}% 41
+\BOOKMARK [4][]{paragraph.2.4.3.4.2}{2.4.3.4.2 FrameNet}{subsubsection.2.4.3.4}% 42
+\BOOKMARK [4][]{paragraph.2.4.3.4.3}{2.4.3.4.3 Oxford Collocations Dictionary}{subsubsection.2.4.3.4}% 43
+\BOOKMARK [4][]{paragraph.2.4.3.4.4}{2.4.3.4.4 Associations}{subsubsection.2.4.3.4}% 44
+\BOOKMARK [4][]{paragraph.2.4.3.4.5}{2.4.3.4.5 NodeBox Perception}{subsubsection.2.4.3.4}% 45
+\BOOKMARK [4][]{paragraph.2.4.3.4.6}{2.4.3.4.6 Google Search Suggestions}{subsubsection.2.4.3.4}% 46
+\BOOKMARK [4][]{paragraph.2.4.3.4.7}{2.4.3.4.7 Noah's ARK Informal Research}{subsubsection.2.4.3.4}% 47
+\BOOKMARK [2][]{subsection.2.4.4}{2.4.4 Natural Language Generation}{section.2.4}% 48
+\BOOKMARK [0][]{chapter.3}{3 Poem Analysis}{}% 49
+\BOOKMARK [1][]{section.3.1}{3.1 Obtaining Phonetic Structure}{chapter.3}% 50
+\BOOKMARK [1][]{section.3.2}{3.2 Rhyme}{chapter.3}% 51
+\BOOKMARK [2][]{subsection.3.2.1}{3.2.1 Obtaining the Rhyme Phoneme Pattern}{section.3.2}% 52
+\BOOKMARK [2][]{subsection.3.2.2}{3.2.2 Building and Normalising the Rhyme Scheme}{section.3.2}% 53
+\BOOKMARK [1][]{section.3.3}{3.3 Rhythm}{chapter.3}% 54
+\BOOKMARK [2][]{subsection.3.3.1}{3.3.1 Detecting Syllabic Rhythm}{section.3.3}% 55
+\BOOKMARK [2][]{subsection.3.3.2}{3.3.2 Detecting Quantitative and Accentual Rhythm}{section.3.3}% 56
+\BOOKMARK [1][]{section.3.4}{3.4 Sound Devices}{chapter.3}% 57
+\BOOKMARK [1][]{section.3.5}{3.5 Form}{chapter.3}% 58
+\BOOKMARK [2][]{subsection.3.5.1}{3.5.1 Structure and Repetition}{section.3.5}% 59
+\BOOKMARK [2][]{subsection.3.5.2}{3.5.2 Point of View}{section.3.5}% 60
+\BOOKMARK [2][]{subsection.3.5.3}{3.5.3 Tense}{section.3.5}% 61
+\BOOKMARK [2][]{subsection.3.5.4}{3.5.4 N-Grams}{section.3.5}% 62
+\BOOKMARK [2][]{subsection.3.5.5}{3.5.5 Topics}{section.3.5}% 63
+\BOOKMARK [1][]{section.3.6}{3.6 Characters and Context}{chapter.3}% 64
+\BOOKMARK [2][]{subsection.3.6.1}{3.6.1 Semantic Relations}{section.3.6}% 65
+\BOOKMARK [2][]{subsection.3.6.2}{3.6.2 Semantic Labelling using Noah's ARK}{section.3.6}% 66
+\BOOKMARK [3][]{subsubsection.3.6.2.1}{3.6.2.1 FrameNet Semantic Role Labelling using SEMAFOR}{subsection.3.6.2}% 67
+\BOOKMARK [3][]{subsubsection.3.6.2.2}{3.6.2.2 Semantic Dependency Relations using TurboParser}{subsection.3.6.2}% 68
+\BOOKMARK [2][]{subsection.3.6.3}{3.6.3 Extracting and Binding Relations to Characters}{section.3.6}% 69
+\BOOKMARK [3][]{subsubsection.3.6.3.1}{3.6.3.1 Obtaining the Semantic Dependency Relations and Frame-Semantic Parse from Noah's ARK}{subsection.3.6.3}% 70
+\BOOKMARK [3][]{subsubsection.3.6.3.2}{3.6.3.2 Collapsing Loose Leaves of Dependency Relations}{subsection.3.6.3}% 71
+\BOOKMARK [3][]{subsubsection.3.6.3.3}{3.6.3.3 Finding and Creating Persona}{subsection.3.6.3}% 72
+\BOOKMARK [3][]{subsubsection.3.6.3.4}{3.6.3.4 Extracting Candidate Relations from the Frame-Semantic Parse}{subsection.3.6.3}% 73
+\BOOKMARK [3][]{subsubsection.3.6.3.5}{3.6.3.5 Obtaining the Associated Dependency Relations for each Persona}{subsection.3.6.3}% 74
+\BOOKMARK [3][]{subsubsection.3.6.3.6}{3.6.3.6 Binding ConceptNet Relations to Characters}{subsection.3.6.3}% 75
+\BOOKMARK [1][]{section.3.7}{3.7 Symbolism and Imagery}{chapter.3}% 76
+\BOOKMARK [2][]{subsection.3.7.1}{3.7.1 Personification}{section.3.7}% 77
+\BOOKMARK [2][]{subsection.3.7.2}{3.7.2 Onomatopoeia}{section.3.7}% 78
+\BOOKMARK [2][]{subsection.3.7.3}{3.7.3 Simile}{section.3.7}% 79
+\BOOKMARK [0][]{chapter.4}{4 Analysis Interpretation}{}% 80
+\BOOKMARK [1][]{section.4.1}{4.1 Approach}{chapter.4}% 81
+\BOOKMARK [2][]{subsection.4.1.1}{4.1.1 The Corpus}{section.4.1}% 82
+\BOOKMARK [2][]{subsection.4.1.2}{4.1.2 Subcategories of Collections}{section.4.1}% 83
+\BOOKMARK [2][]{subsection.4.1.3}{4.1.3 Novel and Creative Generation}{section.4.1}% 84
+\BOOKMARK [1][]{section.4.2}{4.2 A Stochastic Approach}{chapter.4}% 85
+\BOOKMARK [1][]{section.4.3}{4.3 Algorithms}{chapter.4}% 86
+\BOOKMARK [2][]{subsection.4.3.1}{4.3.1 List Comprehension}{section.4.3}% 87
+\BOOKMARK [2][]{subsection.4.3.2}{4.3.2 Line by Line}{section.4.3}% 88
+\BOOKMARK [2][]{subsection.4.3.3}{4.3.3 Pick the Most Popular}{section.4.3}% 89
+\BOOKMARK [2][]{subsection.4.3.4}{4.3.4 Filter Below Threshold}{section.4.3}% 90
+\BOOKMARK [1][]{section.4.4}{4.4 Testing and Validation by Inspection}{chapter.4}% 91
+\BOOKMARK [0][]{chapter.5}{5 Generation}{}% 92
+\BOOKMARK [1][]{section.5.1}{5.1 Approach}{chapter.5}% 93
+\BOOKMARK [1][]{section.5.2}{5.2 Generating Simple Sentences}{chapter.5}% 94
+\BOOKMARK [2][]{subsection.5.2.1}{5.2.1 Translating Relations into Clauses}{section.5.2}% 95
+\BOOKMARK [2][]{subsection.5.2.2}{5.2.2 Semantic Network of Common Sense}{section.5.2}% 96
+\BOOKMARK [3][]{subsubsection.5.2.2.1}{5.2.2.1 The Network}{subsection.5.2.2}% 97
+\BOOKMARK [4][]{paragraph.5.2.2.1.1}{5.2.2.1.1 Nodes}{subsubsection.5.2.2.1}% 98
+\BOOKMARK [4][]{paragraph.5.2.2.1.2}{5.2.2.1.2 Edges}{subsubsection.5.2.2.1}% 99
+\BOOKMARK [4][]{paragraph.5.2.2.1.3}{5.2.2.1.3 Concept Halos and Fields}{subsubsection.5.2.2.1}% 100
+\BOOKMARK [3][]{subsubsection.5.2.2.2}{5.2.2.2 Sources}{subsection.5.2.2}% 101
+\BOOKMARK [4][]{paragraph.5.2.2.2.1}{5.2.2.2.1 Collocations}{subsubsection.5.2.2.2}% 102
+\BOOKMARK [4][]{paragraph.5.2.2.2.2}{5.2.2.2.2 Associations}{subsubsection.5.2.2.2}% 103
+\BOOKMARK [4][]{paragraph.5.2.2.2.3}{5.2.2.2.3 NodeBox Perception}{subsubsection.5.2.2.2}% 104
+\BOOKMARK [4][]{paragraph.5.2.2.2.4}{5.2.2.2.4 WordNet}{subsubsection.5.2.2.2}% 105
+\BOOKMARK [4][]{paragraph.5.2.2.2.5}{5.2.2.2.5 Google Search Suggestions}{subsubsection.5.2.2.2}% 106
+\BOOKMARK [3][]{subsubsection.5.2.2.3}{5.2.2.3 Concept Similarity}{subsection.5.2.2}% 107
+\BOOKMARK [4][]{paragraph.5.2.2.3.1}{5.2.2.3.1 Associative Similarity}{subsubsection.5.2.2.3}% 108
+\BOOKMARK [4][]{paragraph.5.2.2.3.2}{5.2.2.3.2 Similarity Paths}{subsubsection.5.2.2.3}% 109
+\BOOKMARK [4][]{paragraph.5.2.2.3.3}{5.2.2.3.3 Symbolic Similarity}{subsubsection.5.2.2.3}% 110
+\BOOKMARK [1][]{section.5.3}{5.3 Persona Creation and Management}{chapter.5}% 111
+\BOOKMARK [2][]{subsection.5.3.1}{5.3.1 Referencing Specific Persona}{section.5.3}% 112
+\BOOKMARK [2][]{subsection.5.3.2}{5.3.2 Adding New Persona}{section.5.3}% 113
+\BOOKMARK [2][]{subsection.5.3.3}{5.3.3 Anaphora and Presupposition}{section.5.3}% 114
+\BOOKMARK [2][]{subsection.5.3.4}{5.3.4 Semantic Types}{section.5.3}% 115
+\BOOKMARK [1][]{section.5.4}{5.4 Poem Initialisation}{chapter.5}% 116
+\BOOKMARK [2][]{subsection.5.4.1}{5.4.1 Overall Structure}{section.5.4}% 117
+\BOOKMARK [2][]{subsection.5.4.2}{5.4.2 Inspiration}{section.5.4}% 118
+\BOOKMARK [1][]{section.5.5}{5.5 Incremental Growth}{chapter.5}% 119
+\BOOKMARK [2][]{subsection.5.5.1}{5.5.1 Applying Inspiration}{section.5.5}% 120
+\BOOKMARK [3][]{subsubsection.5.5.1.1}{5.5.1.1 Relation Ordering by Type}{subsection.5.5.1}% 121
+\BOOKMARK [3][]{subsubsection.5.5.1.2}{5.5.1.2 Allocating Relations by Rhyme Scheme}{subsection.5.5.1}% 122
+\BOOKMARK [2][]{subsection.5.5.2}{5.5.2 Creating New Lines}{section.5.5}% 123
+\BOOKMARK [3][]{subsubsection.5.5.2.1}{5.5.2.1 Rhyming Lines}{subsection.5.5.2}% 124
+\BOOKMARK [3][]{subsubsection.5.5.2.2}{5.5.2.2 Blank Lines}{subsection.5.5.2}% 125
+\BOOKMARK [2][]{subsection.5.5.3}{5.5.3 Keeping in Context}{section.5.5}% 126
+\BOOKMARK [1][]{section.5.6}{5.6 Rephrase for Poetic Features}{chapter.5}% 127
+\BOOKMARK [2][]{subsection.5.6.1}{5.6.1 Rhyme}{section.5.6}% 128
+\BOOKMARK [3][]{subsubsection.5.6.1.1}{5.6.1.1 Finding Rhyming Words}{subsection.5.6.1}% 129
+\BOOKMARK [3][]{subsubsection.5.6.1.2}{5.6.1.2 Guaranteeing Rhyme}{subsection.5.6.1}% 130
+\BOOKMARK [2][]{subsection.5.6.2}{5.6.2 Rhythm}{section.5.6}% 131
+\BOOKMARK [3][]{subsubsection.5.6.2.1}{5.6.2.1 Syllabic}{subsection.5.6.2}% 132
+\BOOKMARK [4][]{paragraph.5.6.2.1.1}{5.6.2.1.1 Extending}{subsubsection.5.6.2.1}% 133
+\BOOKMARK [4][]{paragraph.5.6.2.1.2}{5.6.2.1.2 Reducing}{subsubsection.5.6.2.1}% 134
+\BOOKMARK [3][]{subsubsection.5.6.2.2}{5.6.2.2 Accentual}{subsection.5.6.2}% 135
+\BOOKMARK [0][]{chapter.6}{6 Evaluation}{}% 136
+\BOOKMARK [1][]{section.6.1}{6.1 Comparison of Analysis Results to Theory}{chapter.6}% 137
+\BOOKMARK [2][]{subsection.6.1.1}{6.1.1 Limericks}{section.6.1}% 138
+\BOOKMARK [2][]{subsection.6.1.2}{6.1.2 Haiku}{section.6.1}% 139
+\BOOKMARK [2][]{subsection.6.1.3}{6.1.3 Shakespearean Sonnets}{section.6.1}% 140
+\BOOKMARK [2][]{subsection.6.1.4}{6.1.4 Concurrency and Performance}{section.6.1}% 141
+\BOOKMARK [2][]{subsection.6.1.5}{6.1.5 Summary}{section.6.1}% 142
+\BOOKMARK [1][]{section.6.2}{6.2 Analysis of Generated Poetry}{chapter.6}% 143
+\BOOKMARK [2][]{subsection.6.2.1}{6.2.1 Turing-style Tests}{section.6.2}% 144
+\BOOKMARK [2][]{subsection.6.2.2}{6.2.2 Quality of English}{section.6.2}% 145
+\BOOKMARK [3][]{subsubsection.6.2.2.1}{6.2.2.1 Vocabulary and Word Selection}{subsection.6.2.2}% 146
+\BOOKMARK [3][]{subsubsection.6.2.2.2}{6.2.2.2 Grammar and Sentence Structure}{subsection.6.2.2}% 147
+\BOOKMARK [2][]{subsection.6.2.3}{6.2.3 Creativity and Cohesiveness}{section.6.2}% 148
+\BOOKMARK [3][]{subsubsection.6.2.3.1}{6.2.3.1 Knowledge as Creativity}{subsection.6.2.3}% 149
+\BOOKMARK [3][]{subsubsection.6.2.3.2}{6.2.3.2 Cohesiveness}{subsection.6.2.3}% 150
+\BOOKMARK [2][]{subsection.6.2.4}{6.2.4 Performance}{section.6.2}% 151
+\BOOKMARK [3][]{subsubsection.6.2.4.1}{6.2.4.1 Delay when Finding Rhymes}{subsection.6.2.4}% 152
+\BOOKMARK [3][]{subsubsection.6.2.4.2}{6.2.4.2 SimpleNLG via JPype}{subsection.6.2.4}% 153
 \BOOKMARK [0][]{chapter.7}{7 Conclusion}{}% 154
 \BOOKMARK [1][]{section.7.1}{7.1 Summary of Achievements}{chapter.7}% 155
 \BOOKMARK [1][]{section.7.2}{7.2 Applications}{chapter.7}% 156
