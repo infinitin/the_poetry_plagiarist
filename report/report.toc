@@ -302,7 +302,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {6.2.3.2}Cohesiveness}{142}{subsubsection.6.2.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.2.4}Performance}{143}{subsection.6.2.4}
+\contentsline {subsection}{\numberline {6.2.4}Performance}{142}{subsection.6.2.4}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {6.2.4.1}Delay when Finding Rhymes}{143}{subsubsection.6.2.4.1}
 \defcounter {refsection}{0}\relax 
@@ -312,34 +312,42 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {7.1}Summary of Achievements}{145}{section.7.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {7.2}Applications}{145}{section.7.2}
+\contentsline {section}{\numberline {7.2}Applications}{146}{section.7.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {7.3}Future Work}{145}{section.7.3}
+\contentsline {section}{\numberline {7.3}Future Work}{147}{section.7.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {7.3.1}Context-Aware Anaphora and Presupposition Resolution}{146}{subsection.7.3.1}
+\contentsline {subsection}{\numberline {7.3.1}Deliverable as an App}{147}{subsection.7.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {7.3.2}Inferring Properties and Capabilities}{146}{subsection.7.3.2}
+\contentsline {subsection}{\numberline {7.3.2}Deriving Inspiration on Topics to Remain Cohesive}{147}{subsection.7.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Appendix A}{148}{appendix*.115}
+\contentsline {subsection}{\numberline {7.3.3}Rephrasing Module}{148}{subsection.7.3.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.1}Dry Run of Generation Phase with Commentary}{148}{section.Alph0.1}
+\contentsline {subsection}{\numberline {7.3.4}Strategies for Retaining Coherence}{148}{subsection.7.3.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.2}CMU Pronunciation Dictionary ARPABET Phoneme Set}{152}{section.Alph0.2}
+\contentsline {subsection}{\numberline {7.3.5}Expanding the Knowledge and Use Cases of the Semantic Network}{149}{subsection.7.3.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.3}Penn Treebank Tagset}{152}{section.Alph0.3}
+\contentsline {subsection}{\numberline {7.3.6}Context-Aware Anaphora and Presupposition Resolution}{149}{subsection.7.3.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.4}Testing Specifications}{152}{section.Alph0.4}
+\contentsline {chapter}{Appendix A}{151}{appendix*.115}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.5}FrameNet Frames to ConceptNet Relations}{152}{section.Alph0.5}
+\contentsline {section}{\numberline {A.1}Dry Run of Generation Phase with Commentary}{151}{section.Alph0.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.6}List of collapsable dependencies}{155}{section.Alph0.6}
+\contentsline {section}{\numberline {A.2}CMU Pronunciation Dictionary ARPABET Phoneme Set}{155}{section.Alph0.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.7}Onomatopoeia Types to ConceptNet Relations}{156}{section.Alph0.7}
+\contentsline {section}{\numberline {A.3}Penn Treebank Tagset}{155}{section.Alph0.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.8}Evaluation}{158}{section.Alph0.8}
+\contentsline {section}{\numberline {A.4}Testing Specifications}{155}{section.Alph0.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {A.8.1}Edward Lear}{158}{subsection.Alph0.8.1}
+\contentsline {section}{\numberline {A.5}FrameNet Frames to ConceptNet Relations}{155}{section.Alph0.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {A.8.2}The Book of Limericks}{160}{subsection.Alph0.8.2}
+\contentsline {section}{\numberline {A.6}List of collapsable dependencies}{158}{section.Alph0.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {A.8.3}Limerick sources}{162}{subsection.Alph0.8.3}
+\contentsline {section}{\numberline {A.7}Onomatopoeia Types to ConceptNet Relations}{159}{section.Alph0.7}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {A.8}Evaluation}{161}{section.Alph0.8}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {A.8.1}Edward Lear}{161}{subsection.Alph0.8.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {A.8.2}The Book of Limericks}{163}{subsection.Alph0.8.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {A.8.3}Limerick sources}{165}{subsection.Alph0.8.3}

@@ -696,6 +696,24 @@
       \field{title}{Ray kurzweil’s cybernetic poet}
       \field{year}{1999}
     \endentry
+    \entry{lear1894book}{book}{}
+      \name{labelname}{1}{}{%
+        {{hash=d4d49d9f3aead67e497aacab2e282b12}{Lear}{L\bibinitperiod}{Edward}{E\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{1}{}{%
+        {{hash=d4d49d9f3aead67e497aacab2e282b12}{Lear}{L\bibinitperiod}{Edward}{E\bibinitperiod}{}{}{}{}}%
+      }
+      \list{publisher}{2}{%
+        {F. Warne}%
+        {Company, Limited}%
+      }
+      \strng{namehash}{d4d49d9f3aead67e497aacab2e282b12}
+      \strng{fullhash}{d4d49d9f3aead67e497aacab2e282b12}
+      \field{sortinit}{L}
+      \field{labeltitle}{The Book of Nonsense, and More Nonsense}
+      \field{title}{The Book of Nonsense, and More Nonsense}
+      \field{year}{1894}
+    \endentry
     \entry{liu2004conceptnet}{article}{}
       \name{labelname}{2}{}{%
         {{hash=d5780dd92459a9f90b55eb3ae726a4f9}{Liu}{L\bibinitperiod}{Hugo}{H\bibinitperiod}{}{}{}{}}%
@@ -761,6 +779,23 @@
       \field{volume}{19}
       \field{year}{1993}
       \field{pages}{313\bibrangedash 330}
+    \endentry
+    \entry{marsh1997wordsworth}{book}{}
+      \name{labelname}{1}{}{%
+        {{hash=a7c64d2cf571421ef904a6bcfbac5a23}{Marsh}{M\bibinitperiod}{Linda}{L\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{1}{}{%
+        {{hash=a7c64d2cf571421ef904a6bcfbac5a23}{Marsh}{M\bibinitperiod}{Linda}{L\bibinitperiod}{}{}{}{}}%
+      }
+      \list{publisher}{1}{%
+        {Wordsworth Editions}%
+      }
+      \strng{namehash}{a7c64d2cf571421ef904a6bcfbac5a23}
+      \strng{fullhash}{a7c64d2cf571421ef904a6bcfbac5a23}
+      \field{sortinit}{M}
+      \field{labeltitle}{The Wordsworth book of limericks}
+      \field{title}{The Wordsworth book of limericks}
+      \field{year}{1997}
     \endentry
     \entry{martin2003agile}{book}{}
       \name{labelname}{1}{}{%
@@ -927,6 +962,25 @@
       \field{title}{Harnessing Constraint Programming for Poetry Composition}
       \field{year}{2013}
       \field{pages}{160}
+    \endentry
+    \entry{turing1950computing}{article}{}
+      \name{labelname}{1}{}{%
+        {{hash=fca813825e3285622dde9d2d6cbfb71e}{Turing}{T\bibinitperiod}{Alan\bibnamedelima M}{A\bibinitperiod\bibinitdelim M\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{1}{}{%
+        {{hash=fca813825e3285622dde9d2d6cbfb71e}{Turing}{T\bibinitperiod}{Alan\bibnamedelima M}{A\bibinitperiod\bibinitdelim M\bibinitperiod}{}{}{}{}}%
+      }
+      \list{publisher}{1}{%
+        {JSTOR}%
+      }
+      \strng{namehash}{fca813825e3285622dde9d2d6cbfb71e}
+      \strng{fullhash}{fca813825e3285622dde9d2d6cbfb71e}
+      \field{sortinit}{T}
+      \field{labeltitle}{Computing machinery and intelligence}
+      \field{journaltitle}{Mind}
+      \field{title}{Computing machinery and intelligence}
+      \field{year}{1950}
+      \field{pages}{433\bibrangedash 460}
     \endentry
     \entry{veale2013less}{inproceedings}{}
       \name{labelname}{1}{}{%

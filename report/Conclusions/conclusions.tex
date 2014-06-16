@@ -11,14 +11,71 @@
 
 \section{Summary of Achievements}
 
+This project uses a suite of algorithms to analyse the structure, poetic techniques and typical content of any given poem in detail. Together they cover a large number of features and give as many options for each feature as possible.
+
+We extract persona from the poems to give more contextual understanding in our readings. By peppering these persona with semantic information such as gender, animation and plurality, we are able to perform some basic anaphora and presupposition resolution. Semantic relationships between other persona and other concepts are extracted using Semantic Role Labelling and Dependency Parsing. These are used to help guide the construction of new poems.
+
+The analysis results of several poems can be aggregated together to produce an overall blueprint of the class of poem. Each feature is aggregated in isolation, allowing for individual implementations resulting in higher quality interpretations of each feature. We automatically produce graphs for the results of this aggregation and interpretation based on probability distributions of each feature taking on a particular value.
+
+Our blueprints for limericks, haiku and sonnets have largely validated the taught theory. Some parts of theory have been called into question due to inconsistencies with our results that may lead to further investigation of poetry theory.
+
+We use the aforementioned blueprints to produce new poetry with the derived style. We are able to receive inspiration input from a user as well as extract inspiration from the blueprint.
+
+Poems are built with a content-first approach from first principles; translating relations directly into phrases that are put together to form sentences. The large number grammatical structures provided by FrameNet, that together with the extensive vocabulary and the NLG engine SimpleNLG enable to produce a variety of grammatically correct sentences.
+
+We built a semantic knowledge network and use it to find associative similarity between concepts, which is used to choose words carefully when building sentences and retain some amount of contextual coherence between different sentences. It is also used to find symbolic similarity between concepts in order to introduce analogies, demonstrating seemingly imaginative and creative capabilities.
+
+The sentences built are converted into lines of poetry by rephrasing them to match rhyme, syllabic rhythm and accentual rhythm.
+
+Turing-style tests were created to assess the extent to which poems produced by our system can be distinguished from human written poetry. It revealed that the major drawback of our system was keeping cohesiveness over large number of lines, as well as after rephrasing for rhyme and rhythm. It validated our content-first approach since there was minimal negative feedback on grammaticality and vocabulary in computer generated poems, but some in human written ones.
+
+
 \section{Applications}
+
+The system has the intended application of being able to learn the structure of and recreate any poem when provided with a number of examples. Users can add their own inspiration to the poems, which means that it is effective as a stand-alone product for creating poetry for enjoyment.
+
+Most parts of this system have a general-purpose implementation. The analysis and interpretation algorithms can be used to build a blueprint of any kind of text if given sufficient examples, not just poetry. For example, we could give it the lyrics of all songs by \textit{'The Beatles'} and it should output a blueprint for creating new song lyrics.
+
+The blueprint itself is based on probabilities and can be interpreted in various ways, which can be used for other applications such as teaching poetry to children.
+
+Our semantic network of common sense can be used to build eloquent natural language sentences, not necessarily poetry, especially when combined with FrameNet and an NLG engine such as SimpleNLG in the way this project has done. It can also be used as the back end of a metaphorical search engine based on the symbolic similarity technique.
+
+Our ability to extract persona and related semantic information has several use cases. Firstly, it can be used to expand our semantic knowledge network by feeding it large amounts of text, for example from Wikipedia. It can also be used as a stand-alone information extraction engine for other researchers of Natural Language Processing. It is particularly useful for the problem of anaphora and presupposition resolution, as well as deriving relations between the persona. Rephrasing the text from which it was extracted is another possibility since we showed that we can build a variety of sentences directly from relations without changing meaning.
+
+The natural language generation module on its own has a large vocabulary and broad control over grammar. Since it is based on first principles of building a sentence, it can adapt to almost any situation.
 
 \section{Future Work}
 
-Derive inspiration relations from natural text e.g. wikipedia. Lookup Forth Bridge, extract as many relation as possible, allocate them to lines and go. Will stay in context and make sense + do quickly.
+\subsection{Deliverable as an App}
+This project has the potential to become a fun app that people can use to produce poems, probably about their friends. A  polished front end and some ironing out of minor kinks would be all that is necessary to create the first deliverable.
 
+\subsection{Deriving Inspiration on Topics to Remain Cohesive}
+We discussed the positive effects on cohesiveness of starting the generation process with inspiration in Section \ref{sec:eval-gen}. We can take advantage of this by deriving relations about the poem topic from natural text, for example on Wikipedia.
 
-Future:
+For example, if we did want to generate a sonnet on the subject of the Forth Bridge as in Turing's example dialogue for the Turing Test\cite{turing1950computing}, we can look up Forth Bridge on Wikipedia, extract relations on the text in the way we did in the analysis stage and seed the generation process with that.
+
+This has the advantage of preserving cohesiveness throughout the poem while using up-to-date and relevant information about a single topic.
+
+This would be a fruitful next stage to the deliverable as all the components have been created already.
+
+\subsection{Rephrasing Module}
+The biggest culprit of ruining the fluency and cohesiveness of sentences was the rephrasing module. It was rare to find synonyms of the words that we wanted to replace that had the structure that we desired, and associative similarity often did not work well enough. The only other strategy was to expand the sentence by adding modifiers to verbs and nouns, which worked well but became predictable. Reducing the length of sentences and rephrasing to use enjambent (flowing sentences over into new lines) are the next challenges. 
+
+An alternative route would be to rephrase the whole sentence from scratch by going back to the original relation from which it was built. However, some forward-looking heuristics could be implemented to avoid this, for example by using intransitive verbs when we know that the sentence can only be five syllables long so not to need the added object of the sentence.
+
+Rephrasing is an ongoing research topic in Computational Linguistics and effective rephrasing is probably a MPhil or PhD in itself.
+
+\subsection{Strategies for Retaining Coherence} 
+
+Cohesiveness in this system is achieved on a word-by-word basis by finding associatively similar concepts in the knowledge graph. At the moment, the context concept nodes include those in the lines immediately surrounding the one being built. This gives a ladder effect to the cohesiveness; we can go from one topic to another but may end up far away from the original by the end of the poem. This is a big reason the limericks performed poorly compared to the haiku, according to feedback on the Turing test.
+
+A better strategy could be to attain a circular effect, whereby we aim to return to the original concept that we started with by the end of the poem. Or we have a star effect, where one concept anchors the entire poem. Thorough experimentation with different strategies will be required to uncover a consistently effective approach.
+
+Once again, this is likely to be an MPhil or PhD project.
+
+\subsection{Expanding the Knowledge and Use Cases of the Semantic Network}
+There are several sources of knowledge that were not used in building our semantic network.
+
 \begin{itemize}
 \item{\textit{VerbNet}: a lexical database that groups verbs by semantic and syntactic linking behaviour.\cite{schuler2005verbnet}}
 \item{\textit{ACE}: a classification of names, places and other proper nouns for Named Entity Recognition.\cite{doddington2004automatic}}
@@ -27,22 +84,11 @@ Future:
 \item{\textit{Metaphor Magnet}: a web application that maps commonplace metaphors in everyday texts\cite{vealespecifying}}
 Google Ngrams
 \item{\textit{LinguaTools DISCO}: a tool to derive semantic similarity between words based on statistical analysis of large text collections\cite{kolb2008disco}}
-
-\textit{DBPedia}
 \end{itemize}
 
+Combining these with ConceptNet and our ability to extract relations from any text can all be used to build and improve the knowledge network.
+
 \subsection{Context-Aware Anaphora and Presupposition Resolution}
-\label{sec:ca-ar}
-We can now clearly see the anaphora problem as described in Section \ref{sec:characters}. We must match up the \textit{'a cat'} character and \textit{'he'} character, and the \textit{'they'} character with the \textit{'a lot of mice'} character. 
-
-In this particular example, we can simply match the plurals and singulars together. However, we may not always be so lucky as we can run into a situation where the cat could be referred to as \textit{'the feline'} instead of \textit{'he'}, for example.
-
-Section \ref{sec:arback} gives an overview of the state of the art solutions and notes that none of them use domain-specific knowledge. Our solution relies on \textbf{common sense} knowledge (which is domain-specific relative to our universe) as well as a deeper contextual awareness.
-
-We model common sense similarly to the semantic networks in Section \ref{sec:sem-net}.  
-
-
-\subsection{Inferring Properties and Capabilities}
 
 Combining the semantic network with our ability to identify persona and relations in text, we can make inferences on the properties and capabilities of the persona to resolve anaphora and presuppositions.
 
@@ -52,6 +98,8 @@ Take another example sentence:\\
 \textit{There was a cat with a flea on his back. It chased the mouse.}
 
 In this situation, it is ambiguous whether \textit{'It'} refers to the cat or the flea because they are both singular, animated and neutral gender. However, our semantic network of common sense would be able to reveal that \textit{'It'} probably refers to the cat since it is common sense that cats take the action of chasing mice.
+
+This is a new solution proposal for the research topic of anaphora and presupposition resolution that is likely to require an MPhil or PhD thesis to fully investigate.
 
 %%% ----------------------------------------------------------------------
 

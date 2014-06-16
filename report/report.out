@@ -155,17 +155,21 @@
 \BOOKMARK [1][]{section.7.1}{7.1 Summary of Achievements}{chapter.7}% 155
 \BOOKMARK [1][]{section.7.2}{7.2 Applications}{chapter.7}% 156
 \BOOKMARK [1][]{section.7.3}{7.3 Future Work}{chapter.7}% 157
-\BOOKMARK [2][]{subsection.7.3.1}{7.3.1 Context-Aware Anaphora and Presupposition Resolution}{section.7.3}% 158
-\BOOKMARK [2][]{subsection.7.3.2}{7.3.2 Inferring Properties and Capabilities}{section.7.3}% 159
-\BOOKMARK [0][]{appendix*.115}{Appendix A}{}% 160
-\BOOKMARK [1][]{section.Alph0.1}{A.1 Dry Run of Generation Phase with Commentary}{appendix*.115}% 161
-\BOOKMARK [1][]{section.Alph0.2}{A.2 CMU Pronunciation Dictionary ARPABET Phoneme Set}{appendix*.115}% 162
-\BOOKMARK [1][]{section.Alph0.3}{A.3 Penn Treebank Tagset}{appendix*.115}% 163
-\BOOKMARK [1][]{section.Alph0.4}{A.4 Testing Specifications}{appendix*.115}% 164
-\BOOKMARK [1][]{section.Alph0.5}{A.5 FrameNet Frames to ConceptNet Relations}{appendix*.115}% 165
-\BOOKMARK [1][]{section.Alph0.6}{A.6 List of collapsable dependencies}{appendix*.115}% 166
-\BOOKMARK [1][]{section.Alph0.7}{A.7 Onomatopoeia Types to ConceptNet Relations}{appendix*.115}% 167
-\BOOKMARK [1][]{section.Alph0.8}{A.8 Evaluation}{appendix*.115}% 168
-\BOOKMARK [2][]{subsection.Alph0.8.1}{A.8.1 Edward Lear}{section.Alph0.8}% 169
-\BOOKMARK [2][]{subsection.Alph0.8.2}{A.8.2 The Book of Limericks}{section.Alph0.8}% 170
-\BOOKMARK [2][]{subsection.Alph0.8.3}{A.8.3 Limerick sources}{section.Alph0.8}% 171
+\BOOKMARK [2][]{subsection.7.3.1}{7.3.1 Deliverable as an App}{section.7.3}% 158
+\BOOKMARK [2][]{subsection.7.3.2}{7.3.2 Deriving Inspiration on Topics to Remain Cohesive}{section.7.3}% 159
+\BOOKMARK [2][]{subsection.7.3.3}{7.3.3 Rephrasing Module}{section.7.3}% 160
+\BOOKMARK [2][]{subsection.7.3.4}{7.3.4 Strategies for Retaining Coherence}{section.7.3}% 161
+\BOOKMARK [2][]{subsection.7.3.5}{7.3.5 Expanding the Knowledge and Use Cases of the Semantic Network}{section.7.3}% 162
+\BOOKMARK [2][]{subsection.7.3.6}{7.3.6 Context-Aware Anaphora and Presupposition Resolution}{section.7.3}% 163
+\BOOKMARK [0][]{appendix*.115}{Appendix A}{}% 164
+\BOOKMARK [1][]{section.Alph0.1}{A.1 Dry Run of Generation Phase with Commentary}{appendix*.115}% 165
+\BOOKMARK [1][]{section.Alph0.2}{A.2 CMU Pronunciation Dictionary ARPABET Phoneme Set}{appendix*.115}% 166
+\BOOKMARK [1][]{section.Alph0.3}{A.3 Penn Treebank Tagset}{appendix*.115}% 167
+\BOOKMARK [1][]{section.Alph0.4}{A.4 Testing Specifications}{appendix*.115}% 168
+\BOOKMARK [1][]{section.Alph0.5}{A.5 FrameNet Frames to ConceptNet Relations}{appendix*.115}% 169
+\BOOKMARK [1][]{section.Alph0.6}{A.6 List of collapsable dependencies}{appendix*.115}% 170
+\BOOKMARK [1][]{section.Alph0.7}{A.7 Onomatopoeia Types to ConceptNet Relations}{appendix*.115}% 171
+\BOOKMARK [1][]{section.Alph0.8}{A.8 Evaluation}{appendix*.115}% 172
+\BOOKMARK [2][]{subsection.Alph0.8.1}{A.8.1 Edward Lear}{section.Alph0.8}% 173
+\BOOKMARK [2][]{subsection.Alph0.8.2}{A.8.2 The Book of Limericks}{section.Alph0.8}% 174
+\BOOKMARK [2][]{subsection.Alph0.8.3}{A.8.3 Limerick sources}{section.Alph0.8}% 175

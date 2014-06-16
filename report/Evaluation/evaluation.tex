@@ -580,7 +580,7 @@ The major shortcomings of the current implementation are:
 
 
 \section{Analysis of Generated Poetry}
-
+\label{sec:eval-gen}
 We evaluate the generation phase with limericks and haikus, as they are sufficient to show the positives and negatives of this project. The assessment is done on poems that were created from scratch, i.e. without inspiration from the user. This is because cohesiveness, creativity and vocabulary all naturally improve when seeded with inspiration, which is not a true test of the system.
 
 For completeness, Figures \ref{fig:inspr-lim1} through \ref{fig:inspr-lim4} are examples of limericks generated with inspiration from the user. In each of these cases, note that the persona was initiated as \textit{singular, male and animate}.
@@ -1040,10 +1040,6 @@ A third of all relations are of the most general \textit{RelatedTo} type, which 
 
 \subsubsection{Cohesiveness}
 The problem of a cohesive theme is a very important one. Many decisions made by participants on the Turing test were based on the extent to which words in the poem were related to each other. The haiku in Figure \ref{fig:haik-test7} mentions words on the theme of education but are not related temporally or any other way. This haiku still fooled many, and the reason given was that they did not expect such cohesiveness from a computer. Human poems were also admonished for their lack of cohesiveness and therefore thought to be computer-generated.
-
-Cohesiveness in this system is achieved on a word-by-word basis by finding associatively similar concepts in the knowledge graph. At the moment, the context concept nodes include those in the lines immediately surrounding the one being built. This gives a ladder effect to the cohesiveness; we can go from one topic to another but may end up far away from the original by the end of the poem. This is a big reason the limericks performed poorly compared to the haiku, according to feedback on the Turing test.
-
-A better strategy could be to attain a circular effect, whereby we aim to return to the original concept that we started with by the end of the poem. Or we have a star effect, where one concept anchors the entire poem. Thorough experimentation with different strategies will be required to uncover a consistently effective approach.
 
 Many human poems were lauded for their story-telling; a temporally consecutive series of events. Further investigation into strategies that utilise tense and aspect together with cohesiveness may be the final piece in the puzzle for automatic generation of poetry, especially if it is able to cope with long poems that include many stanzas.
 
